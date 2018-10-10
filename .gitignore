@@ -1,3 +1,19 @@
+# Files that won't be included
+*.pdf
+notas-tp4.txt
+*.7z
+
+# Directories that won't be included
+test/
+informe/
+entregas/
+inputs/
+local_output/
+
+# Directories that could be included
+imgs/
+terrain/
+
 # Prerequisites
 *.d
 
