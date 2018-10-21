@@ -17,7 +17,8 @@ private:
 
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
-    std::vector<Positionable*> positionables;
+//    std::vector<Positionable*> unitys;
+    std::vector<Unity*> unitys;
 public:
     static Map* getInstance();
     static void create(int width, int height);
@@ -28,7 +29,8 @@ public:
     int getHeight();
     bool isValid(Position& pos);
     bool canMove(Unity &unity, Position pos);
-    void put(Positionable &positionable);
+    void put(Unity &unity);
+    bool moveUnitys();
 
     Terrain& at(int x, int y);
     Terrain& at(const Position& pos);

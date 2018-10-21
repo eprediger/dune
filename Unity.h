@@ -18,9 +18,7 @@ public:
 
     int move();
 
-    bool canMoveAboveTerrain(Terrain& terrain);
-//    bool canMoveAboveTerrain(Sand& terrain);
-//    bool canMoveAboveTerrain(Precipice& terrain);
+    virtual bool canMoveAboveTerrain(Terrain& terrain);
 
     Unity(int x, int y);
 };

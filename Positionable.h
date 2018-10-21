@@ -14,7 +14,6 @@ public:
 
     int getValue();
 
-    Positionable(int x, int y, int value);
 };
 
 #endif //__POSITIONABLE_H__

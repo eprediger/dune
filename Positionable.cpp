@@ -1,8 +1,8 @@
 #include "Positionable.h"
 
-Positionable::Positionable(int x, int y) : pos(x,y) {}
-
-Positionable::Positionable(int x, int y, int value) : pos(x,y), value(value) {}
+Positionable::Positionable(int x, int y) : pos(x,y) {
+    value = 9;
+}
 
 Position Positionable::getPosition() const {
     return pos;

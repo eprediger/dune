@@ -68,7 +68,7 @@ void Map::print() {
 //        }
     }
 
-    for (auto pos : positionables){
+    for (auto pos : unitys){
         pmatrix.at(pos->getPosition().getY()*cols + pos->getPosition().getX()) = 'A' + pos->getValue();
     }
 
@@ -105,17 +105,21 @@ bool Map::isValid(Position &pos) {
     return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
 }
 
-void Map::put(Positionable& positionable) {
-    positionables.push_back(&positionable);
+void Map::put(Unity &unity) {
+    unitys.push_back(&unity);
 }
 
-bool Map::canMove(Unity &unity, Position pos) {
-//    return unity.canMoveAboveTerrain(this->at(unity.getPosition().getX(), unity.getPosition().getY()));
+bool Map::canMove(Unity& unity, Position pos) {
     return unity.canMoveAboveTerrain(this->at(pos));
-//    Sand a;
-//    return unity.canMoveAboveTerrain(a);
 }
 
-
-
+bool Map::moveUnitys() {
+    bool result = false;
+    for (auto u : unitys){
+        if (u->move()){
+            result = true;
+        }
+    }
+    return result;
+}
 
