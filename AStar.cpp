@@ -20,7 +20,7 @@ std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &bether
     return total_path;
 }
 
-std::stack<Position> AStar::makePath(Position start, Position end) {
+std::stack<Position> AStar::makePath(Position start, Position end, Unity& unity) {
     std::map<Position, Position> bether_path;
     AStarNode n_end(end);
     AStarNode n_start(start);
@@ -56,13 +56,14 @@ std::stack<Position> AStar::makePath(Position start, Position end) {
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
 
             // Si el hijo esta en la lista de cerrados o es una pared, se ignora
-            if (child_cl_itr != closeList.end() || Map::getInstance()->at(child.pos.getX(), child.pos.getY()).getMovility() == 1){
+//            if (child_cl_itr != closeList.end() || Map::getInstance()->at(child.pos.getX(), child.pos.getY()).getMovility() == 1) {
+            if (child_cl_itr != closeList.end() || !Map::getInstance()->canMove(unity, child.pos)) {
                 continue;
             }
 
             // Se calculan los parametros del hijo
             child.g = curr_node_itr->g + 1;
-            child.h = (child.pos.getX() - n_end.pos.getX())*(child.pos.getX() - n_end.pos.getX()) + (child.pos.getY() - n_end.pos.getY())*(child.pos.getY() - n_end.pos.getY()) ;
+            child.h = child.pos.sqrtDistance(n_end.pos);
             child.f = child.g + child.h;
 
             // Si el hijo esta en la lista de abiertos, no se vuelve a agregar.

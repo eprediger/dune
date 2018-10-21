@@ -24,12 +24,16 @@ int Position::getY() const {
     return y;
 }
 
-bool Position::operator==(const Position &other) const{
+bool Position::operator==(const Position &other) const {
     return other.x == this->x && other.y == this->y;
 }
 
 bool Position::operator<(const Position &other) const {
     return this->y * 10 + this->x < other.y * 10 + other.x;
+}
+
+int Position::sqrtDistance(const Position &pos) {
+    return (this->x - pos.x)*(this->x - pos.x) + (this->y - pos.y)*(this->y - pos.y);
 }
 
 

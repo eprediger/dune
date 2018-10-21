@@ -6,7 +6,7 @@ int Terrain::getMovility() {
     return movility;
 }
 
-Terrain::Terrain() : movility(0){}
+Terrain::Terrain() : key(' '), movility(0){}
 
 std::ostream &operator<<(std::ostream &os, const Terrain &terrain) {
     os << terrain.movility;
@@ -16,3 +16,17 @@ std::ostream &operator<<(std::ostream &os, const Terrain &terrain) {
 void Terrain::setMovility(int movility) {
     this->movility = movility;
 }
+
+Terrain::Terrain(char key) : key(key){
+
+}
+
+bool Terrain::operator==(const Terrain &terrain) {
+    return terrain.key == key;
+}
+
+char Terrain::getKey() {
+    return key;
+}
+
+

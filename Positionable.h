@@ -10,7 +10,7 @@ protected:
 public:
     Positionable(int x, int y);
 
-    Position getPosition();
+    Position getPosition() const;
 
     int getValue();
 

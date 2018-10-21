@@ -1,22 +1,39 @@
 #include "Map.h"
 
+#include "Precipice.h"
+#include "Summit.h"
 
 Map* Map::map_instance = nullptr;
 
-Map::Map(int width, int height) : matrix(width,std::vector<Terrain>(height)){
+Map::Map(int width, int height) : matrix(width*height), rows(height), cols(width){
     //// TMP /////
+    for (int i=0; i < width*height ; i++){
+        matrix[i] = std::unique_ptr<Terrain>(new Sand());
+    }
 
-    matrix.at(8).at(0) = Terrain(1);
-    matrix.at(8).at(1) = Terrain(1);
-    matrix.at(8).at(2) = Terrain(1);
-    matrix.at(8).at(3) = Terrain(1);
-    matrix.at(3).at(9) = Terrain(1);
-    matrix.at(3).at(8) = Terrain(1);
-    matrix.at(3).at(7) = Terrain(1);
-    matrix.at(3).at(6) = Terrain(1);
-    matrix.at(3).at(5) = Terrain(1);
-    matrix.at(3).at(4) = Terrain(1);
-    matrix.at(3).at(3) = Terrain(1);
+//    this->at(0, 8) = std::move(p);
+//    matrix.at(8*cols + 0) = std::move(std::unique_ptr<Terrain>(new Precipice()));
+    matrix.at(8*cols + 0) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(8*cols + 1) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(8*cols + 2) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(8*cols + 3) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 8) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 7) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 6) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 5) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 4) = std::unique_ptr<Terrain>(new Summit());
+    matrix.at(3*cols + 3) = std::unique_ptr<Terrain>(new Precipice());
+//    this->at(1, 8) = Terrain(1);
+//    this->at(2, 8) = Terrain(1);
+//    this->at(3, 8) = Terrain(1);
+//    this->at(9, 3) = Terrain(1);
+//    this->at(8, 3) = Terrain(1);
+//    this->at(7, 3) = Terrain(1);
+//    this->at(6, 3) = Terrain(1);
+//    this->at(5, 3) = Terrain(1);
+//    this->at(4, 3) = Terrain(1);
+//    this->at(3, 3) = Terrain(1);
 
 }
 
@@ -40,49 +57,65 @@ void Map::create(int width, int height) {
 
 #include <iostream>
 void Map::print() {
-    std::vector<std::vector<int>> pmatrix(getWidth(), std::vector<int>(getHeight()));
-    int n_row = 0,n_col = 0;
-    for (auto row : matrix){
-        n_col = 0;
-        for(auto col : row){
-            pmatrix[n_row][n_col] = col.getMovility();
-            n_col++;
-        }
-        n_row++;
+    std::vector<char> pmatrix(rows*cols);
+
+    std::fill(pmatrix.begin(), pmatrix.end(), ' ');
+    for (int i = 0; i< cols*rows; i++){
+//        int mov = matrix[i].getMovility();
+//        if (mov != 0) {
+            pmatrix[i] = matrix[i]->getKey();
+//            pmatrix[i] = 'O';
+//        }
     }
 
     for (auto pos : positionables){
-        pmatrix[pos->getPosition().getY()][pos->getPosition().getX()] = pos->getValue();
+        pmatrix.at(pos->getPosition().getY()*cols + pos->getPosition().getX()) = 'A' + pos->getValue();
     }
 
-    for (int i = 0; i< pmatrix.size() ; i++){
-        for (int j = 0; j< pmatrix[i].size() ; j++){
-            std::cout << pmatrix[i][j] << "\t";
+    int col = 0;
+    for (auto m : pmatrix){
+        if (col == cols) {
+            std::cout << std::endl;
+            col = 0;
         }
-        std::cout << std::endl;
+        col++;
+        std::cout << m << "\t";
     }
-
+    std::cout << std::endl;
 
 }
 
 Terrain& Map::at(int x, int y){
-    return matrix.at(y).at(x);
+    return *matrix.at(y*cols + x);
+}
+
+Terrain& Map::at(const Position& pos) {
+    return *matrix.at(pos.getY()*cols + pos.getX());
 }
 
 int Map::getHeight() {
-    return matrix.size();
+    return rows;
 }
 
 int Map::getWidth() {
-    return matrix.at(0).size();
+    return cols;
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < matrix.at(0).size() && pos.getY() < matrix.size();
+    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
 }
 
 void Map::put(Positionable& positionable) {
     positionables.push_back(&positionable);
 }
+
+bool Map::canMove(Unity &unity, Position pos) {
+//    return unity.canMoveAboveTerrain(this->at(unity.getPosition().getX(), unity.getPosition().getY()));
+    return unity.canMoveAboveTerrain(this->at(pos));
+//    Sand a;
+//    return unity.canMoveAboveTerrain(a);
+}
+
+
 
 

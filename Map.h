@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "Positionable.h"
 #include "Unity.h"
+#include <memory>
 
 class Map {
 private:
@@ -14,7 +15,8 @@ private:
     Map& operator=(Map const&);
     static Map* map_instance;
 
-    std::vector<std::vector<Terrain>> matrix;
+    std::vector<std::unique_ptr<Terrain>> matrix;
+    int rows, cols;
     std::vector<Positionable*> positionables;
 public:
     static Map* getInstance();
@@ -25,10 +27,11 @@ public:
     int getWidth();
     int getHeight();
     bool isValid(Position& pos);
-
+    bool canMove(Unity &unity, Position pos);
     void put(Positionable &positionable);
 
     Terrain& at(int x, int y);
+    Terrain& at(const Position& pos);
 
     ~Map();
 

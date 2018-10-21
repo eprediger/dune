@@ -16,6 +16,8 @@ public:
 
     bool operator==(const Position& other) const;
     bool operator<(const Position& other) const;
+
+    int sqrtDistance(const Position &pos);
 };
 
 #endif //__POSITION_H__
