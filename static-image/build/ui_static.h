@@ -14,9 +14,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +24,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Static
 {
 public:
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout;
     QLabel *label_img;
     QLabel *label_text;
@@ -36,26 +36,27 @@ public:
         Static->setEnabled(true);
         Static->resize(640, 480);
         Static->setAutoFillBackground(false);
-        horizontalLayout = new QHBoxLayout(Static);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout = new QVBoxLayout(Static);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_img = new QLabel(Static);
         label_img->setObjectName(QStringLiteral("label_img"));
+        label_img->setLayoutDirection(Qt::LeftToRight);
         label_img->setPixmap(QPixmap(QString::fromUtf8("../../imgs/imgs/000a0ad1.bmp")));
         label_img->setScaledContents(false);
         label_img->setWordWrap(false);
 
-        gridLayout->addWidget(label_img, 0, 0, 1, 1);
+        gridLayout->addWidget(label_img, 0, 0, 1, 1, Qt::AlignHCenter|Qt::AlignVCenter);
 
         label_text = new QLabel(Static);
         label_text->setObjectName(QStringLiteral("label_text"));
         label_text->setWordWrap(true);
 
-        gridLayout->addWidget(label_text, 0, 1, 1, 1);
+        gridLayout->addWidget(label_text, 0, 1, 1, 1, Qt::AlignHCenter|Qt::AlignVCenter);
 
 
-        horizontalLayout->addLayout(gridLayout);
+        verticalLayout->addLayout(gridLayout);
 
 
         retranslateUi(Static);

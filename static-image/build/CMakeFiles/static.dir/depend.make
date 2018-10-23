@@ -115,9 +115,9 @@ CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidg
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QButtonGroup
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGridLayout
-CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHeaderView
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel
+CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemdelegate.h
 CMakeFiles/static.dir/src/Static.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemview.h

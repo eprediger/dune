@@ -16,6 +16,12 @@ Static.h
 ui_static.h
 /home/emiliano/fiuba/7542-Taller/tp4-dune/static-image/src/ui_static.h
 
+/home/emiliano/fiuba/7542-Taller/tp4-dune/static-image/src/main.cpp
+QApplication
+-
+Static.h
+/home/emiliano/fiuba/7542-Taller/tp4-dune/static-image/src/Static.h
+
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant
 qvariant.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h
@@ -1042,10 +1048,6 @@ qbuttongroup.h
 qgridlayout.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h
 
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout
-qboxlayout.h
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h
-
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHeaderView
 qheaderview.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qheaderview.h
@@ -1053,6 +1055,10 @@ qheaderview.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel
 qlabel.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout
+qboxlayout.h
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget
 qwidget.h
@@ -1287,11 +1293,11 @@ QtWidgets/QButtonGroup
 -
 QtWidgets/QGridLayout
 -
-QtWidgets/QHBoxLayout
--
 QtWidgets/QHeaderView
 -
 QtWidgets/QLabel
+-
+QtWidgets/QVBoxLayout
 -
 QtWidgets/QWidget
 -
