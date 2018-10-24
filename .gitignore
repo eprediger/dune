@@ -1,3 +1,7 @@
+# Ignorar proyecto de CLion
+.idea
+cmake-build-debug
+
 # Files that won't be included
 *.pdf
 notas-tp4.txt
