@@ -4,6 +4,8 @@ notas-tp4.txt
 *.7z
 
 # Directories that won't be included
+.idea/
+cmake-build-debug/
 test/
 informe/
 entregas/
