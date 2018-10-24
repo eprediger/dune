@@ -14,7 +14,8 @@ private:
 public:
     Unity();
 
-    void setDestiny(int x_dest, int y_dest);
+//    void setDestiny(int x_dest, int y_dest);
+    void setPath(std::stack<Position> path);
 
     int move();
 

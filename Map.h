@@ -32,6 +32,8 @@ public:
     void put(Unity &unity);
     bool moveUnitys();
 
+    void setDestiny(Unity &unity, int x_dest, int y_dest);
+
     Terrain& at(int x, int y);
     Terrain& at(const Position& pos);
 

@@ -6,11 +6,11 @@ Unity::Unity() : Positionable(0,0){}
 
 Unity::Unity(int x, int y) : Positionable(x, y) {}
 
-void Unity::setDestiny(int x_dest, int y_dest) {
-    AStar algorithm;
-    this->pathToDestiny = algorithm.makePath(this->pos, Position(x_dest, y_dest), *this);
-    this->pathToDestiny.pop();
-}
+//void Unity::setDestiny(int x_dest, int y_dest) {
+//    AStar algorithm(<#initializer#>);
+//    this->pathToDestiny = algorithm.makePath(*this, Position(x_dest, y_dest));
+//    this->pathToDestiny.pop();
+//}
 
 int Unity::move() {
     if (!pathToDestiny.empty()) {
@@ -26,3 +26,9 @@ int Unity::move() {
 bool Unity::canMoveAboveTerrain(Terrain &terrain) {
     return terrain == Sand() || terrain == Summit();
 }
+
+void Unity::setPath(std::stack<Position> path) {
+    pathToDestiny = path;
+}
+
+

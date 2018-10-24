@@ -14,17 +14,18 @@ int main( int argc, char* args[] ) {
     Map::getInstance()->put(unidad);
     Map::getInstance()->put(infanteria);
 
-    unidad.setDestiny(0, 9);
-    infanteria.setDestiny(9,9);
+//    unidad.setDestiny(0, 9);
+//    infanteria.setDestiny(9,9);
+    Map::getInstance()->setDestiny(unidad, 0, 9);
 
     std::cout << "****************************************" << std::endl;
     Map::getInstance()->print();
 
 //    while (unidad.move() && infanteria.move()) {
     while (Map::getInstance()->moveUnitys()) {
-        if (unidad.getPosition() == Position(3,9)){
-            unidad.setDestiny(5, 0);
-        }
+//        if (unidad.getPosition() == Position(3,9)){
+//            unidad.setDestiny(5, 0);
+//        }
         std::cout << "****************************************" << std::endl;
         Map::getInstance()->print();
     }

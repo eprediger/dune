@@ -2,6 +2,7 @@
 
 #include "Precipice.h"
 #include "Summit.h"
+#include "AStar.h"
 
 Map* Map::map_instance = nullptr;
 
@@ -107,6 +108,7 @@ bool Map::isValid(Position &pos) {
 
 void Map::put(Unity &unity) {
     unitys.push_back(&unity);
+
 }
 
 bool Map::canMove(Unity& unity, Position pos) {
@@ -121,5 +123,10 @@ bool Map::moveUnitys() {
         }
     }
     return result;
+}
+
+void Map::setDestiny(Unity &unity, int x_dest, int y_dest) {
+    AStar algorithm(*this);
+    unity.setPath(algorithm.makePath(unity, Position(x_dest, y_dest)));
 }
 

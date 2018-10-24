@@ -3,6 +3,7 @@
 
 #include "AStarNode.h"
 #include "Unity.h"
+#include "Map.h"
 
 #include <set>
 #include <map>
@@ -12,12 +13,12 @@ class AStar {
 private:
     std::vector<AStarNode> closeList;
     std::vector<AStarNode> openList;
-
+    Map& map;
 public:
-    AStar();
+    AStar(Map &map);
 
     std::stack<Position> reconstructPath(std::map<Position, Position> &bether_path, Position &start);
-    std::stack<Position> makePath(Position start, Position end, Unity& unity);
+    std::stack<Position> makePath(Unity &unity, Position end);
 
 };
 
