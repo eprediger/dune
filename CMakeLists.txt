@@ -9,8 +9,8 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
 #message("[INFO] La raiz del proyecto es ${PROJECT_SOURCE_DIR}")
 
 file(GLOB SOURCE
-        *.cpp
-        *.h
+        src/*.cpp
+        src/*.h
         )
 
 message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")
