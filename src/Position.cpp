@@ -29,7 +29,11 @@ bool Position::operator==(const Position &other) const {
 }
 
 bool Position::operator<(const Position &other) const {
-    return this->y * 10 + this->x < other.y * 10 + other.x;
+    if (this->x == other.x) {
+        return this->y < other.y;
+    } else {
+        return this->x < other.x;
+    }
 }
 
 int Position::sqrtDistance(const Position &pos) {
