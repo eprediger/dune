@@ -17,12 +17,7 @@ message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")
 include_directories(${PROJECT_BINARY_DIR})
 
 add_executable(${PROJECT_NAME}
-        src/main.cpp
-        src/SdlWindow.cpp
-        src/SdlWindow.h
-        src/SdlException.cpp
-        src/SdlException.h src/SdlTexture.cpp src/SdlTexture.h src/Area.cpp src/Area.h
-        $(SOURCE))
+        ${SOURCE})
 
 INCLUDE(FindPkgConfig)
 

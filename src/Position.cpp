@@ -5,12 +5,6 @@
 Position::Position() : x(0), y(0) {}
 
 Position::Position(int x, int y) {
-//    if (x < 0 || x > Map::getInstance()->getWidth()){
-//        throw "Incorrect Pos";
-//    }
-//    if (y < 0 || y > Map::getInstance()->getHeight()){
-//        throw "Incorrect Pos";
-//    }
     this->x = x;
     this->y = y;
 

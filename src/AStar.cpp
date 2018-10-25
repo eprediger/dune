@@ -47,7 +47,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
         curr_node_itr = closeList.end()-1;
 
         // Se buscan todos los hijos que son adyacentes al nodo actual
-        std::vector<AStarNode> children = curr_node_itr->getAdjacents();
+        std::vector<AStarNode> children = curr_node_itr->getAdjacents(this->map);
 
         // A partir de aca, procesa cada hijo para saber si debe ignorarlo, actualizarlo en la lista de abiertos
         // o agregarlo en la lista de abiertos. Tambien chequea si uno de los hijos es el nodo final
