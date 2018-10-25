@@ -8,13 +8,16 @@
 #define SUCCESS 0
 #define FAILURE 1
 
+#define WIDTH 800
+#define HEIGTH 600
+
 int main(int argc, const char* argv[]) {
     try {
-        Map::create(640, 480);
-        Unity unidad(0, 0);
+        Map::create(WIDTH, HEIGTH);
+        Unity unidad(WIDTH/2, HEIGTH/2);
         Map::getInstance()->put(unidad);
 
-        SdlWindow window(640, 480);
+        SdlWindow window(WIDTH, HEIGTH);
         window.fill();
         SdlTexture im("../imgs/imgs/000a6d70.bmp", window);
         Area srcArea(0, 0, 41, 38); // estos numeros?
@@ -42,7 +45,7 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-            if (vel == 10){
+            if (vel == 100){
                 unidad.move();
                 vel = 0;
             }
