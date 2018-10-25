@@ -1,16 +1,14 @@
 #include "Unity.h"
 #include "AStar.h"
 #include "Summit.h"
+#include "AssaultRifle.h"
 
-Unity::Unity() : Positionable(0,0){}
+Unity::Unity() : life(INITIAL_LIFE), Positionable(0,0), weapon(AssaultRifle()){
+}
 
-Unity::Unity(int x, int y) : Positionable(x, y) {}
+Unity::Unity(int x, int y) : life(INITIAL_LIFE), Positionable(x, y), weapon(AssaultRifle()) {
+}
 
-//void Unity::setDestiny(int x_dest, int y_dest) {
-//    AStar algorithm(<#initializer#>);
-//    this->pathToDestiny = algorithm.makePath(*this, Position(x_dest, y_dest));
-//    this->pathToDestiny.pop();
-//}
 
 int Unity::move() {
     if (!pathToDestiny.empty()) {
@@ -29,6 +27,22 @@ bool Unity::canMoveAboveTerrain(Terrain &terrain) {
 
 void Unity::setPath(std::stack<Position> path) {
     pathToDestiny = path;
+}
+
+int Unity::getLife() {
+    return life;
+}
+
+void Unity::attack(Unity &defender) {
+    defender.getAttack(*this);
+}
+
+void Unity::getAttack(Unity &attacker) {
+    life -= attacker.getDammage();
+}
+
+int Unity::getDammage() {
+    return weapon.getDammage();
 }
 
 

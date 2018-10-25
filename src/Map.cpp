@@ -36,14 +36,6 @@ Terrain& Map::at(const Position& pos) {
     return *matrix.at(pos.getY()*cols + pos.getX());
 }
 
-int Map::getHeight() {
-    return rows;
-}
-
-int Map::getWidth() {
-    return cols;
-}
-
 bool Map::isValid(Position &pos) {
     return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
 }
