@@ -4,11 +4,11 @@
 #include "AssaultRifle.h"
 #include "Config.h"
 
-Unity::Unity() : life(INITIAL_LIFE), Positionable(0,0), weapon(AssaultRifle()){
+Unity::Unity() : Attackable(INITIAL_LIFE), Positionable(0,0), Attacker(AssaultRifle()){
     id = Config::getNextId();
 }
 
-Unity::Unity(int x, int y) : life(INITIAL_LIFE), Positionable(x, y), weapon(AssaultRifle()) {
+Unity::Unity(int x, int y) : Attackable(INITIAL_LIFE), Positionable(x, y), Attacker(AssaultRifle()) {
     id = Config::getNextId();
 }
 
@@ -31,24 +31,22 @@ void Unity::setPath(std::stack<Position> path) {
     pathToDestiny = path;
 }
 
-int Unity::getLife() {
-    return life;
-}
 
-void Unity::attack(Unity &defender) {
-    defender.reciveAttack(*this);
-}
 
-void Unity::reciveAttack(Unity &attacker) {
-    life -= attacker.getDammage();
-    if (life <= 0) {
-        // this->kill;
-    }
-}
+//void Unity::attack(Unity &defender) {
+//    defender.reciveAttack(*this);
+//}
 
-int Unity::getDammage() {
-    return weapon.getDammage();
-}
+//void Unity::reciveAttack(Unity &attacker) {
+//    life -= attacker.getDammage();
+//    if (life <= 0) {
+//        // this->kill;
+//    }
+//}
+//
+//int Unity::getDammage() {
+//    return weapon.getDammage();
+//}
 
 bool Unity::automaticAttack(Map &map) {
     Unity* closes_unity = map.getClosestUnity(*this, 100);

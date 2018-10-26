@@ -8,6 +8,7 @@
 #include "SdlException.h"
 #include "Area.h"
 #include "Map.h"
+#include "Unity.h"
 
 #define SUCCESS 0
 #define FAILURE 1

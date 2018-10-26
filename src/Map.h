@@ -4,8 +4,10 @@
 #include <vector>
 #include "Terrain.h"
 #include "Positionable.h"
-#include "Unity.h"
+//#include "Unity.h"
 #include <memory>
+
+class Unity;
 
 class Map {
 private:
