@@ -13,8 +13,6 @@ public:
 
     virtual void reciveAttack(Attacker &attacker);
 
-
-
 };
 
 #endif //__ATTACKABLE_H__

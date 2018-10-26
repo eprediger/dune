@@ -14,21 +14,19 @@
 
 #define INITIAL_LIFE 50
 
+class Map;
+
 class Unity : public Positionable, public Attackable, public Attacker {
 private:
     int id;
-
     std::stack<Position> pathToDestiny;
 
-//    Map & map;
 public:
     Unity();
 
     Unity(int x, int y);
 
     void setPath(std::stack<Position> path);
-
-//    int getLife();
 
     int move();
 

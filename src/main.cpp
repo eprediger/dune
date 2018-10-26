@@ -9,6 +9,7 @@
 #include "Area.h"
 #include "Map.h"
 #include "Unity.h"
+#include "Building.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -22,6 +23,7 @@ int main(int argc, const char* argv[]) {
     Unity soldado4(1,30);
     Unity soldado5;
     Unity soldado6;
+    Building edificio;
 
     mapa.put(soldado1);
     mapa.put(soldado2);
@@ -57,6 +59,14 @@ int main(int argc, const char* argv[]) {
 
     mapa.cleanDeadUnitys();
     std::cout << "Se limpio el mapa" << std::endl;
+
+
+    std::cout << "Soldado 1 ataca al edificio" << std::endl;
+    soldado1.attack(edificio);
+    std::cout << "Vida Soldado 1: " << soldado1.getLife() << std::endl;
+    std::cout << "Vida edificio: " << edificio.getLife() << std::endl;
+
+
 
 
 

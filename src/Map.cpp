@@ -44,7 +44,9 @@ bool Map::isValid(Position &pos) {
 
 void Map::put(Unity &unity) {
     unitys.push_back(&unity);
-
+}
+void Map::put(Building &building) {
+    buildings.push_back(&building);
 }
 
 bool Map::canMove(Unity& unity, Position pos) {

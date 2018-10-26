@@ -4,10 +4,11 @@
 #include <vector>
 #include "Terrain.h"
 #include "Positionable.h"
-//#include "Unity.h"
+#include "Building.h"
+#include "Unity.h"
 #include <memory>
 
-class Unity;
+//class Unity;
 
 class Map {
 private:
@@ -15,6 +16,7 @@ private:
     int rows, cols;
 //    std::vector<Positionable*> unitys;
     std::vector<Unity*> unitys;
+    std::vector<Building*> buildings;
 public:
     Map();
     Map(int width, int height);
@@ -22,6 +24,7 @@ public:
     bool isValid(Position& pos);
     bool canMove(Unity& unity, Position pos);
     void put(Unity& unity);
+    void put(Building& building);
     bool moveUnitys();
 
     Unity * getClosestUnity(Unity &unity, int limitRadius);

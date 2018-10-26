@@ -2,7 +2,6 @@
 #define __ATTACKER_H__
 
 #include "Weapon.h"
-#include "Map.h"
 
 class Attackable;
 
@@ -15,8 +14,6 @@ public:
     virtual void attack(Attackable &defender);
 
     virtual int getDammage();
-
-//    virtual bool automaticAttack(Map &map);
 
 };
 

@@ -32,22 +32,6 @@ void Unity::setPath(std::stack<Position> path) {
 }
 
 
-
-//void Unity::attack(Unity &defender) {
-//    defender.reciveAttack(*this);
-//}
-
-//void Unity::reciveAttack(Unity &attacker) {
-//    life -= attacker.getDammage();
-//    if (life <= 0) {
-//        // this->kill;
-//    }
-//}
-//
-//int Unity::getDammage() {
-//    return weapon.getDammage();
-//}
-
 bool Unity::automaticAttack(Map &map) {
     Unity* closes_unity = map.getClosestUnity(*this, 100);
     if (closes_unity == nullptr){
