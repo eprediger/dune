@@ -9,15 +9,15 @@
 #define FAILURE 1
 
 #define WIDTH 800
-#define HEIGTH 600
+#define HEIGHT 600
 
 int main(int argc, const char* argv[]) {
     try {
-        Map::create(WIDTH, HEIGTH);
-        Unity unidad(WIDTH/2, HEIGTH/2);
+        Map::create(WIDTH, HEIGHT);
+        Unity unidad(WIDTH/2, HEIGHT/2);
         Map::getInstance()->put(unidad);
 
-        SdlWindow window(WIDTH, HEIGTH);
+        SdlWindow window(WIDTH, HEIGHT);
         window.fill();
         SdlTexture im("../imgs/imgs/000a6d70.bmp", window);
         Area srcArea(0, 0, 41, 38); // estos numeros?
@@ -31,7 +31,6 @@ int main(int argc, const char* argv[]) {
             window.fill(); // Repinto el fondo gris
             im.render(srcArea, destArea);
             while (SDL_PollEvent(&event)) {
-//            SDL_WaitEvent(&event);
                 switch(event.type) {
                     case SDL_QUIT:
                         running = false;
