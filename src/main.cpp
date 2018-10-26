@@ -14,23 +14,48 @@
 
 int main(int argc, const char* argv[]) {
 
+    Map mapa;
+    Unity soldado1(0,0);
+    Unity soldado2(0,20);
+    Unity soldado3(0,10);
+    Unity soldado4(1,30);
+    Unity soldado5;
+    Unity soldado6;
 
-
-    Unity soldado1;
-    Unity soldado2;
+    mapa.put(soldado1);
+    mapa.put(soldado2);
+    mapa.put(soldado3);
+    mapa.put(soldado4);
 
     std::cout << "Vida Soldado 1 [Esp: 50]: " << soldado1.getLife() << std::endl;
     std::cout << "Vida Soldado 2 [Esp: 50]: " << soldado2.getLife() << std::endl;
 
+    std::cout << "Soldado 1 ataca a Soldado 2" << std::endl;
     soldado1.attack(soldado2);
 
     std::cout << "Vida Soldado 1 [Esp: 50]: " << soldado1.getLife() << std::endl;
     std::cout << "Vida Soldado 2 [Esp: 48]: " << soldado2.getLife() << std::endl;
 
+    std::cout << "Soldado 2 ataca a Soldado 1" << std::endl;
+    soldado2.attack(soldado1);
+    std::cout << "Vida Soldado 1 [Esp: 48]: " << soldado1.getLife() << std::endl;
+    std::cout << "Vida Soldado 2 [Esp: 48]: " << soldado2.getLife() << std::endl;
 
+    std::cout << "Soldado 1 ataca automaticamente" << std::endl;
+    soldado1.automaticAttack(mapa);
+    mapa.cleanDeadUnitys();
+    std::cout << "Vida Soldado 1 [Esp: 50]: " << soldado1.getLife() << std::endl;
+    std::cout << "Vida Soldado 2 [Esp: 46]: " << soldado2.getLife() << std::endl;
+    std::cout << "Vida Soldado 3 [Esp: ?]: " << soldado3.getLife() << std::endl;
+    std::cout << "Vida Soldado 4 [Esp: ?]: " << soldado4.getLife() << std::endl;
 
+    while (soldado2.getLife() > 0){
+        soldado1.attack(soldado2);
+        std::cout << "Vida Soldado 2: " << soldado2.getLife() << std::endl;
+    }
 
-
+    mapa.cleanDeadUnitys();
+    std::cout << "Se limpio el mapa" << std::endl;
 
 
 

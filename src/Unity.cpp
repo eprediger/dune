@@ -2,13 +2,15 @@
 #include "AStar.h"
 #include "Summit.h"
 #include "AssaultRifle.h"
+#include "Config.h"
 
 Unity::Unity() : life(INITIAL_LIFE), Positionable(0,0), weapon(AssaultRifle()){
+    id = Config::getNextId();
 }
 
 Unity::Unity(int x, int y) : life(INITIAL_LIFE), Positionable(x, y), weapon(AssaultRifle()) {
+    id = Config::getNextId();
 }
-
 
 int Unity::move() {
     if (!pathToDestiny.empty()) {
@@ -34,15 +36,40 @@ int Unity::getLife() {
 }
 
 void Unity::attack(Unity &defender) {
-    defender.getAttack(*this);
+    defender.reciveAttack(*this);
 }
 
-void Unity::getAttack(Unity &attacker) {
+void Unity::reciveAttack(Unity &attacker) {
     life -= attacker.getDammage();
+    if (life <= 0) {
+        // this->kill;
+    }
 }
 
 int Unity::getDammage() {
     return weapon.getDammage();
 }
+
+bool Unity::automaticAttack(Map &map) {
+    Unity* closes_unity = map.getClosestUnity(*this, 100);
+    if (closes_unity == nullptr){
+        return false;
+    } else {
+        this->attack(*closes_unity);
+        return true;
+    }
+}
+
+bool Unity::operator==(const Unity &other) {
+    return this->id == other.id;
+}
+
+bool Unity::isDead(Unity* unity) {
+    return unity->life <= 0;
+}
+
+
+
+
 
 

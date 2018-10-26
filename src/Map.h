@@ -9,7 +9,6 @@
 
 class Map {
 private:
-
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
 //    std::vector<Positionable*> unitys;
@@ -19,11 +18,15 @@ public:
     Map(int width, int height);
 
     bool isValid(Position& pos);
-    bool canMove(Unity &unity, Position pos);
-    void put(Unity &unity);
+    bool canMove(Unity& unity, Position pos);
+    void put(Unity& unity);
     bool moveUnitys();
 
-    void setDestiny(Unity &unity, int x_dest, int y_dest);
+    Unity * getClosestUnity(Unity &unity, int limitRadius);
+
+    void setDestiny(Unity& unity, int x_dest, int y_dest);
+
+    void cleanDeadUnitys();
 
     Terrain& at(int x, int y);
     Terrain& at(const Position& pos);
