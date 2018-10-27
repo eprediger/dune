@@ -15,6 +15,7 @@ informe/
 entregas/
 inputs/
 local_output/
+build/
 
 # Directories that could be included
 imgs/

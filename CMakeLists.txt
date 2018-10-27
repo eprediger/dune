@@ -17,7 +17,7 @@ message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")
 include_directories(${PROJECT_BINARY_DIR})
 
 add_executable(${PROJECT_NAME}
-        ${SOURCE})
+               ${SOURCE})
 
 INCLUDE(FindPkgConfig)
 
