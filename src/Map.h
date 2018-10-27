@@ -8,13 +8,16 @@
 #include "Unity.h"
 #include <memory>
 
-//class Unity;
+// Configurar aca el tamaño de los bloques
+#define BLOCK_HEIGHT 10
+#define BLOCK_WIDTH 10
+
 
 class Map {
 private:
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
-//    std::vector<Positionable*> unitys;
+    // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unity en getClosestUnity para hacer esto
     std::vector<Unity*> unitys;
     std::vector<Building*> buildings;
 public:
@@ -34,6 +37,7 @@ public:
     void cleanDeadUnitys();
 
     Terrain& at(int x, int y);
+    Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
 
     ~Map();

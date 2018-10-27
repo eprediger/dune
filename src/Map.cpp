@@ -6,9 +6,14 @@
 
 #include <algorithm>
 
-Map::Map(int width, int height) : matrix(width*height), rows(height), cols(width){
+Map::Map(int width, int height) : matrix(width*height/(BLOCK_HEIGHT*BLOCK_WIDTH)), rows(height/BLOCK_HEIGHT), cols(width/BLOCK_WIDTH){
     //// TMP /////
-    for (int i=0; i < width*height ; i++){
+
+    if (width%BLOCK_WIDTH != 0 || height%BLOCK_HEIGHT){
+        throw "Error"; // Modificar luego
+    }
+
+    for (int i=0; i < width*height/(BLOCK_HEIGHT*BLOCK_WIDTH) ; i++){
         matrix[i] = std::unique_ptr<Terrain>(new Sand());
     }
 
@@ -31,15 +36,19 @@ Map::Map() :matrix(640*480), rows(640), cols(480)  {}
 Map::~Map() {}
 
 Terrain& Map::at(int x, int y){
+    return *matrix.at((y/BLOCK_HEIGHT)*cols + (x/BLOCK_WIDTH));
+}
+
+Terrain& Map::blockAt(int x, int y){
     return *matrix.at(y*cols + x);
 }
 
 Terrain& Map::at(const Position& pos) {
-    return *matrix.at(pos.getY()*cols + pos.getX());
+    return *matrix.at((pos.getY()/BLOCK_HEIGHT)*cols + (pos.getX()/BLOCK_WIDTH));
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
+    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols*BLOCK_HEIGHT && pos.getY() < rows*BLOCK_WIDTH;
 }
 
 void Map::put(Unity &unity) {

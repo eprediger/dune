@@ -44,7 +44,7 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-            if (vel == 100){
+            if (vel == 1){
                 unidad.move();
                 vel = 0;
             }
