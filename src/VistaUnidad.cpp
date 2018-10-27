@@ -28,7 +28,7 @@ VistaUnidad::VistaUnidad(Unity& unidad, SdlWindow& window)
 
 void VistaUnidad::dibujar(){
 	Position pos = unidad.getPosition();
-	Area dest(pos.getX(),pos.getY(),41,38);
+	Area dest(pos.getX()-20,pos.getY()-19,41,38);
 	orientacion.calcular(prev_pos,pos);
 	prev_pos = pos;
 	vistas.at(orientacion.getValor())->render(Area(0, 0, 41, 38),dest);
