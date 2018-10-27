@@ -21,6 +21,11 @@ std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &bether
 }
 
 std::stack<Position> AStar::makePath(Unity &unity, Position end) {
+
+    if (!map.canMove(unity, end) ) {
+        return std::move(std::stack<Position>());
+    }
+
     std::map<Position, Position> bether_path;
     AStarNode n_end(end);
     AStarNode n_start(unity.getPosition());
