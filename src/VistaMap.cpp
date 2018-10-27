@@ -20,11 +20,12 @@ Area get_source_area(char key){
 			return Area(0,64,32,32);
 		case 'D':
 			return Area(32,96,32,32);
-		case 'S':
+		case 'C':
 			return Area(112,64,32,32);
 			break;
 	}
-	return Area(0,8,16,16);
+	std::cout<<key<<std::endl;
+	return Area(0,8,32,32);
 }
 
 void VistaMap::dibujar(){
