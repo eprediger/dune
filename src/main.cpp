@@ -13,9 +13,9 @@
 
 int main(int argc, const char* argv[]) {
     try {
-        Map::create(WIDTH, HEIGHT);
+        Map map(WIDTH, HEIGHT);
         Unity unidad(WIDTH/2, HEIGHT/2);
-        Map::getInstance()->put(unidad);
+        map.put(unidad);
 
         SdlWindow window(WIDTH, HEIGHT);
         window.fill();
@@ -38,7 +38,7 @@ int main(int argc, const char* argv[]) {
                     case SDL_MOUSEBUTTONUP:
                         if (event.button.button == SDL_BUTTON_RIGHT) {
                             SDL_GetMouseState(&x, &y);
-                            Map::getInstance()->setDestiny(unidad, x, y);
+                            map.setDestiny(unidad, x, y);
                         }
                     default:
                         break;
