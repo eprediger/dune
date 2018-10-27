@@ -5,12 +5,13 @@
 #include "Area.h"
 #include "Map.h"
 #include "VistaUnidad.h"
+#include "VistaMap.h"
 
 #define SUCCESS 0
 #define FAILURE 1
 
 #define WIDTH 800
-#define HEIGHT 600
+#define HEIGHT 640
 
 int main(int argc, const char* argv[]) {
     try {
@@ -20,13 +21,14 @@ int main(int argc, const char* argv[]) {
 
         SdlWindow window(WIDTH, HEIGHT);
         window.fill();
-	VistaUnidad vista(unidad,window);        
+	VistaMap vistaMap(map,window);
+	VistaUnidad vistaUnidad(unidad,window);        
 	bool running = true;
         int vel = 0;
         while (running) {
             SDL_Event event;
-            window.fill(); // Repinto el fondo gris
-            vista.dibujar();
+	    vistaMap.dibujar();
+            vistaUnidad.dibujar();
 	    while (SDL_PollEvent(&event)) {
                 switch(event.type) {
                     case SDL_QUIT:
@@ -42,7 +44,7 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-            if (vel == 20){
+            if (vel == 10){
                 unidad.move();
                 vel = 0;
             }

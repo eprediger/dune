@@ -9,8 +9,8 @@
 #include <memory>
 
 // Configurar aca el tamaño de los bloques
-#define BLOCK_HEIGHT 10
-#define BLOCK_WIDTH 10
+#define BLOCK_HEIGHT 32
+#define BLOCK_WIDTH 32
 
 
 class Map {
@@ -29,6 +29,9 @@ public:
     void put(Unity& unity);
     void put(Building& building);
     bool moveUnitys();
+
+    int getWidthInBlocks();
+    int getHeightInBlocks();
 
     Unity * getClosestUnity(Unity &unity, int limitRadius);
 

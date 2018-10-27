@@ -35,6 +35,15 @@ Map::Map() :matrix(640*480), rows(640), cols(480)  {}
 
 Map::~Map() {}
 
+
+int Map::getWidthInBlocks(){
+	return cols;
+}
+
+int Map::getHeightInBlocks(){
+	return rows;
+}
+
 Terrain& Map::at(int x, int y){
     return *matrix.at((y/BLOCK_HEIGHT)*cols + (x/BLOCK_WIDTH));
 }
