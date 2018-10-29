@@ -29,6 +29,13 @@ SdlWindow::~SdlWindow() {
     }
 }
 
+void SdlWindow::grabMouse(bool grab){
+	if (grab)
+		SDL_SetWindowGrab(window,SDL_TRUE);
+	else 
+		SDL_SetWindowGrab(window,SDL_FALSE);
+}
+
 void SdlWindow::fill(const Uint8 r, const Uint8 g,
                      const Uint8 b, const Uint8 alpha) {
     SDL_SetRenderDrawColor(this->renderer, r, g, b, alpha);

@@ -14,6 +14,7 @@ public:
     void fill();
     void fill(Uint8 r, Uint8 g, Uint8 b, Uint8 alpha);
     void render();
+    void grabMouse(bool grab);
     SDL_Renderer* getRenderer() const;
 private:
     const int width;

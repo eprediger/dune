@@ -15,6 +15,8 @@
 
 int main(int argc, const char* argv[]) {
     try {
+	int mouse_x, mouse_y;
+	bool left_click = false;
         Map map(WIDTH, HEIGHT);
         Unity unidad(WIDTH/2, HEIGHT/2);
         map.put(unidad);
@@ -25,7 +27,23 @@ int main(int argc, const char* argv[]) {
 	VistaUnidad vistaUnidad(unidad,window);        
 	bool running = true;
         int vel = 0;
-        while (running) {
+	while (running) {
+	   
+	   if (left_click){
+		if (mouse_x==WIDTH/2 - 1){
+			camara.setX(camara.getX()+1);
+		}
+		if (mouse_y==HEIGHT/2 - 1){
+			camara.setY(camara.getY()+1);
+		}
+		if (mouse_x == 0){
+			camara.setX(camara.getX()-1);
+		}
+		if (mouse_y==0){
+			camara.setY(camara.getY()-1);
+		}
+	    }	
+
 	    if (camara.getX() < 0){
 		camara.setX(0);
 	    }
@@ -38,7 +56,9 @@ int main(int argc, const char* argv[]) {
 	    if (camara.getY() + camara.getHeight() > map.getHeight()){
 		camara.setY(map.getHeight() - camara.getHeight());
 	    }
-            SDL_Event event;
+            
+
+	    SDL_Event event;
 	    vistaMap.dibujar(camara);
             vistaUnidad.dibujar(camara);
 	    while (SDL_PollEvent(&event)) {
@@ -48,10 +68,13 @@ int main(int argc, const char* argv[]) {
                         break;
                     case SDL_MOUSEBUTTONUP:
                         if (event.button.button == SDL_BUTTON_RIGHT) {
-                            int x,y;
-			    SDL_GetMouseState(&x, &y);
-                            map.setDestiny(unidad, x + camara.getX(), y + camara.getY());
-                        }
+			    SDL_GetMouseState(&mouse_x, &mouse_y);
+                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
+                        } else if (event.button.button == SDL_BUTTON_LEFT){
+				window.grabMouse(false);
+				left_click = false;
+			}
+			break;
 		    case SDL_KEYDOWN:
 			switch( event.key.keysym.sym ){
 				case SDLK_LEFT:
@@ -69,6 +92,18 @@ int main(int argc, const char* argv[]) {
 				default:
 					break;
 			}
+			break;
+		    case SDL_MOUSEBUTTONDOWN:
+		    	if (event.button.button == SDL_BUTTON_LEFT){
+				window.grabMouse(true);				
+				left_click = true;			
+			}
+			break;
+		    case SDL_MOUSEMOTION:
+			if (left_click){
+				SDL_GetMouseState(&mouse_x,&mouse_y);
+				break;
+			}	
 		    default:
                         break;
                 }
