@@ -9,6 +9,8 @@
 class Area {
 public:
 	Area(int x, int y, int width, int height);
+	void setX(int x);
+	void setY(int y);
 	int getX() const;
 	int getY() const;
 	int getWidth() const;

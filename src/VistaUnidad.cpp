@@ -4,7 +4,7 @@
 #include "Position.h"
 #include "Orientacion.h"
 #include <map>
-
+#include "Area.h"
 
 std::map<int,SdlTexture*> VistaUnidad::vistas;
 
@@ -26,9 +26,9 @@ VistaUnidad::VistaUnidad(Unity& unidad, SdlWindow& window)
 	}
 }
 
-void VistaUnidad::dibujar(){
+void VistaUnidad::dibujar(Area camara){
 	Position pos = unidad.getPosition();
-	Area dest(pos.getX()-20,pos.getY()-19,41,38);
+	Area dest(pos.getX()- 16 - camara.getX(),pos.getY()-16 - camara.getY() ,32,32);
 	orientacion.calcular(prev_pos,pos);
 	prev_pos = pos;
 	vistas.at(orientacion.getValor())->render(Area(0, 0, 41, 38),dest);

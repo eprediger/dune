@@ -30,6 +30,9 @@ public:
     void put(Building& building);
     bool moveUnitys();
 
+    int getHeight();
+    int getWidth();
+
     int getWidthInBlocks();
     int getHeightInBlocks();
 

@@ -36,6 +36,15 @@ Map::Map() :matrix(640*480), rows(640), cols(480)  {}
 Map::~Map() {}
 
 
+
+int Map::getWidth(){
+	return cols*BLOCK_WIDTH;
+}
+
+int Map::getHeight(){
+	return rows*BLOCK_HEIGHT;
+}
+
 int Map::getWidthInBlocks(){
 	return cols;
 }

@@ -8,11 +8,12 @@
 #include "Position.h"
 #include <map>
 #include "Orientacion.h"
+#include "Area.h"
 
 class VistaUnidad{
 	public:
 		VistaUnidad(Unity& unidad, SdlWindow& window);
-		void dibujar();
+		void dibujar(Area camara);
 	private:
 		Unity& unidad;
 		Position prev_pos;

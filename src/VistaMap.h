@@ -4,14 +4,17 @@
 #include "Map.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
+#include <map>
+#include "Area.h"
 
 class VistaMap{
 	public:
 		VistaMap(Map& mapa, SdlWindow& window);
-		void dibujar();
+		void dibujar(Area camara);
 	private:
 		Map& mapa;
 		SdlTexture terrenos;
+		std::map<char,Area> areas;
 };
 
 #endif
