@@ -12,7 +12,6 @@ public:
     virtual int getLife();
 
     virtual void reciveAttack(Attacker &attacker);
-
 };
 
 #endif //__ATTACKABLE_H__
