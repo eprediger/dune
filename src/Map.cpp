@@ -69,6 +69,9 @@ bool Map::isValid(Position &pos) {
     return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols*BLOCK_HEIGHT && pos.getY() < rows*BLOCK_WIDTH;
 }
 
+//void Map::put(Attackable &attackable) {
+//    attackables.push_back(&attackable);
+//}
 void Map::put(Unity &unity) {
     unitys.push_back(&unity);
 }
@@ -111,9 +114,28 @@ Unity* Map::getClosestUnity(Unity &unity, int limitRadius) {
     return closest_unity;
 }
 
+Unity *Map::getClosestUnity(Position &position, int limitRadius) {
+    Unity* closest_unity = nullptr;
+    int closest_unity_distance = limitRadius;
+    for (auto unit : unitys){
+        int distance = unit->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unity_distance){
+            closest_unity = unit;
+            closest_unity_distance = distance;
+        }
+    }
+
+    return closest_unity;
+}
+
 void Map::cleanDeadUnitys() {
     if (std::find_if(unitys.begin(), unitys.end(), Unity::isDead) != unitys.end()){
         unitys.erase(std::remove_if(unitys.begin(), unitys.end(), Unity::isDead));
     }
 }
+
+
+
+
 

@@ -18,6 +18,7 @@ private:
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
     // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unity en getClosestUnity para hacer esto
+    std::vector<Attackable*> attackables;
     std::vector<Unity*> unitys;
     std::vector<Building*> buildings;
 public:
@@ -26,6 +27,7 @@ public:
 
     bool isValid(Position& pos);
     bool canMove(Unity& unity, Position pos);
+//    void put(Attackable& attackable);
     void put(Unity& unity);
     void put(Building& building);
     bool moveUnitys();
@@ -37,6 +39,7 @@ public:
     int getHeightInBlocks();
 
     Unity * getClosestUnity(Unity &unity, int limitRadius);
+    Unity * getClosestUnity(Position& position, int limitRadius);
 
     void setDestiny(Unity& unity, int x_dest, int y_dest);
 

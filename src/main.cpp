@@ -6,6 +6,8 @@
 #include "Map.h"
 #include "VistaUnidad.h"
 #include "VistaMap.h"
+#include "Model.h"
+#include "View.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -17,15 +19,27 @@ int main(int argc, const char* argv[]) {
     try {
 	int mouse_x, mouse_y;
 	bool left_click = false;
-        Map map(WIDTH, HEIGHT);
-        Unity unidad(WIDTH/2, HEIGHT/2);
-        map.put(unidad);
+//        Map map(WIDTH, HEIGHT);
+//        Unity unidad(WIDTH/2, HEIGHT/2);
+//		Unity unidad2(20, 20);
+//        map.put(unidad);
+//        map.put(unidad2);
+    Model model(WIDTH, HEIGHT);
+    Map& map = model.getMap();
 	SdlWindow window(WIDTH/2, HEIGHT/2);
-	Area camara(0,0,WIDTH/2,HEIGHT/2);        
+	Area camara(0,0,WIDTH/2,HEIGHT/2);
+
+	View vista(window, camara);
 	window.fill();
 	VistaMap vistaMap(map,window);
-	VistaUnidad vistaUnidad(unidad,window);        
+//	VistaUnidad vistaUnidad(model.createUnity(WIDTH/2, HEIGHT/2),window);
+//	VistaUnidad vistaUnidad2(model.createUnity(0,0),window);
+    vista.addUnityView(model.createUnity(WIDTH/2, HEIGHT/2));
+    vista.addUnityView(model.createUnity(0,0));
+    vista.addUnityView(model.createUnity(90,100));
+
 	bool running = true;
+        Unity* selectedUnity;
         int vel = 0;
 	while (running) {
 	   
@@ -60,7 +74,9 @@ int main(int argc, const char* argv[]) {
 
 	    SDL_Event event;
 	    vistaMap.dibujar(camara);
-            vistaUnidad.dibujar(camara);
+//            vistaUnidad.dibujar(camara);
+//            vistaUnidad2.dibujar(camara);
+		vista.draw();
 	    while (SDL_PollEvent(&event)) {
                 switch(event.type) {
                     case SDL_QUIT:
@@ -69,10 +85,19 @@ int main(int argc, const char* argv[]) {
                     case SDL_MOUSEBUTTONUP:
                         if (event.button.button == SDL_BUTTON_RIGHT) {
 			    SDL_GetMouseState(&mouse_x, &mouse_y);
-                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
+//                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
+							if (selectedUnity != nullptr) {
+								map.setDestiny(*selectedUnity, mouse_x + camara.getX(), mouse_y + camara.getY());
+							}
                         } else if (event.button.button == SDL_BUTTON_LEFT){
-				window.grabMouse(false);
-				left_click = false;
+							window.grabMouse(false);
+							left_click = false;
+							// TMP //
+							int x,y;
+							SDL_GetMouseState(&x, &y);
+							Position pos(x + camara.getX(),y + camara.getY());
+							selectedUnity = map.getClosestUnity(pos, 32*32);
+							// END_TMP //
 			}
 			break;
 		    case SDL_KEYDOWN:
@@ -109,7 +134,7 @@ int main(int argc, const char* argv[]) {
                 }
             }
             if (vel == 10){
-                unidad.move();
+                model.step();
                 vel = 0;
             }
             vel++;
