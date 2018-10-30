@@ -54,7 +54,7 @@ int Unity::makeAction(Map& map){
                     pathToDestiny = std::stack<Position>();
                     state = STOPPED;
                 }
-            } else if (foll_unity->getPosition() == prev_foll_unity_pos){
+            } else if (foll_unity->getPosition() == prev_foll_unity_pos || actual_vel != velocity){
                 this->move();
             } else {
                 this->follow(foll_unity, map);

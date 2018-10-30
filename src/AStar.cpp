@@ -17,6 +17,7 @@ std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &bether
         current = bether_path.at(current);
         total_path.push(current);
     }
+    total_path.pop();
     return total_path;
 }
 

@@ -36,7 +36,7 @@ int main(int argc, const char* argv[]) {
 //	VistaUnidad vistaUnidad2(model.createUnity(0,0),window);
     vista.addUnityView(model.createUnity(WIDTH/2, HEIGHT/2));
     vista.addUnityView(model.createUnity(0,0));
-    vista.addUnityView(model.createUnity(90,100));
+    vista.addUnityView(model.createUnity(100,50));
 
 	bool running = true;
 	Unity* selectedUnity;

@@ -26,8 +26,14 @@ Map::Map(int width, int height) : matrix(width*height/(BLOCK_HEIGHT*BLOCK_WIDTH)
     matrix.at(3*cols + 7) = std::unique_ptr<Terrain>(new Precipice());
     matrix.at(3*cols + 6) = std::unique_ptr<Terrain>(new Precipice());
     matrix.at(3*cols + 5) = std::unique_ptr<Terrain>(new Precipice());
-    matrix.at(3*cols + 4) = std::unique_ptr<Terrain>(new Summit());
+    matrix.at(3*cols + 4) = std::unique_ptr<Terrain>(new Precipice());
     matrix.at(3*cols + 3) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 2) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 1) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(3*cols + 0) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(2*cols + 9) = std::unique_ptr<Terrain>(new Summit());
+    matrix.at(1*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(0*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
 
 }
 
