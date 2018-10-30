@@ -13,12 +13,16 @@
 #include <stack>
 
 #define INITIAL_LIFE 50
+#define UNITY_VEL 10
+#define ATTACK_RANGE 1024
 
 class Map;
 
 class Unity : public Positionable, public Attackable, public Attacker {
 private:
     int id;
+    int velocity;
+    int actual_vel;
     std::stack<Position> pathToDestiny;
 
 public:

@@ -13,6 +13,7 @@
 class VistaUnidad{
 	public:
 		VistaUnidad(Unity& unidad, SdlWindow& window);
+		Unity& getUnity();
 		void dibujar(Area camara);
 	private:
 		Unity& unidad;

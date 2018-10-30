@@ -34,4 +34,8 @@ void VistaUnidad::dibujar(Area camara){
 	vistas.at(orientacion.getValor())->render(Area(0, 0, 41, 38),dest);
 }
 
+Unity &VistaUnidad::getUnity() {
+	return unidad;
+}
+
 

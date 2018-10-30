@@ -39,8 +39,7 @@ int main(int argc, const char* argv[]) {
     vista.addUnityView(model.createUnity(90,100));
 
 	bool running = true;
-        Unity* selectedUnity;
-        int vel = 0;
+	Unity* selectedUnity;
 	while (running) {
 	   
 	   if (left_click){
@@ -84,19 +83,24 @@ int main(int argc, const char* argv[]) {
                         break;
                     case SDL_MOUSEBUTTONUP:
                         if (event.button.button == SDL_BUTTON_RIGHT) {
-			    SDL_GetMouseState(&mouse_x, &mouse_y);
+			    			SDL_GetMouseState(&mouse_x, &mouse_y);
 //                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
-							if (selectedUnity != nullptr) {
+							Position pos(mouse_x + camara.getX(), mouse_y + camara.getY());
+							Unity* objetiveUnity = map.getClosestUnity(pos, 32 * 32);
+
+							if (objetiveUnity != nullptr && selectedUnity != nullptr) {
+								selectedUnity->attack(*objetiveUnity);
+							} else if (selectedUnity != nullptr) {
 								map.setDestiny(*selectedUnity, mouse_x + camara.getX(), mouse_y + camara.getY());
 							}
                         } else if (event.button.button == SDL_BUTTON_LEFT){
 							window.grabMouse(false);
 							left_click = false;
 							// TMP //
-							int x,y;
+							int x, y;
 							SDL_GetMouseState(&x, &y);
-							Position pos(x + camara.getX(),y + camara.getY());
-							selectedUnity = map.getClosestUnity(pos, 32*32);
+							Position pos(x + camara.getX(), y + camara.getY());
+							selectedUnity = map.getClosestUnity(pos, 32 * 32);
 							// END_TMP //
 			}
 			break;
@@ -133,11 +137,8 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-            if (vel == 10){
-                model.step();
-                vel = 0;
-            }
-            vel++;
+
+			model.step();
             window.render();
         }
     } catch (const SdlException& e) {

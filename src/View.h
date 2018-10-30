@@ -19,5 +19,6 @@ public:
     void addUnityView(Unity& unity);
 
     void draw();
+
 };
 #endif //__VIEW_H__

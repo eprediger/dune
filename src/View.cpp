@@ -11,8 +11,8 @@ void View::addUnityView(Unity &unity) {
 void View::draw() {
 //    for (auto unity_view : unity_views){
     for (auto itr = unity_views.begin(); itr != unity_views.end(); ++itr){
-        (*itr)->dibujar(camera);
+        if (!Unity::isDead(&(*itr)->getUnity())){
+            (*itr)->dibujar(camera);
+        }
     }
 }
-
-

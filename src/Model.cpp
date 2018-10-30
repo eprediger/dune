@@ -13,7 +13,9 @@ void Model::step() {
 //    for (auto unit : unitys){
     for (auto itr = unitys.begin(); itr != unitys.end(); ++itr){
         (*itr)->move();
+//        (*itr)->automaticAttack(map);
     }
+//    map.cleanDeadUnitys();
 }
 
 Unity *Model::selectUnity(int x, int y) {

@@ -4,18 +4,32 @@
 #include "AssaultRifle.h"
 #include "Config.h"
 
-Unity::Unity() : Attackable(INITIAL_LIFE), Positionable(0,0), Attacker(AssaultRifle()){
+Unity::Unity() :
+        Attackable(INITIAL_LIFE),
+        Positionable(0,0),
+        Attacker(AssaultRifle()),
+        velocity(UNITY_VEL),
+        actual_vel(0){
     id = Config::getNextId();
+
 }
 
-Unity::Unity(int x, int y) : Attackable(INITIAL_LIFE), Positionable(x, y), Attacker(AssaultRifle()) {
+Unity::Unity(int x, int y) :
+        Attackable(INITIAL_LIFE),
+        Positionable(x, y),
+        Attacker(AssaultRifle()),
+        velocity(UNITY_VEL),
+        actual_vel(0) {
     id = Config::getNextId();
 }
 
 int Unity::move() {
     if (!pathToDestiny.empty()) {
-        pos = pathToDestiny.top();
-        pathToDestiny.pop();
+        if (actual_vel++ == velocity) {
+            pos = pathToDestiny.top();
+            pathToDestiny.pop();
+            actual_vel = 0;
+        }
         return 1;
     } else {
         return 0;
@@ -33,7 +47,7 @@ void Unity::setPath(std::stack<Position> path) {
 
 
 bool Unity::automaticAttack(Map &map) {
-    Unity* closes_unity = map.getClosestUnity(*this, 100);
+    Unity* closes_unity = map.getClosestUnity(*this, ATTACK_RANGE);
     if (closes_unity == nullptr){
         return false;
     } else {
