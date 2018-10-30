@@ -49,9 +49,3 @@ bool Unity::operator==(const Unity &other) {
 bool Unity::isDead(Unity* unity) {
     return unity->life <= 0;
 }
-
-
-
-
-
-

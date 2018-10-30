@@ -6,12 +6,15 @@
 #include "Map.h"
 #include "VistaUnidad.h"
 #include "VistaMap.h"
+#include "GlobalConfig.h"
 
 #define SUCCESS 0
 #define FAILURE 1
 
 #define WIDTH 1600
 #define HEIGHT 1280
+
+config_t GlobalConfig;
 
 int main(int argc, const char* argv[]) {
     try {

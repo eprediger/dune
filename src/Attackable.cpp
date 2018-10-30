@@ -1,6 +1,6 @@
 #include "Attackable.h"
 
-Attackable::Attackable(int life) : life(life){}
+Attackable::Attackable(int life) : life(life) {}
 
 int Attackable::getLife() {
     return life;
@@ -16,4 +16,3 @@ void Attackable::reciveAttack(Attacker &attacker) {
 //bool Attackable::isDead(Attackable* attackable) {
 //    return attackable->life <= 0;
 //}
-

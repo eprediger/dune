@@ -10,4 +10,3 @@ void Attacker::attack(Attackable &defender) {
 int Attacker::getDammage() {
     return weapon.getDammage();
 }
-

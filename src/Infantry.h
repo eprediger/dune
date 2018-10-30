@@ -11,7 +11,6 @@ public:
     Infantry(int x, int y);
 
     virtual bool canMoveAboveTerrain(Terrain &terrain) override;
-
 };
 
 #endif //__INFANTRY_H__
