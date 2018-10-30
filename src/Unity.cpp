@@ -11,6 +11,7 @@ Unity::Unity() :
         velocity(UNITY_VEL),
         actual_vel(0){
     id = Config::getNextId();
+    state = STOPPED;
 
 }
 
@@ -21,6 +22,7 @@ Unity::Unity(int x, int y) :
         velocity(UNITY_VEL),
         actual_vel(0) {
     id = Config::getNextId();
+    state = STOPPED;
 }
 
 int Unity::move() {
@@ -30,11 +32,36 @@ int Unity::move() {
             pathToDestiny.pop();
             actual_vel = 0;
         }
-        return 1;
     } else {
+        state = STOPPED;
         return 0;
     }
 
+}
+
+int Unity::makeAction(Map& map){
+    switch (state) {
+        case STOPPED:
+            return 0;
+        case MOVING:
+            this->move();
+            return 1;
+        case FOLLOWING:
+            if (prev_foll_unity_pos.sqrtDistance(pos) < ATTACK_RANGE){
+                this->attack(*foll_unity);
+                if (Unity::isDead(foll_unity)){
+                    foll_unity = nullptr;
+                    pathToDestiny = std::stack<Position>();
+                    state = STOPPED;
+                }
+            } else if (foll_unity->getPosition() == prev_foll_unity_pos){
+                this->move();
+            } else {
+                this->follow(foll_unity, map);
+                this->move();
+            }
+            return 0;
+    }
 }
 
 bool Unity::canMoveAboveTerrain(Terrain &terrain) {
@@ -43,6 +70,7 @@ bool Unity::canMoveAboveTerrain(Terrain &terrain) {
 
 void Unity::setPath(std::stack<Position> path) {
     pathToDestiny = path;
+    state = MOVING;
 }
 
 
@@ -62,6 +90,13 @@ bool Unity::operator==(const Unity &other) {
 
 bool Unity::isDead(Unity* unity) {
     return unity->life <= 0;
+}
+
+void Unity::follow(Unity* other, Map& map) {
+    foll_unity = other;
+    prev_foll_unity_pos = foll_unity->getPosition();
+    map.setDestiny(*this, foll_unity->getPosition().getX(), foll_unity->getPosition().getY());
+    state = FOLLOWING;
 }
 
 

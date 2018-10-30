@@ -19,13 +19,10 @@
 class Map;
 
 class Unity : public Positionable, public Attackable, public Attacker {
-private:
-    int id;
-    int velocity;
-    int actual_vel;
-    std::stack<Position> pathToDestiny;
-
 public:
+
+    enum State {FOLLOWING, MOVING, ATTACKING, STOPPED};
+
     Unity();
 
     Unity(int x, int y);
@@ -34,6 +31,10 @@ public:
 
     int move();
 
+    int makeAction(Map& map);
+
+    void follow(Unity* other, Map& map);
+
     virtual bool canMoveAboveTerrain(Terrain& terrain);
 
     bool automaticAttack(Map &map);
@@ -41,6 +42,15 @@ public:
     static bool isDead(Unity* attackable);
 
     bool operator==(const Unity& other);
+
+private:
+    int id;
+    int velocity;
+    int actual_vel;
+    std::stack<Position> pathToDestiny;
+    Unity* foll_unity;
+    Position prev_foll_unity_pos;
+    State state;
 };
 
 #endif //__UNITY_H__

@@ -88,8 +88,11 @@ int main(int argc, const char* argv[]) {
 							Position pos(mouse_x + camara.getX(), mouse_y + camara.getY());
 							Unity* objetiveUnity = map.getClosestUnity(pos, 32 * 32);
 
-							if (objetiveUnity != nullptr && selectedUnity != nullptr) {
-								selectedUnity->attack(*objetiveUnity);
+							if (objetiveUnity != nullptr && selectedUnity != nullptr && objetiveUnity != selectedUnity) {
+//								selectedUnity->attack(*objetiveUnity);
+								// Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
+								// No funciona si la unidad a seguir se encuentra en movimiento
+								selectedUnity->follow(objetiveUnity, map);
 							} else if (selectedUnity != nullptr) {
 								map.setDestiny(*selectedUnity, mouse_x + camara.getX(), mouse_y + camara.getY());
 							}

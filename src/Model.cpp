@@ -12,7 +12,8 @@ Unity &Model::createUnity(int x, int y) {
 void Model::step() {
 //    for (auto unit : unitys){
     for (auto itr = unitys.begin(); itr != unitys.end(); ++itr){
-        (*itr)->move();
+//        (*itr)->move();
+        (*itr)->makeAction(map);
 //        (*itr)->automaticAttack(map);
     }
 //    map.cleanDeadUnitys();
