@@ -1,10 +1,11 @@
 #include "Model.h"
+#include "light-infantry.h"
 
 Model::Model(int width, int height) : map(width, height){
 }
 
 Unity &Model::createUnity(int x, int y) {
-    unitys.push_back(std::unique_ptr<Unity>(new Unity(x,y)));
+    unitys.push_back(std::unique_ptr<Unity>(new LightInfantry(x,y)));
     map.put(*unitys.back());
     return *unitys.back();
 }

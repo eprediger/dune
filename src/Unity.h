@@ -20,7 +20,7 @@ public:
 
     enum State {FOLLOWING, MOVING, ATTACKING, STOPPED};
 
-    Unity();
+    /*Unity();
 
     Unity(int x, int y);*/
 
@@ -45,13 +45,11 @@ public:
 
 private:
     int id;
-    int velocity; // Refactor -> speed
-    //const int speed;
-    int actual_vel;
+    const int speed;
+    int actual_speed;
     std::stack<Position> pathToDestiny;
     Unity* foll_unity;
     Position prev_foll_unity_pos;
-
     Position next_pos;
     State state;
 };

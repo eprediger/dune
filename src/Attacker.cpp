@@ -9,6 +9,6 @@ void Attacker::attack(Attackable &defender) {
     defender.reciveAttack(*this);
 }
 
-int Attacker::getDamage() {
+int Attacker::getDammage() {
     return weapon.getDamage();
 }

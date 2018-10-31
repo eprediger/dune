@@ -10,5 +10,5 @@ LightInfantry::LightInfantry(int x, int y) :
 LightInfantry::~LightInfantry() {}
 
 bool LightInfantry::canMoveAboveTerrain(Terrain &terrain) {
-    return terrain == Sand() || terrain == Summit() || terrain == Precipice();
+    return terrain == Sand() || terrain == Summit();
 }

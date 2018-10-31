@@ -14,7 +14,7 @@ public:
 
     virtual void attack(Attackable &defender);
 
-    virtual int getDamage();
+    virtual int getDammage();
 };
 
 #endif //__ATTACKER_H__

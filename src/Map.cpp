@@ -3,14 +3,18 @@
 #include "Precipice.h"
 #include "Summit.h"
 #include "AStar.h"
+#include "CustomException.h"
 
 #include <algorithm>
 
 Map::Map(int width, int height) : matrix(width*height/(BLOCK_HEIGHT*BLOCK_WIDTH)), rows(height/BLOCK_HEIGHT), cols(width/BLOCK_WIDTH){
     //// TMP /////
 
-    if (width%BLOCK_WIDTH != 0 || height%BLOCK_HEIGHT){
-        throw "Error"; // Modificar luego
+    if (width%BLOCK_WIDTH != 0){
+        throw CustomException("Incorrect Width"); // Modificar luego
+    }
+    if  (height%BLOCK_HEIGHT){
+        throw CustomException("Incorrect Height"); // Modificar luego
     }
 
     for (int i=0; i < width*height/(BLOCK_HEIGHT*BLOCK_WIDTH) ; i++){
