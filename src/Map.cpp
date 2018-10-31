@@ -72,7 +72,7 @@ Terrain& Map::at(const Position& pos) {
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols*BLOCK_HEIGHT && pos.getY() < rows*BLOCK_WIDTH;
+    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
 }
 
 //void Map::put(Attackable &attackable) {

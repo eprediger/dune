@@ -10,7 +10,7 @@ AStar::AStar(Map &map) : map(map) {}
 
 std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &bether_path, Position &start){
     std::stack<Position> total_path;
-    Position current = start;
+    Position current(start.getX()/BLOCK_WIDTH, start.getY()/BLOCK_HEIGHT);
 
     total_path.push(current);
     while(bether_path.find(current) != bether_path.end()){

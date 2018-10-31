@@ -16,7 +16,9 @@ std::vector<AStarNode> AStarNode::getAdjacents(Map &map) {
     return std::move(vec);
 }
 
-AStarNode::AStarNode(Position pos) : pos(pos), f(0), g(0), h(0) {}
+AStarNode::AStarNode(Position pos) : f(0), g(0), h(0) {
+    pos = Position(pos.getX()/BLOCK_HEIGHT , pos.getY()/BLOCK_WIDTH);
+}
 
 bool AStarNode::operator==(const AStarNode &other) const{
     return other.pos == this->pos;

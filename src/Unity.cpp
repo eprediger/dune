@@ -28,8 +28,15 @@ Unity::Unity(int x, int y) :
 int Unity::move() {
     if (!pathToDestiny.empty()) {
         if (actual_vel++ == velocity) {
-            pos = pathToDestiny.top();
-            pathToDestiny.pop();
+            if (pos == next_block) {
+                next_block = pathToDestiny.top();
+                pathToDestiny.pop();
+            } else {
+                int x_c_block = next_block.getX()*BLOCK_WIDTH + BLOCK_WIDTH/2;
+                int y_c_block = next_block.getX()*BLOCK_HEIGHT + BLOCK_HEIGHT/2;
+
+                pos = Position(x_c_block, y_c_block);
+            }
             actual_vel = 0;
         }
     } else {

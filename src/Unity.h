@@ -50,6 +50,8 @@ private:
     std::stack<Position> pathToDestiny;
     Unity* foll_unity;
     Position prev_foll_unity_pos;
+
+    Position next_block;
     State state;
 };
 
