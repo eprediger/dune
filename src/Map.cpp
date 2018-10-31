@@ -11,10 +11,10 @@ Map::Map(int width, int height) : matrix(width*height/(BLOCK_HEIGHT*BLOCK_WIDTH)
     //// TMP /////
 
     if (width%BLOCK_WIDTH != 0){
-        throw CustomException("Incorrect Width"); // Modificar luego
+        throw CustomException("Incorrect Width: %d", width); // Modificar luego
     }
     if  (height%BLOCK_HEIGHT){
-        throw CustomException("Incorrect Height"); // Modificar luego
+        throw CustomException("Incorrect Height: %d", height); // Modificar luego
     }
 
     for (int i=0; i < width*height/(BLOCK_HEIGHT*BLOCK_WIDTH) ; i++){
