@@ -8,12 +8,13 @@ class Attackable;
 class Attacker {
 protected:
     Weapon weapon;
+    const int range;
 public:
-    Attacker(Weapon weapon);
+    Attacker(Weapon weapon, const int range);
 
     virtual void attack(Attackable &defender);
 
-    virtual int getDammage();
+    virtual int getDamage();
 };
 
 #endif //__ATTACKER_H__

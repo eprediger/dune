@@ -1,9 +1,12 @@
 #ifndef __HEAVY_INFANTRY_H__
 #define __HEAVY_INFANTRY_H__
 
-class HeavyInfantry {
+#include "Unity.h"
+#include "rocket-launcher.h"
+
+class HeavyInfantry : public Unity {
 public:
-	HeavyInfantry();
+	HeavyInfantry(int x, int y);
 	~HeavyInfantry();
 	
 };

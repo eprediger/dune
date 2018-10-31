@@ -1,6 +1,7 @@
 #include "Positionable.h"
 
-Positionable::Positionable(int x, int y) : pos(x,y) {
+Positionable::Positionable(int x, int y) :
+	pos(x,y) {
     value = 9;
 }
 

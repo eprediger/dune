@@ -1,15 +1,25 @@
 #include "Unity.h"
 #include "AStar.h"
-#include "Summit.h"
-#include "AssaultRifle.h"
+#include "assault-rifle.h"
 #include "Config.h"
 
-Unity::Unity() : Attackable(INITIAL_LIFE), Positionable(0,0), Attacker(AssaultRifle()){
+/*Unity::Unity(const int hitPoints) : Attackable(hitPoints), Positionable(0,0), Attacker(AssaultRifle(), ){
     id = Config::getNextId();
 }
 
-Unity::Unity(int x, int y) : Attackable(INITIAL_LIFE), Positionable(x, y), Attacker(AssaultRifle()) {
+Unity::Unity(int x, int y) : Attackable(hitPoints), Positionable(x, y), Attacker(AssaultRifle()) {
     id = Config::getNextId();
+}*/
+
+Unity::Unity(const int x, const int y, const int hitPoints, const int range,
+             Weapon weapon, const int speed) :
+    Positionable(x, y),
+    Attackable(hitPoints),
+    Attacker(weapon, range),
+    id(Config::getNextId()),
+    speed(speed),
+    pathToDestiny() {
+    // this->id = Config::getNextId();
 }
 
 int Unity::move() {
@@ -23,9 +33,9 @@ int Unity::move() {
 
 }
 
-bool Unity::canMoveAboveTerrain(Terrain &terrain) {
+/*bool Unity::canMoveAboveTerrain(Terrain &terrain) {
     return terrain == Sand() || terrain == Summit();
-}
+}*/
 
 void Unity::setPath(std::stack<Position> path) {
     pathToDestiny = path;

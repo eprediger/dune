@@ -1,9 +1,12 @@
 #ifndef __RAIDER_H__
 #define __RAIDER_H__
 
-class Raider {
+#include "Unity.h"
+#include "small-cannon.h"
+
+class Raider : public Unity {
 public:
-	Raider();
+	Raider(int x, int y);
 	~Raider();
 	
 };

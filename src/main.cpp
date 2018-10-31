@@ -7,6 +7,7 @@
 #include "VistaUnidad.h"
 #include "VistaMap.h"
 #include "GlobalConfig.h"
+#include "light-infantry.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -21,7 +22,7 @@ int main(int argc, const char* argv[]) {
 	int mouse_x, mouse_y;
 	bool left_click = false;
         Map map(WIDTH, HEIGHT);
-        Unity unidad(WIDTH/2, HEIGHT/2);
+        LightInfantry unidad(WIDTH/2, HEIGHT/2);
         map.put(unidad);
 	SdlWindow window(WIDTH/2, HEIGHT/2);
 	Area camara(0,0,WIDTH/2,HEIGHT/2);        

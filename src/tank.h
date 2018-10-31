@@ -1,9 +1,12 @@
 #ifndef __TANK_H__
 #define __TANK_H__
 
-class Tank {
+#include "Unity.h"
+#include "cannon.h"
+
+class Tank : public Unity {
 public:
-	Tank();
+	Tank(int x, int y);
 	~Tank();
 	
 };

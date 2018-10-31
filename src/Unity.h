@@ -7,30 +7,32 @@
 
 #include "Sand.h"
 #include "Precipice.h"
+#include "Summit.h"
 #include "Attackable.h"
 #include "Attacker.h"
 //#include "Map.h"
 #include <stack>
-
-#define INITIAL_LIFE 50
 
 class Map;
 
 class Unity : public Positionable, public Attackable, public Attacker {
 private:
     int id;
+    const int speed;
     std::stack<Position> pathToDestiny;
-
 public:
-    Unity();
+    /*Unity(const int hitPoints);
 
-    Unity(int x, int y);
+    Unity(int x, int y);*/
+
+    Unity(const int x, const int y, const int hitPoints,
+          const int range, Weapon weapon, const int speed);
 
     void setPath(std::stack<Position> path);
 
     int move();
 
-    virtual bool canMoveAboveTerrain(Terrain& terrain);
+    virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
 
     bool automaticAttack(Map &map);
 

@@ -1,13 +1,13 @@
 #include "Attackable.h"
 
-Attackable::Attackable(int life) : life(life) {}
+Attackable::Attackable(const int life) : life(life) {}
 
 int Attackable::getLife() {
     return life;
 }
 
 void Attackable::reciveAttack(Attacker &attacker) {
-    life -= attacker.getDammage();
+    life -= attacker.getDamage();
     if (life <= 0) {
         // this->kill;
     }

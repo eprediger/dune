@@ -1,14 +1,17 @@
 #ifndef __WEAPON_H__
 #define __WEAPON_H__
 
+#include "GlobalConfig.h"
+
 class Weapon {
 private:
-    int dammage;
-    int frecuency;
+    const int damage;
+    const int frecuency;
+    const int bonus;
 public:
-    Weapon(int dammage, int frecuency);
-
-    int getDammage();
+    Weapon(int damage, int frecuency, int bonus);
+    ~Weapon();
+    int getDamage();
 };
 
 #endif //__WEAPON_H__

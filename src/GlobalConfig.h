@@ -50,18 +50,22 @@ typedef struct {
 	const int rocketLauncherDamage			= 8;
 	const int rocketLauncherShootingRate	= 1;
 	const int rocketLauncherBonus			= 0;
-	// Ondas de sonido
-	const int soundWaveDamage			= 4;
-	const int soundWaveShootingRate		= 1;
-	const int soundWaveBonus			= 4;	// a infanteria
 	// Cañon 22mm
 	const int smallCannonDamage			= 6;
 	const int smallCannonShootingRate	= 6;
 	const int smallCannonBonus			= 2;	// vehiculos y edificios
+	// Ondas de sonido
+	/*
+	const int soundWaveDamage			= 4;
+	const int soundWaveShootingRate		= 1;
+	const int soundWaveBonus			= 4;	// a infanteria
+	*/
 	// Cañon de Plasma
+	/*
 	const int plasmaCannonDamage		= 8;
 	const int plasmaCannonShootingRate	= 1;
 	const int plasmaCannonBonus			= 2;	// vehiculos y edificios
+	*/
 // Infantry Stats
 	// Infanteria Ligera
 	const int lightInfantryHitPoints	= 50;

@@ -7,7 +7,7 @@ class Attackable {
 protected:
     int life;
 public:
-    Attackable(int life);
+    Attackable(const int life);
 
     virtual int getLife();
 
