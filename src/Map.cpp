@@ -31,8 +31,8 @@ Map::Map(int width, int height) : matrix(width*height/(BLOCK_HEIGHT*BLOCK_WIDTH)
     matrix.at(3*cols + 2) = std::unique_ptr<Terrain>(new Precipice());
     matrix.at(3*cols + 1) = std::unique_ptr<Terrain>(new Precipice());
     matrix.at(3*cols + 0) = std::unique_ptr<Terrain>(new Precipice());
-    matrix.at(2*cols + 9) = std::unique_ptr<Terrain>(new Summit());
-    matrix.at(1*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(2*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
+    matrix.at(1*cols + 9) = std::unique_ptr<Terrain>(new Summit());
     matrix.at(0*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
 
 }
@@ -72,7 +72,7 @@ Terrain& Map::at(const Position& pos) {
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols && pos.getY() < rows;
+    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols*BLOCK_HEIGHT && pos.getY() < rows*BLOCK_WIDTH;
 }
 
 //void Map::put(Attackable &attackable) {

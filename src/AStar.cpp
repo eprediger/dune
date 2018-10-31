@@ -8,13 +8,14 @@
 
 AStar::AStar(Map &map) : map(map) {}
 
-std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &bether_path, Position &start){
+std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_path, Position &start){
     std::stack<Position> total_path;
-    Position current(start.getX()/BLOCK_WIDTH, start.getY()/BLOCK_HEIGHT);
+    Position current(start);
+    current.normalizeToBlock();
 
     total_path.push(current);
-    while(bether_path.find(current) != bether_path.end()){
-        current = bether_path.at(current);
+    while(best_path.find(current) != best_path.end()){
+        current = best_path.at(current);
         total_path.push(current);
     }
     total_path.pop();
@@ -27,7 +28,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
         return std::move(std::stack<Position>());
     }
 
-    std::map<Position, Position> bether_path;
+    std::map<Position, Position> best_path;
     AStarNode n_end(end);
     AStarNode n_start(unity.getPosition());
     openList.push_back(n_start);
@@ -43,7 +44,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
 
         // Se chequea si se encuentra en el destino
         if (*curr_node_itr == n_end) {
-            return this->reconstructPath(bether_path, end);
+            return this->reconstructPath(best_path, end);
         }
 
 
@@ -85,7 +86,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
                 child_ol_itr->f = child.f;
             }
 
-            bether_path[child.pos] = curr_node_itr->pos;
+            best_path[child.pos] = curr_node_itr->pos;
 
         }
 

@@ -1,6 +1,7 @@
 #include "Positionable.h"
 
 Positionable::Positionable(int x, int y) : pos(x,y) {
+    this->pos.normalizeToBlock();
     value = 9;
 }
 

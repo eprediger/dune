@@ -32,11 +32,8 @@ int Unity::move() {
                 next_pos = pathToDestiny.top();
                 pathToDestiny.pop();
             } else {
-                int x_c_block = next_block.getX()*BLOCK_WIDTH + BLOCK_WIDTH/2;
-                int y_c_block = next_block.getX()*BLOCK_HEIGHT + BLOCK_HEIGHT/2;
-
-                pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x)? +1 : 0)
-                pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y)? +1 : 0)
+                pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x)? +1 : 0);
+                pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y)? +1 : 0);
 
             }
             actual_vel = 0;
@@ -79,7 +76,14 @@ bool Unity::canMoveAboveTerrain(Terrain &terrain) {
 
 void Unity::setPath(std::stack<Position> path) {
     pathToDestiny = path;
-    state = MOVING;
+    if (!path.empty()){
+        next_pos = pathToDestiny.top();
+        pathToDestiny.pop();
+        state = MOVING;
+    } else {
+        next_pos = pos;
+        state = STOPPED;
+    }
 }
 
 

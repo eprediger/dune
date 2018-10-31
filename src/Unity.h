@@ -13,8 +13,8 @@
 #include <stack>
 
 #define INITIAL_LIFE 50
-#define UNITY_VEL 10
-#define ATTACK_RANGE 1024
+#define UNITY_VEL 5
+#define ATTACK_RANGE 1500
 
 class Map;
 
@@ -51,7 +51,7 @@ private:
     Unity* foll_unity;
     Position prev_foll_unity_pos;
 
-    Position next_block;
+    Position next_pos;
     State state;
 };
 

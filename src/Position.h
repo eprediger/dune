@@ -2,17 +2,26 @@
 #define __POSITION_H__
 
 #include <vector>
+
+#define BLOCK_X 32
+#define BLOCK_Y 32
+
 class Position {
-private:
-    int x,y;
+//private:
+
 public:
+    int x,y;
+
     Position();
     Position(int x, int y);
 
     int getX() const;
     int getY() const;
+    void setX(int x);
+    void setY(int y);
 
     std::vector<Position> getAdjacents();
+    void normalizeToBlock();
 
     bool operator==(const Position& other) const;
     bool operator<(const Position& other) const;

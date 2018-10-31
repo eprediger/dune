@@ -86,7 +86,7 @@ int main(int argc, const char* argv[]) {
 			    			SDL_GetMouseState(&mouse_x, &mouse_y);
 //                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
 							Position pos(mouse_x + camara.getX(), mouse_y + camara.getY());
-							Unity* objetiveUnity = map.getClosestUnity(pos, 32 * 32);
+							Unity* objetiveUnity = map.getClosestUnity(pos, 50 * 50);
 
 							if (objetiveUnity != nullptr && selectedUnity != nullptr && objetiveUnity != selectedUnity) {
 //								selectedUnity->attack(*objetiveUnity);
