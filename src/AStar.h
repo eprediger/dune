@@ -17,7 +17,7 @@ private:
 public:
     AStar(Map &map);
 
-    std::stack<Position> reconstructPath(std::map<Position, Position> &best_path, Position &start);
+    std::stack<Position> reconstructPath(const std::map<Position, Position> &best_path, const Position &start);
     std::stack<Position> makePath(Unity &unity, Position end);
 
 };

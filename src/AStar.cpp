@@ -8,7 +8,7 @@
 
 AStar::AStar(Map &map) : map(map) {}
 
-std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_path, Position &start){
+std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &best_path, const Position &start){
     std::stack<Position> total_path;
     Position current(start);
     current.normalizeToBlock();
@@ -19,7 +19,7 @@ std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_p
         total_path.push(current);
     }
     total_path.pop();
-    return total_path;
+    return std::move(total_path);
 }
 
 std::stack<Position> AStar::makePath(Unity &unity, Position end) {
@@ -58,7 +58,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
 
         // A partir de aca, procesa cada hijo para saber si debe ignorarlo, actualizarlo en la lista de abiertos
         // o agregarlo en la lista de abiertos. Tambien chequea si uno de los hijos es el nodo final
-        for(AStarNode child : children) {
+        for(AStarNode& child : children) {
 
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
 
