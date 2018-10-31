@@ -12,5 +12,3 @@ Position Positionable::getPosition() const {
 int Positionable::getValue() {
     return value;
 }
-
-

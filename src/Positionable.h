@@ -13,7 +13,6 @@ public:
     Position getPosition() const;
 
     int getValue();
-
 };
 
 #endif //__POSITIONABLE_H__

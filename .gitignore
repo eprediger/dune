@@ -6,6 +6,8 @@ cmake-build-debug
 *.pdf
 notas-tp4.txt
 *.7z
+*.mdj
+*.png
 
 # Directories that won't be included
 .idea/
@@ -20,6 +22,7 @@ build/
 # Directories that could be included
 imgs/
 terrain/
+sounds/
 
 # Prerequisites
 *.d

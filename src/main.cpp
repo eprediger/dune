@@ -8,12 +8,16 @@
 #include "VistaMap.h"
 #include "Model.h"
 #include "View.h"
+#include "GlobalConfig.h"
+#include "light-infantry.h"
 
 #define SUCCESS 0
 #define FAILURE 1
 
 #define WIDTH 1600
 #define HEIGHT 1280
+
+config_t GlobalConfig;
 
 int main(int argc, const char* argv[]) {
     try {

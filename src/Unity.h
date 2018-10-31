@@ -7,14 +7,11 @@
 
 #include "Sand.h"
 #include "Precipice.h"
+#include "Summit.h"
 #include "Attackable.h"
 #include "Attacker.h"
 //#include "Map.h"
 #include <stack>
-
-#define INITIAL_LIFE 50
-#define UNITY_VEL 5
-#define ATTACK_RANGE 1500
 
 class Map;
 
@@ -25,7 +22,10 @@ public:
 
     Unity();
 
-    Unity(int x, int y);
+    Unity(int x, int y);*/
+
+    Unity(const int x, const int y, const int hitPoints,
+          const int range, Weapon weapon, const int speed);
 
     void setPath(std::stack<Position> path);
 
@@ -35,7 +35,7 @@ public:
 
     void follow(Unity* other, Map& map);
 
-    virtual bool canMoveAboveTerrain(Terrain& terrain);
+    virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
 
     bool automaticAttack(Map &map);
 
@@ -45,7 +45,8 @@ public:
 
 private:
     int id;
-    int velocity;
+    int velocity; // Refactor -> speed
+    //const int speed;
     int actual_vel;
     std::stack<Position> pathToDestiny;
     Unity* foll_unity;

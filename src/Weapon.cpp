@@ -1,7 +1,12 @@
 #include "Weapon.h"
 
-Weapon::Weapon(int dammage, int frecuency) : dammage(dammage), frecuency(frecuency) {}
+Weapon::Weapon(int damage, int frecuency, int bonus) :
+	damage(damage),
+	frecuency(frecuency),
+	bonus(bonus) {}
 
-int Weapon::getDammage() {
-    return dammage;
+Weapon::~Weapon() {}
+
+int Weapon::getDamage() {
+    return damage;
 }
