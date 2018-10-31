@@ -2,7 +2,7 @@
 #define __CONFIG_H__
 
 struct Config {
-    static int unity_id;
+    static int unit_id;
 
     Config();
 

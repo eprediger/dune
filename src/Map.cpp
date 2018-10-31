@@ -1,7 +1,7 @@
 #include "Map.h"
 
-#include "Precipice.h"
-#include "Summit.h"
+#include "Terrains/Precipice.h"
+#include "Terrains/Summit.h"
 #include "AStar.h"
 #include "CustomException.h"
 
@@ -82,20 +82,20 @@ bool Map::isValid(Position &pos) {
 //void Map::put(Attackable &attackable) {
 //    attackables.push_back(&attackable);
 //}
-void Map::put(Unity &unity) {
-    unitys.push_back(&unity);
+void Map::put(Unit &unit) {
+    units.push_back(&unit);
 }
 void Map::put(Building &building) {
     buildings.push_back(&building);
 }
 
-bool Map::canMove(Unity& unity, Position pos) {
-    return unity.canMoveAboveTerrain(this->at(pos));
+bool Map::canMove(Unit& unit, Position pos) {
+    return unit.canMoveAboveTerrain(this->at(pos));
 }
 
-bool Map::moveUnitys() {
+bool Map::moveUnits() {
     bool result = false;
-    for (auto u : unitys){
+    for (auto u : units){
         if (u->move()){
             result = true;
         }
@@ -103,45 +103,45 @@ bool Map::moveUnitys() {
     return result;
 }
 
-void Map::setDestiny(Unity &unity, int x_dest, int y_dest) {
+void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     AStar algorithm(*this);
-    unity.setPath(algorithm.makePath(unity, Position(x_dest, y_dest)));
+    unit.setPath(algorithm.makePath(unit, Position(x_dest, y_dest)));
 }
 
-Unity* Map::getClosestUnity(Unity &unity, int limitRadius) {
-    Unity* closest_unity = nullptr;
-    int closest_unity_distance = limitRadius;
-    for (auto unit : unitys){
-        int distance = unit->getPosition().sqrtDistance(unity.getPosition());
+Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
+    Unit* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units){
+        int distance = current_unit->getPosition().sqrtDistance(unit.getPosition());
         if (distance < limitRadius
-                && distance < closest_unity_distance
-                && !(*unit == unity)){
-            closest_unity = unit;
-            closest_unity_distance = distance;
+                && distance < closest_unit_distance
+                && !(*current_unit == unit)){
+            closest_unit = current_unit;
+            closest_unit_distance = distance;
         }
     }
 
-    return closest_unity;
+    return closest_unit;
 }
 
-Unity *Map::getClosestUnity(Position &position, int limitRadius) {
-    Unity* closest_unity = nullptr;
-    int closest_unity_distance = limitRadius;
-    for (auto unit : unitys){
-        int distance = unit->getPosition().sqrtDistance(position);
+Unit *Map::getClosestUnit(Position &position, int limitRadius) {
+    Unit* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units){
+        int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
-            && distance < closest_unity_distance){
-            closest_unity = unit;
-            closest_unity_distance = distance;
+            && distance < closest_unit_distance){
+            closest_unit = current_unit;
+            closest_unit_distance = distance;
         }
     }
 
-    return closest_unity;
+    return closest_unit;
 }
 
-void Map::cleanDeadUnitys() {
-    if (std::find_if(unitys.begin(), unitys.end(), Unity::isDead) != unitys.end()){
-        unitys.erase(std::remove_if(unitys.begin(), unitys.end(), Unity::isDead));
+void Map::cleanDeadUnits() {
+    if (std::find_if(units.begin(), units.end(), Unit::isDead) != units.end()){
+        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
     }
 }
 

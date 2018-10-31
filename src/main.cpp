@@ -1,15 +1,15 @@
 #include <iostream>
-#include "SdlWindow.h"
-#include "SdlTexture.h"
-#include "SdlException.h"
-#include "Area.h"
+#include "View/SdlWindow.h"
+#include "View/SdlTexture.h"
+#include "View/SdlException.h"
+#include "View/Area.h"
 #include "Map.h"
-#include "VistaUnidad.h"
-#include "VistaMap.h"
+#include "View/VistaUnidad.h"
+#include "View/VistaMap.h"
 #include "Model.h"
-#include "View.h"
+#include "View/View.h"
 #include "GlobalConfig.h"
-#include "light-infantry.h"
+#include "Unit/light-infantry.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -24,8 +24,8 @@ int main(int argc, const char* argv[]) {
 	int mouse_x, mouse_y;
 	bool left_click = false;
 //        Map map(WIDTH, HEIGHT);
-//        Unity unidad(WIDTH/2, HEIGHT/2);
-//		Unity unidad2(20, 20);
+//        Unit unidad(WIDTH/2, HEIGHT/2);
+//		Unit unidad2(20, 20);
 //        map.put(unidad);
 //        map.put(unidad2);
     Model model(WIDTH, HEIGHT);
@@ -36,14 +36,14 @@ int main(int argc, const char* argv[]) {
 	View vista(window, camara);
 	window.fill();
 	VistaMap vistaMap(map,window);
-//	VistaUnidad vistaUnidad(model.createUnity(WIDTH/2, HEIGHT/2),window);
-//	VistaUnidad vistaUnidad2(model.createUnity(0,0),window);
-    vista.addUnityView(model.createUnity(WIDTH/2, HEIGHT/2));
-    vista.addUnityView(model.createUnity(0,0));
-    vista.addUnityView(model.createUnity(100,50));
+//	VistaUnidad vistaUnidad(model.createUnit(WIDTH/2, HEIGHT/2),window);
+//	VistaUnidad vistaUnidad2(model.createUnit(0,0),window);
+    vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
+    vista.addUnitView(model.createUnit(0,0));
+    vista.addUnitView(model.createUnit(100,50));
 
 	bool running = true;
-	Unity* selectedUnity;
+	Unit* selectedUnit;
 	while (running) {
 	   
 	   if (left_click){
@@ -90,15 +90,15 @@ int main(int argc, const char* argv[]) {
 			    			SDL_GetMouseState(&mouse_x, &mouse_y);
 //                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
 							Position pos(mouse_x + camara.getX(), mouse_y + camara.getY());
-							Unity* objetiveUnity = map.getClosestUnity(pos, 50 * 50);
+							Unit* objetiveUnit = map.getClosestUnit(pos, 50 * 50);
 
-							if (objetiveUnity != nullptr && selectedUnity != nullptr && objetiveUnity != selectedUnity) {
-//								selectedUnity->attack(*objetiveUnity);
+							if (objetiveUnit != nullptr && selectedUnit != nullptr && objetiveUnit != selectedUnit) {
+//								selectedUnit->attack(*objetiveUnit);
 								// Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
 								// No funciona si la unidad a seguir se encuentra en movimiento
-								selectedUnity->follow(objetiveUnity, map);
-							} else if (selectedUnity != nullptr) {
-								map.setDestiny(*selectedUnity, mouse_x + camara.getX(), mouse_y + camara.getY());
+								selectedUnit->follow(objetiveUnit, map);
+							} else if (selectedUnit != nullptr) {
+								map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
 							}
                         } else if (event.button.button == SDL_BUTTON_LEFT){
 							window.grabMouse(false);
@@ -107,7 +107,7 @@ int main(int argc, const char* argv[]) {
 							int x, y;
 							SDL_GetMouseState(&x, &y);
 							Position pos(x + camara.getX(), y + camara.getY());
-							selectedUnity = map.getClosestUnity(pos, 32 * 32);
+							selectedUnit = map.getClosestUnit(pos, 32 * 32);
 							// END_TMP //
 			}
 			break;

@@ -2,7 +2,7 @@
 #define __ASTAR_H__
 
 #include "AStarNode.h"
-#include "Unity.h"
+#include "Unit/Unit.h"
 #include "Map.h"
 
 #include <set>
@@ -18,7 +18,7 @@ public:
     AStar(Map &map);
 
     std::stack<Position> reconstructPath(const std::map<Position, Position> &best_path, const Position &start);
-    std::stack<Position> makePath(Unity &unity, Position end);
+    std::stack<Position> makePath(Unit &unit, Position end);
 
 };
 

@@ -22,15 +22,15 @@ std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &
     return std::move(total_path);
 }
 
-std::stack<Position> AStar::makePath(Unity &unity, Position end) {
+std::stack<Position> AStar::makePath(Unit &unit, Position end) {
 
-    if (!map.canMove(unity, end) ) {
+    if (!map.canMove(unit, end) ) {
         return std::move(std::stack<Position>());
     }
 
     std::map<Position, Position> best_path;
     AStarNode n_end(end);
-    AStarNode n_start(unity.getPosition());
+    AStarNode n_start(unit.getPosition());
     openList.push_back(n_start);
     while (!openList.empty()){
         // Se obtiene el nodo de menor f
@@ -64,7 +64,7 @@ std::stack<Position> AStar::makePath(Unity &unity, Position end) {
 
             // Si el hijo esta en la lista de cerrados o es una pared, se ignora
 //            if (child_cl_itr != closeList.end() || Map::getInstance()->at(child.pos.getX(), child.pos.getY()).getMovility() == 1) {
-            if (child_cl_itr != closeList.end() || !map.canMove(unity, child.pos)) {
+            if (child_cl_itr != closeList.end() || !map.canMove(unit, child.pos)) {
                 continue;
             }
 

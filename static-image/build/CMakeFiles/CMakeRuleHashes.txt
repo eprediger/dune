@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-a7e66bcd181a25b938b7dfcb69a67391 ui_static.h

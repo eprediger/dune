@@ -1,13 +1,13 @@
 #include "Config.h"
 
-int Config::unity_id = 0;
+int Config::unit_id = 0;
 
 int Config::getNextId() {
-    return unity_id++;
+    return unit_id++;
 }
 
 void Config::init() {
-    unity_id = 0;
+    unit_id = 0;
 }
 
 

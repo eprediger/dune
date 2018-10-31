@@ -11,6 +11,8 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
 file(GLOB SOURCE
         src/*.cpp
         src/*.h
+        src/*/*.cpp
+        src/*/*.h
         )
 
 message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")

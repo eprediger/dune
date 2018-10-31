@@ -1,9 +1,9 @@
 #ifndef __MODEL_H__
 #define __MODEL_H__
 
-#include "Unity.h"
+#include "Unit/Unit.h"
 #include "Map.h"
-#include "VistaUnidad.h"
+#include "View/VistaUnidad.h"
 #include <vector>
 #include <memory>
 
@@ -12,7 +12,7 @@
 class Model {
 private:
     Map map;
-    std::vector<std::unique_ptr<Unity>> unitys;
+    std::vector<std::unique_ptr<Unit>> units;
 
 public:
     Model(int width, int height);
@@ -20,12 +20,12 @@ public:
 //    Map& createMap();
     Map& getMap();
 
-    Unity& createUnity(int x, int y);
+    Unit& createUnit(int x, int y);
 
 
     void step();
 
-    Unity* selectUnity(int x, int y);
+    Unit* selectUnit(int x, int y);
 
 
 };

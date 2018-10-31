@@ -2,10 +2,10 @@
 #define __MAP_H__
 
 #include <vector>
-#include "Terrain.h"
+#include "Terrains/Terrain.h"
 #include "Positionable.h"
-#include "Building.h"
-#include "Unity.h"
+#include "Buildings/Building.h"
+#include "Unit/Unit.h"
 #include <memory>
 
 // Configurar aca el tamaño de los bloques
@@ -17,20 +17,20 @@ class Map {
 private:
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
-    // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unity en getClosestUnity para hacer esto
+    // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unit en getClosestUnit para hacer esto
     std::vector<Attackable*> attackables;
-    std::vector<Unity*> unitys;
+    std::vector<Unit*> units;
     std::vector<Building*> buildings;
 public:
     Map();
     Map(int width, int height);
 
     bool isValid(Position& pos);
-    bool canMove(Unity& unity, Position pos);
+    bool canMove(Unit& unit, Position pos);
 //    void put(Attackable& attackable);
-    void put(Unity& unity);
+    void put(Unit& unit);
     void put(Building& building);
-    bool moveUnitys();
+    bool moveUnits();
 
     int getHeight();
     int getWidth();
@@ -38,12 +38,12 @@ public:
     int getWidthInBlocks();
     int getHeightInBlocks();
 
-    Unity * getClosestUnity(Unity &unity, int limitRadius);
-    Unity * getClosestUnity(Position& position, int limitRadius);
+    Unit * getClosestUnit(Unit &unit, int limitRadius);
+    Unit * getClosestUnit(Position& position, int limitRadius);
 
-    void setDestiny(Unity& unity, int x_dest, int y_dest);
+    void setDestiny(Unit& unit, int x_dest, int y_dest);
 
-    void cleanDeadUnitys();
+    void cleanDeadUnits();
 
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
