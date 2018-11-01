@@ -1,11 +1,11 @@
-#include "Orientacion.h"
-#include "../Position.h"
+#include "Orientation.h"
+#include "Position.h"
 
-Orientacion::Orientacion(){
+Orientation::Orientation(){
 	this->valor = indefinida();
 }
 
-void Orientacion::calcular(Position& p1, Position& p2){
+void Orientation::calcular(Position& p1, Position& p2){
 	if (p1==p2) return;	
 	if (p1.getX() < p2.getX()){
 		if (p1.getY() < p2.getY()){ 
@@ -27,43 +27,43 @@ void Orientacion::calcular(Position& p1, Position& p2){
 	}
 }
 
-int Orientacion::getValor(){
+int Orientation::getValor(){
 	return this->valor;
 }
 
-int Orientacion::indefinida(){
+int Orientation::indefinida(){
 	return 0;
 }
 
-int Orientacion::norte(){
+int Orientation::norte(){
 	return 1;
 }
 
-int Orientacion::noroeste(){
+int Orientation::noroeste(){
 	return 2;
 }
 
-int Orientacion::oeste(){
+int Orientation::oeste(){
 	return 3;
 }
 
-int Orientacion::sudoeste(){
+int Orientation::sudoeste(){
 	return 4;
 }
 
-int Orientacion::sur(){
+int Orientation::sur(){
 	return 5;
 }
 
-int Orientacion::sudeste(){
+int Orientation::sudeste(){
 	return 6;
 }
 
-int Orientacion::este(){
+int Orientation::este(){
 	return 7;
 }
 
-int Orientacion::noreste(){
+int Orientation::noreste(){
 	return 8;
 }
 

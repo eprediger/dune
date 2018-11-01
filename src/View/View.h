@@ -2,14 +2,14 @@
 #define __VIEW_H__
 
 #include "SdlWindow.h"
-#include "VistaMap.h"
-#include "VistaUnidad.h"
+#include "MapView.h" 
+#include "UnitView.h"
 #include <memory>
 
 class View {
 private:
-    std::vector<std::unique_ptr<VistaUnidad>> unit_views;
-//    std::vector<VistaMap> map_view;
+    std::vector<std::unique_ptr<UnitView>> unit_views;
+//    std::vector<MapView> map_view;
     SdlWindow& window;
     Area& camera;
 

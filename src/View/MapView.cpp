@@ -1,11 +1,11 @@
-#include "VistaMap.h"
+#include "MapView.h"
 #include <iostream>
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "../Map.h"
 #include "Area.h"
 
-VistaMap::VistaMap(Map& mapa, SdlWindow& window)
+MapView::MapView(Map& mapa, SdlWindow& window)
 	:mapa(mapa)
 	,terrenos("../terrain/d2k_BLOXBASE.bmp",window)
 	,areas()
@@ -15,9 +15,9 @@ areas.emplace(std::make_pair('R',Area(120,240,32,32)));
 areas.emplace(std::make_pair('P',Area(0,64,32,32)));
 areas.emplace(std::make_pair('D',Area(32,96,32,32)));
 areas.emplace(std::make_pair('C',Area(112,64,32,32)));
-}
+} 
 
-void VistaMap::dibujar(Area camara){
+void MapView::draw(Area camara){
 
 	int i = camara.getY() / 32;
 	int lim_i = i + 1 + camara.getHeight()/32;

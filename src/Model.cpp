@@ -1,5 +1,4 @@
 #include "Model.h"
-#include "Unit/light-infantry.h"
 
 Model::Model(int width, int height) : map(width, height){
 }
@@ -12,6 +11,7 @@ Unit &Model::createUnit(Unit *unit) {
     map.put(*units.back());
     return *units.back();
 }
+
 
 void Model::step() {
 //    for (auto unit : units){

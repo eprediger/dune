@@ -1,5 +1,5 @@
-#ifndef __VISTA_MAP_H__
-#define __VISTA_MAP_H__
+#ifndef __MAP_VIEW_H__
+#define __MAP_VIEW_H__
 
 #include "../Map.h"
 #include "SdlTexture.h"
@@ -7,10 +7,10 @@
 #include <map>
 #include "Area.h"
 
-class VistaMap{
+class MapView{
 	public:
-		VistaMap(Map& mapa, SdlWindow& window);
-		void dibujar(Area camara);
+		MapView(Map& mapa, SdlWindow& window);
+		void draw(Area camara);
 	private:
 		Map& mapa;
 		SdlTexture terrenos;

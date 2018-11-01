@@ -3,7 +3,6 @@
 
 #include "Unit/Unit.h"
 #include "Map.h"
-#include "View/VistaUnidad.h"
 #include "Unit/OffensiveUnit.h"
 #include <vector>
 #include <memory>
@@ -13,7 +12,7 @@
 class Model {
 private:
     Map map;
-    std::vector<std::unique_ptr<Unit>> units;
+    std::vector<std::unique_ptr<Unit> > units;
 
 public:
     Model(int width, int height);

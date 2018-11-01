@@ -1,9 +1,9 @@
-#ifndef __ORIENTACION_H__
-#define __ORIENTACION_H__
+#ifndef __ORIENTATION_H__
+#define __ORIENTATION_H__
 
-#include "../Position.h"
+#include "Position.h"
 
-class Orientacion{
+class Orientation{
 	public:
 		static int indefinida();
 		static int norte();
@@ -16,7 +16,7 @@ class Orientacion{
 		static int noreste();
 		void calcular(Position& p1, Position& p2);
 		int getValor();
-		Orientacion();		
+		Orientation();		
 	private:
 		int valor;	
 };
