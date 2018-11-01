@@ -1,10 +1,10 @@
 #ifndef __TRIKE_H__
 #define __TRIKE_H__
 
-#include "Unit.h"
+#include "OffensiveUnit.h"
 #include "../Weapons/assault-rifle.h"
 
-class Trike : public Unit {
+class Trike : public OffensiveUnit {
 public:
 	Trike(int x, int y);
 	~Trike();

@@ -1,10 +1,10 @@
 #ifndef __LIGHT_INFANTRY_H__
 #define __LIGHT_INFANTRY_H__
 
-#include "Unit.h"
+#include "OffensiveUnit.h"
 #include "../Weapons/assault-rifle.h"
 
-class LightInfantry : public Unit {
+class LightInfantry : public OffensiveUnit {
 public:
 	LightInfantry(int x, int y);
 	

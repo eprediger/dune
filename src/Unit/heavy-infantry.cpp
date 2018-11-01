@@ -1,7 +1,7 @@
 #include "heavy-infantry.h"
 
 HeavyInfantry::HeavyInfantry(int x, int y) :
-	Unit(x, y,
+	OffensiveUnit(x, y,
 		  GlobalConfig.heavyInfantryHitPoints,
 		  GlobalConfig.heavyInfantryRange,
 		  RocketLauncher(),

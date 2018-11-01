@@ -1,7 +1,7 @@
 #include "trike.h"
 
 Trike::Trike(int x, int y) :
-	Unit(x, y,
+		OffensiveUnit(x, y,
 		  GlobalConfig.trikeHitPoints,
 		  GlobalConfig.trikeRange,
 		  AssaultRifle(),

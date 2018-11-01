@@ -1,10 +1,10 @@
 #ifndef __RAIDER_H__
 #define __RAIDER_H__
 
-#include "Unit.h"
+#include "OffensiveUnit.h"
 #include "../Weapons/small-cannon.h"
 
-class Raider : public Unit {
+class Raider : public OffensiveUnit {
 public:
 	Raider(int x, int y);
 	~Raider();

@@ -1,7 +1,7 @@
 #include "raider.h"
 
 Raider::Raider(int x, int y) :
-	Unit(x, y,
+		OffensiveUnit(x, y,
 		  GlobalConfig.raiderHitPoints,
 		  GlobalConfig.raiderRange,
 		  SmallCannon(),

@@ -4,6 +4,7 @@
 #include "Unit/Unit.h"
 #include "Map.h"
 #include "View/VistaUnidad.h"
+#include "Unit/OffensiveUnit.h"
 #include <vector>
 #include <memory>
 

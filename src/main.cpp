@@ -12,6 +12,7 @@
 #include "Unit/light-infantry.h"
 #include "Unit/raider.h"
 #include "Unit/heavy-infantry.h"
+#include "Unit/harvester.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -52,6 +53,8 @@ int main(int argc, const char* argv[]) {
 
     vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 300))));
     vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 300))));
+
+    vista.addUnitView(model.createUnit(std::move(new Harvester(300, 200))));
 
 	bool running = true;
 	Unit* selectedUnit;

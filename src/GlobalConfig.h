@@ -1,7 +1,7 @@
 #ifndef __GLOBALCONFIG_H__
 #define __GLOBALCONFIG_H__
 
-#define SPEED_FACTOR (84*6)
+#define SPEED_FACTOR (84*3)
 #define RANGE_FACTOR 2000
 
 typedef struct {

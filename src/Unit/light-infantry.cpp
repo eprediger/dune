@@ -1,7 +1,7 @@
 #include "light-infantry.h"
 
 LightInfantry::LightInfantry(int x, int y) :
-	Unit(x, y,
+        OffensiveUnit(x, y,
 		  GlobalConfig.lightInfantryHitPoints,
 		  GlobalConfig.lightInfantryRange,
 		  AssaultRifle(),

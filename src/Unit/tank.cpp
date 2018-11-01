@@ -1,7 +1,7 @@
 #include "tank.h"
 
 Tank::Tank(int x, int y) :
-	Unit(x, y,
+		OffensiveUnit(x, y,
 		  GlobalConfig.tankHitPoints,
 		  GlobalConfig.tankRange,
 		  Cannon(),

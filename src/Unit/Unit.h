@@ -11,13 +11,12 @@
 #include "../Terrains/Dunes.h"
 #include "../Terrains/Rocks.h"
 #include "../Attackable.h"
-#include "../Attacker.h"
 //#include "Map.h"
 #include <stack>
 
 class Map;
 
-class Unit : public Positionable, public Attackable, public Attacker {
+class Unit : public Positionable, public Attackable {
 public:
 
     enum State {FOLLOWING, MOVING, ATTACKING, STOPPED};
@@ -26,26 +25,25 @@ public:
 
     Unit(int x, int y);*/
 
-    Unit(const int x, const int y, const int hitPoints,
-          const int range, Weapon weapon, const int speed);
+    Unit(const int x, const int y, const int hitPoints, const int speed);
 
     void setPath(std::stack<Position> path);
 
     int move();
 
-    int makeAction(Map& map);
+    virtual int makeAction(Map& map) = 0;
 
     void follow(Unit* other, Map& map);
 
     virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
 
-    bool automaticAttack(Map &map);
+//    bool automaticAttack(Map &map);
 
     static bool isDead(Unit* attackable);
 
     bool operator==(const Unit& other);
 
-private:
+protected:
     int id;
     const int speed;
     int actual_speed;
