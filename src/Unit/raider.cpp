@@ -8,3 +8,7 @@ Raider::Raider(int x, int y) :
 		  GlobalConfig.raiderSpeed) {}
 
 Raider::~Raider() {}
+
+bool Raider::canMoveAboveTerrain(Terrain &terrain) {
+	return terrain == Sand() || terrain == Dunes() || terrain == Rocks();
+}

@@ -9,6 +9,7 @@ public:
 	Harvester(int x, int y);
 
 	~Harvester();
+	virtual bool canMoveAboveTerrain(Terrain &terrain);
 };
 
 #endif

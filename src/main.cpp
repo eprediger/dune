@@ -10,6 +10,8 @@
 #include "View/View.h"
 #include "GlobalConfig.h"
 #include "Unit/light-infantry.h"
+#include "Unit/raider.h"
+#include "Unit/heavy-infantry.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -38,9 +40,18 @@ int main(int argc, const char* argv[]) {
 	VistaMap vistaMap(map,window);
 //	VistaUnidad vistaUnidad(model.createUnit(WIDTH/2, HEIGHT/2),window);
 //	VistaUnidad vistaUnidad2(model.createUnit(0,0),window);
-    vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
-    vista.addUnitView(model.createUnit(0,0));
-    vista.addUnitView(model.createUnit(100,50));
+//    vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
+    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
+    vista.addUnitView(model.createUnit(std::move(new Raider(89, 0))));
+
+    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 100))));
+    vista.addUnitView(model.createUnit(std::move(new Raider(89, 100))));
+
+    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 200))));
+    vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 200))));
+
+    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 300))));
+    vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 300))));
 
 	bool running = true;
 	Unit* selectedUnit;

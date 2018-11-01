@@ -8,6 +8,7 @@ class Tank : public Unit {
 public:
 	Tank(int x, int y);
 	~Tank();
+	virtual bool canMoveAboveTerrain(Terrain &terrain);
 	
 };
 

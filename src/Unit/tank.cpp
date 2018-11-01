@@ -8,3 +8,7 @@ Tank::Tank(int x, int y) :
 		  GlobalConfig.tankSpeed) {}
 
 Tank::~Tank() {}
+
+bool Tank::canMoveAboveTerrain(Terrain &terrain) {
+	return terrain == Sand() || terrain == Dunes() || terrain == Rocks();
+}

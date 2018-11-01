@@ -4,8 +4,11 @@
 Model::Model(int width, int height) : map(width, height){
 }
 
-Unit &Model::createUnit(int x, int y) {
-    units.push_back(std::unique_ptr<Unit>(new LightInfantry(x,y)));
+//Unit &Model::createUnit(int x, int y) {
+Unit &Model::createUnit(Unit *unit) {
+
+//    units.push_back(std::unique_ptr<Unit>(Unit(x,y)));
+    units.push_back(std::unique_ptr<Unit>(unit));
     map.put(*units.back());
     return *units.back();
 }

@@ -8,6 +8,7 @@ class Trike : public Unit {
 public:
 	Trike(int x, int y);
 	~Trike();
+	virtual bool canMoveAboveTerrain(Terrain &terrain);
 	
 };
 

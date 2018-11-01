@@ -8,6 +8,8 @@
 #include "../Terrains/Sand.h"
 #include "../Terrains/Precipice.h"
 #include "../Terrains/Summit.h"
+#include "../Terrains/Dunes.h"
+#include "../Terrains/Rocks.h"
 #include "../Attackable.h"
 #include "../Attacker.h"
 //#include "Map.h"

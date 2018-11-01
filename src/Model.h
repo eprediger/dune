@@ -20,7 +20,7 @@ public:
 //    Map& createMap();
     Map& getMap();
 
-    Unit& createUnit(int x, int y);
+    Unit &createUnit(Unit *unit);
 
 
     void step();

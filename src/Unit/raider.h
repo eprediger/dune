@@ -8,6 +8,7 @@ class Raider : public Unit {
 public:
 	Raider(int x, int y);
 	~Raider();
+	virtual bool canMoveAboveTerrain(Terrain &terrain);
 	
 };
 

@@ -8,3 +8,7 @@ HeavyInfantry::HeavyInfantry(int x, int y) :
 		  GlobalConfig.heavyInfantrySpeed) {}
 
 HeavyInfantry::~HeavyInfantry() {}
+
+bool HeavyInfantry::canMoveAboveTerrain(Terrain &terrain) {
+	return terrain == Sand() || terrain == Dunes() || terrain == Rocks() || terrain == Summit();
+}
