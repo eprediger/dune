@@ -16,7 +16,7 @@ private:
 public:
     View(SdlWindow &window, Area &camera);
 
-    void addUnitView(Unit& unit);
+    void addUnitView(UnitView* unitView);
 
     void draw();
 

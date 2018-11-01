@@ -4,8 +4,9 @@
 #include "View/SdlException.h"
 #include "View/Area.h"
 #include "Map.h"
-#include "View/VistaUnidad.h"
-#include "View/VistaMap.h"
+#include "View/UnitView.h"
+#include "View/UnitViewFactory.h" 
+#include "View/MapView.h"
 #include "Model.h"
 #include "View/View.h"
 #include "GlobalConfig.h"
@@ -38,11 +39,20 @@ int main(int argc, const char* argv[]) {
 
 	View vista(window, camara);
 	window.fill();
-	VistaMap vistaMap(map,window);
-//	VistaUnidad vistaUnidad(model.createUnit(WIDTH/2, HEIGHT/2),window);
-//	VistaUnidad vistaUnidad2(model.createUnit(0,0),window);
-//    vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
-    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
+	MapView mapView(map,window);
+//	UnitView unitView(model.createUnit(WIDTH/2, HEIGHT/2),window);
+//	UnitView unitView2(model.createUnit(0,0),window);
+//  vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
+    Harvester* harvester = new Harvester(300,200);
+	UnitView* unitView = UnitViewFactory::createUnitView(*harvester,window);
+	model.createUnit(std::move(harvester));
+	vista.addUnitView(std::move(unitView));
+
+	Trike* trike = new Trike(100,200);
+	unitView = UnitViewFactory::createUnitView(*trike,window);
+	model.createUnit(std::move(trike));
+	vista.addUnitView(std::move(unitView));
+/*	vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
     vista.addUnitView(model.createUnit(std::move(new Raider(89, 0))));
 
     vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 100))));
@@ -55,7 +65,7 @@ int main(int argc, const char* argv[]) {
     vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 300))));
 
     vista.addUnitView(model.createUnit(std::move(new Harvester(300, 200))));
-
+*/
 	bool running = true;
 	Unit* selectedUnit;
 	while (running) {
@@ -90,9 +100,9 @@ int main(int argc, const char* argv[]) {
             
 
 	    SDL_Event event;
-	    vistaMap.dibujar(camara);
-//            vistaUnidad.dibujar(camara);
-//            vistaUnidad2.dibujar(camara);
+	    mapView.draw(camara);
+//            unitView.draw(camara);
+//            unitView2.draw(camara);
 		vista.draw();
 	    while (SDL_PollEvent(&event)) {
                 switch(event.type) {

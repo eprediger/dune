@@ -1,9 +1,8 @@
 #include "TrikeView.h"
 #include <map>
 #include "SdlTexture.h"
-#include "trike.h"
-#include "Position.h"
-#include "Unit.h"
+#include "../Unit/trike.h"
+#include "../Position.h"
 #include "UnitView.h"
 #include "Orientation.h"
 
@@ -21,7 +20,7 @@ TrikeView::TrikeView(Trike& unit, SdlWindow& window)
 		trike_sprites.emplace(std::make_pair(Orientation::sur(),new SdlTexture("../imgs/imgs/000a038f.bmp",window)));
 		trike_sprites.emplace(std::make_pair(Orientation::sudeste(),new SdlTexture("../imgs/imgs/00128cdd.bmp",window)));
 		trike_sprites.emplace(std::make_pair(Orientation::este(),new SdlTexture("../imgs/imgs/0012984f.bmp",window)));
-		trike_sprites.emplace(std::make_pair(Orientation::noreste(),new SdlTexture("../imgs/imgs/000a038f.bmp",window)));
+		trike_sprites.emplace(std::make_pair(Orientation::noreste(),new SdlTexture("../imgs/imgs/0012a366.bmp",window)));
     }  
 }  
 

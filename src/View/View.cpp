@@ -4,9 +4,9 @@ View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
 
 }
 
-void View::addUnitView(Unit &unit) {
-    unit_views.push_back(std::unique_ptr<UnitView>( new UnitView(unit, window)));
-}
+void View::addUnitView(UnitView* unitView) {
+    unit_views.push_back(std::unique_ptr<UnitView>(unitView));
+} 
 
 void View::draw() {
 //    for (auto unit_view : unit_views){

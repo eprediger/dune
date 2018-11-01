@@ -1,7 +1,7 @@
 #include "HarvesterView.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "Position.h"
+#include "../Position.h"
 #include "Orientation.h"
 #include <map>
 #include "Area.h"

@@ -1,5 +1,5 @@
 #include "Orientation.h"
-#include "Position.h"
+#include "../Position.h"
 
 Orientation::Orientation(){
 	this->valor = indefinida();
