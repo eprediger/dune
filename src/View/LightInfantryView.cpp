@@ -35,7 +35,9 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
         
         std::vector<SdlTexture*> oeste;
         oeste.emplace_back(new SdlTexture("../imgs/imgs/00063ebb.bmp",window));
+        oeste.emplace_back(new SdlTexture("../imgs/imgs/00063ebb.bmp",window));
 
+        oeste.emplace_back(new SdlTexture("../imgs/imgs/00062fe3.bmp",window));
         oeste.emplace_back(new SdlTexture("../imgs/imgs/00062fe3.bmp",window));
 
         sprites.emplace(std::make_pair(Orientation::oeste(),
