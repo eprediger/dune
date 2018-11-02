@@ -13,7 +13,6 @@ SdlWindow::SdlWindow(const int width, const int height) :
         throw SdlException("Error al crear ventana", SDL_GetError());
     }
     SDL_SetWindowTitle(this->window, "Dune");
-    background.start();
 }
 
 SdlWindow::~SdlWindow() {
@@ -25,6 +24,7 @@ SdlWindow::~SdlWindow() {
         SDL_DestroyWindow(this->window);
         this->window = nullptr;
     }
+    background.join();
 }
 
 void SdlWindow::grabMouse(bool grab) {
@@ -38,6 +38,7 @@ void SdlWindow::fill(const Uint8 r, const Uint8 g,
                      const Uint8 b, const Uint8 alpha) {
     SDL_SetRenderDrawColor(this->renderer, r, g, b, alpha);
     SDL_RenderClear(this->renderer);
+    background.start();
 }
 
 void SdlWindow::fill() {
