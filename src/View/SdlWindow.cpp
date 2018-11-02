@@ -13,7 +13,7 @@ SdlWindow::SdlWindow(const int width, const int height) :
         throw SdlException("Error al crear ventana", SDL_GetError());
     }
     SDL_SetWindowTitle(this->window, "Dune");
-    this->background.play();
+    background.start();
 }
 
 SdlWindow::~SdlWindow() {

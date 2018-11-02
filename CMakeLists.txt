@@ -1,12 +1,23 @@
-project(window)
-
 cmake_minimum_required(VERSION 3.12)
+project(dune)
+
+set(CMAKE_CXX_STANDARD 11)
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -pthread")
+else()
+	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -pthread")
+endif()
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 FIND_PACKAGE(SDL2 REQUIRED)
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
 
-#message("[INFO] La raiz del proyecto es ${PROJECT_SOURCE_DIR}")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	SET(GCC_COVERAGE_LINK_FLAGS "-Wl -lSDL2 -lSDL2_mixer")
+else()
+	SET(GCC_COVERAGE_LINK_FLAGS "-Wl,--no-as-needed -lSDL2 -lSDL2_mixer")
+endif()
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 file(GLOB SOURCE
         src/*.cpp

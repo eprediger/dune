@@ -21,5 +21,4 @@ private:
     Sound background;
 };
 
-
 #endif //WINDOW_SDLWINDOW_H

@@ -4,6 +4,15 @@
 Sound::Sound(const std::string &filename) : 
 	filename(filename),
 	music(nullptr) {
+}
+
+Sound::~Sound() {
+	Mix_FreeMusic(music);
+    SDL_Quit();
+    this->music = nullptr;
+}
+
+void Sound::run() {
 	int result = 0;
     int flags = MIX_INIT_MP3;
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
@@ -16,18 +25,7 @@ Sound::Sound(const std::string &filename) :
         exit(1);*/
     }
     Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-    this->music = Mix_LoadMUS(filename.c_str());
-}
-
-Sound::~Sound() {
-	Mix_FreeMusic(music);
-    SDL_Quit();
-    this->music = nullptr;
-}
-
-void Sound::play() {
-// void Sound::operator()() {
-	Mix_PlayMusic(music, 1);
+    this->music = Mix_LoadMUS(filename.c_str());Mix_PlayMusic(music, 1);
     while (!SDL_QuitRequested()) {
         SDL_Delay(250);
     }
