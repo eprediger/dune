@@ -4,7 +4,6 @@
 
 #include "SdlWindow.h"
 #include "SdlException.h"
-
 SdlWindow::SdlWindow(const int width, const int height) :
     width(width), height(height) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -22,7 +21,6 @@ SdlWindow::~SdlWindow() {
         SDL_DestroyRenderer(this->renderer);
         this->renderer = nullptr;
     }
-
     if (this->window != nullptr) {
         SDL_DestroyWindow(this->window);
         this->window = nullptr;

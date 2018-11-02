@@ -17,7 +17,6 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
     if (sprites.empty()){
         std::vector<SdlTexture*> indef;
         indef.emplace_back(new SdlTexture("../imgs/imgs/00061b8d.bmp",window));
-        indef.emplace_back(new SdlTexture("../imgs/imgs/00062a2c.bmp",window));
         sprites.emplace(std::make_pair(Orientation::indefinida(),
                                     std::move(indef)));
         std::vector<SdlTexture*> norte;
@@ -36,9 +35,9 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
         
         std::vector<SdlTexture*> oeste;
         oeste.emplace_back(new SdlTexture("../imgs/imgs/00063ebb.bmp",window));
-        oeste.emplace_back(new SdlTexture("../imgs/imgs/00064e5e.bmp",window));
+
         oeste.emplace_back(new SdlTexture("../imgs/imgs/00062fe3.bmp",window));
-        oeste.emplace_back(new SdlTexture("../imgs/imgs/00065f35.bmp",window));
+
         sprites.emplace(std::make_pair(Orientation::oeste(),
                                     std::move(oeste)));
         std::vector<SdlTexture*> sudoeste;
@@ -51,8 +50,9 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
 
         std::vector<SdlTexture*> sur;
         sur.emplace_back(new SdlTexture("../imgs/imgs/00062a2c.bmp",window));
-        sur.emplace_back(new SdlTexture("../imgs/imgs/00062a2c.bmp",window));
         sur.emplace_back(new SdlTexture("../imgs/imgs/00061b8d.bmp",window));
+        sur.emplace_back(new SdlTexture("../imgs/imgs/00062a2c.bmp",window));
+
         sur.emplace_back(new SdlTexture("../imgs/imgs/00061b8d.bmp",window));
         sprites.emplace(std::make_pair(Orientation::sur(),
                                     std::move(sur)));
@@ -83,10 +83,10 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
 
 void LightInfantryView::draw(Area& camara){
     Position pos = unit.getPosition();
-	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,12,16);
+	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,15,20);
 	orientation.calcular(prev_pos,pos);
     if (orientation.getValor() == prev_orient.getValor()){
-        if (pos == prev_pos){
+        if (!(pos == prev_pos)){
             animation_it++;
             if (animation_it == sprites.at(orientation.getValor()).end()){
                 animation_it = sprites.at(orientation.getValor()).begin();

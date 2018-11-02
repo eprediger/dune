@@ -20,7 +20,7 @@ class UnitView{
 		Position prev_pos;
 		Orientation orientation;
 		
-	private:
+	private: 
 };  
 
 #endif

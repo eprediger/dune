@@ -3,7 +3,6 @@
 //
 
 #include "SdlTexture.h"
-
 SdlTexture::SdlTexture(const std::string &filename, const SdlWindow &window) :
     renderer(window.getRenderer()) {
     this->texture = loadTexture(filename);
