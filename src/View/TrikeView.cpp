@@ -9,7 +9,7 @@
 std::map<int,SdlTexture*> TrikeView::trike_sprites;
 
 TrikeView::TrikeView(Trike& unit, SdlWindow& window)
-	:UnitView(unit,trike_sprites,window) 
+	:UnitView(unit,window) 
 {
     if (trike_sprites.empty()){  
         trike_sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/0009e9ca.bmp",window)));		
@@ -25,10 +25,10 @@ TrikeView::TrikeView(Trike& unit, SdlWindow& window)
 }  
 
  
-void TrikeView::draw(Area camara){
+void TrikeView::draw(Area& camara){
 	Position pos = unit.getPosition();
-	Area dest(pos.getX()- 16 - camara.getX(),pos.getY()-16 - camara.getY() ,32,32);
+	Area dest(pos.getX()- 15 - camara.getX(),pos.getY()-10 - camara.getY() ,30,20);
 	orientation.calcular(prev_pos,pos);
 	prev_pos = pos;
-	trike_sprites.at(orientation.getValor())->render(Area(0, 0, 41, 38),dest);
+	trike_sprites.at(orientation.getValor())->render(Area(0, 0, 26, 18),dest);
 }

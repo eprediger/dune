@@ -7,12 +7,10 @@
 #include "Area.h"
 
 UnitView::UnitView(Unit& unit
-						,std::map<int,SdlTexture*>& sprites
 						,SdlWindow& window)
 	:unit(unit)
 	,prev_pos(unit.getPosition())
 	,orientation()
-	,sprites(sprites) 
 {}
 
 Unit &UnitView::getUnit() {

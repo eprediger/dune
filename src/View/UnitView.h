@@ -12,16 +12,15 @@
 
 class UnitView{
 	public:
-		UnitView(Unit& unit,std::map<int,SdlTexture*>& sprites, SdlWindow& window);
+		UnitView(Unit& unit, SdlWindow& window);
 		Unit& getUnit();
-		virtual void draw(Area camara) = 0;
+		virtual void draw(Area& camara) = 0;
 	protected: 
 		Unit& unit;
 		Position prev_pos;
 		Orientation orientation;
 		
 	private:
-		std::map<int,SdlTexture*>& sprites;
 };  
 
 #endif

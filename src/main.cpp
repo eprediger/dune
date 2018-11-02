@@ -52,6 +52,11 @@ int main(int argc, const char* argv[]) {
 	unitView = UnitViewFactory::createUnitView(*trike,window);
 	model.createUnit(std::move(trike));
 	vista.addUnitView(std::move(unitView));
+
+	LightInfantry* lightInf = new LightInfantry(100,100);
+	unitView = UnitViewFactory::createUnitView(*lightInf,window);
+	model.createUnit(std::move(lightInf));
+	vista.addUnitView(std::move(unitView));
 /*	vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
     vista.addUnitView(model.createUnit(std::move(new Raider(89, 0))));
 

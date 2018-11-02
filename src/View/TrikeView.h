@@ -12,7 +12,7 @@
 class TrikeView: public UnitView{
     public: 
         TrikeView(Trike& unit, SdlWindow& window);
-        virtual void draw(Area camara);
+        virtual void draw(Area& camara);
     private:
        static std::map<int,SdlTexture*> trike_sprites;
         

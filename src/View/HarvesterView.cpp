@@ -10,7 +10,7 @@
 std::map<int,SdlTexture*> HarvesterView::harvester_sprites;
 
 HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window)
-	:UnitView(harvester,harvester_sprites,window)
+	:UnitView(harvester,window)
 { 
 	if (harvester_sprites.empty()){
 		harvester_sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000a612e.bmp",window)));		
@@ -25,9 +25,9 @@ HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window)
 	}
 }
 
-void HarvesterView::draw(Area camara){
+void HarvesterView::draw(Area& camara){
 	Position pos = unit.getPosition();
-	Area dest(pos.getX()- 16 - camara.getX(),pos.getY()-16 - camara.getY() ,32,32);
+	Area dest(pos.getX()- 20 - camara.getX(),pos.getY()-19 - camara.getY() ,41,38);
 	orientation.calcular(prev_pos,pos);
 	prev_pos = pos;
 	harvester_sprites.at(orientation.getValor())->render(Area(0, 0, 41, 38),dest);

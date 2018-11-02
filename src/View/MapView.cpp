@@ -17,8 +17,8 @@ areas.emplace(std::make_pair('D',Area(32,96,32,32)));
 areas.emplace(std::make_pair('C',Area(112,64,32,32)));
 } 
 
-void MapView::draw(Area camara){
-
+void MapView::draw(Area& camara){
+ 
 	int i = camara.getY() / 32;
 	int lim_i = i + 1 + camara.getHeight()/32;
 	if (lim_i > mapa.getHeightInBlocks()){
