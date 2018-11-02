@@ -7,7 +7,7 @@
 
 class Precipice : public Terrain {
 public:
-    Precipice();
+	Precipice();
 
 };
 

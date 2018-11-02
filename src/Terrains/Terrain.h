@@ -7,16 +7,16 @@
 
 class Terrain {
 private:
-    char key;
+	char key;
 
 public:
-    Terrain();
+	Terrain();
 
-    Terrain(char key);
+	Terrain(char key);
 
-    bool operator==(const Terrain& terrain);
+	bool operator==(const Terrain& terrain);
 
-    char getKey();
+	char getKey();
 
 };
 

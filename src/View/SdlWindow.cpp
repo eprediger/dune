@@ -1,11 +1,10 @@
-//
-// Created by emiliano on 24/10/18.
-//
-
 #include "SdlWindow.h"
 #include "SdlException.h"
+
 SdlWindow::SdlWindow(const int width, const int height) :
-    width(width), height(height) {
+    width(width),
+    height(height),
+    background("../../sounds/music/options.mp3") {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         throw SdlException("Error en la inicialización", SDL_GetError());
     }
@@ -14,6 +13,7 @@ SdlWindow::SdlWindow(const int width, const int height) :
         throw SdlException("Error al crear ventana", SDL_GetError());
     }
     SDL_SetWindowTitle(this->window, "Dune");
+    this->background.play();
 }
 
 SdlWindow::~SdlWindow() {
@@ -27,11 +27,11 @@ SdlWindow::~SdlWindow() {
     }
 }
 
-void SdlWindow::grabMouse(bool grab){
-	if (grab)
-		SDL_SetWindowGrab(window,SDL_TRUE);
-	else 
-		SDL_SetWindowGrab(window,SDL_FALSE);
+void SdlWindow::grabMouse(bool grab) {
+    if (grab)
+        SDL_SetWindowGrab(window, SDL_TRUE);
+    else
+        SDL_SetWindowGrab(window, SDL_FALSE);
 }
 
 void SdlWindow::fill(const Uint8 r, const Uint8 g,
@@ -41,7 +41,7 @@ void SdlWindow::fill(const Uint8 r, const Uint8 g,
 }
 
 void SdlWindow::fill() {
-    this->fill(0xFF,0xFF,0xFF,0xFF);
+    this->fill(0xFF, 0xFF, 0xFF, 0xFF);
 }
 
 void SdlWindow::render() {

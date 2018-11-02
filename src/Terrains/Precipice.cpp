@@ -1,5 +1,3 @@
 #include "Precipice.h"
 
-Precipice::Precipice() : Terrain(PRECIPICE_KEY){
-
-}
+Precipice::Precipice() : Terrain(PRECIPICE_KEY) {}

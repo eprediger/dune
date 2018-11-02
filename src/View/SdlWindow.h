@@ -1,11 +1,8 @@
-//
-// Created by emiliano on 24/10/18.
-//
-
 #ifndef WINDOW_SDLWINDOW_H
 #define WINDOW_SDLWINDOW_H
 
 #include <SDL2/SDL.h>
+#include "Sound.h"
 
 class SdlWindow {
 public:
@@ -21,6 +18,7 @@ private:
     const int height;
     SDL_Window* window;
     SDL_Renderer* renderer;
+    Sound background;
 };
 
 

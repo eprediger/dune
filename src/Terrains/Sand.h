@@ -7,7 +7,7 @@
 
 class Sand : public Terrain {
 public:
-    Sand();
+	Sand();
 
 };
 

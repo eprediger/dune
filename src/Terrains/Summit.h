@@ -7,7 +7,7 @@
 
 class Summit : public Terrain {
 public:
-    Summit();
+	Summit();
 
 };
 
