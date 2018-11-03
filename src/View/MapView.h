@@ -7,14 +7,14 @@
 #include <map>
 #include "Area.h"
 
-class MapView{
-	public:
-		MapView(Map& mapa, SdlWindow& window);
-		void draw(Area& camara);
-	private:
-		Map& mapa;
-		SdlTexture terrenos;
-		std::map<char,Area> areas;
+class MapView {
+public:
+	MapView(Map& mapa, SdlWindow& window);
+	void draw(Area& camara);
+private:
+	Map& mapa;
+	SdlTexture terrenos;
+	std::map<char, Area> areas;
 };
 
 #endif

@@ -11,22 +11,20 @@
 
 class Model {
 private:
-    Map map;
-    std::vector<std::unique_ptr<Unit> > units;
+	Map map;
+	std::vector<std::unique_ptr<Unit>> units;
 
 public:
-    Model(int width, int height);
+	Model(int width, int height);
 
 //    Map& createMap();
-    Map& getMap();
+	Map& getMap();
 
-    Unit &createUnit(Unit *unit);
+	Unit &createUnit(Unit *unit);
 
+	void step();
 
-    void step();
-
-    Unit* selectUnit(int x, int y);
-
+	Unit* selectUnit(int x, int y);
 
 };
 

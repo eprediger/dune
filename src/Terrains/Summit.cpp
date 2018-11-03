@@ -1,7 +1,3 @@
 #include "Summit.h"
 
-Summit::Summit() : Terrain(SUMMIT_KEY){
-
-}
-
-
+Summit::Summit() : Terrain(SUMMIT_KEY) {}

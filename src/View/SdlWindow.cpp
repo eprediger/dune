@@ -1,11 +1,10 @@
-//
-// Created by emiliano on 24/10/18.
-//
-
 #include "SdlWindow.h"
 #include "SdlException.h"
+
 SdlWindow::SdlWindow(const int width, const int height) :
-    width(width), height(height) {
+    width(width),
+    height(height),
+    background("../../sounds/music/options.mp3") {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         throw SdlException("Error en la inicialización", SDL_GetError());
     }
@@ -25,23 +24,25 @@ SdlWindow::~SdlWindow() {
         SDL_DestroyWindow(this->window);
         this->window = nullptr;
     }
+    background.join();
 }
 
-void SdlWindow::grabMouse(bool grab){
-	if (grab)
-		SDL_SetWindowGrab(window,SDL_TRUE);
-	else 
-		SDL_SetWindowGrab(window,SDL_FALSE);
+void SdlWindow::grabMouse(bool grab) {
+    if (grab)
+        SDL_SetWindowGrab(window, SDL_TRUE);
+    else
+        SDL_SetWindowGrab(window, SDL_FALSE);
 }
 
 void SdlWindow::fill(const Uint8 r, const Uint8 g,
                      const Uint8 b, const Uint8 alpha) {
     SDL_SetRenderDrawColor(this->renderer, r, g, b, alpha);
     SDL_RenderClear(this->renderer);
+    background.start();
 }
 
 void SdlWindow::fill() {
-    this->fill(0xFF,0xFF,0xFF,0xFF);
+    this->fill(0xFF, 0xFF, 0xFF, 0xFF);
 }
 
 void SdlWindow::render() {

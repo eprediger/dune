@@ -1,5 +1,3 @@
 #include "Rocks.h"
 
-Rocks::Rocks() : Terrain(ROCKS_KEY){
-
-}
+Rocks::Rocks() : Terrain(ROCKS_KEY) {}

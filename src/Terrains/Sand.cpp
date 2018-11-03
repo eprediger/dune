@@ -1,6 +1,3 @@
 #include "Sand.h"
 
-Sand::Sand() : Terrain(SAND_KEY) {
-
-}
-
+Sand::Sand() : Terrain(SAND_KEY) {}
