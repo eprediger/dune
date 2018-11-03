@@ -43,25 +43,62 @@ int main(int argc, const char* argv[]) {
 //	UnitView unitView(model.createUnit(WIDTH/2, HEIGHT/2),window);
 //	UnitView unitView2(model.createUnit(0,0),window);
 //  vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
+   
+   
     Harvester* harvester = new Harvester(300,200);
-	UnitView* unitView = UnitViewFactory::createUnitView(*harvester,window);
+	UnitView* harvesterView = UnitViewFactory::createUnitView(*harvester,window);
 	model.createUnit(std::move(harvester));
-	vista.addUnitView(std::move(unitView));
+	vista.addUnitView(std::move(harvesterView));
 
 	Trike* trike = new Trike(100,200);
-	unitView = UnitViewFactory::createUnitView(*trike,window);
+	UnitView* trikeView = UnitViewFactory::createUnitView(*trike,window);
 	model.createUnit(std::move(trike));
-	vista.addUnitView(std::move(unitView));
+	vista.addUnitView(std::move(trikeView));
 
 	LightInfantry* lightInf = new LightInfantry(100,100);
-	unitView = UnitViewFactory::createUnitView(*lightInf,window);
+	UnitView* lightInfView = UnitViewFactory::createUnitView(*lightInf,window);
 	model.createUnit(std::move(lightInf));
-	vista.addUnitView(std::move(unitView));
+	vista.addUnitView(std::move(lightInfView));
 
 	HeavyInfantry* heavyInf = new HeavyInfantry(200,200);
-	unitView = UnitViewFactory::createUnitView(*heavyInf,window);
+	UnitView* heavyInfView = UnitViewFactory::createUnitView(*heavyInf,window);
 	model.createUnit(std::move(heavyInf));
-	vista.addUnitView(std::move(unitView));
+	vista.addUnitView(std::move(heavyInfView));
+
+	Raider* raider = new Raider(100,150);
+	UnitView* raiderView = UnitViewFactory::createUnitView(*raider,window);
+	model.createUnit(std::move(raider));
+	vista.addUnitView(std::move(raiderView));
+
+
+	Raider* raider2 = new Raider(400,150);
+	UnitView* raiderView2 = UnitViewFactory::createUnitView(*raider2,window);
+	model.createUnit(std::move(raider2));
+	vista.addUnitView(std::move(raiderView2));
+
+	Raider* raider3 = new Raider(180,150);
+	UnitView* raiderView3 = UnitViewFactory::createUnitView(*raider3,window);
+	model.createUnit(std::move(raider3));
+	vista.addUnitView(std::move(raiderView3));
+
+/*
+	Trike* trike2 = new Trike(100,250);
+	UnitView* trikeView2 = UnitViewFactory::createUnitView(*trike2,window);
+	model.createUnit(std::move(trike2));
+	vista.addUnitView(std::move(trikeView2));
+
+
+	Trike* trike3 = new Trike(100,300);
+	UnitView* trikeView3 = UnitViewFactory::createUnitView(*trike3,window);
+	model.createUnit(std::move(trike3));
+	vista.addUnitView(std::move(trikeView3));
+*/
+
+	Tank* tank = new Tank(250,200);
+	UnitView* tankView = UnitViewFactory::createUnitView(*tank,window);
+	model.createUnit(std::move(tank));
+	vista.addUnitView(std::move(tankView));
+
 /*	vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
     vista.addUnitView(model.createUnit(std::move(new Raider(89, 0))));
 

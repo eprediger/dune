@@ -18,6 +18,7 @@ public:
 
     SDL_Texture* loadTexture(const std::string &filename);
 
+    int setColor();
     int render(const Area &src, const Area &dest);
 
 private:

@@ -16,6 +16,7 @@ public:
 
     bool automaticAttack(Map &map);
 
+    bool attacking;
 //    void follow(Unit* other, Map& map);
 //private:
 //    Unit* foll_unit;

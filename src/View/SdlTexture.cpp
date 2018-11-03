@@ -3,6 +3,7 @@
 //
 
 #include "SdlTexture.h"
+#include <iostream>
 SdlTexture::SdlTexture(const std::string &filename, const SdlWindow &window) :
     renderer(window.getRenderer()) {
     this->texture = loadTexture(filename);
@@ -23,6 +24,10 @@ SDL_Texture* SdlTexture::loadTexture(const std::string &filename) {
     return texture;
 }
 
+int SdlTexture::setColor(){
+    SDL_SetTextureColorMod(this->texture,128,32,32);
+}
+
 SdlTexture::~SdlTexture() {
     SDL_DestroyTexture(this->texture);
 }
@@ -32,6 +37,5 @@ int SdlTexture::render(const Area &src, const Area &dest) {
                        src.getWidth(), src.getHeight()};
     SDL_Rect sdlDest = {dest.getX(), dest.getY(),
                         dest.getWidth(), dest.getHeight()};
-
-    return SDL_RenderCopy(this->renderer, this->texture, &sdlSrc, &sdlDest);
+    int a = SDL_RenderCopy(this->renderer, this->texture, &sdlSrc, &sdlDest);
 }

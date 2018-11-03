@@ -7,10 +7,16 @@
 #include "../Unit/harvester.h"
 #include "../Unit/light-infantry.h"
 #include "../Unit/heavy-infantry.h"
+#include "../Unit/raider.h"
+#include "../Unit/tank.h"
 
 class UnitViewFactory{
     public:
         static UnitView* createUnitView(Trike& trike
+                                        ,SdlWindow& window);
+        static UnitView* createUnitView(Tank& tank
+                                        ,SdlWindow& window);
+        static UnitView* createUnitView(Raider& raider
                                         ,SdlWindow& window);
         static UnitView* createUnitView(Harvester& harvester
                                         ,SdlWindow& window);

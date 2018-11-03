@@ -19,7 +19,6 @@ class UnitView{
 		Unit& unit;
 		Position prev_pos;
 		Orientation orientation;
-		
 	private: 
 };  
 

@@ -5,7 +5,8 @@
 OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, const int range,
            Weapon weapon, const int speed) :
         Unit(x, y, hitPoints, speed),
-        Attacker(weapon, range) {}
+        Attacker(weapon, range),
+        attacking(false) {}
 
 int OffensiveUnit::makeAction(Map& map){
     switch (state) {
@@ -16,6 +17,8 @@ int OffensiveUnit::makeAction(Map& map){
             return 1;
         case FOLLOWING:
             if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
+                if (!attacking)
+                    attacking = true;
                 this->attack(*foll_unit);
                 if (Unit::isDead(foll_unit)){
                     foll_unit = nullptr;
@@ -32,11 +35,14 @@ int OffensiveUnit::makeAction(Map& map){
     }
 }
 
+
 bool OffensiveUnit::automaticAttack(Map &map) {
     Unit* closes_unit = map.getClosestUnit(*this, this->range);
     if (closes_unit == nullptr){
         return false;
     } else {
+        if (!attacking)
+            attacking = true;
         this->attack(*closes_unit);
         return true;
     }

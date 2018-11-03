@@ -1,4 +1,5 @@
 #include "View.h"
+#include <iostream>
 
 View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
 

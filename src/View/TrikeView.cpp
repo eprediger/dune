@@ -19,7 +19,7 @@ TrikeView::TrikeView(Trike& unit, SdlWindow& window)
 		trike_sprites.emplace(std::make_pair(Orientation::sudoeste(),new SdlTexture("../imgs/imgs/0009fe42.bmp",window)));
 		trike_sprites.emplace(std::make_pair(Orientation::sur(),new SdlTexture("../imgs/imgs/000a038f.bmp",window)));
 		trike_sprites.emplace(std::make_pair(Orientation::sudeste(),new SdlTexture("../imgs/imgs/00128cdd.bmp",window)));
-		trike_sprites.emplace(std::make_pair(Orientation::este(),new SdlTexture("../imgs/imgs/0012984f.bmp",window)));
+		trike_sprites.emplace(std::make_pair(Orientation::este(),new SdlTexture("../imgs/imgs/000a1090.bmp",window)));
 		trike_sprites.emplace(std::make_pair(Orientation::noreste(),new SdlTexture("../imgs/imgs/0012a366.bmp",window)));
     }  
 }  
@@ -27,8 +27,8 @@ TrikeView::TrikeView(Trike& unit, SdlWindow& window)
  
 void TrikeView::draw(Area& camara){
 	Position pos = unit.getPosition();
-	Area dest(pos.getX()- 15 - camara.getX(),pos.getY()-10 - camara.getY() ,30,20);
+	Area dest(pos.getX()- 13 - camara.getX(),pos.getY()-13 - camara.getY() ,25,25);
 	orientation.calcular(prev_pos,pos);
 	prev_pos = pos;
-	trike_sprites.at(orientation.getValor())->render(Area(0, 0, 26, 18),dest);
+	trike_sprites.at(orientation.getValor())->render(Area(0, 0, 32, 32),dest);
 }

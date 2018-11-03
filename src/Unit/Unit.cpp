@@ -29,6 +29,7 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
 
 }
 
+
 int Unit::move() {
 
     if (actual_speed++ == speed) {
