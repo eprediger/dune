@@ -6,9 +6,6 @@ Sound::Sound(const std::string& filename) :
 	music(nullptr) {
     int result = 0;
     int flags = MIX_INIT_MP3;
-    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-        throw SdlException("Error inicializando audio", SDL_GetError());
-    }
     if (flags != (result = Mix_Init(flags))) {
         throw SdlException("Error en recurso en audio", Mix_GetError());
     }
