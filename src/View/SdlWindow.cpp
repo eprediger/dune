@@ -24,6 +24,7 @@ SdlWindow::~SdlWindow() {
         SDL_DestroyWindow(this->window);
         this->window = nullptr;
     }
+    background.stop();
     background.join();
 }
 
@@ -38,11 +39,11 @@ void SdlWindow::fill(const Uint8 r, const Uint8 g,
                      const Uint8 b, const Uint8 alpha) {
     SDL_SetRenderDrawColor(this->renderer, r, g, b, alpha);
     SDL_RenderClear(this->renderer);
-//    background.start();
 }
 
 void SdlWindow::fill() {
     this->fill(0xFF, 0xFF, 0xFF, 0xFF);
+    background.start();
 }
 
 void SdlWindow::render() {

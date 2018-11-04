@@ -44,7 +44,7 @@ int main(int argc, const char* argv[]) {
 //	UnitView unitView(model.createUnit(WIDTH/2, HEIGHT/2),window);
 //	UnitView unitView2(model.createUnit(0,0),window);
 //  vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
-        Widget widget(window, "../imgs/units-btns/linfantry.gif");
+        Widget lightInfantryCreator(window, "../imgs/units-btns/linfantry.gif");
 
         Harvester* harvester = new Harvester(300,200);
         UnitView* harvesterView = UnitViewFactory::createUnitView(*harvester,window);
@@ -152,7 +152,7 @@ int main(int argc, const char* argv[]) {
 //            unitView.draw(camara);
 //            unitView2.draw(camara);
             vista.draw();
-            widget.draw();
+            lightInfantryCreator.draw();
             while (SDL_PollEvent(&event)) {
                 switch(event.type) {
                     case SDL_QUIT:

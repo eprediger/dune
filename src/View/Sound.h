@@ -11,6 +11,7 @@ public:
     explicit Sound(const std::string &filename);
     ~Sound();
     void run() override;
+    void stop();
 private:
     const std::string& filename;
     Mix_Music* music;

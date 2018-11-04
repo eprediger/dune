@@ -16,11 +16,11 @@ Sound::Sound(const std::string &filename) :
         exit(1);*/
     }
     Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-    this->music = Mix_LoadMUS(filename.c_str());Mix_PlayMusic(music, 1);
+    this->music = Mix_LoadMUS(filename.c_str());
 }
 
 Sound::~Sound() {
-	Mix_FreeMusic(music);
+    Mix_FreeMusic(music);
     SDL_Quit();
     this->music = nullptr;
 }
@@ -30,5 +30,8 @@ void Sound::run() {
     while (!SDL_QuitRequested()) {
         SDL_Delay(250);
     }
+}
+
+void Sound::stop() {
     Mix_HaltMusic();
 }
