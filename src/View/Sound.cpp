@@ -14,13 +14,13 @@ Sound::Sound(const std::string& filename) :
 }
 
 Sound::~Sound() {
-    Mix_FreeMusic(music);
+    Mix_FreeMusic(this->music);
     SDL_Quit();
     this->music = nullptr;
 }
 
 void Sound::run() {
-    Mix_PlayMusic(music, 0);
+    Mix_PlayMusic(this->music, 0);
     bool isPlaying = true;
     while (!SDL_QuitRequested() && isPlaying) {
         isPlaying = Mix_PlayingMusic();
@@ -31,4 +31,3 @@ void Sound::run() {
 void Sound::stop() {
     Mix_HaltMusic();
 }
-

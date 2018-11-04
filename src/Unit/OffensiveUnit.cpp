@@ -54,9 +54,3 @@ bool OffensiveUnit::automaticAttack(Map &map) {
 //    map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
 //    state = FOLLOWING;
 //}
-
-
-
-
-
-

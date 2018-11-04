@@ -9,7 +9,7 @@
 class Sound : public Thread {
 // class Sound {
 public:
-    explicit Sound(const std::string &filename);
+    explicit Sound(const std::string& filename);
     ~Sound();
     void run();
     void stop();
