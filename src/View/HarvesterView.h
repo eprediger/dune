@@ -1,7 +1,7 @@
 #ifndef __HARVESTER_VIEW_H__
 #define __HARVESTER_VIEW_H__
 
-#include "../Unit/harvester.h"
+#include "../Unit/Harvester.h"
 #include "UnitView.h"
 
 class HarvesterView: public UnitView{

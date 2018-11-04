@@ -2,7 +2,7 @@
 #define __TANK_H__
 
 #include "OffensiveUnit.h"
-#include "../Weapons/cannon.h"
+#include "../Weapons/Cannon.h"
 
 class Tank : public OffensiveUnit {
 public:

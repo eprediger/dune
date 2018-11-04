@@ -1,4 +1,4 @@
-#include "cannon.h"
+#include "Cannon.h"
 
 Cannon::Cannon() :
 	Weapon(GlobalConfig.cannonDamage,

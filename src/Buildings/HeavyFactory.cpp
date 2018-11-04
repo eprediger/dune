@@ -1,4 +1,4 @@
-#include "heavy-factory.h"
+#include "HeavyFactory.h"
 
 HeavyFactory::HeavyFactory() :
 	Building(GlobalConfig.heavyFactoryEnergy,

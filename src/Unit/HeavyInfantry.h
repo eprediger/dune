@@ -2,7 +2,7 @@
 #define __HEAVY_INFANTRY_H__
 
 #include "OffensiveUnit.h"
-#include "../Weapons/rocket-launcher.h"
+#include "../Weapons/RocketLauncher.h"
 
 class HeavyInfantry : public OffensiveUnit {
 public:

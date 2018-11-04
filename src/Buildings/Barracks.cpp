@@ -1,4 +1,4 @@
-#include "barracks.h"
+#include "Barracks.h"
 #include "../GlobalConfig.h"
 
 Barracks::Barracks() :

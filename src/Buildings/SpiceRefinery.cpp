@@ -1,4 +1,4 @@
-#include "spice-refinery.h"
+#include "SpiceRefinery.h"
 
 SpiceRefinery::SpiceRefinery() :
 	Building(GlobalConfig.spiceRefineryEnergy,

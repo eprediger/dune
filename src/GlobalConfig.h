@@ -101,10 +101,11 @@ typedef struct {
 // Vehicles
 	// Cosechadora
 	const int harvesterHitPoints		= 600;
-	const int harvesterRange			= RANGE_FACTOR*0;
+	//const int harvesterRange			= RANGE_FACTOR*0;
 	const int harvesterSpeed			= SPEED_FACTOR/12;
 	const int harvesterConstructionTime	= 180;
 	const int harvesterCost				= 300;
+	const int harvesterSpiceCapacity	= 200;
 	// Trike
 	const int trikeHitPoints		= 80;
 	const int trikeRange			= RANGE_FACTOR*4;

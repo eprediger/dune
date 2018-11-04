@@ -1,4 +1,4 @@
-#include "tank.h"
+#include "Tank.h"
 
 Tank::Tank(int x, int y) :
 		OffensiveUnit(x, y,

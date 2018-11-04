@@ -1,6 +1,6 @@
 #include "Unit.h"
 #include "../AStar.h"
-#include "../Weapons/assault-rifle.h"
+#include "../Weapons/AssaultRifle.h"
 #include "../Config.h"
 
 /*Unit::Unit(const int hitPoints) : Attackable(hitPoints), Positionable(0,0), Attacker(AssaultRifle(), ){

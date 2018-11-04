@@ -1,4 +1,4 @@
-#include "construction-yard.h"
+#include "ConstructionYard.h"
 
 ConstructionYard::ConstructionYard() :
 	Building(GlobalConfig.constructionYardEnergy,

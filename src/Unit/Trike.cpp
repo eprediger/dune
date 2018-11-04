@@ -1,4 +1,4 @@
-#include "trike.h"
+#include "Trike.h"
 
 Trike::Trike(int x, int y) :
 		OffensiveUnit(x, y,

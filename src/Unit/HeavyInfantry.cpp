@@ -1,4 +1,4 @@
-#include "heavy-infantry.h"
+#include "HeavyInfantry.h"
 
 HeavyInfantry::HeavyInfantry(int x, int y) :
 	OffensiveUnit(x, y,

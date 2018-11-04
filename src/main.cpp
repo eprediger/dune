@@ -10,10 +10,10 @@
 #include "Model.h"
 #include "View/View.h"
 #include "GlobalConfig.h"
-#include "Unit/light-infantry.h"
-#include "Unit/raider.h"
-#include "Unit/heavy-infantry.h"
-#include "Unit/harvester.h"
+#include "Unit/LightInfantry.h"
+#include "Unit/Raider.h"
+#include "Unit/HeavyInfantry.h"
+#include "Unit/Harvester.h"
 #include "View/Widget.h"
 
 #define SUCCESS 0

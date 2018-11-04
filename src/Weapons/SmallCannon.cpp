@@ -1,4 +1,4 @@
-#include "small-cannon.h"
+#include "SmallCannon.h"
 
 SmallCannon::SmallCannon() :
 	Weapon(GlobalConfig.smallCannonDamage,

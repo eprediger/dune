@@ -1,4 +1,4 @@
-#include "rocket-launcher.h"
+#include "RocketLauncher.h"
 
 RocketLauncher::RocketLauncher() :
 	Weapon(GlobalConfig.rocketLauncherDamage/5,

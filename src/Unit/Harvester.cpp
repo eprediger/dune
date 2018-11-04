@@ -1,9 +1,10 @@
-#include "harvester.h"
+#include "Harvester.h"
 
 Harvester::Harvester(int x, int y) :
-		PassiveUnit(x, y,
-		  GlobalConfig.harvesterHitPoints,
-		  GlobalConfig.harvesterSpeed) {}
+	PassiveUnit(x, y,
+	  GlobalConfig.harvesterHitPoints,
+	  GlobalConfig.harvesterSpeed),
+    spiceCapacity(GlobalConfig.harvesterSpiceCapacity) {}
 
 Harvester::~Harvester() {}
 

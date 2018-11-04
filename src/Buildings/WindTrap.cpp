@@ -1,4 +1,4 @@
-#include "wind-trap.h"
+#include "WindTrap.h"
 
 WindTrap::WindTrap() :
 	Building(GlobalConfig.windTrapEnergy,

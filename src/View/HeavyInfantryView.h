@@ -1,7 +1,7 @@
 #ifndef __HEAVY_INFANTRY_VIEW_H__
 #define __HEAVY_INFANTRY_VIEW_H__
 
-#include "../Unit/heavy-infantry.h"
+#include "../Unit/HeavyInfantry.h"
 #include "UnitView.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

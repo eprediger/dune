@@ -1,7 +1,7 @@
 #ifndef __TRIKE_VIEW_H__
 #define __TRIKE_VIEW_H__
 
-#include "../Unit/trike.h"
+#include "../Unit/Trike.h"
 #include "../Position.h"
 #include "Orientation.h"
 #include "UnitView.h"

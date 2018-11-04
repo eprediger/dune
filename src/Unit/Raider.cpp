@@ -1,4 +1,4 @@
-#include "raider.h"
+#include "Raider.h"
 
 Raider::Raider(int x, int y) :
 		OffensiveUnit(x, y,

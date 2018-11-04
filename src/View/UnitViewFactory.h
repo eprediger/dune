@@ -3,12 +3,12 @@
 
 #include "UnitView.h"
 #include "SdlWindow.h"
-#include "../Unit/trike.h"
-#include "../Unit/harvester.h"
-#include "../Unit/light-infantry.h"
-#include "../Unit/heavy-infantry.h"
-#include "../Unit/raider.h"
-#include "../Unit/tank.h"
+#include "../Unit/Trike.h"
+#include "../Unit/Harvester.h"
+#include "../Unit/LightInfantry.h"
+#include "../Unit/HeavyInfantry.h"
+#include "../Unit/Raider.h"
+#include "../Unit/Tank.h"
 
 class UnitViewFactory{
     public:

@@ -1,4 +1,4 @@
-#include "spice-silo.h"
+#include "SpiceSilo.h"
 
 SpiceSilo::SpiceSilo() :
 	Building(GlobalConfig.spiceSiloEnergy,

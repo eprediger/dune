@@ -1,4 +1,4 @@
-#include "assault-rifle.h"
+#include "AssaultRifle.h"
 
 AssaultRifle::AssaultRifle() :
 	Weapon(GlobalConfig.assaultRifleDamage,

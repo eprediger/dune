@@ -1,4 +1,4 @@
-#include "light-factory.h"
+#include "LightFactory.h"
 
 LightFactory::LightFactory() :
 	Building(GlobalConfig.lightFactoryEnergy,

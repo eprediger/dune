@@ -1,4 +1,4 @@
-#include "light-infantry.h"
+#include "LightInfantry.h"
 
 LightInfantry::LightInfantry(int x, int y) :
         OffensiveUnit(x, y,

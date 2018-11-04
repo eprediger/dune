@@ -2,7 +2,7 @@
 #define __LIGHT_INFANTRY_H__
 
 #include "OffensiveUnit.h"
-#include "../Weapons/assault-rifle.h"
+#include "../Weapons/AssaultRifle.h"
 
 class LightInfantry : public OffensiveUnit {
 public:
