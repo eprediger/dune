@@ -4,8 +4,8 @@
 SdlWindow::SdlWindow(const int width, const int height) :
     width(width),
     height(height),
-    background("../../sounds/music/options.mp3") {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    background("../sounds/music/the-atreides-gain.mp3") {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         throw SdlException("Error en la inicialización", SDL_GetError());
     }
     if (SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_ACCELERATED,
@@ -38,7 +38,7 @@ void SdlWindow::fill(const Uint8 r, const Uint8 g,
                      const Uint8 b, const Uint8 alpha) {
     SDL_SetRenderDrawColor(this->renderer, r, g, b, alpha);
     SDL_RenderClear(this->renderer);
-    background.start();
+//    background.start();
 }
 
 void SdlWindow::fill() {

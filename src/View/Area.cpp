@@ -5,7 +5,7 @@
 #include "Area.h"
 
 Area::Area(int x, int y, int width, int height) :
-        x(x), y(y), width(width), height(height){
+    x(x), y(y), width(width), height(height) {
 }
 
 void Area::setX(int x){

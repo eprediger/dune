@@ -5,7 +5,10 @@
 #include "SdlTexture.h"
 #include <iostream>
 SdlTexture::SdlTexture(const std::string &filename, const SdlWindow &window) :
-    renderer(window.getRenderer()) {
+    renderer(window.getRenderer()),
+    texture(nullptr),
+    textureWidth(0),
+    textureHeight(0) {
     this->texture = loadTexture(filename);
 }
 
@@ -20,8 +23,17 @@ SDL_Texture* SdlTexture::loadTexture(const std::string &filename) {
         if (texture == nullptr) {
             throw SdlException("Error al cargar la textura", SDL_GetError());
         }
+        SDL_QueryTexture(this->texture, NULL, NULL, &this->textureWidth, &this->textureHeight);
     }
     return texture;
+}
+
+int SdlTexture::getWidth() {
+    return this->textureWidth;
+}
+
+int SdlTexture::getHeigth() {
+    return this->textureHeight;
 }
 
 int SdlTexture::setColor(){

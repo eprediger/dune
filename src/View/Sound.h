@@ -15,13 +15,3 @@ private:
     const std::string& filename;
     Mix_Music* music;
 };
-
-/*int main(int argc, char **argv) {
-    if (argc != 2) {
-        std::cout << "Uso: " << argv[0] << " <sound-file>" << std::endl;
-    } else {
-        Sound background(argv[1]);
-        background.play();
-    }
-    return 0;
-}*/

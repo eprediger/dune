@@ -18,12 +18,19 @@ public:
 
     SDL_Texture* loadTexture(const std::string &filename);
 
+    // Retorna el ancho de la textura
+    int getWidth();
+
+    // Retorna el alto de la textura
+    int getHeigth();
+
     int setColor();
     int render(const Area &src, const Area &dest);
 
 private:
     SDL_Renderer* renderer;
     SDL_Texture* texture;
+    int textureWidth, textureHeight;
 };
 
 
