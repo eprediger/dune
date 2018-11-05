@@ -8,11 +8,15 @@
 #include "Orientation.h"
 
 std::map<int,std::vector<SdlTexture*> > LightInfantryView::sprites;
- 
+std::map<int,std::vector<SdlTexture*> > LightInfantryView::attack_sprites;
 LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
                                     ,SdlWindow& window)
-    :UnitView(lightInfantry,window)
+    :UnitView(lightInfantry,window) 
+    ,lightInfantry(lightInfantry)
+    ,attacking(false)
     ,prev_orient()
+    ,attack_orient()
+    ,update_sprite(0)
 {
     if (sprites.empty()){
         std::vector<SdlTexture*> indef;
@@ -78,26 +82,116 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
         noreste.emplace_back(new SdlTexture("../imgs/imgs/00062d46.bmp",window));
         sprites.emplace(std::make_pair(Orientation::noreste(),
                                     std::move(noreste)));
+
+
+        norte.clear();
+        norte.emplace_back(new SdlTexture("../imgs/imgs/00064469.bmp",window));
+        norte.emplace_back(new SdlTexture("../imgs/imgs/000654ea.bmp",window));
+        norte.emplace_back(new SdlTexture("../imgs/imgs/000665d0.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::norte(),
+                                    std::move(norte)));
+
+        noroeste.clear();
+        noroeste.emplace_back(new SdlTexture("../imgs/imgs/0006457d.bmp",window));
+        noroeste.emplace_back(new SdlTexture("../imgs/imgs/000655f5.bmp",window));
+        noroeste.emplace_back(new SdlTexture("../imgs/imgs/000666db.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::noroeste(),
+                                    std::move(noroeste)));
+        
+        oeste.clear();
+        oeste.emplace_back(new SdlTexture("../imgs/imgs/00064691.bmp",window));
+        oeste.emplace_back(new SdlTexture("../imgs/imgs/00065709.bmp",window));
+        oeste.emplace_back(new SdlTexture("../imgs/imgs/000667fc.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::oeste(),
+                                    std::move(oeste)));
+
+        sudoeste.clear();
+        sudoeste.emplace_back(new SdlTexture("../imgs/imgs/0006478f.bmp",window));
+        sudoeste.emplace_back(new SdlTexture("../imgs/imgs/00065826.bmp",window));
+        sudoeste.emplace_back(new SdlTexture("../imgs/imgs/00066929.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::sudoeste(),
+                                    std::move(sudoeste)));
+
+        sur.clear();
+        sur.emplace_back(new SdlTexture("../imgs/imgs/00064870.bmp",window));
+        sur.emplace_back(new SdlTexture("../imgs/imgs/00065924.bmp",window));
+        sur.emplace_back(new SdlTexture("../imgs/imgs/00066a26.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::sur(),
+                                    std::move(sur)));
+       
+        sudeste.clear();
+        sudeste.emplace_back(new SdlTexture("../imgs/imgs/0006497d.bmp",window));
+        sudeste.emplace_back(new SdlTexture("../imgs/imgs/00065a61.bmp",window));
+        sudeste.emplace_back(new SdlTexture("../imgs/imgs/00066b53.bmp",window));
+        attack_sprites.emplace(std::make_pair(Orientation::sudeste(),
+                                    std::move(sudeste)));
+        
+        este.clear();
+        este.emplace_back(new SdlTexture("../imgs/imgs/00064a7a.bmp",window));
+        este.emplace_back(new SdlTexture("../imgs/imgs/00065b5e.bmp",window));
+        este.emplace_back(new SdlTexture("../imgs/imgs/00066c50.bmp",window));
+        
+        attack_sprites.emplace(std::make_pair(Orientation::este(),
+                                    std::move(este)));
+
+        noreste.clear();
+        noreste.emplace_back(new SdlTexture("../imgs/imgs/00064c37.bmp",window));
+        noreste.emplace_back(new SdlTexture("../imgs/imgs/00065d1b.bmp",window));
+        noreste.emplace_back(new SdlTexture("../imgs/imgs/00066e0d.bmp",window));
+        
+        attack_sprites.emplace(std::make_pair(Orientation::noreste(),
+                                    std::move(noreste)));
+
+
     }
-    animation_it = sprites.at(orientation.getValor()).begin();
+    anim_it = sprites.at(orientation.getValor()).begin();
 }
 
-
-void LightInfantryView::draw(Area& camara){
+void LightInfantryView::comenzar_ataque(){
+    anim_it = attack_sprites.at(orientation.getValor()).begin();
+}
+ 
+void LightInfantryView::draw(Area& camara){ 
     Position pos = unit.getPosition();
-	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,15,20);
+	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,25,25);
 	orientation.calcular(prev_pos,pos);
+
+    if (lightInfantry.attacking && !attacking){
+        update_sprite = 0;
+        attacking = true;
+        comenzar_ataque();
+    } 
+
+    while (attacking){
+        (*anim_it)->render(Area(0,0,25,25),dest);
+        if (update_sprite == 60){
+            anim_it++;
+            update_sprite = 0;
+        }
+        update_sprite+=1;
+        if (anim_it == attack_sprites.at(orientation.getValor()).end()){
+            anim_it = sprites.at(orientation.getValor()).begin();
+            lightInfantry.attacking = false;
+            attacking = false;
+        }
+        return;
+    }
+
     if (orientation.getValor() == prev_orient.getValor()){
         if (!(pos == prev_pos)){
-            animation_it++;
-            if (animation_it == sprites.at(orientation.getValor()).end()){
-                animation_it = sprites.at(orientation.getValor()).begin();
+            if (update_sprite == 2){
+                anim_it++; 
+                update_sprite = 0;
+            }
+            update_sprite+=1;
+            if (anim_it == sprites.at(orientation.getValor()).end()){
+                anim_it = sprites.at(orientation.getValor()).begin();
             }
         }
-        (*animation_it)->render(Area(0,0,12,16),dest);
+        (*anim_it)->render(Area(0,0,12,16),dest);
     }
-    else animation_it = sprites.at(orientation.getValor()).begin();
+    else anim_it = sprites.at(orientation.getValor()).begin();
     prev_orient = orientation;
     prev_pos = pos;
-    (*animation_it)->render(Area(0,0,12,16),dest);
+    (*anim_it)->render(Area(0,0,12,16),dest);
 }

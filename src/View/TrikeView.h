@@ -11,11 +11,16 @@
  
 class TrikeView: public UnitView{
     public: 
-        TrikeView(Trike& unit, SdlWindow& window);
+        TrikeView(Trike& trike, SdlWindow& window);
         virtual void draw(Area& camara);
     private:
-       static std::map<int,SdlTexture*> trike_sprites;
-        
+        void comenzar_ataque();
+        Trike& trike;
+        static std::map<int, SdlTexture*> trike_sprites;
+        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+        bool attacking;
+        std::vector<SdlTexture*>::iterator anim_it;
+        int update_sprite;
 };
 
 #endif

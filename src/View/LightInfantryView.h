@@ -15,9 +15,15 @@ class LightInfantryView: public UnitView {
         
         virtual void draw(Area& camara);
     private:
+        void comenzar_ataque();
+        LightInfantry& lightInfantry;
         static std::map<int, std::vector<SdlTexture*> > sprites;
-        std::vector<SdlTexture*>::iterator animation_it;
+        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+        std::vector<SdlTexture*>::iterator anim_it;
+        bool attacking;
         Orientation prev_orient; 
+        Orientation attack_orient;
+        int update_sprite;
 };
 
 #endif

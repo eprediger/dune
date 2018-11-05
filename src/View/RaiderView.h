@@ -16,6 +16,12 @@ class RaiderView: public UnitView{
         virtual void draw(Area& area);
     private:
         static std::map<int, SdlTexture*> raider_sprites;
+        void comenzar_ataque();
+        Raider& raider;
+        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+        bool attacking;
+        std::vector<SdlTexture*>::iterator anim_it;
+        int update_sprite;
 };
 
 #endif
