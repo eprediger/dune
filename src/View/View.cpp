@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "View.h"
 #include <iostream>
 
@@ -15,5 +16,11 @@ void View::draw() {
         if (!Unit::isDead(&(*itr)->getUnit())){
             (*itr)->draw(camera);
         }
+    }
+}
+
+void View::cleanDeadUnitViews(){
+    if (std::find_if(unit_views.begin(), unit_views.end(), UnitView::isDead) != unit_views.end()){
+        unit_views.erase(std::remove_if(unit_views.begin(), unit_views.end(), UnitView::isDead));
     }
 }

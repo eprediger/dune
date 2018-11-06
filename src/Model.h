@@ -23,6 +23,7 @@ public:
 	Unit &createUnit(Unit *unit);
 
 	void step();
+    void cleanDeadUnits();
 
 	Unit* selectUnit(int x, int y);
 

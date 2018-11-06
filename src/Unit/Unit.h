@@ -13,6 +13,7 @@
 #include "../Attackable.h"
 //#include "Map.h"
 #include <stack>
+#include <memory>
 
 class Map;
 
@@ -39,7 +40,9 @@ public:
 
 //    bool automaticAttack(Map &map);
 
-    static bool isDead(Unit* attackable);
+    static bool isDead(const Unit *unit);
+
+    static bool isDeadOnModel(const std::unique_ptr<Unit> &unit);
 
     bool operator==(const Unit& other);
 

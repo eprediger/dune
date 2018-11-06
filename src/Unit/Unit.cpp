@@ -105,7 +105,11 @@ bool Unit::operator==(const Unit &other) {
     return this->id == other.id;
 }
 
-bool Unit::isDead(Unit* unit) {
+bool Unit::isDead(const Unit *unit) {
+    return unit->life <= 0;
+}
+
+bool Unit::isDeadOnModel(const std::unique_ptr<Unit> &unit) {
     return unit->life <= 0;
 }
 
@@ -115,6 +119,7 @@ void Unit::follow(Unit* other, Map& map) {
     map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
     state = FOLLOWING;
 }
+
 
 
 

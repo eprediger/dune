@@ -20,5 +20,7 @@ public:
 
     void draw();
 
+    void cleanDeadUnitViews();
+
 };
 #endif //__VIEW_H__

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Model.h"
 
 Model::Model(int width, int height) :
@@ -17,8 +18,8 @@ void Model::step() {
 //        (*itr)->move();
 		(*itr)->makeAction(map);
 //        (*itr)->automaticAttack(map);
-	}
-//    map.cleanDeadUnits();
+    }
+    this->cleanDeadUnits();
 }
 
 Unit *Model::selectUnit(int x, int y) {
@@ -28,4 +29,11 @@ Unit *Model::selectUnit(int x, int y) {
 
 Map &Model::getMap() {
 	return map;
+}
+
+void Model::cleanDeadUnits() {
+    map.cleanDeadUnits();
+    if (std::find_if(units.begin(), units.end(), Unit::isDeadOnModel) != units.end()){
+        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDeadOnModel));
+    }
 }

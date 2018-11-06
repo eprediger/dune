@@ -224,8 +224,8 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-
-            model.step();
+			vista.cleanDeadUnitViews();
+			model.step();
             window.render();
         }
     } catch (const SdlException& e) {
