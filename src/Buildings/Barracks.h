@@ -5,7 +5,7 @@
 
 class Barracks : public Building {
 public:
-	Barracks();
+	Barracks(const int x, const int y);
 	~Barracks();
 	
 };

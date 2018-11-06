@@ -1,7 +1,8 @@
 #include "HeavyFactory.h"
 
-HeavyFactory::HeavyFactory() :
-	Building(GlobalConfig.heavyFactoryEnergy,
+HeavyFactory::HeavyFactory(const int x, const int y) :
+	Building(x, y,
+			 GlobalConfig.heavyFactoryEnergy,
 			 GlobalConfig.heavyFactoryCost,
 			 GlobalConfig.heavyFactoryHitPoints) {}
 

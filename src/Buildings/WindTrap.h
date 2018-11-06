@@ -5,7 +5,7 @@
 
 class WindTrap : public Building {
 public:
-	WindTrap();
+	WindTrap(const int x, const int y);
 	~WindTrap();
 	
 };

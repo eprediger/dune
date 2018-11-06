@@ -145,3 +145,54 @@ void Map::cleanDeadUnits() {
         units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
     }
 }
+
+
+Building * Map::getClosestBuilding(Position &position, int limitRadius) {
+    Building* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_building : buildings) {
+        int distance = current_building->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unit_distance) {
+            closest_unit = current_building;
+            closest_unit_distance = distance;
+        }
+    }
+
+    return closest_unit;
+}
+
+Unit *Map::getClosestAllyUnit(Position &position, int limitRadius, Player &player) {
+    Unit* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units){
+        int distance = current_unit->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unit_distance
+            && current_unit->getPlayer() == player){
+            closest_unit = current_unit;
+            closest_unit_distance = distance;
+        }
+    }
+
+    return closest_unit;
+}
+
+
+Unit *Map::getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit) {
+    Unit* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units){
+        int distance = current_unit->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unit_distance
+            && !(current_unit->getPlayer() == ally_unit.getPlayer())){
+            closest_unit = current_unit;
+            closest_unit_distance = distance;
+        }
+    }
+
+    return closest_unit;
+}
+
+

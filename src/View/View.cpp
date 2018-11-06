@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "View.h"
-#include <iostream>
+#include "BuildingView.h"
 
 View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
 
@@ -8,7 +8,11 @@ View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
 
 void View::addUnitView(UnitView* unitView) {
     unit_views.push_back(std::unique_ptr<UnitView>(unitView));
-} 
+}
+
+void View::addBuildingView(BuildingView* buildingView) {
+    building_views.push_back(std::unique_ptr<BuildingView>(buildingView));
+}
 
 void View::draw() {
 //    for (auto unit_view : unit_views){
@@ -16,6 +20,10 @@ void View::draw() {
         if (!Unit::isDead(&(*itr)->getUnit())){
             (*itr)->draw(camera);
         }
+    }
+
+    for (auto itr = building_views.begin(); itr != building_views.end(); ++itr){
+        (*itr)->draw(camera);
     }
 }
 

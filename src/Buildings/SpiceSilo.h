@@ -5,7 +5,7 @@
 
 class SpiceSilo : public Building {
 public:
-	SpiceSilo();
+	SpiceSilo(const int x, const int y);
 	~SpiceSilo();
 
 private:

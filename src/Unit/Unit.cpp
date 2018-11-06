@@ -120,6 +120,13 @@ void Unit::follow(Unit* other, Map& map) {
     state = FOLLOWING;
 }
 
+void Unit::setPlayer(Player &player) {
+    this->player = &player;
+}
+
+Player &Unit::getPlayer() {
+    return *player;
+}
 
 
  
