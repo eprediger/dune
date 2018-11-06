@@ -11,6 +11,7 @@
 #include "../Terrains/Dunes.h"
 #include "../Terrains/Rocks.h"
 #include "../Attackable.h"
+#include "../Player.h"
 //#include "Map.h"
 #include <stack>
 #include <memory>
@@ -48,6 +49,10 @@ public:
 
     bool operator==(const Unit& other);
 
+    void setPlayer(Player &player);
+
+    Player& getPlayer();
+
 protected:
     int id;
     const int speed;
@@ -57,6 +62,7 @@ protected:
     Position prev_foll_unit_pos;
     Position next_pos;
     State state;
+    Player* player;
 };
 
 #endif //__UNITY_H__

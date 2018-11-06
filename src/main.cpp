@@ -34,7 +34,7 @@ int main(int argc, const char* argv[]) {
 //		Unit unidad2(20, 20);
 //        map.put(unidad);
 //        map.put(unidad2);
-        Model model(WIDTH, HEIGHT);
+        Model model(WIDTH, HEIGHT, 2);
         Map& map = model.getMap();
         SdlWindow window(WIDTH/2, HEIGHT/2);
         Area camara(0,0,WIDTH/2,HEIGHT/2);
@@ -49,38 +49,38 @@ int main(int argc, const char* argv[]) {
 
         Harvester* harvester = new Harvester(300,200);
         UnitView* harvesterView = UnitViewFactory::createUnitView(*harvester,window);
-        model.createUnit(std::move(harvester));
+        model.createUnit(std::move(harvester), 0);
         vista.addUnitView(std::move(harvesterView));
 
         Trike* trike = new Trike(100,200);
         UnitView* trikeView = UnitViewFactory::createUnitView(*trike,window);
-        model.createUnit(std::move(trike));
+        model.createUnit(std::move(trike), 0);
         vista.addUnitView(std::move(trikeView));
 
         LightInfantry* lightInf = new LightInfantry(100,100);
         UnitView* lightInfView = UnitViewFactory::createUnitView(*lightInf,window);
-        model.createUnit(std::move(lightInf));
+        model.createUnit(std::move(lightInf), 0);
         vista.addUnitView(std::move(lightInfView));
 
         HeavyInfantry* heavyInf = new HeavyInfantry(200,200);
         UnitView* heavyInfView = UnitViewFactory::createUnitView(*heavyInf,window);
-        model.createUnit(std::move(heavyInf));
+        model.createUnit(std::move(heavyInf), 0);
         vista.addUnitView(std::move(heavyInfView));
 
         Raider* raider = new Raider(100,150);
         UnitView* raiderView = UnitViewFactory::createUnitView(*raider,window);
-        model.createUnit(std::move(raider));
+        model.createUnit(std::move(raider), 0);
         vista.addUnitView(std::move(raiderView));
 
 
         Raider* raider2 = new Raider(400,150);
         UnitView* raiderView2 = UnitViewFactory::createUnitView(*raider2,window);
-        model.createUnit(std::move(raider2));
+        model.createUnit(std::move(raider2), 0);
         vista.addUnitView(std::move(raiderView2));
 
         Raider* raider3 = new Raider(180,150);
         UnitView* raiderView3 = UnitViewFactory::createUnitView(*raider3,window);
-        model.createUnit(std::move(raider3));
+        model.createUnit(std::move(raider3), 0);
         vista.addUnitView(std::move(raiderView3));
 
         Building* building = new Barracks(50, 600);
@@ -102,7 +102,7 @@ int main(int argc, const char* argv[]) {
 
         Tank* tank = new Tank(250,200);
         UnitView* tankView = UnitViewFactory::createUnitView(*tank,window);
-        model.createUnit(std::move(tank));
+        model.createUnit(std::move(tank), 0);
         vista.addUnitView(std::move(tankView));
 
 /*	vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
@@ -168,16 +168,22 @@ int main(int argc, const char* argv[]) {
                             SDL_GetMouseState(&mouse_x, &mouse_y);
 //                            map.setDestiny(unidad, mouse_x + camara.getX(), mouse_y + camara.getY());
                             Position pos(mouse_x + camara.getX(), mouse_y + camara.getY());
-                            Unit* objetiveUnit = map.getClosestUnit(pos, 50 * 50);
+                            // Descomentando esto y comentando lo de abajo, se permite atacar entre todos
+//                            Unit* objetiveUnit = map.getClosestUnit(pos, 50 * 50);
 
-                            if (objetiveUnit != nullptr && selectedUnit != nullptr && objetiveUnit != selectedUnit) {
+
+                            if (selectedUnit != nullptr) {
+                                Unit* objetiveUnit = map.getClosestEnemyUnit(pos, 50 * 50, *selectedUnit);
+                                if (objetiveUnit != nullptr && objetiveUnit != selectedUnit) {
 //								selectedUnit->attack(*objetiveUnit);
-                                // Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
-                                // No funciona si la unidad a seguir se encuentra en movimiento
-                                selectedUnit->follow(objetiveUnit, map);
-                            } else if (selectedUnit != nullptr) {
-                                map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
+                                    // Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
+                                    // No funciona si la unidad a seguir se encuentra en movimiento
+                                    selectedUnit->follow(objetiveUnit, map);
+                                } else {
+                                    map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
+                                }
                             }
+
                         } else if (event.button.button == SDL_BUTTON_LEFT){
                             window.grabMouse(false);
                             left_click = false;
@@ -216,7 +222,7 @@ int main(int argc, const char* argv[]) {
                             if (((mouse_x >= 650) && (mouse_x <= 716)) && ((mouse_y >= 500) && (mouse_y <= 566))) {
                                 LightInfantry* lightInf = new LightInfantry(500,500);
                                 UnitView* lightInfView = UnitViewFactory::createUnitView(*lightInf,window);
-                                model.createUnit(std::move(lightInf));
+                                model.createUnit(std::move(lightInf), 1);
                                 vista.addUnitView(std::move(lightInfView));
                             }
                         }

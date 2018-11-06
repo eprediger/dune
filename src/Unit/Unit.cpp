@@ -123,7 +123,13 @@ void Unit::follow(Unit* other, Map& map) {
 Position Unit::getNextPosition(){
     return next_pos;
 }
+void Unit::setPlayer(Player &player) {
+    this->player = &player;
+}
 
+Player &Unit::getPlayer() {
+    return *player;
+}
 
 
 

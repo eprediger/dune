@@ -1,11 +1,17 @@
 #include <algorithm>
 #include "Model.h"
 
-Model::Model(int width, int height) :
-	map(width, height) {}
+Model::Model(int width, int height, int n_player) : map(width, height){
+    // reemplazar luego por un vector de players
+    for (int i=0; i< n_player; ++i){
+        players.emplace(players.end(),i);
+    }
+}
 
 //Unit &Model::createUnit(int x, int y) {
-Unit &Model::createUnit(Unit *unit) {
+Unit &Model::createUnit(Unit *unit, int player) {
+
+    unit->setPlayer(players.at(player));
 //    units.push_back(std::unique_ptr<Unit>(Unit(x,y)));
 	units.push_back(std::unique_ptr<Unit>(unit));
 	map.put(*units.back());
@@ -42,4 +48,8 @@ void Model::cleanDeadUnits() {
     if (std::find_if(units.begin(), units.end(), Unit::isDeadOnModel) != units.end()){
         units.erase(std::remove_if(units.begin(), units.end(), Unit::isDeadOnModel));
     }
+}
+
+Player &Model::getPlayer(int player) {
+    return players.at(player);
 }
