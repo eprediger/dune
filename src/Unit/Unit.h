@@ -58,5 +58,5 @@ protected:
     Position next_pos;
     State state;
 };
-
+ 
 #endif //__UNITY_H__

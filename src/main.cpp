@@ -216,10 +216,10 @@ int main(int argc, const char* argv[]) {
                         }
                         break;
                     case SDL_MOUSEMOTION:
-                        if (left_click){
+                        
                             SDL_GetMouseState(&mouse_x,&mouse_y);
                             break;
-                        }
+                        
                     default:
                         break;
                 }

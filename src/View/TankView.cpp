@@ -83,6 +83,7 @@ TankView::TankView(Tank& tank, SdlWindow& window)
 
 
 void TankView::comenzar_ataque(){
+    orientation.calcular(prev_pos,tank.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  

@@ -176,6 +176,7 @@ HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
 
 
 void HeavyInfantryView::comenzar_ataque(){
+    orientation.calcular(prev_pos,heavyInfantry.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  

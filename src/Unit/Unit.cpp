@@ -120,12 +120,9 @@ void Unit::follow(Unit* other, Map& map) {
     state = FOLLOWING;
 }
 
-Position Unit::getNextPosition(){
-    return next_pos;
-}
 
 
-
+ 
 
 
 

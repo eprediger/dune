@@ -5,7 +5,7 @@ Orientation::Orientation(){
 	this->valor = indefinida();
 }
 
-void Orientation::calcular(Position& p1, Position& p2){
+void Orientation::calcular(const Position& p1,const Position& p2){
 	if (p1==p2) return;	
 	if (p1.getX() < p2.getX()){
 		if (p1.getY() < p2.getY()){ 

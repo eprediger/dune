@@ -83,6 +83,7 @@ TrikeView::TrikeView(Trike& trike, SdlWindow& window)
  
 
 void TrikeView::comenzar_ataque(){
+    orientation.calcular(prev_pos,trike.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  

@@ -148,6 +148,7 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
 }
 
 void LightInfantryView::comenzar_ataque(){
+    orientation.calcular(prev_pos,lightInfantry.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  

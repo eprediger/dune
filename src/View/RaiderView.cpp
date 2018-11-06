@@ -85,6 +85,7 @@ RaiderView::RaiderView(Raider& raider, SdlWindow& window)
  
 
 void RaiderView::comenzar_ataque(){
+	orientation.calcular(prev_pos,raider.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  

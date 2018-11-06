@@ -14,7 +14,7 @@ class Orientation{
 		static int sudeste();
 		static int este();
 		static int noreste();
-		void calcular(Position& p1, Position& p2);
+		void calcular(const Position& p1,const Position& p2);
 		int getValor();
 		Orientation();		
 	private:

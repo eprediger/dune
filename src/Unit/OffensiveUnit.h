@@ -16,7 +16,10 @@ public:
 
     bool automaticAttack(Map &map);
 
+    Position& getVictimPosition();
     bool attacking;
+private:
+    Position victim_pos;
 //    void follow(Unit* other, Map& map);
 //private:
 //    Unit* foll_unit;
