@@ -13,6 +13,7 @@ class Model {
 private:
 	Map map;
 	std::vector<std::unique_ptr<Unit>> units;
+	std::vector<std::unique_ptr<Building>> buildings;
 
 public:
 	Model(int width, int height);
@@ -21,6 +22,7 @@ public:
 	Map& getMap();
 
 	Unit &createUnit(Unit *unit);
+	Building &createBuilding(Building* building);
 
 	void step();
     void cleanDeadUnits();

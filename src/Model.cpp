@@ -12,6 +12,12 @@ Unit &Model::createUnit(Unit *unit) {
 	return *units.back();
 }
 
+Building &Model::createBuilding(Building *building) {
+	buildings.push_back(std::unique_ptr<Building>(building));
+	map.put(*buildings.back());
+	return *buildings.back();
+}
+
 void Model::step() {
 //    for (auto unit : units){
 	for (auto itr = units.begin(); itr != units.end(); ++itr) {

@@ -1,7 +1,8 @@
 #include "ConstructionYard.h"
 
-ConstructionYard::ConstructionYard() :
-	Building(GlobalConfig.constructionYardEnergy,
+ConstructionYard::ConstructionYard(const int x, const int y) :
+	Building(x, y,
+			 GlobalConfig.constructionYardEnergy,
 			 GlobalConfig.constructionYardCost,
 			 GlobalConfig.constructionYardHitPoints) {}
 

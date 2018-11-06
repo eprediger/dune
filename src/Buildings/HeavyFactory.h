@@ -5,7 +5,7 @@
 
 class HeavyFactory : public Building {
 public:
-	HeavyFactory();
+	HeavyFactory(const int x, const int y);
 	~HeavyFactory();
 };
 

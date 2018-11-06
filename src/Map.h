@@ -12,7 +12,6 @@
 #define BLOCK_HEIGHT 32
 #define BLOCK_WIDTH 32
 
-
 class Map {
 private:
     std::vector<std::unique_ptr<Terrain>> matrix;
@@ -40,6 +39,7 @@ public:
 
     Unit * getClosestUnit(Unit &unit, int limitRadius);
     Unit * getClosestUnit(Position& position, int limitRadius);
+    Building * getClosestBuilding(Position &position, int limitRadius);
 
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 

@@ -5,7 +5,7 @@
 
 class ConstructionYard : public Building {
 public:
-	ConstructionYard();
+	ConstructionYard(const int x, const int y);
 	~ConstructionYard();
 	
 };

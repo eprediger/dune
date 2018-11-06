@@ -5,7 +5,7 @@
 
 class SpiceRefinery : public Building {
 public:
-	SpiceRefinery();
+	SpiceRefinery(const int x, const int y);
 	~SpiceRefinery();
 
 private:

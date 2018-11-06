@@ -7,7 +7,7 @@
 
 class Building : public Attackable, public Positionable {
 public:
-    Building(const int hitPoints, const int energy, const int cost);
+    Building(const int x, const int y, const int hitPoints, const int energy, const int cost);
     ~Building();
 
 private:

@@ -15,6 +15,7 @@
 #include "Unit/HeavyInfantry.h"
 #include "Unit/Harvester.h"
 #include "View/Widget.h"
+#include "Buildings/Barracks.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -82,6 +83,10 @@ int main(int argc, const char* argv[]) {
         model.createUnit(std::move(raider3));
         vista.addUnitView(std::move(raiderView3));
 
+        Building* building = new Barracks(50, 600);
+        BuildingView* buildingView = new BuildingView(*building, window);
+        model.createBuilding(std::move(building));
+        vista.addBuildingView(std::move(buildingView));
 /*
 	Trike* trike2 = new Trike(100,250);
 	UnitView* trikeView2 = UnitViewFactory::createUnitView(*trike2,window);
@@ -206,6 +211,7 @@ int main(int argc, const char* argv[]) {
                         if (event.button.button == SDL_BUTTON_LEFT){
                             window.grabMouse(true);
                             left_click = true;
+                            SDL_GetMouseState(&mouse_x, &mouse_y);
                             std::cout << "x: " << mouse_x << " y: " << mouse_y << std::endl;
                             if (((mouse_x >= 650) && (mouse_x <= 716)) && ((mouse_y >= 500) && (mouse_y <= 566))) {
                                 LightInfantry* lightInf = new LightInfantry(500,500);

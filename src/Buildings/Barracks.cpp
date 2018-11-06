@@ -1,8 +1,9 @@
 #include "Barracks.h"
 #include "../GlobalConfig.h"
 
-Barracks::Barracks() :
-	Building(GlobalConfig.barracksEnergy,
+Barracks::Barracks(const int x, const int y) :
+	Building(x, y,
+			 GlobalConfig.barracksEnergy,
 			 GlobalConfig.barracksCost,
 			 GlobalConfig.barracksHitPoints) {}
 
