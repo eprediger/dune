@@ -16,7 +16,7 @@ class UnitView{
 		UnitView(Unit& unit, SdlWindow& window);
 		Unit& getUnit();
 		virtual void draw(Area& camara) = 0;
-		static bool isDead(const std::unique_ptr<UnitView>& unit_view);
+		static bool isDead(const UnitView *unit_view);
 	protected: 
 		Unit& unit;
 		Position prev_pos;

@@ -10,16 +10,14 @@ Model::Model(int width, int height, int n_player) : map(width, height){
 
 //Unit &Model::createUnit(int x, int y) {
 Unit &Model::createUnit(Unit *unit, int player) {
-
     unit->setPlayer(players.at(player));
-//    units.push_back(std::unique_ptr<Unit>(Unit(x,y)));
-	units.push_back(std::unique_ptr<Unit>(unit));
+	units.push_back(std::move(unit));
 	map.put(*units.back());
 	return *units.back();
 }
 
 Building &Model::createBuilding(Building *building) {
-	buildings.push_back(std::unique_ptr<Building>(building));
+	buildings.push_back(std::move(building));
 	map.put(*buildings.back());
 	return *buildings.back();
 }
@@ -45,11 +43,27 @@ Map &Model::getMap() {
 
 void Model::cleanDeadUnits() {
     map.cleanDeadUnits();
-    if (std::find_if(units.begin(), units.end(), Unit::isDeadOnModel) != units.end()){
-        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDeadOnModel));
+    bool has_dead_unit = false;
+    for (auto u : units){
+        if (Unit::isDead(u)){
+            has_dead_unit = true;
+            delete u;
+        }
+    }
+    if (has_dead_unit){
+        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
     }
 }
 
 Player &Model::getPlayer(int player) {
     return players.at(player);
+}
+
+Model::~Model() {
+    for (auto unit : units){
+        delete unit;
+    }
+    for (auto building : buildings){
+        delete building;
+    }
 }

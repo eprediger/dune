@@ -43,8 +43,6 @@ public:
 
     static bool isDead(const Unit *unit);
 
-    static bool isDeadOnModel(const std::unique_ptr<Unit> &unit);
-
     Position getNextPosition();
 
     bool operator==(const Unit& other);

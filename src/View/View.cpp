@@ -7,11 +7,11 @@ View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
 }
 
 void View::addUnitView(UnitView* unitView) {
-    unit_views.push_back(std::unique_ptr<UnitView>(unitView));
+    unit_views.push_back(std::move(unitView));
 }
 
 void View::addBuildingView(BuildingView* buildingView) {
-    building_views.push_back(std::unique_ptr<BuildingView>(buildingView));
+    building_views.push_back(std::move(buildingView));
 }
 
 void View::draw() {
@@ -28,7 +28,24 @@ void View::draw() {
 }
 
 void View::cleanDeadUnitViews(){
-    if (std::find_if(unit_views.begin(), unit_views.end(), UnitView::isDead) != unit_views.end()){
+    bool has_dead_views = false;
+    for (auto unit_view : unit_views){
+        if (UnitView::isDead(unit_view)){
+            has_dead_views = true;
+            delete unit_view;
+        }
+    }
+    if (has_dead_views){
         unit_views.erase(std::remove_if(unit_views.begin(), unit_views.end(), UnitView::isDead));
     }
+}
+
+View::~View() {
+    for(auto unit_view : unit_views){
+        delete unit_view;
+    }
+    for(auto building_view : building_views){
+        delete building_view;
+    }
+
 }

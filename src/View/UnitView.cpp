@@ -17,7 +17,7 @@ Unit &UnitView::getUnit() {
 	return unit;
 }
 
-bool UnitView::isDead(const std::unique_ptr<UnitView>& unit_view) {
+bool UnitView::isDead(const UnitView *unit_view) {
     return Unit::isDead(&unit_view->unit);
 }
 

@@ -9,8 +9,8 @@
 
 class View {
 private:
-    std::vector<std::unique_ptr<UnitView>> unit_views;
-    std::vector<std::unique_ptr<BuildingView>> building_views;
+    std::vector<UnitView*> unit_views;
+    std::vector<BuildingView*> building_views;
 
 //    std::vector<MapView> map_view;
     SdlWindow& window;
@@ -18,6 +18,7 @@ private:
 
 public:
     View(SdlWindow &window, Area &camera);
+    ~View();
 
     void addUnitView(UnitView* unitView);
 

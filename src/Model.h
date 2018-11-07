@@ -13,12 +13,13 @@
 class Model {
 private:
 	Map map;
-	std::vector<std::unique_ptr<Unit>> units;
-	std::vector<std::unique_ptr<Building>> buildings;
+	std::vector<Unit*> units;
+	std::vector<Building*> buildings;
     std::vector<Player> players;
 
 public:
     Model(int width, int height, int n_player);
+    ~Model();
 
 //    Map& createMap();
 	Map& getMap();
