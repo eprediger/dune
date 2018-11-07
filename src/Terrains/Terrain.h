@@ -8,11 +8,16 @@
 class Terrain {
 private:
 	char key;
+	bool occupied;
 
 public:
 	Terrain();
 
 	Terrain(char key);
+
+	void occupy();
+	void free();
+	bool isOccupied();
 
 	bool operator==(const Terrain& terrain);
 

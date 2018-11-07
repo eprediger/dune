@@ -29,9 +29,9 @@ public:
 
     Unit(const int x, const int y, const int hitPoints, const int speed);
 
-    void setPath(std::stack<Position> path);
+    void setPath(std::stack<Position> path, Position destiny);
 
-    int move();
+    int move(Map& map);
 
     virtual int makeAction(Map& map) = 0;
 
@@ -59,6 +59,7 @@ protected:
     int actual_speed;
     std::stack<Position> pathToDestiny;
     Unit* foll_unit;
+    Position destiny;
     Position prev_foll_unit_pos;
     Position next_pos;
     State state;

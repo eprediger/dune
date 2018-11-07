@@ -9,7 +9,7 @@ int PassiveUnit::makeAction(Map& map){
         case STOPPED:
             return 0;
         case MOVING:
-            this->move();
+            this->move(map);
             return 1;
     }
 }

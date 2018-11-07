@@ -85,28 +85,35 @@ bool Map::isValid(Position &pos) {
 
 void Map::put(Unit &unit) {
     units.push_back(&unit);
+    this->at(unit.getPosition()).occupy();
 }
 void Map::put(Building &building) {
     buildings.push_back(&building);
+    this->at(building.getPosition()).occupy();
 }
 
 bool Map::canMove(Unit& unit, Position pos) {
-    return unit.canMoveAboveTerrain(this->at(pos));
+    return unit.canMoveAboveTerrain(this->at(pos)) && !this->at(pos).isOccupied();
 }
-
-bool Map::moveUnits() {
-    bool result = false;
-    for (auto u : units) {
-        if (u->move()) {
-            result = true;
-        }
-    }
-    return result;
-}
+//
+//bool Map::moveUnits() {
+//    bool result = false;
+//    for (auto u : units) {
+//        if (u->move()) {
+//            result = true;
+//        }
+//    }
+//    return result;
+//}
 
 void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     AStar algorithm(*this);
-    unit.setPath(algorithm.makePath(unit, Position(x_dest, y_dest)));
+    Position p_destiny(x_dest, y_dest);
+    std::stack<Position> path = algorithm.makePath(unit, p_destiny);
+    if (!path.empty()){
+        this->at(unit.getPosition()).free();
+    }
+    unit.setPath(path, p_destiny);
 }
 
 Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
@@ -141,7 +148,14 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius) {
 }
 
 void Map::cleanDeadUnits() {
-    if (std::find_if(units.begin(), units.end(), Unit::isDead) != units.end()) {
+    bool has_dead_unit = false;
+    for (auto u : units){
+        if (Unit::isDead(u)){
+            has_dead_unit = true;
+            this->at(u->getPosition()).free();
+        }
+    }
+    if (has_dead_unit) {
         units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
     }
 }

@@ -13,7 +13,7 @@ int OffensiveUnit::makeAction(Map& map){
         case STOPPED:
             return 0;
         case MOVING:
-            this->move();
+            this->move(map);
             return 1;
         case FOLLOWING:
             if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
@@ -28,10 +28,10 @@ int OffensiveUnit::makeAction(Map& map){
                     state = STOPPED;
                 }
             } else if (foll_unit->getPosition() == prev_foll_unit_pos || actual_speed != speed){
-                this->move();
+                this->move(map);
             } else {
                 this->follow(foll_unit, map);
-                this->move();
+                this->move(map);
             }
             return 0;
     }
