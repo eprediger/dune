@@ -49,3 +49,7 @@ View::~View() {
     }
 
 }
+
+SdlWindow &View::getWindow() {
+    return window;
+}

@@ -34,12 +34,13 @@ int main(int argc, const char* argv[]) {
 //		Unit unidad2(20, 20);
 //        map.put(unidad);
 //        map.put(unidad2);
-        Model model(WIDTH, HEIGHT, 2);
-        Map& map = model.getMap();
         SdlWindow window(WIDTH/2, HEIGHT/2);
         Area camara(0,0,WIDTH/2,HEIGHT/2);
 
         View vista(window, camara);
+        Model model(WIDTH, HEIGHT, 2, vista);
+        Map& map = model.getMap();
+
         window.fill();
         MapView mapView(map,window);
 //	UnitView unitView(model.createUnit(WIDTH/2, HEIGHT/2),window);
@@ -47,78 +48,17 @@ int main(int argc, const char* argv[]) {
 //  vista.addUnitView(model.createUnit(WIDTH/2, HEIGHT/2));
         Widget lightInfantryCreator(window, "../imgs/units-btns/linfantry.gif");
 
-        Harvester* harvester = new Harvester(300,200);
-        UnitView* harvesterView = UnitViewFactory::createUnitView(*harvester,window);
-        model.createUnit(std::move(harvester), 0);
-        vista.addUnitView(std::move(harvesterView));
+        model.createHarvester(300,200, 0);
+        model.createTrike(100,200, 0);
+        model.createLightInfantry(100,100, 0);
+        model.createHeavyInfantry(200,200, 0);
+        model.createRaider(100,150, 0);
+        model.createRaider(400,150, 0);
+        model.createRaider(180,150, 0);
+        model.createTank(250,200, 0);
 
-        Trike* trike = new Trike(100,200);
-        UnitView* trikeView = UnitViewFactory::createUnitView(*trike,window);
-        model.createUnit(std::move(trike), 0);
-        vista.addUnitView(std::move(trikeView));
+        model.createBarracks(50, 600, 0);
 
-        LightInfantry* lightInf = new LightInfantry(100,100);
-        UnitView* lightInfView = UnitViewFactory::createUnitView(*lightInf,window);
-        model.createUnit(std::move(lightInf), 0);
-        vista.addUnitView(std::move(lightInfView));
-
-        HeavyInfantry* heavyInf = new HeavyInfantry(200,200);
-        UnitView* heavyInfView = UnitViewFactory::createUnitView(*heavyInf,window);
-        model.createUnit(std::move(heavyInf), 0);
-        vista.addUnitView(std::move(heavyInfView));
-
-        Raider* raider = new Raider(100,150);
-        UnitView* raiderView = UnitViewFactory::createUnitView(*raider,window);
-        model.createUnit(std::move(raider), 0);
-        vista.addUnitView(std::move(raiderView));
-
-
-        Raider* raider2 = new Raider(400,150);
-        UnitView* raiderView2 = UnitViewFactory::createUnitView(*raider2,window);
-        model.createUnit(std::move(raider2), 0);
-        vista.addUnitView(std::move(raiderView2));
-
-        Raider* raider3 = new Raider(180,150);
-        UnitView* raiderView3 = UnitViewFactory::createUnitView(*raider3,window);
-        model.createUnit(std::move(raider3), 0);
-        vista.addUnitView(std::move(raiderView3));
-
-        Building* building = new Barracks(50, 600);
-        BuildingView* buildingView = new BuildingView(*building, window);
-        model.createBuilding(std::move(building));
-        vista.addBuildingView(std::move(buildingView));
-/*
-	Trike* trike2 = new Trike(100,250);
-	UnitView* trikeView2 = UnitViewFactory::createUnitView(*trike2,window);
-	model.createUnit(std::move(trike2));
-	vista.addUnitView(std::move(trikeView2));
-
-
-	Trike* trike3 = new Trike(100,300);
-	UnitView* trikeView3 = UnitViewFactory::createUnitView(*trike3,window);
-	model.createUnit(std::move(trike3));
-	vista.addUnitView(std::move(trikeView3));
-*/
-
-        Tank* tank = new Tank(250,200);
-        UnitView* tankView = UnitViewFactory::createUnitView(*tank,window);
-        model.createUnit(std::move(tank), 0);
-        vista.addUnitView(std::move(tankView));
-
-/*	vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 0))));
-    vista.addUnitView(model.createUnit(std::move(new Raider(89, 0))));
-
-    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 100))));
-    vista.addUnitView(model.createUnit(std::move(new Raider(89, 100))));
-
-    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 200))));
-    vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 200))));
-
-    vista.addUnitView(model.createUnit(std::move(new LightInfantry(0, 300))));
-    vista.addUnitView(model.createUnit(std::move(new HeavyInfantry(89, 300))));
-
-    vista.addUnitView(model.createUnit(std::move(new Harvester(300, 200))));
-*/
         bool running = true;
         Unit* selectedUnit;
         while (running) {
@@ -220,10 +160,7 @@ int main(int argc, const char* argv[]) {
                             SDL_GetMouseState(&mouse_x, &mouse_y);
                             std::cout << "x: " << mouse_x << " y: " << mouse_y << std::endl;
                             if (((mouse_x >= 650) && (mouse_x <= 716)) && ((mouse_y >= 500) && (mouse_y <= 566))) {
-                                LightInfantry* lightInf = new LightInfantry(500,500);
-                                UnitView* lightInfView = UnitViewFactory::createUnitView(*lightInf,window);
-                                model.createUnit(std::move(lightInf), 1);
-                                vista.addUnitView(std::move(lightInfView));
+                                model.createHeavyInfantry(500,500, 1);
                             }
                         }
                         break;

@@ -20,6 +20,7 @@ public:
     View(SdlWindow &window, Area &camera);
     ~View();
 
+    SdlWindow& getWindow();
     void addUnitView(UnitView* unitView);
 
     void addBuildingView(BuildingView* buildingView);
