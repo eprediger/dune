@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <algorithm>
 
 Player::Player(int id) :
     id(id),
@@ -28,3 +29,18 @@ void Player::addEnergy(int energy_to_add) {
 void Player::subEnergy(int energy_to_sub) {
     energy -= energy_to_sub;
 }
+
+
+void Player::addBuilding(Building *building) {
+    buildings.push_back(building);
+}
+
+bool Player::hasBuilding(Building *building) {
+    return std::find(buildings.begin(), buildings.end(), building) != buildings.end();
+}
+
+void Player::cleanBuilding(Building *building) {
+    buildings.erase(std::find(buildings.begin(), buildings.end(), building));
+}
+
+

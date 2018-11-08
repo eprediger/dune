@@ -113,15 +113,16 @@ int main(int argc, const char* argv[]) {
 
 
                             if (selectedUnit != nullptr) {
-                                Unit* objetiveUnit = map.getClosestEnemyUnit(pos, 50 * 50, *selectedUnit);
-                                if (objetiveUnit != nullptr && objetiveUnit != selectedUnit) {
-//								selectedUnit->attack(*objetiveUnit);
-                                    // Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
-                                    // No funciona si la unidad a seguir se encuentra en movimiento
-                                    selectedUnit->follow(objetiveUnit, map);
-                                } else {
-                                    map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
-                                }
+                                model.actionOnPosition(pos, *selectedUnit);
+//                                Unit* objetiveUnit = map.getClosestEnemyUnit(pos, 50 * 50, *selectedUnit);
+//                                if (objetiveUnit != nullptr && objetiveUnit != selectedUnit) {
+////								selectedUnit->attack(*objetiveUnit);
+//                                    // Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
+//                                    // No funciona si la unidad a seguir se encuentra en movimiento
+//                                    selectedUnit->follow(objetiveUnit, map);
+//                                } else {
+//                                    map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
+//                                }
                             }
 
                         } else if (event.button.button == SDL_BUTTON_LEFT){
@@ -131,7 +132,8 @@ int main(int argc, const char* argv[]) {
                             int x, y;
                             SDL_GetMouseState(&x, &y);
                             Position pos(x + camara.getX(), y + camara.getY());
-                            selectedUnit = map.getClosestUnit(pos, 32 * 32);
+//                            selectedUnit = map.getClosestUnit(pos, 32 * 32);
+                            selectedUnit = model.selectUnit(pos, 0);
                             // END_TMP //
                         }
                         break;

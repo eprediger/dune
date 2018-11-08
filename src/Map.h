@@ -6,6 +6,7 @@
 #include "Positionable.h"
 #include "Buildings/Building.h"
 #include "Unit/Unit.h"
+#include "Player.h"
 #include <memory>
 
 // Configurar aca el tamaño de los bloques
@@ -40,12 +41,15 @@ public:
     Unit * getClosestUnit(Unit &unit, int limitRadius);
     Unit * getClosestUnit(Position& position, int limitRadius);
     Building * getClosestBuilding(Position &position, int limitRadius);
-    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
-    Unit *getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit);
+//    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
+    Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
+
+//    Unit* getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit);
 
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 
     void cleanDeadUnits();
+    void cleanUnit(Unit* unit);
 
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);

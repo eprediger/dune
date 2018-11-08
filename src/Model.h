@@ -43,6 +43,8 @@ public:
     void createWindTrap(int x, int y, int player);
 	Building &createBuilding(Building* building);
 
+    Unit * selectUnit(Position &pos, int player);
+    void actionOnPosition(Position &pos, Unit &unit);
 
 	void step();
     void cleanDeadUnits();

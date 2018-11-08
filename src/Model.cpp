@@ -18,6 +18,15 @@ Model::Model(int width, int height, int n_player, View &view) : map(width, heigh
     }
 }
 
+Model::~Model() {
+    for (auto unit : units){
+        delete unit;
+    }
+    for (auto building : buildings){
+        delete building;
+    }
+}
+
 //Unit &Model::createUnit(int x, int y) {
 Unit &Model::createUnit(Unit *unit) {
 	units.push_back(std::move(unit));
@@ -51,11 +60,11 @@ Map &Model::getMap() {
 }
 
 void Model::cleanDeadUnits() {
-    map.cleanDeadUnits();
     bool has_dead_unit = false;
     for (auto u : units){
         if (Unit::isDead(u)){
             has_dead_unit = true;
+            map.cleanUnit(u);
             delete u;
         }
     }
@@ -66,15 +75,6 @@ void Model::cleanDeadUnits() {
 
 Player &Model::getPlayer(int player) {
     return players.at(player);
-}
-
-Model::~Model() {
-    for (auto unit : units){
-        delete unit;
-    }
-    for (auto building : buildings){
-        delete building;
-    }
 }
 
 void Model::createHarvester(int x, int y, int player) {
@@ -122,49 +122,67 @@ void Model::createTrike(int x, int y, int player) {
 // Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)
 void Model::createBarracks(int x, int y, int player) {
     Barracks* building = new Barracks(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createConstructionYard(int x, int y, int player) {
     ConstructionYard* building = new ConstructionYard(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createHeavyFactory(int x, int y, int player) {
     HeavyFactory* building = new HeavyFactory(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createLightFactory(int x, int y, int player) {
     LightFactory* building = new LightFactory(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceRefinery(int x, int y, int player) {
     SpiceRefinery* building = new SpiceRefinery(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceSilo(int x, int y, int player) {
     SpiceSilo* building = new SpiceSilo(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createWindTrap(int x, int y, int player) {
     WindTrap* building = new WindTrap(x, y);
-    // player.add(barracks);
+    players.at(player).addBuilding(building);
     view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
+
+Unit * Model::selectUnit(Position &pos, int player) {
+//    map.getClosestUnit(pos, 50*50, players.at(player), true);
+    return map.getClosestUnit(pos, 50*50);
+}
+
+void Model::actionOnPosition(Position &pos, Unit &unit) {
+    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
+    if (foll_unit != nullptr){
+        unit.follow(foll_unit, map);
+    } else {
+        map.setDestiny(unit, pos.x, pos.y);
+    }
+
+    // Hacer lo mismo con los edificios
+}
+
+
