@@ -8,34 +8,29 @@ OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, cons
         Attacker(weapon, range),
         attacking(false) {}
 
-int OffensiveUnit::makeAction(Map& map){
-    switch (state) {
-        case STOPPED:
-            return 0;
-        case MOVING:
-            this->move(map);
-            return 1;
-        case FOLLOWING:
-            if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
-                if (!attacking){
-                    attacking = true;
-                    victim_pos = prev_foll_unit_pos;
-                }
-                this->attack(*foll_unit);
-                if (Unit::isDead(foll_unit)){
-                    foll_unit = nullptr;
-                    pathToDestiny = std::stack<Position>();
-                    state = STOPPED;
-                }
-            } else if (foll_unit->getPosition() == prev_foll_unit_pos || actual_speed != speed){
-                this->move(map);
-            } else {
-                this->follow(foll_unit, map);
-                this->move(map);
-            }
-            return 0;
+
+UnitState * OffensiveUnit::makeFollow(Map &map) {
+    UnitState* new_state = state;
+    if (Unit::isDead(foll_unit)){
+        foll_unit = nullptr;
+        pathToDestiny = std::stack<Position>();
+        new_state = (UnitState*)&Unit::stopped;
+    } else if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
+        if (!attacking){
+            attacking = true;
+            victim_pos = prev_foll_unit_pos;
+        }
+        this->attack(*foll_unit);
+
+    } else if (foll_unit->getPosition() == prev_foll_unit_pos || actual_speed != speed){
+        this->move(map);
+    } else {
+        this->follow(foll_unit, map);
+        this->move(map);
     }
+    return new_state;
 }
+
 
 
 bool OffensiveUnit::automaticAttack(Map &map) {

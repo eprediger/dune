@@ -13,10 +13,14 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
     destiny(x, y),
     prev_foll_unit_pos(),
     next_pos(x, y),
-    state(STOPPED)
+    state((UnitState*)&Unit::stopped)
     {
 }
 
+const UnitStateAttacking Unit::attacking;
+const UnitStateFollowing Unit::following;
+const UnitStateMoving Unit::moving;
+const UnitStateStopped Unit::stopped;
 
 int Unit::move(Map& map) {
 
@@ -35,7 +39,7 @@ int Unit::move(Map& map) {
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y)? +1 : 0);
         } else {
             map.at(pos).occupy();
-            state = STOPPED;
+            state = (UnitState*)&Unit::stopped;;
         }
         actual_speed = 0;
     }
@@ -48,10 +52,10 @@ void Unit::setPath(std::stack<Position> path, Position destiny) {
     if (!path.empty()){
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
-        state = MOVING;
+        state = (UnitState*)&Unit::moving;
     } else {
         next_pos = pos;
-        state = STOPPED;
+        state = (UnitState*)&Unit::stopped;
     }
 }
 
@@ -74,7 +78,7 @@ void Unit::follow(Unit* other, Map& map) {
     if(occupied_pos) map.at(prev_foll_unit_pos).free();
     map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
     if(occupied_pos) map.at(prev_foll_unit_pos).occupy();
-    state = FOLLOWING;
+    state = (UnitState*)&Unit::following;
 }
 
 void Unit::setPlayer(Player &player) {
@@ -83,6 +87,10 @@ void Unit::setPlayer(Player &player) {
 
 Player &Unit::getPlayer() {
     return *player;
+}
+
+void Unit::makeAction(Map &map) {
+    state = state->makeAction(map, *this);
 }
 
 

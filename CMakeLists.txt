@@ -24,6 +24,8 @@ file(GLOB SOURCE
         src/*.h
         src/*/*.cpp
         src/*/*.h
+		src/*/*/*.cpp
+		src/*/*/*.h
         )
 
 message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")

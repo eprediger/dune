@@ -12,6 +12,11 @@
 #include "../Terrains/Rocks.h"
 #include "../Attackable.h"
 #include "../Player.h"
+#include "States/UnitState.h"
+#include "States/UnitStateAttacking.h"
+#include "States/UnitStateFollowing.h"
+#include "States/UnitStateMoving.h"
+#include "States/UnitStateStopped.h"
 //#include "Map.h"
 #include <stack>
 #include <memory>
@@ -23,6 +28,11 @@ public:
 
     enum State {FOLLOWING, MOVING, ATTACKING, STOPPED};
 
+    static const UnitStateAttacking attacking;
+    static const UnitStateFollowing following;
+    static const UnitStateMoving moving;
+    static const UnitStateStopped stopped;
+
     /*Unit();
 
     Unit(int x, int y);*/
@@ -33,7 +43,9 @@ public:
 
     int move(Map& map);
 
-    virtual int makeAction(Map& map) = 0;
+    virtual void makeAction(Map &map);
+
+    virtual UnitState * makeFollow(Map &map) = 0;
 
     void follow(Unit* other, Map& map);
 
@@ -60,7 +72,7 @@ protected:
     Position destiny;
     Position prev_foll_unit_pos;
     Position next_pos;
-    State state;
+    UnitState* state;
     Player* player;
 };
  

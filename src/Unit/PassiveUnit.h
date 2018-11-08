@@ -10,8 +10,7 @@ class PassiveUnit : public Unit {
 public:
     PassiveUnit (const int x, const int y, const int hitPoints, const int speed);
 
-    virtual int makeAction(Map& map) override;
-
+    virtual UnitState * makeFollow(Map &map) override;
 };
 
 #endif //__PasiveUnit_H__

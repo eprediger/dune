@@ -12,7 +12,7 @@ public:
     OffensiveUnit(const int x, const int y, const int hitPoints, const int range,
                                  Weapon weapon, const int speed);
 
-    virtual int makeAction(Map& map) override;
+    virtual UnitState * makeFollow(Map &map) override;
 
     bool automaticAttack(Map &map);
 
