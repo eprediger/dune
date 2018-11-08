@@ -12,6 +12,8 @@ public:
 
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
 
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
+
 private:
 	const int spiceCapacity;
 };

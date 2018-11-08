@@ -9,7 +9,8 @@ public:
 	Trike(int x, int y);
 	~Trike();
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
-	
+
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
 };
 
 #endif

@@ -9,6 +9,8 @@ public:
 	HeavyInfantry(int x, int y);
 	~HeavyInfantry();
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
+
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
 	
 };
 

@@ -1,14 +1,14 @@
 #include "Attacker.h"
 #include "Unit/Unit.h"
 
-Attacker::Attacker(Weapon weapon, const int range) :
+Attacker::Attacker(const Weapon &weapon, const int range) :
 	weapon(weapon),
 	range(range) {}
 
 void Attacker::attack(Attackable &defender) {
-    defender.reciveAttack(*this);
+    defender.reciveAttack(weapon);
 }
 
 int Attacker::getDammage() {
-    return weapon.getDamage();
+    return weapon.getDammage();
 }

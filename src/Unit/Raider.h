@@ -9,6 +9,8 @@ public:
 	Raider(int x, int y);
 	~Raider();
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
+
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
 	
 };
 

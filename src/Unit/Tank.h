@@ -9,6 +9,8 @@ public:
 	Tank(int x, int y);
 	~Tank();
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
+
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
 	
 };
 

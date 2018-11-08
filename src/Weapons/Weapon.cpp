@@ -7,6 +7,6 @@ Weapon::Weapon(int damage, int frecuency, int bonus) :
 
 Weapon::~Weapon() {}
 
-int Weapon::getDamage() {
+int Weapon::getDammage() const {
     return damage;
 }

@@ -11,6 +11,8 @@ public:
 	~LightInfantry();
 	
     virtual bool canMoveAboveTerrain(Terrain &terrain) override;
+
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
 };
 
 #endif

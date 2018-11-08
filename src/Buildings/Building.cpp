@@ -7,3 +7,7 @@ Building::Building(const int x, const int y, const int hitPoints, const int ener
 	cost(cost) {}
 
 Building::~Building() {}
+
+void Building::reciveBonusDammage(const Weapon &weapon) {
+	life -= weapon.getBuildingBonus();
+}

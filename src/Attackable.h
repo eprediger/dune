@@ -11,7 +11,9 @@ public:
 
     virtual int getLife();
 
-    virtual void reciveAttack(Attacker &attacker);
+    virtual void reciveAttack(const Weapon &weapon);
+
+    virtual void reciveBonusDammage(const Weapon &weapon) = 0;
 };
 
 #endif //__ATTACKABLE_H__

@@ -7,8 +7,9 @@ int Attackable::getLife() {
 }
 
 #include <iostream>
-void Attackable::reciveAttack(Attacker &attacker) {
-    life -= attacker.getDammage();
+void Attackable::reciveAttack(const Weapon &weapon) {
+    life -= weapon.getDammage();
+    this->reciveBonusDammage(weapon);
     std::cout << "Recibe ataque. Vida: " << life << std::endl;
     if (life <= 0) {
         // this->kill;

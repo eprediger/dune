@@ -1,4 +1,5 @@
 #include "Cannon.h"
+#include "../GlobalConfig.h"
 
 Cannon::Cannon() :
 	Weapon(GlobalConfig.cannonDamage,
@@ -6,3 +7,15 @@ Cannon::Cannon() :
 		   GlobalConfig.cannonBonus) {}
 
 Cannon::~Cannon() {}
+
+int Cannon::getInfantryBonus() const {
+    return 0;
+}
+
+int Cannon::getVehicleBonus() const {
+	return 0;
+}
+
+int Cannon::getBuildingBonus() const {
+	return 0;
+}

@@ -3,7 +3,7 @@
 
 
 OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, const int range,
-           Weapon weapon, const int speed) :
+                             const Weapon &weapon, const int speed) :
         Unit(x, y, hitPoints, speed),
         Attacker(weapon, range),
         attacking(false) {}

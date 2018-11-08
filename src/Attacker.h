@@ -7,10 +7,10 @@ class Attackable;
 
 class Attacker {
 protected:
-    Weapon weapon;
+    const Weapon& weapon;
     const int range;
 public:
-    Attacker(Weapon weapon, const int range);
+    Attacker(const Weapon& weapon, const int range);
 
     virtual void attack(Attackable &defender);
 

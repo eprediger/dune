@@ -10,6 +10,8 @@ public:
     Building(const int x, const int y, const int hitPoints, const int energy, const int cost);
     ~Building();
 
+	virtual void reciveBonusDammage(const Weapon &weapon) override;
+
 private:
 	const int energy;
 	const int cost;

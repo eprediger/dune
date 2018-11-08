@@ -10,7 +10,7 @@
 class OffensiveUnit : public Unit, Attacker {
 public:
     OffensiveUnit(const int x, const int y, const int hitPoints, const int range,
-                                 Weapon weapon, const int speed);
+                  const Weapon &weapon, const int speed);
 
     virtual UnitState * makeFollow(Map &map) override;
 

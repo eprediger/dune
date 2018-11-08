@@ -26,16 +26,10 @@ class Map;
 class Unit : public Positionable, public Attackable {
 public:
 
-    enum State {FOLLOWING, MOVING, ATTACKING, STOPPED};
-
     static const UnitStateAttacking attacking;
     static const UnitStateFollowing following;
     static const UnitStateMoving moving;
     static const UnitStateStopped stopped;
-
-    /*Unit();
-
-    Unit(int x, int y);*/
 
     Unit(const int x, const int y, const int hitPoints, const int speed);
 
