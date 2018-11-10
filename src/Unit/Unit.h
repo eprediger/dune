@@ -17,6 +17,7 @@
 #include "States/UnitStateFollowing.h"
 #include "States/UnitStateMoving.h"
 #include "States/UnitStateStopped.h"
+#include "States/UnitStateDefending.h"
 //#include "Map.h"
 #include <stack>
 #include <memory>
@@ -30,17 +31,20 @@ public:
     static const UnitStateFollowing following;
     static const UnitStateMoving moving;
     static const UnitStateStopped stopped;
+    static const UnitStateDefending defending;
 
     Unit(const int x, const int y, const int hitPoints, const int speed);
 
     void setPath(std::stack<Position> path, Position destiny);
 
-    int move(Map& map);
+    bool move(Map &map);
 
     virtual void makeAction(Map &map);
 
     virtual UnitState * makeFollow(Map &map) = 0;
     virtual UnitState * makeAttack(Map &map) = 0;
+    virtual UnitState * makeStopped(Map &map) = 0;
+    virtual UnitState * makeDefending(Map &map) = 0;
 
     void follow(Unit* other, Map& map);
 

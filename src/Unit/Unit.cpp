@@ -21,9 +21,10 @@ const UnitStateAttacking Unit::attacking;
 const UnitStateFollowing Unit::following;
 const UnitStateMoving Unit::moving;
 const UnitStateStopped Unit::stopped;
+const UnitStateDefending Unit::defending;
 
-int Unit::move(Map& map) {
-
+bool Unit::move(Map &map) {
+    bool moved = true;
     if (actual_speed++ == speed) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
@@ -39,11 +40,12 @@ int Unit::move(Map& map) {
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y)? +1 : 0);
         } else {
             map.at(pos).occupy();
-            state = (UnitState*)&Unit::stopped;;
+//            state = (UnitState*)&Unit::stopped;;
+            moved = false;
         }
         actual_speed = 0;
     }
-    return 0;
+    return moved;
 }
 
 void Unit::setPath(std::stack<Position> path, Position destiny) {

@@ -12,6 +12,8 @@ public:
 
     virtual UnitState * makeFollow(Map &map) override;
     virtual UnitState * makeAttack(Map &map) override;
+    virtual UnitState * makeStopped(Map &map) override;
+    virtual UnitState * makeDefending(Map &map) override;
 };
 
 #endif //__PasiveUnit_H__
