@@ -9,12 +9,12 @@ class Attacker {
 protected:
     const Weapon& weapon;
     const int range;
+    int actual_frec;
 public:
     Attacker(const Weapon& weapon, const int range);
 
     virtual void attack(Attackable &defender);
 
-    virtual int getDammage();
 };
 
 #endif //__ATTACKER_H__

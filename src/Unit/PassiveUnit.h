@@ -11,6 +11,7 @@ public:
     PassiveUnit (const int x, const int y, const int hitPoints, const int speed);
 
     virtual UnitState * makeFollow(Map &map) override;
+    virtual UnitState * makeAttack(Map &map) override;
 };
 
 #endif //__PasiveUnit_H__

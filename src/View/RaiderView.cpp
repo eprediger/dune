@@ -94,11 +94,16 @@ void RaiderView::draw(Area& camara){
 	Area dest(pos.getX()- 15 - camara.getX(),pos.getY()-15 - camara.getY() ,30,30);
 	orientation.calcular(prev_pos,pos);
 
-    if (raider.attacking && !attacking){
-        update_sprite = 0;
-        attacking = true;
-        comenzar_ataque();
-    } 
+//	attacking = false;
+    if (raider.isAttacking()) {
+    	if (!attacking) {
+			update_sprite = 0;
+			attacking = true;
+			comenzar_ataque();
+		}
+    } else {
+		attacking = false;
+	}
     while (attacking){
         (*anim_it)->render(Area(0,0,30,30),dest);
         if (update_sprite == 10){
@@ -107,7 +112,7 @@ void RaiderView::draw(Area& camara){
         }
         update_sprite+=1;
         if (anim_it == attack_sprites.at(orientation.getValor()).end()){
-            raider.attacking = false;
+//            raider.attacking = false;
             attacking = false;
         }
         return;

@@ -93,6 +93,10 @@ void Unit::makeAction(Map &map) {
     state = state->makeAction(map, *this);
 }
 
+bool Unit::isAttacking() {
+    return state->isAttacking();
+}
+
 
  
 

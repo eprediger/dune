@@ -7,6 +7,10 @@ UnitState *PassiveUnit::makeFollow(Map &map) {
     return state;
 }
 
+UnitState *PassiveUnit::makeAttack(Map &map) {
+    return state;
+}
+
 
 //int PassiveUnit::makeAction(Map& map){
 //    switch (state) {

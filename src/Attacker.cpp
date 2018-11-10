@@ -3,12 +3,13 @@
 
 Attacker::Attacker(const Weapon &weapon, const int range) :
 	weapon(weapon),
-	range(range) {}
+	range(range),
+	actual_frec(0){}
 
 void Attacker::attack(Attackable &defender) {
-    defender.reciveAttack(weapon);
+    if (actual_frec++ == 250/weapon.getFrecuency()) {
+        defender.reciveAttack(weapon);
+        actual_frec = 0;
+    }
 }
 
-int Attacker::getDammage() {
-    return weapon.getDammage();
-}

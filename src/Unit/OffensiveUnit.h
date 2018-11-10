@@ -13,11 +13,12 @@ public:
                   const Weapon &weapon, const int speed);
 
     virtual UnitState * makeFollow(Map &map) override;
+    virtual UnitState * makeAttack(Map &map) override;
 
     bool automaticAttack(Map &map);
 
     Position& getVictimPosition();
-    bool attacking;
+//    bool attacking;
 private:
     Position victim_pos;
 //    void follow(Unit* other, Map& map);

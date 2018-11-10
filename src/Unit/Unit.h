@@ -40,6 +40,7 @@ public:
     virtual void makeAction(Map &map);
 
     virtual UnitState * makeFollow(Map &map) = 0;
+    virtual UnitState * makeAttack(Map &map) = 0;
 
     void follow(Unit* other, Map& map);
 
@@ -48,6 +49,8 @@ public:
 //    bool automaticAttack(Map &map);
 
     static bool isDead(const Unit *unit);
+
+    bool isAttacking();
 
     Position getNextPosition();
 

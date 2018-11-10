@@ -2,7 +2,7 @@
 #include "../GlobalConfig.h"
 
 RocketLauncher::RocketLauncher() :
-	Weapon(GlobalConfig.rocketLauncherDamage/5,
+	Weapon(GlobalConfig.rocketLauncherDamage,
 		   GlobalConfig.rocketLauncherShootingRate,
 		   GlobalConfig.rocketLauncherBonus) {}
 

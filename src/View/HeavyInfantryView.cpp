@@ -185,11 +185,15 @@ void HeavyInfantryView::draw(Area& camara){
 	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,25,25);
 	orientation.calcular(prev_pos,pos);
 
-    if (heavyInfantry.attacking && !attacking){
-        update_sprite = 0;
-        attacking = true;
-        comenzar_ataque();
-    } 
+    if (heavyInfantry.isAttacking()) {
+        if (!attacking) {
+            update_sprite = 0;
+            attacking = true;
+            comenzar_ataque();
+        }
+    } else {
+        attacking = false;
+    }
 
     while (attacking){
         (*anim_it)->render(Area(0,0,25,25),dest);
@@ -200,7 +204,7 @@ void HeavyInfantryView::draw(Area& camara){
         update_sprite+=1;
         if (anim_it == attack_sprites.at(orientation.getValor()).end()){
             anim_it = sprites.at(orientation.getValor()).begin();
-            heavyInfantry.attacking = false;
+//            heavyInfantry.attacking = false;
             attacking = false;
         }
         return;

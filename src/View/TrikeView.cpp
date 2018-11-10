@@ -92,11 +92,15 @@ void TrikeView::draw(Area& camara){
 	Area dest(pos.getX()- 13 - camara.getX(),pos.getY()-13 - camara.getY() ,25,25);
 	orientation.calcular(prev_pos,pos);
 
-    if (trike.attacking && !attacking){
-        update_sprite = 0;
-        attacking = true;
-        comenzar_ataque();
-    } 
+    if (trike.isAttacking()) {
+		if (!attacking) {
+			update_sprite = 0;
+			attacking = true;
+			comenzar_ataque();
+		}
+	} else {
+		attacking = false;
+	}
     while (attacking){
         (*anim_it)->render(Area(0,0,30,30),dest);
         if (update_sprite == 10){
@@ -105,7 +109,7 @@ void TrikeView::draw(Area& camara){
         }
         update_sprite+=1;
         if (anim_it == attack_sprites.at(orientation.getValor()).end()){
-            trike.attacking = false;
+//            trike.attacking = false;
             attacking = false;
         }
         return;
