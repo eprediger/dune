@@ -16,7 +16,7 @@ UnitState * OffensiveUnit::makeFollow(Map &map) {
         foll_unit = nullptr;
         pathToDestiny = std::stack<Position>();
         new_state = (UnitState*)&Unit::stopped;
-    } else if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
+    } else if (foll_unit->getPosition().sqrtDistance(pos) < this->range){
 //        if (!attacking){
 //            attacking = true;
 //            victim_pos = prev_foll_unit_pos;
@@ -60,7 +60,7 @@ UnitState *OffensiveUnit::makeAttack(Map &map) {
         foll_unit = nullptr;
         pathToDestiny = std::stack<Position>();
         new_state = (UnitState*)&Unit::stopped;
-    } else if (prev_foll_unit_pos.sqrtDistance(pos) < this->range){
+    } else if (foll_unit->getPosition().sqrtDistance(pos) < this->range){
         this->attack(*foll_unit);
     } else {
         new_state = (UnitState*)&Unit::following;
