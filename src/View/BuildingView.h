@@ -10,6 +10,7 @@
 class BuildingView {
 public:
     BuildingView(Building& building, SdlWindow& window);
+    virtual ~BuildingView();
     Building& getBuilding();
     virtual void draw(Area& camara);
 protected:

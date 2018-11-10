@@ -17,6 +17,8 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
     {
 }
 
+Unit::~Unit() {}
+
 const UnitStateAttacking Unit::attacking;
 const UnitStateFollowing Unit::following;
 const UnitStateMoving Unit::moving;
@@ -98,6 +100,8 @@ void Unit::makeAction(Map &map) {
 bool Unit::isAttacking() {
     return state->isAttacking();
 }
+
+
 
 
  

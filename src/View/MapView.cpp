@@ -29,7 +29,7 @@ void MapView::draw(Area& camara) {
 		lim_j -= 1;
 	}
 
-	for (i; i < lim_i ; i++) {
+	for (; i < lim_i ; i++) {
 		for (j = camara.getX() / 32; j < lim_j ; j++) {
 			terrenos.render(areas.at(mapa.blockAt(j, i).getKey()), Area(j * 32 - camara.getX(), i * 32 - camara.getY(), 32, 32));
 		}

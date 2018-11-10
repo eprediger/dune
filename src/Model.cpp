@@ -11,7 +11,7 @@
 #include "Buildings/SpiceSilo.h"
 #include "Buildings/WindTrap.h"
 
-Model::Model(int width, int height, int n_player, View &view) : map(width, height), view(view){
+Model::Model(int width, int height, int n_player, View &view) : view(view), map(width, height) {
     // reemplazar luego por un vector de players
     for (int i=0; i< n_player; ++i){
         players.emplace(players.end(),i);

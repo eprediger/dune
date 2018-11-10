@@ -13,8 +13,8 @@ TankView::TankView(Tank& tank, SdlWindow& window)
 	:UnitView(tank,window)
     ,tank(tank)
     ,attacking(false)
-    ,update_sprite(0)
     ,anim_it()
+    ,update_sprite(0)
 { 	
     if (sprites.empty()){  
     sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000ba250.bmp",window)));		

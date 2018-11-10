@@ -18,7 +18,7 @@ private:
 
 public:
     View(SdlWindow &window, Area &camera);
-    ~View();
+    virtual ~View();
 
     SdlWindow& getWindow();
     void addUnitView(UnitView* unitView);

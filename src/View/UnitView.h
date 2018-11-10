@@ -14,6 +14,7 @@
 class UnitView{
 	public:
 		UnitView(Unit& unit, SdlWindow& window);
+		virtual ~UnitView();
 		Unit& getUnit();
 		virtual void draw(Area& camara) = 0;
 		static bool isDead(const UnitView *unit_view);

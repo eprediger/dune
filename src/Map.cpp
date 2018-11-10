@@ -221,7 +221,7 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, b
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
             && distance < closest_unit_distance
-            && !( player == current_unit->getPlayer() ^  has)){
+            && !( (player == current_unit->getPlayer()) ^  has)){
             closest_unit = current_unit;
             closest_unit_distance = distance;
         }

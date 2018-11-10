@@ -5,8 +5,9 @@ BuildingView::BuildingView(Building& building
 	:building(building)
 	,prev_pos(building.getPosition())
 	,building_sprite("../imgs/imgs/001a44ee.bmp",window)
-{
-}
+{}
+
+BuildingView::~BuildingView() {}
 
 Building &BuildingView::getBuilding() {
 	return building;

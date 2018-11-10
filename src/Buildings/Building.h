@@ -8,7 +8,7 @@
 class Building : public Attackable, public Positionable {
 public:
     Building(const int x, const int y, const int hitPoints, const int energy, const int cost);
-    ~Building();
+    virtual ~Building();
 
 	virtual void reciveBonusDammage(const Weapon &weapon) override;
 

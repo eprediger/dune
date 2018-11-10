@@ -34,6 +34,7 @@ public:
     static const UnitStateDefending defending;
 
     Unit(const int x, const int y, const int hitPoints, const int speed);
+    virtual ~Unit();
 
     void setPath(std::stack<Position> path, Position destiny);
 
