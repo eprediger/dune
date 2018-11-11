@@ -23,3 +23,7 @@ void Terrain::free(){
 bool Terrain::isOccupied(){
 	return occupied;
 }
+
+int Terrain::getFarm() {
+	return 0;
+}

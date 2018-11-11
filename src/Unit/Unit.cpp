@@ -24,6 +24,9 @@ const UnitStateFollowing Unit::following;
 const UnitStateMoving Unit::moving;
 const UnitStateStopped Unit::stopped;
 const UnitStateDefending Unit::defending;
+const UnitStateLoading Unit::loading;
+const UnitStateFarming Unit::farming;
+const UnitStateBacking Unit::backing;
 
 bool Unit::move(Map &map) {
     bool moved = true;
@@ -101,11 +104,39 @@ bool Unit::isAttacking() {
     return state->isAttacking();
 }
 
+UnitState *Unit::makeFollow(Map &map) {
+    return state;
+}
 
+UnitState *Unit::makeAttack(Map &map) {
+    return state;
+}
 
+UnitState *Unit::makeStopped(Map &map) {
+    return state;
+}
 
- 
+UnitState *Unit::makeDefending(Map &map) {
+    return state;
+}
 
+UnitState *Unit::makeLoading(Map &map) {
+    return state;
+}
 
+UnitState *Unit::makeFarming(Map &map) {
+    return state;
+}
 
+UnitState *Unit::makeBacking(Map &map) {
+    return state;
+}
 
+void Unit::actionOnPosition(Map &map, Position &pos) {
+    Unit* foll_unit = map.getClosestUnit(pos, 50*50, *player, false);
+    if (foll_unit != nullptr){
+        this->follow(foll_unit, map);
+    } else {
+        map.setDestiny(*this, pos.x, pos.y);
+    }
+}

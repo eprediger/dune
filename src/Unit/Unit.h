@@ -18,6 +18,9 @@
 #include "States/UnitStateMoving.h"
 #include "States/UnitStateStopped.h"
 #include "States/UnitStateDefending.h"
+#include "States/UnitStateLoading.h"
+#include "States/UnitStateFarming.h"
+#include "States/UnitStateBacking.h"
 //#include "Map.h"
 #include <stack>
 #include <memory>
@@ -32,6 +35,9 @@ public:
     static const UnitStateMoving moving;
     static const UnitStateStopped stopped;
     static const UnitStateDefending defending;
+    static const UnitStateLoading loading;
+    static const UnitStateFarming farming;
+    static const UnitStateBacking backing;
 
     Unit(const int x, const int y, const int hitPoints, const int speed);
     virtual ~Unit();
@@ -42,10 +48,15 @@ public:
 
     virtual void makeAction(Map &map);
 
-    virtual UnitState * makeFollow(Map &map) = 0;
-    virtual UnitState * makeAttack(Map &map) = 0;
-    virtual UnitState * makeStopped(Map &map) = 0;
-    virtual UnitState * makeDefending(Map &map) = 0;
+    virtual UnitState * makeFollow(Map &map);
+    virtual UnitState * makeAttack(Map &map);
+    virtual UnitState * makeStopped(Map &map);
+    virtual UnitState * makeDefending(Map &map);
+    virtual UnitState * makeLoading(Map &map);
+    virtual UnitState * makeFarming(Map &map);
+    virtual UnitState * makeBacking(Map &map);
+
+    virtual void actionOnPosition(Map& map, Position& pos);
 
     void follow(Unit* other, Map& map);
 

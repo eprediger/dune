@@ -57,6 +57,13 @@ int main(int argc, const char* argv[]) {
         model.createRaider(180,150, 0);
         model.createTank(250,200, 0);
 
+        model.createTank(600,50, 1);
+        model.createRaider(600,100, 1);
+        model.createLightInfantry(600,150, 1);
+        model.createHeavyInfantry(600,200, 1);
+        model.createTrike(600,250, 1);
+        model.createHarvester(600,300, 1);
+
         model.createBarracks(50, 600, 0);
 
         bool running = true;

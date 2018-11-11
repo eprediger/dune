@@ -19,6 +19,8 @@ public:
 	void free();
 	bool isOccupied();
 
+	virtual int getFarm();
+
 	bool operator==(const Terrain& terrain);
 
 	char getKey();

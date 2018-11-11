@@ -175,12 +175,13 @@ Unit * Model::selectUnit(Position &pos, int player) {
 }
 
 void Model::actionOnPosition(Position &pos, Unit &unit) {
-    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
-    if (foll_unit != nullptr){
-        unit.follow(foll_unit, map);
-    } else {
-        map.setDestiny(unit, pos.x, pos.y);
-    }
+    unit.actionOnPosition(map, pos);
+//    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
+//    if (foll_unit != nullptr){
+//        unit.follow(foll_unit, map);
+//    } else {
+//        map.setDestiny(unit, pos.x, pos.y);
+//    }
 
     // Hacer lo mismo con los edificios
 }
