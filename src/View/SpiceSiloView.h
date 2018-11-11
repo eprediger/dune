@@ -3,7 +3,7 @@
 
 
 #include "BuildingView.h"
-#include "../Buildings/SpiceRefinery.h"
+#include "../Buildings/SpiceSilo.h"
 #include "Area.h"
 #include "../Position.h"
 #include "SdlWindow.h"
@@ -12,9 +12,9 @@
 #include <map>
 #include <string>
 
-class SpiceRefineryView: public BuildingView{
+class SpiceSiloView: public BuildingView{
     public:
-        SpiceRefineryView(SpiceRefinery& spiceRefinery, SdlWindow& window);
+        SpiceSiloView(SpiceSilo& spiceSilo, SdlWindow& window);
         virtual void draw(Area& camara);
     private:
         static std::map<std::string, std::vector<SdlTexture*> > sprites;

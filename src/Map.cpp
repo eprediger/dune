@@ -4,7 +4,7 @@
 #include "Terrains/Summit.h"
 #include "AStar.h"
 #include "CustomException.h"
-
+#include "View/Area.h"
 #include <algorithm>
 
 Map::Map(int width, int height) :
@@ -146,6 +146,42 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius) {
 
     return closest_unit;
 }
+
+Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player){
+    Unit* closest_unit = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units) {
+        if (current_unit->getPlayer() == player){    
+            int distance = current_unit->getPosition().sqrtDistance(pos);
+            if (distance < limitRadius
+                    && distance < closest_unit_distance) {
+                closest_unit = current_unit;
+                closest_unit_distance = distance;
+            }
+        }
+    }
+
+    return closest_unit;
+}
+
+std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player){
+    std::vector<Unit*> answer;
+    for (auto unit: units){
+        if (unit->getPlayer() == player)
+            if (unit->getPosition().x > area.getX())
+                if (unit->getPosition().x < area.getX()+area.getWidth())
+                    if (unit->getPosition().y > area.getY())
+                        if (unit->getPosition().y < area.getY()+area.getHeight())
+                            answer.emplace_back(unit);
+    }
+    if (answer.empty()){
+        Unit* unit = getClosestUnit(Position(area.getX()+area.getWidth(),area.getY()+area.getHeight()),120,player);
+        if (unit!=nullptr)
+            answer.emplace_back(unit);
+    }
+    return (std::move(answer));
+}
+
 
 void Map::cleanDeadUnits() {
     bool has_dead_unit = false;

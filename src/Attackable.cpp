@@ -1,11 +1,16 @@
 #include "Attackable.h"
 
-Attackable::Attackable(const int life) : life(life) {}
+Attackable::Attackable(const int life)
+    : initial_life(life) 
+    , life(life){}
 
 int Attackable::getLife() {
     return life;
 }
 
+int Attackable::getInitialLife(){
+    return initial_life; 
+}
 #include <iostream>
 void Attackable::reciveAttack(const Weapon &weapon) {
     life -= weapon.getDammage();

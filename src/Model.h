@@ -6,6 +6,7 @@
 #include "Unit/OffensiveUnit.h"
 #include "Player.h"
 #include "View/View.h"
+#include "View/Area.h"
 #include <vector>
 #include <memory>
 
@@ -44,6 +45,8 @@ public:
 	Building &createBuilding(Building* building);
 
     Unit * selectUnit(Position &pos, int player);
+    std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
+
     void actionOnPosition(Position &pos, Unit &unit);
 
 	void step();

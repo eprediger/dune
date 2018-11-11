@@ -5,11 +5,14 @@
 
 class Attackable {
 protected:
+    int initial_life;
     int life;
 public:
     Attackable(const int life);
 
     virtual int getLife();
+
+    virtual int getInitialLife();
 
     virtual void reciveAttack(const Weapon &weapon);
 

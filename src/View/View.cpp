@@ -2,7 +2,11 @@
 #include "View.h"
 #include "BuildingView.h"
 
-View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
+View::View(SdlWindow &window, Area &camera)
+    : window(window) 
+    , camera(camera)
+    , selectorView(nullptr)
+{
 
 }
 
@@ -12,6 +16,10 @@ void View::addUnitView(UnitView* unitView) {
 
 void View::addBuildingView(BuildingView* buildingView) {
     building_views.push_back(std::move(buildingView));
+}
+
+void View::addSelectorView(SelectorView* selectorView){
+    this->selectorView = selectorView;
 }
 
 void View::draw() {
@@ -24,6 +32,10 @@ void View::draw() {
 
     for (auto itr = building_views.begin(); itr != building_views.end(); ++itr){
         (*itr)->draw(camera);
+    }
+
+    if (selectorView!=nullptr){
+        selectorView->draw(camera);
     }
 }
 

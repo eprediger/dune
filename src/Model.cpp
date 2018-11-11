@@ -10,6 +10,8 @@
 #include "Buildings/SpiceRefinery.h"
 #include "Buildings/SpiceSilo.h"
 #include "Buildings/WindTrap.h"
+#include "View/BuildingViewFactory.h"
+#include "View/Area.h"
 
 Model::Model(int width, int height, int n_player, View &view) : map(width, height), view(view){
     // reemplazar luego por un vector de players
@@ -54,6 +56,10 @@ Unit *Model::selectUnit(int x, int y) {
 	Position aux_pos(x, y);
 	return map.getClosestUnit(aux_pos, LIMIT_TO_SELECT);
 }
+
+std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player){
+    return std::move(map.getUnitsInArea(area,player));
+} 
 
 Map &Model::getMap() {
 	return map;
@@ -123,49 +129,49 @@ void Model::createTrike(int x, int y, int player) {
 void Model::createBarracks(int x, int y, int player) {
     Barracks* building = new Barracks(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createConstructionYard(int x, int y, int player) {
     ConstructionYard* building = new ConstructionYard(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createHeavyFactory(int x, int y, int player) {
     HeavyFactory* building = new HeavyFactory(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createLightFactory(int x, int y, int player) {
     LightFactory* building = new LightFactory(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceRefinery(int x, int y, int player) {
     SpiceRefinery* building = new SpiceRefinery(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceSilo(int x, int y, int player) {
     SpiceSilo* building = new SpiceSilo(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createWindTrap(int x, int y, int player) {
     WindTrap* building = new WindTrap(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
