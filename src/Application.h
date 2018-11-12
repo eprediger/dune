@@ -4,7 +4,7 @@
 #include "View/View.h"
 #include "Controller/InputHandler.h"
 
-#define WINDOW_WIDTH  1000
+#define WINDOW_WIDTH  1024
 #define WINDOW_HEIGHT (WINDOW_WIDTH*3/4)
 
 class Application {

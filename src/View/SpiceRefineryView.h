@@ -3,7 +3,7 @@
 
 
 #include "BuildingView.h"
-#include "../Buildings/SpiceRefinery.h"
+#include "../Model/Buildings/SpiceRefinery.h"
 #include "Area.h"
 #include "../Position.h"
 #include "SdlWindow.h"

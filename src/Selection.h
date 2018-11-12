@@ -1,8 +1,8 @@
 #ifndef __SELECTION_H__
 #define __SELECTION_H__
 
-#include "Unit/Unit.h"
-#include "Buildings/Building.h"
+#include "Model/Unit/Unit.h"
+#include "Model/Buildings/Building.h"
 #include <vector>
 
 class Selection{

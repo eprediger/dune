@@ -1,7 +1,7 @@
 #include "TrikeView.h"
 #include <map>
 #include "SdlTexture.h"
-#include "../Unit/Trike.h"
+#include "../Model/Unit/Trike.h"
 #include "../Position.h"
 #include "UnitView.h"
 #include "Orientation.h"

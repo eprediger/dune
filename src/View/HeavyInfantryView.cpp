@@ -1,5 +1,5 @@
 #include "HeavyInfantryView.h"
-#include "../Unit/HeavyInfantry.h"
+#include "../Model/Unit/HeavyInfantry.h"
 #include "Area.h"
 #include "Orientation.h"
 #include "../Position.h"

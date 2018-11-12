@@ -20,12 +20,14 @@ endif()
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 file(GLOB SOURCE
-        src/*.cpp
-        src/*.h
-        src/*/*.cpp
-        src/*/*.h
+		src/*.cpp
+		src/*.h
+		src/*/*.cpp
+		src/*/*.h
 		src/*/*/*.cpp
 		src/*/*/*.h
+		src/*/*/*/*.cpp
+		src/*/*/*/*.h
         )
 
 add_executable(${PROJECT_NAME}

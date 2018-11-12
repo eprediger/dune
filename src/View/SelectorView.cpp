@@ -1,6 +1,6 @@
 #include "SelectorView.h"
 #include "../Selector.h"
-#include "../Attackable.h"
+#include "../Model/Attackable.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 SelectorView::SelectorView(Selector& selector, SdlWindow& window)

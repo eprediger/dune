@@ -1,13 +1,13 @@
 #ifndef __ROCKET_VIEW_H__
 #define __ROCKET_VIEW_H__
 
-#include "../Weapons/Rocket.h"
 #include "OldView.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <vector>
 #include "Area.h"
 #include "../Position.h"
+#include "../Model/Weapons/Rocket.h"
 
 class RocketView{
     public:

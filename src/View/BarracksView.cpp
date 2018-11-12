@@ -1,6 +1,6 @@
 #include "BarracksView.h"
 #include "BuildingView.h"
-#include "../Buildings/Barracks.h"
+#include "../Model/Buildings/Barracks.h"
 #include "Area.h"
 #include "../Position.h"
 #include "SdlWindow.h"

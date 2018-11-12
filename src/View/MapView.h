@@ -1,7 +1,7 @@
 #ifndef __MAP_VIEW_H__
 #define __MAP_VIEW_H__
 
-#include "../Map.h"
+#include "../Model/Map.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <map>

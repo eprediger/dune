@@ -8,7 +8,8 @@
 
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
-#include "GlobalConfig.h"
+#include "Model/GlobalConfig.h"
+#include "View/OldView.h"
 
 #include <iostream>
 
@@ -30,8 +31,11 @@ int main(int argc, const char *argv[]) {
 		HouseSelectionHandler houseSelectionHandler(houseSelectionView);
 		Application app(houseSelectionView, houseSelectionHandler);*/
 
-		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT);
-		GameHandler gameHandler(gameView);
+//		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT);
+		Model model(WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+		OldView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
+
+		GameHandler gameHandler(gameView, model);
 		Application app(gameView, gameHandler);
 
 		while (app.running()) {

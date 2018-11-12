@@ -1,10 +1,11 @@
 #include "GameHandler.h"
+#include "../View/UnitViewFactory.h"
 #include <iostream>
 
-GameHandler::GameHandler(View& view) :
+GameHandler::GameHandler(OldView &view, Model &model) :
 	InputHandler(),
-	view(view) {}
-	// model(model) {}
+	view(view),
+	model(model) {}
 
 GameHandler::~GameHandler() {}
 
@@ -27,8 +28,10 @@ bool GameHandler::handleInput() {
 			}
 			break;
 		case SDL_MOUSEBUTTONUP:
-			if (event.button.button == SDL_BUTTON_LEFT) {
+			if (event.button.button == SDL_BUTTON_MIDDLE) {
 				this->cursor.currentPosition();
+				Raider & raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
+				view.addUnitView(UnitViewFactory::createUnitView(raider,view.getWindow()));
 				// std::cout << "Suelta en x: " << this->cursor.current_x << " y: " << this->cursor.current_y << std::endl;
 			}
 			break;

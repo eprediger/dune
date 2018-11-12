@@ -2,7 +2,7 @@
 #define __BUILDINGVIEW_H__
 
 
-#include "../Buildings/Building.h"
+#include "../Model/Buildings/Building.h"
 #include "SdlWindow.h"
 #include "Area.h"
 #include "SdlTexture.h"

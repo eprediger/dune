@@ -2,7 +2,7 @@
 #define __UNIT_VIEW_H__
 
 
-#include "../Unit/Unit.h"
+#include "../Model/Unit/Unit.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "../Position.h"

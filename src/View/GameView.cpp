@@ -9,7 +9,7 @@ GameView::GameView(const int width, const int height) :
 	moneyBalance(0),
 	buildings(),
 	units(),
-	buttons("../assets/img/btns/cursors.png", this->window) {
+	buttons("../assets/img/btns/cantSell.png", this->window) {
 	/*barracks-atreides.jpg
 	barracks-harkonnen.jpg
 	barracks-ordos.jpg*/
@@ -76,12 +76,10 @@ void GameView::render() {
 	// Botones
 	// Vender Edificio
 	// Area sellSrc(20, 450, 30, 40);	// boton venta habilitada
-	Area sellSrc(170, 75, 35, 40);	// boton ventana deshabilitada
-	Area sellDest(this->window.width * 16 / 20, this->window.height * 5 / 16, 35, 40);
-	this->buttons.render(sellSrc, sellDest);
+	this->buttons.render(this->window.width * 16 / 20, this->window.height *4/ 16);
 
 	// Edificios
-	// this->buildingTag.render(this->window.width * 12 / 16, this->window.height * 5 / 16);
+	this->buildingTag.render(this->window.width * 12 / 16, this->window.height * 5 / 16);
 	for (unsigned i = 0; i < this->buildings.size(); ++i) {
 		Area buildingSrc(0, 0, this->buildings[i]->width, this->buildings[i]->height);
 		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
@@ -92,7 +90,7 @@ void GameView::render() {
 	}
 
 	// Unidades
-	// this->unitsTag.render(this->window.width * 28 / 32, this->window.height * 5 / 16);
+	this->unitsTag.render(this->window.width * 28 / 32, this->window.height * 5 / 16);
 	for (unsigned i = 0; i < this->units.size(); ++i) {
 		Area UnitSrc(0, 0, this->units[i]->width, this->units[i]->height);
 		Area UnitDest(this->window.width * 18 / 20,	// this->window.width * 29 / 32,

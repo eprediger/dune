@@ -1,5 +1,5 @@
 #include "RocketView.h"
-#include "../Weapons/Rocket.h"
+#include "../Model/Weapons/Rocket.h"
 #include <vector> 
 #include "SdlTexture.h"
 #include "SdlWindow.h"

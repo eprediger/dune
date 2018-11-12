@@ -1,6 +1,6 @@
 #include "HeavyFactoryView.h"
 #include "BuildingView.h"
-#include "../Buildings/HeavyFactory.h"
+#include "../Model/Buildings/HeavyFactory.h"
 #include "Area.h"
 #include "../Position.h"
 #include "SdlWindow.h"

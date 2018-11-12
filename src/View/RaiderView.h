@@ -2,7 +2,7 @@
 #define __RAIDER_VIEW_H__
 
 #include "UnitView.h"
-#include "../Unit/Raider.h"
+#include "../Model/Unit/Raider.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Area.h"

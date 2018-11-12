@@ -28,6 +28,7 @@ private:
 	std::vector<SdlTexture*> buildings;
 	std::vector<SdlTexture*> units;
 	SdlTexture buttons;
+
 };
 
 #endif	// __GAME_VIEW_H__

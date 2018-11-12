@@ -1,5 +1,5 @@
 #include "RaiderView.h"
-#include "../Unit/Raider.h"
+#include "../Model/Unit/Raider.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <map>
