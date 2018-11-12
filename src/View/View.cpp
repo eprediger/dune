@@ -2,7 +2,11 @@
 #include "View.h"
 #include "BuildingView.h"
 
-View::View(SdlWindow &window, Area &camera) : window(window) ,camera(camera){
+View::View(SdlWindow &window, Area &camera)
+    : selectorView(nullptr)
+    ,window(window) 
+    , camera(camera)
+{
 
 }
 
@@ -12,6 +16,10 @@ void View::addUnitView(UnitView* unitView) {
 
 void View::addBuildingView(BuildingView* buildingView) {
     building_views.push_back(std::move(buildingView));
+}
+
+void View::addSelectorView(SelectorView* selectorView){
+    this->selectorView = selectorView;
 }
 
 void View::draw() {
@@ -25,6 +33,10 @@ void View::draw() {
     for (auto itr = building_views.begin(); itr != building_views.end(); ++itr){
         (*itr)->draw(camera);
     }
+
+    if (selectorView!=nullptr){
+        selectorView->draw(camera);
+    }
 }
 
 void View::cleanDeadUnitViews(){
@@ -32,11 +44,17 @@ void View::cleanDeadUnitViews(){
     for (auto unit_view : unit_views){
         if (UnitView::isDead(unit_view)){
             has_dead_views = true;
-            delete unit_view;
         }
     }
     if (has_dead_views){
-        unit_views.erase(std::remove_if(unit_views.begin(), unit_views.end(), UnitView::isDead));
+        std::vector<UnitView*>::iterator it = unit_views.begin();
+        while (it!=unit_views.end()){
+            if (UnitView::isDead(*it)){
+                delete(*it);
+                it = unit_views.erase(it);
+            }
+            else it++;
+        }
     }
 }
 

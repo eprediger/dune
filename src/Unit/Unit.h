@@ -24,6 +24,7 @@
 //#include "Map.h"
 #include <stack>
 #include <memory>
+#include <iostream>
 
 class Map;
 
@@ -75,6 +76,9 @@ public:
     void setPlayer(Player &player);
 
     Player& getPlayer();
+
+    void checkForDeadVictim();
+
 
 protected:
     int id;

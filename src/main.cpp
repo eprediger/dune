@@ -101,8 +101,6 @@ int main(int argc, const char* argv[]) {
 
             SDL_Event event;
             mapView.draw(camara);
-//            unitView.draw(camara);
-//            unitView2.draw(camara);
             vista.draw();
             lightInfantryCreator.draw();
             while (SDL_PollEvent(&event)) {
@@ -182,8 +180,10 @@ int main(int argc, const char* argv[]) {
                         break;
                 }
             }
-			vista.cleanDeadUnitViews();
 			model.step();
+			vista.cleanDeadUnitViews();
+            if (Unit::isDead(selectedUnit))
+                selectedUnit = nullptr;
             window.render();
         }
     } catch (const SdlException& e) {

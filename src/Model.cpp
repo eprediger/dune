@@ -10,6 +10,8 @@
 #include "Buildings/SpiceRefinery.h"
 #include "Buildings/SpiceSilo.h"
 #include "Buildings/WindTrap.h"
+#include "View/BuildingViewFactory.h"
+#include "View/Area.h"
 
 Model::Model(int width, int height, int n_player, View &view) : view(view), map(width, height) {
     // reemplazar luego por un vector de players
@@ -42,18 +44,23 @@ Building &Model::createBuilding(Building *building) {
 
 void Model::step() {
 //    for (auto unit : units){
+    this->cleanDeadUnits();
 	for (auto itr = units.begin(); itr != units.end(); ++itr) {
 //        (*itr)->move();
 		(*itr)->makeAction(map);
 //        (*itr)->automaticAttack(map);
     }
-    this->cleanDeadUnits();
 }
 
 Unit *Model::selectUnit(int x, int y) {
 	Position aux_pos(x, y);
 	return map.getClosestUnit(aux_pos, LIMIT_TO_SELECT);
 }
+
+
+std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player){
+    return std::move(map.getUnitsInArea(area,player));
+} 
 
 Map &Model::getMap() {
 	return map;
@@ -65,11 +72,19 @@ void Model::cleanDeadUnits() {
         if (Unit::isDead(u)){
             has_dead_unit = true;
             map.cleanUnit(u);
-            delete u;
+        } else {
+            u->checkForDeadVictim();
         }
     }
     if (has_dead_unit){
-        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
+        std::vector<Unit*>::iterator it = units.begin();
+        while (it!=units.end()){
+            if (Unit::isDead((*it))){
+                delete(*it);
+                it = units.erase(it);
+            }
+            else it++;
+        }
     }
 }
 
@@ -123,51 +138,52 @@ void Model::createTrike(int x, int y, int player) {
 void Model::createBarracks(int x, int y, int player) {
     Barracks* building = new Barracks(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createConstructionYard(int x, int y, int player) {
     ConstructionYard* building = new ConstructionYard(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createHeavyFactory(int x, int y, int player) {
     HeavyFactory* building = new HeavyFactory(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createLightFactory(int x, int y, int player) {
     LightFactory* building = new LightFactory(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceRefinery(int x, int y, int player) {
     SpiceRefinery* building = new SpiceRefinery(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createSpiceSilo(int x, int y, int player) {
     SpiceSilo* building = new SpiceSilo(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
 
 void Model::createWindTrap(int x, int y, int player) {
     WindTrap* building = new WindTrap(x, y);
     players.at(player).addBuilding(building);
-    view.addBuildingView(std::move(new BuildingView(*building, view.getWindow())));
+    view.addBuildingView(std::move(BuildingViewFactory::createBuildingView(*building, view.getWindow())));
     this->createBuilding(std::move(building));
 }
+
 
 Unit * Model::selectUnit(Position &pos, int player) {
 //    map.getClosestUnit(pos, 50*50, players.at(player), true);

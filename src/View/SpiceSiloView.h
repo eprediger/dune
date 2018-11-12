@@ -1,0 +1,26 @@
+#ifndef __SPICE_SILO_VIEW_H__
+#define __SPICE_SILO_VIEW_H__
+
+
+#include "BuildingView.h"
+#include "../Buildings/SpiceSilo.h"
+#include "Area.h"
+#include "../Position.h"
+#include "SdlWindow.h"
+#include "SdlTexture.h"
+#include <vector>
+#include <map>
+#include <string>
+
+class SpiceSiloView: public BuildingView{
+    public:
+        SpiceSiloView(SpiceSilo& spiceSilo, SdlWindow& window);
+        virtual void draw(Area& camara);
+    private:
+        static std::map<std::string, std::vector<SdlTexture*> > sprites;
+        std::vector<SdlTexture*>::iterator anim_it;
+        SdlTexture* base;
+};
+
+
+#endif

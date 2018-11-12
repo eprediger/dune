@@ -8,6 +8,7 @@
 #include "Unit/Unit.h"
 #include "Player.h"
 #include <memory>
+#include "View/Area.h"
 
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32
@@ -40,11 +41,16 @@ public:
 
     Unit * getClosestUnit(Unit &unit, int limitRadius);
     Unit * getClosestUnit(Position& position, int limitRadius);
+    Unit * getClosestUnit(Position position, int limitRadius, Player& player);
+
     Building * getClosestBuilding(Position &position, int limitRadius);
 //    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
     Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
 
 //    Unit* getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit);
+
+    std::vector<Unit*> getUnitsInArea(Area& area, Player& player );
+
 
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 

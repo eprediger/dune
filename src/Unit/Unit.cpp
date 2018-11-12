@@ -2,6 +2,7 @@
 #include "../AStar.h"
 #include "../Weapons/AssaultRifle.h"
 #include "../Config.h"
+#include <iostream>
 
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
     Positionable(x, y),
@@ -10,6 +11,7 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
     speed(speed),
     actual_speed(0),
     pathToDestiny(),
+    foll_unit(nullptr),
     destiny(x, y),
     prev_foll_unit_pos(),
     next_pos(x, y),
@@ -70,8 +72,13 @@ bool Unit::operator==(const Unit &other) {
     return this->id == other.id;
 }
 
+
 bool Unit::isDead(const Unit *unit) {
-    return unit->life <= 0;
+    if (!unit){
+        return true;
+    }
+    return unit->life<=0;
+
 }
 
 void Unit::follow(Unit* other, Map& map) {
@@ -139,4 +146,10 @@ void Unit::actionOnPosition(Map &map, Position &pos) {
     } else {
         map.setDestiny(*this, pos.x, pos.y);
     }
+}
+
+void Unit::checkForDeadVictim(){
+    if (foll_unit != nullptr)
+        if (Unit::isDead(foll_unit))
+            this->foll_unit = nullptr;
 }

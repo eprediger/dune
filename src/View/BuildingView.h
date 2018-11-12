@@ -9,15 +9,13 @@
 
 class BuildingView {
 public:
-    BuildingView(Building& building, SdlWindow& window);
-    virtual ~BuildingView();
-    Building& getBuilding();
-    virtual void draw(Area& camara);
+    BuildingView(Building& building);
+    Building& getBuilding(); 
+    virtual void draw(Area& camara) = 0;
 protected:
     Building& building;
-    Position prev_pos;
-    SdlTexture building_sprite;
-
+    Position pos;
+    bool destroyed;
 private:
 
 };
