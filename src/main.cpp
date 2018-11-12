@@ -16,6 +16,8 @@
 #include "Unit/Harvester.h"
 #include "View/Widget.h"
 #include "Buildings/Barracks.h"
+#include "Selector.h" 
+#include "View/SelectorView.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -35,12 +37,13 @@ int main(int argc, const char* argv[]) {
 //        map.put(unidad);
 //        map.put(unidad2);
         SdlWindow window(WIDTH/2, HEIGHT/2);
+        Player player(0);
         Area camara(0,0,WIDTH/2,HEIGHT/2);
-
+        Selector selector(WIDTH/2, HEIGHT/2);
         View vista(window, camara);
         Model model(WIDTH, HEIGHT, 2, vista);
         Map& map = model.getMap();
-
+        vista.addSelectorView(new SelectorView(selector,window));
         window.fill();
         MapView mapView(map,window);
 //	UnitView unitView(model.createUnit(WIDTH/2, HEIGHT/2),window);
@@ -98,12 +101,14 @@ int main(int argc, const char* argv[]) {
                 camara.setY(map.getHeight() - camara.getHeight());
             }
 
-
+            selector.pos.x = mouse_x+camara.getX();
+            selector.pos.y = mouse_y+camara.getY();
+          
             SDL_Event event;
             mapView.draw(camara);
             vista.draw();
             lightInfantryCreator.draw();
-            while (SDL_PollEvent(&event)) {
+                        while (SDL_PollEvent(&event)) {
                 switch(event.type) {
                     case SDL_QUIT:
                         running = false;
@@ -117,30 +122,18 @@ int main(int argc, const char* argv[]) {
 //                            Unit* objetiveUnit = map.getClosestUnit(pos, 50 * 50);
 
 
-                            if (selectedUnit != nullptr) {
-                                model.actionOnPosition(pos, *selectedUnit);
-//                                Unit* objetiveUnit = map.getClosestEnemyUnit(pos, 50 * 50, *selectedUnit);
-//                                if (objetiveUnit != nullptr && objetiveUnit != selectedUnit) {
-////								selectedUnit->attack(*objetiveUnit);
-//                                    // Descomentar y comentar el ataque para que la unidad siga a otra hasta alcanzarla y matarla
-//                                    // No funciona si la unidad a seguir se encuentra en movimiento
-//                                    selectedUnit->follow(objetiveUnit, map);
-//                                } else {
-//                                    map.setDestiny(*selectedUnit, mouse_x + camara.getX(), mouse_y + camara.getY());
-//                                }
+                            for (auto& unit:selector.selection.getSelectedUnits()){
+                                model.actionOnPosition(pos, *unit);
                             }
 
                         } else if (event.button.button == SDL_BUTTON_LEFT){
+                            selector.drag = false;
+                            Area selectArea(selector.drag_source,selector.pos);
+                            std::vector<Unit*> selection = model.selectUnitsInArea(selectArea,player);
+                            selector.addSelection(selection); 
                             window.grabMouse(false);
                             left_click = false;
-                            // TMP //
-                            int x, y;
-                            SDL_GetMouseState(&x, &y);
-                            Position pos(x + camara.getX(), y + camara.getY());
-//                            selectedUnit = map.getClosestUnit(pos, 32 * 32);
-                            selectedUnit = model.selectUnit(pos, 0);
-                            // END_TMP //
-                        }
+                         }
                         break;
                     case SDL_KEYDOWN:
                         switch( event.key.keysym.sym ){
@@ -169,6 +162,8 @@ int main(int argc, const char* argv[]) {
                             if (((mouse_x >= 650) && (mouse_x <= 716)) && ((mouse_y >= 500) && (mouse_y <= 566))) {
                                 model.createHeavyInfantry(500,500, 1);
                             }
+                            selector.drag = true;
+                            selector.drag_source = selector.pos;
                         }
                         break;
                     case SDL_MOUSEMOTION:
@@ -182,9 +177,11 @@ int main(int argc, const char* argv[]) {
             }
 			model.step();
 			vista.cleanDeadUnitViews();
+            selector.selection.eraseDeads();
             if (Unit::isDead(selectedUnit))
                 selectedUnit = nullptr;
             window.render();
+
         }
     } catch (const SdlException& e) {
         std::cerr << e.what() << std::endl;

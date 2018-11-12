@@ -1,6 +1,6 @@
 #include "Attackable.h"
 
-Attackable::Attackable(const int life) : life(life) {}
+Attackable::Attackable(const int life) : life(life),initial_life(life) {}
 
 int Attackable::getLife() {
     return life;

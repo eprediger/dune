@@ -16,20 +16,20 @@ SelectorView::SelectorView(Selector& selector, SdlWindow& window)
 
 void SelectorView::drawLife(Building* building, Area& camara){
     max_life.w = building->getInitialLife()/4;
-    if (max_life.w > 80)
-        max_life.w = 80;
+    if (max_life.w > 60)
+        max_life.w = 60;
     max_life.x = building->getPosition().x - 20 - camara.getX();
     max_life.y = building->getPosition().y + 10 - camara.getY();
     SDL_SetRenderDrawColor(window.getRenderer(),0,0,0,0xFF);
     SDL_RenderFillRect(window.getRenderer(),&max_life);
-    short factor = short(building->getLife())/short(building->getInitialLife());
+    float factor = float(building->getLife())/float(building->getInitialLife());
     current_life.w = max_life.w * factor;
     current_life.x = max_life.x;
     current_life.y = max_life.y;
     int r,g;
     if (factor<0.65){
         if (factor<0.3){
-            r = 128;
+            r = 200;
             g = 0;
         } else {
             r = 160;
@@ -48,22 +48,22 @@ void SelectorView::drawLife(Unit* unit,Area& camara){
     max_life.w = unit->getInitialLife()/2;
     max_life.x = unit->getPosition().x - 20 - camara.getX();
     max_life.y = unit->getPosition().y + 10 - camara.getY();
-    if (max_life.w > 80)
-        max_life.w = 80;
+    if (max_life.w > 60)
+        max_life.w = 60;
     SDL_SetRenderDrawColor(window.getRenderer(),0,0,0,0xFF);
     SDL_RenderFillRect(window.getRenderer(),&max_life);
-    short factor = short(unit->getLife())/short(unit->getInitialLife());
+    float factor = float(unit->getLife())/float(unit->getInitialLife());
     current_life.w = max_life.w * factor;
     current_life.x = max_life.x;
     current_life.y = max_life.y;
     int r,g;
     if (factor<0.65){
         if (factor<0.3){
-            r = 128;
+            r = 255;
             g = 0;
         } else {
-            r = 160;
-            g = 160;
+            r = 200;
+            g = 80;
         }
     } else {
         r = 0;
