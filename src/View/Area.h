@@ -1,9 +1,6 @@
 #ifndef __AREA_H__
 #define __AREA_H__
 
-#ifndef WINDOW_AREA_H
-#define WINDOW_AREA_H
-
 #include "../Position.h"
 
 class Area {

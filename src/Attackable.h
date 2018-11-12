@@ -13,8 +13,6 @@ public:
     virtual int getLife();
     virtual int getInitialLife();
 
-    virtual int getInitialLife();
-
     virtual void reciveAttack(const Weapon &weapon);
 
     virtual void reciveBonusDammage(const Weapon &weapon) = 0;
