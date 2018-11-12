@@ -1,5 +1,5 @@
-#ifndef WINDOW_SDLEXCEPTION_H
-#define WINDOW_SDLEXCEPTION_H
+#ifndef __SDLEXCEPTION_H__
+#define __SDLEXCEPTION_H__
 
 #include <exception>
 #include <string>
@@ -16,4 +16,4 @@ private:
 	std::string msg;
 };
 
-#endif //WINDOW_SDLEXCEPTION_H
+#endif	// __SDLEXCEPTION_H__

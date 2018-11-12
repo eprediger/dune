@@ -3,7 +3,7 @@
 #include "Terrains/Precipice.h"
 #include "Terrains/Summit.h"
 #include "AStar.h"
-#include "CustomException.h"
+#include "Common/CustomException.h"
 #include "View/Area.h"
 #include <algorithm>
 

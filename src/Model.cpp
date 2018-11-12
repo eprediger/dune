@@ -1,6 +1,5 @@
 #include <algorithm>
 #include "Model.h"
-#include "View/View.h"
 #include "Unit/Harvester.h"
 #include "View/UnitViewFactory.h"
 #include "Buildings/Barracks.h"
@@ -11,9 +10,8 @@
 #include "Buildings/SpiceSilo.h"
 #include "Buildings/WindTrap.h"
 #include "View/BuildingViewFactory.h"
-#include "View/Area.h"
 
-Model::Model(int width, int height, int n_player, View &view) : map(width, height), view(view){
+Model::Model(int width, int height, int n_player, OldView &view) : map(width, height), view(view){
     // reemplazar luego por un vector de players
     for (int i=0; i< n_player; ++i){
         players.emplace(players.end(),i);

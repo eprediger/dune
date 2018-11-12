@@ -1,6 +1,6 @@
 # Ignorar proyecto de CLion
-.idea
-cmake-build-debug
+.idea/
+cmake-build-debug/
 
 # Files that won't be included
 *.pdf
@@ -11,18 +11,7 @@ notas-tp4.txt
 
 # Directories that won't be included
 .idea/
-cmake-build-debug/
-test/
-informe/
-entregas/
-inputs/
-local_output/
 build/
-
-# Directories that could be included
-imgs/
-terrain/
-sounds/
 
 # Prerequisites
 *.d

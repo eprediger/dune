@@ -2,34 +2,27 @@
 #define __VIEW_H__
 
 #include "SdlWindow.h"
-#include "MapView.h" 
-#include "UnitView.h"
-#include "BuildingView.h"
-#include <memory>
-#include "SelectorView.h"
+#include "SdlTexture.h"
+#include "Sound.h"
+#include "Text.h"
+#include "TextBox.h"
+
+#define TITLE_FONT_SIZE 80
+
 class View {
-private:
-    std::vector<UnitView*> unit_views;
-    std::vector<BuildingView*> building_views;
-    SelectorView* selectorView;
-//    std::vector<MapView> map_view;
-    SdlWindow& window;
-    Area& camera;
-
 public:
-    View(SdlWindow &window, Area &camera);
-    ~View();
+    // Se inicializan recursos asociados a la vista
+    // View(Model& model, const int width, const int height)
+    View(const int width, const int height);
 
-    SdlWindow& getWindow();
-    void addUnitView(UnitView* unitView);
+    // Se liberan recursos asociados a la instancia
+    virtual ~View();
 
-    void addBuildingView(BuildingView* buildingView);
+    // Se dibuja vista en la pantalla
+    virtual void render() = 0;
 
-    void addSelectorView(SelectorView* selectorView);
-
-    void draw();
-
-    void cleanDeadUnitViews();
-
+protected:
+    SdlWindow window;
 };
-#endif //__VIEW_H__
+
+#endif	// __VIEW_H__

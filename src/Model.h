@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "Unit/OffensiveUnit.h"
 #include "Player.h"
-#include "View/View.h"
+#include "View/OldView.h"
 #include "View/Area.h"
 #include <vector>
 #include <memory>
@@ -14,14 +14,14 @@
 
 class Model {
 private:
-    View& view;
+    OldView& view;
 	Map map;
 	std::vector<Unit*> units;
 	std::vector<Building*> buildings;
     std::vector<Player> players;
 
 public:
-    Model(int width, int height, int n_player, View &view);
+    Model(int width, int height, int n_player, OldView &view);
     ~Model();
 
 //    Map& createMap();

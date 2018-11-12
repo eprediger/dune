@@ -2,7 +2,7 @@
 #define __ROCKET_VIEW_H__
 
 #include "../Weapons/Rocket.h"
-#include "View.h"
+#include "OldView.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <vector>

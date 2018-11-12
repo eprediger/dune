@@ -1,16 +1,9 @@
-//
-// Created by emiliano on 24/10/18.
-//
-
-#ifndef WINDOW_AREA_H
-#define WINDOW_AREA_H
-
-#include "../Position.h"
+#ifndef __AREA_H__
+#define __AREA_H__
 
 class Area {
 public:
 	Area(int x, int y, int width, int height);
-	Area(const Position& pos1,const Position& pos2);
 	void setX(int x);
 	void setY(int y);
 	int getX() const;
@@ -22,5 +15,4 @@ private:
 	int width, height;
 };
 
-
-#endif //WINDOW_AREA_H
+#endif	// __AREA_H__

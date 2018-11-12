@@ -1,9 +1,5 @@
-//
-// Created by emiliano on 24/10/18.
-//
-
-#ifndef WINDOW_SDLTEXTURE_H
-#define WINDOW_SDLTEXTURE_H
+#ifndef __SDLTEXTURE_H__
+#define __SDLTEXTURE_H__
 
 #include <SDL2/SDL_image.h>
 #include "SdlWindow.h"
@@ -13,25 +9,25 @@
 
 class SdlTexture {
 public:
-    SdlTexture(const std::string &filename, const SdlWindow& window);
-    ~SdlTexture();
+	SdlTexture(const std::string& filename, const SdlWindow& window);
+	
+	~SdlTexture();
 
-    SDL_Texture* loadTexture(const std::string &filename);
+	SDL_Texture* loadTexture(const std::string &filename);
 
-    // Retorna el ancho de la textura
-    int getWidth();
+	int setColor();
+	
+	int render(const Area &src, const Area &dest);
 
-    // Retorna el alto de la textura
-    int getHeigth();
+	// renderiza la textura completa en su tamaño original,
+	// en la posición (x, y) de la ventana
+	int render(const int x, const int y);
 
-    int setColor();
-    int render(const Area &src, const Area &dest);
-
+	int width, height;
 private:
-    SDL_Renderer* renderer;
-    SDL_Texture* texture;
-    int textureWidth, textureHeight;
+	SDL_Renderer* renderer;
+	SDL_Texture* texture;
 };
 
 
-#endif //WINDOW_SDLTEXTURE_H
+#endif  // __SDLTEXTURE_H__

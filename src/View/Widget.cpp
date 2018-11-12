@@ -23,7 +23,7 @@ Widget::~Widget() {
 
 void Widget::draw() {
     Area src(0, 0, 66, 66);
-    int scaledWidth = texture->getWidth(), scaledHeight = texture->getHeigth();
+//    int scaledWidth = texture->getWidth(), scaledHeight = texture->getHeigth();
     Area dest(650, 500, 66, 66);
     this->texture->render(src, dest);
 }

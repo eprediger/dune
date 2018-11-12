@@ -1,8 +1,8 @@
 #include "Sound.h"
+#include <string>
 #include "SdlException.h"
 
 Sound::Sound(const std::string& filename) : 
-	filename(filename),
 	music(nullptr) {
     int result = 0;
     int flags = MIX_INIT_MP3;
@@ -15,16 +15,15 @@ Sound::Sound(const std::string& filename) :
 
 Sound::~Sound() {
     Mix_FreeMusic(this->music);
-    SDL_Quit();
+    Mix_Quit();
     this->music = nullptr;
 }
 
 void Sound::run() {
-    Mix_PlayMusic(this->music, 0);
+    Mix_PlayMusic(this->music, -1);
     bool isPlaying = true;
     while (!SDL_QuitRequested() && isPlaying) {
         isPlaying = Mix_PlayingMusic();
-        SDL_Delay(250);
     }
 }
 

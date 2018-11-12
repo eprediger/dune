@@ -11,6 +11,20 @@ El objetivo es simple: destruir a todos los adversarios y quedarse con el contro
 
 En este remake, el jugador podrá elegir jugar con una de las tres Casas: los nobles Atreides, los insidiosos Ordos y los malvados Harkonnen
 
+### Compilación
+
+Instalación de librerías externas:
+
+	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+Compilación desde carpeta de proyecto:
+
+	mkdir build; cd build; rm -rf *; cmake ..; make
+
+Ejecución desde carpeta build/:
+
+	./dune
+
 ### USER STORIES
 
 * Servidor:

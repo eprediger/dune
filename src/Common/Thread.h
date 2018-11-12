@@ -27,4 +27,4 @@ private:
 	std::thread thread;
 };
 
-#endif
+#endif	// __THREAD_H__

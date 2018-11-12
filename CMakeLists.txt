@@ -13,9 +13,9 @@ FIND_PACKAGE(SDL2 REQUIRED)
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	SET(GCC_COVERAGE_LINK_FLAGS "-Wl -lSDL2 -lSDL2_mixer")
+	SET(GCC_COVERAGE_LINK_FLAGS "-Wl -lSDL2_ttf -lSDL2_mixer -lSDL2")
 else()
-	SET(GCC_COVERAGE_LINK_FLAGS "-Wl,--no-as-needed -lSDL2 -lSDL2_mixer")
+	SET(GCC_COVERAGE_LINK_FLAGS "-Wl,--no-as-needed -lSDL2_ttf -lSDL2_mixer -lSDL2")
 endif()
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
@@ -27,9 +27,6 @@ file(GLOB SOURCE
 		src/*/*/*.cpp
 		src/*/*/*.h
         )
-
-message("Agregando '${PROJECT_BINARY_DIR}' como directorio de includes")
-include_directories(${PROJECT_BINARY_DIR})
 
 add_executable(${PROJECT_NAME}
                ${SOURCE})
