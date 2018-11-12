@@ -42,12 +42,12 @@ Building &Model::createBuilding(Building *building) {
 
 void Model::step() {
 //    for (auto unit : units){
+    this->cleanDeadUnits();
 	for (auto itr = units.begin(); itr != units.end(); ++itr) {
 //        (*itr)->move();
 		(*itr)->makeAction(map);
 //        (*itr)->automaticAttack(map);
     }
-    this->cleanDeadUnits();
 }
 
 Unit *Model::selectUnit(int x, int y) {
@@ -69,11 +69,19 @@ void Model::cleanDeadUnits() {
         if (Unit::isDead(u)){
             has_dead_unit = true;
             map.cleanUnit(u);
-            delete u;
+        } else {
+            u->checkForDeadVictim();
         }
     }
     if (has_dead_unit){
-        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
+        std::vector<Unit*>::iterator it = units.begin();
+        while (it!=units.end()){
+            if (Unit::isDead((*it))){
+                delete(*it);
+                it = units.erase(it);
+            }
+            else it++;
+        }
     }
 }
 
@@ -173,18 +181,20 @@ void Model::createWindTrap(int x, int y, int player) {
     this->createBuilding(std::move(building));
 }
 
+
 Unit * Model::selectUnit(Position &pos, int player) {
 //    map.getClosestUnit(pos, 50*50, players.at(player), true);
     return map.getClosestUnit(pos, 50*50);
 }
 
 void Model::actionOnPosition(Position &pos, Unit &unit) {
-    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
-    if (foll_unit != nullptr){
-        unit.follow(foll_unit, map);
-    } else {
-        map.setDestiny(unit, pos.x, pos.y);
-    }
+    unit.actionOnPosition(map, pos);
+//    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
+//    if (foll_unit != nullptr){
+//        unit.follow(foll_unit, map);
+//    } else {
+//        map.setDestiny(unit, pos.x, pos.y);
+//    }
 
     // Hacer lo mismo con los edificios
 }

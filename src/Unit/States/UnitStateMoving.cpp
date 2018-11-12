@@ -3,6 +3,10 @@
 #include "../Unit.h"
 
 UnitState *UnitStateMoving::makeAction(Map &map, Unit &unit) {
-    unit.move(map);
-    return this;
+    if (unit.move(map) ){
+        return this;
+    } else {
+        return (UnitState*)&Unit::stopped;
+    }
+
 }

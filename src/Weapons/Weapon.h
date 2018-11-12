@@ -9,6 +9,7 @@ protected:
 public:
     Weapon(int damage, int frecuency, int bonus);
     ~Weapon();
+    int getFrecuency() const;
     int getDammage() const;
     virtual int getInfantryBonus() const = 0;
     virtual int getVehicleBonus() const = 0;

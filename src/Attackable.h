@@ -11,6 +11,7 @@ public:
     Attackable(const int life);
 
     virtual int getLife();
+    virtual int getInitialLife();
 
     virtual int getInitialLife();
 

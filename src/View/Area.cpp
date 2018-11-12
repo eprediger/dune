@@ -1,4 +1,6 @@
 #include "Area.h"
+#include "../Position.h"
+#include <cstdlib>
 
 Area::Area(int x, int y, int width, int height) :
 	x(x),
@@ -6,7 +8,20 @@ Area::Area(int x, int y, int width, int height) :
 	width(width),
 	height(height) {}
 
-void Area::setX(int x) {
+Area::Area(const Position& pos1,const Position& pos2){
+    if (pos1.x < pos2.x)
+        x = pos1.x;
+    else
+        x = pos2.x;
+    if (pos1.y < pos2.y)
+        y = pos1.y;
+    else 
+        y = pos2.y;
+    width = abs(pos1.x - pos2.x);
+    height = abs(pos1.y - pos2.y);
+}
+
+void Area::setX(int x){
 	this->x = x;
 }
 

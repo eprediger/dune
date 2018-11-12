@@ -6,6 +6,7 @@
 class UnitStateAttacking : public UnitState {
 public:
     virtual UnitState *makeAction(Map &map, Unit &unit) override;
+    virtual bool isAttacking() override;
 };
 
 

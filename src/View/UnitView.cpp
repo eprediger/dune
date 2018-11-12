@@ -13,6 +13,8 @@ UnitView::UnitView(Unit& unit
 	,orientation()
 {}
 
+UnitView::~UnitView() {}
+
 Unit &UnitView::getUnit() {
 	return unit;
 }
@@ -20,6 +22,3 @@ Unit &UnitView::getUnit() {
 bool UnitView::isDead(const UnitView *unit_view) {
     return Unit::isDead(&unit_view->unit);
 }
-
-
- 

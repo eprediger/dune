@@ -13,8 +13,8 @@ TankView::TankView(Tank& tank, SdlWindow& window)
 	:UnitView(tank,window)
     ,tank(tank)
     ,attacking(false)
-    ,update_sprite(0)
     ,anim_it()
+    ,update_sprite(0)
 { 	
     if (sprites.empty()){  
     sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000ba250.bmp",window)));		
@@ -92,11 +92,15 @@ void TankView::draw(Area& camara){
 	Area dest(pos.getX()- 18 - camara.getX(),pos.getY()-18 - camara.getY() ,35,35);
 	orientation.calcular(prev_pos,pos);
 
-    if (tank.attacking && !attacking){
-        update_sprite = 0;
-        attacking = true;
-        comenzar_ataque();
-    } 
+    if (tank.isAttacking()) {
+        if (!attacking) {
+            update_sprite = 0;
+            attacking = true;
+            comenzar_ataque();
+        }
+    } else {
+        attacking = false;
+    }
     while (attacking){
         (*anim_it)->render(Area(0,0,30,30),dest);
         if (update_sprite == 10){
@@ -105,7 +109,7 @@ void TankView::draw(Area& camara){
         }
         update_sprite+=1;
         if (anim_it == attack_sprites.at(orientation.getValor()).end()){
-            tank.attacking = false;
+//            tank.attacking = false;
             attacking = false;
         }
         return;

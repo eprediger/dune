@@ -7,6 +7,7 @@ class Map;
 class UnitState {
 public:
     virtual UnitState *makeAction(Map &map, Unit &unit) = 0;
+    virtual bool isAttacking();
 
 };
 

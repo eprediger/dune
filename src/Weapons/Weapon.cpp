@@ -10,3 +10,7 @@ Weapon::~Weapon() {}
 int Weapon::getDammage() const {
     return damage;
 }
+
+int Weapon::getFrecuency() const{
+    return frecuency;
+}

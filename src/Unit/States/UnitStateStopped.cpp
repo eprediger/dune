@@ -1,5 +1,7 @@
 #include "UnitStateStopped.h"
 
+#include "../Unit.h"
+
 UnitState *UnitStateStopped::makeAction(Map &map, Unit &unit) {
-    return this;
+    return unit.makeStopped(map);
 }
