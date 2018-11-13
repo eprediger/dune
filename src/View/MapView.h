@@ -9,10 +9,10 @@
 
 class MapView {
 public:
-	MapView(Map& mapa, SdlWindow& window);
+	MapView(Map &map, SdlWindow &window);
 	void draw(Area& camara);
 private:
-	Map& mapa;
+	Map& map;
 	SdlTexture terrenos;
 	std::map<char, Area> areas;
 };

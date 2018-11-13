@@ -35,6 +35,28 @@ bool GameHandler::handleInput() {
 				// std::cout << "Suelta en x: " << this->cursor.current_x << " y: " << this->cursor.current_y << std::endl;
 			}
 			break;
+		case SDL_KEYDOWN:
+			switch( event.key.keysym.sym ){
+				case SDLK_LEFT:
+					std::cout << " Izquierda " << std::endl;
+					view.moveLeft(4);
+					break;
+				case SDLK_RIGHT:
+					std::cout << " Derecha " << std::endl;
+					view.moveRight(4);
+					break;
+				case SDLK_DOWN:
+					std::cout << " Abajo " << std::endl;
+					view.moveDown(4);
+					break;
+				case SDLK_UP:
+					std::cout << " Arriba " << std::endl;
+					view.moveUp(4);
+					break;
+				default:
+					break;
+			}
+			break;
 	}
 	return true;
 }

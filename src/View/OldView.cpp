@@ -6,7 +6,7 @@
 #include "View.h"
 
 OldView::OldView(const int width, const int height, Model &model) :
-		View(width, height),
+		View(width/2, height/2),
 		camera(0, 0, width/2, height/2),
 		map_view(model.getMap(), window),
 		selectorView(nullptr),
@@ -17,7 +17,11 @@ OldView::OldView(const int width, const int height, Model &model) :
 		moneyBalance(0),
 		buildings(),
 		units(),
-		buttons("../assets/img/btns/cantSell.png", this->window) {
+		buttons("../assets/img/btns/cantSell.png", this->window),
+		map_width(width),
+		map_height(height),
+		camera_width(width/2),
+		camera_height(height/2){
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
@@ -155,4 +159,24 @@ void OldView::RenderVPBar(int x, int y, int w, int h, float percent, SDL_Color F
 	SDL_Rect fgrect = { x, py, w, ph };
 	SDL_RenderFillRect(this->window.getRenderer(), &fgrect);
 	SDL_SetRenderDrawColor(this->window.getRenderer(), old.r, old.g, old.b, old.a);
+}
+
+void OldView::moveUp(int distance) {
+	int new_y = camera.getY() - distance;
+	camera.setY(new_y > 0 ? new_y : 0);
+}
+
+void OldView::moveDown(int distance) {
+	int new_y = camera.getY() + distance;
+	camera.setY((new_y < (map_height - camera_height)) ? new_y : map_height - camera_height);
+}
+
+void OldView::moveLeft(int distance) {
+	int new_x = camera.getX() - distance;
+	camera.setX((new_x > 0) ? new_x : 0);
+}
+
+void OldView::moveRight(int distance) {
+	int new_x = camera.getX() + distance;
+	camera.setX((new_x < (map_width - camera_width)) ? new_x : map_width - camera_width);
 }

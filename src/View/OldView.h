@@ -26,6 +26,10 @@ private:
 	std::vector<SdlTexture*> buildings;
 	std::vector<SdlTexture*> units;
 	SdlTexture buttons;
+	int map_width;
+	int map_height;
+	int camera_width;
+	int camera_height;
 
 public:
 	OldView(const int width, const int height, Model &model);
@@ -41,6 +45,11 @@ public:
 	void RenderVPBar(int x, int y, int w, int h, float percent, SDL_Color FGColor, SDL_Color BGColor);
 
 	void cleanDeadUnitViews();
+
+	void moveUp(int distance);
+	void moveDown(int distance);
+	void moveLeft(int distance);
+	void moveRight(int distance);
 
 	void render() override;
 

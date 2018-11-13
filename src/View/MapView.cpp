@@ -5,8 +5,8 @@
 #include "../Model/Map.h"
 #include "Area.h"
 
-MapView::MapView(Map& mapa, SdlWindow& window) :
-	mapa(mapa),
+MapView::MapView(Map &mapa, SdlWindow &window) :
+	map(mapa),
 	terrenos("../terrain/d2k_BLOXBASE.bmp", window),
 	areas() {
 	areas.emplace(std::make_pair('A', Area(0, 8, 32, 32)));
@@ -19,19 +19,20 @@ MapView::MapView(Map& mapa, SdlWindow& window) :
 void MapView::draw(Area& camara) {
 	int i = camara.getY() / 32;
 	int lim_i = i + 1 + (camara.getHeight() / 32);
-	if (lim_i > mapa.getHeightInBlocks()) {
+	if (lim_i > map.getHeightInBlocks()) {
 		lim_i -= 1;
 	}
 
 	int j = camara.getX() / 32;
 	int lim_j = j + 1 + (camara.getWidth() / 32);
-	if (lim_j > mapa.getWidthInBlocks()) {
+	if (lim_j > map.getWidthInBlocks()) {
 		lim_j -= 1;
 	}
 
 	for (; i < lim_i ; i++) {
 		for (j = camara.getX() / 32; j < lim_j ; j++) {
-			terrenos.render(areas.at(mapa.blockAt(j, i).getKey()), Area(j * 32 - camara.getX(), i * 32 - camara.getY(), 32, 32));
+			terrenos.render(areas.at(map.blockAt(j, i).getKey()), Area(j * 32 - camara.getX(), i * 32 - camara.getY(), 32, 32));
 		}
 	}
 }
+
