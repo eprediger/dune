@@ -11,12 +11,9 @@
 std::map<int, SdlTexture*> RaiderView::raider_sprites;
 std::map<int, std::vector<SdlTexture*> > RaiderView::attack_sprites;
 
-RaiderView::RaiderView(Raider& raider, SdlWindow& window) :
-	UnitView(raider, window),
-	raider(raider),
-	attacking(false),
-	anim_it(),
-	update_sprite(0) {
+RaiderView::RaiderView(Raider& raider, SdlWindow& window)
+	:OffensiveUnitView(raider,Area(0,0,30,30))   
+{
 	if (raider_sprites.empty()) {
 		raider_sprites.emplace(std::make_pair(Orientation::indefinida(), new SdlTexture("../imgs/imgs/000a08e6.bmp", window)));
 		raider_sprites.emplace(std::make_pair(Orientation::norte(), new SdlTexture("../imgs/imgs/0009e6d8.bmp", window)));
@@ -79,39 +76,10 @@ RaiderView::RaiderView(Raider& raider, SdlWindow& window) :
 	}
 }
 
-void RaiderView::comenzar_ataque() {
-	orientation.calcular(prev_pos, raider.getVictimPosition());
-	anim_it = attack_sprites.at(orientation.getValor()).begin();
-}
 
-void RaiderView::draw(Area& camara) {
-	Position pos = unit.getPosition();
-	Area dest(pos.getX() - 15 - camara.getX(), pos.getY() - 15 - camara.getY() , 30, 30);
-	orientation.calcular(prev_pos, pos);
-
-//	attacking = false;
-	if (raider.isAttacking()) {
-		if (!attacking) {
-			update_sprite = 0;
-			attacking = true;
-			comenzar_ataque();
-		}
-	} else {
-		attacking = false;
+void RaiderView::draw(Area& camara){ 
+	if (offensiveUnit.isAttacking() || animating_attack){
+		drawAttack(camara,attack_sprites);
 	}
-	while (attacking) {
-		(*anim_it)->render(Area(0, 0, 30, 30), dest);
-		if (update_sprite == 10) {
-			anim_it++;
-			update_sprite = 0;
-		}
-		update_sprite += 1;
-		if (anim_it == attack_sprites.at(orientation.getValor()).end()) {
-//            raider.attacking = false;
-			attacking = false;
-		}
-		return;
-	}
-	prev_pos = pos;
-	raider_sprites.at(orientation.getValor())->render(Area(0, 0, 30, 30), dest);
+	else UnitView::draw(camara,raider_sprites);
 }

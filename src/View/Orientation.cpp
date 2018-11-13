@@ -27,6 +27,10 @@ void Orientation::calcular(const Position& p1,const Position& p2){
 	}
 }
 
+bool Orientation::operator==(const Orientation& other){
+	return this->valor == other.valor;
+}
+
 int Orientation::getValor(){
 	return this->valor;
 }

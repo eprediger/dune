@@ -11,11 +11,8 @@ std::map<int,SdlTexture*> TrikeView::trike_sprites;
 std::map<int,std::vector<SdlTexture*> > TrikeView:: attack_sprites;
 
 TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
-	UnitView(trike,window),
-	trike(trike),
-	attacking(false),
-	anim_it(),
-	update_sprite(0) {
+	OffensiveUnitView(trike,Area(0,0,25,25))
+{
     if (trike_sprites.empty()){  
         trike_sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/0009e9ca.bmp",window)));		
 		trike_sprites.emplace(std::make_pair(Orientation::norte(),new SdlTexture("../imgs/imgs/0009e6d8.bmp",window)));
@@ -78,38 +75,9 @@ TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
 	}  
 }  
 
-void TrikeView::comenzar_ataque() {
-    orientation.calcular(prev_pos,trike.getVictimPosition());
-    anim_it = attack_sprites.at(orientation.getValor()).begin();
-}
- 
 void TrikeView::draw(Area& camara){ 
-    Position pos = unit.getPosition();
-	Area dest(pos.getX()- 13 - camara.getX(),pos.getY()-13 - camara.getY() ,25,25);
-	orientation.calcular(prev_pos,pos);
-
-    if (trike.isAttacking()) {
-		if (!attacking) {
-			update_sprite = 0;
-			attacking = true;
-			comenzar_ataque();
-		}
-	} else {
-		attacking = false;
+	if (offensiveUnit.isAttacking()||animating_attack){
+		drawAttack(camara,attack_sprites);
 	}
-    while (attacking){
-        (*anim_it)->render(Area(0,0,30,30),dest);
-        if (update_sprite == 10){
-            anim_it++;
-            update_sprite = 0;
-        }
-        update_sprite+=1;
-        if (anim_it == attack_sprites.at(orientation.getValor()).end()){
-//            trike.attacking = false;
-            attacking = false;
-        }
-        return;
-    }
-    prev_pos = pos;
-    trike_sprites.at(orientation.getValor())->render(Area(0,0,30,30),dest);
+	else UnitView::draw(camara,trike_sprites);
 }

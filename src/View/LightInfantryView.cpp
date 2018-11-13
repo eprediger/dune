@@ -10,13 +10,9 @@
 std::map<int, std::vector<SdlTexture*> > LightInfantryView::sprites;
 std::map<int, std::vector<SdlTexture*> > LightInfantryView::attack_sprites;
 LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
-                                     , SdlWindow& window) :
-    UnitView(lightInfantry, window),
-    lightInfantry(lightInfantry),
-    attacking(false),
-    prev_orient(),
-    attack_orient(),
-    update_sprite(0) {
+                                     , SdlWindow& window)
+    :OffensiveUnitView(lightInfantry,Area(0,0,20,20)) 
+{
     if (sprites.empty()) {
         std::vector<SdlTexture*> indef;
         indef.emplace_back(new SdlTexture("../imgs/imgs/00061b8d.bmp", window));
@@ -144,56 +140,9 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
     anim_it = sprites.at(orientation.getValor()).begin();
 }
 
-void LightInfantryView::comenzar_ataque() {
-    orientation.calcular(prev_pos, lightInfantry.getVictimPosition());
-    anim_it = attack_sprites.at(orientation.getValor()).begin();
-}
-
-void LightInfantryView::draw(Area& camara) {
-    Position pos = unit.getPosition();
-    Area dest(pos.getX() - 6 - camara.getX(), pos.getY() - 8 - camara.getY() , 25, 25);
-    orientation.calcular(prev_pos, pos);
-
-    if (lightInfantry.isAttacking()) {
-        if (!attacking) {
-            update_sprite = 0;
-            attacking = true;
-            comenzar_ataque();
-        }
-    } else {
-        attacking = false;
+void LightInfantryView::draw(Area& camara){ 
+    if (offensiveUnit.isAttacking() || animating_attack){
+        drawAttack(camara,attack_sprites);
     }
-
-    while (attacking) {
-        (*anim_it)->render(Area(0, 0, 25, 25), dest);
-        if (update_sprite == 60) {
-            anim_it++;
-            update_sprite = 0;
-        }
-        update_sprite += 1;
-        if (anim_it == attack_sprites.at(orientation.getValor()).end()) {
-            anim_it = sprites.at(orientation.getValor()).begin();
-//            lightInfantry.attacking = false;
-            attacking = false;
-        }
-        return;
-    }
-
-    if (orientation.getValor() == prev_orient.getValor()) {
-        if (!(pos == prev_pos)) {
-            if (update_sprite == 2) {
-                anim_it++;
-                update_sprite = 0;
-            }
-            update_sprite += 1;
-            if (anim_it == sprites.at(orientation.getValor()).end()) {
-                anim_it = sprites.at(orientation.getValor()).begin();
-            }
-        }
-        (*anim_it)->render(Area(0, 0, 12, 16), dest);
-    }
-    else anim_it = sprites.at(orientation.getValor()).begin();
-    prev_orient = orientation;
-    prev_pos = pos;
-    (*anim_it)->render(Area(0, 0, 12, 16), dest);
+    else UnitView::draw(camara,sprites,anim_it,update);
 }

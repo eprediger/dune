@@ -15,6 +15,7 @@ class Orientation{
 		static int este();
 		static int noreste();
 		void calcular(const Position& p1,const Position& p2);
+		bool operator==(const Orientation& other);
 		int getValor();
 		Orientation();		
 	private:

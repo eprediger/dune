@@ -10,11 +10,8 @@ std::map<int,SdlTexture*> TankView::sprites;
 std::map<int, std::vector<SdlTexture*> > TankView::attack_sprites;
 
 TankView::TankView(Tank& tank, SdlWindow& window) :
-	UnitView(tank,window),
-    tank(tank),
-    attacking(false),
-    anim_it(),
-    update_sprite(0) { 	
+	OffensiveUnitView(tank,Area(0,0,30,30))
+{ 	
     if (sprites.empty()){  
     sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000ba250.bmp",window)));		
     sprites.emplace(std::make_pair(Orientation::norte(),new SdlTexture("../imgs/imgs/000b748d.bmp",window)));
@@ -79,38 +76,9 @@ TankView::TankView(Tank& tank, SdlWindow& window) :
 }  
 
 
-void TankView::comenzar_ataque(){
-    orientation.calcular(prev_pos,tank.getVictimPosition());
-    anim_it = attack_sprites.at(orientation.getValor()).begin();
-}
- 
 void TankView::draw(Area& camara){ 
-    Position pos = unit.getPosition();
-	Area dest(pos.getX()- 18 - camara.getX(),pos.getY()-18 - camara.getY() ,35,35);
-	orientation.calcular(prev_pos,pos);
-
-    if (tank.isAttacking()) {
-        if (!attacking) {
-            update_sprite = 0;
-            attacking = true;
-            comenzar_ataque();
-        }
-    } else {
-        attacking = false;
+    if (offensiveUnit.isAttacking() || animating_attack){
+        drawAttack(camara,attack_sprites);
     }
-    while (attacking){
-        (*anim_it)->render(Area(0,0,30,30),dest);
-        if (update_sprite == 10){
-            anim_it++;
-            update_sprite = 0;
-        }
-        update_sprite+=1;
-        if (anim_it == attack_sprites.at(orientation.getValor()).end()){
-//            tank.attacking = false;
-            attacking = false;
-        }
-        return;
-    }
-    prev_pos = pos;
-    sprites.at(orientation.getValor())->render(Area(0,0,30,30),dest);
+    else UnitView::draw(camara,sprites);
 }
