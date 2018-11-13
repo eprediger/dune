@@ -47,9 +47,7 @@ void Model::step() {
 //    for (auto unit : units){
     this->cleanDeadUnits();
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
-//        (*itr)->move();
         (*itr)->makeAction(map);
-//        (*itr)->automaticAttack(map);
     }
 }
 
@@ -92,83 +90,83 @@ Player &Model::getPlayer(int player) {
     return players.at(player);
 }
 
-void Model::createHarvester(int x, int y, int player) {
+Harvester& Model::createHarvester(int x, int y, int player) {
     Harvester* harvester = new Harvester(x,y);
     harvester->setPlayer(players.at(player)); //Quitar luego y hacer player.add(harvester)
-    this->createUnit(harvester);
+    return (Harvester&)this->createUnit(harvester);
 }
 
-void Model::createHeavyInfantry(int x, int y, int player) {
+HeavyInfantry& Model::createHeavyInfantry(int x, int y, int player) {
     HeavyInfantry* heavyInfantry = new HeavyInfantry(x,y);
     heavyInfantry->setPlayer(players.at(player)); //Quitar luego y hacer player.add(heavyInfantry)
-    this->createUnit(heavyInfantry);
+    return (HeavyInfantry&)this->createUnit(heavyInfantry);
 }
 
-void Model::createLightInfantry(int x, int y, int player) {
+LightInfantry& Model::createLightInfantry(int x, int y, int player) {
     LightInfantry* lightInfantry = new LightInfantry(x,y);
     lightInfantry->setPlayer(players.at(player)); //Quitar luego y hacer player.add(lightInfantry)
-    this->createUnit(lightInfantry);
+    return (LightInfantry&)this->createUnit(lightInfantry);
 }
 
-Raider & Model::createRaider(int x, int y, int player) {
+Raider& Model::createRaider(int x, int y, int player) {
     Raider* raider = new Raider(x,y);
     raider->setPlayer(players.at(player)); //Quitar luego y hacer player.add(raider)
     return (Raider&)this->createUnit(raider);
 }
 
-void Model::createTank(int x, int y, int player) {
+Tank& Model::createTank(int x, int y, int player) {
     Tank* tank = new Tank(x,y);
     tank->setPlayer(players.at(player)); //Quitar luego y hacer player.add(tank)
-    this->createUnit(tank);
+    return (Tank&)this->createUnit(tank);
 }
 
-void Model::createTrike(int x, int y, int player) {
+Trike& Model::createTrike(int x, int y, int player) {
     Trike* trike = new Trike(x,y);
     trike->setPlayer(players.at(player)); //Quitar luego y hacer player.add(trike)
-    this->createUnit(trike);
+    return (Trike&)this->createUnit(trike);
 }
 
 // Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)
-void Model::createBarracks(int x, int y, int player) {
+Barracks& Model::createBarracks(int x, int y, int player) {
     Barracks* building = new Barracks(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (Barracks&)this->createBuilding(std::move(building));
 }
 
-void Model::createConstructionYard(int x, int y, int player) {
+ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
     ConstructionYard* building = new ConstructionYard(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (ConstructionYard&)this->createBuilding(std::move(building));
 }
 
-void Model::createHeavyFactory(int x, int y, int player) {
+HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
     HeavyFactory* building = new HeavyFactory(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (HeavyFactory&)this->createBuilding(std::move(building));
 }
 
-void Model::createLightFactory(int x, int y, int player) {
+LightFactory& Model::createLightFactory(int x, int y, int player) {
     LightFactory* building = new LightFactory(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (LightFactory&)this->createBuilding(std::move(building));
 }
 
-void Model::createSpiceRefinery(int x, int y, int player) {
+SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
     SpiceRefinery* building = new SpiceRefinery(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (SpiceRefinery&)this->createBuilding(std::move(building));
 }
 
-void Model::createSpiceSilo(int x, int y, int player) {
+SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
     SpiceSilo* building = new SpiceSilo(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (SpiceSilo&)this->createBuilding(std::move(building));
 }
 
-void Model::createWindTrap(int x, int y, int player) {
+WindTrap& Model::createWindTrap(int x, int y, int player) {
     WindTrap* building = new WindTrap(x, y);
     players.at(player).addBuilding(building);
-    this->createBuilding(std::move(building));
+    return (WindTrap&)this->createBuilding(std::move(building));
 }
 
 

@@ -6,6 +6,18 @@
 #include "Unit/OffensiveUnit.h"
 #include "Player.h"
 #include "Unit/Raider.h"
+#include "Unit/Trike.h"
+#include "Unit/Tank.h"
+#include "Unit/LightInfantry.h"
+#include "Unit/HeavyInfantry.h"
+#include "Unit/Harvester.h"
+#include "Buildings/Barracks.h"
+#include "Buildings/ConstructionYard.h"
+#include "Buildings/SpiceRefinery.h"
+#include "Buildings/SpiceSilo.h"
+#include "Buildings/WindTrap.h"
+#include "Buildings/HeavyFactory.h"
+#include "Buildings/LightFactory.h"
 #include <vector>
 #include <memory>
 
@@ -25,21 +37,21 @@ public:
 //    Map& createMap();
 	Map& getMap();
 
-    void createHarvester(int x, int y, int player);
-    void createHeavyInfantry(int x, int y, int player);
-    void createLightInfantry(int x, int y, int player);
-    Raider & createRaider(int x, int y, int player);
-    void createTank(int x, int y, int player);
-    void createTrike(int x, int y, int player);
+	Harvester& createHarvester(int x, int y, int player);
+	HeavyInfantry& createHeavyInfantry(int x, int y, int player);
+	LightInfantry& createLightInfantry(int x, int y, int player);
+	Raider& createRaider(int x, int y, int player);
+	Tank& createTank(int x, int y, int player);
+	Trike& createTrike(int x, int y, int player);
     Unit &createUnit(Unit *unit);
 
-    void createBarracks(int x, int y, int player);
-    void createConstructionYard(int x, int y, int player);
-    void createHeavyFactory(int x, int y, int player);
-    void createLightFactory(int x, int y, int player);
-    void createSpiceRefinery(int x, int y, int player);
-    void createSpiceSilo(int x, int y, int player);
-    void createWindTrap(int x, int y, int player);
+	Barracks& createBarracks(int x, int y, int player);
+	ConstructionYard& createConstructionYard(int x, int y, int player);
+	HeavyFactory& createHeavyFactory(int x, int y, int player);
+	LightFactory& createLightFactory(int x, int y, int player);
+	SpiceRefinery& createSpiceRefinery(int x, int y, int player);
+	SpiceSilo& createSpiceSilo(int x, int y, int player);
+	WindTrap& createWindTrap(int x, int y, int player);
 	Building &createBuilding(Building* building);
 
     Unit * selectUnit(Position &pos, int player);
