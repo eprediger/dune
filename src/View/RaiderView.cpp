@@ -10,6 +10,7 @@
 
 std::map<int, SdlTexture*> RaiderView::raider_sprites;
 std::map<int, std::vector<SdlTexture*> > RaiderView::attack_sprites;
+std::vector<SdlTexture*> RaiderView::dead_sprites;
 
 RaiderView::RaiderView(Raider& raider, SdlWindow& window)
 	:OffensiveUnitView(raider,Area(0,0,30,30))   
@@ -73,6 +74,20 @@ RaiderView::RaiderView(Raider& raider, SdlWindow& window)
 
 		attack_sprites.emplace(std::make_pair(Orientation::noreste(),
 		                                      std::move(noreste)));
+	
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e004b.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e06d5.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e10e6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e1d2a.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e2729.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e30a6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e3d02.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e591c.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e6697.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e744d.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e81c8.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e8dcf.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e99b9.bmp",window));
 	}
 }
 
@@ -82,4 +97,8 @@ void RaiderView::draw(Area& camara){
 		drawAttack(camara,attack_sprites);
 	}
 	else UnitView::draw(camara,raider_sprites);
+}
+
+DeadUnitView* RaiderView::getDeadUnitView(){
+	return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
 }

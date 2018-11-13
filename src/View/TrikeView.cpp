@@ -9,6 +9,7 @@
 
 std::map<int,SdlTexture*> TrikeView::trike_sprites;
 std::map<int,std::vector<SdlTexture*> > TrikeView:: attack_sprites;
+std::vector<SdlTexture*> TrikeView::dead_sprites;
 
 TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
 	OffensiveUnitView(trike,Area(0,0,25,25))
@@ -72,7 +73,21 @@ TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
 		
 		attack_sprites.emplace(std::make_pair(Orientation::noreste(),
 									std::move(noreste)));
-	}  
+
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e004b.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e06d5.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e10e6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e1d2a.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e2729.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e30a6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e3d02.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e591c.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e6697.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e744d.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e81c8.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e8dcf.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e99b9.bmp",window));
+	}
 }  
 
 void TrikeView::draw(Area& camara){ 
@@ -80,4 +95,8 @@ void TrikeView::draw(Area& camara){
 		drawAttack(camara,attack_sprites);
 	}
 	else UnitView::draw(camara,trike_sprites);
+}
+
+DeadUnitView* TrikeView::getDeadUnitView(){
+	return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
 }

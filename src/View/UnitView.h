@@ -10,6 +10,7 @@
 #include "Orientation.h" 
 #include "Area.h"
 #include <memory>
+#include "DeadUnitView.h"
 
 class UnitView{
 	public:
@@ -22,6 +23,7 @@ class UnitView{
 				  ,std::vector<SdlTexture*>::iterator& anim_it, int& update);
 		void drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites);
 		static bool isDead(const UnitView *unit_view);
+		virtual DeadUnitView* getDeadUnitView() = 0;
 	protected: 
 		Unit& unit;
 		Area sprite_area;

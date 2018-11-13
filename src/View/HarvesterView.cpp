@@ -8,6 +8,7 @@
 #include "UnitView.h"
 
 std::map<int, SdlTexture*> HarvesterView::harvester_sprites;
+std::vector<SdlTexture*> HarvesterView::dead_sprites; 
 
 HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window) :
 	UnitView(harvester, Area(0,0,41,38)) {
@@ -21,7 +22,25 @@ HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window) :
 		harvester_sprites.emplace(std::make_pair(Orientation::sudeste(), new SdlTexture("../imgs/imgs/000ad4b2.bmp", window)));
 		harvester_sprites.emplace(std::make_pair(Orientation::este(), new SdlTexture("../imgs/imgs/000af1f9.bmp", window)));
 		harvester_sprites.emplace(std::make_pair(Orientation::noreste(), new SdlTexture("../imgs/imgs/000b0a18.bmp", window)));
+	
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e004b.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e06d5.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e10e6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e1d2a.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e2729.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e30a6.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e3d02.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e591c.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e6697.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e744d.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e81c8.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e8dcf.bmp",window));
+		dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e99b9.bmp",window));
+    
+	
 	}
+
+	
 }
 
 

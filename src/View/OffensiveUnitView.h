@@ -11,6 +11,7 @@ class OffensiveUnitView: public UnitView{
         OffensiveUnitView(OffensiveUnit& unit, Area sprite_area);
         virtual void draw(Area& camara) = 0;
         void drawAttack(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites);
+        virtual DeadUnitView* getDeadUnitView() = 0;
     protected:
         OffensiveUnit& offensiveUnit;
         std::vector<SdlTexture*>::iterator anim_it;

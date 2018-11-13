@@ -9,6 +9,8 @@
 
 std::map<int, std::vector<SdlTexture*> > LightInfantryView::sprites;
 std::map<int, std::vector<SdlTexture*> > LightInfantryView::attack_sprites;
+std::vector<SdlTexture*> LightInfantryView::dead_sprites;
+
 LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
                                      , SdlWindow& window)
     :OffensiveUnitView(lightInfantry,Area(0,0,20,20)) 
@@ -136,6 +138,13 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
 
         attack_sprites.emplace(std::make_pair(Orientation::noreste(),
                                               std::move(noreste)));
+
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b081.bmp",window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b1ca.bmp",window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b9d5.bmp",window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006c2da.bmp",window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006cc5e.bmp",window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006bc17.bmp",window));  
     }
     anim_it = sprites.at(orientation.getValor()).begin();
 }
@@ -145,4 +154,8 @@ void LightInfantryView::draw(Area& camara){
         drawAttack(camara,attack_sprites);
     }
     else UnitView::draw(camara,sprites,anim_it,update);
+}
+
+DeadUnitView* LightInfantryView::getDeadUnitView(){
+    return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
 }

@@ -16,10 +16,11 @@ class HeavyInfantryView: public OffensiveUnitView{
     public:
         HeavyInfantryView(HeavyInfantry& heavyInfantry, SdlWindow& window);
         virtual void draw(Area& camara);
+        virtual DeadUnitView* getDeadUnitView();
     private:
-        
         static std::map<int, std::vector<SdlTexture*> > sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+        static std::vector<SdlTexture*> dead_sprites;
 };
 
 

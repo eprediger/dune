@@ -13,9 +13,11 @@ class TrikeView: public OffensiveUnitView{
     public: 
         TrikeView(Trike& trike, SdlWindow& window);
         virtual void draw(Area& camara);
+        virtual DeadUnitView* getDeadUnitView();
     private:
         static std::map<int, SdlTexture*> trike_sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+        static std::vector<SdlTexture*> dead_sprites;
 };
 
 
