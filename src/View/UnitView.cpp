@@ -12,7 +12,10 @@ UnitView::UnitView(Unit& unit, Area sprite_area)
 	,sprite_area(sprite_area)
 	,dest_area(sprite_area)
 	,prev_pos(unit.getPosition())
-	,orientation(){}
+	,orientation()
+	,life(unit.getLife())
+	,damage_anim_it()
+	,damage_update(0){}
 
 UnitView::~UnitView() {}
 
@@ -59,3 +62,14 @@ void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& spri
 	(*anim_it)->render(sprite_area,dest_area);
 }
 		
+void UnitView::drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites){
+	if (damage_update == 5){
+		damage_anim_it++;
+		damage_update = 0;
+		if (damage_anim_it == damage_sprites.end()){
+			damage_anim_it = damage_sprites.begin();
+		}
+	}
+	else damage_update++;
+	(*damage_anim_it)->render(Area(0,0,10,10),dest_area);
+}
