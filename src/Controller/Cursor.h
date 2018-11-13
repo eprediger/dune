@@ -19,6 +19,9 @@ public:
 	// Setea posicion actual del mouse relativo a la ventana
 	void currentPosition();
 
+	// Devuelve true si initial_@ == current_@
+	bool notMoving();
+
 	int initial_x, initial_y, current_x, current_y;
 };
 

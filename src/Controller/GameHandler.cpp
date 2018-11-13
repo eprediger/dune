@@ -22,10 +22,6 @@ bool GameHandler::handleInput() {
 			}
 			break;
 		case SDL_MOUSEMOTION:
-			if (event.button.button == SDL_BUTTON_LEFT) {
-				this->cursor.currentPosition();
-				// std::cout << "Moviendo en x: " << this->cursor.current_x << " y: " << this->cursor.current_y << std::endl;
-			}
 			break;
 		case SDL_MOUSEBUTTONUP:
 			if (event.button.button == SDL_BUTTON_MIDDLE) {
@@ -38,20 +34,24 @@ bool GameHandler::handleInput() {
 		case SDL_KEYDOWN:
 			switch( event.key.keysym.sym ){
 				case SDLK_LEFT:
+				case SDLK_a:
 					std::cout << " Izquierda " << std::endl;
-					view.moveLeft(4);
+					view.moveLeft(MOVE_AMOUNT);
 					break;
 				case SDLK_RIGHT:
+				case SDLK_d:
 					std::cout << " Derecha " << std::endl;
-					view.moveRight(4);
+					view.moveRight(MOVE_AMOUNT);
 					break;
 				case SDLK_DOWN:
+				case SDLK_s:
 					std::cout << " Abajo " << std::endl;
-					view.moveDown(4);
+					view.moveDown(MOVE_AMOUNT);
 					break;
 				case SDLK_UP:
+				case SDLK_w:
 					std::cout << " Arriba " << std::endl;
-					view.moveUp(4);
+					view.moveUp(MOVE_AMOUNT);
 					break;
 				default:
 					break;

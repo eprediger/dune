@@ -15,3 +15,7 @@ void Cursor::initialPosition() {
 void Cursor::currentPosition() {
 	SDL_GetMouseState(&this->current_x, &this->current_y);
 }
+
+bool Cursor::notMoving() {
+	return ((this->current_x == this->initial_x) && (this->current_y == this->initial_y));
+}

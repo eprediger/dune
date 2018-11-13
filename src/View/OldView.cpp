@@ -163,7 +163,7 @@ void OldView::RenderVPBar(int x, int y, int w, int h, float percent, SDL_Color F
 
 void OldView::moveUp(int distance) {
 	int new_y = camera.getY() - distance;
-	camera.setY(new_y > 0 ? new_y : 0);
+	camera.setY((new_y > 0) ? new_y : 0);
 }
 
 void OldView::moveDown(int distance) {
@@ -176,7 +176,7 @@ void OldView::moveLeft(int distance) {
 	camera.setX((new_x > 0) ? new_x : 0);
 }
 
-void OldView::moveRight(int distance) {
+void OldView::moveRight(const int distance) {
 	int new_x = camera.getX() + distance;
 	camera.setX((new_x < (map_width - camera_width)) ? new_x : map_width - camera_width);
 }
