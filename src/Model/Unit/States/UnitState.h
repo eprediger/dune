@@ -6,10 +6,8 @@ class Map;
 
 class UnitState {
 public:
-    virtual UnitState *makeAction(Map &map, Unit &unit) = 0;
-    virtual bool isAttacking();
-
+	virtual UnitState *makeAction(Map &map, Unit &unit) = 0;
+	virtual bool isAttacking();
 };
 
-
-#endif //__UNITSTATE_H__
+#endif	// __UNITSTATE_H__

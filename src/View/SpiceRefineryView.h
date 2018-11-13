@@ -12,15 +12,14 @@
 #include <map>
 #include <string>
 
-class SpiceRefineryView: public BuildingView{
-    public:
-        SpiceRefineryView(SpiceRefinery& spiceRefinery, SdlWindow& window);
-        virtual void draw(Area& camara);
-    private:
-        static std::map<std::string, std::vector<SdlTexture*> > sprites;
-        std::vector<SdlTexture*>::iterator anim_it;
-        SdlTexture* base;
+class SpiceRefineryView: public BuildingView {
+public:
+	SpiceRefineryView(SpiceRefinery& spiceRefinery, SdlWindow& window);
+	virtual void draw(Area& camara);
+private:
+	static std::map<std::string, std::vector<SdlTexture*> > sprites;
+	std::vector<SdlTexture*>::iterator anim_it;
+	SdlTexture* base;
 };
 
-
-#endif
+#endif	// __SPICE_REFINERY_VIEW_H__

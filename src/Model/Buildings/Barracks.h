@@ -6,8 +6,7 @@
 class Barracks : public Building {
 public:
 	Barracks(const int x, const int y);
-	~Barracks();
-	
+	~Barracks();	
 };
 
-#endif
+#endif	// __BARRACKS_H__

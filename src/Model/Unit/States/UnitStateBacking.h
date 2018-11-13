@@ -6,8 +6,6 @@
 class UnitStateBacking : public UnitState {
 public:
     virtual UnitState *makeAction(Map &map, Unit &unit) override;
-
 };
-
 
 #endif //__UNITSTATEBACKING_H__

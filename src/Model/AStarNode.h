@@ -6,7 +6,7 @@
 
 struct AStarNode {
     AStarNode();
-    AStarNode(Position pos);
+    explicit AStarNode(Position pos);
     std::vector<AStarNode> getAdjacents(Map &map);
 
     bool operator==(const AStarNode& other) const;

@@ -65,7 +65,6 @@ public:
 	Player& getPlayer(int player);
 
 	Unit* selectUnit(int x, int y);
-
 };
 
 #endif //__MODEL_H__

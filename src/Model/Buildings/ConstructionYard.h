@@ -7,7 +7,6 @@ class ConstructionYard : public Building {
 public:
 	ConstructionYard(const int x, const int y);
 	~ConstructionYard();
-	
 };
 
-#endif
+#endif	// __CONSTRUCTION_YARD_H__

@@ -8,7 +8,6 @@
 class Precipice : public Terrain {
 public:
 	Precipice();
-
 };
 
 #endif //__PRECIPICE_H__

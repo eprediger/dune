@@ -13,15 +13,15 @@ public:
 	// Handler para eventos del juego
 	// explicit GameHandler(Model& model);
 	explicit GameHandler(OldView &view, Model &model);
-	
+
 	// Libera recursos asociados a la instancia
 	~GameHandler();
-	
+
 	bool handleInput() override;
 
 private:
 	OldView& view;
-	 Model& model;
+	Model& model;
 };
 
 #endif	// __GAME_HANDLER_H__

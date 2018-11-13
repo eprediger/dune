@@ -6,8 +6,7 @@
 class WindTrap : public Building {
 public:
 	WindTrap(const int x, const int y);
-	~WindTrap();
-	
+	~WindTrap();	
 };
 
-#endif
+#endif	// __WIND_TRAP_H__

@@ -29,7 +29,7 @@ void Harvester::actionOnPosition(Map &map, Position &pos) {
 }
 
 UnitState *Harvester::makeFollow(Map &map) {
-	if (this->move(map) ){
+	if (this->move(map)){
 		return state;
 	} else {
 		return (UnitState*)&Unit::farming;
@@ -48,7 +48,7 @@ UnitState *Harvester::makeFarming(Map &map) {
 }
 
 UnitState *Harvester::makeLoading(Map &map) {
-	if (spiceCollected != 0 ){
+	if (spiceCollected != 0) {
         spiceCollected -= 1;
         std::cout << "Loading! SpiceCollected restante: " << spiceCollected << std::endl;
         return state;
@@ -59,7 +59,7 @@ UnitState *Harvester::makeLoading(Map &map) {
 }
 
 UnitState *Harvester::makeBacking(Map &map) {
-    if (this->move(map) ){
+    if (this->move(map)) {
         return state;
     } else {
     	if (spiceCollected == 0){

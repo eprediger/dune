@@ -7,13 +7,12 @@
 
 std::vector<SdlTexture*> RocketView::sprites; 
 
-RocketView::RocketView(Rocket& rocket, SdlWindow& window)
-    :rocket(rocket)
-    ,exploding(false)
-    ,pos(rocket.getPosition())
-    ,update_sprite(0)
-    ,finished(false)
-{
+RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
+    rocket(rocket),
+    exploding(false),
+    pos(rocket.getPosition()),
+    update_sprite(0),
+    finished(false) {
     if (sprites.empty()){
         sprites.emplace_back(new SdlTexture("../imgs/imgs/002cbf9c.bmp",window));
         sprites.emplace_back(new SdlTexture("../imgs/imgs/002cd3b1.bmp",window));
@@ -32,7 +31,6 @@ RocketView::RocketView(Rocket& rocket, SdlWindow& window)
         sprites.emplace_back(new SdlTexture("../imgs/imgs/002dc3d4.bmp",window));
     }
 }
-
 
 void RocketView::draw(Area& camara){
     if (!exploding){
@@ -57,5 +55,4 @@ void RocketView::draw(Area& camara){
         }
         else update_sprite+=1;
     }
-
 }

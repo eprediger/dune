@@ -13,7 +13,7 @@ private:
 public:
 	Terrain();
 
-	Terrain(char key);
+	explicit Terrain(char key);
 
 	void occupy();
 	void free();
@@ -24,7 +24,6 @@ public:
 	bool operator==(const Terrain& terrain);
 
 	char getKey();
-
 };
 
-#endif //__TERRAIN_H__
+#endif	// __TERRAIN_H__

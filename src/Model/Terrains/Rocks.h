@@ -8,7 +8,6 @@
 class Rocks : public Terrain {
 public:
 	Rocks();
-
 };
 
 #endif //__ROCKS_H__

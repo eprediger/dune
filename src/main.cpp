@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Model/GlobalConfig.h"
 
 /*#include "Controller/MainMenuHandler.h"
 #include "View/MainMenuView.h"*/
@@ -8,7 +9,6 @@
 
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
-#include "Model/GlobalConfig.h"
 #include "View/OldView.h"
 
 #include <iostream>

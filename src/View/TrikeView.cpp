@@ -10,13 +10,12 @@
 std::map<int,SdlTexture*> TrikeView::trike_sprites;
 std::map<int,std::vector<SdlTexture*> > TrikeView:: attack_sprites;
 
-TrikeView::TrikeView(Trike& trike, SdlWindow& window)
-	:UnitView(trike,window)
-	,trike(trike)
-	,attacking(false)
-	,anim_it()
-	,update_sprite(0)
-{
+TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
+	UnitView(trike,window),
+	trike(trike),
+	attacking(false),
+	anim_it(),
+	update_sprite(0) {
     if (trike_sprites.empty()){  
         trike_sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/0009e9ca.bmp",window)));		
 		trike_sprites.emplace(std::make_pair(Orientation::norte(),new SdlTexture("../imgs/imgs/0009e6d8.bmp",window)));
@@ -76,13 +75,10 @@ TrikeView::TrikeView(Trike& trike, SdlWindow& window)
 		
 		attack_sprites.emplace(std::make_pair(Orientation::noreste(),
 									std::move(noreste)));
-	
 	}  
 }  
 
- 
-
-void TrikeView::comenzar_ataque(){
+void TrikeView::comenzar_ataque() {
     orientation.calcular(prev_pos,trike.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }

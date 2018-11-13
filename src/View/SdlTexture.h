@@ -10,13 +10,13 @@
 class SdlTexture {
 public:
 	SdlTexture(const std::string& filename, const SdlWindow& window);
-	
+
 	~SdlTexture();
 
 	SDL_Texture* loadTexture(const std::string &filename);
 
 	int setColor();
-	
+
 	int render(const Area &src, const Area &dest);
 
 	// renderiza la textura completa en su tamaño original,
@@ -28,6 +28,5 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 };
-
 
 #endif  // __SDLTEXTURE_H__

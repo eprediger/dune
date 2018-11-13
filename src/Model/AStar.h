@@ -11,15 +11,14 @@
 
 class AStar {
 private:
-    std::vector<AStarNode> closeList;
-    std::vector<AStarNode> openList;
-    Map& map;
+	std::vector<AStarNode> closeList;
+	std::vector<AStarNode> openList;
+	Map& map;
 public:
-    AStar(Map &map);
+	explicit AStar(Map &map);
 
-    std::stack<Position> reconstructPath(const std::map<Position, Position> &best_path, const Position &start);
-    std::stack<Position> makePath(Unit &unit, Position end);
-
+	std::stack<Position> reconstructPath(const std::map<Position, Position> &best_path, const Position &start);
+	std::stack<Position> makePath(Unit &unit, Position end);
 };
 
 #endif //__ASTAR_H__

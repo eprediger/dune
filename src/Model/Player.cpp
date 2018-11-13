@@ -5,9 +5,7 @@ Player::Player(int id) :
     id(id),
     energy(5000), //Reemplazar luego por valores iniciales
     gold(10000),
-    gold_limit(10000){
-
-}
+    gold_limit(10000) {}
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
@@ -42,5 +40,3 @@ bool Player::hasBuilding(Building *building) {
 void Player::cleanBuilding(Building *building) {
     buildings.erase(std::find(buildings.begin(), buildings.end(), building));
 }
-
-

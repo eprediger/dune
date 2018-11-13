@@ -22,4 +22,4 @@ class BarracksView: public BuildingView{
         SdlTexture* base;
 };
 
-#endif 
+#endif	// __BARRACKS_VIEW_H__

@@ -2,7 +2,6 @@
 #define __GAME_VIEW_H__
 
 #include "View.h"
-
 #include <vector>
 
 #define TAG_FONT_SIZE 20
@@ -28,7 +27,6 @@ private:
 	std::vector<SdlTexture*> buildings;
 	std::vector<SdlTexture*> units;
 	SdlTexture buttons;
-
 };
 
 #endif	// __GAME_VIEW_H__

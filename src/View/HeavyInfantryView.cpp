@@ -14,15 +14,14 @@ std::map<int, std::vector<SdlTexture*> > HeavyInfantryView::sprites;
 std::map<int, std::vector<SdlTexture*> > HeavyInfantryView::attack_sprites;
 
 HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
-                                    SdlWindow& window)
-    :UnitView(heavyInfantry,window) 
-    ,heavyInfantry(heavyInfantry)
-    ,attacking(false) 
-    ,prev_orient() 
-    ,attack_orient()
-    ,update_sprite(0)
-{
-    if (sprites.empty()){
+                                    SdlWindow& window) :
+    UnitView(heavyInfantry,window),
+    heavyInfantry(heavyInfantry),
+    attacking(false),
+    prev_orient(),
+    attack_orient(),
+    update_sprite(0) {
+    if (sprites.empty()) {
         std::vector<SdlTexture*> indef;
         indef.emplace_back(new SdlTexture("../imgs/imgs/00060799.bmp",window));
         sprites.emplace(std::make_pair(Orientation::indefinida(),
@@ -167,20 +166,18 @@ HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
         noreste.emplace_back(new SdlTexture("../imgs/imgs/00058183.bmp",window));
 
         attack_sprites.emplace(std::make_pair(Orientation::noreste(),
-                                    std::move(noreste)));
-
-        
+                                    std::move(noreste)));   
     }
     anim_it = sprites.at(orientation.getValor()).begin();
 }
 
 
-void HeavyInfantryView::comenzar_ataque(){
+void HeavyInfantryView::comenzar_ataque() {
     orientation.calcular(prev_pos,heavyInfantry.getVictimPosition());
     anim_it = attack_sprites.at(orientation.getValor()).begin();
 }
  
-void HeavyInfantryView::draw(Area& camara){ 
+void HeavyInfantryView::draw(Area& camara) { 
     Position pos = unit.getPosition();
 	Area dest(pos.getX()- 6 - camara.getX(),pos.getY()-8 - camara.getY() ,25,25);
 	orientation.calcular(prev_pos,pos);
@@ -195,14 +192,14 @@ void HeavyInfantryView::draw(Area& camara){
         attacking = false;
     }
 
-    while (attacking){
+    while (attacking) {
         (*anim_it)->render(Area(0,0,25,25),dest);
-        if (update_sprite == 60){
+        if (update_sprite == 60) {
             anim_it++;
             update_sprite = 0;
         }
         update_sprite+=1;
-        if (anim_it == attack_sprites.at(orientation.getValor()).end()){
+        if (anim_it == attack_sprites.at(orientation.getValor()).end()) {
             anim_it = sprites.at(orientation.getValor()).begin();
 //            heavyInfantry.attacking = false;
             attacking = false;
@@ -210,19 +207,19 @@ void HeavyInfantryView::draw(Area& camara){
         return;
     }
 
-    if (orientation.getValor() == prev_orient.getValor()){
-        if (!(pos == prev_pos)){
-            if (update_sprite == 2){
+    if (orientation.getValor() == prev_orient.getValor()) {
+        if (!(pos == prev_pos)) {
+            if (update_sprite == 2) {
                 anim_it++;
                 update_sprite = 0;
             }
             update_sprite+=1;
-            if (anim_it == sprites.at(orientation.getValor()).end()){
+            if (anim_it == sprites.at(orientation.getValor()).end()) {
                 anim_it = sprites.at(orientation.getValor()).begin();
             }
         }
         (*anim_it)->render(Area(0,0,12,16),dest);
-    }
+    } 
     else anim_it = sprites.at(orientation.getValor()).begin();
     prev_orient = orientation;
     prev_pos = pos;

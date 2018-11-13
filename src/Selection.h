@@ -18,4 +18,4 @@ class Selection{
         std::vector<Building*> buildings;
 };
 
-#endif
+#endif  // __SELECTION_H__

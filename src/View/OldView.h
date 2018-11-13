@@ -1,6 +1,5 @@
-#ifndef __GAMEVIEW_H__
-#define __GAMEVIEW_H__
-
+#ifndef __OLD_VIEW_H__
+#define __OLD_VIEW_H__
 
 #include "MapView.h"
 #include "UnitView.h"
@@ -17,7 +16,7 @@ private:
 	std::vector<UnitView*> unit_views;
 	std::vector<BuildingView*> building_views;
 	SelectorView* selectorView;
-    MapView map_view;
+	MapView map_view;
 	Area camera;
 
 	Sound backgroundMusic;
@@ -52,6 +51,6 @@ public:
 	void moveRight(const int distance);
 
 	void render() override;
-
 };
-#endif //__VIEW_H__
+
+#endif	// __OLD_VIEW_H__

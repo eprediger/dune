@@ -14,7 +14,6 @@ public:
     Attacker(const Weapon& weapon, const int range);
 
     virtual void attack(Attackable &defender);
-
 };
 
 #endif //__ATTACKER_H__

@@ -1,5 +1,5 @@
-#ifndef DUNE_WIDGET_H
-#define DUNE_WIDGET_H
+#ifndef __WIDGET_H__
+#define __WIDGET_H__
 
 #include "SdlWindow.h"
 #include "SdlTexture.h"
@@ -7,19 +7,17 @@
 
 class Widget {
 public:
-    // PRE:  window en estado valido
-    // POST: Se inicializa Widget
-    Widget(SdlWindow& window, const std::string& filename);
+	// PRE:  filename ruta a archivo valida
+	// POST: Se inicializa Widget
+	Widget(SdlWindow& window, const std::string& filename);
 
-    // Se libera recurso asociado
-    ~Widget();
+	// Se libera recurso asociado
+	~Widget();
 
-
-    void draw();
+	void draw();
 private:
-    SdlWindow& window;
-    SdlTexture* texture;
+	SdlWindow& window;
+	SdlTexture* texture;
 };
 
-
-#endif //DUNE_WIDGET_H
+#endif	// __WIDGET_H__

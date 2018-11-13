@@ -7,7 +7,6 @@ class LightFactory : public Building {
 public:
 	LightFactory(const int x, const int y);
 	~LightFactory();
-	
 };
 
-#endif
+#endif	// __LIGHT_FACTORY_H__

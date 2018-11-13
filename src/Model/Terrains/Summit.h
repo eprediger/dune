@@ -8,7 +8,6 @@
 class Summit : public Terrain {
 public:
 	Summit();
-
 };
 
-#endif //__SUMMIT_H__
+#endif	//__SUMMIT_H__

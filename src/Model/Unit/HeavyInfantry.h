@@ -11,7 +11,6 @@ public:
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
 
 	virtual void reciveBonusDammage(const Weapon &weapon) override;
-	
 };
 
-#endif
+#endif	// __HEAVY_INFANTRY_H__

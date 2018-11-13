@@ -12,15 +12,13 @@
 #include <map>
 #include <string>
 
-class ConstructionYardView: public BuildingView{
-    public:
-        ConstructionYardView(ConstructionYard& constructionYard, SdlWindow& window);
-        virtual void draw(Area& camara);
-    private:
-        static std::map<std::string, std::vector<SdlTexture*> > sprites;
-        std::vector<SdlTexture*>::iterator anim_it;
+class ConstructionYardView: public BuildingView {
+public:
+	ConstructionYardView(ConstructionYard& constructionYard, SdlWindow& window);
+	virtual void draw(Area& camara);
+private:
+	static std::map<std::string, std::vector<SdlTexture*> > sprites;
+	std::vector<SdlTexture*>::iterator anim_it;
 };
 
-
-
-#endif
+#endif	// __CONSTRUCTION_YARD_VIEW_H__

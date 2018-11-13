@@ -2,14 +2,13 @@
 #define __CONFIG_H__
 
 struct Config {
-    static int unit_id;
+	static int unit_id;
 
-    Config();
+	Config();
 
-    static void init();
+	static void init();
 
-    static int getNextId();
-
+	static int getNextId();
 };
 
 #endif //__CONFIG_H__

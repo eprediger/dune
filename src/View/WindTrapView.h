@@ -11,7 +11,7 @@
 #include <vector>
 #include <string>
 
-class WindTrapView: public BuildingView{
+class WindTrapView: public BuildingView {
     public:
         WindTrapView(WindTrap& windtrap, SdlWindow& window);
         virtual void draw(Area& camara);
@@ -20,4 +20,4 @@ class WindTrapView: public BuildingView{
         std::vector<SdlTexture*>::iterator anim_it;
 };
 
-#endif
+#endif	// __WINDTRAP_VIEW_H__

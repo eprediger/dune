@@ -23,4 +23,4 @@ class TrikeView: public UnitView{
         int update_sprite;
 };
 
-#endif
+#endif  // __TRIKE_VIEW_H__

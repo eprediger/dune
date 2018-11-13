@@ -32,6 +32,7 @@ protected:
 
 public:
 	int textWidth, textHeight;
+
 protected:
 	std::string inputText;
 	SdlWindow& window;

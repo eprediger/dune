@@ -8,7 +8,7 @@ protected:
     int initial_life;
     int life;
 public:
-    Attackable(const int life);
+    explicit Attackable(const int life);
 
     virtual int getLife();
     virtual int getInitialLife();

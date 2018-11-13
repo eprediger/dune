@@ -23,4 +23,4 @@ class RocketView{
         std::vector<SdlTexture*>::iterator anim_it;
 };
 
-#endif
+#endif  // __ROCKET_VIEW_H__

@@ -14,4 +14,4 @@ class Rocket{
         Position dest;
 };
 
-#endif
+#endif	// __ROCKET_H__

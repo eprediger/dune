@@ -11,14 +11,14 @@
 #include <map>
 #include <string>
 
-class LightFactoryView: public BuildingView{
-    public:
-        LightFactoryView(LightFactory& lightFactory, SdlWindow& window);
-        virtual void draw(Area& camara);
-    private:
-        static std::map<std::string, std::vector<SdlTexture*> > sprites;
-        std::vector<SdlTexture*>::iterator anim_it;
-        SdlTexture* base;
+class LightFactoryView: public BuildingView {
+public:
+	LightFactoryView(LightFactory& lightFactory, SdlWindow& window);
+	virtual void draw(Area& camara);
+private:
+	static std::map<std::string, std::vector<SdlTexture*> > sprites;
+	std::vector<SdlTexture*>::iterator anim_it;
+	SdlTexture* base;
 };
 
-#endif
+#endif	// __LIGHT_FACTORY_VIEW_H__

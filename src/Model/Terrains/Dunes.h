@@ -8,7 +8,6 @@
 class Dunes : public Terrain {
 public:
 	Dunes();
-
 };
 
-#endif //__DUNES_H__
+#endif	//__DUNES_H__

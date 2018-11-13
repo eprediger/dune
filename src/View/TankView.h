@@ -24,4 +24,4 @@ class TankView: public UnitView{
         int update_sprite;
 };
 
-#endif
+#endif  // __TANK_VIEW_H__

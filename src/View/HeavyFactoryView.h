@@ -24,4 +24,4 @@ class HeavyFactoryView: public BuildingView{
 
 
 
-#endif
+#endif	// __HEAVY_FACTORY_VIEW_H__

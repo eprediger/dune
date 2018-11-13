@@ -17,4 +17,4 @@ class Selector{
         Selection selection;
 };
 
-#endif
+#endif	// __SELECTOR_H__

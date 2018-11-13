@@ -10,8 +10,7 @@ public:
 	~Raider();
 	virtual bool canMoveAboveTerrain(Terrain &terrain);
 
-	virtual void reciveBonusDammage(const Weapon &weapon) override;
-	
+	virtual void reciveBonusDammage(const Weapon &weapon) override;	
 };
 
-#endif
+#endif	// __RAIDER_H__

@@ -1,9 +1,8 @@
-#include <algorithm>
-#include <caca_conio.h>
 #include "OldView.h"
-#include "BuildingView.h"
-#include "../Model/Model.h"
 #include "View.h"
+#include "../Model/Model.h"
+#include "BuildingView.h"
+#include <algorithm>
 
 OldView::OldView(const int width, const int height, Model &model) :
 		View(width/2, height/2),
@@ -21,7 +20,7 @@ OldView::OldView(const int width, const int height, Model &model) :
 		map_width(width),
 		map_height(height),
 		camera_width(width/2),
-		camera_height(height/2){
+		camera_height(height/2) {
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
@@ -62,7 +61,6 @@ void OldView::cleanDeadUnitViews() {
 }
 
 OldView::~OldView() {
-
 	backgroundMusic.stop();
 
 	while (this->buildings.size() > 0) {
@@ -88,7 +86,6 @@ SdlWindow &OldView::getWindow() {
 }
 
 void OldView::render() {
-
 	//    for (auto unit_view : unit_views){
 	map_view.draw(camera);
 	for (auto itr = unit_views.begin(); itr != unit_views.end(); ++itr) {
@@ -146,7 +143,6 @@ void OldView::render() {
 }
 
 void OldView::RenderVPBar(int x, int y, int w, int h, float percent, SDL_Color FGColor, SDL_Color BGColor) {
-
 	percent = percent > 1.f ? 1.f : percent < 0.f ? 0.f : percent;
 	SDL_Color old;
 	SDL_GetRenderDrawColor(this->window.getRenderer(), &old.r, &old.g, &old.g, &old.a);

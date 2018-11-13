@@ -15,9 +15,7 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
     destiny(x, y),
     prev_foll_unit_pos(),
     next_pos(x, y),
-    state((UnitState*)&Unit::stopped)
-    {
-}
+    state((UnitState*) & Unit::stopped) {}
 
 Unit::~Unit() {}
 
@@ -43,8 +41,8 @@ bool Unit::move(Map &map) {
         }
 
         if (!(pos == next_pos)) {
-            pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x)? +1 : 0);
-            pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y)? +1 : 0);
+            pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
+            pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
         } else {
             map.at(pos).occupy();
 //            state = (UnitState*)&Unit::stopped;;
@@ -58,7 +56,7 @@ bool Unit::move(Map &map) {
 void Unit::setPath(std::stack<Position> path, Position destiny) {
     pathToDestiny = path;
     this->destiny = destiny;
-    if (!path.empty()){
+    if (!path.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
         state = (UnitState*)&Unit::moving;
@@ -74,24 +72,22 @@ bool Unit::operator==(const Unit &other) {
 
 
 bool Unit::isDead(const Unit *unit) {
-    if (!unit){
+    if (!unit) {
         return true;
     }
-    return unit->life<=0;
-
+    return unit->life <= 0;
 }
 
 void Unit::follow(Unit* other, Map& map) {
-
     foll_unit = other;
     prev_foll_unit_pos = foll_unit->getPosition();
     bool occupied_pos = map.at(prev_foll_unit_pos).isOccupied();
 
     // Se libera la posicion objetivo para que el algoritmo pueda calcular el camino.
     // Luego se vuelve a ocupar
-    if(occupied_pos) map.at(prev_foll_unit_pos).free();
+    if (occupied_pos) map.at(prev_foll_unit_pos).free();
     map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
-    if(occupied_pos) map.at(prev_foll_unit_pos).occupy();
+    if (occupied_pos) map.at(prev_foll_unit_pos).occupy();
     state = (UnitState*)&Unit::following;
 }
 
@@ -140,15 +136,15 @@ UnitState *Unit::makeBacking(Map &map) {
 }
 
 void Unit::actionOnPosition(Map &map, Position &pos) {
-    Unit* foll_unit = map.getClosestUnit(pos, 50*50, *player, false);
-    if (foll_unit != nullptr){
+    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
+    if (foll_unit != nullptr) {
         this->follow(foll_unit, map);
     } else {
         map.setDestiny(*this, pos.x, pos.y);
     }
 }
 
-void Unit::checkForDeadVictim(){
+void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr)
         if (Unit::isDead(foll_unit))
             this->foll_unit = nullptr;

@@ -26,4 +26,4 @@ class LightInfantryView: public UnitView {
         int update_sprite;
 };
 
-#endif
+#endif  // __LIGHT_INFANTRY_VIEW_H__

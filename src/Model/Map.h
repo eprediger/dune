@@ -21,6 +21,7 @@ private:
     std::vector<Attackable*> attackables;
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
+
 public:
     Map();
     Map(int width, int height);
@@ -45,8 +46,7 @@ public:
 //    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
     Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
 
-
-    std::vector<Unit*> getUnitsInArea(Area& area, Player& player );
+    std::vector<Unit*> getUnitsInArea(Area& area, Player& player);
 
 //    Unit* getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit);
 
@@ -60,7 +60,6 @@ public:
     Terrain& at(const Position& pos);
 
     ~Map();
-
 };
 
 #endif //__MAP_H__

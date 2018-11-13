@@ -18,17 +18,17 @@
 #include "../Model/Buildings/WindTrap.h"
 #include "SdlWindow.h"
 
-class BuildingViewFactory{
-    private:
-        BuildingViewFactory();
-    public:
-        static BuildingView* createBuildingView(Barracks& building,SdlWindow& window);
-        static BuildingView* createBuildingView(ConstructionYard& building,SdlWindow& window);
-        static BuildingView* createBuildingView(LightFactory& building,SdlWindow& window);
-        static BuildingView* createBuildingView(HeavyFactory& building,SdlWindow& window);
-        static BuildingView* createBuildingView(SpiceRefinery& building,SdlWindow& window);
-        static BuildingView* createBuildingView(SpiceSilo& building,SdlWindow& window);
-        static BuildingView* createBuildingView(WindTrap& building,SdlWindow& window);
+class BuildingViewFactory {
+private:
+    BuildingViewFactory();
+public:
+    static BuildingView* createBuildingView(Barracks& building, SdlWindow& window);
+    static BuildingView* createBuildingView(ConstructionYard& building, SdlWindow& window);
+    static BuildingView* createBuildingView(LightFactory& building, SdlWindow& window);
+    static BuildingView* createBuildingView(HeavyFactory& building, SdlWindow& window);
+    static BuildingView* createBuildingView(SpiceRefinery& building, SdlWindow& window);
+    static BuildingView* createBuildingView(SpiceSilo& building, SdlWindow& window);
+    static BuildingView* createBuildingView(WindTrap& building, SdlWindow& window);
 };
 
-#endif
+#endif  // __BUILDING_VIEW_FACTORY_H__

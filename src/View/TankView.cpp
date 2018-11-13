@@ -9,13 +9,12 @@
 std::map<int,SdlTexture*> TankView::sprites;
 std::map<int, std::vector<SdlTexture*> > TankView::attack_sprites;
 
-TankView::TankView(Tank& tank, SdlWindow& window)
-	:UnitView(tank,window)
-    ,tank(tank)
-    ,attacking(false)
-    ,anim_it()
-    ,update_sprite(0)
-{ 	
+TankView::TankView(Tank& tank, SdlWindow& window) :
+	UnitView(tank,window),
+    tank(tank),
+    attacking(false),
+    anim_it(),
+    update_sprite(0) { 	
     if (sprites.empty()){  
     sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000ba250.bmp",window)));		
     sprites.emplace(std::make_pair(Orientation::norte(),new SdlTexture("../imgs/imgs/000b748d.bmp",window)));
@@ -76,8 +75,6 @@ TankView::TankView(Tank& tank, SdlWindow& window)
     
     attack_sprites.emplace(std::make_pair(Orientation::noreste(),
                                 std::move(noreste)));
-
-
     }  
 }  
 

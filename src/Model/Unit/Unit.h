@@ -1,5 +1,5 @@
-#ifndef __UNITY_H__
-#define __UNITY_H__
+#ifndef __UNIT_H__
+#define __UNIT_H__
 
 #include "../../Position.h"
 #include "../Positionable.h"
@@ -30,7 +30,6 @@ class Map;
 
 class Unit : public Positionable, public Attackable {
 public:
-
     static const UnitStateAttacking attacking;
     static const UnitStateFollowing following;
     static const UnitStateMoving moving;
@@ -79,7 +78,6 @@ public:
 
     void checkForDeadVictim();
 
-
 protected:
     int id;
     const int speed;
@@ -93,4 +91,4 @@ protected:
     Player* player;
 };
  
-#endif //__UNITY_H__
+#endif //__UNIT_H__
