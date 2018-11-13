@@ -5,8 +5,8 @@
 #include <iostream>
 
 SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
-    selector(selector),
     window(window),
+    selector(selector),
     drag_rect(),
     max_life(),
     current_life() {

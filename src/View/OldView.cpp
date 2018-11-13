@@ -5,22 +5,22 @@
 #include <algorithm>
 
 OldView::OldView(const int width, const int height, Model &model) :
-		View(width/2, height/2),
-		camera(0, 0, width/2, height/2),
-		map_view(model.getMap(), window),
-		selectorView(nullptr),
-		backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
-		moneyTag(Text("DINERO", TAG_FONT_SIZE, this->window)),
-		buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
-		unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
-		moneyBalance(0),
-		buildings(),
-		units(),
-		buttons("../assets/img/btns/cantSell.png", this->window),
-		map_width(width),
-		map_height(height),
-		camera_width(width/2),
-		camera_height(height/2) {
+	View(width / 2, height / 2),
+	camera(0, 0, width / 2, height / 2),
+	map_view(model.getMap(), window),
+	selectorView(nullptr),
+	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
+	moneyTag(Text("DINERO", TAG_FONT_SIZE, this->window)),
+	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
+	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
+	moneyBalance(0),
+	buildings(),
+	units(),
+	buttons("../assets/img/btns/cantSell.png", this->window),
+	map_width(width),
+	map_height(height),
+	camera_width(width / 2),
+	camera_height(height / 2) {
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
 	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
@@ -107,16 +107,16 @@ void OldView::render() {
 	// Botones
 	// Vender Edificio
 	// Area sellSrc(20, 450, 30, 40);	// boton venta habilitada
-	this->buttons.render(this->window.width * 16 / 20, this->window.height *4/ 16);
+	this->buttons.render(this->window.width * 16 / 20, this->window.height * 4 / 16);
 
 	// Edificios
 	this->buildingTag.render(this->window.width * 12 / 16, this->window.height * 5 / 16);
 	for (unsigned i = 0; i < this->buildings.size(); ++i) {
 		Area buildingSrc(0, 0, this->buildings[i]->width, this->buildings[i]->height);
 		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
-						  this->window.height * (6 + 2 * i) / 16,	//this->window.height * (1 + 8 * i) / 64,
-						  80,
-						  80 * 3 / 4);
+		                  this->window.height * (6 + 2 * i) / 16,	//this->window.height * (1 + 8 * i) / 64,
+		                  80,
+		                  80 * 3 / 4);
 		this->buildings[i]->render(buildingSrc, buildingDest);
 	}
 
@@ -125,19 +125,19 @@ void OldView::render() {
 	for (unsigned i = 0; i < this->units.size(); ++i) {
 		Area UnitSrc(0, 0, this->units[i]->width, this->units[i]->height);
 		Area UnitDest(this->window.width * 18 / 20,	// this->window.width * 29 / 32,
-					  this->window.height * (6 + 2 * i) / 16,	// this->window.height * (1 + 8 * i) / 64,
-					  80,
-					  80 * 3 / 4);
+		              this->window.height * (6 + 2 * i) / 16,	// this->window.height * (1 + 8 * i) / 64,
+		              80,
+		              80 * 3 / 4);
 		this->units[i]->render(UnitSrc, UnitDest);
 	}
 	// Barra de energia harcodeada, se debe leer la energia del jugador en el modelo
 	SDL_Color available = { 0x0, 0x80, 0x0, 0xFF };	//{ 0xFF, 0x0, 0x0, 0xFF };
 	SDL_Color bkgrColor = { 0xA9, 0xA9, 0xA9, 0xFF };	//{ 0x0, 0xFF, 0x0, 0xFF };
 	this->RenderVPBar(this->window.width * 63 / 80,	//this->window.width * 1 / 10,
-					  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
-					  5,
-					  this->window.height * 19 / 32,
-					  0.75f, available, bkgrColor);
+	                  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
+	                  5,
+	                  this->window.height * 19 / 32,
+	                  0.75f, available, bkgrColor);
 
 	this->window.render();
 }

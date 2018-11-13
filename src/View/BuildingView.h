@@ -9,6 +9,7 @@
 class BuildingView {
 public:
 	explicit BuildingView(Building& building);
+	virtual ~BuildingView();
 	Building& getBuilding();
 	virtual void draw(Area& camara) = 0;
 protected:
