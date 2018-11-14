@@ -11,6 +11,7 @@
 #include "Area.h"
 #include <memory>
 #include "DeadUnitView.h"
+#include "PlayerColorMaker.h"
 
 class UnitView {
 	public:
@@ -28,6 +29,7 @@ class UnitView {
 		SdlWindow& window;
 		SDL_Rect playerColorRect;
 		Unit& unit;
+		int player_r,player_g,player_b;
 		Area sprite_area;
 		Area dest_area;
 		Position prev_pos;

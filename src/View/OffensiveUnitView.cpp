@@ -22,9 +22,11 @@ void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<SdlTe
     playerColorRect.x = dest_area.getX();
     playerColorRect.y = dest_area.getY();
     SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(window.getRenderer(),103,255,103,150);
-    SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
-    (*anim_it)->render(sprite_area,dest_area);
+    SDL_SetRenderDrawColor(window.getRenderer(),player_r,player_g,player_b,250);
+	SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
+	SDL_SetRenderDrawColor(window.getRenderer(),player_r,player_g,player_b,30);
+	SDL_RenderFillRect(window.getRenderer(),&playerColorRect);
+	(*anim_it)->render(sprite_area,dest_area);
     update++;
     if (update == 10){
         anim_it++;
