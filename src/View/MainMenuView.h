@@ -48,7 +48,8 @@ public:
 private:
 	SdlTexture backgroundImage;
 	Sound backgroundMusic;
-	Text title;
+	// Text title;
+	SdlTexture titleImage;
 	std::vector<std::unique_ptr<Text>> tags;
 	std::vector<std::unique_ptr<TextBox>> inputBoxes;
 	std::unique_ptr<Text> playButton;

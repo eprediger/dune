@@ -5,7 +5,8 @@ MainMenuView::MainMenuView(const int width, const int height) :
 	View(width, height),
 	backgroundImage("../assets/img/bkgr/dune2000_1.jpg", this->window),
 	backgroundMusic("../assets/sound/music/options.mp3"),
-	title("Dune 2000", TITLE_FONT_SIZE, this->window),
+	// title("Dune 2000", TITLE_FONT_SIZE, this->window),
+	titleImage("../assets/img/bkgr/d2klogo.png", this->window),
 	tags(),
 	playButton(nullptr),
 	selectedTextBox(nullptr),
@@ -84,16 +85,19 @@ void MainMenuView::getTextBoxContent() {
 }
 
 void MainMenuView::render() {
-	Area src(0, 0, this->backgroundImage.width, this->backgroundImage.height);
-	Area dest(0, 0, this->window.width, this->window.height);
-	this->backgroundImage.render(src, dest);
+	Area bkgrImgSrc(0, 0, this->backgroundImage.width, this->backgroundImage.height);
+	Area bkgrImgDest(0, 0, this->window.width, this->window.height);
+	this->backgroundImage.render(bkgrImgSrc, bkgrImgDest);
 
-	/*Area titleArea((this->window.width - this->title.textWidth) / 2,
-	               this->window.height / 10,
-	               this->title.textWidth,
-	               this->title.textHeight);*/
-	this->title.render((this->window.width - this->title.textWidth) / 2,
-	                   this->window.height / 10);
+	/*this->title.render((this->window.width - this->title.textWidth) / 2,
+	                   this->window.height / 10);*/
+
+	Area titleAreaSrc(0, 0, this->titleImage.width, this->titleImage.height);
+	Area titleAreaDest(((this->window.width - (this->titleImage.width / 2)) / 2),
+	                   this->window.height / 10,
+	                   this->titleImage.width / 2,
+	                   this->titleImage.height / 2);
+	this->titleImage.render(titleAreaSrc, titleAreaDest);
 
 	for (unsigned i = 0; i < this->tags.size(); i++) {
 		/*Area tagArea((this->window.width / 4),

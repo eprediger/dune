@@ -1,7 +1,7 @@
 #ifndef __GAME_HANDLER_H__
 #define __GAME_HANDLER_H__
 
-#define MOVE_AMOUNT 4
+#define MOVE_AMOUNT 16
 
 #include "InputHandler.h"
 #include "../View/GameView.h"

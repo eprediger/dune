@@ -34,10 +34,12 @@ SdlWindow::~SdlWindow() {
 }
 
 void SdlWindow::grabMouse(bool grab) {
-	if (grab)
+	grab ? SDL_SetWindowGrab(window, SDL_TRUE) : SDL_SetWindowGrab(window, SDL_FALSE);
+	/*if (grab) {
 		SDL_SetWindowGrab(window, SDL_TRUE);
-	else
+	} else {
 		SDL_SetWindowGrab(window, SDL_FALSE);
+	}*/
 }
 
 void SdlWindow::fill(const Uint8 r, const Uint8 g,

@@ -31,10 +31,8 @@ int main(int argc, const char *argv[]) {
 		HouseSelectionHandler houseSelectionHandler(houseSelectionView);
 		Application app(houseSelectionView, houseSelectionHandler);*/
 
-//		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT);
-		Model model(WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+		Model model(WINDOW_WIDTH, WINDOW_HEIGHT, 2);
 		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
-
 		GameHandler gameHandler(gameView, model);
 		Application app(gameView, gameHandler);
 

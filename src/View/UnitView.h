@@ -12,7 +12,7 @@
 #include <memory>
 #include "DeadUnitView.h"
 
-class UnitView{
+class UnitView {
 	public:
 		UnitView(Unit& unit, Area sprite_area);
 		virtual ~UnitView();

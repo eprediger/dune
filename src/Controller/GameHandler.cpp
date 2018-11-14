@@ -13,8 +13,7 @@ GameHandler::GameHandler(GameView &view, Model &model) :
 GameHandler::~GameHandler() {}
 
 bool GameHandler::handleInput() {
-	selector.pos.x = this->cursor.current_x+this->view.camera.getX();
-	selector.pos.y = this->cursor.current_y+this->view.camera.getY();
+
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
@@ -22,49 +21,61 @@ bool GameHandler::handleInput() {
 			return false;
 		case SDL_MOUSEBUTTONDOWN:
 			if (event.button.button == SDL_BUTTON_LEFT) {
+				this->view.grabMouse();
 				this->cursor.initialPosition();
 				selector.drag = true;
 				selector.drag_source = selector.pos;
-				// std::cout << "Click en x: " << this->cursor.initial_x << " y: " << this->cursor.initial_y << std::endl;
 			}
 			break;
 		case SDL_MOUSEMOTION:
 			this->cursor.currentPosition();
+			selector.pos.x = this->cursor.current_x + this->view.getCameraX();
+			selector.pos.y = this->cursor.current_y + this->view.getCameraY();
 			break;
 		case SDL_MOUSEBUTTONUP:
+			this->cursor.currentPosition();
 			if (event.button.button == SDL_BUTTON_LEFT) {
 				selector.drag = false;
 				Area selectArea(selector.drag_source, selector.pos);
-				std::vector<Unit *> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
+				std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
 				selector.addSelection(selection);
+				this->view.releaseMouse();
 			}
+			// TEST
 			if (event.button.button == SDL_BUTTON_MIDDLE) {
-				this->cursor.currentPosition();
 				Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
 				view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
-				// std::cout << "Suelta en x: " << this->cursor.current_x << " y: " << this->cursor.current_y << std::endl;
+
+				Raider& raider2 = model.createRaider(this->cursor.current_x+150, this->cursor.current_y+150, 1);
+				view.addUnitView(UnitViewFactory::createUnitView(raider2, view.getWindow()));
+			}
+			if (event.button.button == SDL_BUTTON_RIGHT) {
+				this->cursor.currentPosition();
+
+				//this->model.getMap().setDestiny(unit, this->cursor.current_x + this->view.getCameraX(), this->cursor.current_y + this->view.getCameraY());
+
+                Position pos(this->cursor.current_x + this->view.getCameraX(), this->cursor.current_y + this->view.getCameraY());
+                for (auto& unit : selector.selection.getSelectedUnits()) {
+                    this->model.actionOnPosition(pos, *unit);
+				}
 			}
 			break;
 		case SDL_KEYDOWN:
 			switch ( event.key.keysym.sym ) {
 				case SDLK_LEFT:
 				case SDLK_a:
-					// std::cout << " Izquierda " << std::endl;
 					view.moveLeft(MOVE_AMOUNT);
 					break;
 				case SDLK_RIGHT:
 				case SDLK_d:
-					// std::cout << " Derecha " << std::endl;
 					view.moveRight(MOVE_AMOUNT);
 					break;
 				case SDLK_DOWN:
 				case SDLK_s:
-					// std::cout << " Abajo " << std::endl;
 					view.moveDown(MOVE_AMOUNT);
 					break;
 				case SDLK_UP:
 				case SDLK_w:
-					// std::cout << " Arriba " << std::endl;
 					view.moveUp(MOVE_AMOUNT);
 					break;
 				default:
