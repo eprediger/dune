@@ -50,6 +50,7 @@ UnitState *Harvester::makeFarming(Map &map) {
 UnitState *Harvester::makeLoading(Map &map) {
 	if (spiceCollected != 0) {
         spiceCollected -= 1;
+        refinery->load(1);
         std::cout << "Loading! SpiceCollected restante: " << spiceCollected << std::endl;
         return state;
 	} else {
@@ -59,7 +60,12 @@ UnitState *Harvester::makeLoading(Map &map) {
 }
 
 UnitState *Harvester::makeBacking(Map &map) {
-    if (this->move(map)) {
+    if (this->refinery == nullptr) {
+        this->refinery = (SpiceRefinery*) player->getClosestBuilding(this->pos, Building::SPICE_REFINERY);
+        if (this->refinery == nullptr){
+            state = (UnitState*)&Unit::stopped;
+        }
+    } else if (this->move(map)) {
         return state;
     } else {
     	if (spiceCollected == 0){

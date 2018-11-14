@@ -6,6 +6,11 @@ SpiceRefinery::SpiceRefinery(const int x, const int y) :
                  GlobalConfig.spiceRefineryCost,
                  GlobalConfig.spiceRefineryHitPoints,
                  SPICE_REFINERY),
-	capacity(GlobalConfig.spiceRefinerySpiceCapacity) {}
+		capacity(GlobalConfig.spiceRefinerySpiceCapacity) ,
+		availableCapacity(0) {}
 
 SpiceRefinery::~SpiceRefinery() {}
+
+void SpiceRefinery::load(int charge) {
+	availableCapacity-= charge;
+}

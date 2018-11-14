@@ -3,6 +3,7 @@
 
 #include "Unit.h"
 #include "../Weapons/AssaultRifle.h"
+#include "../Buildings/SpiceRefinery.h"
 
 class Harvester : public Unit {
 public:
@@ -28,7 +29,7 @@ private:
 	int spiceCollected;
 	Position back_pos; //Temporal
 	Position farming_position;
-	Building* refinery;
+	SpiceRefinery* refinery;
 };
 
 #endif

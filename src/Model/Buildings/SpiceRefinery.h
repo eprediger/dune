@@ -8,8 +8,11 @@ public:
 	SpiceRefinery(const int x, const int y);
 	~SpiceRefinery();
 
+	void load(int charge);
+
 private:
-	int capacity;	
+	int capacity;
+	int availableCapacity;
 };
 
 #endif

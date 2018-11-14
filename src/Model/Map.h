@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Terrains/Terrain.h"
-#include "Positionable.h"
 #include "Buildings/Building.h"
 #include "Unit/Unit.h"
 #include "Player.h"

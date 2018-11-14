@@ -3,8 +3,6 @@
 
 #include <ostream>
 
-#include "../Positionable.h"
-
 class Terrain {
 private:
 	char key;
