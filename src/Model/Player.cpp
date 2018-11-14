@@ -41,3 +41,12 @@ bool Player::hasBuilding(Building *building) {
 void Player::cleanBuilding(Building *building) {
     buildings.erase(std::find(buildings.begin(), buildings.end(), building));
 }
+
+Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
+    for (auto b : buildings){
+        if ( b->is(type) ){
+            return b;
+        }
+    }
+    return nullptr;
+}

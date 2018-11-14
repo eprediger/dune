@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Buildings/Building.h"
+#include <functional>
 
 class Player {
 private:
@@ -26,6 +27,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     void addBuilding(Building* building);
 //    void cleanUnit(Unit* unit);
     void cleanBuilding(Building* building);
+
+    Building * getClosestBuilding(Position pos, Building::BuildingType type);
 
 //    bool hasUnit(Unit *unit);
     bool hasBuilding(Building* building);
