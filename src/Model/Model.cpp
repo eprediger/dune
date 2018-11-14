@@ -187,4 +187,8 @@ void Model::actionOnPosition(Position &pos, Unit &unit) {
     // Hacer lo mismo con los edificios
 }
 
-
+bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player){
+    if ( cost>player.gold )
+        return false;
+    return this->map.canWeBuild(pos,width,height);
+}

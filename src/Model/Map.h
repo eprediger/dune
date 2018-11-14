@@ -54,6 +54,8 @@ public:
     void cleanDeadUnits();
     void cleanUnit(Unit* unit);
 
+    bool canWeBuild(Position& pos, int width, int height);
+
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);

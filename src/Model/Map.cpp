@@ -87,9 +87,15 @@ void Map::put(Unit &unit) {
     units.push_back(&unit);
     this->at(unit.getPosition()).occupy();
 }
+
+
 void Map::put(Building &building) {
     buildings.push_back(&building);
-    this->at(building.getPosition()).occupy();
+    for (int i = 0; i<building.height; i++){
+        for (int j = 0; j<building.width; j++){
+            this->at(building.getPosition().x + j*BLOCK_WIDTH,building.getPosition().y + i*BLOCK_HEIGHT).buildOn();
+        }
+    }
 }
 
 bool Map::canMove(Unit& unit, Position pos) {
@@ -248,6 +254,29 @@ Building * Map::getClosestBuilding(Position &position, int limitRadius) {
 
 void Map::cleanUnit(Unit *unit) {
     units.erase(std::find(units.begin(), units.end(), unit));
+}
+
+bool Map::canWeBuild(Position& pos, int width, int height){
+    try{
+        for (int i = 0; i<height; i++){
+            for (int j = 0; i<width;j++){
+                if (this->at(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT).isOccupied()){
+                    return false;
+                }
+            }
+        }
+        for (int i = -5; i<=height + 5; i+=2){
+            for (int j = -5; j<=height + 5; j+=2){
+                if (this->at(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT).isBuiltOn()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    } catch (std::out_of_range& e){
+        return false;
+    }
+
 }
 
 Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, bool has) {

@@ -58,7 +58,7 @@ public:
     std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 
     void actionOnPosition(Position &pos, Unit &unit);
-
+	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player); 
 	void step();
     void cleanDeadUnits();
 

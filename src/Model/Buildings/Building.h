@@ -24,12 +24,14 @@ public:
 
 	bool is(BuildingType type);
 
+    const int width;
+    const int height;
+
+
 private:
 	BuildingType key;
 	const int energy;
 	const int cost;
-    const int width;
-    const int height;
 };
 
 #endif //__BUILDING_H__

@@ -7,16 +7,17 @@ class Terrain {
 private:
 	char key;
 	bool occupied;
-
+	bool builtOn;
 public:
 	Terrain();
 
 	explicit Terrain(char key);
 
 	void occupy();
+	void buildOn();
 	void free();
 	bool isOccupied();
-
+	bool isBuiltOn();
 	virtual int getFarm();
 
 	bool operator==(const Terrain& terrain);
