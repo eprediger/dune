@@ -14,7 +14,7 @@
 #include "Unit/Tank.h"
 #include "Unit/Trike.h"
 
-Model::Model(int width, int height, int n_player) : map(width, height) {
+Model::Model(int width, int height, int n_player) : map(width, height),gameFinished(false) {
     // reemplazar luego por un vector de players
     for (int i=0; i< n_player; ++i){
         players.emplace(players.end(),i);
@@ -44,11 +44,36 @@ Building &Model::createBuilding(Building *building) {
 }
 
 void Model::step() {
-//    for (auto unit : units){
     this->cleanDeadUnits();
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         (*itr)->makeAction(map);
     }
+
+    int players_alive = 0;
+    for (auto itr = players.begin(); itr != players.end(); ++itr){
+        if ( !itr->lose() ){
+            players_alive++;
+        }
+    }
+    if (players_alive <= 1){
+        gameFinished = true;
+    }
+}
+
+bool Model::isGameFinished() {
+    return gameFinished;
+}
+
+Player *Model::getWinner() {
+    if (!gameFinished){
+        return nullptr;
+    }
+    for (auto itr = players.begin(); itr != players.end() ; ++itr){
+        if ( !itr->lose() ){
+            return &(*itr);
+        }
+    }
+    return nullptr;
 }
 
 Unit *Model::selectUnit(int x, int y) {

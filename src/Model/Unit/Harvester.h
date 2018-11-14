@@ -27,7 +27,6 @@ public:
 private:
 	const int spiceCapacity;
 	int spiceCollected;
-	Position back_pos; //Temporal
 	Position farming_position;
 	SpiceRefinery* refinery;
 };

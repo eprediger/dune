@@ -29,6 +29,7 @@ private:
 	std::vector<Unit*> units;
 	std::vector<Building*> buildings;
     std::vector<Player> players;
+    bool gameFinished;
 
 public:
     Model(int width, int height, int n_player);
@@ -61,6 +62,9 @@ public:
 	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player); 
 	void step();
     void cleanDeadUnits();
+
+    bool isGameFinished();
+    Player* getWinner();
 
 	Player& getPlayer(int player);
 
