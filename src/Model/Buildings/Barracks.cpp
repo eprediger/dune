@@ -6,6 +6,8 @@ Barracks::Barracks(const int x, const int y) :
 				 GlobalConfig.barracksEnergy,
 				 GlobalConfig.barracksCost,
 				 GlobalConfig.barracksHitPoints,
+				 GlobalConfig.barracksWidth,
+				 GlobalConfig.barracksHeight,
 				 BARRACKS) {}
 
 Barracks::~Barracks() {}
