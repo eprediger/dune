@@ -1,7 +1,7 @@
 #ifndef __ROCKET_VIEW_H__
 #define __ROCKET_VIEW_H__
 
-#include "OldView.h"
+#include "GameView.h"
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <vector>

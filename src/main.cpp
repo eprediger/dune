@@ -9,7 +9,7 @@
 
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
-#include "View/OldView.h"
+#include "View/GameView.h"
 
 #include <iostream>
 
@@ -33,7 +33,7 @@ int main(int argc, const char *argv[]) {
 
 //		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT);
 		Model model(WINDOW_WIDTH, WINDOW_HEIGHT, 1);
-		OldView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
+		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
 
 		GameHandler gameHandler(gameView, model);
 		Application app(gameView, gameHandler);

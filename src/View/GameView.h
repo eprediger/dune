@@ -1,32 +1,57 @@
-#ifndef __GAME_VIEW_H__
-#define __GAME_VIEW_H__
+#ifndef __OLD_VIEW_H__
+#define __OLD_VIEW_H__
 
+#include "MapView.h"
+#include "UnitView.h"
+#include "BuildingView.h"
+#include <memory>
+#include "SelectorView.h"
+#include "../Model/Model.h"
 #include "View.h"
-#include <vector>
 
 #define TAG_FONT_SIZE 20
 
 class GameView : public View {
+private:
+	Model& model;
+	std::vector<UnitView*> unitViews;
+	std::vector<BuildingView*> buildingViews;
+	SelectorView* selectorView;
+	MapView map_view;
 public:
-	//
-	GameView(const int width, const int height);
+	Area camera;
+private:
+	Sound backgroundMusic;
+	Text moneyTag, moneyBalance, buildingTag, unitsTag;
+	std::vector<SdlTexture*> buildingButtons;
+	std::vector<SdlTexture*> unitButtons;
+	SdlTexture buttons;
+	int map_width;
+	int map_height;
+	int camera_width;
+	int camera_height;
 
-	// Libera recursos asociados a la instancia
+public:
+	GameView(const int width, const int height, Model& model);
 	~GameView();
 
-	void RenderHPBar(int x, int y, int w, int h, float Percent, SDL_Color FGColor, SDL_Color BGColor);
+	SdlWindow& getWindow();
+	void addUnitView(UnitView* unitView);
+
+	void addBuildingView(BuildingView* buildingView);
+
+	void addSelectorView(Selector& selector);
 
 	void RenderVPBar(int x, int y, int w, int h, float percent, SDL_Color FGColor, SDL_Color BGColor);
 
-	void render() override;
+	void cleanDeadUnitViews();
 
-private:
-	Sound backgroundMusic;
-	Text moneyTag, buildingTag, unitsTag;
-	unsigned moneyBalance;
-	std::vector<SdlTexture*> buildings;
-	std::vector<SdlTexture*> units;
-	SdlTexture buttons;
+	void moveUp(int distance);
+	void moveDown(int distance);
+	void moveLeft(int distance);
+	void moveRight(const int distance);
+
+	void render() override;
 };
 
-#endif	// __GAME_VIEW_H__
+#endif	// __OLD_VIEW_H__
