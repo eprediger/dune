@@ -9,10 +9,13 @@ class DeadUnitView{
     public:
         DeadUnitView(Position pos,Area area, std::vector<SdlTexture*>& sprites);
         void draw(Area& camara);
+        bool finished();
     private:
-        int update;
         std::vector<SdlTexture*>& dead_sprites; 
         std::vector<SdlTexture*>::iterator anim_it;
+        Area src_area,dest_area;
+        Position pos;
+        int update;
 };
 
 #endif
