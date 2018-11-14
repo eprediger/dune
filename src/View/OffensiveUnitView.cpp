@@ -17,8 +17,8 @@ void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<SdlTe
         anim_it = sprites.at(orientation.getValor()).begin();
         update = 0;
     }  
-    dest_area.setX(prev_pos.x - camara.getX() - sprite_area.getX()/2);
-    dest_area.setY(prev_pos.y - camara.getY() - sprite_area.getY()/2);
+    dest_area.setX(prev_pos.x - camara.getX() - sprite_area.getWidth()/2);
+    dest_area.setY(prev_pos.y - camara.getY() - sprite_area.getHeight()/2);
     (*anim_it)->render(sprite_area,dest_area);
     update++;
     if (update == 10){
