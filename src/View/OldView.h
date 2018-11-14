@@ -13,17 +13,16 @@
 
 class OldView : public View {
 private:
-	std::vector<UnitView*> unit_views;
-	std::vector<BuildingView*> building_views;
+	Model& model;
+	std::vector<UnitView*> unitViews;
+	std::vector<BuildingView*> buildingViews;
 	SelectorView* selectorView;
 	MapView map_view;
 	Area camera;
-
 	Sound backgroundMusic;
-	Text moneyTag, buildingTag, unitsTag;
-	unsigned moneyBalance;
-	std::vector<SdlTexture*> buildings;
-	std::vector<SdlTexture*> units;
+	Text moneyTag, moneyBalance, buildingTag, unitsTag;
+	std::vector<SdlTexture*> buildingButtons;
+	std::vector<SdlTexture*> unitButtons;
 	SdlTexture buttons;
 	int map_width;
 	int map_height;
@@ -31,7 +30,7 @@ private:
 	int camera_height;
 
 public:
-	OldView(const int width, const int height, Model &model);
+	OldView(const int width, const int height, Model& model);
 	~OldView();
 
 	SdlWindow& getWindow();

@@ -23,6 +23,9 @@ public:
 	// Obtener el texto
 	std::string getText();
 
+	// Reemplaza el contenido por newText
+	void setText(const std::string& newText);
+
 	// Muestra el texto en la ventana en la posicion (x,y)
 	virtual void render(const int x, const int y);
 

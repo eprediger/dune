@@ -3,7 +3,8 @@
 
 Player::Player(int id) :
     id(id),
-    energy(5000), //Reemplazar luego por valores iniciales
+    generatedEnergy(5000),  // Inicial es 0
+    consumedEnergy(2500),   // Inicial es 0
     gold(10000),
     gold_limit(10000) {}
 
@@ -20,13 +21,13 @@ void Player::subGold(int gold_to_sub) {
     gold -= gold_to_sub;
 }
 
-void Player::addEnergy(int energy_to_add) {
+/*void Player::addEnergy(int energy_to_add) {
     energy += energy_to_add;
 }
 
 void Player::subEnergy(int energy_to_sub) {
     energy -= energy_to_sub;
-}
+}*/
 
 
 void Player::addBuilding(Building *building) {

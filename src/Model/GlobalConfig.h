@@ -10,32 +10,46 @@ typedef struct {
 	const int constructionYardEnergy	= 0;
 	const int constructionYardCost		= 0;
 	const int constructionYardHitPoints	= 3000;
+	const int constructionYardWidth 	= 3;
+	const int constructionYardHeight	= 3;
 	// Trampas de Aire
 	const int windTrapEnergy	= 500;
 	const int windTrapCost		= 800;
 	const int windTrapHitPoints	= 500;
+	const int windTrapWidth 	= 3;
+	const int windTrapHeight	= 3;
 	// Fabrica Ligera
 	const int lightFactoryEnergy	= -500;
 	const int lightFactoryCost		= 800;
 	const int lightFactoryHitPoints	= 500;
+	const int lightFactoryWidth 	= 3;
+	const int lightFactoryHeight	= 3;
 	// Fabrica Pesada
 	const int heavyFactoryEnergy	= -800;
 	const int heavyFactoryCost		= 1500;
 	const int heavyFactoryHitPoints	= 1500;
+	const int heavyFactoryWidth 	= 4;
+	const int heavyFactoryHeight	= 4;
 	// Refinera
 	const int spiceRefineryEnergy			= -400;
 	const int spiceRefineryCost				= 500;
 	const int spiceRefineryHitPoints		= 500;	// el enunciado no dice
 	const int spiceRefinerySpiceCapacity	= 5000;
+	const int spiceRefinerySpicWidth 		= 3;	// enunciado no dice
+	const int spiceRefinerySpicHeight		= 3;	// enunciado no dice
 	// Silo
 	const int spiceSiloEnergy			= 100;
 	const int spiceSiloCost				= 200;
 	const int spiceSiloHitPoints		= 200;
 	const int spiceSiloSpiceCapacity	= 1000;
+	const int spiceSiloSpicWidth 	= 1;
+	const int spiceSiloSpicHeight	= 1;
 	// Cuartel
 	const int barracksEnergy	= 100;
 	const int barracksCost		= 300;
 	const int barracksHitPoints	= 300;
+	const int barracksWidth 	= 3;
+	const int barracksHeight	= 2;
 	// Palacio
 	/*const int palaceEnergy		= 800;
 	const int palaceCost		= 2000;

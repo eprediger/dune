@@ -57,6 +57,10 @@ std::string Text::getText() {
 	return this->inputText;
 }
 
+void Text::setText(const std::string& newText) {
+	this->inputText = newText;
+}
+
 void Text::render(const int x, const int y) {
 	// Rectangulo
 	// SDL_SetRenderDrawColor(this->renderer, 0x33, 0x33, 0x33, 0xFF);

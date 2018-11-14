@@ -26,7 +26,7 @@ bool GameHandler::handleInput() {
 	case SDL_MOUSEBUTTONUP:
 		if (event.button.button == SDL_BUTTON_MIDDLE) {
 			this->cursor.currentPosition();
-			Raider & raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
+			Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
 			view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
 			// std::cout << "Suelta en x: " << this->cursor.current_x << " y: " << this->cursor.current_y << std::endl;
 		}
@@ -35,22 +35,22 @@ bool GameHandler::handleInput() {
 		switch ( event.key.keysym.sym ) {
 		case SDLK_LEFT:
 		case SDLK_a:
-			std::cout << " Izquierda " << std::endl;
+			// std::cout << " Izquierda " << std::endl;
 			view.moveLeft(MOVE_AMOUNT);
 			break;
 		case SDLK_RIGHT:
 		case SDLK_d:
-			std::cout << " Derecha " << std::endl;
+			// std::cout << " Derecha " << std::endl;
 			view.moveRight(MOVE_AMOUNT);
 			break;
 		case SDLK_DOWN:
 		case SDLK_s:
-			std::cout << " Abajo " << std::endl;
+			// std::cout << " Abajo " << std::endl;
 			view.moveDown(MOVE_AMOUNT);
 			break;
 		case SDLK_UP:
 		case SDLK_w:
-			std::cout << " Arriba " << std::endl;
+			// std::cout << " Arriba " << std::endl;
 			view.moveUp(MOVE_AMOUNT);
 			break;
 		default:

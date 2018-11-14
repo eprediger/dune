@@ -4,43 +4,46 @@
 #include "BuildingView.h"
 #include <algorithm>
 
-OldView::OldView(const int width, const int height, Model &model) :
+OldView::OldView(const int width, const int height, Model& model) :
 	View(width / 2, height / 2),
-	camera(0, 0, width / 2, height / 2),
+	model(model),
+	unitViews(),
+	buildingViews(),
+	selectorView(nullptr),	// corregir
 	map_view(model.getMap(), window),
-	selectorView(nullptr),
+	camera(0, 0, width / 2, height / 2),
 	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
 	moneyTag(Text("DINERO", TAG_FONT_SIZE, this->window)),
+	moneyBalance(Text(std::to_string(model.getPlayer(0).gold), TAG_FONT_SIZE, this->window)),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
-	moneyBalance(0),
-	buildings(),
-	units(),
+	buildingButtons(),			// nombre
+	unitButtons(),				// nombre
 	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(width),
 	map_height(height),
 	camera_width(width / 2),
 	camera_height(height / 2) {
-	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
-	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
-	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
-	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
-	this->buildings.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/harvest.gif", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/linfantry.gif", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/hinfantry.gif", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/raider.gif", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/trike.jpg", this->window));
-	this->units.emplace_back(new SdlTexture("../assets/img/btns/units/tank.gif", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/harvest.gif", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/linfantry.gif", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/hinfantry.gif", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/raider.gif", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/trike.jpg", this->window));
+	this->unitButtons.emplace_back(new SdlTexture("../assets/img/btns/units/tank.gif", this->window));
 	backgroundMusic.start();
 }
 
 void OldView::addUnitView(UnitView* unitView) {
-	unit_views.push_back(std::move(unitView));
+	unitViews.push_back(std::move(unitView));
 }
 
 void OldView::addBuildingView(BuildingView* buildingView) {
-	building_views.push_back(std::move(buildingView));
+	buildingViews.push_back(std::move(buildingView));
 }
 
 void OldView::addSelectorView(SelectorView* selectorView) {
@@ -49,33 +52,33 @@ void OldView::addSelectorView(SelectorView* selectorView) {
 
 void OldView::cleanDeadUnitViews() {
 	bool has_dead_views = false;
-	for (auto unit_view : unit_views) {
+	for (auto unit_view : unitViews) {
 		if (UnitView::isDead(unit_view)) {
 			has_dead_views = true;
 			delete unit_view;
 		}
 	}
 	if (has_dead_views) {
-		unit_views.erase(std::remove_if(unit_views.begin(), unit_views.end(), UnitView::isDead));
+		unitViews.erase(std::remove_if(unitViews.begin(), unitViews.end(), UnitView::isDead));
 	}
 }
 
 OldView::~OldView() {
 	backgroundMusic.stop();
 
-	while (this->buildings.size() > 0) {
-		delete this->buildings.back();
-		this->buildings.pop_back();
+	while (this->buildingButtons.size() > 0) {
+		delete this->buildingButtons.back();
+		this->buildingButtons.pop_back();
 	}
-	while (this->units.size() > 0) {
-		delete this->units.back();
-		this->units.pop_back();
+	while (this->unitButtons.size() > 0) {
+		delete this->unitButtons.back();
+		this->unitButtons.pop_back();
 	}
 
-	for (auto unit_view : unit_views) {
+	for (auto unit_view : unitViews) {
 		delete unit_view;
 	}
-	for (auto building_view : building_views) {
+	for (auto building_view : buildingViews) {
 		delete building_view;
 	}
 	backgroundMusic.join();
@@ -86,15 +89,15 @@ SdlWindow &OldView::getWindow() {
 }
 
 void OldView::render() {
-	//    for (auto unit_view : unit_views){
+	//    for (auto unit_view : unitViews){
 	map_view.draw(camera);
-	for (auto itr = unit_views.begin(); itr != unit_views.end(); ++itr) {
+	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
 		if (!Unit::isDead(&(*itr)->getUnit())) {
 			(*itr)->draw(camera);
 		}
 	}
 
-	for (auto itr = building_views.begin(); itr != building_views.end(); ++itr) {
+	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
 		(*itr)->draw(camera);
 	}
 
@@ -104,6 +107,8 @@ void OldView::render() {
 
 	// Dinero
 	this->moneyTag.render((this->window.width - this->moneyTag.textWidth) / 2, 0);
+	this->moneyBalance.setText(std::to_string(model.getPlayer(0).gold));
+	this->moneyBalance.render((this->window.width - this->moneyBalance.textWidth) / 2 + this->moneyTag.textWidth, 0);
 	// Botones
 	// Vender Edificio
 	// Area sellSrc(20, 450, 30, 40);	// boton venta habilitada
@@ -111,33 +116,34 @@ void OldView::render() {
 
 	// Edificios
 	this->buildingTag.render(this->window.width * 12 / 16, this->window.height * 5 / 16);
-	for (unsigned i = 0; i < this->buildings.size(); ++i) {
-		Area buildingSrc(0, 0, this->buildings[i]->width, this->buildings[i]->height);
+	for (unsigned i = 0; i < this->buildingButtons.size(); ++i) {
+		Area buildingSrc(0, 0, this->buildingButtons[i]->width, this->buildingButtons[i]->height);
 		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
 		                  this->window.height * (6 + 2 * i) / 16,	//this->window.height * (1 + 8 * i) / 64,
 		                  80,
 		                  80 * 3 / 4);
-		this->buildings[i]->render(buildingSrc, buildingDest);
+		this->buildingButtons[i]->render(buildingSrc, buildingDest);
 	}
 
 	// Unidades
 	this->unitsTag.render(this->window.width * 28 / 32, this->window.height * 5 / 16);
-	for (unsigned i = 0; i < this->units.size(); ++i) {
-		Area UnitSrc(0, 0, this->units[i]->width, this->units[i]->height);
+	for (unsigned i = 0; i < this->unitButtons.size(); ++i) {
+		Area UnitSrc(0, 0, this->unitButtons[i]->width, this->unitButtons[i]->height);
 		Area UnitDest(this->window.width * 18 / 20,	// this->window.width * 29 / 32,
 		              this->window.height * (6 + 2 * i) / 16,	// this->window.height * (1 + 8 * i) / 64,
 		              80,
 		              80 * 3 / 4);
-		this->units[i]->render(UnitSrc, UnitDest);
+		this->unitButtons[i]->render(UnitSrc, UnitDest);
 	}
 	// Barra de energia harcodeada, se debe leer la energia del jugador en el modelo
 	SDL_Color available = { 0x0, 0x80, 0x0, 0xFF };	//{ 0xFF, 0x0, 0x0, 0xFF };
 	SDL_Color bkgrColor = { 0xA9, 0xA9, 0xA9, 0xFF };	//{ 0x0, 0xFF, 0x0, 0xFF };
 	this->RenderVPBar(this->window.width * 63 / 80,	//this->window.width * 1 / 10,
-	                  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
-	                  5,
-	                  this->window.height * 19 / 32,
-	                  0.75f, available, bkgrColor);
+					  this->window.height * 0 / 16,	//this->window.height * 1 / 64,
+					  5,
+					  this->window.height * 19 / 32,
+					  0.5f,//this->model.getPlayer(0).consumedEnergy/this->model.getPlayer(0).generatedEnergy,
+					  available, bkgrColor);
 
 	this->window.render();
 }

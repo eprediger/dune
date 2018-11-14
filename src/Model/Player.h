@@ -7,19 +7,20 @@
 class Player {
 private:
     int id;
-    int energy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
+public:     // El cliente sólo debería tenerse a su propio player disponible
+    int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
+    int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
     int gold;   // Se restara durante los constructores
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
 
     std::vector<Building*> buildings;
 
-public:
     explicit Player(int id);
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
-    void addEnergy(int energy_to_add);
-    void subEnergy(int energy_to_sub);
+    //void addEnergy(int energy_to_add);
+    //void subEnergy(int energy_to_sub);
 
 //    void addUnit(Unit* unit);
     void addBuilding(Building* building);
