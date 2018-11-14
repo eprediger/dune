@@ -5,6 +5,8 @@ WindTrap::WindTrap(const int x, const int y) :
                  GlobalConfig.windTrapEnergy,
                  GlobalConfig.windTrapCost,
                  GlobalConfig.windTrapHitPoints,
+                 GlobalConfig.windTrapWidth,
+                 GlobalConfig.windTrapHeight,
                  WIND_TRAP) {}
 
 WindTrap::~WindTrap() {}

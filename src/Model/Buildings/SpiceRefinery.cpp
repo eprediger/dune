@@ -5,6 +5,8 @@ SpiceRefinery::SpiceRefinery(const int x, const int y) :
                  GlobalConfig.spiceRefineryEnergy,
                  GlobalConfig.spiceRefineryCost,
                  GlobalConfig.spiceRefineryHitPoints,
+                 GlobalConfig.spiceRefinerySpicWidth,
+                 GlobalConfig.spiceRefinerySpicHeight,
                  SPICE_REFINERY),
 		capacity(GlobalConfig.spiceRefinerySpiceCapacity) ,
 		availableCapacity(0) {}

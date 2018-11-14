@@ -5,6 +5,8 @@ HeavyFactory::HeavyFactory(const int x, const int y) :
                  GlobalConfig.heavyFactoryEnergy,
                  GlobalConfig.heavyFactoryCost,
                  GlobalConfig.heavyFactoryHitPoints,
+                 GlobalConfig.heavyFactoryWidth,
+                 GlobalConfig.heavyFactoryHeight,
                  HEAVY_FACTORY) {}
 
 HeavyFactory::~HeavyFactory() {}

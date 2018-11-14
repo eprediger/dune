@@ -5,6 +5,8 @@ LightFactory::LightFactory(const int x, const int y) :
                  GlobalConfig.lightFactoryEnergy,
                  GlobalConfig.lightFactoryCost,
                  GlobalConfig.lightFactoryHitPoints,
+                 GlobalConfig.lightFactoryWidth,
+                 GlobalConfig.lightFactoryHeight,
                  LIGHT_FACTORY) {}
 
 LightFactory::~LightFactory() {}

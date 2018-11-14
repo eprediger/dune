@@ -1,10 +1,13 @@
 #include "Building.h"
 
-Building::Building(const int x, const int y, const int hitPoints, const int energy, const int cost, BuildingType type) :
-	Attackable(hitPoints, x, y),
-	energy(energy),
-	cost(cost),
-	key(type) {}
+Building::Building(const int x, const int y, const int hitPoints, const int energy, const int cost,
+ 				   const int width, const int height, BuildingType type)
+	:Attackable(hitPoints, x, y)
+	,energy(energy)
+	,cost(cost)
+	,width(width)
+	,height(height)
+	,key(type) {}
 
 Building::~Building() {}
 

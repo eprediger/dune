@@ -17,7 +17,7 @@ public:
     };
 
 
-    Building(const int x, const int y, const int hitPoints, const int energy, const int cost, BuildingType type);
+    Building(const int x, const int y, const int hitPoints, const int energy, const int cost, const int width, const int height, BuildingType type);
     virtual ~Building();
 
 	virtual void reciveBonusDammage(const Weapon &weapon) override;
@@ -28,6 +28,8 @@ private:
 	BuildingType key;
 	const int energy;
 	const int cost;
+    const int width;
+    const int height;
 };
 
 #endif //__BUILDING_H__
