@@ -1,8 +1,7 @@
 #include "Building.h"
 
 Building::Building(const int x, const int y, const int hitPoints, const int energy, const int cost, BuildingType type) :
-	Attackable(hitPoints),
-	Positionable(x, y),
+	Attackable(hitPoints, x, y),
 	energy(energy),
 	cost(cost),
 	key(type) {}

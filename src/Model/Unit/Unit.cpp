@@ -5,8 +5,7 @@
 #include <iostream>
 
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
-    Positionable(x, y),
-    Attackable(hitPoints),
+    Attackable(hitPoints, x, y),
     id(Config::getNextId()),
     speed(speed),
     actual_speed(0),
@@ -71,14 +70,14 @@ bool Unit::operator==(const Unit &other) {
 }
 
 
-bool Unit::isDead(const Unit *unit) {
-    if (!unit) {
-        return true;
-    }
-    return unit->life <= 0;
-}
+//bool Unit::isDead(const Attackable *unit) {
+//    if (!unit) {
+//        return true;
+//    }
+//    return unit->getLife() <= 0;
+//}
 
-void Unit::follow(Unit* other, Map& map) {
+void Unit::follow(Attackable* other, Map& map) {
     foll_unit = other;
     prev_foll_unit_pos = foll_unit->getPosition();
     bool occupied_pos = map.at(prev_foll_unit_pos).isOccupied();

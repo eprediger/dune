@@ -2,7 +2,6 @@
 #define __UNIT_H__
 
 #include "../../Position.h"
-#include "../Positionable.h"
 #include "../Weapons/Weapon.h"
 
 #include "../Terrains/Sand.h"
@@ -28,7 +27,7 @@
 
 class Map;
 
-class Unit : public Positionable, public Attackable {
+class Unit : public Attackable {
 public:
     static const UnitStateAttacking attacking;
     static const UnitStateFollowing following;
@@ -58,13 +57,13 @@ public:
 
     virtual void actionOnPosition(Map& map, Position& pos);
 
-    void follow(Unit* other, Map& map);
+    void follow(Attackable* other, Map& map);
 
     virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
 
 //    bool automaticAttack(Map &map);
 
-    static bool isDead(const Unit *unit);
+//    static bool isDead(const Attackable *unit);
 
     bool isAttacking();
 
@@ -83,7 +82,7 @@ protected:
     const int speed;
     int actual_speed;
     std::stack<Position> pathToDestiny;
-    Unit* foll_unit;
+    Attackable* foll_unit;
     Position destiny;
     Position prev_foll_unit_pos;
     Position next_pos;

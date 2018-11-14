@@ -1,8 +1,11 @@
 #include "Attackable.h"
 
-Attackable::Attackable(const int life)
+Attackable::Attackable(const int life, const int x, const int y)
     : initial_life(life) 
-    , life(life){}
+    , life(life)
+    , pos(x,y) {
+    this->pos.normalizeToBlock();
+}
 
 int Attackable::getLife() {
     return life;
@@ -22,6 +25,17 @@ void Attackable::reciveAttack(const Weapon &weapon) {
     }
 }
 
+Position &Attackable::getPosition() {
+    return pos;
+}
+
 //bool Attackable::isDead(Attackable* attackable) {
 //    return attackable->life <= 0;
 //}
+
+bool Attackable::isDead(const Attackable *unit) {
+    if (!unit) {
+        return true;
+    }
+    return unit->life <= 0;
+}
