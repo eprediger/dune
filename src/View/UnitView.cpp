@@ -7,15 +7,23 @@
 #include "Area.h"
 
 
-UnitView::UnitView(Unit& unit, Area sprite_area)
-	:unit(unit)
+UnitView::UnitView(Unit& unit, Area sprite_area,SdlWindow& window)
+	:window(window)
+	,playerColorRect()
+	,unit(unit)
 	,sprite_area(sprite_area)
 	,dest_area(sprite_area)
 	,prev_pos(unit.getPosition())
 	,orientation()
 	,life(unit.getLife())
 	,damage_anim_it()
-	,damage_update(0){}
+	,damage_update(0)
+{
+	playerColorRect.x = 0;
+	playerColorRect.y = 0;
+	playerColorRect.w = sprite_area.getWidth();
+	playerColorRect.h = sprite_area.getHeight();
+}
 
 UnitView::~UnitView() {}
 
@@ -33,7 +41,15 @@ void UnitView::draw(Area& camara, std::map<int, SdlTexture*>& sprites){
 	dest_area.setY(pos.y - camara.getY() - sprite_area.getHeight()/2);
 	orientation.calcular(prev_pos,pos);
 	prev_pos = pos;
-    sprites.at(orientation.getValor())->render(sprite_area,dest_area);
+	//sprites.at(orientation.getValor())->setColor(unit.getPlayer().getId());
+    playerColorRect.x = dest_area.getX();
+    playerColorRect.y = dest_area.getY();
+    
+	SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(window.getRenderer(),103,255,103,150);
+    SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
+    
+	sprites.at(orientation.getValor())->render(sprite_area,dest_area);
 }
 
 void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites
@@ -59,6 +75,14 @@ void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& spri
 		else update++;
 		prev_pos = pos;	
 	}
+	playerColorRect.x = dest_area.getX();
+    playerColorRect.y = dest_area.getY();
+    
+	SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(window.getRenderer(),103,255,103,250);
+    SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
+    
+	//(*anim_it)->setColor(unit.getPlayer().getId());
 	(*anim_it)->render(sprite_area,dest_area);
 }
 		

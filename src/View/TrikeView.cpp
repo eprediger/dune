@@ -12,7 +12,7 @@ std::map<int,std::vector<SdlTexture*> > TrikeView:: attack_sprites;
 std::vector<SdlTexture*> TrikeView::dead_sprites;
 
 TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
-	OffensiveUnitView(trike,Area(0,0,25,25))
+	OffensiveUnitView(trike,Area(0,0,25,25),window)
 {
     if (trike_sprites.empty()){  
         trike_sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/0009e9ca.bmp",window)));		

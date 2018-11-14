@@ -16,7 +16,7 @@ std::vector<SdlTexture*> HeavyInfantryView::dead_sprites;
 
 HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
                                     SdlWindow& window) :
-    OffensiveUnitView(heavyInfantry,Area(0,0,20,20))
+    OffensiveUnitView(heavyInfantry,Area(0,0,20,20),window)
 {
     if (sprites.empty()) {
         std::vector<SdlTexture*> indef;

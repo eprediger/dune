@@ -11,7 +11,7 @@ std::map<int, std::vector<SdlTexture*> > TankView::attack_sprites;
 std::vector<SdlTexture*> TankView::dead_sprites;
 
 TankView::TankView(Tank& tank, SdlWindow& window) :
-	OffensiveUnitView(tank,Area(0,0,30,30))
+	OffensiveUnitView(tank,Area(0,0,30,30),window)
 { 	
     if (sprites.empty()){  
     sprites.emplace(std::make_pair(Orientation::indefinida(),new SdlTexture("../imgs/imgs/000ba250.bmp",window)));		

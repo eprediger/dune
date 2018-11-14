@@ -14,7 +14,7 @@
 
 class UnitView {
 	public:
-		UnitView(Unit& unit, Area sprite_area);
+		UnitView(Unit& unit, Area sprite_area, SdlWindow& window);
 		virtual ~UnitView();
 		Unit& getUnit();
 		virtual void draw(Area& camara) = 0;
@@ -25,6 +25,8 @@ class UnitView {
 		static bool isDead(const UnitView *unit_view);
 		virtual DeadUnitView* getDeadUnitView() = 0;
 	protected: 
+		SdlWindow& window;
+		SDL_Rect playerColorRect;
 		Unit& unit;
 		Area sprite_area;
 		Area dest_area;

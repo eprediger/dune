@@ -54,3 +54,7 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
 bool Player::lose() {
     return construction_yard == nullptr;
 }
+
+int& Player::getId(){
+    return this->id;
+} 

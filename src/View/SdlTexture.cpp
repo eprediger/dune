@@ -32,8 +32,15 @@ SDL_Texture* SdlTexture::loadTexture(const std::string& filename) {
 	return this->texture;
 }
 
-int SdlTexture::setColor() {
-	return SDL_SetTextureColorMod(this->texture, 128, 32, 32);
+int SdlTexture::setColor(const int& playerKey) {
+	switch(playerKey){
+		case 0:
+			return SDL_SetTextureColorMod(this->texture,255,102,102);
+
+		case 1:
+			return SDL_SetTextureColorMod(this->texture,102,255,102);
+	}
+	return -1;
 }
 
 int SdlTexture::render(const Area& src, const Area& dest) {

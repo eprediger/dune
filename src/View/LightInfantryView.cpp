@@ -13,7 +13,7 @@ std::vector<SdlTexture*> LightInfantryView::dead_sprites;
 
 LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
                                      , SdlWindow& window)
-    :OffensiveUnitView(lightInfantry,Area(0,0,20,20)) 
+    :OffensiveUnitView(lightInfantry,Area(0,0,20,20),window) 
 {
     if (sprites.empty()) {
         std::vector<SdlTexture*> indef;

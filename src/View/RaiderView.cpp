@@ -13,7 +13,7 @@ std::map<int, std::vector<SdlTexture*> > RaiderView::attack_sprites;
 std::vector<SdlTexture*> RaiderView::dead_sprites;
 
 RaiderView::RaiderView(Raider& raider, SdlWindow& window)
-	:OffensiveUnitView(raider,Area(0,0,30,30))   
+	:OffensiveUnitView(raider,Area(0,0,30,30),window)   
 {
 	if (raider_sprites.empty()) {
 		raider_sprites.emplace(std::make_pair(Orientation::indefinida(), new SdlTexture("../imgs/imgs/000a08e6.bmp", window)));

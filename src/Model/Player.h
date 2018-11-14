@@ -37,6 +37,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
     bool lose();
 
+    int& getId();
+
     bool operator==(const Player& other) const;
 };
 

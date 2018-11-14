@@ -11,7 +11,7 @@ std::map<int, SdlTexture*> HarvesterView::harvester_sprites;
 std::vector<SdlTexture*> HarvesterView::dead_sprites; 
 
 HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window) :
-	UnitView(harvester, Area(0,0,41,38)) {
+	UnitView(harvester, Area(0,0,41,38),window) {
 	if (harvester_sprites.empty()) {
 		harvester_sprites.emplace(std::make_pair(Orientation::indefinida(), new SdlTexture("../imgs/imgs/000a612e.bmp", window)));
 		harvester_sprites.emplace(std::make_pair(Orientation::norte(), new SdlTexture("../imgs/imgs/000a612e.bmp", window)));
