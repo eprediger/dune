@@ -3,14 +3,14 @@
 
 #include "View/View.h"
 #include "Controller/InputHandler.h"
-
+#include "Model/Model.h"
 #define WINDOW_WIDTH  2048
 #define WINDOW_HEIGHT (WINDOW_WIDTH*3/4)
 
 class Application {
 public:
 	//
-	Application(View& view, InputHandler& handler);
+	Application(View& view, InputHandler& handler, Model& model);
 	// Application();
 
 	//
@@ -33,7 +33,7 @@ private:
 	// std::string host, port, house;
 	View& view;
 	InputHandler& handler;
-	// Model model;
+	Model& model;
 };
 
 #endif	// __APPLICATION_H__

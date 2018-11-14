@@ -34,8 +34,8 @@ int main(int argc, const char *argv[]) {
 		Model model(WINDOW_WIDTH, WINDOW_HEIGHT, 2);
 		GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
 		GameHandler gameHandler(gameView, model);
-		Application app(gameView, gameHandler);
-
+		Application app(gameView, gameHandler, model);
+ 
 		while (app.running()) {
 			app.handleEvent();	 	// Input de usuario
 			app.update();			// Actualizar Modelo

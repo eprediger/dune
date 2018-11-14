@@ -1,12 +1,13 @@
 #include "Application.h"
 
-Application::Application(View& view, InputHandler& handler) :
+Application::Application(View& view, InputHandler& handler,Model& model) :
 	isRunning(true),
 	/*host(),
 	port(),
 	house(),*/
 	view(view),
-	handler(handler) {
+	handler(handler),
+	model(model) {
 }
 
 Application::~Application() {}
@@ -20,7 +21,7 @@ void Application::handleEvent() {
 }
 
 void Application::update() {
-	// this->model.step();
+	this->model.step();
 }
 
 void Application::render() {
