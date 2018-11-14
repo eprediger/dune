@@ -25,7 +25,6 @@ void Harvester::actionOnPosition(Map &map, Position &pos) {
 //    map.getClosestRefinery(pos);
 	state = (UnitState*)&Unit::following;
 	farming_position = pos;
-	back_pos = this->pos;
 }
 
 UnitState *Harvester::makeFollow(Map &map) {
@@ -40,8 +39,15 @@ UnitState *Harvester::makeFollow(Map &map) {
 UnitState *Harvester::makeFarming(Map &map) {
 //	map.at(pos).getFarm();
 	if (!this->farm(map)) {
-		map.setDestiny(*this, back_pos.x, back_pos.y);
-		state = (UnitState*)&Unit::backing;
+		if (this->refinery == nullptr) {
+			this->refinery = (SpiceRefinery*) player->getClosestBuilding(this->pos, Building::SPICE_REFINERY);
+			if (this->refinery == nullptr){
+				state = (UnitState*)&Unit::stopped;
+			} else {
+				map.setDestiny(*this, refinery->getPosition().x, refinery->getPosition().y);
+				state = (UnitState*)&Unit::backing;
+			}
+		}
 	}
 	std::cout << "SpiceCollected: " << spiceCollected << std::endl;
 	return state;

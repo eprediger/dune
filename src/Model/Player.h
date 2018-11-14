@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Buildings/Building.h"
+#include "Buildings/ConstructionYard.h"
 #include <functional>
 
 class Player {
@@ -15,6 +16,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
 
     std::vector<Building*> buildings;
+    ConstructionYard* construction_yard;
 
     explicit Player(int id);
 
@@ -32,6 +34,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
 //    bool hasUnit(Unit *unit);
     bool hasBuilding(Building* building);
+
+    bool lose();
 
     bool operator==(const Player& other) const;
 };
