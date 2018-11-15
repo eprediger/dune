@@ -46,6 +46,8 @@ Ejecución desde carpeta build/:
 6. Para construir un edificio, se debe contar con el dinero suficiente correspondiente a su costo. Caso contrario, se _deshabilitará_ el botón para comenzar su construcción. Al iniciar la construcción de cualquier edificio, se restará el dinero correspondiente del jugador y se actualizará la energía consumida por el mismo, sumando y pasado el tiempo de construcción correspondiente a cada uno, se podrá colocar en cualquier parte del mapa cuyo terreno sean rocas, no haya unidades en el mismo y se encuentre al menos a 5 bloques de distancia de otros edificios. El edificio pasara a ocupar tantos bloques como su superficie lo indique.
 
 	* Validar la cantidad de dinero (no resta al construir, no deshabilita botón si no hay suficiente)
+	* La construcción es instantánea
+	* Tomar posición de ubicación de edificio del input de click del jugador
 	* No se actualiza energía consumida
 
 7. Al destruirse un edificio, se disminuirá la energía consumida por el jugador que perdió el edificio mostrando una animación en pantalla de su destrucción y posterior borrado del mapa.
