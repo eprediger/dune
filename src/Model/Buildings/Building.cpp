@@ -6,9 +6,9 @@ Building::Building(const int x, const int y, const int hitPoints,
 	Attackable(hitPoints, x, y),
 	width(width),
 	height(height),
-	key(type),
 	energy(energy),
-	cost(cost) {}
+	cost(cost),
+	key(type) {}
 
 Building::~Building() {}
 

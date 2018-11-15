@@ -8,7 +8,7 @@ ButtonHandler::ButtonHandler(ButtonView& button_view, Model& model, GameView& vi
 
 ButtonHandler::~ButtonHandler() {}
 
-void ButtonHandler::onClicked(int x, int y) {
+void ButtonHandler::onClicked(const int x, const int y) {
 	if (button_view.isClicked(x, y)) {
 		this->execute();
 	}

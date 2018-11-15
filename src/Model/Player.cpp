@@ -29,9 +29,14 @@ void Player::subEnergy(int energy_to_sub) {
     energy -= energy_to_sub;
 }*/
 
-
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
+    if (building->is(Building::WIND_TRAP)) {
+        this->generatedEnergy += building->energy;
+    } else {
+        this->consumedEnergy += building->energy;
+    }
+    this->gold -= building->cost;
 }
 
 bool Player::hasBuilding(Building *building) {

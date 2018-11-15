@@ -1,9 +1,10 @@
 #include "HeavyInfantry.h"
 #include "../Weapons/Weapons.h"
+#include "../GlobalConfig.h"
 
 HeavyInfantry::HeavyInfantry(int x, int y) :
 		OffensiveUnit(x, y, GlobalConfig.heavyInfantryHitPoints, GlobalConfig.heavyInfantryRange,
-					  Weapons::rocketLauncher, GlobalConfig.heavyInfantrySpeed, 0) {}
+					  Weapons::rocketLauncher, GlobalConfig.heavyInfantrySpeed, GlobalConfig.heavyInfantryCost) {}
 
 HeavyInfantry::~HeavyInfantry() {}
 

@@ -27,11 +27,10 @@ public:
     bool is(BuildingType type);
 
     const int width, height;
-
-private:
-    BuildingType key;
     const int energy;
     const int cost;
+private:
+    BuildingType key;
 };
 
 #endif //__BUILDING_H__

@@ -1,9 +1,9 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include <vector>
 #include "Buildings/Building.h"
 #include "Buildings/ConstructionYard.h"
+#include <vector>
 #include <functional>
 
 class Player {
