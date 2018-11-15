@@ -16,22 +16,22 @@ public:
         WIND_TRAP
     };
 
+    Building(const int x, const int y, const int hitPoints,
+             const int energy, const int cost, const int width,
+             const int height, BuildingType type);
 
-    Building(const int x, const int y, const int hitPoints, const int energy, const int cost, const int width, const int height, BuildingType type);
     virtual ~Building();
 
-	virtual void reciveBonusDammage(const Weapon &weapon) override;
+    virtual void reciveBonusDammage(const Weapon &weapon) override;
 
-	bool is(BuildingType type);
+    bool is(BuildingType type);
 
     const int width;
     const int height;
-
-
 private:
-	BuildingType key;
-	const int energy;
-	const int cost;
+    BuildingType key;
+    const int energy;
+    const int cost;
 };
 
 #endif //__BUILDING_H__

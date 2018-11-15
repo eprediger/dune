@@ -194,7 +194,6 @@ WindTrap& Model::createWindTrap(int x, int y, int player) {
     return (WindTrap&)this->createBuilding(std::move(building));
 }
 
-
 Unit * Model::selectUnit(Position &pos, int player) {
 //    map.getClosestUnit(pos, 50*50, players.at(player), true);
     return map.getClosestUnit(pos, 50*50);
