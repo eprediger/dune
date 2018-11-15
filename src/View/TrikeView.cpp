@@ -100,3 +100,10 @@ void TrikeView::draw(Area& camara){
 std::vector<SdlTexture*>& TrikeView::getDeadSprites(){
 	return dead_sprites; 
 } 
+
+Area TrikeView::getDeadUnitSrcArea(){
+	return Area(0,0,80,80);
+}
+Area TrikeView::getDeadUnitDestArea(){
+	return Area(0,0,40,40);
+}

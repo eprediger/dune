@@ -152,10 +152,21 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
 void LightInfantryView::draw(Area& camara){ 
     if (offensiveUnit.isAttacking() || animating_attack){
         drawAttack(camara,attack_sprites);
+        if (!animating_attack){
+            anim_it = sprites.at(orientation.getValor()).begin();
+        }
     }
     else UnitView::draw(camara,sprites,anim_it,update);
 }
 
 std::vector<SdlTexture*>& LightInfantryView::getDeadSprites(){
     return dead_sprites; 
+}
+
+
+Area LightInfantryView::getDeadUnitSrcArea(){
+	return Area(0,0,20,20);
+}
+Area LightInfantryView::getDeadUnitDestArea(){
+	return Area(0,0,20,20);
 }

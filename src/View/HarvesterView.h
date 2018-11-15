@@ -9,6 +9,9 @@ public:
 	HarvesterView(Harvester& harvester, SdlWindow& window);
 	virtual void draw(Area& camara);
 	virtual std::vector<SdlTexture*>& getDeadSprites();
+	virtual Area getDeadUnitSrcArea();
+	virtual Area getDeadUnitDestArea();
+		
 private:
 	static std::map<int, SdlTexture*> harvester_sprites;
 	static std::vector<SdlTexture*> dead_sprites;

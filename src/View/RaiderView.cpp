@@ -102,3 +102,13 @@ void RaiderView::draw(Area& camara){
 std::vector<SdlTexture*>& RaiderView::getDeadSprites(){
 	return dead_sprites; 
 }
+
+
+
+Area RaiderView::getDeadUnitSrcArea(){
+	return Area(0,0,80,80);
+}
+
+Area RaiderView::getDeadUnitDestArea(){
+	return Area(0,0,40,40);
+}

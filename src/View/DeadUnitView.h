@@ -7,7 +7,8 @@
 #include "SdlWindow.h"
 class DeadUnitView{
     public:
-        DeadUnitView(Position pos,Area area, std::vector<SdlTexture*>& sprites, int r, int g, int b, SdlWindow& window);
+        DeadUnitView(Position pos,Area src_area,Area dest_area, 
+                     std::vector<SdlTexture*>& sprites, int r, int g, int b, SdlWindow& window);
         void draw(Area& camara);
         bool finished();
     private:

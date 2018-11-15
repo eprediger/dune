@@ -17,6 +17,9 @@ class LightInfantryView: public OffensiveUnitView {
         
         virtual void draw(Area& camara);
         virtual std::vector<SdlTexture*>& getDeadSprites();
+        virtual Area getDeadUnitSrcArea();
+	    virtual Area getDeadUnitDestArea();
+	
     private:
         static std::map<int, std::vector<SdlTexture*> > sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;

@@ -25,6 +25,8 @@ class UnitView {
 		void drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites);
 		static bool isDead(const UnitView *unit_view);
 		virtual DeadUnitView* getDeadUnitView();
+		virtual Area getDeadUnitSrcArea() = 0;
+		virtual Area getDeadUnitDestArea() = 0;
 		virtual std::vector<SdlTexture*>& getDeadSprites() = 0;
 	protected: 
 		SdlWindow& window;

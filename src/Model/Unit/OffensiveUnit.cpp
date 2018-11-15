@@ -20,7 +20,7 @@ UnitState * OffensiveUnit::makeFollow(Map &map) {
         victim_pos = prev_foll_unit_pos;
         new_state = (UnitState*)&Unit::attacking;
         this->attack(*foll_unit);
-
+        this->victim_pos = (*foll_unit).getPosition();
     } else if (foll_unit->getPosition() == prev_foll_unit_pos || actual_speed != speed){
         this->move(map);
     } else {
@@ -38,6 +38,7 @@ UnitState *OffensiveUnit::makeAttack(Map &map) {
         new_state = (UnitState*)&Unit::stopped;
     } else if (foll_unit->getPosition().sqrtDistance(pos) < this->range){
         this->attack(*foll_unit);
+        this->victim_pos = (*foll_unit).getPosition();
     } else {
         new_state = (UnitState*)&Unit::following;
     }
@@ -59,6 +60,7 @@ UnitState *OffensiveUnit::makeDefending(Map &map) {
         new_state = (UnitState*)&Unit::stopped;
     } else {
         this->attack(*foll_unit);
+        victim_pos = (*foll_unit).getPosition();
     }
     return new_state;
 }

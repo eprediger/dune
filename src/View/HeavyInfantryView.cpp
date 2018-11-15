@@ -177,10 +177,23 @@ HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
 void HeavyInfantryView::draw(Area& camara){ 
     if (offensiveUnit.isAttacking() || animating_attack){
         drawAttack(camara,attack_sprites);
+        if (!animating_attack){
+            anim_it = sprites.at(orientation.getValor()).begin();
+        }
     }
     else UnitView::draw(camara,sprites,anim_it,update);
+
+    
 }
 
 std::vector<SdlTexture*>& HeavyInfantryView::getDeadSprites(){
     return dead_sprites;
+}
+
+
+Area HeavyInfantryView::getDeadUnitSrcArea(){
+	return Area(0,0,20,20);
+}
+Area HeavyInfantryView::getDeadUnitDestArea(){
+	return Area(0,0,20,20);
 }

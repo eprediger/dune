@@ -103,3 +103,11 @@ void TankView::draw(Area& camara){
 std::vector<SdlTexture*>& TankView::getDeadSprites(){
     return dead_sprites;
 }
+
+
+Area TankView::getDeadUnitSrcArea(){
+	return Area(0,0,80,80);
+}
+Area TankView::getDeadUnitDestArea(){
+	return Area(0,0,40,40);
+}
