@@ -5,7 +5,7 @@
 #include "SdlTexture.h"
 //#include "ButtonState.h"
 
-class Button {
+class ButtonView {
 public:
 	// El boton cuenta con tres estados:
 	// HIDDEN: no se dibuja el botón
@@ -15,19 +15,25 @@ public:
 	enum class State { HIDDEN, ENABLE, DISABLE };
 
 	// 
-	Button(const std::string& filename, const SdlWindow& window);
+	ButtonView(const std::string& filename, const SdlWindow& window);
 	
 	// 
-	virtual ~Button();
+	virtual ~ButtonView();
 	
 	// 
 	void changeState(State newState);
+
+	bool isClicked(const int x, const int y);
+
+	void execute();
 	
 	virtual void render(const Area &dest);
 
 private:
 	SdlTexture buttonImage;
 //	ButtonState* currentState;
+public:
+	int x, y, width, height;
 };
 
 #endif	// __BUTTON_H__

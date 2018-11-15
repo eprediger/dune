@@ -59,6 +59,7 @@ std::string Text::getText() {
 
 void Text::setText(const std::string& newText) {
 	this->inputText = newText;
+	this->createText(this->inputText);
 }
 
 void Text::render(const int x, const int y) {

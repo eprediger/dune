@@ -17,8 +17,8 @@ GameView::GameView(const int width, const int height, Model& model) :
 	moneyBalance(Text(std::to_string(model.getPlayer(0).gold), TAG_FONT_SIZE, this->window)),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
-	buildingButtons(),			// nombre
-	unitButtons(),				// nombre
+	buildingButtons(),
+	unitButtons(),
 	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(width),
 	map_height(height),
@@ -30,14 +30,13 @@ GameView::GameView(const int width, const int height, Model& model) :
 	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
     this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
     this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/barracks-atreides.jpg", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/harvest.gif", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/linfantry.gif", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/hinfantry.gif", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/raider.gif", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/trike.jpg", this->window));
-	this->unitButtons.emplace_back(new Button("../assets/img/btns/units/tank.gif", this->window));
+	/*this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/harvest.gif", this->window));
+	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/linfantry.gif", this->window));
+	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/hinfantry.gif", this->window));
+	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/raider.gif", this->window));
+	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/trike.jpg", this->window));
+	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/tank.gif", this->window));*/
 	// backgroundMusic.start();
-
 }
 
 GameView::~GameView() {
@@ -138,7 +137,6 @@ void GameView::render() {
 							(this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE*i),	// this->window.height * (1 + 8 * i) / 64,
 							BTN_WIDTH,
 							BTN_HEIGHT);
-//		this->unitButtons[i]->render(UnitSrc, UnitDest);
 		this->unitButtons[i]->render(UnitButtonDest);
 	}
 
@@ -203,4 +201,10 @@ void GameView::grabMouse() {
 
 void GameView::releaseMouse() {
 	this->window.grabMouse(false);
+}
+
+ButtonView& GameView::createUnitButton(std::string filename) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window);
+	this->unitButtons.emplace_back(newButtonView);
+	return *newButtonView;
 }

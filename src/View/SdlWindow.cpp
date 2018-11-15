@@ -10,7 +10,7 @@ SdlWindow::SdlWindow(const int width, const int height) :
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		throw SdlException("Error en la inicialización", SDL_GetError());
 	}
-	if (SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_ACCELERATED | SDL_WINDOW_BORDERLESS,
+	if (SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_ACCELERATED,// | SDL_WINDOW_BORDERLESS,
 	                                &this->window, &this->renderer)) {
 		throw SdlException("Error al crear ventana", SDL_GetError());
 	}

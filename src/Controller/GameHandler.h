@@ -7,6 +7,7 @@
 #include "../View/GameView.h"
 #include "../Model/Model.h"
 #include "../View/GameView.h"
+#include "../View/ButtonHandler.h"
 
 class GameHandler : public InputHandler {
 public:
@@ -23,6 +24,7 @@ private:
 	GameView& view;
 	Model& model;
 	Selector selector;
+	std::vector<ButtonHandler*> buttons;
 };
 
 #endif	// __GAME_HANDLER_H__

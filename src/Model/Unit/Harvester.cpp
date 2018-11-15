@@ -8,7 +8,9 @@ Harvester::Harvester(int x, int y) :
 	  GlobalConfig.harvesterHitPoints,
 	  GlobalConfig.harvesterSpeed),
     spiceCapacity(GlobalConfig.harvesterSpiceCapacity),
-    spiceCollected(0) {}
+    spiceCollected(0) {
+	this->cost = 70;
+}
 
 Harvester::~Harvester() {}
 

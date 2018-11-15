@@ -7,7 +7,7 @@
 #include "BuildingView.h"
 #include "SelectorView.h"
 #include "MapView.h"
-#include "Button.h"
+#include "ButtonView.h"
 
 #include <memory>
 
@@ -31,7 +31,8 @@ private:
 	Sound backgroundMusic;
 	Text moneyTag, moneyBalance, buildingTag, unitsTag;
 	std::vector<SdlTexture*> buildingButtons;
-	std::vector<Button*> unitButtons;
+//	std::vector<ButtonView*> unitButtons;
+	std::vector<ButtonView*> unitButtons;
 	SdlTexture buttons;
 	int map_width;
 	int map_height;
@@ -67,6 +68,8 @@ public:
 	void releaseMouse();
 
 	void render() override;
+
+    ButtonView & createUnitButton(std::string filename);
 };
 
 #endif	// __GAME_VIEW_H__

@@ -92,6 +92,7 @@ void Unit::follow(Attackable* other, Map& map) {
 
 void Unit::setPlayer(Player &player) {
     this->player = &player;
+    this->player->subGold(this->cost);
 }
 
 Player &Unit::getPlayer() {

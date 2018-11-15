@@ -80,6 +80,7 @@ public:
 protected:
     int id;
     const int speed;
+    int cost;
     int actual_speed;
     std::stack<Position> pathToDestiny;
     Attackable* foll_unit;
