@@ -5,9 +5,11 @@
 
 class ButtonHandlerHarvester : public ButtonHandler {
 public:
-    ButtonHandlerHarvester(Model &model, GameView &view);
+	ButtonHandlerHarvester(Model &model, GameView &view);
 
-    virtual void execute();
+	~ButtonHandlerHarvester();
+
+	virtual void execute() override;
 };
 
 

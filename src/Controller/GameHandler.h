@@ -7,7 +7,7 @@
 #include "../View/GameView.h"
 #include "../Model/Model.h"
 #include "../View/GameView.h"
-#include "../View/ButtonHandler.h"
+#include "ButtonHandler.h"
 
 class GameHandler : public InputHandler {
 public:

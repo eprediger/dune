@@ -1,6 +1,10 @@
 #include "GameHandler.h"
-#include "../View/UnitViewFactory.h"
-#include "../View/ButtonHandlerHarvester.h"
+#include "ButtonHandlerHarvester.h"
+#include "ButtonHandlerTank.h"
+#include "ButtonHandlerTrike.h"
+#include "ButtonHandlerRaider.h"
+#include "ButtonHandlerHeavyInfantry.h"
+#include "ButtonHandlerLightInfantry.h"
 
 GameHandler::GameHandler(GameView &view, Model &model) :
         InputHandler(),
@@ -9,11 +13,16 @@ GameHandler::GameHandler(GameView &view, Model &model) :
         selector(0,0) {
     view.addSelectorView(this->selector);
     buttons.push_back(new ButtonHandlerHarvester(model, view));
+    buttons.push_back(new ButtonHandlerLightInfantry(model, view));
+    buttons.push_back(new ButtonHandlerHeavyInfantry(model, view));
+    buttons.push_back(new ButtonHandlerRaider(model, view));
+    buttons.push_back(new ButtonHandlerTrike(model, view));
+    buttons.push_back(new ButtonHandlerTank(model, view));
 }
 
 GameHandler::~GameHandler() {
     while (!this->buttons.empty()) {
-        delete this->buttons.front();
+        delete this->buttons.back();
         this->buttons.pop_back();
     }
 }
