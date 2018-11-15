@@ -31,8 +31,7 @@ private:
 	Area camera;
 	Sound backgroundMusic;
 	Text moneyTag, moneyBalance, buildingTag, unitsTag;
-	std::vector<SdlTexture*> buildingButtons;
-//	std::vector<ButtonView*> unitButtons;
+	std::vector<ButtonView*> buildingButtons;
 	std::vector<ButtonView*> unitButtons;
 	SdlTexture buttons;
 	int map_width;
@@ -68,9 +67,11 @@ public:
 	void grabMouse();
 	void releaseMouse();
 
-	void render() override;
+    ButtonView& createUnitButton(const std::string& filename);
 
-    ButtonView & createUnitButton(std::string filename);
+	ButtonView& createBuildingButton(const std::string& filename);
+
+	void render() override;
 };
 
 #endif	// __GAME_VIEW_H__

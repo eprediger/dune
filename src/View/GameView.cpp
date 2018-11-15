@@ -25,17 +25,11 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_height(height),
 	camera_width(width / 2),
 	camera_height(height / 2) {
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/windtrap.gif", this->window));
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
-	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/barracks-atreides.jpg", this->window));
-	backgroundMusic.start();
+//	backgroundMusic.start();
 }
 
 GameView::~GameView() {
-	backgroundMusic.stop();
+//	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -53,7 +47,7 @@ GameView::~GameView() {
 	for (auto building_view : buildingViews) {
 		delete building_view;
 	}
-	backgroundMusic.join();
+//	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {
@@ -129,12 +123,12 @@ void GameView::render() {
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
 	for (unsigned i = 0; i < this->buildingButtons.size(); ++i) {
-		Area buildingSrc(0, 0, this->buildingButtons[i]->width, this->buildingButtons[i]->height);
+//		Area buildingSrc(0, 0, this->buildingButtons[i]->width, this->buildingButtons[i]->height);
 		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
 		                  (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),	//this->window.height * (1 + 8 * i) / 64,
 		                  BTN_WIDTH,
 		                  BTN_HEIGHT);
-		this->buildingButtons[i]->render(buildingSrc, buildingDest);
+		this->buildingButtons[i]->render(buildingDest);
 	}
 
 	// Botones de Unidades
@@ -211,8 +205,14 @@ void GameView::releaseMouse() {
 	this->window.grabMouse(false);
 }
 
-ButtonView& GameView::createUnitButton(std::string filename) {
+ButtonView& GameView::createUnitButton(const std::string &filename) {
 	ButtonView* newButtonView = new ButtonView(filename, this->window);
 	this->unitButtons.emplace_back(newButtonView);
+	return *newButtonView;
+}
+
+ButtonView &GameView::createBuildingButton(const std::string &filename) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window);
+	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
 }

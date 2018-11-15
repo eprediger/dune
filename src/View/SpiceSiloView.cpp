@@ -50,7 +50,7 @@ void SpiceSiloView::draw(Area& camara) {
         }
     }
     Area src(0, 0, 108, 72);
-    Area dest(pos.getX() - camara.getX() - 54, pos.getY() - camara.getY() - 36, 108, 72);
+    Area dest(pos.getX() - camara.getX() - 54, pos.getY() - camara.getY() - 36, 108/3, 72/3);
     base->render(src, dest);
     (*anim_it)->render(src, dest);
 }

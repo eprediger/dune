@@ -5,14 +5,26 @@
 #include "ButtonHandlerRaider.h"
 #include "ButtonHandlerHeavyInfantry.h"
 #include "ButtonHandlerLightInfantry.h"
+#include "ButtonHandlerBarracks.h"
+#include "ButtonHandlerHeavyFactory.h"
+#include "ButtonHandlerLightFactory.h"
+#include "ButtonHandlerSpiceRefinery.h"
+#include "ButtonHandlerSpiceSilo.h"
+#include "ButtonHandlerWindTrap.h"
 #include "../View/UnitViewFactory.h"
 
 GameHandler::GameHandler(GameView &view, Model &model) :
-        InputHandler(),
-        view(view),
-        model(model),
-        selector(0,0) {
+    InputHandler(),
+    view(view),
+    model(model),
+    selector(0,0) {
     view.addSelectorView(this->selector);
+    this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerBarracks(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view));
 }
 
 GameHandler::~GameHandler() {
@@ -44,16 +56,15 @@ bool GameHandler::handleInput() {
         case SDL_MOUSEBUTTONUP:
             this->cursor.currentPosition();
             if (event.button.button == SDL_BUTTON_LEFT) {
-                    this->selector.drag = false;
-                    Area selectArea(this->selector.drag_source, this->selector.pos);
-                    std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
-                    this->selector.addSelection(selection);
+                this->selector.drag = false;
+                Area selectArea(this->selector.drag_source, this->selector.pos);
+                std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
+                this->selector.addSelection(selection);
                 this->view.releaseMouse();
 
-                for (auto button : buttons){
+                for (auto button : buttons) {
                     button->onClicked(this->cursor.current_x, this->cursor.current_y);
                 }
-
             }
             // TEST
             if (event.button.button == SDL_BUTTON_MIDDLE) {

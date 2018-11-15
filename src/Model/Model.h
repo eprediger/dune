@@ -53,9 +53,9 @@ public:
 	SpiceRefinery& createSpiceRefinery(int x, int y, int player);
 	SpiceSilo& createSpiceSilo(int x, int y, int player);
 	WindTrap& createWindTrap(int x, int y, int player);
-	Building &createBuilding(Building* building);
+	Building& createBuilding(Building* building);
 
-    Unit * selectUnit(Position &pos, int player);
+    Unit* selectUnit(Position &pos, int player);
     std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 
     void actionOnPosition(Position &pos, Unit &unit);
@@ -71,4 +71,4 @@ public:
 	Unit* selectUnit(int x, int y);
 };
 
-#endif //__MODEL_H__
+#endif	// __MODEL_H__

@@ -12,5 +12,4 @@ public:
 	virtual void execute() override;
 };
 
-
 #endif  // __BUTTON_HANDLER_HARVESTER_H__
