@@ -8,7 +8,7 @@ class HarvesterView: public UnitView {
 public:
 	HarvesterView(Harvester& harvester, SdlWindow& window);
 	virtual void draw(Area& camara);
-	virtual DeadUnitView* getDeadUnitView();
+	virtual std::vector<SdlTexture*>& getDeadSprites();
 private:
 	static std::map<int, SdlTexture*> harvester_sprites;
 	static std::vector<SdlTexture*> dead_sprites;

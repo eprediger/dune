@@ -181,6 +181,6 @@ void HeavyInfantryView::draw(Area& camara){
     else UnitView::draw(camara,sprites,anim_it,update);
 }
 
-DeadUnitView* HeavyInfantryView::getDeadUnitView(){
-    return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
+std::vector<SdlTexture*>& HeavyInfantryView::getDeadSprites(){
+    return dead_sprites;
 }

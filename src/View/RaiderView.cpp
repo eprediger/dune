@@ -99,6 +99,6 @@ void RaiderView::draw(Area& camara){
 	else UnitView::draw(camara,raider_sprites);
 }
 
-DeadUnitView* RaiderView::getDeadUnitView(){
-	return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
+std::vector<SdlTexture*>& RaiderView::getDeadSprites(){
+	return dead_sprites; 
 }

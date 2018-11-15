@@ -14,7 +14,7 @@ class RaiderView: public OffensiveUnitView{
     public:
         RaiderView(Raider& raider, SdlWindow& window);
         virtual void draw(Area& area);
-        virtual DeadUnitView* getDeadUnitView();
+        virtual std::vector<SdlTexture*>& getDeadSprites();
     private:
         static std::map<int, SdlTexture*> raider_sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;

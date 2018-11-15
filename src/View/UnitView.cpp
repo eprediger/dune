@@ -102,3 +102,7 @@ void UnitView::drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites
 	else damage_update++;
 	(*damage_anim_it)->render(Area(0,0,10,10),dest_area);
 }
+
+DeadUnitView* UnitView::getDeadUnitView(){
+	return new DeadUnitView(prev_pos,Area(0,0,80,80),this->getDeadSprites(),player_r,player_g,player_b,window);
+}  

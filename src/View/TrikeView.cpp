@@ -97,6 +97,6 @@ void TrikeView::draw(Area& camara){
 	else UnitView::draw(camara,trike_sprites);
 }
 
-DeadUnitView* TrikeView::getDeadUnitView(){
-	return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
-}
+std::vector<SdlTexture*>& TrikeView::getDeadSprites(){
+	return dead_sprites; 
+} 

@@ -253,6 +253,7 @@ Building * Map::getClosestBuilding(Position &position, int limitRadius) {
 //}
 
 void Map::cleanUnit(Unit *unit) {
+    this->at(unit->getPosition()).free();
     units.erase(std::find(units.begin(), units.end(), unit));
 }
 

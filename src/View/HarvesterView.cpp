@@ -48,6 +48,6 @@ void HarvesterView::draw(Area& camara){
 	UnitView::draw(camara,harvester_sprites);
 }
 
-DeadUnitView* HarvesterView::getDeadUnitView(){
-	return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
+std::vector<SdlTexture*>& HarvesterView::getDeadSprites(){
+	return dead_sprites;
 }

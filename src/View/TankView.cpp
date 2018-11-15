@@ -100,6 +100,6 @@ void TankView::draw(Area& camara){
     else UnitView::draw(camara,sprites);
 }
 
-DeadUnitView* TankView::getDeadUnitView(){
-    return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
+std::vector<SdlTexture*>& TankView::getDeadSprites(){
+    return dead_sprites;
 }

@@ -16,7 +16,7 @@ class HeavyInfantryView: public OffensiveUnitView{
     public:
         HeavyInfantryView(HeavyInfantry& heavyInfantry, SdlWindow& window);
         virtual void draw(Area& camara);
-        virtual DeadUnitView* getDeadUnitView();
+        virtual std::vector<SdlTexture*>& getDeadSprites();
     private:
         static std::map<int, std::vector<SdlTexture*> > sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;

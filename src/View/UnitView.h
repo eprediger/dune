@@ -24,7 +24,8 @@ class UnitView {
 				  ,std::vector<SdlTexture*>::iterator& anim_it, int& update);
 		void drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites);
 		static bool isDead(const UnitView *unit_view);
-		virtual DeadUnitView* getDeadUnitView() = 0;
+		virtual DeadUnitView* getDeadUnitView();
+		virtual std::vector<SdlTexture*>& getDeadSprites() = 0;
 	protected: 
 		SdlWindow& window;
 		SDL_Rect playerColorRect;

@@ -14,7 +14,7 @@ class TankView: public OffensiveUnitView{
     public:
         TankView(Tank& tank, SdlWindow& window);
         virtual void draw(Area& camara);
-        virtual DeadUnitView* getDeadUnitView();
+        virtual std::vector<SdlTexture*>& getDeadSprites();
     private:
         static std::map<int, SdlTexture*> sprites;
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;

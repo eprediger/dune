@@ -57,7 +57,7 @@ bool GameHandler::handleInput() {
             }
             // TEST
             if (event.button.button == SDL_BUTTON_MIDDLE) {
-                Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 1);
+                Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
                 view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
 
                 Raider& raider2 = model.createRaider(this->cursor.current_x+150, this->cursor.current_y+150, 1);

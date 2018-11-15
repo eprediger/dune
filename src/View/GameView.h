@@ -24,6 +24,7 @@ class GameView : public View {
 private:
 	Model& model;
 	std::vector<UnitView*> unitViews;
+	std::vector<DeadUnitView*> deadUnitViews;
 	std::vector<BuildingView*> buildingViews;
 	SelectorView* selectorView;
 	MapView map_view;

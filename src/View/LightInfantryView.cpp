@@ -156,6 +156,6 @@ void LightInfantryView::draw(Area& camara){
     else UnitView::draw(camara,sprites,anim_it,update);
 }
 
-DeadUnitView* LightInfantryView::getDeadUnitView(){
-    return new DeadUnitView(prev_pos,sprite_area,dead_sprites);
+std::vector<SdlTexture*>& LightInfantryView::getDeadSprites(){
+    return dead_sprites; 
 }

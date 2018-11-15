@@ -8,6 +8,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	View(width / 2, height / 2),
 	model(model),
 	unitViews(),
+	deadUnitViews(),
 	buildingViews(),
 	selectorView(nullptr),
 	map_view(model.getMap(), window),
@@ -46,6 +47,9 @@ GameView::~GameView() {
 	for (auto unit_view : unitViews) {
 		delete unit_view;
 	}
+	for (auto deadUnitView : deadUnitViews){
+		delete deadUnitView;
+	}
 	for (auto building_view : buildingViews) {
 		delete building_view;
 	}
@@ -65,16 +69,25 @@ void GameView::addSelectorView(Selector& selector) {
 }
 
 void GameView::cleanDeadUnitViews() {
-	bool has_dead_views = false;
-	for (auto unit_view : unitViews) {
-		if (UnitView::isDead(unit_view)) {
-			has_dead_views = true;
-			delete unit_view;
+	std::vector<UnitView*>::iterator it = unitViews.begin();
+	while (it!=unitViews.end()){
+		if (UnitView::isDead(*it)){
+			deadUnitViews.emplace_back((*it)->getDeadUnitView());
+			delete (*it);
+			it = unitViews.erase(it);	
 		}
+		else it++;
 	}
-	if (has_dead_views) {
-		unitViews.erase(std::remove_if(unitViews.begin(), unitViews.end(), UnitView::isDead));
+
+	std::vector<DeadUnitView*>::iterator dead_it = deadUnitViews.begin();
+	while (dead_it!=deadUnitViews.end()){
+		if ((*dead_it)->finished()){
+			delete (*dead_it);
+			dead_it = deadUnitViews.erase(dead_it);	
+		}
+		else dead_it++;
 	}
+
 }
 
 SdlWindow &GameView::getWindow() {
@@ -89,10 +102,12 @@ void GameView::render() {
 		selectorView->draw(camera);
 	}
 
+	for (auto itr = deadUnitViews.begin(); itr != deadUnitViews.end(); ++itr) {
+		(*itr)->draw(camera);
+	}
+
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-		if (!Unit::isDead(&(*itr)->getUnit())) {
 			(*itr)->draw(camera);
-		}
 	}
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
