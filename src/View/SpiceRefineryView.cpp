@@ -12,7 +12,7 @@
 std::map<std::string, std::vector<SdlTexture*> > SpiceRefineryView::sprites;
 
 SpiceRefineryView::SpiceRefineryView(SpiceRefinery& spiceRefinery, SdlWindow& window) :
-    BuildingView(spiceRefinery) {
+    BuildingView(spiceRefinery,window,Area(0,0,108,72),Area(0,0,108,72)) {
     if (sprites.empty()) {
         std::vector<SdlTexture*> vector;
         vector.emplace_back(new SdlTexture("../imgs/imgs/0015d8d3.bmp", window));
@@ -36,14 +36,8 @@ SpiceRefineryView::SpiceRefineryView(SpiceRefinery& spiceRefinery, SdlWindow& wi
 }
 
 void SpiceRefineryView::draw(Area& camara) {
-    if (!destroyed) {
-        if (building.getLife() <= 0) {
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0, 0, 108, 72);
-    Area dest(pos.getX() - camara.getX() - 54, pos.getY() - camara.getY() - 36, 108, 72);
-    base->render(src, dest);
-    (*anim_it)->render(src, dest);
+    BuildingView::draw(camara,*anim_it,base,-10,25);   
 }

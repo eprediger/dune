@@ -15,7 +15,7 @@ public:
 
 	SDL_Texture* loadTexture(const std::string &filename);
 
-	int setColor(const int& playerKey);
+	int setColor(int& r, int& g, int& b);
 
 	int render(const Area &src, const Area &dest);
 

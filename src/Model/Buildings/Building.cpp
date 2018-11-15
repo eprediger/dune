@@ -8,7 +8,8 @@ Building::Building(const int x, const int y, const int hitPoints,
 	cost(cost),
 	width(width),
 	height(height),
-	key(type) {}
+	key(type),
+	player(nullptr) {}
 
 Building::~Building() {}
 
@@ -18,4 +19,12 @@ void Building::reciveBonusDammage(const Weapon &weapon) {
 
 bool Building::is(Building::BuildingType type) {
     return this->key == type;
+}
+
+void Building::setPlayer(Player* player){
+	this->player = player;
+}
+
+Player* Building::getPlayer(){
+	return this->player;
 }

@@ -32,6 +32,7 @@ void Player::subEnergy(int energy_to_sub) {
 
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
+    building->setPlayer(this); 
 }
 
 bool Player::hasBuilding(Building *building) {
