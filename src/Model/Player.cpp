@@ -29,10 +29,15 @@ void Player::subEnergy(int energy_to_sub) {
     energy -= energy_to_sub;
 }*/
 
-
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
     building->setPlayer(this); 
+    if (building->is(Building::WIND_TRAP)) {
+        this->generatedEnergy += building->energy;
+    } else {
+        this->consumedEnergy += building->energy;
+    }
+    this->gold -= building->cost;
 }
 
 bool Player::hasBuilding(Building *building) {
@@ -44,8 +49,8 @@ void Player::cleanBuilding(Building *building) {
 }
 
 Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
-    for (auto b : buildings){
-        if ( b->is(type) ){
+    for (auto b : buildings) {
+        if ( b->is(type) ) {
             return b;
         }
     }
@@ -56,6 +61,6 @@ bool Player::lose() {
     return construction_yard == nullptr;
 }
 
-int& Player::getId(){
+int& Player::getId() {
     return this->id;
-} 
+}

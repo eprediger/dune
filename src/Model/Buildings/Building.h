@@ -30,13 +30,12 @@ public:
     void setPlayer(Player* player);
     Player* getPlayer();
 
-    const int width;
-    const int height;
-private:
-    BuildingType key;
+    const int width, height;
     const int energy;
     const int cost;
+private:
     Player* player;
+    BuildingType key;
 };
 
 #endif //__BUILDING_H__

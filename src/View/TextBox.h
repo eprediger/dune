@@ -2,6 +2,8 @@
 #define __TEXT_BOX_H__
 
 #include "Text.h"
+#include <string>
+
 /*
 #define RED		0xCD
 #define GREEN	0x65

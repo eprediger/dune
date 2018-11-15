@@ -7,15 +7,24 @@
 Dune es un juego de estrategia en tiempo real basado en el icónico juego Dune 2000 de Westwood Studios
 del año 1998 ambientado en la novela Dune de Frank Herbert.
 
-El objetivo es simple: destruir a todos los adversarios y quedarse con el control planeta Arrakis, conocido como Dune.
+El __objetivo__ es simple: destruir a todos los adversarios y quedarse con el control planeta Arrakis, conocido como Dune.
 
-En este remake, el jugador podrá elegir jugar con una de las tres Casas: los nobles Atreides, los insidiosos Ordos y los malvados Harkonnen
+En este remake, __el jugador podrá elegir__ jugar con una de las tres Casas: los nobles **Atreides**, los insidiosos **Ordos** y los malvados **Harkonnen**
 
 ### Compilación
 
 Instalación de librerías externas:
 
-	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev
+	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev
+
+Instalacion libreria libsdl2-mixer-dev version 2.0.1:
+
+	https://packages.ubuntu.com/xenial/amd64/libsdl2-mixer-2.0-0/download
+	https://packages.ubuntu.com/xenial/amd64/libsdl2-mixer-dev/download
+
+	Instalacion [amd64]: dpkg -i libsdl2-mixer-2.0-0_2.0.1+dfsg1-1_amd64
+	Instalacion [amd64]: dpkg -i libsdl2-mixer-dev_2.0.1+dfsg1-1_amd64
+
 
 Compilación desde carpeta de proyecto:
 
@@ -35,20 +44,20 @@ Ejecución desde carpeta build/:
 
 	* Validar dinero suficiente (ahora puedo crear unidades sin dinero suficiente mostrando balance negativo)
 	* Habilitar Handler (mostrar botón) en base a edificios construidos
-	* Deshabilitar botón si no se cumplen los anterios
-	* Restar dinero cuando se construye unidad (solo restan cosechadora y trike)
-	* No tener harcodeado en handler posicion de unidad, leer del modelo
+	* Deshabilitar botón si no se cumplen los anteriores
+	* ~~Restar dinero cuando se construye unidad (solo restan cosechadora y trike)~~
+	* No tener harcodeado en handler posición de unidad, leer del modelo (spawn en edificio)
 
-4. Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla ~~y desaparecerá del mapa~~.
+4. ~~Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla y desaparecerá del mapa~~.
 
 5. Seleccionar una cosechadora, se la envía a recolectar especia y automáticamente realiza el recorrido hacia ese punto, cuando se completa su capacidad de 200 unidades en 20 segundos, retorna a la refinería, descarga lo cosechado en 5 segundos, incrementando en 1 la cantidad de dinero del jugador por cada unidad de especia recolectada. Cuando se agota la especia en la zona donde la cosechadora recolecta, debe buscar más especia en las cercanías automáticamente, continuando la cosecha. En el momento en que no encuentra más especia en sus alrededores, la cosechadora retorna a la refinería.
 
 6. Para construir un edificio, se debe contar con el dinero suficiente correspondiente a su costo. Caso contrario, se _deshabilitará_ el botón para comenzar su construcción. Al iniciar la construcción de cualquier edificio, se restará el dinero correspondiente del jugador y se actualizará la energía consumida por el mismo, sumando y pasado el tiempo de construcción correspondiente a cada uno, se podrá colocar en cualquier parte del mapa cuyo terreno sean rocas, no haya unidades en el mismo y se encuentre al menos a 5 bloques de distancia de otros edificios. El edificio pasara a ocupar tantos bloques como su superficie lo indique.
 
-	* Validar la cantidad de dinero (no resta al construir, no deshabilita botón si no hay suficiente)
+	* Validar la cantidad de dinero (~~no resta al construir~~, no deshabilita botón si no hay suficiente)
 	* La construcción es instantánea
 	* Tomar posición de ubicación de edificio del input de click del jugador
-	* No se actualiza energía consumida
+	* ~~No se actualiza energía consumida~~
 
 7. Al destruirse un edificio, se disminuirá la energía consumida por el jugador que perdió el edificio mostrando una animación en pantalla de su destrucción y posterior borrado del mapa.
 

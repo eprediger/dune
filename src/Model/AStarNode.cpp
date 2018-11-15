@@ -1,5 +1,6 @@
 #include "AStarNode.h"
 #include "Map.h"
+#include <vector>
 
 std::vector<AStarNode> AStarNode::getAdjacents(Map &map) {
     std::vector<AStarNode> vec;

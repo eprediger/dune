@@ -17,10 +17,10 @@ public:
 
 	virtual void actionOnPosition(Map& map, Position& pos) override;
 
-	virtual UnitState * makeFollow(Map &map) override;
-	virtual UnitState * makeFarming(Map &map) override;
-	virtual UnitState * makeLoading(Map &map) override;
-	virtual UnitState * makeBacking(Map &map) override;
+	virtual UnitState* makeFollow(Map &map) override;
+	virtual UnitState* makeFarming(Map &map) override;
+	virtual UnitState* makeLoading(Map &map) override;
+	virtual UnitState* makeBacking(Map &map) override;
 
 	bool farm(Map& map);
 

@@ -3,6 +3,8 @@
 
 #include "../Model/Unit/Harvester.h"
 #include "UnitView.h"
+#include <map>
+#include <vector>
 
 class HarvesterView: public UnitView {
 public:

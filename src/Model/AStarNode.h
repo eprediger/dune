@@ -3,16 +3,17 @@
 
 #include "../Position.h"
 #include "Map.h"
+#include <vector>
 
 struct AStarNode {
-    AStarNode();
-    explicit AStarNode(Position pos);
-    std::vector<AStarNode> getAdjacents(Map &map);
+	AStarNode();
+	explicit AStarNode(Position pos);
+	std::vector<AStarNode> getAdjacents(Map &map);
 
-    bool operator==(const AStarNode& other) const;
+	bool operator==(const AStarNode& other) const;
 
-    int f,g,h;
-    Position pos;
+	int f, g, h;
+	Position pos;
 };
 
 #endif //__ASTARNODE_H__

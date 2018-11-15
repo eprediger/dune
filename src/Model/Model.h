@@ -21,7 +21,7 @@
 #include <vector>
 #include <memory>
 
-#define LIMIT_TO_SELECT 32*32
+#define LIMIT_TO_SELECT (32*32)
 
 class Model {
 private:

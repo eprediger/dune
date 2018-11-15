@@ -3,6 +3,8 @@
 #include "../Model/Model.h"
 #include "BuildingView.h"
 #include <algorithm>
+#include <string>
+#include <vector>
 
 GameView::GameView(const int width, const int height, Model& model) :
 	View(width / 2, height / 2),
@@ -41,7 +43,7 @@ GameView::~GameView() {
 	for (auto unit_view : unitViews) {
 		delete unit_view;
 	}
-	for (auto deadUnitView : deadUnitViews){
+	for (auto deadUnitView : deadUnitViews) {
 		delete deadUnitView;
 	}
 	for (auto building_view : buildingViews) {
@@ -64,24 +66,25 @@ void GameView::addSelectorView(Selector& selector) {
 
 void GameView::cleanDeadUnitViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
-	while (it!=unitViews.end()){
-		if (UnitView::isDead(*it)){
+	while (it != unitViews.end()) {
+		if (UnitView::isDead(*it)) {
 			deadUnitViews.emplace_back((*it)->getDeadUnitView());
 			delete (*it);
-			it = unitViews.erase(it);	
+			it = unitViews.erase(it);
+		} else {
+			it++;
 		}
-		else it++;
 	}
 
 	std::vector<DeadUnitView*>::iterator dead_it = deadUnitViews.begin();
-	while (dead_it!=deadUnitViews.end()){
-		if ((*dead_it)->finished()){
+	while (dead_it != deadUnitViews.end()) {
+		if ((*dead_it)->finished()) {
 			delete (*dead_it);
-			dead_it = deadUnitViews.erase(dead_it);	
+			dead_it = deadUnitViews.erase(dead_it);
+		} else {
+			dead_it++;
 		}
-		else dead_it++;
 	}
-
 }
 
 SdlWindow &GameView::getWindow() {
@@ -101,7 +104,7 @@ void GameView::render() {
 	}
 
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-			(*itr)->draw(camera);
+		(*itr)->draw(camera);
 	}
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {

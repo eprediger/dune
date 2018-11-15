@@ -3,11 +3,11 @@
 
 #include "../Model/Player.h"
 
-class PlayerColorMaker{
-    private:
-        PlayerColorMaker();
-    public:
-        static void makeColor(Player& player, int* r, int* g, int* b);
+class PlayerColorMaker {
+private:
+	PlayerColorMaker();
+public:
+	static void makeColor(Player& player, int* r, int* g, int* b);
 };
 
-#endif
+#endif	// __PLAYER_COLOR_MAKER_H__

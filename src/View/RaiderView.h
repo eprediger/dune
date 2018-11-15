@@ -9,20 +9,20 @@
 #include "../Position.h"
 #include "Orientation.h"
 #include <map>
+#include <vector>
 
-class RaiderView: public OffensiveUnitView{
-    public:
-        RaiderView(Raider& raider, SdlWindow& window);
-        virtual void draw(Area& area);
-        virtual std::vector<SdlTexture*>& getDeadSprites();
-        virtual Area getDeadUnitSrcArea();
-	    virtual Area getDeadUnitDestArea();
-	
-    private:
-        static std::map<int, SdlTexture*> raider_sprites;
-        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
-        static std::vector<SdlTexture*> dead_sprites;
+class RaiderView: public OffensiveUnitView {
+public:
+    RaiderView(Raider& raider, SdlWindow& window);
+    virtual void draw(Area& area);
+    virtual std::vector<SdlTexture*>& getDeadSprites();
+    virtual Area getDeadUnitSrcArea();
+    virtual Area getDeadUnitDestArea();
+
+private:
+    static std::map<int, SdlTexture*> raider_sprites;
+    static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+    static std::vector<SdlTexture*> dead_sprites;
 };
-
 
 #endif  // __RAIDER_VIEW_H__
