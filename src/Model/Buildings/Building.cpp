@@ -4,11 +4,11 @@ Building::Building(const int x, const int y, const int hitPoints,
              const int energy, const int cost, const int width,
              const int height, BuildingType type) :
 	Attackable(hitPoints, x, y),
-	energy(energy),
-	cost(cost),
 	width(width),
 	height(height),
-	key(type) {}
+	key(type),
+	energy(energy),
+	cost(cost) {}
 
 Building::~Building() {}
 

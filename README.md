@@ -7,9 +7,9 @@
 Dune es un juego de estrategia en tiempo real basado en el icónico juego Dune 2000 de Westwood Studios
 del año 1998 ambientado en la novela Dune de Frank Herbert.
 
-El objetivo es simple: destruir a todos los adversarios y quedarse con el control planeta Arrakis, conocido como Dune.
+El __objetivo__ es simple: destruir a todos los adversarios y quedarse con el control planeta Arrakis, conocido como Dune.
 
-En este remake, el jugador podrá elegir jugar con una de las tres Casas: los nobles Atreides, los insidiosos Ordos y los malvados Harkonnen
+En este remake, __el jugador podrá elegir__ jugar con una de las tres Casas: los nobles **Atreides**, los insidiosos **Ordos** y los malvados **Harkonnen**
 
 ### Compilación
 
@@ -39,7 +39,7 @@ Ejecución desde carpeta build/:
 	* Restar dinero cuando se construye unidad (solo restan cosechadora y trike)
 	* No tener harcodeado en handler posicion de unidad, leer del modelo
 
-4. Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla ~~y desaparecerá del mapa~~.
+4. ~~Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla y desaparecerá del mapa~~.
 
 5. Seleccionar una cosechadora, se la envía a recolectar especia y automáticamente realiza el recorrido hacia ese punto, cuando se completa su capacidad de 200 unidades en 20 segundos, retorna a la refinería, descarga lo cosechado en 5 segundos, incrementando en 1 la cantidad de dinero del jugador por cada unidad de especia recolectada. Cuando se agota la especia en la zona donde la cosechadora recolecta, debe buscar más especia en las cercanías automáticamente, continuando la cosecha. En el momento en que no encuentra más especia en sus alrededores, la cosechadora retorna a la refinería.
 

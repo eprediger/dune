@@ -3,9 +3,9 @@ project(dune)
 
 set(CMAKE_CXX_STANDARD 11)
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -pthread")
+	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -ggdb -O0 -pthread")
 else()
-	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -pthread")
+	set(CMAKE_CXX_FLAGS  "-std=c++11 -Wall -ggdb -O0 -pthread")
 endif()
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")

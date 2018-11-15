@@ -49,7 +49,7 @@ void RocketView::draw(Area& camara) {
             anim_it++;
             update_sprite = 0;
             if (anim_it == sprites.end()) {
-                finished == true;
+                finished = true;
             }
         }
         else update_sprite += 1;
