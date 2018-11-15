@@ -33,7 +33,13 @@ Ejecución desde carpeta build/:
 
 3. Para crear una unidad, se debe contar con dinero suficiente correspondiente a su costo y los edificios que requiera, ~~mostrando un botón con la imagen de la unidad _habilitado_~~, caso contrario se _deshabilitará_ el botón en la vista del jugador. ~~Al iniciar el entrenamiento de cualquier unidad, se _restará_ el dinero correspondiente del jugador~~, se _deshabilitará_ el botón en la vista durante el tiempo de entrenamiento. Al finalizar el entrenamiento, la unidad creada será posicionada en el **primer cuartel** que posea el jugador.
 
-4. Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla y desaparecerá del mapa.
+	* Validar dinero suficiente (ahora puedo crear unidades sin dinero suficiente mostrando balance negativo)
+	* Habilitar Handler (mostrar botón) en base a edificios construidos
+	* Deshabilitar botón si no se cumplen los anterios
+	* Restar dinero cuando se construye unidad (solo restan cosechadora y trike)
+	* No tener harcodeado en handler posicion de unidad, leer del modelo
+
+4. Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla ~~y desaparecerá del mapa~~.
 
 5. Seleccionar una cosechadora, se la envía a recolectar especia y automáticamente realiza el recorrido hacia ese punto, cuando se completa su capacidad de 200 unidades en 20 segundos, retorna a la refinería, descarga lo cosechado en 5 segundos, incrementando en 1 la cantidad de dinero del jugador por cada unidad de especia recolectada. Cuando se agota la especia en la zona donde la cosechadora recolecta, debe buscar más especia en las cercanías automáticamente, continuando la cosecha. En el momento en que no encuentra más especia en sus alrededores, la cosechadora retorna a la refinería.
 
@@ -45,7 +51,7 @@ Ejecución desde carpeta build/:
 
 9. Para iniciar el servidor, se deberá indicar, puerto al cual escuchar, mapa sobre el que se jugará y cantidad de jugadores. El juego no iniciará hasta que se hayan conectado la cantidad de clientes indicada por parámetro. Una vez alcanzado ese número, se iniciará el juego para todos.
 
-10. Las distintas unidades de cada jugador se podrán diferenciar mediante un color característico para cada uno de ellos.
+10. ~~Las distintas unidades de cada jugador se podrán diferenciar mediante un color característico para cada uno de ellos.~~
 
 11. Si la energía consumida por los edificios supera a la energía generada por las Trampas de Viento, los tiempos de construcción de edificios y de entrenamiento de unidades se verán incrementados en un factor proporcional a la energía consumida sobre la energía generada.
 
@@ -63,7 +69,6 @@ Ejecución desde carpeta build/:
 	3. Cargar parámetros del juego (daños, velocidades)
 	4. Recibir clientes
 	5. Recibir nuevas partidas (creada por cliente)
-
 
 * Cliente
 
@@ -99,40 +104,3 @@ Ejecución desde carpeta build/:
 
 * Instalacion y uso
 * Archivo de Configuracion (detalles)
-
-### TAREAS
-
-Semana 1: 
-
-Alumno 1: Implementación del algoritmo A-Star sobre un mapa con distintos terrenos y con unidades con diferentes movilidades.
-
-	* Implementar A*
-	* Moverse de punto A a punto B mediante A*
-	* Moverse a través del mapa
-		* Implementar Mapa
-		* Implementar distintos terrenos
-	* Moverse dentro de mapa con posibles obstáculos
-	* Moverse a distintas velocidades.
-
-__SIN GRAFICOS__
-
-Alumno 2: Mostrar una imagen. Mostrar una animación. Mostrar ambas en un lugar fijo o desplazándose por la pantalla (movimiento).
-
-	* Mostrar imagen (de unidad)
-	* Mostrar sprites s/movimiento (desplazamiento, ataque, cosecha)
-	* Mostrar animacion s/movimientos
-	* Mostrar desplazamiento
-
-Alumno 3: Emitir un sonido. Carga y guardado de información a disco. Draft de la interfaz (​wireframes).
-
-	* Emitir un sonido.
-	* Carga y guardado de información a disco.
-		* Formato YAML
-
-<!-- 
-Semana 2:
-Semana 3:
-Semana 4:
-Semana 5:
-Semana 6: 
--->

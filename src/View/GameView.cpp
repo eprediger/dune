@@ -28,29 +28,28 @@ GameView::GameView(const int width, const int height, Model& model) :
 	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/refinery.jpg", this->window));
 	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/silo.gif", this->window));
 	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
-    this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
-    this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/barracks-atreides.jpg", this->window));
-	// backgroundMusic.start();
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
+	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/barracks-atreides.jpg", this->window));
+	backgroundMusic.start();
 }
 
 GameView::~GameView() {
-	// backgroundMusic.stop();
-	while (this->buildingButtons.size() > 0) {
+	backgroundMusic.stop();
+	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
 	}
-	while (this->unitButtons.size() > 0) {
+	while (!this->unitButtons.empty()) {
 		delete this->unitButtons.back();
 		this->unitButtons.pop_back();
 	}
-
 	for (auto unit_view : unitViews) {
 		delete unit_view;
 	}
 	for (auto building_view : buildingViews) {
 		delete building_view;
 	}
-	// backgroundMusic.join();
+	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {
@@ -110,16 +109,16 @@ void GameView::render() {
 	this->moneyBalance.render((this->window.width - this->moneyBalance.textWidth) * 18 / 20 + this->moneyTag.textWidth, this->window.height * 9 / 32);
 	// Botones
 	// Vender Edificio
-	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
+//	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
 
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
 	for (unsigned i = 0; i < this->buildingButtons.size(); ++i) {
 		Area buildingSrc(0, 0, this->buildingButtons[i]->width, this->buildingButtons[i]->height);
 		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
-						  (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE*i),	//this->window.height * (1 + 8 * i) / 64,
-						  BTN_WIDTH,
-						  BTN_HEIGHT);
+		                  (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),	//this->window.height * (1 + 8 * i) / 64,
+		                  BTN_WIDTH,
+		                  BTN_HEIGHT);
 		this->buildingButtons[i]->render(buildingSrc, buildingDest);
 	}
 
@@ -128,9 +127,9 @@ void GameView::render() {
 	for (unsigned i = 0; i < this->unitButtons.size(); ++i) {
 //		Area UnitSrc(0, 0, this->unitButtons[i]->width, this->unitButtons[i]->height);
 		Area UnitButtonDest(this->window.width * 18 / 20,	// this->window.width * 29 / 32,
-							(this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE*i),	// this->window.height * (1 + 8 * i) / 64,
-							BTN_WIDTH,
-							BTN_HEIGHT);
+		                    (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),	// this->window.height * (1 + 8 * i) / 64,
+		                    BTN_WIDTH,
+		                    BTN_HEIGHT);
 		this->unitButtons[i]->render(UnitButtonDest);
 	}
 

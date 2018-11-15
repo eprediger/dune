@@ -5,6 +5,7 @@
 #include "ButtonHandlerRaider.h"
 #include "ButtonHandlerHeavyInfantry.h"
 #include "ButtonHandlerLightInfantry.h"
+#include "../View/UnitViewFactory.h"
 
 GameHandler::GameHandler(GameView &view, Model &model) :
         InputHandler(),
@@ -12,12 +13,6 @@ GameHandler::GameHandler(GameView &view, Model &model) :
         model(model),
         selector(0,0) {
     view.addSelectorView(this->selector);
-    buttons.push_back(new ButtonHandlerHarvester(model, view));
-    buttons.push_back(new ButtonHandlerLightInfantry(model, view));
-    buttons.push_back(new ButtonHandlerHeavyInfantry(model, view));
-    buttons.push_back(new ButtonHandlerRaider(model, view));
-    buttons.push_back(new ButtonHandlerTrike(model, view));
-    buttons.push_back(new ButtonHandlerTank(model, view));
 }
 
 GameHandler::~GameHandler() {
@@ -62,12 +57,11 @@ bool GameHandler::handleInput() {
             }
             // TEST
             if (event.button.button == SDL_BUTTON_MIDDLE) {
-//                Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
-//                view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
-//
-//                Raider& raider2 = model.createRaider(this->cursor.current_x+150, this->cursor.current_y+150, 1);
-//                view.addUnitView(UnitViewFactory::createUnitView(raider2, view.getWindow()));
-                buttons.push_back(new ButtonHandlerHarvester(model, view));
+                Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 1);
+                view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
+
+                Raider& raider2 = model.createRaider(this->cursor.current_x+150, this->cursor.current_y+150, 1);
+                view.addUnitView(UnitViewFactory::createUnitView(raider2, view.getWindow()));
             }
             if (event.button.button == SDL_BUTTON_RIGHT) {
                 this->cursor.currentPosition();
