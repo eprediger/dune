@@ -2,11 +2,8 @@
 #include "../Weapons/Weapons.h"
 
 Raider::Raider(int x, int y) :
-		OffensiveUnit(x, y,
-		  GlobalConfig.raiderHitPoints,
-		  GlobalConfig.raiderRange,
-		  Weapons::smallCannon,
-		  GlobalConfig.raiderSpeed) {}
+        OffensiveUnit(x, y, GlobalConfig.raiderHitPoints, GlobalConfig.raiderRange, Weapons::smallCannon,
+                      GlobalConfig.raiderSpeed, 0) {}
 
 Raider::~Raider() {}
 

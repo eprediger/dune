@@ -2,9 +2,9 @@
 #include "../Weapons/Weapon.h"
 
 
-OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, const int range,
-                             const Weapon &weapon, const int speed) :
-        Unit(x, y, hitPoints, speed),
+OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, const int range, const Weapon &weapon,
+                             const int speed, const int cost) :
+        Unit(x, y, hitPoints, speed, cost),
         Attacker(weapon, range)
 //        ,attacking(false)
         {}

@@ -4,10 +4,11 @@
 #include "../Config.h"
 #include <iostream>
 
-Unit::Unit(const int x, const int y, const int hitPoints, const int speed) :
+Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),
     id(Config::getNextId()),
     speed(speed),
+    cost(cost),
     actual_speed(0),
     pathToDestiny(),
     foll_unit(nullptr),

@@ -2,11 +2,8 @@
 #include "../Weapons/Weapons.h"
 
 Tank::Tank(int x, int y) :
-		OffensiveUnit(x, y,
-		  GlobalConfig.tankHitPoints,
-		  GlobalConfig.tankRange,
-		  Weapons::cannon,
-		  GlobalConfig.tankSpeed) {}
+        OffensiveUnit(x, y, GlobalConfig.tankHitPoints, GlobalConfig.tankRange, Weapons::cannon, GlobalConfig.tankSpeed,
+                      0) {}
 
 Tank::~Tank() {}
 

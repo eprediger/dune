@@ -86,14 +86,14 @@ typedef struct {
 // Infantry Stats
 	// Infanteria Ligera
 	const int lightInfantryHitPoints	= 50;
-	const int lightInfantryRange		= RANGE_FACTOR*3;
-	const int lightInfantrySpeed		= SPEED_FACTOR/16;
+	const int lightInfantryRange		= RANGE_FACTOR * 3;
+	const int lightInfantrySpeed		= SPEED_FACTOR / 16;
 	const int lightInfantryTrainingTime	= 60;
 	const int lightInfantryCost			= 50;
 	// Infanteria Pesada
 	const int heavyInfantryHitPoints	= 80;
-	const int heavyInfantryRange		= RANGE_FACTOR*3;
-	const int heavyInfantrySpeed		= SPEED_FACTOR/12;
+	const int heavyInfantryRange		= RANGE_FACTOR * 3;
+	const int heavyInfantrySpeed		= SPEED_FACTOR / 12;
 	const int heavyInfantryTrainingTime	= 78;
 	const int heavyInfantryCost			= 70;
 	// Fremen
@@ -116,26 +116,26 @@ typedef struct {
 	// Cosechadora
 	const int harvesterHitPoints		= 600;
 	//const int harvesterRange			= RANGE_FACTOR*0;
-	const int harvesterSpeed			= SPEED_FACTOR/12;
+	const int harvesterSpeed			= SPEED_FACTOR / 12;
 	const int harvesterConstructionTime	= 180;
 	const int harvesterCost				= 300;
 	const int harvesterSpiceCapacity	= 200;
 	// Trike
 	const int trikeHitPoints		= 80;
-	const int trikeRange			= RANGE_FACTOR*4;
-	const int trikeSpeed			= SPEED_FACTOR/64;
+	const int trikeRange			= RANGE_FACTOR * 4;
+	const int trikeSpeed			= SPEED_FACTOR / 64;
 	const int trikeConstructionTime	= 120;
 	const int trikeCost				= 100;
 	// Raider
 	const int raiderHitPoints			= 80;
-	const int raiderRange				= RANGE_FACTOR*4;
-	const int raiderSpeed				= SPEED_FACTOR/84;
+	const int raiderRange				= RANGE_FACTOR * 4;
+	const int raiderSpeed				= SPEED_FACTOR / 84;
 	const int raiderConstructionTime	= 120;
 	const int raiderCost				= 100;
 	// Tanque
 	const int tankHitPoints			= 30;
-	const int tankRange				= RANGE_FACTOR*4;
-	const int tankSpeed				= SPEED_FACTOR/40;
+	const int tankRange				= RANGE_FACTOR * 4;
+	const int tankSpeed				= SPEED_FACTOR / 40;
 	const int tankConstructionTime	= 240;
 	const int tankCost				= 300;
 	// Tanque Sonico

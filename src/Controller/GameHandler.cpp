@@ -1,7 +1,6 @@
 #include "GameHandler.h"
 #include "../View/UnitViewFactory.h"
 #include "../View/ButtonHandlerHarvester.h"
-#include <iostream>
 
 GameHandler::GameHandler(GameView &view, Model &model) :
         InputHandler(),
@@ -13,7 +12,10 @@ GameHandler::GameHandler(GameView &view, Model &model) :
 }
 
 GameHandler::~GameHandler() {
-
+    while (!this->buttons.empty()) {
+        delete this->buttons.front();
+        this->buttons.pop_back();
+    }
 }
 
 bool GameHandler::handleInput() {

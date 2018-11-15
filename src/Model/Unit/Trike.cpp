@@ -2,11 +2,12 @@
 #include "../Weapons/Weapons.h"
 
 Trike::Trike(int x, int y) :
-		OffensiveUnit(x, y,
-		  GlobalConfig.trikeHitPoints,
-		  GlobalConfig.trikeRange,
-		  Weapons::assaultRifle,
-		  GlobalConfig.trikeSpeed) {}
+	OffensiveUnit(x, y,
+	              GlobalConfig.trikeHitPoints,
+	              GlobalConfig.trikeRange,
+	              Weapons::assaultRifle,
+	              GlobalConfig.trikeSpeed,
+	              GlobalConfig.trikeCost) {}
 
 Trike::~Trike() {}
 

@@ -38,7 +38,7 @@ public:
     static const UnitStateFarming farming;
     static const UnitStateBacking backing;
 
-    Unit(const int x, const int y, const int hitPoints, const int speed);
+    Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
 
     void setPath(std::stack<Position> path, Position destiny);
@@ -80,7 +80,7 @@ public:
 protected:
     int id;
     const int speed;
-    int cost;
+    const int cost;
     int actual_speed;
     std::stack<Position> pathToDestiny;
     Attackable* foll_unit;
@@ -90,5 +90,5 @@ protected:
     UnitState* state;
     Player* player;
 };
- 
+
 #endif //__UNIT_H__

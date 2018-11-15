@@ -2,11 +2,8 @@
 #include "../Weapons/Weapons.h"
 
 LightInfantry::LightInfantry(int x, int y) :
-        OffensiveUnit(x, y,
-		  GlobalConfig.lightInfantryHitPoints,
-		  GlobalConfig.lightInfantryRange,
-		  Weapons::assaultRifle,
-		  GlobalConfig.lightInfantrySpeed) {}
+        OffensiveUnit(x, y, GlobalConfig.lightInfantryHitPoints, GlobalConfig.lightInfantryRange, Weapons::assaultRifle,
+                      GlobalConfig.lightInfantrySpeed, 0) {}
 
 LightInfantry::~LightInfantry() {}
 

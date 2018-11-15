@@ -30,12 +30,6 @@ GameView::GameView(const int width, const int height, Model& model) :
 	this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/light-factory.gif", this->window));
     this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/heavy-factory.gif", this->window));
     this->buildingButtons.push_back(new SdlTexture("../assets/img/btns/buildings/barracks-atreides.jpg", this->window));
-	/*this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/harvest.gif", this->window));
-	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/linfantry.gif", this->window));
-	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/hinfantry.gif", this->window));
-	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/raider.gif", this->window));
-	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/trike.jpg", this->window));
-	this->unitButtons.emplace_back(new ButtonView("../assets/img/btns/units/tank.gif", this->window));*/
 	// backgroundMusic.start();
 }
 

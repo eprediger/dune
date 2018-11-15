@@ -31,7 +31,7 @@ Ejecución desde carpeta build/:
 
 2. ~~Al seleccionar una unidad con click izquierdo o varias arrastrando el mouse con el click presionado~~, se informa por mensaje de voz la unidad seleccionada, ~~y enviarla a atacar a una unidad enemiga, haciendo click derecho sobre esta, se acercará hasta encontrarse en rango y ahí comenzará el ataque. Si la atacada se desplaza, por ejemplo, intentando escapar, la atacante comenzará a perseguirla automáticamente, hasta encontrarse dentro de su rango de ataque.~~
 
-3. Para crear una unidad, se debe contar con dinero suficiente correspondiente a su costo y los edificios que requiera, mostrando un botón con la imagen de la unidad _habilitado_, caso contrario se _deshabilitará_ el botón en la vista del jugador. Al iniciar el entrenamiento de cualquier unidad, se _restará_ el dinero correspondiente del jugador, se _deshabilitará_ el botón en la vista durante el tiempo de entrenamiento. Al finalizar el entrenamiento, la unidad creada será posicionada en el **primer cuartel** que posea el jugador.
+3. Para crear una unidad, se debe contar con dinero suficiente correspondiente a su costo y los edificios que requiera, ~~mostrando un botón con la imagen de la unidad _habilitado_~~, caso contrario se _deshabilitará_ el botón en la vista del jugador. ~~Al iniciar el entrenamiento de cualquier unidad, se _restará_ el dinero correspondiente del jugador~~, se _deshabilitará_ el botón en la vista durante el tiempo de entrenamiento. Al finalizar el entrenamiento, la unidad creada será posicionada en el **primer cuartel** que posea el jugador.
 
 4. Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla y desaparecerá del mapa.
 
