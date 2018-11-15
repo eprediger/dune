@@ -1,9 +1,9 @@
 #include "AStar.h"
 #include "Map.h"
-
 #include <map>
 #include <stack>
 #include <algorithm>
+#include <vector>
 
 AStar::AStar(Map &map) : map(map) {}
 

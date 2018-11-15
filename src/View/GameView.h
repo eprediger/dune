@@ -10,6 +10,8 @@
 #include "ButtonView.h"
 
 #include <memory>
+#include <string>
+#include <vector>
 
 #define TAG_FONT_SIZE	16
 

@@ -1,9 +1,9 @@
 #include "Attackable.h"
 
-Attackable::Attackable(const int life, const int x, const int y)
-    : initial_life(life) 
-    , life(life)
-    , pos(x,y) {
+Attackable::Attackable(const int life, const int x, const int y):
+    initial_life(life),
+    life(life),
+    pos(x, y) {
     this->pos.normalizeToBlock();
 }
 
@@ -11,8 +11,8 @@ int Attackable::getLife() {
     return life;
 }
 
-int Attackable::getInitialLife(){
-    return initial_life; 
+int Attackable::getInitialLife() {
+    return initial_life;
 }
 #include <iostream>
 void Attackable::reciveAttack(const Weapon &weapon) {

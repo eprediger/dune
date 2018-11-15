@@ -3,6 +3,7 @@
 #include "../Weapons/AssaultRifle.h"
 #include "../Config.h"
 #include <iostream>
+#include <stack>
 
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),

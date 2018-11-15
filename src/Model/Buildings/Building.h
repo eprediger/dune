@@ -26,8 +26,8 @@ public:
 
     bool is(BuildingType type);
 
-    const int width;
-    const int height;
+    const int width, height;
+
 private:
     BuildingType key;
     const int energy;

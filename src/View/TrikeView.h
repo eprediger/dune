@@ -5,25 +5,23 @@
 #include "../Position.h"
 #include "Orientation.h"
 #include "OffensiveUnitView.h"
-#include <map>
 #include "SdlWindow.h"
 #include "SdlTexture.h"
- 
-class TrikeView: public OffensiveUnitView{
-    public: 
-        TrikeView(Trike& trike, SdlWindow& window);
-        virtual void draw(Area& camara);
-        virtual std::vector<SdlTexture*>& getDeadSprites(); 
-        virtual Area getDeadUnitSrcArea();
-	    virtual Area getDeadUnitDestArea();
-	
+#include <map>
+#include <vector>
 
-    private: 
-        static std::map<int, SdlTexture*> trike_sprites;
-        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
-        static std::vector<SdlTexture*> dead_sprites;
+class TrikeView: public OffensiveUnitView {
+public:
+    TrikeView(Trike& trike, SdlWindow& window);
+    virtual void draw(Area& camara);
+    virtual std::vector<SdlTexture*>& getDeadSprites();
+    virtual Area getDeadUnitSrcArea();
+    virtual Area getDeadUnitDestArea();
+
+private:
+    static std::map<int, SdlTexture*> trike_sprites;
+    static std::map<int, std::vector<SdlTexture*> > attack_sprites;
+    static std::vector<SdlTexture*> dead_sprites;
 };
 
-
 #endif  // __TRIKE_VIEW_H__
- 

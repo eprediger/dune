@@ -25,8 +25,6 @@ public:
 
 	bool isClicked(const int x, const int y);
 
-	void execute();
-	
 	virtual void render(const Area &dest);
 
 private:

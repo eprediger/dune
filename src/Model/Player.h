@@ -9,6 +9,7 @@
 class Player {
 private:
     int id;
+    
 public:     // El cliente sólo debería tenerse a su propio player disponible
     int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
     int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
