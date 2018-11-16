@@ -42,36 +42,38 @@ GameHandler::~GameHandler() {
 }
 
 bool GameHandler::handleInput() {
+    bool keepPlaying = true;
     SDL_Event event;
     SDL_PollEvent(&event);
     switch (event.type) {
     case SDL_QUIT:
-        return false;
+        keepPlaying = false;
+        break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT) {
             //this->view.grabMouse();
             this->cursor.initialPosition();
             this->selector.drag = true;
             this->selector.drag_source = selector.pos;
+            for (auto& button : this->buttons) {
+                button->onClicked(this->cursor.current_x, this->cursor.current_y);
+            }
         }
-        break;
-    case SDL_MOUSEMOTION:
-        this->cursor.currentPosition();
-        this->selector.pos.x = this->cursor.current_x + this->view.getCameraX();
-        this->selector.pos.y = this->cursor.current_y + this->view.getCameraY();
-        break;
-    case SDL_MOUSEBUTTONUP:
-        this->cursor.currentPosition();
-        if (event.button.button == SDL_BUTTON_LEFT) {
+            break;
+        case SDL_MOUSEMOTION:
+            this->cursor.currentPosition();
+            this->selector.pos.x = this->cursor.current_x + this->view.getCameraX();
+            this->selector.pos.y = this->cursor.current_y + this->view.getCameraY();
+            break;
+        case SDL_MOUSEBUTTONUP:
+            this->cursor.currentPosition();
+            if (event.button.button == SDL_BUTTON_LEFT) {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
             this->selector.addSelection(selection);
             this->view.releaseMouse();
 
-            for (auto button : buttons) {
-                button->onClicked(this->cursor.current_x, this->cursor.current_y);
-            }
         }
         // TEST
         if (event.button.button == SDL_BUTTON_MIDDLE) {
@@ -122,5 +124,5 @@ bool GameHandler::handleInput() {
     }
     this->view.cleanDeadUnitViews();
     this->selector.selection.eraseDeads();
-    return true;
+    return keepPlaying;
 }

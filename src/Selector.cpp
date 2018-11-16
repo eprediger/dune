@@ -3,9 +3,11 @@
 #include <vector>
 
 Selector::Selector(int x, int y) :
-    pos(x,y),
-    selection() {}
+	pos(x, y),
+	drag(false),
+	drag_source(x, y),
+	selection() {}
 
-void Selector::addSelection(std::vector<Unit*>& units){
-    this->selection.addSelection(units);
+void Selector::addSelection(std::vector<Unit*>& units) {
+	this->selection.addSelection(units);
 }
