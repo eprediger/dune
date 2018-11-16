@@ -149,7 +149,7 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry,
 }
 
 void LightInfantryView::draw(Area& camara) {
-    if (offensiveUnit.isAttacking() || animating_attack) {
+	if (offensiveUnit.isAttacking() && (offensiveUnit.isShooting() || animating_attack)){
         drawAttack(camara, attack_sprites);
         if (!animating_attack) {
             anim_it = sprites.at(orientation.getValor()).begin();

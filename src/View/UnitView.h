@@ -22,7 +22,7 @@ public:
 	void draw(Area& camara, std::map<int, SdlTexture*>& sprites);
 	void draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites,
 	          std::vector<SdlTexture*>::iterator& anim_it, int& update);
-	void drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites);
+	void drawDamage(Area& camara);
 	static bool isDead(const UnitView *unit_view);
 	virtual DeadUnitView* getDeadUnitView();
 	virtual Area getDeadUnitSrcArea() = 0;
@@ -34,13 +34,15 @@ protected:
 	SDL_Rect playerColorRect;
 	Unit& unit;
 	int player_r, player_g, player_b;
-	Area sprite_area;
-	Area dest_area;
+	Area damage_sprite_area,sprite_area;
+	Area damage_dest_area,dest_area;
 	Position prev_pos;
 	Orientation orientation;
 	int life;
+	static std::vector<SdlTexture*> damage_sprites;
 	std::vector<SdlTexture*>::iterator damage_anim_it;
 	int damage_update;
+	bool animating_damage;
 };
 
 #endif	// __UNIT_VIEW_H__

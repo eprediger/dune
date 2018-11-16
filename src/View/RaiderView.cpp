@@ -91,8 +91,8 @@ RaiderView::RaiderView(Raider& raider, SdlWindow& window) :
 }
 
 void RaiderView::draw(Area& camara) {
-	if (offensiveUnit.isAttacking() || animating_attack) {
-		drawAttack(camara, attack_sprites);
+	if (offensiveUnit.isAttacking() && (offensiveUnit.isShooting() || animating_attack)){
+			drawAttack(camara, attack_sprites);
 	} else {
 		UnitView::draw(camara, raider_sprites);
 	}

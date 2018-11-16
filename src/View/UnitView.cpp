@@ -7,6 +7,8 @@
 #include <map>
 #include <vector>
 
+std::vector<SdlTexture*> UnitView::damage_sprites;
+
 UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	window(window),
 	playerColorRect(),
@@ -17,12 +19,30 @@ UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	orientation(),
 	life(unit.getLife()),
 	damage_anim_it(),
-	damage_update(0) {
+	damage_update(0),
+	damage_sprite_area(Area(0,0,15,15)),
+	damage_dest_area(Area(0,0,7,7)),
+	animating_damage(false)
+{
 	PlayerColorMaker::makeColor(unit.getPlayer(), &player_r, &player_g, &player_b);
 	playerColorRect.x = 0;
 	playerColorRect.y = 0;
 	playerColorRect.w = sprite_area.getWidth();
 	playerColorRect.h = sprite_area.getHeight();
+	if (damage_sprites.empty()){
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc36.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc00.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebbb2.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebb55.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eb959.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eb9fa.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eba90.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebb55.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebbb2.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc00.bmp",window));
+		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc36.bmp",window));
+	}
+	damage_anim_it = damage_sprites.begin();
 }
 
 UnitView::~UnitView() {}
@@ -51,7 +71,16 @@ void UnitView::draw(Area& camara, std::map<int, SdlTexture*>& sprites) {
 	SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
 	SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
 	sprites.at(orientation.getValor())->render(sprite_area, dest_area);
+
+	if (life > unit.getLife()){
+		life = unit.getLife();
+		animating_damage = true;
+	}
+	if (animating_damage){
+		drawDamage(camara);
+	}
 }
+
 
 void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites
                     , std::vector<SdlTexture*>::iterator& anim_it, int& update)
@@ -88,19 +117,29 @@ void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& spri
 
 	//(*anim_it)->setColor(unit.getPlayer().getId());
 	(*anim_it)->render(sprite_area, dest_area);
+	if (life > unit.getLife()){
+		life = unit.getLife();
+		animating_damage = true;
+	}
+	if (animating_damage){
+		drawDamage(camara);
+	}
 }
 
-void UnitView::drawDamage(Area& camara, std::vector<SdlTexture*>& damage_sprites) {
-	if (damage_update == 5) {
-		damage_anim_it++;
+void UnitView::drawDamage(Area& camara) {
+	damage_dest_area.setX(dest_area.getX() + dest_area.getWidth()/2 - 4);
+	damage_dest_area.setY(dest_area.getY() + dest_area.getHeight()/2);
+	(*damage_anim_it)->render(damage_sprite_area,damage_dest_area);
+	if (damage_update == 4) {
+		damage_anim_it++; 
 		damage_update = 0;
 		if (damage_anim_it == damage_sprites.end()) {
+			animating_damage = false;
 			damage_anim_it = damage_sprites.begin();
 		}
 	} else {
 		damage_update++;
 	}
-	(*damage_anim_it)->render(Area(0, 0, 10, 10), dest_area);
 }
 
 DeadUnitView* UnitView::getDeadUnitView() {

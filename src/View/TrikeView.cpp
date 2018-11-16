@@ -90,7 +90,7 @@ TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
 }
 
 void TrikeView::draw(Area& camara) {
-	if (offensiveUnit.isAttacking() || animating_attack) {
+	if (offensiveUnit.isAttacking() && (offensiveUnit.isShooting() || animating_attack)){
 		drawAttack(camara, attack_sprites);
 	} else {
 		UnitView::draw(camara, trike_sprites);
