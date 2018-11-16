@@ -14,8 +14,10 @@ public:
 	virtual void draw(Area& camara) = 0;
 	void draw(Area& camara, SdlTexture*& sprite);
 	void draw(Area& camara, SdlTexture*& sprite, SdlTexture*& base,int base_x, int base_y);
-
+	void drawConstruction(Area& camara);
 protected:
+	static std::vector<SdlTexture*> construction_sprites; 
+	std::vector<SdlTexture*>::iterator construction_it;
 	Building& building;
 	SdlWindow& window;
 	Position pos;
@@ -23,6 +25,8 @@ protected:
 	Area src_area,dest_area;
 	int player_r,player_g,player_b;
 	SDL_Rect playerColorRect;
+	bool construido;
+	int update_sprite;
 
 };
 

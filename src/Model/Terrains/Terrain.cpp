@@ -23,6 +23,7 @@ void Terrain::buildOn(){
 
 void Terrain::free(){
 	occupied = false;
+	builtOn = false;
 }
 
 bool Terrain::isOccupied(){
