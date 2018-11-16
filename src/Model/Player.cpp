@@ -1,12 +1,13 @@
 #include "Player.h"
 #include <algorithm>
-
+#include "PlayerTrainingCenter.h"
 Player::Player(int id) :
     id(id),
     generatedEnergy(5000),  // Inicial es 0
-    consumedEnergy(2500),   // Inicial es 0
+    consumedEnergy(2500),   // Inicial es 0 
     gold(10000),
-    gold_limit(10000) {}
+    gold_limit(10000),
+    trainingCenter(new PlayerTrainingCenter()) {}
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
@@ -57,10 +58,18 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
     return nullptr;
 }
 
+void Player::trainUnits(){
+    trainingCenter->trainUnits(buildings);
+}
+
 bool Player::lose() {
     return construction_yard == nullptr;
 }
 
 int& Player::getId() {
     return this->id;
+}
+
+std::vector<Unit*>& Player::getTrainedUnits(Map& map){ 
+        return this->trainingCenter->getReadyUnits(map,buildings,construction_yard);
 }

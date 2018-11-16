@@ -39,3 +39,7 @@ bool Attackable::isDead(const Attackable *unit) {
     }
     return unit->life <= 0;
 }
+
+void Attackable::setPosition(Position pos){
+    this->pos = pos;
+}

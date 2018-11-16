@@ -103,8 +103,10 @@ void GameView::render() {
 		(*itr)->draw(camera);
 	}
 
+
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-		(*itr)->draw(camera);
+		if (!(*itr)->getUnit().isTraining())
+			(*itr)->draw(camera);
 	}
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {

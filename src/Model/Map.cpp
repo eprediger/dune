@@ -276,6 +276,27 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
     }
 }
 
+Position Map::getClosestFreePosition(Building* building){
+    int dist = 1;
+    bool found = false;
+    Position& pos = building->getPosition();
+    while(!found){
+        for (int i = - dist; i<=building->height + dist; i++){
+            for (int j =  - dist; j<=building->width + dist; j++){
+                try{
+                    if (!(this->at(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT).isOccupied())){
+                        std::cout<<"X = "<<pos.x+j*BLOCK_WIDTH<<", Y = "<<pos.y + i* BLOCK_HEIGHT<<std::endl;
+                        return Position(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT);
+                    }
+                }
+                catch(std::out_of_range& e){}
+            }
+        }
+        dist+=1;
+    }
+    return pos;
+}
+
 Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, bool has) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;

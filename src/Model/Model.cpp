@@ -1,4 +1,6 @@
 #include "Model.h"
+#include "Unit/Unit.h"
+#include "Map.h"
 #include "Unit/Harvester.h"
 #include "Buildings/Barracks.h"
 #include "Buildings/HeavyFactory.h"
@@ -14,6 +16,7 @@
 #include "Unit/Trike.h"
 #include <algorithm>
 #include <vector>
+#include "PlayerTrainingCenter.h"
 
 Model::Model(int width, int height, int n_player) : map(width, height), gameFinished(false) {
     // reemplazar luego por un vector de players
@@ -48,6 +51,16 @@ void Model::step() {
     this->cleanDeadUnits();
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         (*itr)->makeAction(map);
+    }
+    for (auto itr = players.begin(); itr!=players.end(); itr++){
+        itr->trainUnits(); 
+        std::vector<Unit*>& new_units = itr->getTrainedUnits(map);
+        for (auto unit = new_units.begin(); unit!=new_units.end(); unit++){
+            units.push_back(*unit);
+            (*unit)->setPlayer(*itr);
+            map.put(**unit);
+        }
+        new_units.clear();
     }
 
     int players_alive = 0;
@@ -119,38 +132,46 @@ Player &Model::getPlayer(int player) {
 
 Harvester& Model::createHarvester(int x, int y, int player) {
     Harvester* harvester = new Harvester(x, y);
-    harvester->setPlayer(players.at(player)); //Quitar luego y hacer player.add(harvester)
-    return (Harvester&)this->createUnit(harvester);
+    harvester->setPlayer(players.at(player));
+    players.at(player).trainingCenter->trainHarvester(harvester);
+    return *harvester;
 }
 
 HeavyInfantry& Model::createHeavyInfantry(int x, int y, int player) {
     HeavyInfantry* heavyInfantry = new HeavyInfantry(x, y);
-    heavyInfantry->setPlayer(players.at(player)); //Quitar luego y hacer player.add(heavyInfantry)
-    return (HeavyInfantry&)this->createUnit(heavyInfantry);
+    heavyInfantry->setPlayer(players.at(player));
+    players.at(player).trainingCenter->trainHeavyInfantry(heavyInfantry);
+    return *heavyInfantry;
 }
 
 LightInfantry& Model::createLightInfantry(int x, int y, int player) {
     LightInfantry* lightInfantry = new LightInfantry(x, y);
-    lightInfantry->setPlayer(players.at(player)); //Quitar luego y hacer player.add(lightInfantry)
-    return (LightInfantry&)this->createUnit(lightInfantry);
+    lightInfantry->setPlayer(players.at(player));
+    players.at(player).trainingCenter->trainLightInfantry(lightInfantry);
+    return *lightInfantry;
 }
 
 Raider& Model::createRaider(int x, int y, int player) {
     Raider* raider = new Raider(x, y);
-    raider->setPlayer(players.at(player)); //Quitar luego y hacer player.add(raider)
-    return (Raider&)this->createUnit(raider);
+    raider->setPlayer(players.at(player));
+
+    players.at(player).trainingCenter->trainRaider(raider);
+    return (*raider);
 }
 
 Tank& Model::createTank(int x, int y, int player) {
     Tank* tank = new Tank(x, y);
-    tank->setPlayer(players.at(player)); //Quitar luego y hacer player.add(tank)
-    return (Tank&)this->createUnit(tank);
+    tank->setPlayer(players.at(player));
+
+    players.at(player).trainingCenter->trainTank(tank);
+    return *tank;
 }
 
 Trike& Model::createTrike(int x, int y, int player) {
     Trike* trike = new Trike(x, y);
-    trike->setPlayer(players.at(player)); //Quitar luego y hacer player.add(trike)
-    return (Trike&)this->createUnit(trike);
+    trike->setPlayer(players.at(player));
+    players.at(player).trainingCenter->trainTrike(trike);
+    return *trike;
 }
 
 // Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)

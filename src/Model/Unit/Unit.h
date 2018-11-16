@@ -20,6 +20,7 @@
 #include "States/UnitStateLoading.h"
 #include "States/UnitStateFarming.h"
 #include "States/UnitStateBacking.h"
+#include "States/UnitStateTraining.h"
 //#include "Map.h"
 #include <stack>
 #include <memory>
@@ -37,6 +38,7 @@ public:
     static const UnitStateLoading loading;
     static const UnitStateFarming farming;
     static const UnitStateBacking backing;
+    static const UnitStateTraining training;
 
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
@@ -76,6 +78,10 @@ public:
     Player& getPlayer();
 
     void checkForDeadVictim();
+
+    bool isTraining();
+
+    void finishTraining();
 
 protected:
     int id;
