@@ -69,8 +69,6 @@ public:
 
     Position getNextPosition();
 
-    bool operator==(const Unit& other);
-
     void setPlayer(Player &player);
 
     Player& getPlayer();
@@ -78,7 +76,6 @@ public:
     void checkForDeadVictim();
 
 protected:
-    int id;
     const int speed;
     const int cost;
     int actual_speed;

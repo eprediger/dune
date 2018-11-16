@@ -1,12 +1,10 @@
 #include "Unit.h"
 #include "../AStar.h"
 #include "../Weapons/AssaultRifle.h"
-#include "../Config.h"
 #include <iostream>
 
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),
-    id(Config::getNextId()),
     speed(speed),
     cost(cost),
     actual_speed(0),
@@ -64,10 +62,6 @@ void Unit::setPath(std::stack<Position> path, Position destiny) {
         next_pos = pos;
         state = (UnitState*)&Unit::stopped;
     }
-}
-
-bool Unit::operator==(const Unit &other) {
-    return this->id == other.id;
 }
 
 
@@ -137,7 +131,8 @@ UnitState *Unit::makeBacking(Map &map) {
 }
 
 void Unit::actionOnPosition(Map &map, Position &pos) {
-    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
+//    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
+    Attackable* foll_unit = map.getClosestAttackable(pos, 50 * 50, *player);
     if (foll_unit != nullptr) {
         this->follow(foll_unit, map);
     } else {

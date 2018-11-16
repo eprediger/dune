@@ -44,6 +44,7 @@ public:
     Building * getClosestBuilding(Position &position, int limitRadius);
 //    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
     Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
+    Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
 
     std::vector<Unit*> getUnitsInArea(Area& area, Player& player);
 
@@ -53,6 +54,7 @@ public:
 
     void cleanDeadUnits();
     void cleanUnit(Unit* unit);
+    void cleanBuilding(Building* building);
 
     bool canWeBuild(Position& pos, int width, int height);
 

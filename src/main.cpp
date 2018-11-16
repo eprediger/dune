@@ -36,7 +36,7 @@ int main(int argc, const char *argv[]) {
 		GameHandler gameHandler(gameView, model);
 		Application app(gameView, gameHandler, model);
  
-		while (app.running()) {
+		while (app.running() && !model.isGameFinished()) {
 			app.handleEvent();	 	// Input de usuario
 			app.update();			// Actualizar Modelo
 			app.render();			// Dibujar Vista

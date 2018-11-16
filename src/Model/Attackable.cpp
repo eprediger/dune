@@ -1,7 +1,9 @@
 #include "Attackable.h"
+#include "Config.h"
 
 Attackable::Attackable(const int life, const int x, const int y)
-    : initial_life(life) 
+    : id(Config::getNextId())
+    , initial_life(life)
     , life(life)
     , pos(x,y) {
     this->pos.normalizeToBlock();
@@ -38,4 +40,8 @@ bool Attackable::isDead(const Attackable *unit) {
         return true;
     }
     return unit->life <= 0;
+}
+
+bool Attackable::operator==(const Attackable &other) {
+    return this->id == other.id;
 }

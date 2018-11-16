@@ -15,9 +15,22 @@
 #include "Unit/Trike.h"
 
 Model::Model(int width, int height, int n_player) : map(width, height),gameFinished(false) {
-    // reemplazar luego por un vector de players
+
+    // Harcodeo para testear, ver de donde conseguir luego las posiciones iniciales
+    int x_tmp[n_player];
+    int y_tmp[n_player];
     for (int i=0; i< n_player; ++i){
-        players.emplace(players.end(),i);
+        x_tmp[i]=(i+1)*100;
+    }
+    for (int i=0; i< n_player; ++i) {
+        y_tmp[i]=(i+1)*100;
+    }
+
+    for (int i=0; i< n_player; ++i){
+
+        ConstructionYard* new_building = new ConstructionYard(x_tmp[i], y_tmp[i]);
+        players.emplace(players.end(),i, *new_building);
+        this->createBuilding(std::move(new_building));
     }
 }
 
@@ -45,6 +58,7 @@ Building &Model::createBuilding(Building *building) {
 
 void Model::step() {
     this->cleanDeadUnits();
+    this->cleanDeadBuildings();
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         (*itr)->makeAction(map);
     }
@@ -105,6 +119,30 @@ void Model::cleanDeadUnits() {
             if (Unit::isDead((*it))){
                 delete(*it);
                 it = units.erase(it);
+            }
+            else it++;
+        }
+    }
+}
+
+
+void Model::cleanDeadBuildings() {
+    bool has_dead_unit = false;
+    for (auto b : buildings){
+        if (Attackable::isDead(b)){
+            has_dead_unit = true;
+            map.cleanBuilding(b);
+        }
+    }
+    if (has_dead_unit){
+        for (auto player : players){
+            player.cleanDeadBuildings();
+        }
+        auto it = buildings.begin();
+        while (it!=buildings.end()){
+            if (Attackable::isDead((*it))){
+                delete(*it);
+                it = buildings.erase(it);
             }
             else it++;
         }
@@ -216,3 +254,8 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
         return false;
     return this->map.canWeBuild(pos,width,height);
 }
+
+int Model::numberOfPlayers() {
+    return players.size();
+}
+

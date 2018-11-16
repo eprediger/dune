@@ -16,8 +16,8 @@ public:
         WIND_TRAP
     };
 
-    Building(const int x, const int y, const int hitPoints,
-             const int energy, const int cost, const int width,
+    Building(const int x, const int y, const int energy, const int cost,
+             const int hitPoints, const int width,
              const int height, BuildingType type);
 
     virtual ~Building();

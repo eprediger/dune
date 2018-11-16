@@ -18,7 +18,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
 
-    explicit Player(int id);
+    explicit Player(int id, ConstructionYard &construction_yard);
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
@@ -28,12 +28,14 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 //    void addUnit(Unit* unit);
     void addBuilding(Building* building);
 //    void cleanUnit(Unit* unit);
-    void cleanBuilding(Building* building);
+    void cleanDeadBuildings();
 
     Building * getClosestBuilding(Position pos, Building::BuildingType type);
+//    bool hasBuilding(const Building* building);
 
 //    bool hasUnit(Unit *unit);
-    bool hasBuilding(Building* building);
+    bool hasBuilding(Building& building);
+    ConstructionYard& getConstructionYard();
 
     bool lose();
 

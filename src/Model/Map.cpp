@@ -198,7 +198,7 @@ void Map::cleanDeadUnits() {
         }
     }
     if (has_dead_unit) {
-        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead));
+        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead), units.end());
     }
 }
 
@@ -257,6 +257,15 @@ void Map::cleanUnit(Unit *unit) {
     units.erase(std::find(units.begin(), units.end(), unit));
 }
 
+void Map::cleanBuilding(Building *building) {
+    for (int i = 0; i<building->height; i++){
+        for (int j = 0; j<building->width; j++){
+            this->at(building->getPosition().x + j*BLOCK_WIDTH,building->getPosition().y + i*BLOCK_HEIGHT).free();
+        }
+    }
+    buildings.erase(std::find(buildings.begin(), buildings.end(), building));
+}
+
 bool Map::canWeBuild(Position& pos, int width, int height){
     try{
         for (int i = 0; i<height; i++){
@@ -296,4 +305,29 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, b
     return closest_unit;
 }
 
+Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
+    Attackable* closest_attackable = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto current_unit : units){
+        int distance = current_unit->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unit_distance
+            && !( player == current_unit->getPlayer())){
+            closest_attackable = current_unit;
+            closest_unit_distance = distance;
+        }
+    }
+
+    for (auto current_building : buildings){
+        int distance = current_building->getPosition().sqrtDistance(position);
+        if (distance < limitRadius
+            && distance < closest_unit_distance
+            && !player.hasBuilding(*current_building) ){
+            closest_attackable = current_building;
+            closest_unit_distance = distance;
+        }
+    }
+
+    return closest_attackable;
+}
 

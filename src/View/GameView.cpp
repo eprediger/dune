@@ -2,6 +2,7 @@
 #include "View.h"
 #include "../Model/Model.h"
 #include "BuildingView.h"
+#include "BuildingViewFactory.h"
 #include <algorithm>
 
 GameView::GameView(const int width, const int height, Model& model) :
@@ -26,6 +27,12 @@ GameView::GameView(const int width, const int height, Model& model) :
 	camera_width(width / 2),
 	camera_height(height / 2) {
 //	backgroundMusic.start();
+	for (int i = 0; i < model.numberOfPlayers() ; ++i){
+		this->addBuildingView(
+				BuildingViewFactory::createBuildingView(
+						model.getPlayer(i).getConstructionYard(),
+						this->window));
+	}
 }
 
 GameView::~GameView() {
