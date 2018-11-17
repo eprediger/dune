@@ -8,6 +8,6 @@ ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model &model, GameView &view) :
 ButtonHandlerWindTrap::~ButtonHandlerWindTrap() {}
 
 void ButtonHandlerWindTrap::execute() {
-	WindTrap& newBuilding = model.createWindTrap(500, 500, 0);
+	WindTrap& newBuilding = model.createWindTrap(500, 400, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }

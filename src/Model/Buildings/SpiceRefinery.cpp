@@ -1,5 +1,7 @@
 #include "SpiceRefinery.h"
 
+#include "../Player.h"
+
 SpiceRefinery::SpiceRefinery(const int x, const int y) :
         Building(x, y,
                  GlobalConfig.spiceRefineryEnergy,
@@ -13,6 +15,9 @@ SpiceRefinery::SpiceRefinery(const int x, const int y) :
 
 SpiceRefinery::~SpiceRefinery() {}
 
-void SpiceRefinery::load(int charge) {
-	availableCapacity-= charge;
+bool SpiceRefinery::load(Player &player) {
+	if (availableCapacity < capacity){
+		++availableCapacity;
+		player.addGold(1);
+	};
 }

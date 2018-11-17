@@ -37,3 +37,7 @@ bool Terrain::isBuiltOn(){
 int Terrain::getFarm() {
 	return 0;
 }
+
+bool Terrain::hasFarm() {
+	return false;
+}

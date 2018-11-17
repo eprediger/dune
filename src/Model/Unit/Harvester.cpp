@@ -9,7 +9,8 @@ Harvester::Harvester(int x, int y) :
 	     GlobalConfig.harvesterSpeed,
 	     GlobalConfig.harvesterCost),
 	spiceCapacity(GlobalConfig.harvesterSpiceCapacity),
-	spiceCollected(0) {}
+	spiceCollected(0),
+	refinery(nullptr) {}
 
 Harvester::~Harvester() {}
 
@@ -30,54 +31,77 @@ void Harvester::actionOnPosition(Map &map, Position &pos) {
 
 UnitState *Harvester::makeFollow(Map &map) {
 	if (this->move(map)) {
-		return state;
+		return (UnitState *) &Unit::following;
 	} else {
+		std::cout << "Following => Farming" << std::endl;
 		return (UnitState*)&Unit::farming;
 	}
 }
 
 #include <iostream>
 UnitState *Harvester::makeFarming(Map &map) {
-//	map.at(pos).getFarm();
-	if (!this->farm(map)) {
-		if (this->refinery == nullptr) {
-			this->refinery = (SpiceRefinery*) player->getClosestBuilding(this->pos, Building::SPICE_REFINERY);
-			if (this->refinery == nullptr) {
-				state = (UnitState*)&Unit::stopped;
-			} else {
-				map.setDestiny(*this, refinery->getPosition().x, refinery->getPosition().y);
-				state = (UnitState*)&Unit::backing;
-			}
+	// Revisa si esta llena. Si no lo esta, intenta cosechar
+	if (!this->isFull()) {
+		// Intenta cosechar, si puede hacerlo, mantiene el estado
+		if (this->farm(map)) {
+			std::cout << "SpiceCollected: " << spiceCollected << std::endl;
+			return (UnitState *) &Unit::farming;
+		}
+
+		// Si no puede cosechar, busca un nuevo lugar
+		Position new_pos = map.getClosestSpeciaPosition(this->pos, 5);
+		if (!(new_pos == this->pos)){
+			farming_position = new_pos;
+			map.setDestiny(*this, new_pos.x, new_pos.y);
+			std::cout << "Farming => Following " << std::endl;
+			return (UnitState *) &Unit::following;
 		}
 	}
-	std::cout << "SpiceCollected: " << spiceCollected << std::endl;
-	return state;
+
+	// Si esta llena o si no encontro una nueva posicion, busca volver a la refineria
+	if (this->refinery == nullptr) {
+		this->refinery = (SpiceRefinery *) player->getClosestBuilding(this->pos, Building::SPICE_REFINERY);
+		if (this->refinery == nullptr) {
+			// Si no encontro ninguna refineria, se queda en el lugar
+			std::cout << "Backing => Stopped: " << std::endl;
+			return (UnitState *) &Unit::stopped;
+		}
+	}
+
+	map.free(*refinery);
+	map.setDestiny(*this, refinery->getPosition().x, refinery->getPosition().y);
+	map.occupy(*refinery);
+
+
+	std::cout << "Farming => Backing" << std::endl;
+	return (UnitState *) &Unit::backing;
 }
 
 UnitState *Harvester::makeLoading(Map &map) {
 	if (spiceCollected != 0) {
-		spiceCollected -= 1;
-		refinery->load(1);
-		std::cout << "Loading! SpiceCollected restante: " << spiceCollected << std::endl;
-		return state;
+		if (refinery->load(*player)){
+			spiceCollected -= 1;
+			std::cout << "Loading! SpiceCollected restante: " << spiceCollected << std::endl;
+			return (UnitState *) &Unit::loading;
+		} else{
+			return (UnitState *) &Unit::stopped;
+		}
 	} else {
 		map.setDestiny(*this, farming_position.x, farming_position.y);
+		std::cout << "Loading => Following " << std::endl;
 		return (UnitState*)&Unit::following;
 	}
 }
 
 UnitState* Harvester::makeBacking(Map &map) {
-	if (this->refinery == nullptr) {
-		this->refinery = (SpiceRefinery*) player->getClosestBuilding(this->pos, Building::SPICE_REFINERY);
-		if (this->refinery == nullptr) {
-			state = (UnitState*)&Unit::stopped;
-		}
-	} else if (this->move(map)) {
-		return state;
+	if (this->move(map)) {
+		return (UnitState *) &Unit::backing;
 	} else {
 		if (spiceCollected == 0) {
+			std::cout << "Backing => Stopped 2" << std::endl;
 			return (UnitState*)&Unit::stopped;
 		} else {
+			std::cout << "Backing => Loading: " << std::endl;
 			return (UnitState*)&Unit::loading;
 		}
 	}
@@ -91,4 +115,8 @@ bool Harvester::farm(Map &map) {
 	} else {
 		return false;
 	}
+}
+
+bool Harvester::isFull() {
+	return spiceCollected >= spiceCapacity;
 }

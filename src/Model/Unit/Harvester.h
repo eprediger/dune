@@ -29,6 +29,8 @@ private:
 	int spiceCollected;
 	Position farming_position;
 	SpiceRefinery* refinery;
+
+    bool isFull();
 };
 
 #endif

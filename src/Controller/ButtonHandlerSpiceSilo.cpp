@@ -9,6 +9,6 @@ ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view) :
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 
 void ButtonHandlerSpiceSilo::execute() {
-	SpiceSilo& newBuilding = model.createSpiceSilo(500, 500, 0);
+	SpiceSilo& newBuilding = model.createSpiceSilo(500, 300, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }

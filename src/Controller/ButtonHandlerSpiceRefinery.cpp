@@ -9,6 +9,6 @@ ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Model &model, GameView &v
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
 
 void ButtonHandlerSpiceRefinery::execute() {
-	SpiceRefinery& newBuilding = model.createSpiceRefinery(500, 500, 0);
+	SpiceRefinery& newBuilding = model.createSpiceRefinery(500, 200, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }

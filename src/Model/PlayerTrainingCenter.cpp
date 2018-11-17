@@ -67,10 +67,10 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings){
                 trike.first-=1;
             if (raider.second!=nullptr)
                 raider.first -=1;
-        }
-        else if ((*it)->is(Building::HEAVY_FACTORY)){
-            if (tank.second!=nullptr)
-                tank.first-=1;
+        } else if ((*it)->is(Building::HEAVY_FACTORY)) {
+            if (tank.second != nullptr)
+                tank.first -= 1;
+        } else if ((*it)->is(Building::SPICE_REFINERY)){
             if (harvester.second!=nullptr){
                 harvester.first-=1;
             }

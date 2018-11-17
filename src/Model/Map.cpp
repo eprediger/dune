@@ -91,6 +91,10 @@ void Map::put(Unit &unit) {
 
 void Map::put(Building &building) {
     buildings.push_back(&building);
+    this->occupy(building);
+}
+
+void Map::occupy(Building &building) {
     for (int i = 0; i < building.height; i++) {
         for (int j = 0; j < building.width; j++) {
             this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).buildOn();
@@ -255,12 +259,16 @@ void Map::cleanUnit(Unit *unit) {
 }
 
 void Map::cleanBuilding(Building *building) {
-    for (int i = 0; i<building->height; i++){
-        for (int j = 0; j<building->width; j++){
-            this->at(building->getPosition().x + j*BLOCK_WIDTH,building->getPosition().y + i*BLOCK_HEIGHT).free();
+    this->free(*building);
+    buildings.erase(std::find(buildings.begin(), buildings.end(), building));
+}
+
+void Map::free(Building &building) {
+    for (int i = 0; i<building.height; i++){
+        for (int j = 0; j<building.width; j++){
+            this->at(building.getPosition().x + j*BLOCK_WIDTH,building.getPosition().y + i*BLOCK_HEIGHT).free();
         }
     }
-    buildings.erase(std::find(buildings.begin(), buildings.end(), building));
 }
 
 bool Map::canWeBuild(Position& pos, int width, int height){
@@ -284,6 +292,7 @@ bool Map::canWeBuild(Position& pos, int width, int height){
         return false;
     }
 }
+
 
 Position Map::getClosestFreePosition(Building* building){
     int dist = 1;
@@ -346,4 +355,31 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
 
     return closest_attackable;
 }
+
+Position Map::getClosestSpeciaPosition(Position pos, int radius) {
+    int block_x = (pos.x / BLOCK_HEIGHT);
+    int block_y = (pos.y / BLOCK_WIDTH);
+    int min_distance = radius + 1;
+    Position min_position = pos;
+    for (int i = -radius; i<=+radius; ++i){
+        for (int j = -(radius - abs(i)); j<=+(radius - abs(i)); ++j){
+            int cur_pos_x = (block_x + j);
+            int cur_pos_y = (block_y + i);
+            if ((cur_pos_y + i) >= 0 &&
+                    (cur_pos_y + i) < cols &&
+                    (cur_pos_x + j)>=0 &&
+                    (cur_pos_x + j) <rows){
+                if ( abs(i) + abs(j) < min_distance
+                        && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()){
+                    min_distance = abs(i) + abs(j);
+                    min_position = Position(cur_pos_x*BLOCK_HEIGHT, cur_pos_y*BLOCK_WIDTH);
+                }
+            }
+        }
+    }
+
+    return min_position;
+}
+
+
 

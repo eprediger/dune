@@ -10,3 +10,7 @@ int Sand::getFarm() {
         return 0;
     }
 }
+
+bool Sand::hasFarm() {
+    return availableFarm > 0;
+}

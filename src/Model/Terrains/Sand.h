@@ -12,6 +12,7 @@ public:
 	Sand();
 
 	virtual int getFarm() override;
+	virtual bool hasFarm() override;
 private:
 	int availableFarm;
 };

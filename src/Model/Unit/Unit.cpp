@@ -59,10 +59,10 @@ void Unit::setPath(std::stack<Position> path, Position destiny) {
     if (!path.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
-        state = (UnitState*)&Unit::moving;
+//        state = (UnitState*)&Unit::moving;
     } else {
         next_pos = pos;
-        state = (UnitState*)&Unit::stopped;
+//        state = (UnitState*)&Unit::stopped;
     }
 }
 

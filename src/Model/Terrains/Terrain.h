@@ -19,6 +19,7 @@ public:
 	bool isOccupied();
 	bool isBuiltOn();
 	virtual int getFarm();
+	virtual bool hasFarm();
 
 	bool operator==(const Terrain& terrain);
 

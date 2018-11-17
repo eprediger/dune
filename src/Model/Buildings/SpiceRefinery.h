@@ -8,7 +8,7 @@ public:
 	SpiceRefinery(const int x, const int y);
 	~SpiceRefinery();
 
-	void load(int charge);
+	bool load(Player &player);
 
 private:
 	int capacity;

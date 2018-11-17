@@ -9,6 +9,6 @@ ButtonHandlerLightFactory::ButtonHandlerLightFactory(Model &model, GameView &vie
 ButtonHandlerLightFactory::~ButtonHandlerLightFactory() {}
 
 void ButtonHandlerLightFactory::execute() {
-	LightFactory& newBuilding = model.createLightFactory(500, 500, 0);
+	LightFactory& newBuilding = model.createLightFactory(500, 100, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }

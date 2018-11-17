@@ -79,6 +79,9 @@ bool GameHandler::handleInput() {
         if (event.button.button == SDL_BUTTON_MIDDLE) {
             Raider& raider = model.createRaider(this->cursor.current_x, this->cursor.current_y, 0);
             view.addUnitView(UnitViewFactory::createUnitView(raider, view.getWindow()));
+
+            Harvester& harvester = model.createHarvester(this->cursor.current_x, this->cursor.current_y, 0);
+            view.addUnitView(UnitViewFactory::createUnitView(harvester, view.getWindow()));
         }
         if (event.button.button == SDL_BUTTON_RIGHT) {
             this->cursor.currentPosition();

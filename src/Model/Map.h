@@ -7,6 +7,7 @@
 #include "Unit/Unit.h"
 #include "Player.h"
 #include <memory>
+#include <map>
 #include "../View/Area.h"
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32
@@ -30,6 +31,8 @@ public:
 //    void put(Attackable& attackable);
     void put(Unit& unit);
     void put(Building& building);
+    void occupy(Building& building);
+    void free(Building& building);
 //    bool moveUnits();
 
     int getHeight();
@@ -59,6 +62,7 @@ public:
     bool canWeBuild(Position& pos, int width, int height);
 
     Position getClosestFreePosition(Building* building);
+    Position getClosestSpeciaPosition(Position pos, int radius);
 
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
