@@ -25,6 +25,7 @@ private:
 	GameView& view;
 	Model& model;
 	Selector selector;
+	BuildingConstructor constructor;
 	std::vector<ButtonHandler*> buttons;
 };
 

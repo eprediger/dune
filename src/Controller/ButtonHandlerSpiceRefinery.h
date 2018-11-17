@@ -5,13 +5,16 @@
 
 class ButtonHandlerSpiceRefinery : public ButtonHandler {
 public:
-	ButtonHandlerSpiceRefinery(Model &model, GameView &view);
+	ButtonHandlerSpiceRefinery(Model &model, GameView &view, BuildingConstructor& constructor);
 
 	~ButtonHandlerSpiceRefinery();
 
 	virtual void execute() override;
 
     virtual bool canBeEnabled() override;
+private:
+	BuildingConstructor& constructor;
+
 };
 
 #endif  // __BUTTON_HANDLER_SPICE_REFINERY_H__

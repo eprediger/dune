@@ -2,15 +2,18 @@
 #include "../View/BuildingViewFactory.h"
 #include <iostream>
 
-ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif"), model, view) {
-}
+ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view, BuildingConstructor& constructor) :
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif"), model, view)
+	,constructor(constructor){}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 
 void ButtonHandlerSpiceSilo::execute() {
-	SpiceSilo& newBuilding = model.createSpiceSilo(500, 500, 0);
-	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
+	constructor.building = Building::SPICE_SILO;
+    constructor.cost = GlobalConfig.spiceSiloCost;
+    constructor.width = GlobalConfig.spiceSiloSpicWidth;
+    constructor.height = GlobalConfig.spiceSiloSpicHeight;
+    constructor.on = true;
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {

@@ -5,13 +5,16 @@
 
 class ButtonHandlerSpiceSilo : public ButtonHandler {
 public:
-	ButtonHandlerSpiceSilo(Model& model, GameView& view);
+	ButtonHandlerSpiceSilo(Model& model, GameView& view, BuildingConstructor& constructor);
 
 	~ButtonHandlerSpiceSilo();
 
 	virtual void execute() override;
 
     virtual bool canBeEnabled() override;
+private:
+	BuildingConstructor& constructor;
+
 };
 
 #endif  // __BUTTON_HANDLER_SPICE_SILO_H__
