@@ -1,8 +1,6 @@
 #ifndef __BUTTON_STATE_H__
 #define __BUTTON_STATE_H__
 
-#include <string>
-
 class ButtonHandler;
 
 enum class State { DISABLED, ENABLED }; //, BUSY, READY };

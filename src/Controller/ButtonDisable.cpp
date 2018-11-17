@@ -1,7 +1,7 @@
 #include "ButtonDisable.h"
 #include "ButtonHandler.h"
 
-DisableState::DisableState() {}
+DisableState::DisableState() : ButtonState() {}
 
 DisableState::~DisableState() {}
 

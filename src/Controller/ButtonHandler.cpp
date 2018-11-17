@@ -28,9 +28,11 @@ void ButtonHandler::setState(const State state) {
 	switch (state) {
 	case State::DISABLED:
 		this->buttonState = new DisableState();
+		this->buttonView.setState(ViewState::DISABLED);
 		break;
 	case State::ENABLED:
 		this->buttonState = new EnableState();
+		this->buttonView.setState(ViewState::ENABLED);
 		break;
 /*	case BUSY:
 		this->buttonState = new BusyState();
