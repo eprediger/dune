@@ -43,10 +43,10 @@ Ejecución desde carpeta build/:
 3. Para crear una unidad, se debe contar con dinero suficiente correspondiente a su costo y los edificios que requiera, ~~mostrando un botón con la imagen de la unidad _habilitado_~~, caso contrario se _deshabilitará_ el botón en la vista del jugador. ~~Al iniciar el entrenamiento de cualquier unidad, se _restará_ el dinero correspondiente del jugador~~, se _deshabilitará_ el botón en la vista durante el tiempo de entrenamiento. Al finalizar el entrenamiento, la unidad creada será posicionada en el **primer cuartel** que posea el jugador.
 
 	* ~~Validar dinero suficiente (ahora puedo crear unidades sin dinero suficiente mostrando balance negativo)~~
-	* Habilitar Handler (mostrar botón) en base a edificios construidos
-	* Deshabilitar botón si no se cumplen los anteriores
+	* ~~Habilitar Handler~~ (mostrar botón) ~~en base a edificios construidos~~
+	* ~~Deshabilitar botón si no se cumplen los anteriores~~
 	* ~~Restar dinero cuando se construye unidad (solo restan cosechadora y trike)~~
-	* No tener harcodeado en handler posición de unidad, leer del modelo (spawn en edificio)
+	* ~~No tener harcodeado en handler posición de unidad, leer del modelo (spawn en edificio)~~
 
 4. ~~Al morir una unidad, se mostrará la animación correspondiente a su muerte/destrucción por pantalla y desaparecerá del mapa~~.
 
@@ -56,7 +56,7 @@ Ejecución desde carpeta build/:
 
 	* ~~Validar la cantidad de dinero (no resta al construir, no deshabilita botón si no hay suficiente)~~
 	* La construcción no debe ser instantánea
-	* Tomar posición de ubicación de edificio del input de click del jugador
+	* ~~Tomar posición de ubicación de edificio del input de click del jugador~~
 	* ~~No se actualiza energía consumida~~
 
 7. Al destruirse un edificio, se disminuirá la energía consumida por el jugador que perdió el edificio mostrando una animación en pantalla de su destrucción y posterior borrado del mapa.
