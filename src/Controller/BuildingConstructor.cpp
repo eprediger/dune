@@ -7,67 +7,67 @@
 #include "../View/GameView.h"
 #include "../View/BuildingViewFactory.h"
 
-BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view)
-    :on(false)
-    ,pos(0,0)
-    ,model(model)
-    ,building()
-    ,width(0)
-    ,height(0)
-    ,cost(0)
-    ,player(player)
-    ,view(view){
-        view.addBuildingConstructorView(this);
-    }
-
-bool BuildingConstructor::canWeBuild(){
-    pos = model.getMap().getCornerPosition(pos);
-    return (on && model.canWeBuild(pos,width,height,cost,player));
+BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view):
+    model(model),
+    player(player),
+    view(view),
+    on(false),
+    pos(0, 0),
+    building(),
+    width(0),
+    height(0),
+    cost(0) {
+    view.addBuildingConstructorView(this);
 }
 
-void BuildingConstructor::build(){
-    if (on){
-       if (model.canWeBuild(pos,width,height,cost,player)){
-            switch(building){
-                case Building::BARRACKS:
-                {
-                    Barracks& barracks = model.createBarracks(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(barracks,view.getWindow()));
-                    break;
-                }
-                case Building::LIGHT_FACTORY:
-                {
-                    LightFactory& lightF = model.createLightFactory(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(lightF,view.getWindow()));
-                    break;
-                }
-                case Building::HEAVY_FACTORY:
-                {
-                    HeavyFactory& heavyF = model.createHeavyFactory(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(heavyF,view.getWindow()));
-                    break;
-                }
-                case Building::SPICE_REFINERY:
-                {
-                    SpiceRefinery& spiceRef = model.createSpiceRefinery(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(spiceRef,view.getWindow()));
-                    break;
-                }
+bool BuildingConstructor::canWeBuild() {
+    pos = model.getMap().getCornerPosition(pos);
+    return (on && model.canWeBuild(pos, width, height, cost, player));
+}
 
-                case Building::SPICE_SILO:
-                {
-                    SpiceSilo& spiceSilo = model.createSpiceSilo(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo,view.getWindow()));
-                    break;
-                }
-                case Building::WIND_TRAP:
-                {
-                    WindTrap& windtrap = model.createWindTrap(pos.x,pos.y,player.getId());
-                    view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap,view.getWindow()));
-                    break;
-                }
-                default:
-                    break;
+void BuildingConstructor::build() {
+    if (on) {
+        if (model.canWeBuild(pos, width, height, cost, player)) {
+            switch (building) {
+            case Building::BARRACKS:
+            {
+                Barracks& barracks = model.createBarracks(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(barracks, view.getWindow()));
+                break;
+            }
+            case Building::LIGHT_FACTORY:
+            {
+                LightFactory& lightF = model.createLightFactory(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(lightF, view.getWindow()));
+                break;
+            }
+            case Building::HEAVY_FACTORY:
+            {
+                HeavyFactory& heavyF = model.createHeavyFactory(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(heavyF, view.getWindow()));
+                break;
+            }
+            case Building::SPICE_REFINERY:
+            {
+                SpiceRefinery& spiceRef = model.createSpiceRefinery(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(spiceRef, view.getWindow()));
+                break;
+            }
+
+            case Building::SPICE_SILO:
+            {
+                SpiceSilo& spiceSilo = model.createSpiceSilo(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo, view.getWindow()));
+                break;
+            }
+            case Building::WIND_TRAP:
+            {
+                WindTrap& windtrap = model.createWindTrap(pos.x, pos.y, player.getId());
+                view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
+                break;
+            }
+            default:
+                break;
             }
             on = false;
 
@@ -75,6 +75,6 @@ void BuildingConstructor::build(){
     }
 }
 
-Player& BuildingConstructor::getPlayer(){
+Player& BuildingConstructor::getPlayer() {
     return this->player;
 }

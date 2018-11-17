@@ -5,7 +5,7 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
     generatedEnergy(5000),  // Inicial es 0
     consumedEnergy(2500),   // Inicial es 0 
-    gold(4000),
+    gold(10000),
     gold_limit(10000),
     trainingCenter(new PlayerTrainingCenter()),
     construction_yard(&construction_yard) {
@@ -24,14 +24,6 @@ void Player::subGold(int gold_to_sub) {
     // if (gold_to_sub > gold ) throw error -> Ver que hacer
     gold -= gold_to_sub;
 }
-
-/*void Player::addEnergy(int energy_to_add) {
-    energy += energy_to_add;
-}
-
-void Player::subEnergy(int energy_to_sub) {
-    energy -= energy_to_sub;
-}*/
 
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
@@ -86,6 +78,16 @@ bool Player::hasBuilding(Building& building) {
     return false;
 }
 
+bool Player::hasBuilding(Building::BuildingType buildingType) {
+    bool buildingTypeFound = false;
+    unsigned i = 0;
+    while ((!buildingTypeFound) && (i < this->buildings.size())) {
+        buildingTypeFound = this->buildings[i]->is(buildingType);
+        i++;
+    }
+    return buildingTypeFound;
+}
+
 void Player::cleanDeadBuildings() {
     if (Attackable::isDead(this->construction_yard)){
         this->construction_yard = nullptr;
@@ -96,6 +98,6 @@ void Player::cleanDeadBuildings() {
     }
 }
 
-std::vector<Unit*>& Player::getTrainedUnits(Map& map){ 
+std::vector<Unit*>& Player::getTrainedUnits(Map& map){
         return this->trainingCenter->getReadyUnits(map,buildings,construction_yard);
 }

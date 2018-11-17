@@ -27,12 +27,12 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view, constructor));
-    /*this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));*/
+    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));
 }
 
 GameHandler::~GameHandler() {

@@ -42,6 +42,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
 //    bool hasUnit(Unit *unit);
     bool hasBuilding(Building& building);
+    bool hasBuilding(Building::BuildingType buildingType);
+
     ConstructionYard& getConstructionYard();
 
     bool lose();

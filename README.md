@@ -42,7 +42,7 @@ Ejecución desde carpeta build/:
 
 3. Para crear una unidad, se debe contar con dinero suficiente correspondiente a su costo y los edificios que requiera, ~~mostrando un botón con la imagen de la unidad _habilitado_~~, caso contrario se _deshabilitará_ el botón en la vista del jugador. ~~Al iniciar el entrenamiento de cualquier unidad, se _restará_ el dinero correspondiente del jugador~~, se _deshabilitará_ el botón en la vista durante el tiempo de entrenamiento. Al finalizar el entrenamiento, la unidad creada será posicionada en el **primer cuartel** que posea el jugador.
 
-	* Validar dinero suficiente (ahora puedo crear unidades sin dinero suficiente mostrando balance negativo)
+	* ~~Validar dinero suficiente (ahora puedo crear unidades sin dinero suficiente mostrando balance negativo)~~
 	* Habilitar Handler (mostrar botón) en base a edificios construidos
 	* Deshabilitar botón si no se cumplen los anteriores
 	* ~~Restar dinero cuando se construye unidad (solo restan cosechadora y trike)~~

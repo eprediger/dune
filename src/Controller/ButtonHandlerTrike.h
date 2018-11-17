@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerTrike();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif	// __BUTTON_HANDLER_TRIKE__
