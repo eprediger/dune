@@ -2,6 +2,7 @@
 
 #include "../Map.h"
 
+#define TIME_FACTOR 2
 
 Harvester::Harvester(int x, int y) :
 	Unit(x, y,
@@ -10,7 +11,11 @@ Harvester::Harvester(int x, int y) :
 	     GlobalConfig.harvesterCost),
 	spiceCapacity(GlobalConfig.harvesterSpiceCapacity),
 	spiceCollected(0),
-	refinery(nullptr) {}
+	refinery(nullptr),
+	farm_speed(GlobalConfig.harvesterFarmSpeed),
+	actual_farm_speed(0),
+	load_speed(GlobalConfig.harvesterLoadSpeed),
+	actual_load_speed(0) {}
 
 Harvester::~Harvester() {}
 
@@ -40,6 +45,12 @@ UnitState *Harvester::makeFollow(Map &map) {
 
 #include <iostream>
 UnitState *Harvester::makeFarming(Map &map) {
+	if (actual_farm_speed++ < farm_speed*TIME_FACTOR){
+		return (UnitState *) &Unit::farming;
+	} else {
+        actual_farm_speed = 0;
+	}
+
 	// Revisa si esta llena. Si no lo esta, intenta cosechar
 	if (!this->isFull()) {
 		// Intenta cosechar, si puede hacerlo, mantiene el estado
@@ -78,6 +89,12 @@ UnitState *Harvester::makeFarming(Map &map) {
 }
 
 UnitState *Harvester::makeLoading(Map &map) {
+	if (actual_load_speed++ < load_speed*TIME_FACTOR){
+		return (UnitState *) &Unit::loading;
+    } else {
+        actual_load_speed = 0;
+    }
+
 	if (spiceCollected != 0) {
 		if (refinery->load(*player)){
 			spiceCollected -= 1;

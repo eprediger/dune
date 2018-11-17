@@ -120,6 +120,8 @@ typedef struct {
 	const int harvesterConstructionTime	= 180;
 	const int harvesterCost				= 300;
 	const int harvesterSpiceCapacity	= 200;
+	const int harvesterFarmSpeed        = 20;
+	const int harvesterLoadSpeed        = 5;
 	// Trike
 	const int trikeHitPoints		= 80;
 	const int trikeRange			= RANGE_FACTOR * 4;

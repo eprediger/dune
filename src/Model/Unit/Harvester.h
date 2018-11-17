@@ -23,14 +23,19 @@ public:
 	virtual UnitState* makeBacking(Map &map) override;
 
 	bool farm(Map& map);
+	bool isFull();
 
 private:
 	const int spiceCapacity;
 	int spiceCollected;
 	Position farming_position;
 	SpiceRefinery* refinery;
+	int farm_speed;
+	int actual_farm_speed;
+	int load_speed;
+	int actual_load_speed;
 
-    bool isFull();
+
 };
 
 #endif
