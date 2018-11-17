@@ -2,6 +2,9 @@
 .idea/
 cmake-build-debug/
 
+# VSCode
+.vscode/
+
 # Files that won't be included
 *.pdf
 notas-tp4.txt

@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerLightInfantry();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif	// __BUTTON_HANDLER_LIGHT_INFANTRY__

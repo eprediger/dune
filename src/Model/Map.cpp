@@ -64,6 +64,9 @@ int Map::getHeightInBlocks() {
 }
 
 Terrain& Map::at(int x, int y) {
+    if (x < 0 || y < 0){
+        throw (std::out_of_range("Out of range"));
+    }
     return *matrix.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH));
 }
 
@@ -274,16 +277,17 @@ void Map::free(Building &building) {
 bool Map::canWeBuild(Position& pos, int width, int height){
     try{
         for (int i = 0; i<height; i++){
-            for (int j = 0; i<width;j++){
+            for (int j = 0; j<width;j++){
                 if (this->at(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT).isOccupied()){
-                    return false;
+                   return false;
                 }
             }
         }
-        for (int i = -5; i <= height + 5; i += 2) {
-            for (int j = -5; j <= height + 5; j += 2) {
+
+        for (int i = -5; i <= height + 5; i++) {
+            for (int j = -5; j <= height + 5; j++) {
                 if (this->at(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT).isBuiltOn()) {
-                    return false;
+                   return false;
                 }
             }
         }
@@ -303,7 +307,6 @@ Position Map::getClosestFreePosition(Building* building){
             for (int j =  - dist; j<=building->width + dist; j++){
                 try{
                     if (!(this->at(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT).isOccupied())){
-                        std::cout<<"X = "<<pos.x+j*BLOCK_WIDTH<<", Y = "<<pos.y + i* BLOCK_HEIGHT<<std::endl;
                         return Position(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT);
                     }
                 }
@@ -356,6 +359,9 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     return closest_attackable;
 }
 
+Position Map::getCornerPosition(Position& pos){
+    return Position((pos.x/BLOCK_WIDTH)*BLOCK_WIDTH, (pos.y/BLOCK_HEIGHT)*BLOCK_HEIGHT);
+}
 Position Map::getClosestSpeciaPosition(Position pos, int radius) {
     int block_x = (pos.x / BLOCK_HEIGHT);
     int block_y = (pos.y / BLOCK_WIDTH);

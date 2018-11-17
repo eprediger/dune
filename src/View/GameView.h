@@ -6,9 +6,9 @@
 #include "UnitView.h"
 #include "BuildingView.h"
 #include "SelectorView.h"
+#include "BuildingConstructorView.h"
 #include "MapView.h"
 #include "ButtonView.h"
-
 #include <memory>
 #include <string>
 #include <vector>
@@ -22,6 +22,7 @@
 
 #define ENERGY_BAR_WIDTH 5
 
+
 class GameView : public View {
 private:
 	Model& model;
@@ -29,6 +30,7 @@ private:
 	std::vector<DeadUnitView*> deadUnitViews;
 	std::vector<BuildingView*> buildingViews;
 	SelectorView* selectorView;
+	BuildingConstructorView* constructorView;
 	MapView map_view;
 	Area camera;
 	Sound backgroundMusic;
@@ -53,6 +55,8 @@ public:
 	void addBuildingView(BuildingView* buildingView);
 
 	void addSelectorView(Selector& selector);
+
+	void addBuildingConstructorView(BuildingConstructor* constructor);
 
 	void RenderVPBar(int x, int y, int h, float percent, SDL_Color FGColor, SDL_Color BGColor);
 

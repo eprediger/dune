@@ -12,3 +12,8 @@ void ButtonHandlerHeavyInfantry::execute() {
 	HeavyInfantry& newUnit = model.createHeavyInfantry(500, 500, 0);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
+
+bool ButtonHandlerHeavyInfantry::canBeEnabled() {
+	return (((model.getPlayer(0).gold >= GlobalConfig.heavyInfantryCost)) &&
+	        (model.getPlayer(0).hasBuilding(Building::BARRACKS)));
+}

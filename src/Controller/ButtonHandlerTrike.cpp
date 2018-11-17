@@ -12,3 +12,8 @@ void ButtonHandlerTrike::execute() {
 	Trike& newUnit = model.createTrike(500, 500, 0);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
+
+bool ButtonHandlerTrike::canBeEnabled() {
+	return (((model.getPlayer(0).gold >= GlobalConfig.trikeCost)) &&
+	        (model.getPlayer(0).hasBuilding(Building::LIGHT_FACTORY)));
+}

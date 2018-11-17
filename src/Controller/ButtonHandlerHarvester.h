@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerHarvester();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif  // __BUTTON_HANDLER_HARVESTER_H__

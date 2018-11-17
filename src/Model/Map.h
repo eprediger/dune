@@ -62,6 +62,7 @@ public:
     bool canWeBuild(Position& pos, int width, int height);
 
     Position getClosestFreePosition(Building* building);
+    Position getCornerPosition(Position& pos);
     Position getClosestSpeciaPosition(Position pos, int radius);
 
     Terrain& at(int x, int y);

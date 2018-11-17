@@ -12,3 +12,8 @@ void ButtonHandlerTank::execute() {
 	Tank& newUnit = model.createTank(500, 500, 0);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
+
+bool ButtonHandlerTank::canBeEnabled() {
+	return (((model.getPlayer(0).gold >= GlobalConfig.tankCost)) &&
+	        (model.getPlayer(0).hasBuilding(Building::HEAVY_FACTORY)));
+}

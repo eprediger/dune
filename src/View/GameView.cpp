@@ -14,6 +14,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	deadUnitViews(),
 	buildingViews(),
 	selectorView(nullptr),
+	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, width / 2, height / 2),
 	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
@@ -71,6 +72,12 @@ void GameView::addSelectorView(Selector& selector) {
 	this->selectorView = new SelectorView(selector, window);
 }
 
+void GameView::addBuildingConstructorView(BuildingConstructor* constructor){
+	this->constructorView = new BuildingConstructorView(*constructor,window);
+}
+
+
+
 void GameView::cleanDeadUnitViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
 	while (it != unitViews.end()) {
@@ -102,8 +109,10 @@ void GameView::render() {
 	//    for (auto unit_view : unitViews){
 	map_view.draw(camera);
 
-	if (selectorView != nullptr) {
-		selectorView->draw(camera);
+	
+
+	if (constructorView!=nullptr){
+		constructorView->draw(camera);
 	}
 
 	for (auto itr = deadUnitViews.begin(); itr != deadUnitViews.end(); ++itr) {

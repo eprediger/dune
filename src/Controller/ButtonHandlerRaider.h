@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerRaider();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif	// __BUTTON_HANDLER_RAIDER__

@@ -5,11 +5,16 @@
 
 class ButtonHandlerHeavyFactory : public ButtonHandler {
 public:
-	ButtonHandlerHeavyFactory(Model &model, GameView &view);
+	ButtonHandlerHeavyFactory(Model &model, GameView &view, BuildingConstructor& constructor);
 
 	~ButtonHandlerHeavyFactory();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
+private:
+	BuildingConstructor& constructor;
+
 };
 
 #endif  // __BUTTON_HANDLER_HEAVY_FACTORY_H__
