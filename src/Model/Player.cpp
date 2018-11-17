@@ -7,8 +7,10 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     consumedEnergy(2500),   // Inicial es 0 
     gold(10000),
     gold_limit(10000),
-    trainingCenter(new PlayerTrainingCenter()) {}
-    construction_yard(&construction_yard) {}
+    trainingCenter(new PlayerTrainingCenter()),
+    construction_yard(&construction_yard) {
+    construction_yard.setPlayer(this);
+}
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
@@ -92,8 +94,6 @@ void Player::cleanDeadBuildings() {
     if (result_itr != buildings.end()){
         buildings.erase(result_itr, buildings.end());
     }
-}
-
 }
 
 std::vector<Unit*>& Player::getTrainedUnits(Map& map){ 
