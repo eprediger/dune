@@ -1,10 +1,14 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include <vector>
 #include "Buildings/Building.h"
 #include "Buildings/ConstructionYard.h"
+#include <vector>
 #include <functional>
+
+class Map;
+class Unit;
+class PlayerTrainingCenter;
 
 class Player {
 private:
@@ -14,9 +18,12 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
     int gold;   // Se restara durante los constructores
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
+    PlayerTrainingCenter* trainingCenter;
 
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
+
+    std::vector<Unit*>& getTrainedUnits(Map& map);  
 
     explicit Player(int id, ConstructionYard &construction_yard);
 
@@ -38,6 +45,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     ConstructionYard& getConstructionYard();
 
     bool lose();
+
+    void trainUnits();
 
     int& getId();
 

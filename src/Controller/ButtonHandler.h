@@ -11,7 +11,7 @@ public:
 
 	virtual ~ButtonHandler();
 
-	void onClicked(int x, int y);
+	void onClicked(const int x, const int y);
 
 	virtual void execute() = 0;
 

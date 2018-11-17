@@ -13,8 +13,8 @@ int Attackable::getLife() {
     return life;
 }
 
-int Attackable::getInitialLife(){
-    return initial_life; 
+int Attackable::getInitialLife() {
+    return initial_life;
 }
 #include <iostream>
 void Attackable::reciveAttack(const Weapon &weapon) {
@@ -44,4 +44,9 @@ bool Attackable::isDead(const Attackable *unit) {
 
 bool Attackable::operator==(const Attackable &other) {
     return this->id == other.id;
+}
+
+
+void Attackable::setPosition(Position pos){
+    this->pos = pos;
 }

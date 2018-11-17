@@ -13,6 +13,7 @@ protected:
 public:
     explicit Attackable(const int life, const int x, const int y);
 
+    void setPosition(Position pos);
 
     Position& getPosition();
 

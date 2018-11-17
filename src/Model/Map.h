@@ -58,6 +58,8 @@ public:
 
     bool canWeBuild(Position& pos, int width, int height);
 
+    Position getClosestFreePosition(Building* building);
+
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);

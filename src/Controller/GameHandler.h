@@ -8,6 +8,7 @@
 #include "../Model/Model.h"
 #include "../View/GameView.h"
 #include "ButtonHandler.h"
+#include <vector>
 
 class GameHandler : public InputHandler {
 public:

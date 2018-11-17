@@ -12,7 +12,7 @@
 std::map<std::string, std::vector<SdlTexture*> > ConstructionYardView::sprites;
  
 ConstructionYardView::ConstructionYardView(ConstructionYard& constructionYard, SdlWindow& window)
-    :BuildingView(constructionYard)
+    :BuildingView(constructionYard,window,Area(0,0,94,80),Area(0,0,94,80))
 {
     if (sprites.empty()){
         std::vector<SdlTexture*> vector;
@@ -33,13 +33,8 @@ ConstructionYardView::ConstructionYardView(ConstructionYard& constructionYard, S
 
 
 void ConstructionYardView::draw(Area& camara){
-    if (!destroyed){
-        if (building.getLife()<=0){
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0,0,94,80);
-    Area dest(pos.getX() - camara.getX() - 47, pos.getY() - camara.getY() - 40,90,80);
-    (*anim_it)->render(src,dest);
+    BuildingView::draw(camara,*anim_it);    
 }

@@ -2,6 +2,7 @@
 #include "../AStar.h"
 #include "../Weapons/AssaultRifle.h"
 #include <iostream>
+#include <stack>
 
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),
@@ -13,7 +14,7 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
     destiny(x, y),
     prev_foll_unit_pos(),
     next_pos(x, y),
-    state((UnitState*) & Unit::stopped) {}
+    state((UnitState*) & Unit::training) {}
 
 Unit::~Unit() {}
 
@@ -25,6 +26,7 @@ const UnitStateDefending Unit::defending;
 const UnitStateLoading Unit::loading;
 const UnitStateFarming Unit::farming;
 const UnitStateBacking Unit::backing;
+const UnitStateTraining Unit::training;
 
 bool Unit::move(Map &map) {
     bool moved = true;
@@ -144,4 +146,12 @@ void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr)
         if (Unit::isDead(foll_unit))
             this->foll_unit = nullptr;
+}
+
+bool Unit::isTraining(){
+    return this->state->isTraining();
+}
+
+void Unit::finishTraining(){
+    this->state = (UnitState*)&Unit::stopped;
 }

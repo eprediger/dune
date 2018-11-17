@@ -1,5 +1,5 @@
-#include <iostream>
 #include "ButtonView.h"
+#include <string>
 
 ButtonView::ButtonView(const std::string& filename, const SdlWindow& window) :
 	buttonImage(filename, window),
@@ -30,10 +30,6 @@ void ButtonView::changeState(State newState) {
 
 bool ButtonView::isClicked(const int x, const int y) {
 	return (((x >= this->x) && (x <= this->x + this->width)) && (((y >= this->y) && (y <= this->y + this->height))));
-}
-
-void ButtonView::execute() {
-	std::cout << "Hola!" << std::endl;
 }
 
 void ButtonView::render(const Area& dest) {

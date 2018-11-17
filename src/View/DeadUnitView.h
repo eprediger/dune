@@ -5,6 +5,7 @@
 #include "SdlTexture.h"
 #include "../Position.h"
 #include "Area.h"
+#include <vector>
 
 class DeadUnitView {
 public:

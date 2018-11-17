@@ -12,7 +12,7 @@
 std::map<std::string, std::vector<SdlTexture*> > SpiceSiloView::sprites;
 
 SpiceSiloView::SpiceSiloView(SpiceSilo& spiceSilo, SdlWindow& window)
-    : BuildingView(spiceSilo)
+    : BuildingView(spiceSilo,window,Area(0,0,36,30),Area(0,0,36,30))
 {
     if (sprites.empty()) {
         std::vector<SdlTexture*> vector;
@@ -38,19 +38,11 @@ SpiceSiloView::SpiceSiloView(SpiceSilo& spiceSilo, SdlWindow& window)
         sprites.emplace(std::make_pair("Ordos", std::move(vector)));
     }
     anim_it = sprites.at("Ordos").begin();
-    base = (*anim_it);
-    anim_it++;
 }
 
 void SpiceSiloView::draw(Area& camara) {
-    if (!destroyed) {
-        if (building.getLife() <= 0) {
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0, 0, 108, 72);
-    Area dest(pos.getX() - camara.getX() - 54, pos.getY() - camara.getY() - 36, 108/3, 72/3);
-    base->render(src, dest);
-    (*anim_it)->render(src, dest);
+    BuildingView::draw(camara,*anim_it);    
 }

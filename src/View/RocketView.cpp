@@ -37,8 +37,7 @@ void RocketView::draw(Area& camara) {
         if (rocket.arrived()) {
             exploding = true;
             anim_it++;
-        }
-        else {
+        } else {
             (*anim_it)->render(Area(0, 0, 72, 72),
                                Area(pos.x - camara.getX() - 36, pos.y - camara.getY() - 36, 72, 72));
             return;
@@ -51,7 +50,8 @@ void RocketView::draw(Area& camara) {
             if (anim_it == sprites.end()) {
                 finished = true;
             }
+        } else {
+            update_sprite += 1;
         }
-        else update_sprite += 1;
     }
 }

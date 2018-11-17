@@ -11,10 +11,9 @@ std::map<int, std::vector<SdlTexture*> > LightInfantryView::sprites;
 std::map<int, std::vector<SdlTexture*> > LightInfantryView::attack_sprites;
 std::vector<SdlTexture*> LightInfantryView::dead_sprites;
 
-LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
-                                     , SdlWindow& window)
-    :OffensiveUnitView(lightInfantry,Area(0,0,20,20),window) 
-{
+LightInfantryView::LightInfantryView(LightInfantry& lightInfantry,
+                                     SdlWindow& window) :
+    OffensiveUnitView(lightInfantry, Area(0, 0, 20, 20), window) {
     if (sprites.empty()) {
         std::vector<SdlTexture*> indef;
         indef.emplace_back(new SdlTexture("../imgs/imgs/00061b8d.bmp", window));
@@ -139,34 +138,35 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry
         attack_sprites.emplace(std::make_pair(Orientation::noreste(),
                                               std::move(noreste)));
 
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b081.bmp",window));
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b1ca.bmp",window));
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b9d5.bmp",window));
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006c2da.bmp",window));
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006cc5e.bmp",window));
-        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006bc17.bmp",window));  
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b081.bmp", window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b1ca.bmp", window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006b9d5.bmp", window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006c2da.bmp", window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006cc5e.bmp", window));
+        dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/0006bc17.bmp", window));
     }
     anim_it = sprites.at(orientation.getValor()).begin();
 }
 
-void LightInfantryView::draw(Area& camara){ 
-    if (offensiveUnit.isAttacking() || animating_attack){
-        drawAttack(camara,attack_sprites);
-        if (!animating_attack){
+void LightInfantryView::draw(Area& camara) {
+	if (offensiveUnit.isAttacking() && (offensiveUnit.isShooting() || animating_attack)){
+        drawAttack(camara, attack_sprites);
+        if (!animating_attack) {
             anim_it = sprites.at(orientation.getValor()).begin();
         }
+    } else {
+        UnitView::draw(camara, sprites, anim_it, update);
     }
-    else UnitView::draw(camara,sprites,anim_it,update);
 }
 
-std::vector<SdlTexture*>& LightInfantryView::getDeadSprites(){
-    return dead_sprites; 
+std::vector<SdlTexture*>& LightInfantryView::getDeadSprites() {
+    return dead_sprites;
 }
 
-
-Area LightInfantryView::getDeadUnitSrcArea(){
-	return Area(0,0,20,20);
+Area LightInfantryView::getDeadUnitSrcArea() {
+    return Area(0, 0, 20, 20);
 }
-Area LightInfantryView::getDeadUnitDestArea(){
-	return Area(0,0,20,20);
+
+Area LightInfantryView::getDeadUnitDestArea() {
+    return Area(0, 0, 20, 20);
 }

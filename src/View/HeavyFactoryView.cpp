@@ -12,7 +12,7 @@
 std::map<std::string, std::vector<SdlTexture*> > HeavyFactoryView::sprites;
  
 HeavyFactoryView::HeavyFactoryView(HeavyFactory& heavyFactory, SdlWindow& window)
-    :BuildingView(heavyFactory)
+    :BuildingView(heavyFactory,window,Area(0,0,90,75),Area(0,0,90,75))
 {
     if (sprites.empty()){
         std::vector<SdlTexture*> vector;
@@ -38,14 +38,9 @@ HeavyFactoryView::HeavyFactoryView(HeavyFactory& heavyFactory, SdlWindow& window
 
 
 void HeavyFactoryView::draw(Area& camara){
-    if (!destroyed){
-        if (building.getLife()<=0){
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0,0,89,75);
-    Area dest(pos.getX() - camara.getX() - 45, pos.getY() - camara.getY() - 38,90,75);
-    base->render(src,dest);
-    (*anim_it)->render(src,dest);
+    BuildingView::draw(camara,*anim_it,base,-5,18);    
 }
+

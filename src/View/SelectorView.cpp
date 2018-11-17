@@ -3,6 +3,7 @@
 #include "../Model/Attackable.h"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <vector>
 
 SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
     window(window),
@@ -99,6 +100,7 @@ void SelectorView::draw(Area& camara) {
         SDL_RenderDrawRect(window.getRenderer(), &drag_rect);
         SDL_SetRenderDrawColor(window.getRenderer(), 0, 128, 64, 80);
         SDL_RenderFillRect(window.getRenderer(), &drag_rect);
+    } else {
+        drawSelection(camara);
     }
-    else drawSelection(camara);
 }

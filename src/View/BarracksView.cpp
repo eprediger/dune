@@ -12,7 +12,7 @@
 std::map<std::string, std::vector<SdlTexture*> > BarracksView::sprites;
 
 BarracksView::BarracksView(Barracks& barracks, SdlWindow& window)
-    :BuildingView(barracks)
+    :BuildingView(barracks,window,Area(0,0,72,68),Area(0,0,72,68))
 {
     if (sprites.empty()){
         std::vector<SdlTexture*> vector;
@@ -32,13 +32,8 @@ BarracksView::BarracksView(Barracks& barracks, SdlWindow& window)
 } 
 
 void BarracksView::draw(Area& camara){
-    if (!destroyed){
-        if (building.getLife()<=0){
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0,0,72,68);
-    Area dest(pos.getX() - camara.getX() - 36, pos.getY() - camara.getY() - 34,72,68);
-    (*anim_it)->render(src,dest); 
+    BuildingView::draw(camara,*anim_it);    
 }

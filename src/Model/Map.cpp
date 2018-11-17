@@ -1,11 +1,12 @@
 #include "Map.h"
-
 #include "Terrains/Precipice.h"
 #include "Terrains/Summit.h"
 #include "AStar.h"
 #include "../Common/CustomException.h"
 #include "../View/Area.h"
 #include <algorithm>
+#include <stack>
+#include <vector>
 
 Map::Map(int width, int height) :
     matrix(width * height / (BLOCK_HEIGHT * BLOCK_WIDTH)),
@@ -88,12 +89,11 @@ void Map::put(Unit &unit) {
     this->at(unit.getPosition()).occupy();
 }
 
-
 void Map::put(Building &building) {
     buildings.push_back(&building);
-    for (int i = 0; i<building.height; i++){
-        for (int j = 0; j<building.width; j++){
-            this->at(building.getPosition().x + j*BLOCK_WIDTH,building.getPosition().y + i*BLOCK_HEIGHT).buildOn();
+    for (int i = 0; i < building.height; i++) {
+        for (int j = 0; j < building.width; j++) {
+            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).buildOn();
         }
     }
 }
@@ -116,7 +116,7 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     AStar algorithm(*this);
     Position p_destiny(x_dest, y_dest);
     std::stack<Position> path = algorithm.makePath(unit, p_destiny);
-    if (!path.empty()){
+    if (!path.empty()) {
         this->at(unit.getPosition()).free();
     }
     unit.setPath(path, p_destiny);
@@ -153,11 +153,11 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius) {
     return closest_unit;
 }
 
-Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player){
+Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
     for (auto current_unit : units) {
-        if (current_unit->getPlayer() == player){    
+        if (current_unit->getPlayer() == player) {
             int distance = current_unit->getPosition().sqrtDistance(pos);
             if (distance < limitRadius
                     && distance < closest_unit_distance) {
@@ -170,29 +170,28 @@ Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player){
     return closest_unit;
 }
 
-std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player){
+std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     std::vector<Unit*> answer;
-    for (auto unit: units){
+    for (auto unit : units) {
         if (unit->getPlayer() == player)
             if (unit->getPosition().x > area.getX())
-                if (unit->getPosition().x < area.getX()+area.getWidth())
+                if (unit->getPosition().x < area.getX() + area.getWidth())
                     if (unit->getPosition().y > area.getY())
-                        if (unit->getPosition().y < area.getY()+area.getHeight())
+                        if (unit->getPosition().y < area.getY() + area.getHeight())
                             answer.emplace_back(unit);
     }
-    if (answer.empty()){
-        Unit* unit = getClosestUnit(Position(area.getX()+area.getWidth(),area.getY()+area.getHeight()),120,player);
-        if (unit!=nullptr)
+    if (answer.empty()) {
+        Unit* unit = getClosestUnit(Position(area.getX() + area.getWidth(), area.getY() + area.getHeight()), 120, player);
+        if (unit != nullptr)
             answer.emplace_back(unit);
     }
     return (std::move(answer));
 }
 
-
 void Map::cleanDeadUnits() {
     bool has_dead_unit = false;
-    for (auto u : units){
-        if (Unit::isDead(u)){
+    for (auto u : units) {
+        if (Unit::isDead(u)) {
             has_dead_unit = true;
             this->at(u->getPosition()).free();
         }
@@ -202,14 +201,13 @@ void Map::cleanDeadUnits() {
     }
 }
 
-
 Building * Map::getClosestBuilding(Position &position, int limitRadius) {
     Building* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
     for (auto current_building : buildings) {
         int distance = current_building->getPosition().sqrtDistance(position);
         if (distance < limitRadius
-            && distance < closest_unit_distance) {
+                && distance < closest_unit_distance) {
             closest_unit = current_building;
             closest_unit_distance = distance;
         }
@@ -233,7 +231,6 @@ Building * Map::getClosestBuilding(Position &position, int limitRadius) {
 //
 //    return closest_unit;
 //}
-
 
 //Unit *Map::getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit) {
 //    Unit* closest_unit = nullptr;
@@ -275,33 +272,52 @@ bool Map::canWeBuild(Position& pos, int width, int height){
                 }
             }
         }
-        for (int i = -5; i<=height + 5; i+=2){
-            for (int j = -5; j<=height + 5; j+=2){
-                if (this->at(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT).isBuiltOn()){
+        for (int i = -5; i <= height + 5; i += 2) {
+            for (int j = -5; j <= height + 5; j += 2) {
+                if (this->at(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT).isBuiltOn()) {
                     return false;
                 }
             }
         }
         return true;
-    } catch (std::out_of_range& e){
+    } catch (std::out_of_range& e) {
         return false;
     }
+}
 
+Position Map::getClosestFreePosition(Building* building){
+    int dist = 1;
+    bool found = false;
+    Position& pos = building->getPosition();
+    while(!found){
+        for (int i = - dist; i<=building->height + dist; i++){
+            for (int j =  - dist; j<=building->width + dist; j++){
+                try{
+                    if (!(this->at(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT).isOccupied())){
+                        std::cout<<"X = "<<pos.x+j*BLOCK_WIDTH<<", Y = "<<pos.y + i* BLOCK_HEIGHT<<std::endl;
+                        return Position(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT);
+                    }
+                }
+                catch(std::out_of_range& e){}
+            }
+        }
+        dist+=1;
+    }
+    return pos;
 }
 
 Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, bool has) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units){
+    for (auto current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
-            && distance < closest_unit_distance
-            && !( (player == current_unit->getPlayer()) ^  has)){
+                && distance < closest_unit_distance
+                && !( (player == current_unit->getPlayer()) ^  has)) {
             closest_unit = current_unit;
             closest_unit_distance = distance;
         }
     }
-
     return closest_unit;
 }
 

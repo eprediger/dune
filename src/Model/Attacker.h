@@ -10,10 +10,12 @@ protected:
     const Weapon& weapon;
     const int range;
     int actual_frec;
+    bool shooting;
 public:
     Attacker(const Weapon& weapon, const int range);
-
+    const Weapon& getWeapon();
     virtual void attack(Attackable &defender);
+    bool isShooting();
 };
 
 #endif //__ATTACKER_H__

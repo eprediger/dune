@@ -7,11 +7,12 @@
 #include "SdlTexture.h"
 #include <vector>
 #include <map>
+#include <string>
 
 std::map<std::string, std::vector<SdlTexture*> > LightFactoryView::sprites;
 
 LightFactoryView::LightFactoryView(LightFactory& lightFactory, SdlWindow& window) :
-    BuildingView(lightFactory) {
+    BuildingView(lightFactory,window,Area(0,0,90,60),Area(0,0,90,60)) {
     if (sprites.empty()) {
         std::vector<SdlTexture*> vector;
         vector.emplace_back(new SdlTexture("../imgs/imgs/00188131.bmp", window));
@@ -35,14 +36,9 @@ LightFactoryView::LightFactoryView(LightFactory& lightFactory, SdlWindow& window
 }
 
 void LightFactoryView::draw(Area& camara) {
-    if (!destroyed) {
-        if (building.getLife() <= 0) {
-            destroyed = true;
-            anim_it++;
-        }
+    if ((!destroyed) && building.getLife()<=0){
+        destroyed = true;
     }
-    Area src(0, 0, 89, 58);
-    Area dest(pos.getX() - camara.getX() - 45, pos.getY() - camara.getY() - 30, 90, 60);
-    base->render(src, dest);
-    (*anim_it)->render(src, dest);
+    BuildingView::draw(camara,*anim_it,base,10,0);    
 }
+

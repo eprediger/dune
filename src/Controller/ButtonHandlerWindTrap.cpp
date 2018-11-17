@@ -3,8 +3,7 @@
 #include <iostream>
 
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model &model, GameView &view) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif"), model, view) {
-}
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif"), model, view) {}
 
 ButtonHandlerWindTrap::~ButtonHandlerWindTrap() {}
 
