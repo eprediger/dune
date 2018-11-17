@@ -19,5 +19,8 @@ bool SpiceRefinery::load(Player &player) {
 	if (availableCapacity < capacity){
 		++availableCapacity;
 		player.addGold(1);
-	};
+		return true;
+	} else {
+		return false;
+	}
 }
