@@ -137,8 +137,10 @@ void Unit::actionOnPosition(Map &map, Position &pos) {
     Attackable* foll_unit = map.getClosestAttackable(pos, 50 * 50, *player);
     if (foll_unit != nullptr) {
         this->follow(foll_unit, map);
+        state = (UnitState*) &Unit::following;
     } else {
         map.setDestiny(*this, pos.x, pos.y);
+        state = (UnitState*) &Unit::moving;
     }
 }
 
