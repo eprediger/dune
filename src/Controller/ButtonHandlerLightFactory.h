@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerLightFactory();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif  // __BUTTON_HANDLER_LIGHT_FACTORY_H__

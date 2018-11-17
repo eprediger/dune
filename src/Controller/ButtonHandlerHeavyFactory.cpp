@@ -12,3 +12,7 @@ void ButtonHandlerHeavyFactory::execute() {
 	HeavyFactory& newBuilding = model.createHeavyFactory(500, 500, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }
+
+bool ButtonHandlerHeavyFactory::canBeEnabled() {
+    return (this->model.getPlayer(0).gold >= GlobalConfig.heavyFactoryCost);
+}

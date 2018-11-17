@@ -34,8 +34,8 @@ protected:
 	SDL_Rect playerColorRect;
 	Unit& unit;
 	int player_r, player_g, player_b;
-	Area damage_sprite_area,sprite_area;
-	Area damage_dest_area,dest_area;
+	Area damage_sprite_area, sprite_area;
+	Area damage_dest_area, dest_area;
 	Position prev_pos;
 	Orientation orientation;
 	int life;

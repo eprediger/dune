@@ -12,3 +12,7 @@ void ButtonHandlerSpiceSilo::execute() {
 	SpiceSilo& newBuilding = model.createSpiceSilo(500, 500, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }
+
+bool ButtonHandlerSpiceSilo::canBeEnabled() {
+    return (this->model.getPlayer(0).gold >= GlobalConfig.spiceSiloCost);
+}

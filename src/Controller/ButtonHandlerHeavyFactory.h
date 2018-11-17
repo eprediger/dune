@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerHeavyFactory();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif  // __BUTTON_HANDLER_HEAVY_FACTORY_H__

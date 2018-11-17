@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerSpiceSilo();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif  // __BUTTON_HANDLER_SPICE_SILO_H__

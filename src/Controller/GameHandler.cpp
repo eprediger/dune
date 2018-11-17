@@ -26,12 +26,12 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
-//    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));
+    /*this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));*/
 }
 
 GameHandler::~GameHandler() {
@@ -56,18 +56,18 @@ bool GameHandler::handleInput() {
             this->selector.drag = true;
             this->selector.drag_source = selector.pos;
             for (auto& button : this->buttons) {
-                button->onClicked(this->cursor.current_x, this->cursor.current_y);
+                button->update(this->cursor.current_x, this->cursor.current_y);
             }
         }
-            break;
-        case SDL_MOUSEMOTION:
-            this->cursor.currentPosition();
-            this->selector.pos.x = this->cursor.current_x + this->view.getCameraX();
-            this->selector.pos.y = this->cursor.current_y + this->view.getCameraY();
-            break;
-        case SDL_MOUSEBUTTONUP:
-            this->cursor.currentPosition();
-            if (event.button.button == SDL_BUTTON_LEFT) {
+        break;
+    case SDL_MOUSEMOTION:
+        this->cursor.currentPosition();
+        this->selector.pos.x = this->cursor.current_x + this->view.getCameraX();
+        this->selector.pos.y = this->cursor.current_y + this->view.getCameraY();
+        break;
+    case SDL_MOUSEBUTTONUP:
+        this->cursor.currentPosition();
+        if (event.button.button == SDL_BUTTON_LEFT) {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));

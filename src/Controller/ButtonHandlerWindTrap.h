@@ -10,6 +10,8 @@ public:
 	~ButtonHandlerWindTrap();
 
 	virtual void execute() override;
+
+    virtual bool canBeEnabled() override;
 };
 
 #endif  // __BUTTON_HANDLER_WIND_TRAP_H__

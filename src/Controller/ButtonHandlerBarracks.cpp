@@ -16,3 +16,7 @@ void ButtonHandlerBarracks::execute() {
 	Barracks& newBuilding = model.createBarracks(500, 500, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }
+
+bool ButtonHandlerBarracks::canBeEnabled() {
+    return (this->model.getPlayer(0).gold >= GlobalConfig.barracksCost);
+}

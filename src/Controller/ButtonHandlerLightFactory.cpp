@@ -12,3 +12,7 @@ void ButtonHandlerLightFactory::execute() {
 	LightFactory& newBuilding = model.createLightFactory(500, 500, 0);
 	view.addBuildingView(BuildingViewFactory::createBuildingView(newBuilding, view.getWindow()));
 }
+
+bool ButtonHandlerLightFactory::canBeEnabled() {
+    return (this->model.getPlayer(0).gold >= GlobalConfig.lightFactoryCost);
+}
