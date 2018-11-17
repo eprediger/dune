@@ -39,13 +39,13 @@ Model::Model(int width, int height, int n_player) : map(width, height),gameFinis
 }
 
 Model::~Model() {
-    for (auto unit : units) {
+    for (auto& unit : units) {
         delete unit;
     }
-    for (auto building : buildings) {
+    for (auto& building : buildings) {
         delete building;
     }
-    for (auto player : players){
+    for (auto& player : players){
         delete player;
     }
 }
@@ -122,7 +122,7 @@ Map &Model::getMap() {
 
 void Model::cleanDeadUnits() {
     bool has_dead_unit = false;
-    for (auto u : units) {
+    for (auto& u : units) {
         if (Unit::isDead(u)) {
             has_dead_unit = true;
             map.cleanUnit(u);
@@ -146,14 +146,14 @@ void Model::cleanDeadUnits() {
 
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;
-    for (auto b : buildings){
+    for (auto& b : buildings){
         if (Attackable::isDead(b)){
             has_dead_unit = true;
             map.cleanBuilding(b);
         }
     }
     if (has_dead_unit){
-        for (auto player : players){
+        for (auto& player : players){
             player->cleanDeadBuildings();
         }
         auto it = buildings.begin();

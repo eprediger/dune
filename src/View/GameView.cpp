@@ -48,13 +48,13 @@ GameView::~GameView() {
 		delete this->unitButtons.back();
 		this->unitButtons.pop_back();
 	}
-	for (auto unit_view : unitViews) {
+	for (auto& unit_view : unitViews) {
 		delete unit_view;
 	}
-	for (auto deadUnitView : deadUnitViews) {
+	for (auto& deadUnitView : deadUnitViews) {
 		delete deadUnitView;
 	}
-	for (auto building_view : buildingViews) {
+	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
 //	backgroundMusic.join();

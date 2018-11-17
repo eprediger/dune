@@ -39,11 +39,17 @@ Text::~Text() {
 void Text::createText(const std::string& text) {
 	SDL_Color fntColor = { RED, GREEN, BLUE };
 	// SDL_Color fntColor = { 0x0, 0xFF, 0x0 };
+	if (this->surface != nullptr){
+		SDL_FreeSurface(this->surface);
+	}
 	this->surface = TTF_RenderText_Blended(this->font, text.c_str(), fntColor);
 	// SDL_Color bkgColor = { 0x33, 0x33, 0x33 };
 	// this->surface = TTF_RenderText_Shaded(this->font, text.c_str(), fntColor, bkgColor);
 	if (this->surface == nullptr) {
 		throw SdlException("Error al crear superficie", SDL_GetError());
+	}
+	if (this->texture != nullptr){
+		SDL_DestroyTexture(this->texture);
 	}
 	this->texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (this->texture == nullptr) {

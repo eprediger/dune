@@ -41,7 +41,7 @@ void Player::addBuilding(Building *building) {
 //}
 
 Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
-    for (auto b : buildings) {
+    for (auto& b : buildings) {
         if ( b->is(type) ) {
             return b;
         }
@@ -70,7 +70,7 @@ bool Player::hasBuilding(Building& building) {
     if (building == *construction_yard){
         return true;
     }
-    for (auto b : buildings){
+    for (auto& b : buildings){
         if (*b == building){
             return true;
         }

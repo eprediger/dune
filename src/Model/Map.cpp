@@ -132,7 +132,7 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
 Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units) {
+    for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(unit.getPosition());
         if (distance < limitRadius
                 && distance < closest_unit_distance
@@ -148,7 +148,7 @@ Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
 Unit *Map::getClosestUnit(Position &position, int limitRadius) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units) {
+    for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
                 && distance < closest_unit_distance) {
@@ -163,7 +163,7 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius) {
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units) {
+    for (auto& current_unit : units) {
         if (current_unit->getPlayer() == player) {
             int distance = current_unit->getPosition().sqrtDistance(pos);
             if (distance < limitRadius
@@ -179,7 +179,7 @@ Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
 
 std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     std::vector<Unit*> answer;
-    for (auto unit : units) {
+    for (auto& unit : units) {
         if (unit->getPlayer() == player)
             if (unit->getPosition().x > area.getX())
                 if (unit->getPosition().x < area.getX() + area.getWidth())
@@ -197,7 +197,7 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
 
 void Map::cleanDeadUnits() {
     bool has_dead_unit = false;
-    for (auto u : units) {
+    for (auto& u : units) {
         if (Unit::isDead(u)) {
             has_dead_unit = true;
             this->at(u->getPosition()).free();
@@ -211,7 +211,7 @@ void Map::cleanDeadUnits() {
 Building * Map::getClosestBuilding(Position &position, int limitRadius) {
     Building* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_building : buildings) {
+    for (auto& current_building : buildings) {
         int distance = current_building->getPosition().sqrtDistance(position);
         if (distance < limitRadius
                 && distance < closest_unit_distance) {
@@ -321,7 +321,7 @@ Position Map::getClosestFreePosition(Building* building){
 Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, bool has) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units) {
+    for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
                 && distance < closest_unit_distance
@@ -336,7 +336,7 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, b
 Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
     Attackable* closest_attackable = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto current_unit : units){
+    for (auto& current_unit : units){
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius
             && distance < closest_unit_distance
@@ -346,7 +346,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
         }
     }
 
-    for (auto current_building : buildings){
+    for (auto& current_building : buildings){
         int distance = current_building->getPosition().sqrtDistance(position);
         if (distance < limitRadius
             && distance < closest_unit_distance
