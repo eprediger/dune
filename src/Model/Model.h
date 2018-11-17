@@ -28,7 +28,7 @@ private:
 	Map map;
 	std::vector<Unit*> units;
 	std::vector<Building*> buildings;
-    std::vector<Player> players;
+    std::vector<Player*> players;
     bool gameFinished;
 
 public:

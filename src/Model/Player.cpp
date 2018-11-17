@@ -49,7 +49,8 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
 }
 
 bool Player::lose() {
-    return construction_yard == nullptr;
+//    return this->lose;
+    return this->construction_yard == nullptr;
 }
 
 int& Player::getId(){
@@ -73,8 +74,8 @@ bool Player::hasBuilding(Building& building) {
 }
 
 void Player::cleanDeadBuildings() {
-    if (Attackable::isDead(construction_yard)){
-        construction_yard = nullptr;
+    if (Attackable::isDead(this->construction_yard)){
+        this->construction_yard = nullptr;
     }
     auto result_itr(std::remove_if(buildings.begin(), buildings.end(), Attackable::isDead));
     if (result_itr != buildings.end()){
