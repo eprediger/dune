@@ -1,5 +1,6 @@
 #include "ButtonHandlerBarracks.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, BuildingConstructor& constructor):
@@ -22,5 +23,5 @@ void ButtonHandlerBarracks::execute() {
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.barracksCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.barracksCost);
 }

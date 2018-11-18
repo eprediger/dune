@@ -1,5 +1,6 @@
 #include "ButtonHandlerHeavyInfantry.h"
 #include "../View/UnitViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &view) :
@@ -9,11 +10,11 @@ ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &v
 ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}
 
 void ButtonHandlerHeavyInfantry::execute() {
-	HeavyInfantry& newUnit = model.createHeavyInfantry(500, 500, 0);
+	HeavyInfantry& newUnit = model.createHeavyInfantry(500, 500, GameHandler::actual_player);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {
-	return (((model.getPlayer(0).gold >= GlobalConfig.heavyInfantryCost)) &&
-	        (model.getPlayer(0).hasBuilding(Building::BARRACKS)));
+	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.heavyInfantryCost)) &&
+	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::BARRACKS)));
 }

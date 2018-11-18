@@ -74,7 +74,7 @@ void Model::step() {
         std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
         for (auto unit = new_units.begin(); unit!=new_units.end(); unit++){
             units.push_back(*unit);
-            (*unit)->setPlayer(**itr);
+//            (*unit)->setPlayer(**itr);
             map.put(**unit);
         }
         new_units.clear();

@@ -1,5 +1,6 @@
 #include "ButtonHandlerSpiceSilo.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view, BuildingConstructor& constructor) :
@@ -17,5 +18,5 @@ void ButtonHandlerSpiceSilo::execute() {
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.spiceSiloCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.spiceSiloCost);
 }

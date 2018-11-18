@@ -2,6 +2,7 @@
 #define __GAME_HANDLER_H__
 
 #define MOVE_AMOUNT 16
+#define PLAYER 1
 
 #include "InputHandler.h"
 #include "../View/GameView.h"
@@ -20,6 +21,8 @@ public:
 	~GameHandler();
 
 	bool handleInput() override;
+
+	static int actual_player;
 
 private:
 	GameView& view;

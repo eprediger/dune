@@ -11,6 +11,7 @@ BuildingConstructorView::BuildingConstructorView(BuildingConstructor& constructo
     }
 
 void BuildingConstructorView::draw(Area& camara){
+    PlayerColorMaker::makeColor(constructor.getPlayer(),&r,&g,&b);
     if (constructor.on){
         SDL_SetRenderDrawBlendMode(window.getRenderer(),SDL_BLENDMODE_BLEND);
         if (constructor.canWeBuild()){

@@ -14,12 +14,14 @@
 #include "../View/UnitViewFactory.h"
 #include <vector>
 
+int GameHandler::actual_player = PLAYER;
+
 GameHandler::GameHandler(GameView &view, Model &model) :
     InputHandler(),
     view(view),
     model(model),
     selector(0, 0),
-    constructor(model,model.getPlayer(0),view) {
+    constructor(model,model.getPlayer(GameHandler::actual_player),view) {
     view.addSelectorView(this->selector);
     this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor));
@@ -72,7 +74,7 @@ bool GameHandler::handleInput() {
         if (event.button.button == SDL_BUTTON_LEFT) {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
-            std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(0));
+            std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
             this->selector.addSelection(selection);
             this->view.releaseMouse();
             if (constructor.on){
@@ -119,6 +121,15 @@ bool GameHandler::handleInput() {
         case SDLK_w:
             view.moveUp(MOVE_AMOUNT);
             break;
+
+            // Temporal
+        case SDLK_c:
+            GameHandler::actual_player++;
+            if (GameHandler::actual_player >= 3){
+                GameHandler::actual_player = 0;
+            }
+            break;
+            /////////
         default:
             break;
         }

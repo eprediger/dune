@@ -1,5 +1,6 @@
 #include "ButtonHandlerHeavyFactory.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,BuildingConstructor& constructor) :
@@ -17,5 +18,5 @@ void ButtonHandlerHeavyFactory::execute() {
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.heavyFactoryCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.heavyFactoryCost);
 }

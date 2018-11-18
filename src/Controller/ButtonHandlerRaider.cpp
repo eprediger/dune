@@ -1,5 +1,6 @@
 #include "ButtonHandlerRaider.h"
 #include "../View/UnitViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view) :
@@ -9,11 +10,11 @@ ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view) :
 ButtonHandlerRaider::~ButtonHandlerRaider() {}
 
 void ButtonHandlerRaider::execute() {
-	Raider& newUnit = model.createRaider(500, 500, 0);
+	Raider& newUnit = model.createRaider(500, 500, GameHandler::actual_player);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {
-	return (((model.getPlayer(0).gold >= GlobalConfig.raiderCost)) &&
-	        (model.getPlayer(0).hasBuilding(Building::LIGHT_FACTORY)));
+	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.raiderCost)) &&
+	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
 }

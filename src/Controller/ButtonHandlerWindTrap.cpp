@@ -1,5 +1,6 @@
 #include "ButtonHandlerWindTrap.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view, BuildingConstructor& constructor) :
@@ -21,5 +22,5 @@ void ButtonHandlerWindTrap::execute() {
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.windTrapCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.windTrapCost);
 }

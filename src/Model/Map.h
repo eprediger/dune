@@ -28,12 +28,10 @@ public:
 
     bool isValid(Position& pos);
     bool canMove(Unit& unit, Position pos);
-//    void put(Attackable& attackable);
     void put(Unit& unit);
     void put(Building& building);
     void occupy(Building& building);
     void free(Building& building);
-//    bool moveUnits();
 
     int getHeight();
     int getWidth();
@@ -41,21 +39,16 @@ public:
     int getWidthInBlocks();
     int getHeightInBlocks();
 
-    Unit * getClosestUnit(Unit &unit, int limitRadius);
     Unit * getClosestUnit(Position& position, int limitRadius);
     Unit * getClosestUnit(Position position, int limitRadius, Player& player);
     Building * getClosestBuilding(Position &position, int limitRadius);
-//    Unit *getClosestAllyUnit(Position &position, int limitRadius, Player &player);
     Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
     Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
 
     std::vector<Unit*> getUnitsInArea(Area& area, Player& player);
 
-//    Unit* getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit);
-
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 
-    void cleanDeadUnits();
     void cleanUnit(Unit* unit);
     void cleanBuilding(Building* building);
 

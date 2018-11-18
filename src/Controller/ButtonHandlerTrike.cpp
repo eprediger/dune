@@ -1,5 +1,6 @@
 #include "ButtonHandlerTrike.h"
 #include "../View/UnitViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view) :
@@ -9,11 +10,11 @@ ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view) :
 ButtonHandlerTrike::~ButtonHandlerTrike() {}
 
 void ButtonHandlerTrike::execute() {
-	Trike& newUnit = model.createTrike(500, 500, 0);
+	Trike& newUnit = model.createTrike(500, 500, GameHandler::actual_player);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {
-	return (((model.getPlayer(0).gold >= GlobalConfig.trikeCost)) &&
-	        (model.getPlayer(0).hasBuilding(Building::LIGHT_FACTORY)));
+	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.trikeCost)) &&
+	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
 }

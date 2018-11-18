@@ -1,5 +1,6 @@
 #include "ButtonHandlerLightFactory.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerLightFactory::ButtonHandlerLightFactory(Model &model, GameView &view, BuildingConstructor& constructor) :
@@ -17,5 +18,5 @@ void ButtonHandlerLightFactory::execute() {
 }
 
 bool ButtonHandlerLightFactory::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.lightFactoryCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.lightFactoryCost);
 }

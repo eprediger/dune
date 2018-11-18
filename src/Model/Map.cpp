@@ -129,21 +129,21 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     unit.setPath(path, p_destiny);
 }
 
-Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
-    Unit* closest_unit = nullptr;
-    int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units) {
-        int distance = current_unit->getPosition().sqrtDistance(unit.getPosition());
-        if (distance < limitRadius
-                && distance < closest_unit_distance
-                && !(*current_unit == unit)) {
-            closest_unit = current_unit;
-            closest_unit_distance = distance;
-        }
-    }
-
-    return closest_unit;
-}
+//Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
+//    Unit* closest_unit = nullptr;
+//    int closest_unit_distance = limitRadius;
+//    for (auto& current_unit : units) {
+//        int distance = current_unit->getPosition().sqrtDistance(unit.getPosition());
+//        if (distance < limitRadius
+//                && distance < closest_unit_distance
+//                && !(*current_unit == unit)) {
+//            closest_unit = current_unit;
+//            closest_unit_distance = distance;
+//        }
+//    }
+//
+//    return closest_unit;
+//}
 
 Unit *Map::getClosestUnit(Position &position, int limitRadius) {
     Unit* closest_unit = nullptr;
@@ -193,19 +193,6 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
             answer.emplace_back(unit);
     }
     return (std::move(answer));
-}
-
-void Map::cleanDeadUnits() {
-    bool has_dead_unit = false;
-    for (auto& u : units) {
-        if (Unit::isDead(u)) {
-            has_dead_unit = true;
-            this->at(u->getPosition()).free();
-        }
-    }
-    if (has_dead_unit) {
-        units.erase(std::remove_if(units.begin(), units.end(), Unit::isDead), units.end());
-    }
 }
 
 Building * Map::getClosestBuilding(Position &position, int limitRadius) {

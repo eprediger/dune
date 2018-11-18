@@ -1,5 +1,6 @@
 #include "ButtonHandlerSpiceRefinery.h"
 #include "../View/BuildingViewFactory.h"
+#include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Model &model, GameView &view, BuildingConstructor& constructor) :
@@ -18,5 +19,5 @@ void ButtonHandlerSpiceRefinery::execute() {
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {
-    return (this->model.getPlayer(0).gold >= GlobalConfig.spiceRefineryCost);
+    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.spiceRefineryCost);
 }
