@@ -262,26 +262,28 @@ void Map::free(Building &building) {
 }
 
 bool Map::canWeBuild(Position& pos, int width, int height){
-    try{
-        for (int i = 0; i<height; i++){
-            for (int j = 0; j<width;j++){
-                if (this->at(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT).isOccupied()){
-                   return false;
+    for (int i = 0; i<height; i++){
+        for (int j = 0; j<width;j++){
+            Position aux(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT);
+            if (isValid(aux)){
+                if (this->at(aux).isOccupied()){
+                    return false;
                 }
             }
         }
-
-        for (int i = -5; i <= height + 5; i++) {
-            for (int j = -5; j <= height + 5; j++) {
-                if (this->at(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT).isBuiltOn()) {
-                   return false;
-                }
-            }
-        }
-        return true;
-    } catch (std::out_of_range& e) {
-        return false;
     }
+
+    for (int i = -5; i <= height + 5; i++) {
+        for (int j = -5; j <= width + 5; j++) {
+            Position aux(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT);
+            if (isValid(aux)){
+                if (this->at(aux).isBuiltOn()){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 
