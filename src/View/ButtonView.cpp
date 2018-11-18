@@ -42,7 +42,9 @@ void ButtonView::setState(const ViewState newState) {
 }
 
 void ButtonView::render(const Area& dest) {
-	if (this->buttonState != ViewState::HIDDEN) {
+
+    // Se debera quitar luego el estado DISABLED de aqui
+	if (this->buttonState != ViewState::HIDDEN && this->buttonState != ViewState::DISABLED) {
 		Area src(0, 0, this->buttonImage.width, this->buttonImage.height);
 		this->buttonImage.render(src, dest);
 		this->x = dest.getX();

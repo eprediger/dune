@@ -3,6 +3,7 @@
 #include "../Model/Model.h"
 #include "BuildingView.h"
 #include "BuildingViewFactory.h"
+#include "../Controller/GameHandler.h"
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -135,7 +136,7 @@ void GameView::render() {
 
 	// Dinero
 	this->moneyTag.render((this->window.width - this->moneyTag.textWidth) * 18 / 20, this->window.height * 9 / 32);
-	this->moneyBalance.setText(std::to_string(model.getPlayer(0).gold));
+	this->moneyBalance.setText(std::to_string(model.getPlayer(GameHandler::actual_player).gold));
 	this->moneyBalance.render((this->window.width - this->moneyBalance.textWidth) * 18 / 20 + this->moneyTag.textWidth, this->window.height * 9 / 32);
 	// Botones
 	// Vender Edificio
