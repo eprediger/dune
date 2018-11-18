@@ -27,6 +27,7 @@ public:
 private:
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
+	SDL_Surface* surface;
 };
 
 #endif  // __SDLTEXTURE_H__

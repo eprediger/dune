@@ -14,16 +14,20 @@ SdlTexture::~SdlTexture() {
 		SDL_DestroyTexture(this->texture);
 		this->texture = nullptr;
 	}
+	if (this->surface != nullptr) {
+		SDL_FreeSurface(surface);
+		this->surface = nullptr;
+	}
 }
 
 SDL_Texture* SdlTexture::loadTexture(const std::string& filename) {
-	SDL_Surface* loadedSurface = IMG_Load(filename.c_str());
-	if (loadedSurface == nullptr) {
+	this->surface = IMG_Load(filename.c_str());
+	if (surface == nullptr) {
 		throw SdlException("Error al cargar la textura", SDL_GetError());
 	} else {
-		SDL_SetColorKey(loadedSurface, SDL_TRUE,
-		                SDL_MapRGB(loadedSurface->format, 0, 0, 0));
-		this->texture = SDL_CreateTextureFromSurface(this->renderer, loadedSurface);
+		SDL_SetColorKey(surface, SDL_TRUE,
+		                SDL_MapRGB(surface->format, 0, 0, 0));
+		this->texture = SDL_CreateTextureFromSurface(this->renderer, surface);
 		if (this->texture == nullptr) {
 			throw SdlException("Error al crear la textura", SDL_GetError());
 		}
@@ -33,7 +37,7 @@ SDL_Texture* SdlTexture::loadTexture(const std::string& filename) {
 }
 
 int SdlTexture::setColor(int& r, int& g, int& b) {
-	return SDL_SetTextureColorMod(texture,r,g,b);
+	return SDL_SetTextureColorMod(texture, r, g, b);
 }
 
 int SdlTexture::render(const Area& src, const Area& dest) {
