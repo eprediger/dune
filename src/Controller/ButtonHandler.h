@@ -13,13 +13,15 @@ public:
 
 	virtual ~ButtonHandler();
 
-	void update(const int x, const int y);
+	void handleUserInput(const int x, const int y);
 
 	bool wasClicked(const int x, const int y);
 
 	virtual void execute() = 0;
 
     virtual bool canBeEnabled() = 0;
+
+    virtual bool finishAction() = 0;
 	
 	void setState(const State state);
 

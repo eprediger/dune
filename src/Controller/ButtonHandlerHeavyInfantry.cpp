@@ -18,3 +18,7 @@ bool ButtonHandlerHeavyInfantry::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.heavyInfantryCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::BARRACKS)));
 }
+
+bool ButtonHandlerHeavyInfantry::finishAction() {
+	return !(this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingHeavyInfantry());
+}

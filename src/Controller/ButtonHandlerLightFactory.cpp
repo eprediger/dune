@@ -20,3 +20,7 @@ void ButtonHandlerLightFactory::execute() {
 bool ButtonHandlerLightFactory::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.lightFactoryCost);
 }
+
+bool ButtonHandlerLightFactory::finishAction() {
+	return true;
+}

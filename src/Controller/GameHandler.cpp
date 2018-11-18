@@ -26,8 +26,8 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerBarracks(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view, constructor));
+    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view));
@@ -35,6 +35,11 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));
+    for (auto& button : this->buttons) {
+        if (button->canBeEnabled()) {
+            button->setState(State::ENABLED);
+        }
+    }
 }
 
 GameHandler::~GameHandler() {
@@ -60,6 +65,9 @@ bool GameHandler::handleInput() {
                 this->selector.drag = true;
                 this->selector.drag_source = selector.pos;
             }
+            for (auto& button : this->buttons) {
+                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
+            }
         }
         break;
     case SDL_MOUSEMOTION:
@@ -80,10 +88,6 @@ bool GameHandler::handleInput() {
             if (constructor.on){
                 constructor.build();
             }
-            for (auto& button : this->buttons) {
-                button->update(this->cursor.current_x, this->cursor.current_y);
-            }
-
         }
         // TEST
         if (event.button.button == SDL_BUTTON_MIDDLE) {

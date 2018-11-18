@@ -24,3 +24,7 @@ void ButtonHandlerWindTrap::execute() {
 bool ButtonHandlerWindTrap::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.windTrapCost);
 }
+
+bool ButtonHandlerWindTrap::finishAction() {
+    return true;
+}

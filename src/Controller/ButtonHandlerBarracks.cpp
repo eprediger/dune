@@ -25,3 +25,7 @@ void ButtonHandlerBarracks::execute() {
 bool ButtonHandlerBarracks::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.barracksCost);
 }
+
+bool ButtonHandlerBarracks::finishAction() {
+	return true;
+}

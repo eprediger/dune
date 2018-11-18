@@ -19,3 +19,7 @@ bool ButtonHandlerLightInfantry::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.lightInfantryCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::BARRACKS)));
 }
+
+bool ButtonHandlerLightInfantry::finishAction() {
+	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingLightInfantry());
+}

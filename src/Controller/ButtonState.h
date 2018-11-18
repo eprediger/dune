@@ -3,7 +3,7 @@
 
 class ButtonHandler;
 
-enum class State { DISABLED, ENABLED }; //, BUSY, READY };
+enum class State { DISABLED, ENABLED, BUSY, READY };
 
 class ButtonState {
 public:

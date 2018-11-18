@@ -170,7 +170,7 @@ void GameView::render() {
 	this->RenderVPBar(this->window.width * 63 / 80,	//this->window.width * 1 / 10,
 	                  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
 	                  this->window.height * 32 / 64,
-	                  (float)this->model.getPlayer(0).consumedEnergy / (float)this->model.getPlayer(0).generatedEnergy,
+	                  (float)this->model.getPlayer(GameHandler::actual_player).consumedEnergy / (float)this->model.getPlayer(GameHandler::actual_player).generatedEnergy,
 	                  available, bkgrColor);
 
 	this->window.render();
