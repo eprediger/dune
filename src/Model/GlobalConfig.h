@@ -19,19 +19,19 @@ typedef struct {
 	const int windTrapWidth 	= 3;
 	const int windTrapHeight	= 3;
 	// Fabrica Ligera
-	const int lightFactoryEnergy	= -500;
+	const int lightFactoryEnergy	= 500;
 	const int lightFactoryCost		= 800;
 	const int lightFactoryHitPoints	= 500;
 	const int lightFactoryWidth 	= 3;
 	const int lightFactoryHeight	= 3;
 	// Fabrica Pesada
-	const int heavyFactoryEnergy	= -800;
+	const int heavyFactoryEnergy	= 800;
 	const int heavyFactoryCost		= 1500;
 	const int heavyFactoryHitPoints	= 1500;
 	const int heavyFactoryWidth 	= 4;
 	const int heavyFactoryHeight	= 4;
 	// Refinera
-	const int spiceRefineryEnergy			= -400;
+	const int spiceRefineryEnergy			= 400;
 	const int spiceRefineryCost				= 500;
 	const int spiceRefineryHitPoints		= 500;	// el enunciado no dice
 	const int spiceRefinerySpiceCapacity	= 5000;
