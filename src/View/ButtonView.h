@@ -36,7 +36,7 @@ private:
 	SdlTexture buttonImage;
 public:
 	int x, y;
-	const int width, height;
+	int width, height;
 };
 
 #endif	// __BUTTON_H__

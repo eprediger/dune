@@ -45,7 +45,7 @@ void ButtonView::render(const Area& dest) {
 	Area enabledSrc(0, 0, this->buttonImage.width / 2,
 	                this->buttonImage.height);
 	Area disabledSrc(this->buttonImage.width/2, 0,
-	                 this->buttonImage.width/2,
+	                 this->buttonImage.width,
 	                 this->buttonImage.height);
 	switch (this->buttonState) {
 	case ViewState::HIDDEN:
@@ -54,6 +54,8 @@ void ButtonView::render(const Area& dest) {
 		this->buttonImage.render(enabledSrc, dest);
 		this->x = dest.getX();
 		this->y = dest.getY();
+		this->height = dest.getHeight();
+		this->width = dest.getWidth();
 		break;
 	case ViewState::DISABLED:
 		this->buttonImage.render(disabledSrc, dest);

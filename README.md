@@ -114,6 +114,21 @@ Ejecución desde carpeta build/:
 	2. Editar cantidad de jugadores
 	3. Editar ubicación de Centros de Construcción
 
+
+
+## Listado de bugs
+
+1. Explota durante la animacion al intentar renderizar un ataque. 
+	* Trace:
+		1. SDL_Texture::render linea 50
+		1. OffensiveUnitView::drawAttack linea 30
+		1. LightInfantryView::draw linea 153
+		1. GameView::render linea 126
+		1. Aplication::render linea 28
+
+2. ~~Al hacer click en los botones de unidades intenta crear el edificio de al lado.~~
+	* Resuelto: el problema esta en la vista del boton el cual toma como ancho y alto el de la imagen. Como el ancho y alto de la imagen es diferente al area de la vista del boton (En los edificios por ejemplo, es el doble de ancho por estar a color y en blanco y negro), el area de "click" es diferente del area de que muestra el boton. Se resuelve quitando el parmetro const de "height" y "width" y asignandoles el ancho y alto del area "dest" durante el render.
+
 ## DOCUMENTACION
 
 * Instalacion y uso
