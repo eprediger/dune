@@ -24,7 +24,7 @@ UnitView* UnitViewFactory::createUnitView(Tank& tank, SdlWindow& window) {
 
 UnitView* UnitViewFactory::createUnitView(Raider& raider, SdlWindow& window) {
 	return new RaiderView(raider, window);
-}
+} 
 
 UnitView* UnitViewFactory::createUnitView(Harvester& harvester, SdlWindow& window) {
 	return new HarvesterView(harvester, window);
@@ -34,6 +34,7 @@ UnitView* UnitViewFactory::createUnitView(LightInfantry& lightInfantry, SdlWindo
 	return new LightInfantryView(lightInfantry, window);
 }
 
-UnitView* UnitViewFactory::createUnitView(HeavyInfantry& heavyInfantry, SdlWindow& window) {
-	return new HeavyInfantryView(heavyInfantry, window);
+UnitView* UnitViewFactory::createUnitView(HeavyInfantry& heavyInfantry, std::vector<RocketView*>& rocketViews,
+							 				SdlWindow& window) {
+	return new HeavyInfantryView(heavyInfantry,rocketViews, window); 
 }

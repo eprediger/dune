@@ -4,31 +4,41 @@
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 
-std::vector<SdlTexture*> RocketView::sprites;
+std::vector<SdlTexture*> RocketView::travel_sprites;
+std::vector<SdlTexture*> RocketView::explosion_sprites;
 
 RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
     rocket(rocket),
     exploding(false),
     pos(rocket.getPosition()),
     update_sprite(0),
+    reverse(false),
     finished(false) {
-    if (sprites.empty()) {
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002cbf9c.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002cd3b1.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002ce7c6.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002cfc23.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d1080.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d24dd.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d393a.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d4bef.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d5fbc.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d7389.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d8756.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002d9a03.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002da77e.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002db5e5.bmp", window));
-        sprites.emplace_back(new SdlTexture("../imgs/imgs/002dc3d4.bmp", window));
+    if (travel_sprites.empty()) {
+        travel_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc36.bmp", window));
+		travel_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc00.bmp", window));
+		travel_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebbb2.bmp", window));
+		travel_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebb55.bmp", window));
+		
+
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002dc3d4.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002db5e5.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002da77e.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d9a03.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d8756.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d7389.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d5fbc.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d4bef.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d393a.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d24dd.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002d1080.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002cfc23.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ce7c6.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002cd3b1.bmp", window));
+        explosion_sprites.emplace_back(new SdlTexture("../imgs/imgs/002cbf9c.bmp", window));
     }
+    anim_it = travel_sprites.begin();
+
 }
 
 void RocketView::draw(Area& camara) {
@@ -36,22 +46,35 @@ void RocketView::draw(Area& camara) {
         pos = rocket.getPosition();
         if (rocket.arrived()) {
             exploding = true;
-            anim_it++;
+            anim_it = explosion_sprites.begin();
         } else {
-            (*anim_it)->render(Area(0, 0, 72, 72),
-                               Area(pos.x - camara.getX() - 36, pos.y - camara.getY() - 36, 72, 72));
+            (*anim_it)->render(Area(0, 0, 20, 20),
+                               Area(pos.x - camara.getX() - 5 , pos.y - camara.getY()-5, 10, 10));
+            anim_it++;
+            if (anim_it == travel_sprites.end()){
+                anim_it = travel_sprites.begin();
+            }
             return;
         }
-        (*anim_it)->render(Area(0, 0, 72, 72),
-                           Area(pos.x - camara.getX() - 36, pos.y - camara.getY() - 36, 72, 72));
-        if (update_sprite == 5) {
+    } 
+
+    (*anim_it)->render(Area(0, 0, 72, 72),
+                           Area(pos.x - camara.getX() , pos.y - camara.getY(), 40, 40));
+
+    if (update_sprite == 5) {
+        if (reverse)
+            anim_it--;
+        else
             anim_it++;
-            update_sprite = 0;
-            if (anim_it == sprites.end()) {
-                finished = true;
-            }
-        } else {
-            update_sprite += 1;
+        update_sprite = 0;
+        if (anim_it == explosion_sprites.end()) {
+            reverse = true;
+            anim_it--;
         }
+        if (anim_it == explosion_sprites.begin()){
+            finished = true;
+        }
+    } else {
+        update_sprite += 1;
     }
 }

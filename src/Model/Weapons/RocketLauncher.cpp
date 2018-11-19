@@ -8,6 +8,7 @@ RocketLauncher::RocketLauncher() :
 
 RocketLauncher::~RocketLauncher() {}
 
+
 int RocketLauncher::getInfantryBonus() const {
 	return 0;
 }
@@ -19,3 +20,5 @@ int RocketLauncher::getVehicleBonus() const {
 int RocketLauncher::getBuildingBonus() const {
 	return 0;
 }
+
+

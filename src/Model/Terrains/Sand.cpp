@@ -24,7 +24,7 @@ bool Sand::hasFarm() {
 char Sand::getKey(){
     if (availableFarm > 300){
         return 'S';
-    } else if (availableFarm > 100){
+    } else if (availableFarm > 0){
         return 'M';
     }
     else return key;

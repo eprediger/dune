@@ -4,6 +4,7 @@
 #include "View.h"
 #include "../Model/Model.h"
 #include "UnitView.h"
+
 #include "BuildingView.h"
 #include "SelectorView.h"
 #include "BuildingConstructorView.h"
@@ -22,6 +23,7 @@
 
 #define ENERGY_BAR_WIDTH 5
 
+class RocketView;
 
 class GameView : public View {
 private:
@@ -29,6 +31,7 @@ private:
 	std::vector<UnitView*> unitViews;
 	std::vector<DeadUnitView*> deadUnitViews;
 	std::vector<BuildingView*> buildingViews;
+	std::vector<RocketView*> rocketViews;
 	SelectorView* selectorView;
 	BuildingConstructorView* constructorView;
 	MapView map_view;
@@ -61,6 +64,9 @@ public:
 	void RenderVPBar(int x, int y, int h, float percent, SDL_Color FGColor, SDL_Color BGColor);
 
 	void cleanDeadViews();
+
+	std::vector<RocketView*>& getRocketViews();
+
 
 	void moveUp(int distance);
 	void moveDown(int distance);

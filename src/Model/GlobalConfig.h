@@ -95,7 +95,7 @@ typedef struct {
 	// Infanteria Pesada
 	const int heavyInfantryHitPoints	= 80;
 	const int heavyInfantryRange		= RANGE_FACTOR * 3;
-	const int heavyInfantrySpeed		= SPEED_FACTOR / 12;
+	const int heavyInfantrySpeed		= SPEED_FACTOR / 14;
 	const int heavyInfantryTrainingTime	= 78*TIME_FACTOR;
 	const int heavyInfantryCost			= 70;
 	// Fremen

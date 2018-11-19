@@ -6,7 +6,7 @@
 #include "Area.h"
 #include <map>
 #include <vector>
-
+#include "RocketView.h"
 class OffensiveUnitView: public UnitView {
 public:
     OffensiveUnitView(OffensiveUnit& unit, Area sprite_area, SdlWindow& window);

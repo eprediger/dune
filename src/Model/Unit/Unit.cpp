@@ -25,7 +25,7 @@ const UnitStateStopped Unit::stopped;
 const UnitStateDefending Unit::defending;
 const UnitStateLoading Unit::loading;
 const UnitStateFarming Unit::farming;
-const UnitStateBacking Unit::backing;
+const UnitStateBacking Unit::backing; 
 const UnitStateTraining Unit::training;
 
 bool Unit::move(Map &map) {
@@ -81,9 +81,11 @@ void Unit::follow(Attackable* other, Map& map) {
 
     // Se libera la posicion objetivo para que el algoritmo pueda calcular el camino.
     // Luego se vuelve a ocupar
-    if (occupied_pos) map.at(prev_foll_unit_pos).free();
+    if (occupied_pos)
+        map.at(prev_foll_unit_pos).free();
     map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
-    if (occupied_pos) map.at(prev_foll_unit_pos).occupy();
+    if (occupied_pos)
+        map.at(prev_foll_unit_pos).occupy();
     state = (UnitState*)&Unit::following;
 }
 
@@ -144,6 +146,13 @@ void Unit::actionOnPosition(Map &map, Position &pos) {
     }
 }
 
+bool Unit::shotARocket(){
+    return false;
+}
+
+Rocket* Unit::getRocket(){
+    return nullptr;
+}
 void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr)
         if (Unit::isDead(foll_unit))

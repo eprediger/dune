@@ -2,6 +2,7 @@
 #include "View.h"
 #include "../Model/Model.h"
 #include "BuildingView.h"
+#include "RocketView.h"
 #include "BuildingViewFactory.h"
 #include "../Controller/GameHandler.h"
 #include <algorithm>
@@ -14,6 +15,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	unitViews(),
 	deadUnitViews(),
 	buildingViews(),
+	rocketViews(),
 	selectorView(nullptr),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
@@ -78,7 +80,6 @@ void GameView::addBuildingConstructorView(BuildingConstructor* constructor){
 }
 
 
-
 void GameView::cleanDeadViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
 	while (it != unitViews.end()) {
@@ -101,7 +102,16 @@ void GameView::cleanDeadViews() {
 			it2++;
 		}
 	}
-	
+
+	std::vector<RocketView*>::iterator rocketView = rocketViews.begin();
+	while (rocketView!= rocketViews.end()) {
+		if ((*rocketView)->finished) { 
+			delete (*rocketView);
+			rocketView = rocketViews.erase(rocketView);
+		} else {
+			rocketView++;
+		}
+	}
 
 	std::vector<DeadUnitView*>::iterator dead_it = deadUnitViews.begin();
 	while (dead_it != deadUnitViews.end()) {
@@ -112,6 +122,10 @@ void GameView::cleanDeadViews() {
 			dead_it++;
 		}
 	}
+}
+
+std::vector<RocketView*>& GameView::getRocketViews(){
+	return this->rocketViews;
 }
 
 
@@ -140,6 +154,10 @@ void GameView::render() {
 	}
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
+		(*itr)->draw(camera);
+	}
+
+	for (auto itr = rocketViews.begin(); itr!=rocketViews.end(); ++itr){
 		(*itr)->draw(camera);
 	}
 

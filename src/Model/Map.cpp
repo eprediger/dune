@@ -207,15 +207,57 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     return (std::move(answer));
 }
 
+std::vector<Unit*> Map::getUnitsInArea(Area& area) {
+    std::vector<Unit*> answer;
+    for (auto& unit : units) {
+        if (unit->getPosition().x > area.getX())
+            if (unit->getPosition().x < area.getX() + area.getWidth())
+                if (unit->getPosition().y > area.getY())
+                    if (unit->getPosition().y < area.getY() + area.getHeight())
+                        answer.emplace_back(unit);
+    }
+    return (std::move(answer));
+}
+
 std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player){
     std::vector<Building*> answer;
+    Position pos(area.getX()+area.getWidth(),area.getY()+area.getHeight());
     for (auto& building : buildings) {
-        if ((*building->getPlayer()) == player)
-            if (building->getPosition().x + building->width*BLOCK_WIDTH > area.getX())
-                if (building->getPosition().x - building->width*BLOCK_WIDTH < area.getX() + area.getWidth())
-                    if (building->getPosition().y + building->height*BLOCK_HEIGHT > area.getY())
-                        if (building->getPosition().y - building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())
+        if ((*building->getPlayer()) == player){
+            if ( (building->getPosition().x > area.getX()) &&
+                (building->getPosition().x + building->width*BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+                    (building->getPosition().y > area.getY()) &&
+                        (building->getPosition().y + building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())){
                             answer.emplace_back(building);
+            }
+            else {
+                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x+building->width*BLOCK_WIDTH) &&
+                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y+building->height*BLOCK_HEIGHT)){
+                        answer.emplace_back(building);
+                    }
+            }
+
+        }
+    }
+    return std::move(answer);
+}
+std::vector<Building*> Map::getBuildingsInArea(Area& area){
+    std::vector<Building*> answer;
+    Position pos(area.getX()+area.getWidth(),area.getY()+area.getHeight());
+    for (auto& building : buildings) {
+        if ( (building->getPosition().x > area.getX()) &&
+            (building->getPosition().x + building->width*BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+                (building->getPosition().y > area.getY()) &&
+                    (building->getPosition().y + building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())){
+                        answer.emplace_back(building);
+        }
+        else {
+            if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x+building->width*BLOCK_WIDTH) &&
+                (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y+building->height*BLOCK_HEIGHT)){
+                    answer.emplace_back(building);
+                }
+        }
+
     }
     return std::move(answer);
 }
@@ -306,7 +348,7 @@ bool Map::canWeBuild(Position& pos, int width, int height){
                 if (this->at(aux).isBuiltOn()){
                     return false;
                 }
-            }
+            } 
         }
     }
     return true;
@@ -362,15 +404,21 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     }
 
     for (auto& current_building : buildings){
-        int distance = current_building->getPosition().sqrtDistance(position);
-        if (distance < limitRadius
-            && distance < closest_unit_distance
-            && !player.hasBuilding(*current_building) ){
-            closest_attackable = current_building;
-            closest_unit_distance = distance;
+        Position pos = current_building->getPosition();
+        for (int i = 0; i<current_building->height; i++){
+            for (int j = 0; j<current_building->width; j++){
+                pos.x = current_building->getPosition().x+j*BLOCK_WIDTH;
+                pos.y = current_building->getPosition().y+i*BLOCK_HEIGHT;
+                int distance = pos.sqrtDistance(position);
+                if (distance < limitRadius
+                && distance < closest_unit_distance
+                && !player.hasBuilding(*current_building) ){
+                    closest_attackable = current_building;
+                    closest_unit_distance = distance;
+                }
+            }
         }
     }
-
     return closest_attackable;
 }
 

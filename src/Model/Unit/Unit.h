@@ -3,7 +3,7 @@
 
 #include "../../Position.h"
 #include "../Weapons/Weapon.h"
-
+#include "../Weapons/Rocket.h"
 #include "../Terrains/Sand.h"
 #include "../Terrains/Precipice.h"
 #include "../Terrains/Summit.h"
@@ -74,6 +74,9 @@ public:
     void setPlayer(Player &player);
 
     Player& getPlayer();
+
+    virtual bool shotARocket();
+    virtual Rocket* getRocket();
 
     void checkForDeadVictim();
 

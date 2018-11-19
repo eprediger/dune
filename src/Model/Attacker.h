@@ -13,6 +13,7 @@ protected:
     bool shooting;
 public:
     Attacker(const Weapon& weapon, const int range);
+    virtual void shoot(Attackable &defender);
     const Weapon& getWeapon();
     virtual void attack(Attackable &defender);
     bool isShooting();

@@ -14,3 +14,4 @@ int Weapon::getDammage() const {
 int Weapon::getFrecuency() const{
     return frecuency;
 }
+

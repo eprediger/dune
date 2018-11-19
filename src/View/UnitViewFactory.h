@@ -3,6 +3,8 @@
 
 #include "UnitView.h"
 #include "SdlWindow.h"
+#include "RocketView.h"
+#include <vector>
 #include "../Model/Unit/Trike.h"
 #include "../Model/Unit/Harvester.h"
 #include "../Model/Unit/LightInfantry.h"
@@ -23,6 +25,7 @@ public:
     static UnitView* createUnitView(LightInfantry& lightInfantry
                                     , SdlWindow& window);
     static UnitView* createUnitView(HeavyInfantry& heavyInfantry
+                                    ,std::vector<RocketView*>& rockets
                                     , SdlWindow& window);
 private:
     UnitViewFactory();

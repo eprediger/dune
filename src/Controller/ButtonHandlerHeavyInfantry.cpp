@@ -13,7 +13,7 @@ ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}
 
 void ButtonHandlerHeavyInfantry::execute() {
 	HeavyInfantry& newUnit = model.createHeavyInfantry(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	view.addUnitView(UnitViewFactory::createUnitView(newUnit,view.getRocketViews(), view.getWindow()));
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {

@@ -15,8 +15,11 @@ std::map<int, std::vector<SdlTexture*> > HeavyInfantryView::attack_sprites;
 std::vector<SdlTexture*> HeavyInfantryView::dead_sprites;
 
 HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
+                                     std::vector<RocketView*>& rocketViews,
                                      SdlWindow& window) :
-    OffensiveUnitView(heavyInfantry, Area(0, 0, 20, 20), window) {
+    OffensiveUnitView(heavyInfantry, Area(0, 0, 20, 20), window)
+    , heavyInf(heavyInfantry)
+    , rocketViews(rocketViews) {
     if (sprites.empty()) {
         std::vector<SdlTexture*> indef;
         indef.emplace_back(new SdlTexture("../imgs/imgs/00060799.bmp", window));
@@ -175,6 +178,10 @@ void HeavyInfantryView::draw(Area& camara) {
         drawAttack(camara, attack_sprites);
         if (!animating_attack) {
             anim_it = sprites.at(orientation.getValor()).begin();
+        }
+        if (this->heavyInf.shotARocket()){
+            rocketViews.emplace_back(new RocketView(*heavyInf.viewRocket(),window));
+            std::cout<<"creada rocket view\n"; 
         }
     } else {
         UnitView::draw(camara, sprites, anim_it, update);
