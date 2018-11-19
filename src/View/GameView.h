@@ -60,7 +60,7 @@ public:
 
 	void RenderVPBar(int x, int y, int h, float percent, SDL_Color FGColor, SDL_Color BGColor);
 
-	void cleanDeadUnitViews();
+	void cleanDeadViews();
 
 	void moveUp(int distance);
 	void moveDown(int distance);

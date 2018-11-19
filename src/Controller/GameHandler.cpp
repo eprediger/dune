@@ -142,7 +142,7 @@ bool GameHandler::handleInput() {
     for (auto& button : this->buttons) {
         button->update();
     }
-    this->view.cleanDeadUnitViews();
+    this->view.cleanDeadViews();
     this->selector.selection.eraseDeads();
     return keepPlaying;
 }

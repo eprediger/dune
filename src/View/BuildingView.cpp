@@ -117,3 +117,14 @@ void BuildingView::draw(Area& camara, SdlTexture*& sprite,SdlTexture*& base,int 
 	}
 	drawConstruction(camara);
 }
+
+DeadBuildingView* BuildingView::getDeadBuildingView(){
+	return new DeadBuildingView(pos,src_area,dest_area,construction_sprites,player_r,player_g,player_b,window);
+}
+ 
+bool BuildingView::isDead(BuildingView* view){
+	if (Attackable::isDead(&(view->building))){
+		return true; 
+	}
+	return false;
+}

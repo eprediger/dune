@@ -29,8 +29,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_width(width),
 	map_height(height),
 	camera_width(width / 2),
-	camera_height(height / 2),
-	menuWindow(window.width/4,window.height/4) {
+	camera_height(height / 2) {
 	backgroundMusic.start();
 	for (int i = 0; i < model.numberOfPlayers() ; ++i){
 		this->addBuildingView(
@@ -38,7 +37,6 @@ GameView::GameView(const int width, const int height, Model& model) :
 						model.getPlayer(i).getConstructionYard(),
 						this->window));
 	}
-
 }
 
 GameView::~GameView() {
@@ -81,7 +79,7 @@ void GameView::addBuildingConstructorView(BuildingConstructor* constructor){
 
 
 
-void GameView::cleanDeadUnitViews() {
+void GameView::cleanDeadViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
 	while (it != unitViews.end()) {
 		if (UnitView::isDead(*it)) {
@@ -93,6 +91,18 @@ void GameView::cleanDeadUnitViews() {
 		}
 	}
 
+	std::vector<BuildingView*>::iterator it2 = buildingViews.begin();
+	while (it2!= buildingViews.end()) {
+		if (BuildingView::isDead(*it2)) { 
+			deadUnitViews.emplace_back((*it2)->getDeadBuildingView());
+			delete (*it2);
+			it2 = buildingViews.erase(it2);
+		} else {
+			it2++;
+		}
+	}
+	
+
 	std::vector<DeadUnitView*>::iterator dead_it = deadUnitViews.begin();
 	while (dead_it != deadUnitViews.end()) {
 		if ((*dead_it)->finished()) {
@@ -103,6 +113,7 @@ void GameView::cleanDeadUnitViews() {
 		}
 	}
 }
+
 
 SdlWindow &GameView::getWindow() {
 	return window;
@@ -176,7 +187,6 @@ void GameView::render() {
 	                  available, bkgrColor);
 
 	this->window.render();
-	menuWindow.render();
 }
 
 void GameView::RenderVPBar(int x, int y, int h, float percent, SDL_Color FGColor, SDL_Color BGColor) {

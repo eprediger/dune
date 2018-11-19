@@ -92,11 +92,14 @@ void Player::cleanDeadBuildings() {
     if (Attackable::isDead(this->construction_yard)){
         this->construction_yard = nullptr;
     }
-    auto result_itr(std::remove_if(buildings.begin(), buildings.end(), Attackable::isDead));
-    if (result_itr != buildings.end()){
-        buildings.erase(result_itr, buildings.end());
+    std::vector<Building*>::iterator it = buildings.begin();
+    while(it!=buildings.end()){
+        if (Attackable::isDead(*it)){
+            it = buildings.erase(it);
+        }
+        else it++;
     }
-}
+}   
 
 std::vector<Unit*>& Player::getTrainedUnits(Map& map){
         return this->trainingCenter->getReadyUnits(map,buildings,construction_yard);
