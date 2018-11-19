@@ -20,6 +20,10 @@ void ButtonHandler::handleUserInput(const int x, const int y) {
 	this->buttonState->handle(this, x, y);
 }
 
+void ButtonHandler::update() {
+	this->buttonState->update(this);
+}
+
 bool ButtonHandler::wasClicked(const int x, const int y) {
 	return this->buttonView.isClicked(x, y);
 }
@@ -36,10 +40,11 @@ void ButtonHandler::setState(const State state) {
 		this->buttonState = new ButtonEnabled();
 		this->buttonView.setState(ViewState::ENABLED);
 		break;
-		case State::BUSY:
+	case State::BUSY:
 		this->buttonState = new ButtonBusy();
+		this->buttonView.setState(ViewState::DISABLED);
 		break;
-		case State::READY:
+	case State::READY:
 		this->buttonState = new ButtonReady();
 		break;
 	}

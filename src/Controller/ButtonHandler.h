@@ -15,6 +15,8 @@ public:
 
 	void handleUserInput(const int x, const int y);
 
+	void update();
+
 	bool wasClicked(const int x, const int y);
 
 	virtual void execute() = 0;

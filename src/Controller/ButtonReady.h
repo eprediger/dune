@@ -10,6 +10,7 @@ public:
     ~ButtonReady();
 
     virtual void handle(ButtonHandler *button, const int x, const int y) override;
+    virtual void update(ButtonHandler *button) override;
 };
 
 
