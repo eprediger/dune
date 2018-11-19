@@ -18,24 +18,14 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(int width, int height, int n_player) : map(width, height),gameFinished(false) {
-
-    // Harcodeo para testear, ver de donde conseguir luego las posiciones iniciales
-    int x_tmp[n_player];
-    int y_tmp[n_player];
+Model::Model(const char* file, int n_player) : map(file),gameFinished(false) {
+    std::vector<Position>& initial_pos = map.getInitialPositions();
     for (int i=0; i< n_player; ++i){
-        x_tmp[i]=(i+1)*100;
-    }
-    for (int i=0; i< n_player; ++i) {
-        y_tmp[i]=(i+1)*100;
-    }
-
-    for (int i=0; i< n_player; ++i){
-
-        ConstructionYard* new_building = new ConstructionYard(x_tmp[i], y_tmp[i]);
+        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x,initial_pos[i].y);
         players.push_back(new Player(i, *new_building));
         this->createBuilding(std::move(new_building));
-    }
+        std::cout<<"x: "<<initial_pos[i].x<<", y: "<<initial_pos[i].y<<std::endl;
+    } 
 }
 
 Model::~Model() {

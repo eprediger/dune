@@ -5,16 +5,16 @@
 
 #define SAND_KEY 'A'
 
-#define INITIAL_AVAIABLE_FARM 200
-
 class Sand : public Terrain {
 public:
+	Sand(int spice);
 	Sand();
-
-	virtual int getFarm() override;
+	virtual int farm() override;
+	virtual int getSpice() override;
 	virtual bool hasFarm() override;
+	virtual char getKey() override;
 private:
 	int availableFarm;
 };
 
-#endif //__SAND_H__
+#endif //__SAND_H__ 

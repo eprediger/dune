@@ -1,6 +1,6 @@
 #include "Map.h"
-#include "Terrains/Precipice.h"
-#include "Terrains/Summit.h"
+#include "yaml-cpp/yaml.h" 
+#include "Terrains/Terrain.h"
 #include "AStar.h"
 #include "../Common/CustomException.h"
 #include "../View/Area.h"
@@ -8,44 +8,56 @@
 #include <stack>
 #include <vector>
 
-Map::Map(int width, int height) :
-    matrix(width * height / (BLOCK_HEIGHT * BLOCK_WIDTH)),
-    rows(height / BLOCK_HEIGHT),
-    cols(width / BLOCK_WIDTH) {
-    //// TMP /////
-    if (width % BLOCK_WIDTH != 0) {
-        throw CustomException("Incorrect Width: %d", width); // Modificar luego
-    }
-    if  (height % BLOCK_HEIGHT) {
-        throw CustomException("Incorrect Height: %d", height); // Modificar luego
-    }
 
-    for (int i = 0; i < width * height / (BLOCK_HEIGHT * BLOCK_WIDTH) ; i++) {
-        matrix[i] = std::unique_ptr<Terrain>(new Sand());
+Map::Map(const char* filePath)
+    :matrix()
+    ,cols()
+    ,rows()
+    ,constructionYardPositions()
+{
+    YAML::Node file = YAML::LoadFile(filePath);
+    cols = file["width"].as<int>();
+    rows = file["height"].as<int>();
+    char sand_key = file["SAND_KEY"].as<char>();
+    char spiced_sand_key = file["SPICED_SAND_KEY"].as<char>();
+    char dune_key = file["DUNE_KEY"].as<char>();
+    char rocks_key = file["ROCK_KEY"].as<char>();
+    char summit_key = file["SUMMIT_KEY"].as<char>();
+    char precipice_key = file["PRECIPICE_KEY"].as<char>();
+    int initial_spice = file["INITIAL_SPICE"].as<int>();
+    int max_players = file["max_players"].as<int>();
+    for (int i = 0; i<max_players ; i++){
+        int x = file["initial_positions"][i][0].as<int>() * BLOCK_WIDTH;
+        int y = file["initial_positions"][i][1].as<int>() * BLOCK_HEIGHT;
+        constructionYardPositions.emplace_back(Position(x,y));
     }
+    for (int i = 0; i<rows; i++){
+        for (int j = 0; j<cols; j++){
+            char key = file["rows"][i][j].as<char>();
+            if (key == sand_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
+            } else if (key == spiced_sand_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(initial_spice)));
+            } else if (key == dune_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Dunes()));
+            } else if (key == rocks_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Rocks()));
+            } else if (key == summit_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Summit()));
+            } else if (key == precipice_key){
+                matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
+            }
 
-//    matrix.at(8*cols + 0) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(8*cols + 1) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(8*cols + 2) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(8*cols + 3) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 8) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 7) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 6) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 5) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 4) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 3) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 2) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 1) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(3*cols + 0) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(2*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
-//    matrix.at(1*cols + 9) = std::unique_ptr<Terrain>(new Sand());
-//    matrix.at(0*cols + 9) = std::unique_ptr<Terrain>(new Precipice());
+        }
+    }
 }
 
-Map::Map() : matrix(640 * 480), rows(640), cols(480)  {}
-
 Map::~Map() {}
+
+
+std::vector<Position>& Map::getInitialPositions(){
+    return constructionYardPositions;
+}
 
 int Map::getWidth() {
     return cols * BLOCK_WIDTH;
@@ -280,10 +292,10 @@ bool Map::canWeBuild(Position& pos, int width, int height){
         for (int j = 0; j<width;j++){
             Position aux(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT);
             if (isValid(aux)){
-                if (this->at(aux).isOccupied()){
+                if ((this->at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()){
                     return false;
                 }
-            }
+            } else return false;
         }
     }
 

@@ -32,7 +32,7 @@ private:
     bool gameFinished;
 
 public:
-    Model(int width, int height, int n_player);
+    Model(const char* file, int n_player);
     ~Model();
 
 //    Map& createMap();

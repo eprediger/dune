@@ -34,7 +34,11 @@ bool Terrain::isBuiltOn(){
 	return builtOn;
 }
 
-int Terrain::getFarm() {
+int Terrain::getSpice(){ 
+	return 0;
+}
+
+int Terrain::farm() {
 	return 0;
 }
 

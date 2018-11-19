@@ -26,8 +26,8 @@ GameView::GameView(const int width, const int height, Model& model) :
 	buildingButtons(),
 	unitButtons(),
 	buttons("../assets/img/btns/cantSell.png", this->window),
-	map_width(width),
-	map_height(height),
+	map_width(model.getMap().getWidth()),
+	map_height(model.getMap().getHeight()),
 	camera_width(width / 2),
 	camera_height(height / 2) {
 	backgroundMusic.start();

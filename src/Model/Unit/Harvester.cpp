@@ -125,7 +125,7 @@ UnitState* Harvester::makeBacking(Map &map) {
 }
 
 bool Harvester::farm(Map &map) {
-	int farm = map.at(farming_position).getFarm();
+	int farm = map.at(farming_position).farm();
 	if (farm != 0) {
 		spiceCollected += farm;
 		return true;

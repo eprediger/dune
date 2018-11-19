@@ -9,6 +9,7 @@
 #include <memory>
 #include <map>
 #include "../View/Area.h"
+#include "../Position.h"
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32
 #define BLOCK_WIDTH 32
@@ -17,15 +18,17 @@ class Map {
 private:
     std::vector<std::unique_ptr<Terrain>> matrix;
     int rows, cols;
+    std::vector<Position> constructionYardPositions;
     // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unit en getClosestUnit para hacer esto
     std::vector<Attackable*> attackables;
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
 
 public:
-    Map();
-    Map(int width, int height);
-
+    Map(const char* filePath);
+   
+    std::vector<Position>& getInitialPositions();
+    
     bool isValid(Position& pos);
     bool canMove(Unit& unit, Position pos);
     void put(Unit& unit);
@@ -61,6 +64,7 @@ public:
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
+
 
     ~Map();
 };

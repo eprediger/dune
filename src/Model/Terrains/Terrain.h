@@ -4,7 +4,7 @@
 #include <ostream>
 
 class Terrain {
-private:
+protected:
 	char key;
 	bool occupied;
 	bool builtOn;
@@ -18,12 +18,13 @@ public:
 	void free();
 	bool isOccupied();
 	bool isBuiltOn();
-	virtual int getFarm();
+	virtual int farm();
+	virtual int getSpice();
 	virtual bool hasFarm();
 
 	bool operator==(const Terrain& terrain);
 
-	char getKey();
+	virtual char getKey();
 };
 
 #endif	// __TERRAIN_H__

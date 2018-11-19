@@ -1,8 +1,10 @@
 #include "Sand.h"
 
-Sand::Sand() : Terrain(SAND_KEY), availableFarm(INITIAL_AVAIABLE_FARM) {}
+Sand::Sand(int spice) : Terrain(SAND_KEY), availableFarm(spice) {}
 
-int Sand::getFarm() {
+Sand::Sand():Terrain(SAND_KEY), availableFarm(0){}
+
+int Sand::farm() {
     if (availableFarm > 0){
         availableFarm--;
         return 1;
@@ -11,6 +13,19 @@ int Sand::getFarm() {
     }
 }
 
+int Sand::getSpice(){
+    return availableFarm;
+}
+
 bool Sand::hasFarm() {
     return availableFarm > 0;
+}
+
+char Sand::getKey(){
+    if (availableFarm > 300){
+        return 'S';
+    } else if (availableFarm > 100){
+        return 'M';
+    }
+    else return key;
 }
