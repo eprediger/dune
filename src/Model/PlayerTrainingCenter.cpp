@@ -11,6 +11,8 @@
 #include "Buildings/Building.h"
 #include <iostream>
 
+#define TIME_TRAINING_FACTOR 30;
+
 PlayerTrainingCenter::PlayerTrainingCenter():
     harvester(0, nullptr),
     lightInfantry(0, nullptr),
@@ -21,31 +23,31 @@ PlayerTrainingCenter::PlayerTrainingCenter():
     readyUnits() {}
 
 void PlayerTrainingCenter::trainHarvester(Harvester* harvester) {
-    this->harvester.first = GlobalConfig.harvesterConstructionTime;
+    this->harvester.first = GlobalConfig.harvesterConstructionTime*TIME_TRAINING_FACTOR;
     this->harvester.second = harvester;
 }
 
 void PlayerTrainingCenter::trainHeavyInfantry(HeavyInfantry* heavyInfantry) {
-    this->heavyInfantry.first = GlobalConfig.heavyInfantryTrainingTime;
+    this->heavyInfantry.first = GlobalConfig.heavyInfantryTrainingTime*TIME_TRAINING_FACTOR;
     this->heavyInfantry.second = heavyInfantry;
 }
 
 void PlayerTrainingCenter::trainLightInfantry(LightInfantry* lightInfantry) {
-    this->lightInfantry.first = GlobalConfig.lightInfantryTrainingTime;
+    this->lightInfantry.first = GlobalConfig.lightInfantryTrainingTime*TIME_TRAINING_FACTOR;
     this->lightInfantry.second = lightInfantry;
 }
 
 void PlayerTrainingCenter::trainRaider(Raider* raider) {
-    this->raider.first = GlobalConfig.raiderConstructionTime;
+    this->raider.first = GlobalConfig.raiderConstructionTime*TIME_TRAINING_FACTOR;
     this->raider.second = raider;
 }
 
 void PlayerTrainingCenter::trainTank(Tank* tank) {
-    this->tank.first = GlobalConfig.tankConstructionTime;
+    this->tank.first = GlobalConfig.tankConstructionTime*TIME_TRAINING_FACTOR;
     this->tank.second = tank;
 }
 void PlayerTrainingCenter::trainTrike(Trike* trike) {
-    this->trike.first = GlobalConfig.trikeConstructionTime;
+    this->trike.first = GlobalConfig.trikeConstructionTime*TIME_TRAINING_FACTOR;
     this->trike.second = trike;
 }
 

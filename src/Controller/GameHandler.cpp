@@ -65,10 +65,7 @@ bool GameHandler::handleInput() {
                 this->selector.drag = true;
                 this->selector.drag_source = selector.pos;
             }
-            for (auto& button : this->buttons) {
-                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
-            }
-        } 
+        }
         break;
     case SDL_MOUSEMOTION:
         this->cursor.currentPosition();
@@ -87,6 +84,9 @@ bool GameHandler::handleInput() {
             this->view.releaseMouse();
             if (constructor.on){
                 constructor.build();
+            }
+            for (auto& button : this->buttons) {
+                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
             }
         }
         // TEST
@@ -138,6 +138,9 @@ bool GameHandler::handleInput() {
             break;
         }
         break;
+    }
+    for (auto& button : this->buttons) {
+        button->update();
     }
     this->view.cleanDeadUnitViews();
     this->selector.selection.eraseDeads();
