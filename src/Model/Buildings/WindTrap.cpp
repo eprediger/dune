@@ -1,7 +1,7 @@
 #include "WindTrap.h"
 
-WindTrap::WindTrap(const int x, const int y) :
-        Building(x, y,
+WindTrap::WindTrap(const int x, const int y, int blockWidth, int blockHeight) :
+        Building(x, y, blockWidth, blockHeight,
                  GlobalConfig.windTrapEnergy,
                  GlobalConfig.windTrapCost,
                  GlobalConfig.windTrapHitPoints,
@@ -10,3 +10,4 @@ WindTrap::WindTrap(const int x, const int y) :
                  WIND_TRAP) {}
 
 WindTrap::~WindTrap() {}
+ 

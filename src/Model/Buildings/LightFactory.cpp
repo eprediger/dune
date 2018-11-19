@@ -1,7 +1,7 @@
 #include "LightFactory.h"
 
-LightFactory::LightFactory(const int x, const int y) :
-        Building(x, y,
+LightFactory::LightFactory(const int x, const int y, int blockWidth, int blockHeight) :
+        Building(x, y, blockWidth, blockHeight,
                  GlobalConfig.lightFactoryEnergy,
                  GlobalConfig.lightFactoryCost,
                  GlobalConfig.lightFactoryHitPoints,
@@ -10,3 +10,4 @@ LightFactory::LightFactory(const int x, const int y) :
                  LIGHT_FACTORY) {}
 
 LightFactory::~LightFactory() {}
+ 

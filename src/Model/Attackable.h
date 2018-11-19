@@ -17,6 +17,7 @@ public:
 
     Position& getPosition();
 
+    virtual Position& getClosestPosition(Position& pos);
 
     virtual int getLife();
     virtual int getInitialLife();

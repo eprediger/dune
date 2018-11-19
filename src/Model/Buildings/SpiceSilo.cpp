@@ -1,7 +1,7 @@
 #include "SpiceSilo.h"
 
-SpiceSilo::SpiceSilo(const int x, const int y) :
-        Building(x, y,
+SpiceSilo::SpiceSilo(const int x, const int y, int blockWidth, int blockHeight) :
+        Building(x, y, blockWidth, blockHeight,
                  GlobalConfig.spiceSiloEnergy,
                  GlobalConfig.spiceSiloCost,
                  GlobalConfig.spiceSiloHitPoints,
@@ -11,3 +11,4 @@ SpiceSilo::SpiceSilo(const int x, const int y) :
 	capacity(GlobalConfig.spiceSiloSpiceCapacity) {}
 
 SpiceSilo::~SpiceSilo() {}
+ 

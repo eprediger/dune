@@ -26,7 +26,8 @@ Model::Model(const char* file, int n_player)
     , rockets() {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     for (int i=0; i< n_player; ++i){
-        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x,initial_pos[i].y);
+        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x,initial_pos[i].y,
+                                                            map.getBlockWidth(), map.getBlockHeight());
         players.push_back(new Player(i, *new_building));
         this->createBuilding(std::move(new_building));
         std::cout<<"x: "<<initial_pos[i].x<<", y: "<<initial_pos[i].y<<std::endl;
@@ -241,7 +242,7 @@ Trike& Model::createTrike(int x, int y, int player) {
 Barracks& Model::createBarracks(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    Barracks* building = new Barracks(pos.x, pos.y);
+    Barracks* building = new Barracks(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (Barracks&)this->createBuilding(std::move(building));
 }
@@ -249,7 +250,7 @@ Barracks& Model::createBarracks(int x, int y, int player) {
 ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    ConstructionYard* building = new ConstructionYard(pos.x, pos.y);
+    ConstructionYard* building = new ConstructionYard(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (ConstructionYard&)this->createBuilding(std::move(building));
 }
@@ -257,7 +258,7 @@ ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
 HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    HeavyFactory* building = new HeavyFactory(pos.x, pos.y);
+    HeavyFactory* building = new HeavyFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (HeavyFactory&)this->createBuilding(std::move(building));
 }
@@ -265,7 +266,7 @@ HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
 LightFactory& Model::createLightFactory(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    LightFactory* building = new LightFactory(pos.x,pos.y);
+    LightFactory* building = new LightFactory(pos.x,pos.y, map.getBlockWidth(),map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (LightFactory&)this->createBuilding(std::move(building));
 }
@@ -273,7 +274,7 @@ LightFactory& Model::createLightFactory(int x, int y, int player) {
 SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    SpiceRefinery* building = new SpiceRefinery(pos.x, pos.y);
+    SpiceRefinery* building = new SpiceRefinery(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (SpiceRefinery&)this->createBuilding(std::move(building));
 }
@@ -281,7 +282,7 @@ SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
 SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    SpiceSilo* building = new SpiceSilo(pos.x, pos.y);
+    SpiceSilo* building = new SpiceSilo(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (SpiceSilo&)this->createBuilding(std::move(building));
 }
@@ -289,7 +290,7 @@ SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
 WindTrap& Model::createWindTrap(int x, int y, int player) {
     Position pos1(x,y);
     Position pos = map.getCornerPosition(pos1);
-    WindTrap* building = new WindTrap(pos.x, pos.y);
+    WindTrap* building = new WindTrap(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (WindTrap&)this->createBuilding(std::move(building));
 }

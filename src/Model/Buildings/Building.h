@@ -18,7 +18,7 @@ public:
         WIND_TRAP
     };
 
-    Building(const int x, const int y, const int energy, const int cost,
+    Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
              const int hitPoints, const int width,
              const int height, BuildingType type);
 
@@ -30,14 +30,16 @@ public:
     void setPlayer(Player* player);
     Player* getPlayer();
 
+    Position& getClosestPosition(Position& position) override;
+
     void demolish();
-    
     const int width, height;
     const int energy;
     const int cost;
 private:
     Player* player;
     BuildingType key;
+    std::vector<Position> all_positions;
 };
 
 #endif //__BUILDING_H__

@@ -50,3 +50,7 @@ bool Attackable::operator==(const Attackable &other) {
 void Attackable::setPosition(Position pos){
     this->pos = pos;
 }
+
+Position& Attackable::getClosestPosition(Position& position){
+    return this->pos;
+}

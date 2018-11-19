@@ -42,6 +42,9 @@ public:
     int getWidthInBlocks();
     int getHeightInBlocks();
 
+    int getBlockWidth();
+    int getBlockHeight();
+
     Unit * getClosestUnit(Position& position, int limitRadius);
     Unit * getClosestUnit(Position position, int limitRadius, Player& player);
     Building * getClosestBuilding(Position &position, int limitRadius);

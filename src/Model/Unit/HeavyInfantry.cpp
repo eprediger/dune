@@ -14,7 +14,7 @@ bool HeavyInfantry::canMoveAboveTerrain(Terrain &terrain) {
 }
 
 void HeavyInfantry::shoot(Attackable& defender){
-	this->rocket = new Rocket(pos,defender.getPosition()); 
+	this->rocket = new Rocket(pos,defender.getClosestPosition(pos)); 
 }
 
 bool HeavyInfantry::shotARocket(){

@@ -5,7 +5,7 @@
 
 class SpiceRefinery : public Building {
 public:
-	SpiceRefinery(const int x, const int y);
+	SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) ;
 	~SpiceRefinery();
 
 	bool load(Player &player);

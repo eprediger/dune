@@ -67,6 +67,14 @@ int Map::getHeight() {
     return rows * BLOCK_HEIGHT;
 }
 
+int Map::getBlockWidth(){
+    return BLOCK_WIDTH;
+}
+
+int Map::getBlockHeight(){
+    return BLOCK_HEIGHT;
+}
+
 int Map::getWidthInBlocks() {
     return cols;
 }
@@ -404,19 +412,13 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     }
 
     for (auto& current_building : buildings){
-        Position pos = current_building->getPosition();
-        for (int i = 0; i<current_building->height; i++){
-            for (int j = 0; j<current_building->width; j++){
-                pos.x = current_building->getPosition().x+j*BLOCK_WIDTH;
-                pos.y = current_building->getPosition().y+i*BLOCK_HEIGHT;
-                int distance = pos.sqrtDistance(position);
-                if (distance < limitRadius
-                && distance < closest_unit_distance
-                && !player.hasBuilding(*current_building) ){
-                    closest_attackable = current_building;
-                    closest_unit_distance = distance;
-                }
-            }
+        Position& pos = current_building->getClosestPosition(position);
+        int distance = pos.sqrtDistance(position);
+        if (distance < limitRadius
+        && distance < closest_unit_distance
+        && !player.hasBuilding(*current_building) ){
+            closest_attackable = current_building;
+            closest_unit_distance = distance;
         }
     }
     return closest_attackable;

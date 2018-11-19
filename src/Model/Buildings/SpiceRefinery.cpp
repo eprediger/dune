@@ -2,8 +2,8 @@
 
 #include "../Player.h"
 
-SpiceRefinery::SpiceRefinery(const int x, const int y) :
-        Building(x, y,
+SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) :
+        Building(x, y, blockWidth, blockHeight,
                  GlobalConfig.spiceRefineryEnergy,
                  GlobalConfig.spiceRefineryCost,
                  GlobalConfig.spiceRefineryHitPoints,
@@ -21,6 +21,6 @@ bool SpiceRefinery::load(Player &player) {
 		player.addGold(1);
 		return true;
 	} else {
-		return false;
+		return false; 
 	}
 }
