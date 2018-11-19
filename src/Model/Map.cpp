@@ -195,6 +195,20 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     return (std::move(answer));
 }
 
+std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player){
+    std::vector<Building*> answer;
+    for (auto& building : buildings) {
+        if ((*building->getPlayer()) == player)
+            if (building->getPosition().x + building->width*BLOCK_WIDTH > area.getX())
+                if (building->getPosition().x - building->width*BLOCK_WIDTH < area.getX() + area.getWidth())
+                    if (building->getPosition().y + building->height*BLOCK_HEIGHT > area.getY())
+                        if (building->getPosition().y - building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())
+                            answer.emplace_back(building);
+    }
+    return std::move(answer);
+}
+
+
 Building * Map::getClosestBuilding(Position &position, int limitRadius) {
     Building* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;

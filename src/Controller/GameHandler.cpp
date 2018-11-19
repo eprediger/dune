@@ -80,7 +80,9 @@ bool GameHandler::handleInput() {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
-            this->selector.addSelection(selection);
+            std::vector<Building*> selected_buildings = model.selectBuildingsInArea(selectArea,model.getPlayer(GameHandler::actual_player));
+            this->selector.addSelection(selection); 
+            this->selector.addSelection(selected_buildings); 
             this->view.releaseMouse();
             if (constructor.on){
                 constructor.build();
@@ -126,7 +128,16 @@ bool GameHandler::handleInput() {
             view.moveUp(MOVE_AMOUNT);
             break;
 
-            // Temporal
+        case SDLK_DELETE:
+        case SDLK_BACKSPACE:
+            {
+                std::vector<Building*>& to_sell = this->selector.selection.getSelectedBuildings();
+                for (auto itr = to_sell.begin(); itr!=to_sell.end() ; itr++){
+                    model.getPlayer(GameHandler::actual_player).sellBuilding(*itr);
+                }
+            }
+            break;
+        // Temporal
         case SDLK_c:
             GameHandler::actual_player++;
             if (GameHandler::actual_player >= 3){

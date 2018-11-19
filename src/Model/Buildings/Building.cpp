@@ -28,3 +28,7 @@ void Building::setPlayer(Player* player){
 Player* Building::getPlayer(){
 	return this->player;
 }
+
+void Building::demolish(){
+	this->life = 0;
+}

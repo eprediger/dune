@@ -30,6 +30,8 @@ public:
     void setPlayer(Player* player);
     Player* getPlayer();
 
+    void demolish();
+    
     const int width, height;
     const int energy;
     const int cost;

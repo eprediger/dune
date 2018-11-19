@@ -46,7 +46,7 @@ public:
     Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
 
     std::vector<Unit*> getUnitsInArea(Area& area, Player& player);
-
+    std::vector<Building*> getBuildingsInArea(Area& area, Player& player);
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 
     void cleanUnit(Unit* unit);

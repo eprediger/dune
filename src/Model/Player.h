@@ -54,6 +54,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int& getId();
 
     bool operator==(const Player& other) const;
+
+    void sellBuilding(Building* building);
 };
 
 #endif  // __PLAYER_H__

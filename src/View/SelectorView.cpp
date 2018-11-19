@@ -40,7 +40,7 @@ void SelectorView::drawLife(Building* building, Area& camara) {
         r = 0;
         g = 128;
     }
-    SDL_SetRenderDrawColor(window.getRenderer(), r, 128 - g, 0, 0xFF);
+    SDL_SetRenderDrawColor(window.getRenderer(), r, g, 0, 0xFF);
     SDL_RenderFillRect(window.getRenderer(), &current_life);
 }
 

@@ -116,6 +116,10 @@ std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
     return std::move(map.getUnitsInArea(area, player));
 }
 
+std::vector<Building*> Model::selectBuildingsInArea(Area& area, Player& player){
+    return std::move(map.getBuildingsInArea(area,player));
+} 
+
 Map &Model::getMap() {
     return map;
 }

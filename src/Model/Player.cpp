@@ -95,6 +95,10 @@ void Player::cleanDeadBuildings() {
     std::vector<Building*>::iterator it = buildings.begin();
     while(it!=buildings.end()){
         if (Attackable::isDead(*it)){
+            if ((*it)->is(Building::WIND_TRAP)){
+                this->generatedEnergy-= (*it)->energy;
+            }
+            else this->consumedEnergy -= (*it)->energy;
             it = buildings.erase(it);
         }
         else it++;
@@ -103,4 +107,16 @@ void Player::cleanDeadBuildings() {
 
 std::vector<Unit*>& Player::getTrainedUnits(Map& map){
         return this->trainingCenter->getReadyUnits(map,buildings,construction_yard);
+}
+
+void Player::sellBuilding(Building* building){
+    std::vector<Building*>::iterator it = buildings.begin();
+    while (it!=buildings.end()){
+        if ((*it) == building){
+            gold += building->cost * float(building->getLife())/float(building->getInitialLife()) * 0.9;
+            building->demolish();
+            break;
+        }
+        else it++;
+    }
 }
