@@ -4,7 +4,9 @@
 #include <iostream>
 
 ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg"), model, view) {
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
+			GlobalConfig.trikeConstructionTime),
+		model, view) {
 }
 
 ButtonHandlerTrike::~ButtonHandlerTrike() {}

@@ -73,9 +73,9 @@ public:
 	void grabMouse();
 	void releaseMouse();
 
-    ButtonView& createUnitButton(const std::string& filename);
+    ButtonView &createUnitButton(const std::string &filename, int number_steps);
 
-	ButtonView& createBuildingButton(const std::string& filename);
+	ButtonView &createBuildingButton(const std::string &filename, int number_steps);
 
 	void render() override;
 };

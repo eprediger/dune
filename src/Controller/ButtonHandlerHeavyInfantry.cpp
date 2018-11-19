@@ -4,7 +4,9 @@
 #include <iostream>
 
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif"), model, view) {
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
+			GlobalConfig.heavyInfantryTrainingTime),
+		model, view) {
 }
 
 ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}

@@ -5,7 +5,9 @@
 #include <iostream>
 
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif"), model, view) {
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
+			GlobalConfig.lightInfantryTrainingTime),
+		model, view) {
 }
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}

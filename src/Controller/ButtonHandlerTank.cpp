@@ -4,7 +4,9 @@
 #include <iostream>
 
 ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif"), model, view) {
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
+			GlobalConfig.tankConstructionTime),
+		model, view) {
 }
 
 ButtonHandlerTank::~ButtonHandlerTank() {}
