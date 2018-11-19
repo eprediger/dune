@@ -32,7 +32,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_height(model.getMap().getHeight()),
 	camera_width(width / 2),
 	camera_height(height / 2) {
-	backgroundMusic.start();
+//	backgroundMusic.start();
 	for (int i = 0; i < model.numberOfPlayers() ; ++i){
 		this->addBuildingView(
 				BuildingViewFactory::createBuildingView(
