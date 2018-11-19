@@ -4,10 +4,11 @@
 #include "ButtonViewDisabled.h"*/
 #include <string>
 
-ButtonView::ButtonView(const std::string& filename, const SdlWindow& window) :
+ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, int number_steps) :
 	buttonState(ViewState::HIDDEN),
 	/*currentState(new ButtonHidden()),*/
 	buttonImage(filename, window),
+    timer(window.getRenderer(), number_steps),
 	x(0),
 	y(0),
 	width(buttonImage.width),
@@ -38,6 +39,10 @@ void ButtonView::setState(const ViewState newState) {
 		// this->currentState = new ButtonDisabled();
 		this->buttonState = ViewState::DISABLED;
 		break;
+	case ViewState::BUSY:
+		// this->currentState = new ButtonDisabled();
+		this->buttonState = ViewState::BUSY;
+		break;
 	}
 }
 
@@ -59,6 +64,10 @@ void ButtonView::render(const Area& dest) {
 		break;
 	case ViewState::DISABLED:
 		this->buttonImage.render(disabledSrc, dest);
+        break;
+	case ViewState::BUSY:
+		this->buttonImage.render(disabledSrc, dest);
+		this->timer.render(dest);
 		break;
 	}
 }

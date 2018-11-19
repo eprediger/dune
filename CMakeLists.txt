@@ -31,7 +31,7 @@ file(GLOB SOURCE
         )
 
 add_executable(${PROJECT_NAME}
-               ${SOURCE})
+               ${SOURCE} src/View/TimerView.cpp src/View/TimerView.h)
 
 INCLUDE(FindPkgConfig)
 

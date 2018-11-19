@@ -4,6 +4,8 @@
 #define SPEED_FACTOR (84*3)
 #define RANGE_FACTOR 2000
 
+#define TIME_FACTOR 30
+
 typedef struct {
 // Building Stats
 	// Centro de Construcción
@@ -88,13 +90,13 @@ typedef struct {
 	const int lightInfantryHitPoints	= 50;
 	const int lightInfantryRange		= RANGE_FACTOR * 3;
 	const int lightInfantrySpeed		= SPEED_FACTOR / 16;
-	const int lightInfantryTrainingTime	= 60;
+	const int lightInfantryTrainingTime	= 60*TIME_FACTOR;
 	const int lightInfantryCost			= 50;
 	// Infanteria Pesada
 	const int heavyInfantryHitPoints	= 80;
 	const int heavyInfantryRange		= RANGE_FACTOR * 3;
 	const int heavyInfantrySpeed		= SPEED_FACTOR / 12;
-	const int heavyInfantryTrainingTime	= 78;
+	const int heavyInfantryTrainingTime	= 78*TIME_FACTOR;
 	const int heavyInfantryCost			= 70;
 	// Fremen
 	/*
@@ -117,7 +119,7 @@ typedef struct {
 	const int harvesterHitPoints		= 600;
 	//const int harvesterRange			= RANGE_FACTOR*0;
 	const int harvesterSpeed			= SPEED_FACTOR / 12;
-	const int harvesterConstructionTime	= 180;
+	const int harvesterConstructionTime	= 180*TIME_FACTOR;
 	const int harvesterCost				= 300;
 	const int harvesterSpiceCapacity	= 200;
 	const int harvesterFarmSpeed        = 20;
@@ -126,19 +128,19 @@ typedef struct {
 	const int trikeHitPoints		= 80;
 	const int trikeRange			= RANGE_FACTOR * 4;
 	const int trikeSpeed			= SPEED_FACTOR / 64;
-	const int trikeConstructionTime	= 120;
+	const int trikeConstructionTime	= 120*TIME_FACTOR;
 	const int trikeCost				= 100;
 	// Raider
 	const int raiderHitPoints			= 80;
 	const int raiderRange				= RANGE_FACTOR * 4;
 	const int raiderSpeed				= SPEED_FACTOR / 84;
-	const int raiderConstructionTime	= 120;
+	const int raiderConstructionTime	= 120*TIME_FACTOR;
 	const int raiderCost				= 100;
 	// Tanque
 	const int tankHitPoints			= 30;
 	const int tankRange				= RANGE_FACTOR * 4;
 	const int tankSpeed				= SPEED_FACTOR / 40;
-	const int tankConstructionTime	= 240;
+	const int tankConstructionTime	= 240*TIME_FACTOR;
 	const int tankCost				= 300;
 	// Tanque Sonico
 	/*

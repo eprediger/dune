@@ -4,7 +4,9 @@
 #include <iostream>
 
 ButtonHandlerHarvester::ButtonHandlerHarvester(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif"), model, view) {
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
+	        GlobalConfig.harvesterConstructionTime),
+        model, view) {
 }
 
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}

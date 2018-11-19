@@ -4,7 +4,11 @@
 #include <iostream>
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, BuildingConstructor& constructor):
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg"), model, view)
+	ButtonHandler(
+            view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
+            		0),
+	        model,
+	        view)
 	,constructor(constructor) {
 	/*
 	"../assets/img/btns/buildings/barracks-harkonnen.jpg"

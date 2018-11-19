@@ -4,7 +4,7 @@
 #include <iostream>
 
 ButtonHandlerLightFactory::ButtonHandlerLightFactory(Model &model, GameView &view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif"), model, view),
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif", 0), model, view),
 	constructor(constructor){}
 
 ButtonHandlerLightFactory::~ButtonHandlerLightFactory() {}

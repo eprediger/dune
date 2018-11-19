@@ -4,7 +4,7 @@
 #include <iostream>
 
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif"), model, view)
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif", 0), model, view)
 	,constructor(constructor){}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
