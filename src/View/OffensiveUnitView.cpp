@@ -13,7 +13,7 @@ void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<SdlTe
     Orientation prev_orient = orientation;
     orientation.calcular(prev_pos, offensiveUnit.getVictimPosition());
     prev_pos = offensiveUnit.getPosition();
-    if ((!(orientation == prev_orient)) || (!animating_attack)) {
+    if ((!(orientation == prev_orient)) || (!animating_attack) || (*anim_it == nullptr)) {
         animating_attack = true;
         anim_it = sprites.at(orientation.getValor()).begin();
         update = 0;

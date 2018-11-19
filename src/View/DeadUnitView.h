@@ -11,6 +11,7 @@ class DeadUnitView {
 public:
 	DeadUnitView(Position pos, Area src_area, Area dest_area,
 	             std::vector<SdlTexture*>& sprites, int r, int g, int b, SdlWindow& window);
+	virtual ~DeadUnitView();
 	virtual void draw(Area& camara);
 	bool finished();
 protected:

@@ -31,3 +31,7 @@ void DeadUnitView::draw(Area& camara) {
 		update = 0;
 	}
 }
+
+DeadUnitView::~DeadUnitView() {
+
+}
