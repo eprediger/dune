@@ -67,8 +67,10 @@ ConstructionYard &Player::getConstructionYard() {
 }
 
 bool Player::hasBuilding(Building& building) {
-    if (building == *construction_yard){
-        return true;
+    if (construction_yard != nullptr ){
+        if (building == *construction_yard){
+            return true;
+        }
     }
     for (auto& b : buildings){
         if (*b == building){
