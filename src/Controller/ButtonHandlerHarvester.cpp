@@ -18,3 +18,7 @@ bool ButtonHandlerHarvester::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.harvesterCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::HEAVY_FACTORY)));
 }
+
+bool ButtonHandlerHarvester::finishAction() {
+	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingHarvester());
+}

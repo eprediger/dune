@@ -3,12 +3,13 @@
 
 #include "Buildings/Building.h"
 #include "Buildings/ConstructionYard.h"
+#include "PlayerTrainingCenter.h"
 #include <vector>
 #include <functional>
 
 class Map;
 class Unit;
-class PlayerTrainingCenter;
+// class PlayerTrainingCenter;
 
 class Player {
 private:

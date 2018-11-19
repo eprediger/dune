@@ -19,7 +19,7 @@ public:
 
 	// Libera recursos asociados a la instancia
 	~GameHandler();
-
+  
 	bool handleInput() override;
 
 	static int actual_player;

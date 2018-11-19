@@ -29,7 +29,8 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_width(width),
 	map_height(height),
 	camera_width(width / 2),
-	camera_height(height / 2) {
+	camera_height(height / 2),
+	menuWindow(window.width/4,window.height/4) {
 	backgroundMusic.start();
 	for (int i = 0; i < model.numberOfPlayers() ; ++i){
 		this->addBuildingView(
@@ -37,6 +38,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 						model.getPlayer(i).getConstructionYard(),
 						this->window));
 	}
+
 }
 
 GameView::~GameView() {
@@ -170,10 +172,11 @@ void GameView::render() {
 	this->RenderVPBar(this->window.width * 63 / 80,	//this->window.width * 1 / 10,
 	                  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
 	                  this->window.height * 32 / 64,
-	                  (float)this->model.getPlayer(1).consumedEnergy / (float)this->model.getPlayer(1).generatedEnergy,
+	                  (float)this->model.getPlayer(GameHandler::actual_player).consumedEnergy / (float)this->model.getPlayer(GameHandler::actual_player).generatedEnergy,
 	                  available, bkgrColor);
 
 	this->window.render();
+	menuWindow.render();
 }
 
 void GameView::RenderVPBar(int x, int y, int h, float percent, SDL_Color FGColor, SDL_Color BGColor) {

@@ -18,3 +18,7 @@ bool ButtonHandlerTrike::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.trikeCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
 }
+
+bool ButtonHandlerTrike::finishAction() {
+	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingTrike());
+}

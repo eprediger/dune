@@ -18,3 +18,7 @@ bool ButtonHandlerRaider::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.raiderCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
 }
+
+bool ButtonHandlerRaider::finishAction() {
+	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingRaider());
+}

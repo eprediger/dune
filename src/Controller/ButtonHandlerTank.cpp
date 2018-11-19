@@ -18,3 +18,7 @@ bool ButtonHandlerTank::canBeEnabled() {
 	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.tankCost)) &&
 	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::HEAVY_FACTORY)));
 }
+
+bool ButtonHandlerTank::finishAction() {
+	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingTank());
+}

@@ -3,10 +3,10 @@
 
 #include "ButtonState.h"
 
-class EnableState : public ButtonState {
+class ButtonEnabled : public ButtonState {
 public:
-	EnableState();
-	~EnableState();
+	ButtonEnabled();
+	~ButtonEnabled();
 	virtual void handle(ButtonHandler *button, const int x, const int y) override;
 };
 
