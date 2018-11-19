@@ -38,12 +38,12 @@ bool Unit::move(Map &map) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
                 map.setDestiny(*this, destiny.x, destiny.y);
-                return false;
-            } else {
+                next_pos = pathToDestiny.top();
+            } 
                 map.at(pos).free();
                 pathToDestiny.pop();
                 map.at(next_pos).occupy();
-            }
+            
         } else if (!(pos == next_pos)) {
             pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
