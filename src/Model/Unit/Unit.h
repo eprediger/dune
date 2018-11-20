@@ -63,13 +63,7 @@ public:
 
     virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
 
-//    bool automaticAttack(Map &map);
-
-//    static bool isDead(const Attackable *unit);
-
     bool isAttacking();
-
-    Position getNextPosition();
 
     void setPlayer(Player &player);
 

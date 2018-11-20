@@ -20,7 +20,6 @@ public:
     void setX(int x);
     void setY(int y);
 
-    std::vector<Position> getAdjacents();
     void normalizeToBlock();
 
     bool operator==(const Position& other) const;
