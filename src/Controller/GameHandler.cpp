@@ -138,6 +138,7 @@ bool GameHandler::handleInput() {
             if (GameHandler::actual_player >= 3){
                 GameHandler::actual_player = 0;
             }
+            view.changePlayer(actual_player);
             break;
             /////////
         default:

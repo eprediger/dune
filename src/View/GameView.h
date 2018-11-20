@@ -88,6 +88,9 @@ public:
 	ButtonView &createBuildingButton(const std::string &filename, int number_steps);
 
 	void render() override;
+
+	/// TEMPORAL
+	void changePlayer(int new_player);
 };
 
 #endif	// __GAME_VIEW_H__

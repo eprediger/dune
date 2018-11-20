@@ -16,7 +16,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
-	playerView(new PlayerView(model.getPlayer(0),window,3*width/4,width/4)),
+	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*width/4,width/4)),
 	selectorView(nullptr),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
@@ -272,4 +272,10 @@ ButtonView &GameView::createBuildingButton(const std::string &filename, int numb
 	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
+}
+
+/// TEMPORAL
+void GameView::changePlayer(int new_player) {
+	delete playerView;
+    playerView = new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*window.width/4,window.width/4);
 }
