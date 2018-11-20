@@ -36,6 +36,7 @@ public:
     const int width, height;
     const int energy;
     const int cost;
+
 private:
     Player* player;
     BuildingType key;

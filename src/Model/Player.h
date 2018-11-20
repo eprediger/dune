@@ -4,13 +4,13 @@
 #include "Buildings/Building.h"
 #include "Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
+#include "PlayerBuildingCenter.h"
 #include <vector>
 #include <string>
 #include <functional>
 
 class Map;
 class Unit;
-// class PlayerTrainingCenter;
 
 class Player {
 private:
@@ -22,11 +22,12 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int gold;   // Se restara durante los constructores
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
     PlayerTrainingCenter* trainingCenter;
+    PlayerBuildingCenter* buildingCenter;
 
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
 
-    std::vector<Unit*>& getTrainedUnits(Map& map);  
+    std::vector<Unit*>& getTrainedUnits(Map& map);
 
     explicit Player(int id, ConstructionYard &construction_yard);
 
@@ -52,6 +53,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     bool lose();
 
     void trainUnits();
+    void constructBuildings();
 
     int& getId();
     std::string& getHouse();

@@ -14,15 +14,15 @@ UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	window(window),
 	playerColorRect(),
 	unit(unit),
+	damage_sprite_area(Area(0, 0, 15, 15)),
 	sprite_area(sprite_area),
+	damage_dest_area(Area(0, 0, 7, 7)),
 	dest_area(sprite_area),
 	prev_pos(unit.getPosition()),
 	orientation(),
 	life(unit.getLife()),
 	damage_anim_it(),
 	damage_update(0),
-	damage_sprite_area(Area(0, 0, 15, 15)),
-	damage_dest_area(Area(0, 0, 7, 7)),
 	animating_damage(false) {
 	PlayerColorMaker::makeColor(unit.getPlayer(), &player_r, &player_g, &player_b);
 	playerColorRect.x = 0;

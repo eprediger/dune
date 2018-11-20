@@ -33,6 +33,7 @@ public:
     bool isTrainingTank();
     bool isTrainingRaider();
     bool isTrainingTrike();
+
 private:
     std::pair<int, Harvester*> harvester;
     std::pair<int, LightInfantry*> lightInfantry;

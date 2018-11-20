@@ -1,8 +1,8 @@
 #ifndef __TIMERVIEW_H__
 #define __TIMERVIEW_H__
 
-
-#include <SDL_render.h>
+// #include <SDL_render.h>
+#include "SdlWindow.h"
 #include "Area.h"
 
 #define POS_Q 30
@@ -20,7 +20,10 @@
 
 class TimerView {
 public:
-    TimerView(SDL_Renderer *renderer, int number_steps);
+    TimerView(const SdlWindow &window, int number_steps);
+    // TimerView(SDL_Renderer *renderer, int number_steps);
+
+    ~TimerView();
 
     void render(const Area &dest);
 
@@ -33,6 +36,5 @@ private:
     const int y_pos[POS_Q] = Y_POSITIONS;
     const int factor = FACTOR;
 };
-
 
 #endif //DUNE_TIMERVIEW_H

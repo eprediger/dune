@@ -26,18 +26,18 @@ void Building::reciveBonusDammage(const Weapon &weapon) {
 }
 
 bool Building::is(Building::BuildingType type) {
-    return this->key == type;
+	return this->key == type;
 }
 
-void Building::setPlayer(Player* player){
+void Building::setPlayer(Player* player) {
 	this->player = player;
 }
 
-Player* Building::getPlayer(){
+Player* Building::getPlayer() {
 	return this->player;
 }
 
-void Building::demolish(){
+void Building::demolish() {
 	this->life = 0;
 }
 

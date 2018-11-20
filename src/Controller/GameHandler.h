@@ -14,7 +14,6 @@
 class GameHandler : public InputHandler {
 public:
 	// Handler para eventos del juego
-	// explicit GameHandler(Model& model);
 	explicit GameHandler(GameView &view, Model &model);
 
 	// Libera recursos asociados a la instancia

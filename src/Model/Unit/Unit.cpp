@@ -163,10 +163,10 @@ void Unit::checkForDeadVictim() {
         }
 }
 
-bool Unit::isTraining(){
+bool Unit::isTraining() {
     return this->state->isTraining();
 }
 
-void Unit::finishTraining(){
+void Unit::finishTraining() {
     this->state = (UnitState*)&Unit::stopped;
 }

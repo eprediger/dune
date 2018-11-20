@@ -3,11 +3,10 @@
 
 #include "UnitState.h"
 
-
 class UnitStateTraining: public UnitState {
-    public:
-        virtual UnitState *makeAction(Map &map, Unit &unit) override;
-        virtual bool isTraining() override;
+public:
+	virtual UnitState *makeAction(Map &map, Unit &unit) override;
+	virtual bool isTraining() override;
 };
 
 #endif

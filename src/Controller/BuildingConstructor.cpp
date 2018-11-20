@@ -34,24 +34,28 @@ void BuildingConstructor::build() {
             {
                 Barracks& barracks = model.createBarracks(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(barracks, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::BARRACKS);
                 break;
             }
             case Building::LIGHT_FACTORY:
             {
                 LightFactory& lightF = model.createLightFactory(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(lightF, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::LIGHT_FACTORY);
                 break;
             }
             case Building::HEAVY_FACTORY:
             {
                 HeavyFactory& heavyF = model.createHeavyFactory(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(heavyF, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::HEAVY_FACTORY);
                 break;
             }
             case Building::SPICE_REFINERY:
             {
                 SpiceRefinery& spiceRef = model.createSpiceRefinery(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(spiceRef, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::SPICE_REFINERY);
                 break;
             }
 
@@ -59,24 +63,24 @@ void BuildingConstructor::build() {
             {
                 SpiceSilo& spiceSilo = model.createSpiceSilo(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::SPICE_SILO);
                 break;
             }
             case Building::WIND_TRAP:
             {
                 WindTrap& windtrap = model.createWindTrap(pos.x, pos.y, GameHandler::actual_player);
                 view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
+                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::WIND_TRAP);
                 break;
             }
             default:
                 break;
             }
             on = false;
-
         }
     }
 }
 
 Player& BuildingConstructor::getPlayer() {
-//    return this->player;
     return model.getPlayer(GameHandler::actual_player);
 }

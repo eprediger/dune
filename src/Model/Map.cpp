@@ -84,7 +84,7 @@ int Map::getHeightInBlocks() {
 }
 
 Terrain& Map::at(int x, int y) {
-    if (x < 0 || y < 0){
+    if (x < 0 || y < 0) {
         throw (std::out_of_range("Out of range"));
     }
     return *matrix.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH));
@@ -330,9 +330,9 @@ void Map::cleanBuilding(Building *building) {
 }
 
 void Map::free(Building &building) {
-    for (int i = 0; i<building.height; i++){
-        for (int j = 0; j<building.width; j++){
-            this->at(building.getPosition().x + j*BLOCK_WIDTH,building.getPosition().y + i*BLOCK_HEIGHT).free();
+    for (int i = 0; i < building.height; i++) {
+        for (int j = 0; j < building.width; j++) {
+            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).free();
         }
     }
 }
@@ -351,9 +351,9 @@ bool Map::canWeBuild(Position& pos, int width, int height){
 
     for (int i = -5; i <= height + 5; i++) {
         for (int j = -5; j <= width + 5; j++) {
-            Position aux(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT);
-            if (isValid(aux)){
-                if (this->at(aux).isBuiltOn()){
+            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            if (isValid(aux)) {
+                if (this->at(aux).isBuiltOn()) {
                     return false;
                 }
             } 
@@ -363,22 +363,22 @@ bool Map::canWeBuild(Position& pos, int width, int height){
 }
 
 
-Position Map::getClosestFreePosition(Building* building){
+Position Map::getClosestFreePosition(Building* building) {
     int dist = 1;
     bool found = false;
     Position& pos = building->getPosition();
-    while(!found){
-        for (int i = - dist; i<=building->height + dist; i++){
-            for (int j =  - dist; j<=building->width + dist; j++){
-                try{
-                    if (!(this->at(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT).isOccupied())){
-                        return Position(pos.x + j*BLOCK_WIDTH, pos.y + i*BLOCK_HEIGHT);
+    while (!found) {
+        for (int i = - dist; i <= building->height + dist; i++) {
+            for (int j =  - dist; j <= building->width + dist; j++) {
+                try {
+                    if (!(this->at(pos.x + j * BLOCK_WIDTH, pos.y + i * BLOCK_HEIGHT).isOccupied())) {
+                        return Position(pos.x + j * BLOCK_WIDTH, pos.y + i * BLOCK_HEIGHT);
                     }
                 }
-                catch(std::out_of_range& e){}
+                catch (std::out_of_range& e) {}
             }
         }
-        dist+=1;
+        dist += 1;
     }
     return pos;
 }
@@ -401,11 +401,11 @@ Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, b
 Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
     Attackable* closest_attackable = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units){
+    for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if (distance < limitRadius
-            && distance < closest_unit_distance
-            && !( player == current_unit->getPlayer())){
+        if (distance < limitRadius &&
+            distance < closest_unit_distance &&
+            !( player == current_unit->getPlayer())) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
         }
@@ -424,26 +424,27 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     return closest_attackable;
 }
 
-Position Map::getCornerPosition(Position& pos){
-    return Position((pos.x/BLOCK_WIDTH)*BLOCK_WIDTH, (pos.y/BLOCK_HEIGHT)*BLOCK_HEIGHT);
+Position Map::getCornerPosition(Position& pos) {
+    return Position((pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT);
 }
+
 Position Map::getClosestSpeciaPosition(Position pos, int radius) {
     int block_x = (pos.x / BLOCK_HEIGHT);
     int block_y = (pos.y / BLOCK_WIDTH);
     int min_distance = radius + 1;
     Position min_position = pos;
-    for (int i = -radius; i<=+radius; ++i){
-        for (int j = -(radius - abs(i)); j<=+(radius - abs(i)); ++j){
+    for (int i = -radius; i <= +radius; ++i) {
+        for (int j = -(radius - abs(i)); j <= +(radius - abs(i)); ++j) {
             int cur_pos_x = (block_x + j);
             int cur_pos_y = (block_y + i);
             if ((cur_pos_y + i) >= 0 &&
                     (cur_pos_y + i) < cols &&
-                    (cur_pos_x + j)>=0 &&
-                    (cur_pos_x + j) <rows){
+                    (cur_pos_x + j) >= 0 &&
+                    (cur_pos_x + j) < rows) {
                 if ( abs(i) + abs(j) < min_distance
-                        && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()){
+                        && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()) {
                     min_distance = abs(i) + abs(j);
-                    min_position = Position(cur_pos_x*BLOCK_HEIGHT, cur_pos_y*BLOCK_WIDTH);
+                    min_position = Position(cur_pos_x * BLOCK_HEIGHT, cur_pos_y * BLOCK_WIDTH);
                 }
             }
         }
@@ -451,6 +452,3 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 
     return min_position;
 }
-
-
-

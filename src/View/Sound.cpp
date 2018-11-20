@@ -9,7 +9,7 @@ Sound::Sound(const std::string& filename) :
     if (flags != (result = Mix_Init(flags))) {
         throw SdlException("Error en recurso en audio", Mix_GetError());
     }
-    Mix_OpenAudio(22050, AUDIO_S16SYS, 4, 4096);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     this->music = Mix_LoadMUS(filename.c_str());
 }
 
