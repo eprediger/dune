@@ -26,6 +26,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
 	unitButtons(),
+	buildingSellButton(nullptr),
 	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
@@ -41,7 +42,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 }
 
 GameView::~GameView() {
-	backgroundMusic.stop();
+//	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -59,7 +60,7 @@ GameView::~GameView() {
 	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
-	backgroundMusic.join();
+//	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {
@@ -168,6 +169,11 @@ void GameView::render() {
 	// Botones
 	// Vender Edificio
 //	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
+	Area sellBuildingDest(this->window.width * 16 / 20,
+	                      this->window.height * 9 / 32,
+	                      BTN_SELL_BUILDING,
+	                      BTN_SELL_BUILDING);
+	this->buildingSellButton->render(sellBuildingDest);
 
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
@@ -270,4 +276,15 @@ ButtonView &GameView::createBuildingButton(const std::string &filename, int numb
 	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
+}
+
+ButtonView& GameView::createSellBuildingButton(const std::string& filename) {
+	this->buildingSellButton = new ButtonView(filename, this->window);
+	return *(this->buildingSellButton);
+}
+
+/// TEMPORAL
+void GameView::changePlayer(int new_player) {
+	delete playerView;
+    playerView = new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*window.width/4,window.width/4);
 }
