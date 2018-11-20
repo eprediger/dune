@@ -43,6 +43,10 @@ void ButtonView::setState(const ViewState newState) {
 		// this->currentState = new ButtonDisabled();
 		this->buttonState = ViewState::BUSY;
 		break;
+	case ViewState::READY:
+		// this->currentState = new ButtonDisabled();
+		this->buttonState = ViewState::READY;
+		break;
 	}
 }
 
@@ -69,5 +73,11 @@ void ButtonView::render(const Area& dest) {
 		this->buttonImage.render(disabledSrc, dest);
 		this->timer.render(dest);
 		break;
+	case ViewState::READY:
+		this->buttonImage.render(enabledSrc, dest);
+		this->x = dest.getX();
+		this->y = dest.getY();
+		this->height = dest.getHeight();
+		this->width = dest.getWidth();
 	}
 }

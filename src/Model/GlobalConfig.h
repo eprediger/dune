@@ -8,6 +8,8 @@
 
 typedef struct {
 // Building Stats
+	// Tiempo de costruccion de edificios
+	const int buildingConstructionTime	= 100*TIME_FACTOR;
 	// Centro de Construcción
 	const int constructionYardEnergy	= 0;
 	const int constructionYardCost		= 0;

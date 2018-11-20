@@ -46,6 +46,13 @@ void ButtonHandler::setState(const State state) {
 		break;
 	case State::READY:
 		this->buttonState = new ButtonReady();
+		this->buttonView.setState(ViewState::READY);
 		break;
 	}
+}
+
+void ButtonHandler::executeReady() {}
+
+bool ButtonHandler::finishReady() {
+    return true;
 }

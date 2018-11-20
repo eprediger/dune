@@ -12,7 +12,7 @@
 // DISABLE: si no hay dinero disponible se deshabilita el boton
 // BUSY: durante la construcción de edificios o
 // creación de unidades se muestra el botón desahabilitado
-enum class ViewState { HIDDEN, ENABLED, DISABLED, BUSY };
+enum class ViewState { HIDDEN, ENABLED, DISABLED, BUSY, READY };
 
 class ButtonView {
 public:

@@ -4,17 +4,15 @@
 #include <iostream>
 
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif", 0), model, view)
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
+	        GlobalConfig.buildingConstructionTime),
+    model, view)
 	,constructor(constructor){}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 
 void ButtonHandlerHeavyFactory::execute() {
-	constructor.building = Building::HEAVY_FACTORY;
-    constructor.cost = GlobalConfig.heavyFactoryCost;
-    constructor.width = GlobalConfig.heavyFactoryWidth;
-    constructor.height = GlobalConfig.heavyFactoryHeight;
-    constructor.on = true;
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::HEAVY_FACTORY);
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
@@ -22,5 +20,17 @@ bool ButtonHandlerHeavyFactory::canBeEnabled() {
 }
 
 bool ButtonHandlerHeavyFactory::finishAction() {
-	return true;
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::HEAVY_FACTORY);
+}
+
+void ButtonHandlerHeavyFactory::executeReady() {
+    constructor.building = Building::HEAVY_FACTORY;
+    constructor.cost = GlobalConfig.heavyFactoryCost;
+    constructor.width = GlobalConfig.heavyFactoryWidth;
+    constructor.height = GlobalConfig.heavyFactoryHeight;
+    constructor.on = true;
+}
+
+bool ButtonHandlerHeavyFactory::finishReady() {
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::HEAVY_FACTORY);
 }

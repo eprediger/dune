@@ -4,6 +4,7 @@
 #include "Buildings/Building.h"
 #include "Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
+#include "PlayerBuildingCenter.h"
 #include <vector>
 #include <string>
 #include <functional>
@@ -22,6 +23,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int gold;   // Se restara durante los constructores
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
     PlayerTrainingCenter* trainingCenter;
+    PlayerBuildingCenter* buildingCenter;
 
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
@@ -52,6 +54,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     bool lose();
 
     void trainUnits();
+    void constructBuildings();
 
     int& getId();
     std::string& getHouse();

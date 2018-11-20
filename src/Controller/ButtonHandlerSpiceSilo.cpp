@@ -4,17 +4,15 @@
 #include <iostream>
 
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif", 0), model, view)
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
+	        GlobalConfig.buildingConstructionTime),
+    model, view)
 	,constructor(constructor){}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 
 void ButtonHandlerSpiceSilo::execute() {
-	constructor.building = Building::SPICE_SILO;
-    constructor.cost = GlobalConfig.spiceSiloCost;
-    constructor.width = GlobalConfig.spiceSiloSpicWidth;
-    constructor.height = GlobalConfig.spiceSiloSpicHeight;
-    constructor.on = true;
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::SPICE_SILO);
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {
@@ -22,5 +20,17 @@ bool ButtonHandlerSpiceSilo::canBeEnabled() {
 }
 
 bool ButtonHandlerSpiceSilo::finishAction() {
-	return true;
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::SPICE_SILO);
+}
+
+void ButtonHandlerSpiceSilo::executeReady() {
+    constructor.building = Building::SPICE_SILO;
+    constructor.cost = GlobalConfig.spiceSiloCost;
+    constructor.width = GlobalConfig.spiceSiloSpicWidth;
+    constructor.height = GlobalConfig.spiceSiloSpicHeight;
+    constructor.on = true;
+}
+
+bool ButtonHandlerSpiceSilo::finishReady() {
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::SPICE_SILO);
 }

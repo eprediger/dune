@@ -15,6 +15,10 @@ public:
 
     virtual bool finishAction() override;
 
+	virtual void executeReady() override;
+
+	virtual bool finishReady() override;
+
 private:
 	BuildingConstructor& constructor;
 

@@ -8,6 +8,7 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     gold(10000),
     gold_limit(10000),
     trainingCenter(new PlayerTrainingCenter()),
+    buildingCenter(new PlayerBuildingCenter()),
     construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
     if ((id%3)==0){
@@ -60,6 +61,10 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
 
 void Player::trainUnits(){
     trainingCenter->trainUnits(buildings);
+}
+
+void Player::constructBuildings() {
+    buildingCenter->construct();
 }
 
 bool Player::lose() {
@@ -134,3 +139,5 @@ void Player::sellBuilding(Building* building){
         else it++;
     }
 }
+
+

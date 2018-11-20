@@ -16,8 +16,13 @@ public:
 
     virtual bool finishAction() override;
 
+    virtual void executeReady() override;
+
+    virtual bool finishReady() override;
+
 private:
 	BuildingConstructor& constructor;
+	int time;
 };
 
 #endif  // __BUTTON_HANDLER_BARRACKS_H__

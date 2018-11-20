@@ -27,6 +27,10 @@ public:
 	
 	void setState(const State state);
 
+	virtual void executeReady();
+
+    virtual bool finishReady();
+
 protected:
 	ButtonState* buttonState;
 	ButtonView& buttonView;

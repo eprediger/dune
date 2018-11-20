@@ -70,6 +70,7 @@ void Model::step() {
     }
     for (auto itr = players.begin(); itr!=players.end(); itr++){
         (*itr)->trainUnits();
+        (*itr)->constructBuildings();
         std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
         for (auto unit = new_units.begin(); unit!=new_units.end(); unit++){
             units.push_back(*unit);

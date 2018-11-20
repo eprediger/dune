@@ -4,18 +4,17 @@
 #include <iostream>
 
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Model &model, GameView &view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg", 0), model, view)
+	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
+	        GlobalConfig.buildingConstructionTime),
+    model, view)
 	,constructor(constructor)
 	{}
 
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
 
+
 void ButtonHandlerSpiceRefinery::execute() {
-	constructor.building = Building::SPICE_REFINERY;
-    constructor.cost = GlobalConfig.spiceRefineryCost;
-    constructor.width = GlobalConfig.spiceRefinerySpicWidth;
-    constructor.height = GlobalConfig.spiceRefinerySpicHeight;
-    constructor.on = true;
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::SPICE_REFINERY);
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {
@@ -23,5 +22,17 @@ bool ButtonHandlerSpiceRefinery::canBeEnabled() {
 }
 
 bool ButtonHandlerSpiceRefinery::finishAction() {
-	return true;
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::SPICE_REFINERY);
+}
+
+void ButtonHandlerSpiceRefinery::executeReady() {
+    constructor.building = Building::SPICE_REFINERY;
+    constructor.cost = GlobalConfig.spiceRefineryCost;
+    constructor.width = GlobalConfig.spiceRefinerySpicWidth;
+    constructor.height = GlobalConfig.spiceRefinerySpicHeight;
+    constructor.on = true;
+}
+
+bool ButtonHandlerSpiceRefinery::finishReady() {
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::SPICE_REFINERY);
 }

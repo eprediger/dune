@@ -6,7 +6,7 @@
 ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, BuildingConstructor& constructor):
 	ButtonHandler(
             view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-            		0),
+                    GlobalConfig.buildingConstructionTime),
 	        model,
 	        view)
 	,constructor(constructor) {
@@ -16,14 +16,10 @@ ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, Build
 	*/
 }
 
-ButtonHandlerBarracks::~ButtonHandlerBarracks() {}
+ButtonHandlerBarracks::~ButtonHandlerBarracks() { time = 0; }
 
 void ButtonHandlerBarracks::execute() {
-	constructor.building = Building::BARRACKS;
-    constructor.cost = GlobalConfig.barracksCost;
-    constructor.width = GlobalConfig.barracksWidth;
-    constructor.height = GlobalConfig.barracksHeight;
-    constructor.on = true;
+	model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::BARRACKS);
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
@@ -31,5 +27,17 @@ bool ButtonHandlerBarracks::canBeEnabled() {
 }
 
 bool ButtonHandlerBarracks::finishAction() {
-	return true;
+    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::BARRACKS);
+}
+
+void ButtonHandlerBarracks::executeReady() {
+	constructor.building = Building::BARRACKS;
+	constructor.cost = GlobalConfig.barracksCost;
+	constructor.width = GlobalConfig.barracksWidth;
+	constructor.height = GlobalConfig.barracksHeight;
+	constructor.on = true;
+}
+
+bool ButtonHandlerBarracks::finishReady() {
+	return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::BARRACKS);
 }
