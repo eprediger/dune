@@ -16,7 +16,7 @@
 
 class Map {
 private:
-    std::vector<std::unique_ptr<Terrain>> matrix;
+    std::vector<std::unique_ptr<Terrain> > matrix;
     int rows, cols;
     std::vector<Position> constructionYardPositions;
     // Esto deberia reemplazarse luego por un vector de Attackable. Hay que reemplazar Unit en getClosestUnit para hacer esto

@@ -4,7 +4,7 @@
 #include <vector>
 
 DeadUnitView::DeadUnitView(Position pos, Area src_area, Area dest_area,
-                           std::vector<SdlTexture*>& sprites,
+                           std::vector<std::unique_ptr<SdlTexture> >& sprites,
                            int r, int g, int b, SdlWindow& window) :
 	dead_sprites(sprites),
 	anim_it(sprites.begin()),

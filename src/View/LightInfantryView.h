@@ -16,14 +16,14 @@ class LightInfantryView: public OffensiveUnitView {
                           ,SdlWindow& window);
         
         virtual void draw(Area& camara);
-        virtual std::vector<SdlTexture*>& getDeadSprites();
+        virtual std::vector<std::unique_ptr<SdlTexture> >& getDeadSprites();
         virtual Area getDeadUnitSrcArea();
 	    virtual Area getDeadUnitDestArea();
 	
     private:
-        static std::map<int, std::vector<SdlTexture*> > sprites;
-        static std::map<int, std::vector<SdlTexture*> > attack_sprites;
-        static std::vector<SdlTexture*> dead_sprites;
+        static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > sprites;
+        static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > attack_sprites;
+        static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
 };
 
 

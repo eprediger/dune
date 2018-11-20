@@ -17,9 +17,8 @@ class HeavyFactoryView: public BuildingView{
         HeavyFactoryView(HeavyFactory& heavyFactory, SdlWindow& window);
         virtual void draw(Area& camara);
     private:
-        static std::map<std::string, std::vector<SdlTexture*> > sprites;
-        std::vector<SdlTexture*>::iterator anim_it;
-        SdlTexture* base;
+        static std::map<std::string, std::vector<std::unique_ptr<SdlTexture> > > sprites;
+        std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
 };
 
 

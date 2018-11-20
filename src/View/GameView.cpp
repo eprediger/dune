@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <memory>
 
 GameView::GameView(const int width, const int height, Model& model) :
 	View(width,height),
@@ -31,7 +32,7 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
 	camera_height(camera.getHeight()) {
-//	backgroundMusic.start();
+	backgroundMusic.start();
 	for (int i = 0; i < model.numberOfPlayers() ; ++i){
 		this->addBuildingView(
 				BuildingViewFactory::createBuildingView(
@@ -59,6 +60,7 @@ GameView::~GameView() {
 	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
+
 //	backgroundMusic.join();
 }
 
@@ -146,12 +148,10 @@ void GameView::render() {
 		(*itr)->draw(camera);
 	}
 
-
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
 		if (!(*itr)->getUnit().isTraining())
 			(*itr)->draw(camera);
 	}
-
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
 		(*itr)->draw(camera);

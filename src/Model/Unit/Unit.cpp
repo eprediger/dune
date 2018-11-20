@@ -157,8 +157,10 @@ Rocket* Unit::getRocket(){
 }
 void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr)
-        if (Unit::isDead(foll_unit))
+        if (Unit::isDead(foll_unit)){
             this->foll_unit = nullptr;
+            this->state = (UnitState*)&Unit::stopped;
+        }
 }
 
 bool Unit::isTraining(){

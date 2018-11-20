@@ -1,9 +1,10 @@
 #include "BuildingView.h"
 #include "PlayerColorMaker.h"
 #include <cstdlib>
+#include <memory>
 
-std::vector<SdlTexture*> BuildingView::construction_sprites;
-std::vector<SdlTexture*> BuildingView::damage_sprites; 
+std::vector<std::unique_ptr<SdlTexture> > BuildingView::construction_sprites;
+std::vector<std::unique_ptr<SdlTexture> > BuildingView::damage_sprites; 
 
 BuildingView::BuildingView(Building& building,SdlWindow& window, Area src_area, Area dest_area) :
 	building(building),
@@ -27,37 +28,37 @@ BuildingView::BuildingView(Building& building,SdlWindow& window, Area src_area, 
 	playerColorRect.h = dest_area.getHeight() + 8;
 
 	if (construction_sprites.empty()){
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00015966.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00015d83.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/000161a0.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/000165bd.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/000169da.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00016df7.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00017214.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00017631.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00017a4e.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00017e6b.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00018288.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/000186a5.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00018ac2.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00018edf.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/000192fc.bmp",window));
-		construction_sprites.emplace_back(new SdlTexture("../imgs/imgs/00019719.bmp",window));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00015966.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00015d83.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000161a0.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000165bd.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000169da.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00016df7.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00017214.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00017631.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00017a4e.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00017e6b.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00018288.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000186a5.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00018ac2.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00018edf.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000192fc.bmp",window)));
+		construction_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00019719.bmp",window)));
 	}
 	construction_it = construction_sprites.begin();
 
 	if (damage_sprites.empty()) {
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc36.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc00.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebbb2.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebb55.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eb959.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eb9fa.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002eba90.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebb55.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebbb2.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc00.bmp", window));
-		damage_sprites.emplace_back(new SdlTexture("../imgs/imgs/002ebc36.bmp", window));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc36.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc00.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebbb2.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebb55.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eb959.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eb9fa.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eba90.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebb55.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebbb2.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc00.bmp",window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc36.bmp",window)));
 	}
 	damage_anim_it = damage_sprites.begin();
 }
@@ -96,7 +97,7 @@ void BuildingView::drawConstruction(Area& camara){
 	}
 }
 
-void BuildingView::draw(Area& camara, SdlTexture*& sprite){
+void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite){
     dest_area.setX(pos.x - camara.getX());
 	dest_area.setY(pos.y - camara.getY());
 	if (construido){
@@ -123,7 +124,7 @@ void BuildingView::draw(Area& camara, SdlTexture*& sprite){
 
 
 
-void BuildingView::draw(Area& camara, SdlTexture*& sprite,SdlTexture*& base,int base_x, int base_y){
+void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite, std::unique_ptr<SdlTexture>& base,int base_x, int base_y){
     dest_area.setX(pos.x - camara.getX());
 	dest_area.setY(pos.y - camara.getY());
 	if (construido){

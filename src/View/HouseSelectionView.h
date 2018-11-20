@@ -25,8 +25,8 @@ private:
 	SdlTexture backgroundImage;
 	Sound backgroundMusic;
 	Text title;
-	std::vector<std::unique_ptr<SdlTexture>> houses;
-	std::vector<std::unique_ptr<Text>> houseNames;
+	std::vector<std::unique_ptr<SdlTexture> > houses;
+	std::vector<std::unique_ptr<Text> > houseNames;
 	Text* selectedHouse;
 };
 

@@ -1,7 +1,7 @@
 #include "DeadBuildingView.h"
 
 DeadBuildingView::DeadBuildingView(Position pos, Area src_area, Area dest_area,
-	             std::vector<SdlTexture*>& sprites, int r, int g, int b, SdlWindow& window)
+	             std::vector<std::unique_ptr<SdlTexture> >& sprites, int r, int g, int b, SdlWindow& window)
     
     :DeadUnitView(pos,src_area,dest_area,sprites,r,g,b,window){}
 

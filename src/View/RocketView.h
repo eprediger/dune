@@ -8,6 +8,7 @@
 #include "Area.h"
 #include "../Position.h"
 #include "../Model/Weapons/Rocket.h"
+#include <memory>
 
 class RocketView {
 public:
@@ -16,12 +17,12 @@ public:
     bool finished;
 private:
     Rocket& rocket;
-    static std::vector<SdlTexture*> travel_sprites;
-    static std::vector<SdlTexture*> explosion_sprites;
+    static std::vector<std::unique_ptr<SdlTexture> > travel_sprites;
+    static std::vector<std::unique_ptr<SdlTexture> > explosion_sprites;
     bool reverse,exploding;
     Position pos;
     int update_sprite;
-    std::vector<SdlTexture*>::iterator anim_it;
+    std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
 };
 
 #endif  // __ROCKET_VIEW_H__

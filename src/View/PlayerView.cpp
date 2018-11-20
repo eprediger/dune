@@ -2,7 +2,9 @@
 #include "PlayerColorMaker.h"
 #include <iostream>
 #include "Text.h"
-SdlTexture* PlayerView::background;
+#include <memory>
+
+std::unique_ptr<SdlTexture> PlayerView::background;
 PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width)
     :player(player)
     ,x(x)
@@ -12,19 +14,20 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width)
     ,house_src(0,0,300,300)
     ,house_dest(x+width/5,window.height*2/32,width*3/5,window.height*5/32)
     ,gold(player.gold)
+    ,soundManager(player)
 {
     if (player.getHouse() == "Ordos"){
-        house = new SdlTexture("../assets/img/houses/ordos.jpg",window);
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg",window)));
     } else 
     if (player.getHouse() == "Harkonnen"){
-        house = new SdlTexture("../assets/img/houses/harkonnen.jpg",window);
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.jpg",window)));
     }
     if (player.getHouse() == "Atreides"){
-        house = new SdlTexture("../assets/img/houses/atreides.jpg",window);
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.jpg",window)));
     }
     PlayerColorMaker::menuColor(player,&r,&g,&b);
     PlayerColorMaker::textColor(player,&text_r,&text_g,&text_b);
-    background = new SdlTexture("../imgs/imgs/002396b2.bmp",window);
+    background = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002396b2.bmp",window)));
     moneyTag = new  Text("DINERO", 16, window,text_r,text_g,text_b);
     moneyBalance = new Text(std::to_string(player.gold), 16, window,text_r,text_g,text_b);
     rect.x = x + width / 5;
@@ -58,6 +61,8 @@ void PlayerView::draw(){
 	if (player.gold != gold || !balances.empty()){
         animateMoney();
     }
+
+    soundManager.manageSounds();
 }
 
 void PlayerView::animateMoney(){

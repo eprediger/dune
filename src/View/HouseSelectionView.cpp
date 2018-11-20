@@ -1,5 +1,6 @@
 #include "HouseSelectionView.h"
 #include <iostream>
+#include <memory>
 
 HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	View(width, height),
@@ -9,9 +10,9 @@ HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	houses(),
 	houseNames(),
 	selectedHouse(nullptr) {
-	this->houses.push_back(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.png", this->window)));
-	this->houses.push_back(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.png", this->window)));
-	this->houses.push_back(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.png", this->window)));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.png", this->window))));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.png", this->window))));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.png", this->window))));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("ATREIDES", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("HARKONNEN", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("ORDOS", HOUSE_FONT_SIZE, this->window)));

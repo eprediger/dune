@@ -6,17 +6,18 @@
 #include "../Position.h"
 #include "Area.h"
 #include <vector>
+#include <memory>
 
 class DeadUnitView {
 public:
 	DeadUnitView(Position pos, Area src_area, Area dest_area,
-	             std::vector<SdlTexture*>& sprites, int r, int g, int b, SdlWindow& window);
+	             std::vector<std::unique_ptr<SdlTexture> >& sprites, int r, int g, int b, SdlWindow& window);
 	virtual ~DeadUnitView();
 	virtual void draw(Area& camara);
 	bool finished();
 protected:
-	std::vector<SdlTexture*>& dead_sprites;
-	std::vector<SdlTexture*>::iterator anim_it;
+	std::vector<std::unique_ptr<SdlTexture> >& dead_sprites;
+	std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
 	Area src_area, dest_area;
 	Position pos;
 	int update;

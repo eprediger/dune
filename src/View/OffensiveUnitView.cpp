@@ -9,7 +9,7 @@ OffensiveUnitView::OffensiveUnitView(OffensiveUnit& unit, Area sprite_area, SdlW
     update(0),
     animating_attack(false) {}
 
-void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites) {
+void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlTexture> > >& sprites) {
     Orientation prev_orient = orientation;
     orientation.calcular(prev_pos, offensiveUnit.getVictimPosition());
     prev_pos = offensiveUnit.getPosition();

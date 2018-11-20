@@ -50,8 +50,8 @@ private:
 	Sound backgroundMusic;
 	// Text title;
 	SdlTexture titleImage;
-	std::vector<std::unique_ptr<Text>> tags;
-	std::vector<std::unique_ptr<TextBox>> inputBoxes;
+	std::vector<std::unique_ptr<Text> > tags;
+	std::vector<std::unique_ptr<TextBox> > inputBoxes;
 	std::unique_ptr<Text> playButton;
 	TextBox* selectedTextBox;
 	unsigned textBoxIndex;

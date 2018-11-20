@@ -7,14 +7,16 @@
 #include "SdlTexture.h"
 #include "DeadBuildingView.h"
 #include "../Model/Player.h"
+#include <memory>
+
 class BuildingView {
 public:
 	explicit BuildingView(Building& building,SdlWindow& window, Area src_area, Area dest_area);
 	virtual ~BuildingView();
 	Building& getBuilding();
 	virtual void draw(Area& camara) = 0;
-	void draw(Area& camara, SdlTexture*& sprite);
-	void draw(Area& camara, SdlTexture*& sprite, SdlTexture*& base,int base_x, int base_y);
+	void draw(Area& camara, std::unique_ptr<SdlTexture>& sprite);
+	void draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite, std::unique_ptr<SdlTexture>& base,int base_x, int base_y);
 	void drawConstruction(Area& camara);
 	void drawDamage(Area& camara);
 	DeadBuildingView* getDeadBuildingView();
@@ -22,8 +24,8 @@ public:
 	static bool isDead(BuildingView* view);
 
 protected:
-	static std::vector<SdlTexture*> construction_sprites; 
-	std::vector<SdlTexture*>::iterator construction_it;
+	static std::vector<std::unique_ptr<SdlTexture> > construction_sprites; 
+	std::vector<std::unique_ptr<SdlTexture> >::iterator construction_it;
 	Building& building;
 	SdlWindow& window;
 	int life;
@@ -35,8 +37,8 @@ protected:
 	bool construido;
 	int update_sprite;
 	Area damage_sprite_area, damage_dest_area;
-	static std::vector<SdlTexture*> damage_sprites;
-	std::vector<SdlTexture*>::iterator damage_anim_it;
+	static std::vector<std::unique_ptr<SdlTexture> > damage_sprites;
+	std::vector<std::unique_ptr<SdlTexture> >::iterator damage_anim_it;
 	int damage_update;
 	bool animating_damage;
 

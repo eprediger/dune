@@ -7,6 +7,9 @@
 #include "Area.h"
 #include "Text.h"
 #include <map>
+#include "PlayerSounds.h"
+#include <memory>
+
 class PlayerView{
     public:
         PlayerView(Player& player, SdlWindow& window, int x, int width);
@@ -21,11 +24,12 @@ class PlayerView{
         SdlWindow& window;
         Area background_area, house_src, house_dest;
         SDL_Rect rect;
-        SdlTexture* house;
-        static SdlTexture* background;
+        std::unique_ptr<SdlTexture> house;
+        static std::unique_ptr<SdlTexture> background;
         Text* moneyTag,*moneyBalance;
         int gold;
         std::map<Text*, int> balances;
+        PlayerSounds soundManager;
 
 };
 
