@@ -17,6 +17,8 @@ DeadUnitView::DeadUnitView(Position pos, Area src_area, Area dest_area,
 	player_b(b),
 	window(window) {}
 
+DeadUnitView::~DeadUnitView() {}
+
 bool DeadUnitView::finished() {
 	return (anim_it == dead_sprites.end());
 }

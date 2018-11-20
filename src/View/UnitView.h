@@ -33,7 +33,6 @@ protected:
 	SdlWindow& window;
 	SDL_Rect playerColorRect;
 	Unit& unit;
-	int player_r, player_g, player_b;
 	Area damage_sprite_area, sprite_area;
 	Area damage_dest_area, dest_area;
 	Position prev_pos;
@@ -43,6 +42,7 @@ protected:
 	std::vector<SdlTexture*>::iterator damage_anim_it;
 	int damage_update;
 	bool animating_damage;
+	int player_r, player_g, player_b;
 };
 
 #endif	// __UNIT_VIEW_H__

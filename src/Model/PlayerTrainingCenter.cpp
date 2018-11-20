@@ -9,7 +9,7 @@
 #include "Unit/Harvester.h"
 #include "Unit/Unit.h"
 #include "Buildings/Building.h"
-#include <iostream>
+#include <vector>
 
 PlayerTrainingCenter::PlayerTrainingCenter():
     harvester(0, nullptr),
@@ -59,8 +59,7 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
             if (heavyInfantry.second != nullptr) {
                 heavyInfantry.first -= 1;
             }
-        }
-        else if ((*it)->is(Building::LIGHT_FACTORY)) {
+        } else if ((*it)->is(Building::LIGHT_FACTORY)) {
             if (trike.second != nullptr)
                 trike.first -= 1;
             if (raider.second != nullptr)

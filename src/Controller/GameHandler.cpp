@@ -1,4 +1,5 @@
 #include "GameHandler.h"
+#include "../View/UnitViewFactory.h"
 #include "ButtonHandlerHarvester.h"
 #include "ButtonHandlerTank.h"
 #include "ButtonHandlerTrike.h"
@@ -11,7 +12,7 @@
 #include "ButtonHandlerSpiceRefinery.h"
 #include "ButtonHandlerSpiceSilo.h"
 #include "ButtonHandlerWindTrap.h"
-#include "../View/UnitViewFactory.h"
+#include "ButtonHandlerSellBuilding.h"
 #include <vector>
 
 int GameHandler::actual_player = PLAYER;
@@ -21,7 +22,7 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     view(view),
     model(model),
     selector(0, 0),
-    constructor(model,model.getPlayer(GameHandler::actual_player),view) {
+    constructor(model, model.getPlayer(GameHandler::actual_player), view) {
     view.addSelectorView(this->selector);
     this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor));
@@ -35,12 +36,13 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
     this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));
+    this->buttons.push_back(new ButtonHandlerSellBuilding(this->model, this->view, this->selector));
     for (auto& button : this->buttons) {
         if (button->canBeEnabled()) {
             button->setState(State::ENABLED);
         }
     }
-} 
+}
 
 GameHandler::~GameHandler() {
     while (!this->buttons.empty()) {
@@ -61,7 +63,7 @@ bool GameHandler::handleInput() {
         if (event.button.button == SDL_BUTTON_LEFT) {
             //this->view.grabMouse();
             this->cursor.initialPosition();
-            if (constructor.on == false){ 
+            if (constructor.on == false) {
                 this->selector.drag = true;
                 this->selector.drag_source = selector.pos;
             }
@@ -80,11 +82,11 @@ bool GameHandler::handleInput() {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
-            std::vector<Building*> selected_buildings = model.selectBuildingsInArea(selectArea,model.getPlayer(GameHandler::actual_player));
-            this->selector.addSelection(selection); 
-            this->selector.addSelection(selected_buildings); 
+            std::vector<Building*> selected_buildings = model.selectBuildingsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
+            this->selector.addSelection(selection);
+            this->selector.addSelection(selected_buildings);
             this->view.releaseMouse();
-            if (constructor.on){
+            if (constructor.on) {
                 constructor.build();
             }
             for (auto& button : this->buttons) {
@@ -130,21 +132,21 @@ bool GameHandler::handleInput() {
 
         case SDLK_DELETE:
         case SDLK_BACKSPACE:
-            {
-                std::vector<Building*>& to_sell = this->selector.selection.getSelectedBuildings();
-                for (auto itr = to_sell.begin(); itr!=to_sell.end() ; itr++){
-                    model.getPlayer(GameHandler::actual_player).sellBuilding(*itr);
-                }
+        {
+            std::vector<Building*>& to_sell = this->selector.selection.getSelectedBuildings();
+            for (auto itr = to_sell.begin(); itr != to_sell.end() ; itr++) {
+                model.getPlayer(GameHandler::actual_player).sellBuilding(*itr);
             }
-            break;
+        }
+        break;
         // Temporal
         case SDLK_c:
             GameHandler::actual_player++;
-            if (GameHandler::actual_player >= 3){
+            if (GameHandler::actual_player >= 3) {
                 GameHandler::actual_player = 0;
             }
             break;
-            /////////
+        /////////
         default:
             break;
         }

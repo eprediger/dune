@@ -2,7 +2,7 @@
 
 #include "../Map.h"
 
-#define TIME_FACTOR 2
+// #define TIME_FACTOR 2
 
 Harvester::Harvester(int x, int y) :
 	Unit(x, y,

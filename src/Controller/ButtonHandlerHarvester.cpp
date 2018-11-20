@@ -5,9 +5,8 @@
 
 ButtonHandlerHarvester::ButtonHandlerHarvester(Model &model, GameView &view) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
-	        GlobalConfig.harvesterConstructionTime),
-        model, view) {
-}
+	                                    GlobalConfig.harvesterConstructionTime),
+	              model, view) {}
 
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 

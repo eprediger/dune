@@ -1,10 +1,10 @@
 #include "ButtonHandler.h"
 #include "ButtonDisabled.h"
 #include "ButtonEnabled.h"
-#include "../View/View.h"
-#include "../Model/GlobalConfig.h"
 #include "ButtonBusy.h"
 #include "ButtonReady.h"
+#include "../View/View.h"
+#include "../Model/GlobalConfig.h"
 
 ButtonHandler::ButtonHandler(ButtonView& buttonView, Model& model, GameView& view) :
 	buttonState(new ButtonDisabled()),
@@ -48,4 +48,8 @@ void ButtonHandler::setState(const State state) {
 		this->buttonState = new ButtonReady();
 		break;
 	}
+}
+
+bool ButtonHandler::finishAction() {
+	return true;
 }

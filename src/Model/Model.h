@@ -32,7 +32,7 @@ private:
     bool gameFinished;
 
 public:
-    Model(int width, int height, int n_player);
+    Model(const int width, const int height, const int n_player);
     ~Model();
 
 //    Map& createMap();
@@ -73,8 +73,6 @@ public:
 	Unit* selectUnit(int x, int y);
 
 	void cleanDeadBuildings();
-
-
 };
 
 #endif	// __MODEL_H__

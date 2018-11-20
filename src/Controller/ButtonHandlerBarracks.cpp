@@ -5,8 +5,7 @@
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, BuildingConstructor& constructor):
 	ButtonHandler(
-            view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-            		0),
+            view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg", 0),
 	        model,
 	        view)
 	,constructor(constructor) {
@@ -30,6 +29,6 @@ bool ButtonHandlerBarracks::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.barracksCost);
 }
 
-bool ButtonHandlerBarracks::finishAction() {
+/*bool ButtonHandlerBarracks::finishAction() {
 	return true;
-}
+}*/

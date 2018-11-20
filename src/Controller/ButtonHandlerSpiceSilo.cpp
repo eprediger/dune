@@ -21,6 +21,6 @@ bool ButtonHandlerSpiceSilo::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.spiceSiloCost);
 }
 
-bool ButtonHandlerSpiceSilo::finishAction() {
+/*bool ButtonHandlerSpiceSilo::finishAction() {
 	return true;
-}
+}*/

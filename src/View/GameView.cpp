@@ -25,22 +25,22 @@ GameView::GameView(const int width, const int height, Model& model) :
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
 	unitButtons(),
-	buttons("../assets/img/btns/cantSell.png", this->window),
+	buildingSellButton(nullptr),
 	map_width(width),
 	map_height(height),
 	camera_width(width / 2),
 	camera_height(height / 2) {
 	backgroundMusic.start();
-	for (int i = 0; i < model.numberOfPlayers() ; ++i){
+	for (int i = 0; i < model.numberOfPlayers() ; ++i) {
 		this->addBuildingView(
-				BuildingViewFactory::createBuildingView(
-						model.getPlayer(i).getConstructionYard(),
-						this->window));
+		    BuildingViewFactory::createBuildingView(
+		        model.getPlayer(i).getConstructionYard(),
+		        this->window));
 	}
 }
 
 GameView::~GameView() {
-//	backgroundMusic.stop();
+	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -58,7 +58,7 @@ GameView::~GameView() {
 	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
-//	backgroundMusic.join();
+	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {
@@ -73,11 +73,9 @@ void GameView::addSelectorView(Selector& selector) {
 	this->selectorView = new SelectorView(selector, window);
 }
 
-void GameView::addBuildingConstructorView(BuildingConstructor* constructor){
-	this->constructorView = new BuildingConstructorView(*constructor,window);
+void GameView::addBuildingConstructorView(BuildingConstructor* constructor) {
+	this->constructorView = new BuildingConstructorView(*constructor, window);
 }
-
-
 
 void GameView::cleanDeadViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
@@ -92,8 +90,8 @@ void GameView::cleanDeadViews() {
 	}
 
 	std::vector<BuildingView*>::iterator it2 = buildingViews.begin();
-	while (it2!= buildingViews.end()) {
-		if (BuildingView::isDead(*it2)) { 
+	while (it2 != buildingViews.end()) {
+		if (BuildingView::isDead(*it2)) {
 			deadUnitViews.emplace_back((*it2)->getDeadBuildingView());
 			delete (*it2);
 			it2 = buildingViews.erase(it2);
@@ -101,7 +99,6 @@ void GameView::cleanDeadViews() {
 			it2++;
 		}
 	}
-	
 
 	std::vector<DeadUnitView*>::iterator dead_it = deadUnitViews.begin();
 	while (dead_it != deadUnitViews.end()) {
@@ -120,12 +117,9 @@ SdlWindow &GameView::getWindow() {
 }
 
 void GameView::render() {
-	//    for (auto unit_view : unitViews){
 	map_view.draw(camera);
 
-	
-
-	if (constructorView!=nullptr){
+	if (constructorView != nullptr) {
 		constructorView->draw(camera);
 	}
 
@@ -153,14 +147,17 @@ void GameView::render() {
 	this->moneyBalance.render((this->window.width - this->moneyBalance.textWidth) * 18 / 20 + this->moneyTag.textWidth, this->window.height * 9 / 32);
 	// Botones
 	// Vender Edificio
-//	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
+	Area sellBuildingDest(this->window.width * 16 / 20,
+	                      this->window.height * 9 / 32,
+	                      BTN_SELL_BUILDING,
+	                      BTN_SELL_BUILDING);
+	this->buildingSellButton->render(sellBuildingDest);
 
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
 	for (unsigned i = 0; i < this->buildingButtons.size(); ++i) {
-//		Area buildingSrc(0, 0, this->buildingButtons[i]->width, this->buildingButtons[i]->height);
-		Area buildingDest(this->window.width * 16 / 20,	//this->window.width * 1 / 128,
-		                  (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),	//this->window.height * (1 + 8 * i) / 64,
+		Area buildingDest(this->window.width * 16 / 20,
+		                  (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),
 		                  BTN_WIDTH,
 		                  BTN_HEIGHT);
 		this->buildingButtons[i]->render(buildingDest);
@@ -169,19 +166,18 @@ void GameView::render() {
 	// Botones de Unidades
 	this->unitsTag.render(this->window.width * 18 / 20, this->window.height * 11 / 32);
 	for (unsigned i = 0; i < this->unitButtons.size(); ++i) {
-//		Area UnitSrc(0, 0, this->unitButtons[i]->width, this->unitButtons[i]->height);
-		Area UnitButtonDest(this->window.width * 18 / 20,	// this->window.width * 29 / 32,
-		                    (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),	// this->window.height * (1 + 8 * i) / 64,
+		Area UnitButtonDest(this->window.width * 18 / 20,
+		                    (this->window.height * (BTN_INIT_HEIGHT) / 16) + (BTN_VERT_SPACE * i),
 		                    BTN_WIDTH,
 		                    BTN_HEIGHT);
 		this->unitButtons[i]->render(UnitButtonDest);
 	}
 
 	// Barra de energia
-	SDL_Color available = { 0x0, 0x80, 0x0, 0xFF };	// { 0xFF, 0x0, 0x0, 0xFF };
-	SDL_Color bkgrColor = { 0xA9, 0xA9, 0xA9, 0xFF };	// { 0x0, 0xFF, 0x0, 0xFF };
-	this->RenderVPBar(this->window.width * 63 / 80,	//this->window.width * 1 / 10,
-	                  this->window.height * 6 / 16,	//this->window.height * 1 / 64,
+	SDL_Color available = { 0x0, 0x80, 0x0, 0xFF };		// verde
+	SDL_Color bkgrColor = { 0xA9, 0xA9, 0xA9, 0xFF };	// gris
+	this->RenderVPBar(this->window.width * 63 / 80,
+	                  this->window.height * 6 / 16,
 	                  this->window.height * 32 / 64,
 	                  (float)this->model.getPlayer(GameHandler::actual_player).consumedEnergy / (float)this->model.getPlayer(GameHandler::actual_player).generatedEnergy,
 	                  available, bkgrColor);
@@ -250,4 +246,9 @@ ButtonView &GameView::createBuildingButton(const std::string &filename, int numb
 	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
+}
+
+ButtonView& GameView::createSellBuildingButton(const std::string& filename) {
+	this->buildingSellButton = new ButtonView(filename, this->window);
+	return *(this->buildingSellButton);
 }

@@ -34,8 +34,6 @@ private:
 	int actual_farm_speed;
 	int load_speed;
 	int actual_load_speed;
-
-
 };
 
 #endif

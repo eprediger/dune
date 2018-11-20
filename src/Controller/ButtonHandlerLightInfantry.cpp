@@ -6,9 +6,8 @@
 
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Model &model, GameView &view) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
-			GlobalConfig.lightInfantryTrainingTime),
-		model, view) {
-}
+	                                    GlobalConfig.lightInfantryTrainingTime),
+	              model, view) {}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
 

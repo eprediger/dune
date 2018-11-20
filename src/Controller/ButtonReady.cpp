@@ -5,9 +5,7 @@ ButtonReady::ButtonReady() : ButtonState() {}
 
 ButtonReady::~ButtonReady() {}
 
-void ButtonReady::handle(ButtonHandler* button, const int x, const int y) {
-
-}
+void ButtonReady::handle(ButtonHandler* button, const int x, const int y) {}
 
 void ButtonReady::update(ButtonHandler *button) {
     if (button->canBeEnabled()) {

@@ -18,20 +18,19 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(int width, int height, int n_player) : map(width, height),gameFinished(false) {
-
+Model::Model(const int width, const int height, const int n_player) :
+    map(width, height),
+    gameFinished(false) {
     // Harcodeo para testear, ver de donde conseguir luego las posiciones iniciales
     int x_tmp[n_player];
     int y_tmp[n_player];
-    for (int i=0; i< n_player; ++i){
-        x_tmp[i]=(i+1)*100;
+    for (int i = 0; i < n_player; ++i) {
+        x_tmp[i] = (i + 1) * 100;
     }
-    for (int i=0; i< n_player; ++i) {
-        y_tmp[i]=(i+1)*100;
+    for (int i = 0; i < n_player; ++i) {
+        y_tmp[i] = (i + 1) * 100;
     }
-
-    for (int i=0; i< n_player; ++i){
-
+    for (int i = 0; i < n_player; ++i) {
         ConstructionYard* new_building = new ConstructionYard(x_tmp[i], y_tmp[i]);
         players.push_back(new Player(i, *new_building));
         this->createBuilding(std::move(new_building));
@@ -45,7 +44,7 @@ Model::~Model() {
     for (auto& building : buildings) {
         delete building;
     }
-    for (auto& player : players){
+    for (auto& player : players) {
         delete player;
     }
 }
@@ -69,10 +68,10 @@ void Model::step() {
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         (*itr)->makeAction(map);
     }
-    for (auto itr = players.begin(); itr!=players.end(); itr++){
+    for (auto itr = players.begin(); itr != players.end(); itr++) {
         (*itr)->trainUnits();
         std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
-        for (auto unit = new_units.begin(); unit!=new_units.end(); unit++){
+        for (auto unit = new_units.begin(); unit != new_units.end(); unit++) {
             units.push_back(*unit);
 //            (*unit)->setPlayer(**itr);
             map.put(**unit);
@@ -81,8 +80,8 @@ void Model::step() {
     }
 
     int players_alive = 0;
-    for (auto itr = players.begin(); itr != players.end(); ++itr){
-        if ( !(*itr)->lose() ){
+    for (auto itr = players.begin(); itr != players.end(); ++itr) {
+        if ( !(*itr)->lose() ) {
             players_alive++;
         }
     }
@@ -99,8 +98,8 @@ Player *Model::getWinner() {
     if (!gameFinished) {
         return nullptr;
     }
-    for (auto itr = players.begin(); itr != players.end() ; ++itr){
-        if ( !(*itr)->lose() ){
+    for (auto itr = players.begin(); itr != players.end() ; ++itr) {
+        if ( !(*itr)->lose() ) {
             return *itr;
         }
     }
@@ -116,9 +115,9 @@ std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
     return std::move(map.getUnitsInArea(area, player));
 }
 
-std::vector<Building*> Model::selectBuildingsInArea(Area& area, Player& player){
-    return std::move(map.getBuildingsInArea(area,player));
-} 
+std::vector<Building*> Model::selectBuildingsInArea(Area& area, Player& player) {
+    return std::move(map.getBuildingsInArea(area, player));
+}
 
 Map &Model::getMap() {
     return map;
@@ -150,23 +149,24 @@ void Model::cleanDeadUnits() {
 
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;
-    for (auto& b : buildings){
-        if (Attackable::isDead(b)){
+    for (auto& b : buildings) {
+        if (Attackable::isDead(b)) {
             has_dead_unit = true;
             map.cleanBuilding(b);
         }
     }
-    if (has_dead_unit){
-        for (auto& player : players){
+    if (has_dead_unit) {
+        for (auto& player : players) {
             player->cleanDeadBuildings();
         }
         auto it = buildings.begin();
-        while (it!=buildings.end()){
-            if (Attackable::isDead((*it))){
+        while (it != buildings.end()) {
+            if (Attackable::isDead((*it))) {
                 delete(*it);
                 it = buildings.erase(it);
+            } else {
+                it++;
             }
-            else it++;
         }
     }
 }
@@ -280,7 +280,7 @@ void Model::actionOnPosition(Position &pos, Unit &unit) {
 }
 
 bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player) {
-    if ( cost > player.gold ){
+    if ( cost > player.gold ) {
         return false;
     }
     return this->map.canWeBuild(pos, width, height);
@@ -289,4 +289,3 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
 int Model::numberOfPlayers() {
     return players.size();
 }
-

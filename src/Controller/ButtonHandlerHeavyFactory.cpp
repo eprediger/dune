@@ -21,6 +21,6 @@ bool ButtonHandlerHeavyFactory::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.heavyFactoryCost);
 }
 
-bool ButtonHandlerHeavyFactory::finishAction() {
+/*bool ButtonHandlerHeavyFactory::finishAction() {
 	return true;
-}
+}*/

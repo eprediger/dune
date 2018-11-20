@@ -5,7 +5,7 @@ Attackable::Attackable(const int life, const int x, const int y)
     : id(Config::getNextId())
     , initial_life(life)
     , life(life)
-    , pos(x,y) {
+    , pos(x, y) {
     this->pos.normalizeToBlock();
 }
 
@@ -47,6 +47,6 @@ bool Attackable::operator==(const Attackable &other) {
 }
 
 
-void Attackable::setPosition(Position pos){
+void Attackable::setPosition(Position pos) {
     this->pos = pos;
 }

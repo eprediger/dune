@@ -13,7 +13,7 @@ public:
 
     virtual bool canBeEnabled() override;
 
-    virtual bool finishAction() override;
+//    virtual bool finishAction() override;
 
 private:
 	BuildingConstructor& constructor;

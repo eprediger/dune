@@ -10,7 +10,7 @@ public:
 	ButtonState();
 	virtual ~ButtonState();
 	virtual void handle(ButtonHandler *button, const int x, const int y) = 0;
-	virtual void update(ButtonHandler *button);
+	virtual void update(ButtonHandler *button) = 0;
 };
 
 #endif	// __BUTTON_STATE_H__

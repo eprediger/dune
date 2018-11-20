@@ -22,6 +22,6 @@ bool ButtonHandlerSpiceRefinery::canBeEnabled() {
     return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.spiceRefineryCost);
 }
 
-bool ButtonHandlerSpiceRefinery::finishAction() {
+/*bool ButtonHandlerSpiceRefinery::finishAction() {
 	return true;
-}
+}*/

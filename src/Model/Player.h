@@ -9,11 +9,11 @@
 
 class Map;
 class Unit;
-// class PlayerTrainingCenter;
 
 class Player {
 private:
     int id;
+
 public:     // El cliente sólo debería tenerse a su propio player disponible
     int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
     int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
@@ -24,7 +24,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
 
-    std::vector<Unit*>& getTrainedUnits(Map& map);  
+    std::vector<Unit*>& getTrainedUnits(Map& map);
 
     explicit Player(int id, ConstructionYard &construction_yard);
 
