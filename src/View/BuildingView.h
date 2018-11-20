@@ -42,7 +42,6 @@ protected:
 	std::vector<std::unique_ptr<SdlTexture> >::iterator damage_anim_it;
 	int damage_update;
 	bool animating_damage;
-
 };
 
 #endif //__BUILDINGVIEW_H__

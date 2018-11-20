@@ -23,7 +23,6 @@ public:
     std::vector<Position> getAdjacents();
     void normalizeToBlock();
 
-
     bool operator==(const Position& other) const;
     bool operator<(const Position& other) const;
 

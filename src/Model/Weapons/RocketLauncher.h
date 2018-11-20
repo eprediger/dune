@@ -13,6 +13,4 @@ public:
 	virtual int getBuildingBonus() const override;
 };
 
-
-
 #endif

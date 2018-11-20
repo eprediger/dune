@@ -18,19 +18,20 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(const char* file, int n_player)
-    : map(file)
-    , gameFinished(false)
-    , units()
-    , buildings()
-    , rockets() {
+Model::Model(const char* file, int n_player) :
+    map(file),
+    units(),
+    buildings(),
+    players(),
+    rockets(),
+    gameFinished(false) {
     std::vector<Position>& initial_pos = map.getInitialPositions();
-    for (int i=0; i< n_player; ++i){
-        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x,initial_pos[i].y,
-                                                            map.getBlockWidth(), map.getBlockHeight());
+    for (int i = 0; i < n_player; ++i) {
+        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x, initial_pos[i].y,
+                map.getBlockWidth(), map.getBlockHeight());
         players.push_back(new Player(i, *new_building));
         this->createBuilding(std::move(new_building));
-    } 
+    }
 }
 
 Model::~Model() {
@@ -63,7 +64,7 @@ void Model::step() {
     this->cleanDeadBuildings();
     this->cleanRockets();
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
-        if ((*itr)->shotARocket()){
+        if ((*itr)->shotARocket()) {
             rockets.emplace_back((*itr)->getRocket());
         }
         (*itr)->makeAction(map);
@@ -80,10 +81,10 @@ void Model::step() {
         new_units.clear();
     }
 
-    for (auto itr = rockets.begin(); itr!=rockets.end(); itr++){
+    for (auto itr = rockets.begin(); itr != rockets.end(); itr++) {
         (*itr)->move();
-        if ((*itr)->arrived()){
-            (*itr)->explode(map); 
+        if ((*itr)->arrived()) {
+            (*itr)->explode(map);
         }
     }
 
@@ -154,7 +155,6 @@ void Model::cleanDeadUnits() {
     }
 }
 
-
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;
     for (auto& b : buildings) {
@@ -179,14 +179,16 @@ void Model::cleanDeadBuildings() {
     }
 }
 
-void Model::cleanRockets(){
-    if (!rockets.empty()){
+void Model::cleanRockets() {
+    if (!rockets.empty()) {
         std::vector<Rocket*>::iterator it = rockets.begin();
-        while (it!=rockets.end()){
-            if ((*it)->arrived()){
+        while (it != rockets.end()) {
+            if ((*it)->arrived()) {
                 delete(*it);
                 it = rockets.erase(it);
-            } else it++;
+            } else {
+                it++;
+            }
         }
     }
 }
@@ -241,7 +243,7 @@ Trike& Model::createTrike(int x, int y, int player) {
 
 // Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)
 Barracks& Model::createBarracks(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     Barracks* building = new Barracks(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
@@ -249,7 +251,7 @@ Barracks& Model::createBarracks(int x, int y, int player) {
 }
 
 ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     ConstructionYard* building = new ConstructionYard(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
@@ -257,7 +259,7 @@ ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
 }
 
 HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     HeavyFactory* building = new HeavyFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
@@ -265,15 +267,15 @@ HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
 }
 
 LightFactory& Model::createLightFactory(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
-    LightFactory* building = new LightFactory(pos.x,pos.y, map.getBlockWidth(),map.getBlockHeight());
+    LightFactory* building = new LightFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (LightFactory&)this->createBuilding(std::move(building));
 }
 
 SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     SpiceRefinery* building = new SpiceRefinery(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
@@ -281,7 +283,7 @@ SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
 }
 
 SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     SpiceSilo* building = new SpiceSilo(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
@@ -289,7 +291,7 @@ SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
 }
 
 WindTrap& Model::createWindTrap(int x, int y, int player) {
-    Position pos1(x,y);
+    Position pos1(x, y);
     Position pos = map.getCornerPosition(pos1);
     WindTrap* building = new WindTrap(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);

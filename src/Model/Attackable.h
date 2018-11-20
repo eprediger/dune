@@ -10,6 +10,7 @@ protected:
     int initial_life;
     int life;
     Position pos;
+
 public:
     explicit Attackable(const int life, const int x, const int y);
 

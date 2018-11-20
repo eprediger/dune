@@ -21,5 +21,4 @@ private:
 	std::unique_ptr<SdlTexture> base;
 };
 
-
 #endif	// __SPICE_SILO_VIEW_H__

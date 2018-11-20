@@ -25,10 +25,10 @@ private:
     std::vector<Building*> buildings;
 
 public:
-    Map(const char* filePath);
-   
+    explicit Map(const char* filePath);
+
     std::vector<Position>& getInitialPositions();
-    
+
     bool isValid(Position& pos);
     bool canMove(Unit& unit, Position pos);
     void put(Unit& unit);
@@ -71,7 +71,6 @@ public:
     Terrain& at(int x, int y);
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
-
 
     ~Map();
 };

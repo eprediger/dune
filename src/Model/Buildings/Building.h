@@ -3,6 +3,7 @@
 
 #include "../Attackable.h"
 #include "../GlobalConfig.h"
+#include <vector>
 
 class Player;
 

@@ -1,7 +1,6 @@
 #ifndef __CONSTRUCTION_YARD_VIEW_H__
 #define __CONSTRUCTION_YARD_VIEW_H__
 
-
 #include "BuildingView.h"
 #include "Area.h"
 #include "../Position.h"

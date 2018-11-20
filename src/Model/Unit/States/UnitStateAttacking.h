@@ -9,5 +9,4 @@ public:
     virtual bool isAttacking() override;
 };
 
-
 #endif //__UNITSTATEATTACKING_H__

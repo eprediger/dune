@@ -11,30 +11,29 @@
 #include <memory>
 
 GameView::GameView(const int width, const int height, Model& model) :
-	View(width,height),
+	View(width, height),
 	model(model),
 	unitViews(),
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
-	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*width/4,width/4)),
 	selectorView(nullptr),
+	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player), window, 3 * width / 4, width / 4)),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
-	camera(0, 0, 3*width/4, height),
+	camera(0, 0, 3 * width / 4, height),
 	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
 	unitButtons(),
 	buildingSellButton(nullptr),
-	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
 	camera_height(camera.getHeight()) {
-	backgroundMusic.start();
-	for (int i = 0; i < model.numberOfPlayers() ; ++i){
+//	backgroundMusic.start();
+	for (int i = 0; i < model.numberOfPlayers() ; ++i) {
 		this->addBuildingView(
 		    BuildingViewFactory::createBuildingView(
 		        model.getPlayer(i).getConstructionYard(),
@@ -81,8 +80,6 @@ void GameView::addBuildingConstructorView(BuildingConstructor* constructor) {
 	this->constructorView = new BuildingConstructorView(*constructor, window);
 }
 
-
-
 void GameView::cleanDeadViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
 	while (it != unitViews.end()) {
@@ -107,8 +104,8 @@ void GameView::cleanDeadViews() {
 	}
 
 	std::vector<RocketView*>::iterator rocketView = rocketViews.begin();
-	while (rocketView!= rocketViews.end()) {
-		if ((*rocketView)->finished) { 
+	while (rocketView != rocketViews.end()) {
+		if ((*rocketView)->finished) {
 			delete (*rocketView);
 			rocketView = rocketViews.erase(rocketView);
 		} else {
@@ -127,10 +124,9 @@ void GameView::cleanDeadViews() {
 	}
 }
 
-std::vector<RocketView*>& GameView::getRocketViews(){
+std::vector<RocketView*>& GameView::getRocketViews() {
 	return this->rocketViews;
 }
-
 
 SdlWindow &GameView::getWindow() {
 	return window;
@@ -156,7 +152,7 @@ void GameView::render() {
 		(*itr)->draw(camera);
 	}
 
-	for (auto itr = rocketViews.begin(); itr!=rocketViews.end(); ++itr){
+	for (auto itr = rocketViews.begin(); itr != rocketViews.end(); ++itr) {
 		(*itr)->draw(camera);
 	}
 
@@ -250,11 +246,11 @@ int GameView::getCameraY() {
 	return this->camera.getY();
 }
 
-int& GameView::getCameraWidth(){
+int& GameView::getCameraWidth() {
 	return this->camera_width;
 }
 
-int& GameView::getCameraHeight(){
+int& GameView::getCameraHeight() {
 	return this->camera_height;
 }
 
@@ -286,5 +282,5 @@ ButtonView& GameView::createSellBuildingButton(const std::string& filename) {
 /// TEMPORAL
 void GameView::changePlayer(int new_player) {
 	delete playerView;
-    playerView = new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*window.width/4,window.width/4);
+	playerView = new PlayerView(model.getPlayer(GameHandler::actual_player), window, 3 * window.width / 4, window.width / 4);
 }

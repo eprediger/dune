@@ -7,7 +7,7 @@
 
 class Sand : public Terrain {
 public:
-	Sand(int spice);
+	explicit Sand(int spice);
 	Sand();
 	virtual int farm() override;
 	virtual int getSpice() override;

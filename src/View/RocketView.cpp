@@ -9,12 +9,12 @@ std::vector<std::unique_ptr<SdlTexture> > RocketView::travel_sprites;
 std::vector<std::unique_ptr<SdlTexture> > RocketView::explosion_sprites;
 
 RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
+    finished(false),
     rocket(rocket),
+    reverse(false),
     exploding(false),
     pos(rocket.getPosition()),
-    update_sprite(0),
-    reverse(false),
-    finished(false) {
+    update_sprite(0) {
     if (travel_sprites.empty()) {
         travel_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc36.bmp",window)));
 		travel_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc00.bmp",window)));
@@ -39,7 +39,6 @@ RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
         explosion_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002cbf9c.bmp",window)));
     }
     anim_it = travel_sprites.begin();
-
 }
 
 void RocketView::draw(Area& camara) {
@@ -50,17 +49,17 @@ void RocketView::draw(Area& camara) {
             anim_it = explosion_sprites.begin();
         } else {
             (*anim_it)->render(Area(0, 0, 20, 20),
-                               Area(pos.x - camara.getX() - 5 , pos.y - camara.getY()-5, 10, 10));
+                               Area(pos.x - camara.getX() - 5 , pos.y - camara.getY() - 5, 10, 10));
             anim_it++;
-            if (anim_it == travel_sprites.end()){
+            if (anim_it == travel_sprites.end()) {
                 anim_it = travel_sprites.begin();
             }
             return;
         }
-    } 
+    }
 
     (*anim_it)->render(Area(0, 0, 72, 72),
-                           Area(pos.x - camara.getX() , pos.y - camara.getY(), 40, 40));
+                       Area(pos.x - camara.getX() , pos.y - camara.getY(), 40, 40));
 
     if (update_sprite == 5) {
         if (reverse)
@@ -72,7 +71,7 @@ void RocketView::draw(Area& camara) {
             reverse = true;
             anim_it--;
         }
-        if (anim_it == explosion_sprites.begin()){
+        if (anim_it == explosion_sprites.begin()) {
             finished = true;
         }
     } else {

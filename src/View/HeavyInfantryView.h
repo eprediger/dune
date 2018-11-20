@@ -11,7 +11,6 @@
 #include <map>
 #include "Area.h"
 
-
 class HeavyInfantryView: public OffensiveUnitView{
     public:
         HeavyInfantryView(HeavyInfantry& heavyInfantry, std::vector<RocketView*>& rocketViews, SdlWindow& window);
@@ -27,6 +26,5 @@ class HeavyInfantryView: public OffensiveUnitView{
         static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
         std::vector<RocketView*>& rocketViews;
 };
-
 
 #endif  // __HEAVY_INFANTRY_VIEW_H__

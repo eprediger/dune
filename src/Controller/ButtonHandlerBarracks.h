@@ -12,13 +12,13 @@ public:
 
 	virtual void execute() override;
 
-    virtual bool canBeEnabled() override;
+	virtual bool canBeEnabled() override;
 
-     virtual bool finishAction() override;
+	virtual bool finishAction() override;
 
-    virtual void executeReady() override;
+	virtual void executeReady() override;
 
-    virtual bool finishReady() override;
+	virtual bool finishReady() override;
 
 private:
 	BuildingConstructor& constructor;

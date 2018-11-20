@@ -10,8 +10,8 @@ MapView::MapView(Map &mapa, SdlWindow &window) :
 	terrenos("../terrain/d2k_BLOXBASE.bmp", window),
 	areas() {
 	areas.emplace(std::make_pair('A', Area(0, 8, 32, 32)));
-	areas.emplace(std::make_pair('S', Area(64,296,32,24)));
-	areas.emplace(std::make_pair('M', Area(80,296,32,24)));
+	areas.emplace(std::make_pair('S', Area(64, 296, 32, 24)));
+	areas.emplace(std::make_pair('M', Area(80, 296, 32, 24)));
 	areas.emplace(std::make_pair('R', Area(106, 216, 32, 32)));
 	areas.emplace(std::make_pair('P', Area(0, 64, 32, 32)));
 	areas.emplace(std::make_pair('D', Area(32, 96, 32, 32)));
@@ -32,7 +32,7 @@ void MapView::draw(Area& camara) {
 	}
 	for (; i < lim_i ; i++) {
 		for (j = camara.getX() / BLOCK_WIDTH; j < lim_j ; j++) {
-			terrenos.render(areas.at(map.blockAt(j, i).getKey()), Area(j * BLOCK_WIDTH- camara.getX(), i * BLOCK_HEIGHT - camara.getY(), 32, 32));
+			terrenos.render(areas.at(map.blockAt(j, i).getKey()), Area(j * BLOCK_WIDTH - camara.getX(), i * BLOCK_HEIGHT - camara.getY(), 32, 32));
 		}
 	}
 }

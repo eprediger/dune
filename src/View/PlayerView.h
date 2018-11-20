@@ -7,7 +7,6 @@
 #include "Area.h"
 #include "Text.h"
 #include <map>
-#include "PlayerSounds.h"
 #include <memory>
 
 class PlayerView{
@@ -29,7 +28,6 @@ class PlayerView{
         Text* moneyTag,*moneyBalance;
         int gold;
         std::map<Text*, int> balances;
-        PlayerSounds soundManager;
 
 };
 

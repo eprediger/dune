@@ -1,11 +1,12 @@
 #include "Attackable.h"
 #include "Config.h"
+#include <iostream>
 
-Attackable::Attackable(const int life, const int x, const int y)
-    : id(Config::getNextId())
-    , initial_life(life)
-    , life(life)
-    , pos(x, y) {
+Attackable::Attackable(const int life, const int x, const int y) :
+    id(Config::getNextId()),
+    initial_life(life),
+    life(life),
+    pos(x, y) {
     this->pos.normalizeToBlock();
 }
 
@@ -16,7 +17,7 @@ int Attackable::getLife() {
 int Attackable::getInitialLife() {
     return initial_life;
 }
-#include <iostream>
+
 void Attackable::reciveAttack(const Weapon &weapon) {
     life -= weapon.getDammage();
     this->reciveBonusDammage(weapon);
@@ -31,10 +32,6 @@ Position &Attackable::getPosition() {
     return pos;
 }
 
-//bool Attackable::isDead(Attackable* attackable) {
-//    return attackable->life <= 0;
-//}
-
 bool Attackable::isDead(const Attackable *unit) {
     if (!unit) {
         return true;
@@ -46,11 +43,10 @@ bool Attackable::operator==(const Attackable &other) {
     return this->id == other.id;
 }
 
-
 void Attackable::setPosition(Position pos) {
     this->pos = pos;
 }
 
-Position& Attackable::getClosestPosition(Position& position){
+Position& Attackable::getClosestPosition(Position& position) {
     return this->pos;
 }

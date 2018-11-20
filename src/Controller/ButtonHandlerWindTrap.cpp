@@ -4,10 +4,10 @@
 #include <iostream>
 
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
-	        GlobalConfig.buildingConstructionTime),
-    model, view)
-    ,constructor(constructor) {
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
+                                            GlobalConfig.buildingConstructionTime),
+                  model, view),
+    constructor(constructor) {
     if (this->canBeEnabled()) {
         this->setState(State::ENABLED);
     }

@@ -28,9 +28,6 @@ const UnitStateFarming Unit::farming;
 const UnitStateBacking Unit::backing; 
 const UnitStateTraining Unit::training;
 
-
-
-
 bool Unit::move(Map &map) {
     bool moved = true;
     if (actual_speed++ == speed) {
@@ -68,7 +65,6 @@ void Unit::setPath(std::stack<Position> path, Position destiny) {
 //        state = (UnitState*)&Unit::stopped;
     }
 }
-
 
 //bool Unit::isDead(const Attackable *unit) {
 //    if (!unit) {

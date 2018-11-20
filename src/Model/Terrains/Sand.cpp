@@ -2,10 +2,10 @@
 
 Sand::Sand(int spice) : Terrain(SAND_KEY), availableFarm(spice) {}
 
-Sand::Sand():Terrain(SAND_KEY), availableFarm(0){}
+Sand::Sand(): Terrain(SAND_KEY), availableFarm(0) {}
 
 int Sand::farm() {
-    if (availableFarm > 0){
+    if (availableFarm > 0) {
         availableFarm--;
         return 1;
     } else {
@@ -13,19 +13,20 @@ int Sand::farm() {
     }
 }
 
-int Sand::getSpice(){
+int Sand::getSpice() {
     return availableFarm;
 }
 
 bool Sand::hasFarm() {
-	return (availableFarm > 0);
+    return (availableFarm > 0);
 }
 
-char Sand::getKey(){
-    if (availableFarm > 300){
+char Sand::getKey() {
+    if (availableFarm > 300) {
         return 'S';
-    } else if (availableFarm > 0){
+    } else if (availableFarm > 0) {
         return 'M';
+    } else {
+        return key;
     }
-    else return key;
 }

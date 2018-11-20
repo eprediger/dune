@@ -10,4 +10,3 @@ void Config::init() {
     unit_id = 0;
 }
 
-

@@ -43,8 +43,6 @@ void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
     }
 }
 
-
-
 bool PlayerBuildingCenter::buildingReady(Building::BuildingType type) {
     return construction[type].first <= 0;
 }

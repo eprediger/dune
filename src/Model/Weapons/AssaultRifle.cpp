@@ -20,4 +20,3 @@ int AssaultRifle::getBuildingBonus() const {
 	return 0;
 }
 
-

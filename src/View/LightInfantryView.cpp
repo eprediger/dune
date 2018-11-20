@@ -80,7 +80,6 @@ LightInfantryView::LightInfantryView(LightInfantry& lightInfantry,
         sprites.emplace(std::make_pair(Orientation::noreste(),
                                        std::move(noreste)));
 
-
         norte.clear();
         norte.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00064469.bmp",window)));
         norte.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/000654ea.bmp",window)));

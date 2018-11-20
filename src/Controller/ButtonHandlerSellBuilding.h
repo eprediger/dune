@@ -19,5 +19,4 @@ private:
 	Selector& selector;
 };
 
-
 #endif //__BUTTON_HANDLER_SELL_BUILDING_H__
