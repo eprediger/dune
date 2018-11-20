@@ -13,5 +13,4 @@ public:
     virtual void update(ButtonHandler *button) override;
 };
 
-
 #endif //DUNE_BUTTONBUSY_H

@@ -9,7 +9,6 @@
 #include <map>
 #include <vector>
 
-
 class LightInfantryView: public OffensiveUnitView {
     public:
         LightInfantryView(LightInfantry& lightInfantry
@@ -25,6 +24,5 @@ class LightInfantryView: public OffensiveUnitView {
         static std::map<int, std::vector<SdlTexture*> > attack_sprites;
         static std::vector<SdlTexture*> dead_sprites;
 };
-
 
 #endif  // __LIGHT_INFANTRY_VIEW_H__

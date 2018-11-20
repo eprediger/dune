@@ -11,9 +11,9 @@ public:
 
 	virtual void execute() override;
 
-    virtual bool canBeEnabled() override;
+	virtual bool canBeEnabled() override;
 
-//    virtual bool finishAction() override;
+	virtual bool finishAction() override;
 
 	virtual void executeReady() override;
 

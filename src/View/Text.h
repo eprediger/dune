@@ -19,7 +19,7 @@ public:
 	Text(const std::string& text, const int fontSize, SdlWindow& window, int r, int g, int b);
 
 	// Libera recursos de la instancia
-	~Text();
+	virtual ~Text();
 
 	// Obtener el texto
 	std::string getText();
@@ -31,13 +31,10 @@ public:
 	// Muestra el texto en la ventana en la posicion (x,y)
 	virtual void render(const int x, const int y);
 
-
-
 protected:
 	// Actualiza el texto
 	void createText(const std::string& text);
 	void createText(const std::string& text, int r, int g, int b);
-
 
 public:
 	int textWidth, textHeight;

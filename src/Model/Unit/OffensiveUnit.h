@@ -29,5 +29,4 @@ private:
 //    Position prev_foll_unit_pos;
 };
 
-
 #endif //__OffensiveUnit_H__

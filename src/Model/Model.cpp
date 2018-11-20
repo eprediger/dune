@@ -18,12 +18,13 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(const char* file, int n_player)
-    : map(file)
-    , gameFinished(false)
-    , units()
-    , buildings()
-    , rockets() {
+Model::Model(const char* file, int n_player) :
+    map(file),
+    units(),
+    buildings(),
+    players(),
+    rockets(),
+    gameFinished(false) {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     for (int i=0; i< n_player; ++i){
         ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x,initial_pos[i].y,
@@ -153,7 +154,6 @@ void Model::cleanDeadUnits() {
         }
     }
 }
-
 
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;

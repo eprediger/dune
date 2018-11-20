@@ -15,5 +15,4 @@ private:
     std::map<Building::BuildingType,std::pair<int, bool>> construction;
 };
 
-
 #endif //DUNE_PLAYERBUILDINGCENTER_H

@@ -1,7 +1,6 @@
 #ifndef __WEAPONS_H__AssaultRifle
 #define __WEAPONS_H__
 
-
 #include "RocketLauncher.h"
 #include "AssaultRifle.h"
 #include "SmallCannon.h"
@@ -14,6 +13,5 @@ public:
     static const SmallCannon smallCannon;
     static const Cannon cannon;
 };
-
 
 #endif //__WEAPONS_H__

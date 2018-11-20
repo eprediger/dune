@@ -80,7 +80,6 @@ void UnitView::draw(Area& camara, std::map<int, SdlTexture*>& sprites) {
 	}
 }
 
-
 void UnitView::draw(Area& camara, std::map<int, std::vector<SdlTexture*> >& sprites
                     , std::vector<SdlTexture*>::iterator& anim_it, int& update)
 {

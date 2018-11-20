@@ -70,7 +70,6 @@ public:
 
 	std::vector<RocketView*>& getRocketViews();
 
-
 	void moveUp(int distance);
 	void moveDown(int distance);
 	void moveLeft(int distance);

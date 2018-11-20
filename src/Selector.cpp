@@ -12,7 +12,6 @@ void Selector::addSelection(std::vector<Unit*>& units) {
 	this->selection.addSelection(units);
 }
 
-
 void Selector::addSelection(std::vector<Building*>& buildings) {
 	this->selection.addSelection(buildings);
 }

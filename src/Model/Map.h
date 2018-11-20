@@ -72,7 +72,6 @@ public:
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
 
-
     ~Map();
 };
 

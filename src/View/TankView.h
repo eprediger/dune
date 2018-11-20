@@ -24,5 +24,4 @@ class TankView: public OffensiveUnitView{
         static std::vector<SdlTexture*> dead_sprites;
 };
 
-
 #endif  // __TANK_VIEW_H__

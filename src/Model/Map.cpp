@@ -1,5 +1,5 @@
 #include "Map.h"
-#include "yaml-cpp/yaml.h" 
+#include "yaml-cpp/yaml.h"
 #include "Terrains/Terrain.h"
 #include "AStar.h"
 #include "../Common/CustomException.h"
@@ -8,13 +8,11 @@
 #include <stack>
 #include <vector>
 
-
-Map::Map(const char* filePath)
-    :matrix()
-    ,cols()
-    ,rows()
-    ,constructionYardPositions()
-{
+Map::Map(const char* filePath) :
+    matrix(),
+    rows(),
+    cols(),
+    constructionYardPositions() {
     YAML::Node file = YAML::LoadFile(filePath);
     cols = file["width"].as<int>();
     rows = file["height"].as<int>();
@@ -26,25 +24,25 @@ Map::Map(const char* filePath)
     char precipice_key = file["PRECIPICE_KEY"].as<char>();
     int initial_spice = file["INITIAL_SPICE"].as<int>();
     int max_players = file["max_players"].as<int>();
-    for (int i = 0; i<max_players ; i++){
+    for (int i = 0; i < max_players ; i++) {
         int x = file["initial_positions"][i][0].as<int>() * BLOCK_WIDTH;
         int y = file["initial_positions"][i][1].as<int>() * BLOCK_HEIGHT;
-        constructionYardPositions.emplace_back(Position(x,y));
+        constructionYardPositions.emplace_back(Position(x, y));
     }
-    for (int i = 0; i<rows; i++){
-        for (int j = 0; j<cols; j++){
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
             char key = file["rows"][i][j].as<char>();
-            if (key == sand_key){
+            if (key == sand_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
-            } else if (key == spiced_sand_key){
+            } else if (key == spiced_sand_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(initial_spice)));
-            } else if (key == dune_key){
+            } else if (key == dune_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Dunes()));
-            } else if (key == rocks_key){
+            } else if (key == rocks_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Rocks()));
-            } else if (key == summit_key){
+            } else if (key == summit_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Summit()));
-            } else if (key == precipice_key){
+            } else if (key == precipice_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
             }
 
@@ -54,8 +52,7 @@ Map::Map(const char* filePath)
 
 Map::~Map() {}
 
-
-std::vector<Position>& Map::getInitialPositions(){
+std::vector<Position>& Map::getInitialPositions() {
     return constructionYardPositions;
 }
 
@@ -67,11 +64,11 @@ int Map::getHeight() {
     return rows * BLOCK_HEIGHT;
 }
 
-int Map::getBlockWidth(){
+int Map::getBlockWidth() {
     return BLOCK_WIDTH;
 }
 
-int Map::getBlockHeight(){
+int Map::getBlockHeight() {
     return BLOCK_HEIGHT;
 }
 
@@ -102,11 +99,6 @@ bool Map::isValid(Position &pos) {
     return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols * BLOCK_HEIGHT && pos.getY() < rows * BLOCK_WIDTH;
 }
 
-/*void Map::put(Attackable &attackable) {
-   attackables.push_back(&attackable);
-}
-*/
-
 void Map::put(Unit &unit) {
     units.push_back(&unit);
     this->at(unit.getPosition()).occupy();
@@ -128,16 +120,6 @@ void Map::occupy(Building &building) {
 bool Map::canMove(Unit& unit, Position pos) {
     return unit.canMoveAboveTerrain(this->at(pos)) && !this->at(pos).isOccupied();
 }
-//
-//bool Map::moveUnits() {
-//    bool result = false;
-//    for (auto u : units) {
-//        if (u->move()) {
-//            result = true;
-//        }
-//    }
-//    return result;
-//}
 
 void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     AStar algorithm(*this);
@@ -148,22 +130,6 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     }
     unit.setPath(path, p_destiny);
 }
-
-//Unit* Map::getClosestUnit(Unit &unit, int limitRadius) {
-//    Unit* closest_unit = nullptr;
-//    int closest_unit_distance = limitRadius;
-//    for (auto& current_unit : units) {
-//        int distance = current_unit->getPosition().sqrtDistance(unit.getPosition());
-//        if (distance < limitRadius
-//                && distance < closest_unit_distance
-//                && !(*current_unit == unit)) {
-//            closest_unit = current_unit;
-//            closest_unit_distance = distance;
-//        }
-//    }
-//
-//    return closest_unit;
-//}
 
 Unit *Map::getClosestUnit(Position &position, int limitRadius) {
     Unit* closest_unit = nullptr;
@@ -227,49 +193,48 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area) {
     return (std::move(answer));
 }
 
-std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player){
+std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
     std::vector<Building*> answer;
-    Position pos(area.getX()+area.getWidth(),area.getY()+area.getHeight());
+    Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
     for (auto& building : buildings) {
-        if ((*building->getPlayer()) == player){
+        if ((*building->getPlayer()) == player) {
             if ( (building->getPosition().x > area.getX()) &&
-                (building->getPosition().x + building->width*BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+                    (building->getPosition().x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
                     (building->getPosition().y > area.getY()) &&
-                        (building->getPosition().y + building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())){
-                            answer.emplace_back(building);
+                    (building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
+                answer.emplace_back(building);
             }
             else {
-                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x+building->width*BLOCK_WIDTH) &&
-                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y+building->height*BLOCK_HEIGHT)){
-                        answer.emplace_back(building);
-                    }
+                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
+                        (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
+                    answer.emplace_back(building);
+                }
             }
 
         }
     }
     return std::move(answer);
 }
-std::vector<Building*> Map::getBuildingsInArea(Area& area){
+std::vector<Building*> Map::getBuildingsInArea(Area& area) {
     std::vector<Building*> answer;
-    Position pos(area.getX()+area.getWidth(),area.getY()+area.getHeight());
+    Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
     for (auto& building : buildings) {
         if ( (building->getPosition().x > area.getX()) &&
-            (building->getPosition().x + building->width*BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+                (building->getPosition().x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
                 (building->getPosition().y > area.getY()) &&
-                    (building->getPosition().y + building->height*BLOCK_HEIGHT < area.getY() + area.getHeight())){
-                        answer.emplace_back(building);
+                (building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
+            answer.emplace_back(building);
         }
         else {
-            if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x+building->width*BLOCK_WIDTH) &&
-                (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y+building->height*BLOCK_HEIGHT)){
-                    answer.emplace_back(building);
-                }
+            if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
+                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
+                answer.emplace_back(building);
+            }
         }
 
     }
     return std::move(answer);
 }
-
 
 Building * Map::getClosestBuilding(Position &position, int limitRadius) {
     Building* closest_unit = nullptr;
@@ -285,39 +250,6 @@ Building * Map::getClosestBuilding(Position &position, int limitRadius) {
 
     return closest_unit;
 }
-
-//Unit *Map::getClosestAllyUnit(Position &position, int limitRadius, Player &player) {
-//    Unit* closest_unit = nullptr;
-//    int closest_unit_distance = limitRadius;
-//    for (auto current_unit : units){
-//        int distance = current_unit->getPosition().sqrtDistance(position);
-//        if (distance < limitRadius
-//            && distance < closest_unit_distance
-//            && player.hasUnit(current_unit)){
-//            closest_unit = current_unit;
-//            closest_unit_distance = distance;
-//        }
-//    }
-//
-//    return closest_unit;
-//}
-
-//Unit *Map::getClosestEnemyUnit(Position &position, int limitRadius, Unit &ally_unit) {
-//    Unit* closest_unit = nullptr;
-//    int closest_unit_distance = limitRadius;
-//    for (auto current_unit : units){
-//        int distance = current_unit->getPosition().sqrtDistance(position);
-//        if (distance < limitRadius
-//            && distance < closest_unit_distance
-////            && !(current_unit->getPlayer() == ally_unit.getPlayer())
-//            ){
-//            closest_unit = current_unit;
-//            closest_unit_distance = distance;
-//        }
-//    }
-//
-//    return closest_unit;
-//}
 
 void Map::cleanUnit(Unit *unit) {
     this->at(unit->getPosition()).free();
@@ -337,12 +269,12 @@ void Map::free(Building &building) {
     }
 }
 
-bool Map::canWeBuild(Position& pos, int width, int height){
-    for (int i = 0; i<height; i++){
-        for (int j = 0; j<width;j++){
-            Position aux(pos.getX()+j*BLOCK_WIDTH,pos.getY()+i*BLOCK_HEIGHT);
-            if (isValid(aux)){
-                if ((this->at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()){
+bool Map::canWeBuild(Position& pos, int width, int height) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            if (isValid(aux)) {
+                if ((this->at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()) {
                     return false;
                 }
             } else return false;
@@ -356,12 +288,11 @@ bool Map::canWeBuild(Position& pos, int width, int height){
                 if (this->at(aux).isBuiltOn()) {
                     return false;
                 }
-            } 
+            }
         }
     }
     return true;
 }
-
 
 Position Map::getClosestFreePosition(Building* building) {
     int dist = 1;
@@ -404,19 +335,19 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
         if (distance < limitRadius &&
-            distance < closest_unit_distance &&
-            !( player == current_unit->getPlayer())) {
+                distance < closest_unit_distance &&
+                !( player == current_unit->getPlayer())) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
         }
     }
 
-    for (auto& current_building : buildings){
+    for (auto& current_building : buildings) {
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
         if (distance < limitRadius
-        && distance < closest_unit_distance
-        && !player.hasBuilding(*current_building) ){
+                && distance < closest_unit_distance
+                && !player.hasBuilding(*current_building) ) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
         }

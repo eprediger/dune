@@ -46,7 +46,6 @@ bool Attackable::operator==(const Attackable &other) {
     return this->id == other.id;
 }
 
-
 void Attackable::setPosition(Position pos) {
     this->pos = pos;
 }

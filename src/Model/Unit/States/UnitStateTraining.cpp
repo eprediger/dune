@@ -1,7 +1,7 @@
 #include "UnitStateTraining.h"
 
 UnitState* UnitStateTraining::makeAction(Map& map, Unit& unit) {
-	// return nullptr?
+	// return nullptr;	// ?
 }
 
 bool UnitStateTraining::isTraining() {

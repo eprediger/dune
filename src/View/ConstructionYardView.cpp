@@ -31,7 +31,6 @@ ConstructionYardView::ConstructionYardView(ConstructionYard& constructionYard, S
     anim_it = sprites.at(building.getPlayer()->getHouse()).begin();
 }
 
-
 void ConstructionYardView::draw(Area& camara){
     if ((!destroyed) && building.getLife()<=0){
         destroyed = true;

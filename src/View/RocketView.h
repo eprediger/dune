@@ -18,7 +18,7 @@ private:
     Rocket& rocket;
     static std::vector<SdlTexture*> travel_sprites;
     static std::vector<SdlTexture*> explosion_sprites;
-    bool reverse,exploding;
+    bool reverse, exploding;
     Position pos;
     int update_sprite;
     std::vector<SdlTexture*>::iterator anim_it;

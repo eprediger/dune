@@ -16,8 +16,8 @@ GameView::GameView(const int width, const int height, Model& model) :
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
-	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*width/4,width/4)),
 	selectorView(nullptr),
+	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player),window,3*width/4,width/4)),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, 3*width/4, height),
@@ -27,7 +27,6 @@ GameView::GameView(const int width, const int height, Model& model) :
 	buildingButtons(),
 	unitButtons(),
 	buildingSellButton(nullptr),
-	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
@@ -79,8 +78,6 @@ void GameView::addBuildingConstructorView(BuildingConstructor* constructor) {
 	this->constructorView = new BuildingConstructorView(*constructor, window);
 }
 
-
-
 void GameView::cleanDeadViews() {
 	std::vector<UnitView*>::iterator it = unitViews.begin();
 	while (it != unitViews.end()) {
@@ -129,7 +126,6 @@ std::vector<RocketView*>& GameView::getRocketViews(){
 	return this->rocketViews;
 }
 
-
 SdlWindow &GameView::getWindow() {
 	return window;
 }
@@ -145,12 +141,10 @@ void GameView::render() {
 		(*itr)->draw(camera);
 	}
 
-
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
 		if (!(*itr)->getUnit().isTraining())
 			(*itr)->draw(camera);
 	}
-
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
 		(*itr)->draw(camera);

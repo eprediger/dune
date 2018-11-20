@@ -1,7 +1,6 @@
 #ifndef __BARRACKS_VIEW_H__
 #define __BARRACKS_VIEW_H__
 
-
 #include "BuildingView.h"
 #include "Area.h"
 #include "../Position.h"

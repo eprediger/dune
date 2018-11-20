@@ -12,7 +12,6 @@ ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Model &model, GameView &v
 
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
 
-
 void ButtonHandlerSpiceRefinery::execute() {
     model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::SPICE_REFINERY);
 }

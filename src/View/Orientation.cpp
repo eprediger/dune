@@ -76,5 +76,3 @@ int Orientation::noreste() {
 	return 8;
 }
 
-
-

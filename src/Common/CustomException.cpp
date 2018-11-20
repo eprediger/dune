@@ -26,7 +26,6 @@ CustomException::CustomException(int errnumb, const char * fmt, ...) noexcept {
 	msg_error[BUF_LEN - 1] = 0;
 }
 
-
 const char* CustomException::what() const noexcept {
 	return msg_error;
 }

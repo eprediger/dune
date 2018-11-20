@@ -36,7 +36,6 @@ HeavyFactoryView::HeavyFactoryView(HeavyFactory& heavyFactory, SdlWindow& window
     anim_it++;
 }
 
-
 void HeavyFactoryView::draw(Area& camara){
     if ((!destroyed) && building.getLife()<=0){
         destroyed = true;

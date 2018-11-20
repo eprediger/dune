@@ -39,12 +39,10 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
             }
         }
 
-
         // Se chequea si se encuentra en el destino
         if (*curr_node_itr == n_end) {
             return this->reconstructPath(best_path, end);
         }
-
 
         // Se quita de la lista de abiertos y se agrega en la lista de cerrados
         closeList.push_back(AStarNode(*curr_node_itr));

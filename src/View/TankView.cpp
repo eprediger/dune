@@ -74,7 +74,6 @@ TankView::TankView(Tank& tank, SdlWindow& window) :
         attack_sprites.emplace(std::make_pair(Orientation::noreste(),
                                               std::move(noreste)));
 
-
         dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e004b.bmp", window));
         dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e06d5.bmp", window));
         dead_sprites.emplace_back(new SdlTexture("../imgs/imgs/002e10e6.bmp", window));
