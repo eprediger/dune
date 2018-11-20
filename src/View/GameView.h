@@ -10,6 +10,7 @@
 #include "BuildingConstructorView.h"
 #include "MapView.h"
 #include "ButtonView.h"
+#include "PlayerView.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -33,11 +34,12 @@ private:
 	std::vector<BuildingView*> buildingViews;
 	std::vector<RocketView*> rocketViews;
 	SelectorView* selectorView;
+	PlayerView* playerView;
 	BuildingConstructorView* constructorView;
 	MapView map_view;
 	Area camera;
 	Sound backgroundMusic;
-	Text moneyTag, moneyBalance, buildingTag, unitsTag;
+	Text buildingTag, unitsTag;
 	std::vector<ButtonView*> buildingButtons;
 	std::vector<ButtonView*> unitButtons;
 	SdlTexture buttons;
@@ -75,6 +77,8 @@ public:
 
 	int getCameraX();
 	int getCameraY();
+	int& getCameraWidth();
+	int& getCameraHeight();
 
 	void grabMouse();
 	void releaseMouse();

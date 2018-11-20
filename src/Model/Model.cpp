@@ -30,7 +30,6 @@ Model::Model(const char* file, int n_player)
                                                             map.getBlockWidth(), map.getBlockHeight());
         players.push_back(new Player(i, *new_building));
         this->createBuilding(std::move(new_building));
-        std::cout<<"x: "<<initial_pos[i].x<<", y: "<<initial_pos[i].y<<std::endl;
     } 
 }
 

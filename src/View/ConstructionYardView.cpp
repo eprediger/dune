@@ -28,7 +28,7 @@ ConstructionYardView::ConstructionYardView(ConstructionYard& constructionYard, S
         vector.emplace_back(new SdlTexture("../imgs/imgs/001f09a1.bmp",window));
         sprites.emplace(std::make_pair("Ordos",std::move(vector)));
     }
-    anim_it = sprites.at("Ordos").begin();
+    anim_it = sprites.at(building.getPlayer()->getHouse()).begin();
 }
 
 

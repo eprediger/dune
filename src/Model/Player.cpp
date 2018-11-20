@@ -10,6 +10,15 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     trainingCenter(new PlayerTrainingCenter()),
     construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
+    if ((id%3)==0){
+        house = "Ordos";
+    }
+    if ((id%3)==1){
+        house = "Atreides";
+    }
+    if ((id%3)==2){
+        house = "Harkonnen";
+    }
 }
 
 bool Player::operator==(const Player &other) const {
@@ -62,6 +71,9 @@ int& Player::getId() {
     return this->id;
 }
 
+std::string& Player::getHouse(){
+    return this->house;
+}
 ConstructionYard &Player::getConstructionYard() {
     return *construction_yard;
 }

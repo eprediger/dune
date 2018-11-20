@@ -40,6 +40,11 @@ int SdlTexture::setColor(int& r, int& g, int& b) {
 	return SDL_SetTextureColorMod(texture, r, g, b);
 }
 
+int SdlTexture::setBlendMode(SDL_BlendMode mode){
+	return SDL_SetTextureBlendMode(texture, mode); 
+}
+
+
 int SdlTexture::render(const Area& src, const Area& dest) {
 	SDL_Rect sdlSrc = { src.getX(), src.getY(),
 	                    src.getWidth(), src.getHeight()

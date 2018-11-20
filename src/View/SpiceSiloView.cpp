@@ -37,7 +37,7 @@ SpiceSiloView::SpiceSiloView(SpiceSilo& spiceSilo, SdlWindow& window)
         vector.emplace_back(new SdlTexture("../imgs/imgs/001fd783.bmp", window));
         sprites.emplace(std::make_pair("Ordos", std::move(vector)));
     }
-    anim_it = sprites.at("Ordos").begin();
+    anim_it = sprites.at(building.getPlayer()->getHouse()).begin();
 }
 
 void SpiceSiloView::draw(Area& camara) {

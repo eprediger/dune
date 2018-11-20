@@ -5,6 +5,7 @@
 #include "Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
 #include <vector>
+#include <string>
 #include <functional>
 
 class Map;
@@ -14,6 +15,7 @@ class Unit;
 class Player {
 private:
     int id;
+    std::string house;
 public:     // El cliente sólo debería tenerse a su propio player disponible
     int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
     int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
@@ -52,6 +54,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     void trainUnits();
 
     int& getId();
+    std::string& getHouse();
 
     bool operator==(const Player& other) const;
 

@@ -17,6 +17,8 @@ public:
 
 	int setColor(int& r, int& g, int& b);
 
+	int setBlendMode(SDL_BlendMode mode); 
+
 	int render(const Area &src, const Area &dest);
 
 	// renderiza la textura completa en su tamaño original,

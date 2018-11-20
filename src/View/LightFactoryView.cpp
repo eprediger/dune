@@ -30,7 +30,7 @@ LightFactoryView::LightFactoryView(LightFactory& lightFactory, SdlWindow& window
         vector.emplace_back(new SdlTexture("../imgs/imgs/00220276.bmp", window));
         sprites.emplace(std::make_pair("Ordos", std::move(vector)));
     }
-    anim_it = sprites.at("Ordos").begin();
+    anim_it = sprites.at(building.getPlayer()->getHouse()).begin();
     base = (*anim_it);
     anim_it++;
 }

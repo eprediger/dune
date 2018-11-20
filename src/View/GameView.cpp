@@ -10,19 +10,18 @@
 #include <vector>
 
 GameView::GameView(const int width, const int height, Model& model) :
-	View(width / 2, height / 2),
+	View(width,height),
 	model(model),
 	unitViews(),
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
+	playerView(new PlayerView(model.getPlayer(0),window,3*width/4,width/4)),
 	selectorView(nullptr),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
-	camera(0, 0, width / 2, height / 2),
+	camera(0, 0, 3*width/4, height),
 	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
-	moneyTag(Text("DINERO", TAG_FONT_SIZE, this->window)),
-	moneyBalance(Text(std::to_string(model.getPlayer(0).gold), TAG_FONT_SIZE, this->window)),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
@@ -30,8 +29,8 @@ GameView::GameView(const int width, const int height, Model& model) :
 	buttons("../assets/img/btns/cantSell.png", this->window),
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
-	camera_width(width / 2),
-	camera_height(height / 2) {
+	camera_width(camera.getWidth()),
+	camera_height(camera.getHeight()) {
 //	backgroundMusic.start();
 	for (int i = 0; i < model.numberOfPlayers() ; ++i){
 		this->addBuildingView(
@@ -153,6 +152,7 @@ void GameView::render() {
 			(*itr)->draw(camera);
 	}
 
+
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
 		(*itr)->draw(camera);
 	}
@@ -165,14 +165,10 @@ void GameView::render() {
 		selectorView->draw(camera);
 	}
 
-	// Dinero
-	this->moneyTag.render((this->window.width - this->moneyTag.textWidth) * 18 / 20, this->window.height * 9 / 32);
-	this->moneyBalance.setText(std::to_string(model.getPlayer(GameHandler::actual_player).gold));
-	this->moneyBalance.render((this->window.width - this->moneyBalance.textWidth) * 18 / 20 + this->moneyTag.textWidth, this->window.height * 9 / 32);
-	// Botones
-	// Vender Edificio
-//	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
+	playerView->draw();
 
+	// Botones
+	
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
 	for (unsigned i = 0; i < this->buildingButtons.size(); ++i) {
@@ -248,6 +244,14 @@ int GameView::getCameraX() {
 
 int GameView::getCameraY() {
 	return this->camera.getY();
+}
+
+int& GameView::getCameraWidth(){
+	return this->camera_width;
+}
+
+int& GameView::getCameraHeight(){
+	return this->camera_height;
 }
 
 void GameView::grabMouse() {

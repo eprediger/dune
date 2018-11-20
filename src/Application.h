@@ -4,8 +4,8 @@
 #include "View/View.h"
 #include "Controller/InputHandler.h"
 #include "Model/Model.h"
-#define WINDOW_WIDTH  2048
-#define WINDOW_HEIGHT (WINDOW_WIDTH*3/4)
+#define WINDOW_WIDTH  1240
+#define WINDOW_HEIGHT 768
 
 class Application {
 public:

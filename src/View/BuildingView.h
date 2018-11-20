@@ -6,6 +6,7 @@
 #include "Area.h"
 #include "SdlTexture.h"
 #include "DeadBuildingView.h"
+#include "../Model/Player.h"
 class BuildingView {
 public:
 	explicit BuildingView(Building& building,SdlWindow& window, Area src_area, Area dest_area);

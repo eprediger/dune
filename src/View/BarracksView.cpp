@@ -28,9 +28,9 @@ BarracksView::BarracksView(Barracks& barracks, SdlWindow& window)
         vector.emplace_back(new SdlTexture("../imgs/imgs/001e7669.bmp",window));
         sprites.emplace(std::make_pair("Ordos",std::move(vector)));
         }
-    anim_it = sprites.at("Ordos").begin();
+    anim_it = sprites.at(building.getPlayer()->getHouse()).begin();
 } 
-
+ 
 void BarracksView::draw(Area& camara){
     if ((!destroyed) && building.getLife()<=0){
         destroyed = true;

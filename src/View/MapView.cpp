@@ -19,18 +19,17 @@ MapView::MapView(Map &mapa, SdlWindow &window) :
 }
 
 void MapView::draw(Area& camara) {
-	int i = camara.getY() / (BLOCK_HEIGHT);
-	int lim_i = i + 1 + (camara.getHeight() / BLOCK_HEIGHT);
+	int i = camara.getY() / map.getBlockHeight();
+	int lim_i = i + 1 + (camara.getHeight() / map.getBlockHeight());
 	if (lim_i > map.getHeightInBlocks()) {
-		lim_i -= 1;
+		lim_i = map.getHeightInBlocks();
 	}
 
-	int j = camara.getX() / BLOCK_WIDTH;
-	int lim_j = j + 1 + (camara.getWidth() / BLOCK_WIDTH);
+	int j = camara.getX() / map.getBlockWidth();
+	int lim_j = j + 1 + (camara.getWidth() / map.getBlockWidth());
 	if (lim_j > map.getWidthInBlocks()) {
-		lim_j -= 1;
+		lim_j = map.getWidthInBlocks();
 	}
-
 	for (; i < lim_i ; i++) {
 		for (j = camara.getX() / BLOCK_WIDTH; j < lim_j ; j++) {
 			terrenos.render(areas.at(map.blockAt(j, i).getKey()), Area(j * BLOCK_WIDTH- camara.getX(), i * BLOCK_HEIGHT - camara.getY(), 32, 32));

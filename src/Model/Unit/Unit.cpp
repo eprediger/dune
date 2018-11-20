@@ -33,22 +33,21 @@ const UnitStateTraining Unit::training;
 
 bool Unit::move(Map &map) {
     bool moved = true;
-    if (actual_speed++ >= speed) {
+    if (actual_speed++ == speed) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
                 map.setDestiny(*this, destiny.x, destiny.y);
-                next_pos = pathToDestiny.top();
-            } 
-                map.at(pos).free();
+            } else {
                 pathToDestiny.pop();
-                map.at(next_pos).occupy();
-            
-        } else if (!(pos == next_pos)) {
+            }
+        }
+
+        if (!(pos == next_pos)) {
             pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
         } else {
-//            map.at(pos).occupy();
+            map.at(pos).occupy();
 //            state = (UnitState*)&Unit::stopped;;
             moved = false;
         }
@@ -82,7 +81,6 @@ void Unit::follow(Attackable* other, Map& map) {
     foll_unit = other;
     prev_foll_unit_pos = foll_unit->getClosestPosition(pos);
     bool occupied_pos = map.at(prev_foll_unit_pos).isOccupied();
-    std::cout<<"hola\n";
     // Se libera la posicion objetivo para que el algoritmo pueda calcular el camino.
     // Luego se vuelve a ocupar
     if (occupied_pos)
