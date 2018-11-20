@@ -15,7 +15,7 @@ En este remake, __el jugador podrá elegir__ jugar con una de las tres Casas: lo
 
 Instalación de librerías externas:
 
-	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev
+	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev libyaml-cpp-dev
 
 Instalacion libreria libsdl2-mixer-dev version 2.0.1:
 
