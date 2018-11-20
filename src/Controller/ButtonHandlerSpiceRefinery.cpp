@@ -4,11 +4,10 @@
 #include <iostream>
 
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Model &model, GameView &view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
-	        GlobalConfig.buildingConstructionTime),
-    model, view)
-	,constructor(constructor)
-	{}
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
+                                            GlobalConfig.buildingConstructionTime),
+                  model, view),
+    constructor(constructor) {}
 
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
 

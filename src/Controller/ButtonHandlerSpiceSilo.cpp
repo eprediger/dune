@@ -4,10 +4,10 @@
 #include <iostream>
 
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view, BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-	        GlobalConfig.buildingConstructionTime),
-    model, view)
-	,constructor(constructor){}
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
+                                            GlobalConfig.buildingConstructionTime),
+                  model, view),
+    constructor(constructor) {}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 

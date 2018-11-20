@@ -1,7 +1,8 @@
 #include "Player.h"
-#include <algorithm>
 #include "PlayerTrainingCenter.h"
+#include <algorithm>
 #include <vector>
+#include <string>
 
 Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
@@ -13,13 +14,13 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     buildingCenter(new PlayerBuildingCenter()),
     construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
-    if ((id%3)==0){
+    if ((id % 3) == 0) {
         house = "Ordos";
     }
-    if ((id%3)==1){
+    if ((id % 3) == 1) {
         house = "Atreides";
     }
-    if ((id%3)==2){
+    if ((id % 3) == 2) {
         house = "Harkonnen";
     }
 }
@@ -78,7 +79,7 @@ int& Player::getId() {
     return this->id;
 }
 
-std::string& Player::getHouse(){
+std::string& Player::getHouse() {
     return this->house;
 }
 ConstructionYard &Player::getConstructionYard() {
@@ -86,8 +87,8 @@ ConstructionYard &Player::getConstructionYard() {
 }
 
 bool Player::hasBuilding(Building& building) {
-    if (construction_yard != nullptr ){
-        if (building == *construction_yard){
+    if (construction_yard != nullptr) {
+        if (building == *construction_yard) {
             return true;
         }
     }
@@ -122,8 +123,9 @@ void Player::cleanDeadBuildings() {
                 this->consumedEnergy -= (*it)->energy;
             }
             it = buildings.erase(it);
+        } else {
+            it++;
         }
-        else it++;
     }
 }
 
@@ -138,7 +140,8 @@ void Player::sellBuilding(Building* building) {
             gold += building->cost * float(building->getLife()) / float(building->getInitialLife()) * 0.9;
             building->demolish();
             break;
+        } else {
+            it++;
         }
-        else it++;
     }
 }

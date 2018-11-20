@@ -9,10 +9,10 @@
 #include "HeavyInfantryView.h"
 #include "../Model/Unit/HeavyInfantry.h"
 #include "RaiderView.h"
-#include <iostream>
 #include "../Model/Unit/Raider.h"
 #include "TankView.h"
 #include "../Model/Unit/Tank.h"
+#include <vector>
 
 UnitView* UnitViewFactory::createUnitView(Trike& trike, SdlWindow& window) {
 	return new TrikeView(trike, window);

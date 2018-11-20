@@ -7,26 +7,25 @@
 #include "Area.h"
 #include "Text.h"
 #include <map>
-class PlayerView{
-    public:
-        PlayerView(Player& player, SdlWindow& window, int x, int width);
-        Player& player;
-        void draw();
-        void animateMoney();
-    private:
-        int x;
-        int width;
-        int r,g,b;
-        int text_r, text_g, text_b;
-        SdlWindow& window;
-        Area background_area, house_src, house_dest;
-        SDL_Rect rect;
-        SdlTexture* house;
-        static SdlTexture* background;
-        Text* moneyTag,*moneyBalance;
-        int gold;
-        std::map<Text*, int> balances;
-
+class PlayerView {
+public:
+    PlayerView(Player& player, SdlWindow& window, int x, int width);
+    Player& player;
+    void draw();
+    void animateMoney();
+private:
+    int x;
+    int width;
+    int r, g, b;
+    int text_r, text_g, text_b;
+    SdlWindow& window;
+    Area background_area, house_src, house_dest;
+    SDL_Rect rect;
+    SdlTexture* house;
+    static SdlTexture* background;
+    Text* moneyTag, *moneyBalance;
+    int gold;
+    std::map<Text*, int> balances;
 };
 
 #endif

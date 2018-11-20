@@ -5,7 +5,7 @@
 
 class LightFactory : public Building {
 public:
-	LightFactory(const int x, const int y, int blockWidth, int blockHeight) ;
+	LightFactory(const int x, const int y, int blockWidth, int blockHeight);
 	~LightFactory();
 };
 

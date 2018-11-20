@@ -19,25 +19,25 @@ void PlayerColorMaker::makeColor(Player& player, int* r, int* g, int* b) {
     }
 }
 
-void PlayerColorMaker::menuColor(Player& player, int*r, int*g,int*b){
-    switch(player.getId()){
-        case 0:
-            *r = 150; 
-            *b = 25;
-            *g = 25;
-        default:
-            break;
+void PlayerColorMaker::menuColor(Player& player, int*r, int*g, int*b) {
+    switch (player.getId()) {
+    case 0:
+        *r = 150;
+        *b = 25;
+        *g = 25;
+    default:
+        break;
     }
 }
 
-void PlayerColorMaker::textColor(Player& player, int*r, int*g,int*b){
-    switch(player.getId()){
-        case 0:
-            *r = 204;
-            *g = 0;
-            *b = 0;
-            break;
-        default:
-            break;
+void PlayerColorMaker::textColor(Player& player, int*r, int*g, int*b) {
+    switch (player.getId()) {
+    case 0:
+        *r = 204;
+        *g = 0;
+        *b = 0;
+        break;
+    default:
+        break;
     }
 }

@@ -71,9 +71,11 @@ bool GameHandler::handleInput() {
         break;
     case SDL_MOUSEMOTION:
         this->cursor.currentPosition();
-        if (this->cursor.current_x >= view.getCameraWidth()){
+        if (this->cursor.current_x >= view.getCameraWidth()) {
             this->selector.pos.x = this->view.getCameraX() + this->view.getCameraWidth();
-        } else this->selector.pos.x = this->view.getCameraX() + this->cursor.current_x;
+        } else {
+            this->selector.pos.x = this->view.getCameraX() + this->cursor.current_x;
+        }
         this->selector.pos.y = this->cursor.current_y + this->view.getCameraY();
         this->constructor.pos.x = this->selector.pos.x;
         this->constructor.pos.y = this->selector.pos.y;

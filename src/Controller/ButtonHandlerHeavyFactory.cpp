@@ -3,11 +3,11 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,BuildingConstructor& constructor) :
-	ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
-	        GlobalConfig.buildingConstructionTime),
-    model, view)
-	,constructor(constructor){}
+ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view, BuildingConstructor& constructor) :
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
+                                            GlobalConfig.buildingConstructionTime),
+                  model, view),
+    constructor(constructor) {}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 

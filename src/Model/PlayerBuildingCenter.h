@@ -1,8 +1,9 @@
 #ifndef __PLAYERBUILDINGCENTER_H__
 #define __PLAYERBUILDINGCENTER_H__
 
-#include <map>
 #include "Buildings/Building.h"
+#include <map>
+#include <utility>
 
 class PlayerBuildingCenter {
 public:

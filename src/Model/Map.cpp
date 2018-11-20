@@ -45,7 +45,6 @@ Map::Map(const char* filePath) :
             } else if (key == precipice_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
             }
-
         }
     }
 }
@@ -81,7 +80,7 @@ int Map::getHeightInBlocks() {
 }
 
 Terrain& Map::at(int x, int y) {
-    if (x < 0 || y < 0) {
+    if ((x < 0) || (y < 0)) {
         throw (std::out_of_range("Out of range"));
     }
     return *matrix.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH));
@@ -203,14 +202,12 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
                     (building->getPosition().y > area.getY()) &&
                     (building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
                 answer.emplace_back(building);
-            }
-            else {
+            } else {
                 if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
                         (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
                     answer.emplace_back(building);
                 }
             }
-
         }
     }
     return std::move(answer);
@@ -224,14 +221,12 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area) {
                 (building->getPosition().y > area.getY()) &&
                 (building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
             answer.emplace_back(building);
-        }
-        else {
+        } else {
             if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
                     (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
                 answer.emplace_back(building);
             }
         }
-
     }
     return std::move(answer);
 }
@@ -277,7 +272,9 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
                 if ((this->at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()) {
                     return false;
                 }
-            } else return false;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -341,7 +338,6 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
             closest_unit_distance = distance;
         }
     }
-
     for (auto& current_building : buildings) {
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
