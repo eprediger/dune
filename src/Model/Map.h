@@ -45,10 +45,7 @@ public:
     int getBlockWidth();
     int getBlockHeight();
 
-    Unit * getClosestUnit(Position& position, int limitRadius);
     Unit * getClosestUnit(Position position, int limitRadius, Player& player);
-    Building * getClosestBuilding(Position &position, int limitRadius);
-    Unit * getClosestUnit(Position &position, int limitRadius, Player& player, bool has);
     Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
 
     std::vector<Unit*> getUnitsInArea(Area& area, Player& player);

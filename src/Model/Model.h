@@ -56,8 +56,7 @@ public:
 	WindTrap& createWindTrap(int x, int y, int player);
 	Building& createBuilding(Building* building);
 
-    Unit* selectUnit(Position &pos, int player);
-    std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
+	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
     void actionOnPosition(Position &pos, Unit &unit);
 	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player); 
@@ -71,9 +70,7 @@ public:
 
 	int numberOfPlayers();
 
-	Unit* selectUnit(int x, int y);
-
-	void cleanDeadBuildings();
+    void cleanDeadBuildings();
 };
 
 #endif	// __MODEL_H__

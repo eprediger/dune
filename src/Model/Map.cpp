@@ -130,21 +130,6 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     unit.setPath(path, p_destiny);
 }
 
-Unit *Map::getClosestUnit(Position &position, int limitRadius) {
-    Unit* closest_unit = nullptr;
-    int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units) {
-        int distance = current_unit->getPosition().sqrtDistance(position);
-        if (distance < limitRadius
-                && distance < closest_unit_distance) {
-            closest_unit = current_unit;
-            closest_unit_distance = distance;
-        }
-    }
-
-    return closest_unit;
-}
-
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
@@ -231,21 +216,6 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area) {
     return std::move(answer);
 }
 
-Building * Map::getClosestBuilding(Position &position, int limitRadius) {
-    Building* closest_unit = nullptr;
-    int closest_unit_distance = limitRadius;
-    for (auto& current_building : buildings) {
-        int distance = current_building->getPosition().sqrtDistance(position);
-        if (distance < limitRadius
-                && distance < closest_unit_distance) {
-            closest_unit = current_building;
-            closest_unit_distance = distance;
-        }
-    }
-
-    return closest_unit;
-}
-
 void Map::cleanUnit(Unit *unit) {
     this->at(unit->getPosition()).free();
     units.erase(std::find(units.begin(), units.end(), unit));
@@ -309,21 +279,6 @@ Position Map::getClosestFreePosition(Building* building) {
         dist += 1;
     }
     return pos;
-}
-
-Unit *Map::getClosestUnit(Position &position, int limitRadius, Player& player, bool has) {
-    Unit* closest_unit = nullptr;
-    int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units) {
-        int distance = current_unit->getPosition().sqrtDistance(position);
-        if (distance < limitRadius
-                && distance < closest_unit_distance
-                && !( (player == current_unit->getPlayer()) ^  has)) {
-            closest_unit = current_unit;
-            closest_unit_distance = distance;
-        }
-    }
-    return closest_unit;
 }
 
 Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {

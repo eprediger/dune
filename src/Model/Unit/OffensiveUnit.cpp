@@ -64,7 +64,7 @@ UnitState *OffensiveUnit::makeDefending(Map &map) {
 }
 
 bool OffensiveUnit::automaticAttack(Map &map) {
-    Unit* closest_unit = map.getClosestUnit(this->pos, this->range, *this->player, false);
+    Attackable* closest_unit = map.getClosestAttackable(this->pos, this->range, *this->player);
     if (closest_unit == nullptr) {
         return false;
     } else {

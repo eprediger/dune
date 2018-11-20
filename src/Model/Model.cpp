@@ -115,11 +115,6 @@ Player *Model::getWinner() {
     return nullptr;
 }
 
-Unit *Model::selectUnit(int x, int y) {
-    Position aux_pos(x, y);
-    return map.getClosestUnit(aux_pos, LIMIT_TO_SELECT);
-}
-
 std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
     return std::move(map.getUnitsInArea(area, player));
 }
@@ -296,11 +291,6 @@ WindTrap& Model::createWindTrap(int x, int y, int player) {
     WindTrap* building = new WindTrap(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
     return (WindTrap&)this->createBuilding(std::move(building));
-}
-
-Unit * Model::selectUnit(Position &pos, int player) {
-//    map.getClosestUnit(pos, 50*50, players.at(player), true);
-    return map.getClosestUnit(pos, 50 * 50);
 }
 
 void Model::actionOnPosition(Position &pos, Unit &unit) {
