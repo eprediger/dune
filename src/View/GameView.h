@@ -21,6 +21,7 @@
 #define BTN_WIDTH 80
 #define BTN_HEIGHT ((BTN_WIDTH) * 3 / 4)
 #define BTN_VERT_SPACE ((BTN_HEIGHT) + 5)
+#define BTN_SELL_BUILDING 34
 
 #define ENERGY_BAR_WIDTH 5
 
@@ -42,7 +43,7 @@ private:
 	Text buildingTag, unitsTag;
 	std::vector<ButtonView*> buildingButtons;
 	std::vector<ButtonView*> unitButtons;
-	SdlTexture buttons;
+	ButtonView* buildingSellButton;
 	int map_width;
 	int map_height;
 	int camera_width;
@@ -86,6 +87,8 @@ public:
     ButtonView &createUnitButton(const std::string &filename, int number_steps);
 
 	ButtonView &createBuildingButton(const std::string &filename, int number_steps);
+
+	ButtonView& createSellBuildingButton(const std::string& filename);
 
 	void render() override;
 

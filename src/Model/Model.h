@@ -74,8 +74,6 @@ public:
 	Unit* selectUnit(int x, int y);
 
 	void cleanDeadBuildings();
-
-
 };
 
 #endif	// __MODEL_H__

@@ -13,7 +13,7 @@ public:
 
     virtual bool canBeEnabled() override;
 
-    virtual bool finishAction() override;
+//    virtual bool finishAction() override;
 
 	virtual void executeReady() override;
 
@@ -21,7 +21,6 @@ public:
 
 private:
 	BuildingConstructor& constructor;
-
 };
 
 #endif  // __BUTTON_HANDLER_HEAVY_FACTORY_H__

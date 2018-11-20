@@ -1,9 +1,9 @@
 #include "UnitState.h"
 
 bool UnitState::isAttacking() {
-    return false;
+	return false;
 }
 
-bool UnitState::isTraining(){
-    return false;
+bool UnitState::isTraining() {
+	return false;
 }

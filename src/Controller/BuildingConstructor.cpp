@@ -77,12 +77,10 @@ void BuildingConstructor::build() {
                 break;
             }
             on = false;
-
         }
     }
 }
 
 Player& BuildingConstructor::getPlayer() {
-//    return this->player;
     return model.getPlayer(GameHandler::actual_player);
 }

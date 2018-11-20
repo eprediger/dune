@@ -18,7 +18,7 @@ int Sand::getSpice(){
 }
 
 bool Sand::hasFarm() {
-    return availableFarm > 0;
+	return (availableFarm > 0);
 }
 
 char Sand::getKey(){

@@ -2,10 +2,10 @@
 #include "Unit/Unit.h"
 #include "Weapons/Weapons.h"
 Attacker::Attacker(const Weapon &weapon, const int range) :
-	weapon(weapon),
-	range(range),
-	actual_frec(0),
-    shooting(false){}
+    weapon(weapon),
+    range(range),
+    actual_frec(0),
+    shooting(false) {}
 
 void Attacker::attack(Attackable &defender) {
     shooting = false;
@@ -23,6 +23,6 @@ const Weapon& Attacker::getWeapon(){
     return weapon;
 }
 
-bool Attacker::isShooting(){
-    return shooting;    
+bool Attacker::isShooting() {
+    return shooting;
 }

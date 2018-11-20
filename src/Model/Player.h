@@ -11,7 +11,6 @@
 
 class Map;
 class Unit;
-// class PlayerTrainingCenter;
 
 class Player {
 private:
@@ -28,7 +27,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
 
-    std::vector<Unit*>& getTrainedUnits(Map& map);  
+    std::vector<Unit*>& getTrainedUnits(Map& map);
 
     explicit Player(int id, ConstructionYard &construction_yard);
 

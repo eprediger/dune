@@ -5,8 +5,8 @@
 
 ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
-			GlobalConfig.tankConstructionTime),
-		model, view) {
+	                                    GlobalConfig.tankConstructionTime),
+	              model, view) {
 }
 
 ButtonHandlerTank::~ButtonHandlerTank() {}

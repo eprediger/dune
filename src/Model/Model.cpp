@@ -40,7 +40,7 @@ Model::~Model() {
     for (auto& building : buildings) {
         delete building;
     }
-    for (auto& player : players){
+    for (auto& player : players) {
         delete player;
     }
 }
@@ -68,11 +68,11 @@ void Model::step() {
         }
         (*itr)->makeAction(map);
     }
-    for (auto itr = players.begin(); itr!=players.end(); itr++){
+    for (auto itr = players.begin(); itr != players.end(); itr++) {
         (*itr)->trainUnits();
         (*itr)->constructBuildings();
         std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
-        for (auto unit = new_units.begin(); unit!=new_units.end(); unit++){
+        for (auto unit = new_units.begin(); unit != new_units.end(); unit++) {
             units.push_back(*unit);
 //            (*unit)->setPlayer(**itr);
             map.put(**unit);
@@ -88,8 +88,8 @@ void Model::step() {
     }
 
     int players_alive = 0;
-    for (auto itr = players.begin(); itr != players.end(); ++itr){
-        if ( !(*itr)->lose() ){
+    for (auto itr = players.begin(); itr != players.end(); ++itr) {
+        if ( !(*itr)->lose() ) {
             players_alive++;
         }
     }
@@ -106,8 +106,8 @@ Player *Model::getWinner() {
     if (!gameFinished) {
         return nullptr;
     }
-    for (auto itr = players.begin(); itr != players.end() ; ++itr){
-        if ( !(*itr)->lose() ){
+    for (auto itr = players.begin(); itr != players.end() ; ++itr) {
+        if ( !(*itr)->lose() ) {
             return *itr;
         }
     }
@@ -123,9 +123,9 @@ std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
     return std::move(map.getUnitsInArea(area, player));
 }
 
-std::vector<Building*> Model::selectBuildingsInArea(Area& area, Player& player){
-    return std::move(map.getBuildingsInArea(area,player));
-} 
+std::vector<Building*> Model::selectBuildingsInArea(Area& area, Player& player) {
+    return std::move(map.getBuildingsInArea(area, player));
+}
 
 Map &Model::getMap() {
     return map;
@@ -157,23 +157,24 @@ void Model::cleanDeadUnits() {
 
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;
-    for (auto& b : buildings){
-        if (Attackable::isDead(b)){
+    for (auto& b : buildings) {
+        if (Attackable::isDead(b)) {
             has_dead_unit = true;
             map.cleanBuilding(b);
         }
     }
-    if (has_dead_unit){
-        for (auto& player : players){
+    if (has_dead_unit) {
+        for (auto& player : players) {
             player->cleanDeadBuildings();
         }
         auto it = buildings.begin();
-        while (it!=buildings.end()){
-            if (Attackable::isDead((*it))){
+        while (it != buildings.end()) {
+            if (Attackable::isDead((*it))) {
                 delete(*it);
                 it = buildings.erase(it);
+            } else {
+                it++;
             }
-            else it++;
         }
     }
 }
@@ -313,7 +314,7 @@ void Model::actionOnPosition(Position &pos, Unit &unit) {
 }
 
 bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player) {
-    if ( cost > player.gold ){
+    if ( cost > player.gold ) {
         return false;
     }
     return this->map.canWeBuild(pos, width, height);
@@ -322,4 +323,3 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
 int Model::numberOfPlayers() {
     return players.size();
 }
-

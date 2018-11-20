@@ -1,8 +1,6 @@
 #ifndef __UNITSTATE_H__
 #define __UNITSTATE_H__
 
-
-
 class Map;
 class Unit;
 

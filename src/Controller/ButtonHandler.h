@@ -8,12 +8,11 @@
 
 class ButtonHandler {
 public:
-
 	ButtonHandler(ButtonView& buttonView, Model& model, GameView& view);
 
 	virtual ~ButtonHandler();
 
-	void handleUserInput(const int x, const int y); 
+	void handleUserInput(const int x, const int y);
 
 	void update();
 
@@ -21,10 +20,10 @@ public:
 
 	virtual void execute() = 0;
 
-    virtual bool canBeEnabled() = 0;
+	virtual bool canBeEnabled() = 0;
 
-    virtual bool finishAction() = 0;
-	
+	virtual bool finishAction();
+
 	void setState(const State state);
 
 	virtual void executeReady();
