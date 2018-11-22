@@ -16,6 +16,8 @@ public:
 
     void setPosition(Position pos);
 
+    int getId();
+
     Position& getPosition();
 
     virtual Position& getClosestPosition(Position& pos);

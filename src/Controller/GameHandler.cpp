@@ -22,7 +22,7 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     view(view),
     model(model),
     selector(0, 0),
-    constructor(model, model.getPlayer(GameHandler::actual_player), view) {
+    constructor(model, model.getPlayer(GameHandler::actual_player), view, send_queue) {
     view.addSelectorView(this->selector);
     this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor));
     this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor));
@@ -156,4 +156,34 @@ bool GameHandler::handleInput() {
     this->view.cleanDeadViews();
     this->selector.selection.eraseDeads();
     return keepPlaying;
+}
+
+
+
+// Este metodo es temporal. La idea es luego, colocar este metodo dentro
+// de la clase que haga el POP del stack recibido y actualice el modelo y
+// la vista en base a eso.
+#include "../View/BuildingViewFactory.h"
+void GameHandler::step() {
+    if (this->send_queue.empty()) {
+        return;
+    }
+
+// La idea es luego, reemplazar esto por la cola de eventos recibida
+// por el servidor
+//    nlohmann::json msg = this->recv_queue.front();
+    nlohmann::json msg = this->send_queue.front();
+    this->send_queue.pop_front();
+
+
+    if ( msg["method"] == "createWindTrap"){
+        WindTrap& windTrap = (WindTrap&) model.getBuildingById(msg["id"]);
+
+        // Aqui se creara el edificio en el modelo del cliente,
+        // luego de haber sido creada en el modelo del servidor
+//            model.createWindTrap(msg["id"], msg["x"], msg["y"], msg["actual_player"]);
+        view.addBuildingView(BuildingViewFactory::createBuildingView(windTrap, view.getWindow()));
+    }
+
+
 }

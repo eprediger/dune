@@ -315,3 +315,13 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
 int Model::numberOfPlayers() {
     return players.size();
 }
+
+
+/// TEMPORAL
+Building & Model::getBuildingById(int id) {
+    for (auto& building : buildings){
+        if(building->getId() == id ){
+            return *building;
+        }
+    }
+}

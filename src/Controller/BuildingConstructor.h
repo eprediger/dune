@@ -6,6 +6,8 @@
 #include "../Model/Player.h"
 #include "../View/GameView.h"
 
+#include <json.hpp>
+
 class GameView;
 
 class BuildingConstructor {
@@ -13,6 +15,7 @@ private:
     Model& model;
     Player& player;
     GameView& view;
+    std::deque<nlohmann::json>& send_queue;
 
 public:
     bool on;
@@ -21,7 +24,7 @@ public:
     int width, height;
     int cost;
 
-    BuildingConstructor(Model& model, Player& player, GameView& view);
+    BuildingConstructor(Model& model, Player& player, GameView& view, std::deque<nlohmann::json>& send_queue);
     void build();
     bool canWeBuild();
     Player& getPlayer();

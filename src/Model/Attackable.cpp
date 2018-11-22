@@ -50,3 +50,7 @@ void Attackable::setPosition(Position pos) {
 Position& Attackable::getClosestPosition(Position& position) {
     return this->pos;
 }
+
+int Attackable::getId() {
+    return id;
+}

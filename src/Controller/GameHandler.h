@@ -15,14 +15,18 @@ class GameHandler : public InputHandler {
 public:
 	// Handler para eventos del juego
 	explicit GameHandler(GameView &view, Model &model);
+	static int actual_player;
 
 	// Libera recursos asociados a la instancia
 	~GameHandler();
   
 	bool handleInput() override;
 
-	static int actual_player;
 
+	// Metodo temporal
+	virtual void step();
+
+	std::deque<nlohmann::json> send_queue;
 private:
 	GameView& view;
 	Model& model;

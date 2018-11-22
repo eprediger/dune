@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "View/BuildingViewFactory.h"
 
 Application::Application(View& view, InputHandler& handler,Model& model) :
 	isRunning(true),
@@ -21,6 +22,7 @@ void Application::handleEvent() {
 }
 
 void Application::update() {
+    this->handler.step();
 	this->model.step();
 }
 

@@ -71,6 +71,9 @@ public:
 	int numberOfPlayers();
 
     void cleanDeadBuildings();
+
+    /// TEMPORAL
+	Building & getBuildingById(int id);
 };
 
 #endif	// __MODEL_H__

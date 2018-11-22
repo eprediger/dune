@@ -8,10 +8,13 @@
 #include "../View/BuildingViewFactory.h"
 #include "GameHandler.h"
 
-BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view):
+#include <nlohmann/json.hpp>
+
+BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view, std::deque<nlohmann::json>& send_queue):
     model(model),
     player(player),
     view(view),
+    send_queue(send_queue),
     on(false),
     pos(0, 0),
     building(),
@@ -69,7 +72,18 @@ void BuildingConstructor::build() {
             case Building::WIND_TRAP:
             {
                 WindTrap& windtrap = model.createWindTrap(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
+//                interface.createWindTrap(pos.x, pos.y, GameHandler::actual_player);
+                nlohmann::json msg;
+                msg["class"] = "model";
+                msg["method"] = "createWindTrap";
+                msg["id"] = windtrap.getId();
+                msg["x"] = pos.x;
+                msg["y"] = pos.y;
+                msg["actual_player"] = GameHandler::actual_player;
+//                send(msg);
+                send_queue.push_back(msg);
+
+//                view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
                 model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::WIND_TRAP);
                 break;
             }

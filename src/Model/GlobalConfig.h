@@ -4,7 +4,7 @@
 #define SPEED_FACTOR (84*3)
 #define RANGE_FACTOR 2000
 
-#define TIME_FACTOR 30
+#define TIME_FACTOR 10
 
 typedef struct {
 // Building Stats
