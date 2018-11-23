@@ -5,7 +5,7 @@
 
 class ButtonHandlerRaider : public ButtonHandler {
 public:
-	ButtonHandlerRaider(Model &model, GameView &view);
+	ButtonHandlerRaider(Model &model, GameView &view, CommunicationQueue& queue);
 
 	~ButtonHandlerRaider();
 

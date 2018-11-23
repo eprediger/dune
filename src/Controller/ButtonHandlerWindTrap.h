@@ -5,7 +5,8 @@
 
 class ButtonHandlerWindTrap : public ButtonHandler {
 public:
-	ButtonHandlerWindTrap(Model &model, GameView &view, BuildingConstructor& constructor);
+	ButtonHandlerWindTrap(Model &model, GameView &view,
+			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerWindTrap();
 

@@ -3,16 +3,21 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view, BuildingConstructor& constructor) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
-                                            GlobalConfig.buildingConstructionTime),
-                  model, view),
+ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,
+            BuildingConstructor& constructor, CommunicationQueue& queue) :
+        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
+                                                GlobalConfig.buildingConstructionTime),
+                      model, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 
 void ButtonHandlerHeavyFactory::execute() {
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::HEAVY_FACTORY);
+    nlohmann::json msg;
+    msg["method"] = "beginConstruction";
+    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["building_type"] = Building::HEAVY_FACTORY;
+    queue.enqueue(msg);
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {

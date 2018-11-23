@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
-			GlobalConfig.heavyInfantryTrainingTime),
-		model, view) {
+ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &view, CommunicationQueue& queue) :
+        ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
+                                            GlobalConfig.heavyInfantryTrainingTime),
+                      model, view, queue) {
 }
 
 ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}

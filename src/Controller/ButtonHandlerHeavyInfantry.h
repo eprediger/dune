@@ -5,7 +5,7 @@
 
 class ButtonHandlerHeavyInfantry : public ButtonHandler {
 public:
-	ButtonHandlerHeavyInfantry(Model &model, GameView &view);
+	ButtonHandlerHeavyInfantry(Model &model, GameView &view, CommunicationQueue& queue);
 
 	~ButtonHandlerHeavyInfantry();
 

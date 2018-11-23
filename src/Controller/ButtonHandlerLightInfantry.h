@@ -5,7 +5,7 @@
 
 class ButtonHandlerLightInfantry : public ButtonHandler {
 public:
-	ButtonHandlerLightInfantry(Model &model, GameView &view);
+	ButtonHandlerLightInfantry(Model &model, GameView &view, CommunicationQueue& queue);
 
 	~ButtonHandlerLightInfantry();
 

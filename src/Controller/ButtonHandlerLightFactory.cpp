@@ -3,16 +3,21 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerLightFactory::ButtonHandlerLightFactory(Model &model, GameView &view, BuildingConstructor& constructor) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif",
-                                            GlobalConfig.buildingConstructionTime),
-                  model, view),
+ButtonHandlerLightFactory::ButtonHandlerLightFactory(Model &model, GameView &view,
+            BuildingConstructor& constructor, CommunicationQueue& queue) :
+        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif",
+                                                GlobalConfig.buildingConstructionTime),
+                      model, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerLightFactory::~ButtonHandlerLightFactory() {}
 
 void ButtonHandlerLightFactory::execute() {
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::LIGHT_FACTORY);
+    nlohmann::json msg;
+    msg["method"] = "beginConstruction";
+    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["building_type"] = Building::LIGHT_FACTORY;
+    queue.enqueue(msg);
 }
 
 bool ButtonHandlerLightFactory::canBeEnabled() {

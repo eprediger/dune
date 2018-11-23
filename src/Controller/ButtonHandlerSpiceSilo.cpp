@@ -3,16 +3,21 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view, BuildingConstructor& constructor) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-                                            GlobalConfig.buildingConstructionTime),
-                  model, view),
+ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Model &model, GameView &view,
+            BuildingConstructor& constructor, CommunicationQueue& queue) :
+        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
+                                                GlobalConfig.buildingConstructionTime),
+                      model, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 
 void ButtonHandlerSpiceSilo::execute() {
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::SPICE_SILO);
+    nlohmann::json msg;
+    msg["method"] = "beginConstruction";
+    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["building_type"] = Building::SPICE_SILO;
+    queue.enqueue(msg);
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {

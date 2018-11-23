@@ -21,6 +21,7 @@ private:
     void createSpiceRefinery(int x, int y, int player_id);
     void createSpiceSilo(int x, int y, int player_id);
 
+    void beginConstruction(int player_id, Building::BuildingType type);
 };
 
 

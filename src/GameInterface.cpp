@@ -33,6 +33,10 @@ void GameInterface::execute(nlohmann::json json) {
         this->createSpiceSilo(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
         return;
     }
+    if ( json["method"] == "beginConstruction"){
+        this->beginConstruction(json["args"]["player"],json["args"]["building_type"]);
+        return;
+    }
 }
 
 void GameInterface::createWindTrap(int x, int y, int player_id) {
@@ -68,4 +72,8 @@ void GameInterface::createSpiceSilo(int x, int y, int player_id) {
     SpiceSilo& spiceSilo = model.createSpiceSilo(x, y, player_id);
     view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo, view.getWindow()));
     model.getPlayer(player_id).buildingCenter->build(Building::SPICE_SILO);
+}
+
+void GameInterface::beginConstruction(int player_id, Building::BuildingType type) {
+    model.getPlayer(player_id).buildingCenter->newConstruct(type);
 }

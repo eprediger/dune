@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
-	                                    GlobalConfig.trikeConstructionTime),
-	              model, view) {
+ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view, CommunicationQueue& queue) :
+        ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
+                                            GlobalConfig.trikeConstructionTime),
+                      model, view, queue) {
 }
 
 ButtonHandlerTrike::~ButtonHandlerTrike() {}

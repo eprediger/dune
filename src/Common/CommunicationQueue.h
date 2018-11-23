@@ -11,6 +11,9 @@ public:
     void enqueue(nlohmann::json send_json);
 
     nlohmann::json dequeue();
+
+    bool isEmpty();
+
 private:
     std::queue<nlohmann::json> send_queue;
 };

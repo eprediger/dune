@@ -3,12 +3,13 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, BuildingConstructor& constructor):
-	ButtonHandler(
-            view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-                    GlobalConfig.buildingConstructionTime),
-	        model,
-	        view)
+ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view,
+			BuildingConstructor& constructor, CommunicationQueue& queue):
+        ButtonHandler(
+                view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
+                                          GlobalConfig.buildingConstructionTime),
+                model,
+                view, queue)
 	,constructor(constructor) {
 	/*
 	"../assets/img/btns/buildings/barracks-harkonnen.jpg"
@@ -19,7 +20,11 @@ ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view, Build
 ButtonHandlerBarracks::~ButtonHandlerBarracks() { time = 0; }
 
 void ButtonHandlerBarracks::execute() {
-	model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::BARRACKS);
+	nlohmann::json msg;
+	msg["method"] = "beginConstruction";
+	msg["args"]["player"] = GameHandler::actual_player;
+	msg["args"]["building_type"] = Building::BARRACKS;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {

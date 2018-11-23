@@ -1,12 +1,12 @@
 #include "ButtonHandlerWindTrap.h"
 #include "../View/BuildingViewFactory.h"
 #include "GameHandler.h"
-#include <iostream>
 
-ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view, BuildingConstructor& constructor) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
-                                            GlobalConfig.buildingConstructionTime),
-                  model, view),
+ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view,
+            BuildingConstructor& constructor, CommunicationQueue& queue) :
+        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
+                                                GlobalConfig.buildingConstructionTime),
+                      model, view, queue),
     constructor(constructor) {
     if (this->canBeEnabled()) {
         this->setState(State::ENABLED);
@@ -16,7 +16,11 @@ ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view, Build
 ButtonHandlerWindTrap::~ButtonHandlerWindTrap() {}
 
 void ButtonHandlerWindTrap::execute() {
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::WIND_TRAP);
+    nlohmann::json msg;
+    msg["method"] = "beginConstruction";
+    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["building_type"] = Building::WIND_TRAP;
+    queue.enqueue(msg);
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {

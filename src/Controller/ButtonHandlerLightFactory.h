@@ -5,7 +5,8 @@
 
 class ButtonHandlerLightFactory : public ButtonHandler {
 public:
-	ButtonHandlerLightFactory(Model &model, GameView &view, BuildingConstructor& constructor);
+	ButtonHandlerLightFactory(Model &model, GameView &view,
+			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerLightFactory();
 

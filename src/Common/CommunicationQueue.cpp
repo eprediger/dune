@@ -14,3 +14,7 @@ nlohmann::json CommunicationQueue::dequeue() {
     }
     return ret_json;
 }
+
+bool CommunicationQueue::isEmpty() {
+    return send_queue.empty();
+}

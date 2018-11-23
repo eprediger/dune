@@ -2,8 +2,10 @@
 #include "GameHandler.h"
 #include <vector>
 
-ButtonHandlerSellBuilding::ButtonHandlerSellBuilding(Model &model, GameView &view, Selector &selector) :
-	ButtonHandler(view.createSellBuildingButton("../assets/img/btns/sellBuilding.png"), model, view),
+ButtonHandlerSellBuilding::ButtonHandlerSellBuilding(Model &model, GameView &view,
+			Selector &selector, CommunicationQueue& queue) :
+        ButtonHandler(view.createSellBuildingButton("../assets/img/btns/sellBuilding.png"), model, view,
+                      queue),
 	selector(selector) {}
 
 ButtonHandlerSellBuilding::~ButtonHandlerSellBuilding() {}

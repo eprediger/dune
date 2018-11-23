@@ -5,7 +5,7 @@
 
 class ButtonHandlerTrike : public ButtonHandler {
 public:
-	ButtonHandlerTrike(Model &model, GameView &view);
+	ButtonHandlerTrike(Model &model, GameView &view, CommunicationQueue& queue);
 	
 	~ButtonHandlerTrike();
 

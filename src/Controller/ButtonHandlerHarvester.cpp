@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerHarvester::ButtonHandlerHarvester(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
-	                                    GlobalConfig.harvesterConstructionTime),
-	              model, view) {}
+ButtonHandlerHarvester::ButtonHandlerHarvester(Model &model, GameView &view, CommunicationQueue& queue) :
+        ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
+                                            GlobalConfig.harvesterConstructionTime),
+                      model, view, queue) {}
 
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 

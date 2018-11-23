@@ -25,19 +25,19 @@ GameHandler::GameHandler(GameView &view, Model &model) :
     constructor(model, model.getPlayer(GameHandler::actual_player), view, queue),
     interface(model, view) {
     view.addSelectorView(this->selector);
-    this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerBarracks(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view, constructor));
-    this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerTank(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view));
-    this->buttons.push_back(new ButtonHandlerSellBuilding(this->model, this->view, this->selector));
+    this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerBarracks(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerTank(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerSellBuilding(this->model, this->view, this->selector, this->queue));
     for (auto& button : this->buttons) {
         if (button->canBeEnabled()) {
             button->setState(State::ENABLED);
@@ -54,6 +54,9 @@ GameHandler::~GameHandler() {
 
 bool GameHandler::handleInput() {
     bool keepPlaying = true;
+    for (auto& button : this->buttons) {
+        button->update();
+    }
     SDL_Event event;
     SDL_PollEvent(&event);
     switch (event.type) {
@@ -151,9 +154,6 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-    for (auto& button : this->buttons) {
-        button->update();
-    }
     this->view.cleanDeadViews();
     this->selector.selection.eraseDeads();
     return keepPlaying;
@@ -165,6 +165,7 @@ bool GameHandler::handleInput() {
 // de la clase que haga el POP del stack recibido y actualice el modelo y
 // la vista en base a eso.
 void GameHandler::step() {
-    interface.execute(queue.dequeue());
-
+    while (!queue.isEmpty()){
+        interface.execute(queue.dequeue());
+    }
 }

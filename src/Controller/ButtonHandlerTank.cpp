@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
-	                                    GlobalConfig.tankConstructionTime),
-	              model, view) {
+ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view, CommunicationQueue& queue) :
+        ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
+                                            GlobalConfig.tankConstructionTime),
+                      model, view, queue) {
 }
 
 ButtonHandlerTank::~ButtonHandlerTank() {}

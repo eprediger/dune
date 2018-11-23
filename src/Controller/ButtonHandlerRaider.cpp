@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
-	                                    GlobalConfig.raiderConstructionTime),
-	              model, view) {
+ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view, CommunicationQueue& queue) :
+        ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
+                                            GlobalConfig.raiderConstructionTime),
+                      model, view, queue) {
 }
 
 ButtonHandlerRaider::~ButtonHandlerRaider() {}

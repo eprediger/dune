@@ -5,7 +5,7 @@
 
 class ButtonHandlerHarvester : public ButtonHandler {
 public:
-	ButtonHandlerHarvester(Model &model, GameView &view);
+	ButtonHandlerHarvester(Model &model, GameView &view, CommunicationQueue& queue);
 
 	~ButtonHandlerHarvester();
 

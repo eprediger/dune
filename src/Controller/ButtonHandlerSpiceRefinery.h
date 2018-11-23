@@ -5,7 +5,8 @@
 
 class ButtonHandlerSpiceRefinery : public ButtonHandler {
 public:
-	ButtonHandlerSpiceRefinery(Model &model, GameView &view, BuildingConstructor& constructor);
+	ButtonHandlerSpiceRefinery(Model &model, GameView &view,
+			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerSpiceRefinery();
 
