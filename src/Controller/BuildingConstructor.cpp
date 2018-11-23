@@ -10,11 +10,11 @@
 
 #include <nlohmann/json.hpp>
 
-BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view, std::deque<nlohmann::json>& send_queue):
+BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view, CommunicationQueue& queue):
     model(model),
     player(player),
     view(view),
-    send_queue(send_queue),
+    queue(queue),
     on(false),
     pos(0, 0),
     building(),
@@ -32,64 +32,53 @@ bool BuildingConstructor::canWeBuild() {
 void BuildingConstructor::build() {
     if (on) {
         if (model.canWeBuild(pos, width, height, cost, model.getPlayer(GameHandler::actual_player))) {
+            nlohmann::json msg;
+            msg["args"]["x"] = pos.x;
+            msg["args"]["y"] = pos.y;
+            msg["args"]["player"] = GameHandler::actual_player;
+
             switch (building) {
             case Building::BARRACKS:
             {
-                Barracks& barracks = model.createBarracks(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(barracks, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::BARRACKS);
+                msg["method"] = "createBarracks";
+                queue.enqueue(msg);
                 break;
             }
             case Building::LIGHT_FACTORY:
             {
-                LightFactory& lightF = model.createLightFactory(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(lightF, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::LIGHT_FACTORY);
+                msg["method"] = "createLightFactory";
+                queue.enqueue(msg);
                 break;
             }
             case Building::HEAVY_FACTORY:
             {
-                HeavyFactory& heavyF = model.createHeavyFactory(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(heavyF, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::HEAVY_FACTORY);
+                msg["method"] = "createHeavyFactory";
+                queue.enqueue(msg);
                 break;
             }
             case Building::SPICE_REFINERY:
             {
-                SpiceRefinery& spiceRef = model.createSpiceRefinery(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(spiceRef, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::SPICE_REFINERY);
+                msg["method"] = "createSpiceRefinery";
+                queue.enqueue(msg);
                 break;
             }
 
             case Building::SPICE_SILO:
             {
-                SpiceSilo& spiceSilo = model.createSpiceSilo(pos.x, pos.y, GameHandler::actual_player);
-                view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::SPICE_SILO);
+                msg["method"] = "createSpiceSilo";
+                queue.enqueue(msg);
                 break;
             }
             case Building::WIND_TRAP:
             {
-                WindTrap& windtrap = model.createWindTrap(pos.x, pos.y, GameHandler::actual_player);
-//                interface.createWindTrap(pos.x, pos.y, GameHandler::actual_player);
-                nlohmann::json msg;
-                msg["class"] = "model";
                 msg["method"] = "createWindTrap";
-                msg["id"] = windtrap.getId();
-                msg["x"] = pos.x;
-                msg["y"] = pos.y;
-                msg["actual_player"] = GameHandler::actual_player;
-//                send(msg);
-                send_queue.push_back(msg);
-
-//                view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
-                model.getPlayer(GameHandler::actual_player).buildingCenter->build(Building::WIND_TRAP);
-                break;
+                queue.enqueue(msg);
             }
             default:
                 break;
             }
+
+
             on = false;
         }
     }

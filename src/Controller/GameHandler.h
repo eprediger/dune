@@ -9,6 +9,8 @@
 #include "../Model/Model.h"
 #include "../View/GameView.h"
 #include "ButtonHandler.h"
+#include "../Common/CommunicationQueue.h"
+#include "../GameInterface.h"
 #include <vector>
 
 class GameHandler : public InputHandler {
@@ -26,13 +28,15 @@ public:
 	// Metodo temporal
 	virtual void step();
 
-	std::deque<nlohmann::json> send_queue;
+
 private:
 	GameView& view;
 	Model& model;
 	Selector selector;
 	BuildingConstructor constructor;
 	std::vector<ButtonHandler*> buttons;
+    CommunicationQueue queue;
+    GameInterface interface;
 };
 
 #endif	// __GAME_HANDLER_H__
