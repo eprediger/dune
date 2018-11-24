@@ -29,6 +29,8 @@ private:
     void createRaider(int player_id);
     void createTank(int player_id);
     void createTrike(int player_id);
+
+    void sellBuilding(int player_id, int building_id);
 };
 
 

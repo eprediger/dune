@@ -136,7 +136,11 @@ bool GameHandler::handleInput() {
         {
             std::vector<Building*>& to_sell = this->selector.selection.getSelectedBuildings();
             for (auto itr = to_sell.begin(); itr != to_sell.end() ; itr++) {
-                model.getPlayer(GameHandler::actual_player).sellBuilding(*itr);
+                nlohmann::json msg;
+                msg["method"] = "sellBuilding";
+                msg["args"]["player"] = GameHandler::actual_player;
+                msg["args"]["building_id"] = (*itr)->getId();
+                queue.enqueue(msg);
             }
         }
         break;
@@ -154,7 +158,7 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-    this->view.cleanDeadViews();
+    this->step();
     this->selector.selection.eraseDeads();
     return keepPlaying;
 }

@@ -58,6 +58,10 @@ void GameInterface::execute(nlohmann::json json) {
         this->createTrike(json["args"]["player"]);
         return;
     }
+    if ( json["method"] == "sellBuilding"){
+        this->sellBuilding(json["args"]["player"], json["args"]["building_id"]);
+        return;
+    }
 }
 
 void GameInterface::createWindTrap(int x, int y, int player_id) {
@@ -122,4 +126,8 @@ void GameInterface::createTank(int player_id) {
 void GameInterface::createTrike(int player_id) {
     Trike& newUnit = model.createTrike(0,0, player_id);
     view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+}
+
+void GameInterface::sellBuilding(int player_id, int building_id) {
+    model.getPlayer(player_id).sellBuilding(&model.getBuildingById(building_id));
 }

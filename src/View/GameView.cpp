@@ -132,6 +132,7 @@ SdlWindow &GameView::getWindow() {
 }
 
 void GameView::render() {
+	this->cleanDeadViews();
 	map_view.draw(camera);
 
 	if (constructorView != nullptr) {
