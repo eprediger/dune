@@ -12,8 +12,10 @@ ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view, Communica
 ButtonHandlerRaider::~ButtonHandlerRaider() {}
 
 void ButtonHandlerRaider::execute() {
-	Raider& newUnit = model.createRaider(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createRaider";
+	msg["args"]["player"] = GameHandler::actual_player;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {

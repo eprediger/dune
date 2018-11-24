@@ -1,9 +1,6 @@
-//
-// Created by demian on 22/11/18.
-//
-
 #include "GameInterface.h"
 #include "View/BuildingViewFactory.h"
+#include "View/UnitViewFactory.h"
 
 GameInterface::GameInterface(Model &model, GameView &view) :
     model(model), view(view) {}
@@ -35,6 +32,30 @@ void GameInterface::execute(nlohmann::json json) {
     }
     if ( json["method"] == "beginConstruction"){
         this->beginConstruction(json["args"]["player"],json["args"]["building_type"]);
+        return;
+    }
+    if ( json["method"] == "createHarvester"){
+        this->createHarvester(json["args"]["player"]);
+        return;
+    }
+    if ( json["method"] == "createHeavyInfantry"){
+        this->createHeavyInfantry(json["args"]["player"]);
+        return;
+    }
+    if ( json["method"] == "createLightInfantry"){
+        this->createLightInfantry(json["args"]["player"]);
+        return;
+    }
+    if ( json["method"] == "createRaider"){
+        this->createRaider(json["args"]["player"]);
+        return;
+    }
+    if ( json["method"] == "createTank"){
+        this->createTank(json["args"]["player"]);
+        return;
+    }
+    if ( json["method"] == "createTrike"){
+        this->createTrike(json["args"]["player"]);
         return;
     }
 }
@@ -76,4 +97,29 @@ void GameInterface::createSpiceSilo(int x, int y, int player_id) {
 
 void GameInterface::beginConstruction(int player_id, Building::BuildingType type) {
     model.getPlayer(player_id).buildingCenter->newConstruct(type);
+}
+
+void GameInterface::createHarvester(int player_id) {
+    Harvester& newUnit = model.createHarvester(0,0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+}
+void GameInterface::createHeavyInfantry(int player_id) {
+    HeavyInfantry& newUnit = model.createHeavyInfantry(0, 0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit,view.getRocketViews(), view.getWindow()));
+}
+void GameInterface::createLightInfantry(int player_id) {
+    LightInfantry& newUnit = model.createLightInfantry(0,0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+}
+void GameInterface::createRaider(int player_id) {
+    Raider& newUnit = model.createRaider(0,0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+}
+void GameInterface::createTank(int player_id) {
+    Tank& newUnit = model.createTank(0,0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+}
+void GameInterface::createTrike(int player_id) {
+    Trike& newUnit = model.createTrike(0,0, player_id);
+    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }

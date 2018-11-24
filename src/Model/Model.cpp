@@ -295,14 +295,6 @@ WindTrap& Model::createWindTrap(int x, int y, int player) {
 
 void Model::actionOnPosition(Position &pos, Unit &unit) {
     unit.actionOnPosition(map, pos);
-//    Unit* foll_unit = map.getClosestUnit(pos, 50*50, unit.getPlayer(), false);
-//    if (foll_unit != nullptr){
-//        unit.follow(foll_unit, map);
-//    } else {
-//        map.setDestiny(unit, pos.x, pos.y);
-//    }
-
-    // Hacer lo mismo con los edificios
 }
 
 bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player) {

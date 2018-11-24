@@ -12,8 +12,10 @@ ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Model &model, GameView &v
 ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}
 
 void ButtonHandlerHeavyInfantry::execute() {
-	HeavyInfantry& newUnit = model.createHeavyInfantry(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit,view.getRocketViews(), view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createHeavyInfantry";
+	msg["args"]["player"] = GameHandler::actual_player;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {

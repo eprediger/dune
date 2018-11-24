@@ -12,8 +12,10 @@ ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Model &model, GameView &v
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
 
 void ButtonHandlerLightInfantry::execute() {
-	LightInfantry& newUnit = model.createLightInfantry(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createLightInfantry";
+	msg["args"]["player"] = GameHandler::actual_player;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerLightInfantry::canBeEnabled() {

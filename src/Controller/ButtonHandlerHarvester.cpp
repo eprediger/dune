@@ -11,8 +11,10 @@ ButtonHandlerHarvester::ButtonHandlerHarvester(Model &model, GameView &view, Com
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 
 void ButtonHandlerHarvester::execute() {
-	Harvester& newUnit = model.createHarvester(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createHarvester";
+	msg["args"]["player"] = GameHandler::actual_player;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerHarvester::canBeEnabled() {

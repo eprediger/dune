@@ -12,8 +12,10 @@ ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view, Communicati
 ButtonHandlerTrike::~ButtonHandlerTrike() {}
 
 void ButtonHandlerTrike::execute() {
-	Trike& newUnit = model.createTrike(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createTrike";
+	msg["args"]["player"] = GameHandler::actual_player;
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {

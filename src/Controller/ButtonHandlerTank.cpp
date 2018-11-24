@@ -12,6 +12,10 @@ ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view, Communication
 ButtonHandlerTank::~ButtonHandlerTank() {}
 
 void ButtonHandlerTank::execute() {
+//	nlohmann::json msg;
+//	msg["method"] = "createTank";
+//	msg["args"]["player"] = GameHandler::actual_player;
+//	queue.enqueue(msg);
 	Tank& newUnit = model.createTank(500, 500, GameHandler::actual_player);
 	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
 }

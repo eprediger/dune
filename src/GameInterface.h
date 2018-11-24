@@ -22,6 +22,13 @@ private:
     void createSpiceSilo(int x, int y, int player_id);
 
     void beginConstruction(int player_id, Building::BuildingType type);
+
+    void createHarvester(int player_id);
+    void createHeavyInfantry(int player_id);
+    void createLightInfantry(int player_id);
+    void createRaider(int player_id);
+    void createTank(int player_id);
+    void createTrike(int player_id);
 };
 
 
