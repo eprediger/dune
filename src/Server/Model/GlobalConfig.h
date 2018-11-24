@@ -1,0 +1,175 @@
+#ifndef __GLOBALCONFIG_H__
+#define __GLOBALCONFIG_H__
+
+#define SPEED_FACTOR (84*3)
+#define RANGE_FACTOR 2000
+
+#define TIME_FACTOR 10
+
+typedef struct {
+// Building Stats
+	// Tiempo de costruccion de edificios
+	const int buildingConstructionTime	= 100*TIME_FACTOR;
+	// Centro de Construcción
+	const int constructionYardEnergy	= 0;
+	const int constructionYardCost		= 0;
+	const int constructionYardHitPoints	= 3000;
+	const int constructionYardWidth 	= 3;
+	const int constructionYardHeight	= 3;
+	// Trampas de Aire
+	const int windTrapEnergy	= 500;
+	const int windTrapCost		= 800;
+	const int windTrapHitPoints	= 500;
+	const int windTrapWidth 	= 3;
+	const int windTrapHeight	= 3;
+	// Fabrica Ligera
+	const int lightFactoryEnergy	= 500;
+	const int lightFactoryCost		= 800;
+	const int lightFactoryHitPoints	= 500;
+	const int lightFactoryWidth 	= 3;
+	const int lightFactoryHeight	= 3;
+	// Fabrica Pesada
+	const int heavyFactoryEnergy	= 800;
+	const int heavyFactoryCost		= 1500;
+	const int heavyFactoryHitPoints	= 1500;
+	const int heavyFactoryWidth 	= 4;
+	const int heavyFactoryHeight	= 4;
+	// Refinera
+	const int spiceRefineryEnergy			= 400;
+	const int spiceRefineryCost				= 500;
+	const int spiceRefineryHitPoints		= 500;	// el enunciado no dice
+	const int spiceRefinerySpiceCapacity	= 5000;
+	const int spiceRefinerySpicWidth 		= 3;	// enunciado no dice
+	const int spiceRefinerySpicHeight		= 3;	// enunciado no dice
+	// Silo
+	const int spiceSiloEnergy			= 100;
+	const int spiceSiloCost				= 200;
+	const int spiceSiloHitPoints		= 200;
+	const int spiceSiloSpiceCapacity	= 1000;
+	const int spiceSiloSpicWidth 	= 1;
+	const int spiceSiloSpicHeight	= 1;
+	// Cuartel
+	const int barracksEnergy	= 100;
+	const int barracksCost		= 300;
+	const int barracksHitPoints	= 300;
+	const int barracksWidth 	= 3;
+	const int barracksHeight	= 2;
+	// Palacio
+	/*const int palaceEnergy		= 800;
+	const int palaceCost		= 2000;
+	const int palaceHitPoints	= 1000;*/
+// Weaponry -> frecuencias de disparo por segundo
+	// Rifles de asalto
+	const int assaultRifleDamage		= 2;
+	const int assaultRifleShootingRate	= 6;
+	const int assaultRifleBonus			= 1;	// a infanteria
+	// Cañon
+	const int cannonDamage			= 7;
+	const int cannonShootingRate	= 1;
+	const int cannonBonus			= 0;
+	// Lanzamisiles
+	const int rocketLauncherDamage			= 8;
+	const int rocketLauncherShootingRate	= 1;
+	const int rocketLauncherBonus			= 0;
+	// Cañon 22mm
+	const int smallCannonDamage			= 6;
+	const int smallCannonShootingRate	= 6;
+	const int smallCannonBonus			= 2;	// vehiculos y edificios
+	// Ondas de sonido
+	/*
+	const int soundWaveDamage			= 4;
+	const int soundWaveShootingRate		= 1;
+	const int soundWaveBonus			= 4;	// a infanteria
+	*/
+	// Cañon de Plasma
+	/*
+	const int plasmaCannonDamage		= 8;
+	const int plasmaCannonShootingRate	= 1;
+	const int plasmaCannonBonus			= 2;	// vehiculos y edificios
+	*/
+// Infantry Stats
+	// Infanteria Ligera
+	const int lightInfantryHitPoints	= 50;
+	const int lightInfantryRange		= RANGE_FACTOR * 3;
+	const int lightInfantrySpeed		= SPEED_FACTOR / 16;
+	const int lightInfantryTrainingTime	= 60*TIME_FACTOR;
+	const int lightInfantryCost			= 50;
+	// Infanteria Pesada
+	const int heavyInfantryHitPoints	= 80;
+	const int heavyInfantryRange		= RANGE_FACTOR * 3;
+	const int heavyInfantrySpeed		= SPEED_FACTOR / 14;
+	const int heavyInfantryTrainingTime	= 78*TIME_FACTOR;
+	const int heavyInfantryCost			= 70;
+	// Fremen
+	/*
+	const int fremenHitPoints	= 50;
+	const int fremenRange		= 3;
+	const int fremenSpeed		= 20;
+	const int fremenTrainingTime	= 120;
+	const int fremenCost			= 100;
+	*/
+	// Sardaukar
+	/*
+	const int sardaukarHitPoints	= 80;
+	const int sardaukarRange		= 3;
+	const int sardaukarSpeed		= 12;
+	const int sardaukarTrainingTime	= 120;
+	const int sardaukarCost			= 100;
+	*/
+// Vehicles
+	// Cosechadora
+	const int harvesterHitPoints		= 600;
+	//const int harvesterRange			= RANGE_FACTOR*0;
+	const int harvesterSpeed			= SPEED_FACTOR / 12;
+	const int harvesterConstructionTime	= 180*TIME_FACTOR;
+	const int harvesterCost				= 300;
+	const int harvesterSpiceCapacity	= 200;
+	const int harvesterFarmSpeed        = 20;
+	const int harvesterLoadSpeed        = 5;
+	// Trike
+	const int trikeHitPoints		= 80;
+	const int trikeRange			= RANGE_FACTOR * 4;
+	const int trikeSpeed			= SPEED_FACTOR / 64;
+	const int trikeConstructionTime	= 120*TIME_FACTOR;
+	const int trikeCost				= 100;
+	// Raider
+	const int raiderHitPoints			= 80;
+	const int raiderRange				= RANGE_FACTOR * 4;
+	const int raiderSpeed				= SPEED_FACTOR / 84;
+	const int raiderConstructionTime	= 120*TIME_FACTOR;
+	const int raiderCost				= 100;
+	// Tanque
+	const int tankHitPoints			= 30;
+	const int tankRange				= RANGE_FACTOR * 4;
+	const int tankSpeed				= SPEED_FACTOR / 40;
+	const int tankConstructionTime	= 240*TIME_FACTOR;
+	const int tankCost				= 300;
+	// Tanque Sonico
+	/*
+	const int sonicTankHitPoints		= 300;
+	const int sonicTankRange			= 4;
+	const int sonicTankSpeed			= 12;
+	const int sonicTankConstructionTime	= 240;
+	const int sonicTankCost				= 300;
+	*/
+	// Desviador
+	/*
+	const int deviatorHitPoints			= 300;
+	const int deviatorRange				= 5;
+	const int deviatorSpeed				= 12;
+	const int deviatorConstructionTime	= 240;
+	const int deviatorCost				= 400;
+	*/
+	// Devastador
+	/*
+	const int desvastatorHitPoints			= 400;
+	const int desvastatorRange				= 4;
+	const int desvastatorSpeed				= 12;
+	const int desvastatorConstructionTime	= 300;
+	const int desvastatorCost				= 400;
+	*/
+} config_t;
+
+extern config_t GlobalConfig;
+
+#endif
