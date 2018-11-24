@@ -2,11 +2,11 @@
 #define __RAIDER_VIEW_H__
 
 #include "OffensiveUnitView.h"
-#include "../Model/Unit/Raider.h"
+#include "Model/Unit/Raider.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include "Orientation.h"
 #include <map>
 #include <vector>

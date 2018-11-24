@@ -3,7 +3,7 @@
 
 class BuildingConstructor;
 class BuildingConstructorView;
-#include "../Controller/BuildingConstructor.h"
+#include "Controller/BuildingConstructor.h"
 #include "Area.h"
 
 class BuildingConstructorView {

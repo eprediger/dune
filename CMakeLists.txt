@@ -14,6 +14,13 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
 FIND_PACKAGE( yaml-cpp REQUIRED)
 INCLUDE_DIRECTORIES(${YAML_CPP_INCLUDE_DIRS})
 
+# Agregando esto se evita usar paths relativos en los include
+INCLUDE_DIRECTORIES(src)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR})
+
+# Reemplazar por TARGET_INCLUDE_DIRECTORIES al tener cliente/servidor
+
+
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 	SET(GCC_COVERAGE_LINK_FLAGS "-Wl -lSDL2_ttf -lSDL2_mixer -lSDL2")
 else()
@@ -21,15 +28,10 @@ else()
 endif()
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
-file(GLOB SOURCE
+
+file(GLOB_RECURSE SOURCE
 		src/*.cpp
 		src/*.h
-		src/*/*.cpp
-		src/*/*.h
-		src/*/*/*.cpp
-		src/*/*/*.h
-		src/*/*/*/*.cpp
-		src/*/*/*/*.h
         )
 
 add_executable(${PROJECT_NAME}

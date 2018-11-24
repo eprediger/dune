@@ -2,7 +2,7 @@
 #define __OFFENSIVE_UNIT_VIEW_H__
 
 #include "UnitView.h"
-#include "../Model/Unit/OffensiveUnit.h"
+#include "Model/Unit/OffensiveUnit.h"
 #include "Area.h"
 #include <map>
 #include <vector>

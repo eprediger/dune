@@ -1,10 +1,10 @@
 #include "GameView.h"
 #include "View.h"
-#include "../Model/Model.h"
+#include "Model/Model.h"
 #include "BuildingView.h"
 #include "RocketView.h"
 #include "BuildingViewFactory.h"
-#include "../Controller/GameHandler.h"
+#include "Controller/GameHandler.h"
 #include <algorithm>
 #include <string>
 #include <vector>

@@ -2,9 +2,9 @@
 #define __BUTTON_HANDLER_H__
 
 #include "ButtonState.h"
-#include "../View/ButtonView.h"
-#include "../Model/Model.h"
-#include "../View/GameView.h"
+#include "View/ButtonView.h"
+#include "Model/Model.h"
+#include "View/GameView.h"
 
 class ButtonHandler {
 public:

@@ -1,5 +1,5 @@
 #include "PlayerTrainingCenter.h"
-#include "GlobalConfig.h"
+#include "Model/GlobalConfig.h"
 
 #include "Unit/HeavyInfantry.h"
 #include "Unit/LightInfantry.h"
@@ -8,7 +8,7 @@
 #include "Unit/Tank.h"
 #include "Unit/Harvester.h"
 #include "Unit/Unit.h"
-#include "Buildings/Building.h"
+#include "Model/Buildings/Building.h"
 #include <vector>
 
 PlayerTrainingCenter::PlayerTrainingCenter():

@@ -1,5 +1,5 @@
 #include "DeadUnitView.h"
-#include "../Position.h"
+#include "Position.h"
 #include "Area.h"
 #include <vector>
 

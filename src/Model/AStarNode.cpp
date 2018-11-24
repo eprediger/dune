@@ -1,5 +1,5 @@
-#include "AStarNode.h"
-#include "Map.h"
+#include "Model/AStarNode.h"
+#include "Model/Map.h"
 #include <vector>
 
 std::vector<AStarNode> AStarNode::getAdjacents(Map &map) {

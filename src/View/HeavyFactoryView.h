@@ -2,9 +2,9 @@
 #define __HEAVY_FACTORY_VIEW_H__
 
 #include "BuildingView.h"
-#include "../Model/Buildings/HeavyFactory.h"
+#include "Model/Buildings/HeavyFactory.h"
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include <vector>

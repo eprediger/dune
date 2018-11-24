@@ -1,17 +1,17 @@
 #include "UnitView.h"
 #include "UnitViewFactory.h"
 #include "TrikeView.h"
-#include "../Model/Unit/Trike.h"
+#include "Model/Unit/Trike.h"
 #include "HarvesterView.h"
-#include "../Model/Unit/Harvester.h"
+#include "Model/Unit/Harvester.h"
 #include "LightInfantryView.h"
-#include "../Model/Unit/LightInfantry.h"
+#include "Model/Unit/LightInfantry.h"
 #include "HeavyInfantryView.h"
-#include "../Model/Unit/HeavyInfantry.h"
+#include "Model/Unit/HeavyInfantry.h"
 #include "RaiderView.h"
-#include "../Model/Unit/Raider.h"
+#include "Model/Unit/Raider.h"
 #include "TankView.h"
-#include "../Model/Unit/Tank.h"
+#include "Model/Unit/Tank.h"
 #include <vector>
 
 UnitView* UnitViewFactory::createUnitView(Trike& trike, SdlWindow& window) {

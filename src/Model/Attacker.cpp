@@ -1,6 +1,6 @@
-#include "Attacker.h"
+#include "Model/Attacker.h"
 #include "Unit/Unit.h"
-#include "Weapons/Weapons.h"
+#include "Model/Weapons/Weapons.h"
 Attacker::Attacker(const Weapon &weapon, const int range) :
     weapon(weapon),
     range(range),

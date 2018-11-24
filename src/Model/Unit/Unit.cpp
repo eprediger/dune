@@ -1,6 +1,6 @@
-#include "Unit.h"
-#include "../AStar.h"
-#include "../Weapons/AssaultRifle.h"
+#include "Model/Unit/Unit.h"
+#include "Model/AStar.h"
+#include "Model/Weapons/AssaultRifle.h"
 #include <iostream>
 #include <stack>
 

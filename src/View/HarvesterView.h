@@ -1,7 +1,7 @@
 #ifndef __HARVESTER_VIEW_H__
 #define __HARVESTER_VIEW_H__
 
-#include "../Model/Unit/Harvester.h"
+#include "Model/Unit/Harvester.h"
 #include "UnitView.h"
 #include <map>
 #include <vector>

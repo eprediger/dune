@@ -1,11 +1,11 @@
 #include "BuildingConstructor.h"
-#include "../Model/Buildings/Barracks.h"
-#include "../Model/Buildings/LightFactory.h"
-#include "../Model/Buildings/HeavyFactory.h"
-#include "../Model/Buildings/SpiceRefinery.h"
-#include "../Model/Buildings/SpiceSilo.h"
-#include "../View/GameView.h"
-#include "../View/BuildingViewFactory.h"
+#include "Model/Buildings/Barracks.h"
+#include "Model/Buildings/LightFactory.h"
+#include "Model/Buildings/HeavyFactory.h"
+#include "Model/Buildings/SpiceRefinery.h"
+#include "Model/Buildings/SpiceSilo.h"
+#include "View/GameView.h"
+#include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 
 #include <nlohmann/json.hpp>

@@ -2,7 +2,7 @@
 #define __GAME_VIEW_H__
 
 #include "View.h"
-#include "../Model/Model.h"
+#include "Model/Model.h"
 #include "UnitView.h"
 
 #include "BuildingView.h"

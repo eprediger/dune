@@ -1,5 +1,5 @@
 #include "Trike.h"
-#include "../Weapons/Weapons.h"
+#include "Model/Weapons/Weapons.h"
 
 Trike::Trike(int x, int y) :
 	OffensiveUnit(x, y,

@@ -1,5 +1,5 @@
 #include "RocketLauncher.h"
-#include "../GlobalConfig.h"
+#include "Model/GlobalConfig.h"
 
 RocketLauncher::RocketLauncher() :
 	Weapon(GlobalConfig.rocketLauncherDamage,

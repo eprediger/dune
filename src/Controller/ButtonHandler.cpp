@@ -3,8 +3,8 @@
 #include "ButtonEnabled.h"
 #include "ButtonBusy.h"
 #include "ButtonReady.h"
-#include "../View/View.h"
-#include "../Model/GlobalConfig.h"
+#include "View/View.h"
+#include "Model/GlobalConfig.h"
 
 ButtonHandler::ButtonHandler(ButtonView &buttonView, Model &model, GameView &view, CommunicationQueue &queue) :
 	buttonState(new ButtonDisabled()),

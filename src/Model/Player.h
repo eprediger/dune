@@ -1,8 +1,8 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "Buildings/Building.h"
-#include "Buildings/ConstructionYard.h"
+#include "Model/Buildings/Building.h"
+#include "Model/Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
 #include "PlayerBuildingCenter.h"
 #include <vector>

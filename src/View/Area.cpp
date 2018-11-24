@@ -1,5 +1,5 @@
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include <cstdlib>
 
 Area::Area(int x, int y, int width, int height) :

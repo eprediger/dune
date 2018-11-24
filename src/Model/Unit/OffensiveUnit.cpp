@@ -1,5 +1,5 @@
 #include "OffensiveUnit.h"
-#include "../Weapons/Weapon.h"
+#include "Model/Weapons/Weapon.h"
 #include <stack>
 
 OffensiveUnit::OffensiveUnit(const int x, const int y, const int hitPoints, const int range, const Weapon &weapon,

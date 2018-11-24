@@ -1,5 +1,5 @@
 #include "LightInfantryView.h"
-#include "../Model/Unit/LightInfantry.h"
+#include "Model/Unit/LightInfantry.h"
 #include "UnitView.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

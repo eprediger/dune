@@ -1,7 +1,7 @@
 #ifndef __ROCKET_H__
 #define __ROCKET_H__
 
-#include "../../Position.h"
+#include "Position.h"
 
 class Map;
 

@@ -1,8 +1,8 @@
 #ifndef __TRIKE_VIEW_H__
 #define __TRIKE_VIEW_H__
 
-#include "../Model/Unit/Trike.h"
-#include "../Position.h"
+#include "Model/Unit/Trike.h"
+#include "Position.h"
 #include "Orientation.h"
 #include "OffensiveUnitView.h"
 #include "SdlWindow.h"

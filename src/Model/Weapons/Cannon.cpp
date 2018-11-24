@@ -1,5 +1,5 @@
 #include "Cannon.h"
-#include "../GlobalConfig.h"
+#include "Model/GlobalConfig.h"
 
 Cannon::Cannon() :
 	Weapon(GlobalConfig.cannonDamage,

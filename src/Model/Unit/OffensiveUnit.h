@@ -1,11 +1,11 @@
 #ifndef __OffensiveUnit_H__
 #define __OffensiveUnit_H__
 
-#include "../Attacker.h"
+#include "Model/Attacker.h"
 
-#include "Unit.h"
+#include "Model/Unit/Unit.h"
 
-#include "../Map.h"
+#include "Model/Map.h"
 
 class OffensiveUnit : public Unit, public Attacker {
 public:

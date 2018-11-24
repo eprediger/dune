@@ -1,7 +1,7 @@
 #ifndef __ORIENTATION_H__
 #define __ORIENTATION_H__
 
-#include "../Position.h"
+#include "Position.h"
 
 class Orientation{
 	public:

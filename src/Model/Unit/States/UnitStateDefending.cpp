@@ -1,6 +1,6 @@
 #include "UnitStateDefending.h"
 
-#include "../Unit.h"
+#include "Model/Unit/Unit.h"
 
 UnitState *UnitStateDefending::makeAction(Map &map, Unit &unit) {
     return unit.makeDefending(map);

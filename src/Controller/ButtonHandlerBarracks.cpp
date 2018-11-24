@@ -1,5 +1,5 @@
 #include "ButtonHandlerBarracks.h"
-#include "../View/BuildingViewFactory.h"
+#include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
 

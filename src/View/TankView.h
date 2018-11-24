@@ -2,7 +2,7 @@
 #define __TANK_VIEW_H__
 
 #include "OffensiveUnitView.h"
-#include "../Model/Unit/Tank.h"
+#include "Model/Unit/Tank.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Area.h"

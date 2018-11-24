@@ -2,7 +2,7 @@
 #define __HOUSE_SELECTION_HANDLER_H__
 
 #include "InputHandler.h"
-#include "../View/HouseSelectionView.h"
+#include "View/HouseSelectionView.h"
 
 class HouseSelectionHandler : public InputHandler {
 public:

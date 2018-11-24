@@ -1,8 +1,8 @@
 #ifndef __ASTARNODE_H__
 #define __ASTARNODE_H__
 
-#include "../Position.h"
-#include "Map.h"
+#include "Position.h"
+#include "Model/Map.h"
 #include <vector>
 
 struct AStarNode {

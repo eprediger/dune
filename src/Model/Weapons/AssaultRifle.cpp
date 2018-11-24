@@ -1,5 +1,5 @@
 #include "AssaultRifle.h"
-#include "../GlobalConfig.h"
+#include "Model/GlobalConfig.h"
 
 AssaultRifle::AssaultRifle() :
 	Weapon(GlobalConfig.assaultRifleDamage,

@@ -1,6 +1,6 @@
 #include "SpiceRefinery.h"
 
-#include "../Player.h"
+#include "Model/Player.h"
 
 SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,

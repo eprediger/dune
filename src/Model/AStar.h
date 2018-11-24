@@ -1,9 +1,9 @@
 #ifndef __ASTAR_H__
 #define __ASTAR_H__
 
-#include "AStarNode.h"
+#include "Model/AStarNode.h"
 #include "Unit/Unit.h"
-#include "Map.h"
+#include "Model/Map.h"
 
 #include <set>
 #include <map>

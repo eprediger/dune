@@ -1,7 +1,7 @@
 #ifndef __PLAYER_COLOR_MAKER_H__
 #define __PLAYER_COLOR_MAKER_H__
 
-#include "../Model/Player.h"
+#include "Model/Player.h"
 
 class PlayerColorMaker {
 private:

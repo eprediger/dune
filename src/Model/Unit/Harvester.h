@@ -1,9 +1,9 @@
 #ifndef __HARVESTER_H__
 #define __HARVESTER_H__
 
-#include "Unit.h"
-#include "../Weapons/AssaultRifle.h"
-#include "../Buildings/SpiceRefinery.h"
+#include "Model/Unit/Unit.h"
+#include "Model/Weapons/AssaultRifle.h"
+#include "Model/Buildings/SpiceRefinery.h"
 
 class Harvester : public Unit {
 public:

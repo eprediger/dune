@@ -1,8 +1,8 @@
 #ifndef __BUILDING_H__
 #define __BUILDING_H__
 
-#include "../Attackable.h"
-#include "../GlobalConfig.h"
+#include "Model/Attackable.h"
+#include "Model/GlobalConfig.h"
 #include <vector>
 
 class Player;

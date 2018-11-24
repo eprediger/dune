@@ -3,13 +3,13 @@
 
 #include <vector>
 #include "Terrains/Terrain.h"
-#include "Buildings/Building.h"
+#include "Model/Buildings/Building.h"
 #include "Unit/Unit.h"
-#include "Player.h"
+#include "Model/Player.h"
 #include <memory>
 #include <map>
-#include "../View/Area.h"
-#include "../Position.h"
+#include "View/Area.h"
+#include "Position.h"
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32
 #define BLOCK_WIDTH 32

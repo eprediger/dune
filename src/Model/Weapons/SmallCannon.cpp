@@ -1,5 +1,5 @@
 #include "SmallCannon.h"
-#include "../GlobalConfig.h"
+#include "Model/GlobalConfig.h"
 
 SmallCannon::SmallCannon() :
 	Weapon(GlobalConfig.smallCannonDamage,

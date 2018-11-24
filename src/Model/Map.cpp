@@ -1,9 +1,9 @@
-#include "Map.h"
+#include "Model/Map.h"
 #include "yaml-cpp/yaml.h"
 #include "Terrains/Terrain.h"
-#include "AStar.h"
-#include "../Common/CustomException.h"
-#include "../View/Area.h"
+#include "Model/AStar.h"
+#include "Common/CustomException.h"
+#include "View/Area.h"
 #include <algorithm>
 #include <stack>
 #include <vector>

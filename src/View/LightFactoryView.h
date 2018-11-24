@@ -2,9 +2,9 @@
 #define __LIGHT_FACTORY_VIEW_H__
 
 #include "BuildingView.h"
-#include "../Model/Buildings/LightFactory.h"
+#include "Model/Buildings/LightFactory.h"
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include <vector>

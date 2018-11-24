@@ -1,6 +1,6 @@
 #include "HeavyInfantry.h"
-#include "../Weapons/Weapons.h"
-#include "../GlobalConfig.h"
+#include "Model/Weapons/Weapons.h"
+#include "Model/GlobalConfig.h"
 
 HeavyInfantry::HeavyInfantry(int x, int y) 
 		:OffensiveUnit(x, y, GlobalConfig.heavyInfantryHitPoints, GlobalConfig.heavyInfantryRange,

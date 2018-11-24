@@ -2,7 +2,7 @@
 #define __SOUND_H__
 
 #include <string>
-#include "../Common/Thread.h"
+#include "Common/Thread.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_mixer.h"
 

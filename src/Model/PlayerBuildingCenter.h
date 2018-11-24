@@ -1,7 +1,7 @@
 #ifndef __PLAYERBUILDINGCENTER_H__
 #define __PLAYERBUILDINGCENTER_H__
 
-#include "Buildings/Building.h"
+#include "Model/Buildings/Building.h"
 #include <map>
 #include <utility>
 

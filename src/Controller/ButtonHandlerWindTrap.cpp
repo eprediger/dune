@@ -1,5 +1,5 @@
 #include "ButtonHandlerWindTrap.h"
-#include "../View/BuildingViewFactory.h"
+#include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view,

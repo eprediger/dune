@@ -1,5 +1,5 @@
 #include "GameHandler.h"
-#include "../View/UnitViewFactory.h"
+#include "View/UnitViewFactory.h"
 #include "ButtonHandlerHarvester.h"
 #include "ButtonHandlerTank.h"
 #include "ButtonHandlerTrike.h"

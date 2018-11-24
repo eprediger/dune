@@ -2,7 +2,7 @@
 #define __LIGHT_INFANTRY_VIEW_H__
 
 #include "OffensiveUnitView.h"
-#include "../Model/Unit/LightInfantry.h"
+#include "Model/Unit/LightInfantry.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Orientation.h"

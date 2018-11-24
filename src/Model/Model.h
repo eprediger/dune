@@ -2,22 +2,22 @@
 #define __MODEL_H__
 
 #include "Unit/Unit.h"
-#include "Map.h"
+#include "Model/Map.h"
 #include "Unit/OffensiveUnit.h"
-#include "Player.h"
+#include "Model/Player.h"
 #include "Unit/Raider.h"
 #include "Unit/Trike.h"
 #include "Unit/Tank.h"
 #include "Unit/LightInfantry.h"
 #include "Unit/HeavyInfantry.h"
 #include "Unit/Harvester.h"
-#include "Buildings/Barracks.h"
-#include "Buildings/ConstructionYard.h"
-#include "Buildings/SpiceRefinery.h"
-#include "Buildings/SpiceSilo.h"
-#include "Buildings/WindTrap.h"
-#include "Buildings/HeavyFactory.h"
-#include "Buildings/LightFactory.h"
+#include "Model/Buildings/Barracks.h"
+#include "Model/Buildings/ConstructionYard.h"
+#include "Model/Buildings/SpiceRefinery.h"
+#include "Model/Buildings/SpiceSilo.h"
+#include "Model/Buildings/WindTrap.h"
+#include "Model/Buildings/HeavyFactory.h"
+#include "Model/Buildings/LightFactory.h"
 #include <vector>
 #include <memory>
 

@@ -2,7 +2,7 @@
 #define __MAIN_MENU_HANDLER_H__
 
 #include "InputHandler.h"
-#include "../View/MainMenuView.h"
+#include "View/MainMenuView.h"
 
 class MainMenuHandler : public InputHandler {
 public:

@@ -1,12 +1,12 @@
 #ifndef __BUILDINGVIEW_H__
 #define __BUILDINGVIEW_H__
 
-#include "../Model/Buildings/Building.h"
+#include "Model/Buildings/Building.h"
 #include "SdlWindow.h"
 #include "Area.h"
 #include "SdlTexture.h"
 #include "DeadBuildingView.h"
-#include "../Model/Player.h"
+#include "Model/Player.h"
 #include <memory>
 #include <vector>
 

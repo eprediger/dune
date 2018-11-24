@@ -1,7 +1,7 @@
 #include "Rocket.h"
-#include "../../Position.h"
-#include "../Map.h"
-#include "../../View/Area.h"
+#include "Position.h"
+#include "Model/Map.h"
+#include "View/Area.h"
 #include "Weapons.h"
 #include <cstdlib>
 #include <vector>

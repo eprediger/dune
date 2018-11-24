@@ -5,12 +5,12 @@
 #define PLAYER 1
 
 #include "InputHandler.h"
-#include "../View/GameView.h"
-#include "../Model/Model.h"
-#include "../View/GameView.h"
+#include "View/GameView.h"
+#include "Model/Model.h"
+#include "View/GameView.h"
 #include "ButtonHandler.h"
-#include "../Common/CommunicationQueue.h"
-#include "../GameInterface.h"
+#include "Common/CommunicationQueue.h"
+#include "GameInterface.h"
 #include <vector>
 
 class GameHandler : public InputHandler {

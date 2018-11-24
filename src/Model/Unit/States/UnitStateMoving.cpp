@@ -1,5 +1,5 @@
 #include "UnitStateMoving.h"
-#include "../Unit.h"
+#include "Model/Unit/Unit.h"
 
 UnitState *UnitStateMoving::makeAction(Map &map, Unit &unit) {
 	if (unit.move(map)) {

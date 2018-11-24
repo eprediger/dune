@@ -1,7 +1,7 @@
 #ifndef __PLAYER_VIEW_H__
 #define __PLAYER_VIEW_H__
 
-#include "../Model/Player.h"
+#include "Model/Player.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Area.h"

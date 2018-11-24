@@ -1,5 +1,5 @@
-#include "AStar.h"
-#include "Map.h"
+#include "Model/AStar.h"
+#include "Model/Map.h"
 #include <map>
 #include <stack>
 #include <algorithm>

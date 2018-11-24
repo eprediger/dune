@@ -1,7 +1,7 @@
 #ifndef __ATTACKER_H__
 #define __ATTACKER_H__
 
-#include "Weapons/Weapon.h"
+#include "Model/Weapons/Weapon.h"
 
 class Attackable;
 

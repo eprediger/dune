@@ -1,8 +1,8 @@
 #ifndef __ATTACKABLE_H__
 #define __ATTACKABLE_H__
 
-#include "Attacker.h"
-#include "../Position.h"
+#include "Model/Attacker.h"
+#include "Position.h"
 
 class Attackable {
 protected:

@@ -1,12 +1,12 @@
 #ifndef __HEAVY_INFANTRY_VIEW_H__
 #define __HEAVY_INFANTRY_VIEW_H__
 
-#include "../Model/Unit/HeavyInfantry.h"
+#include "Model/Unit/HeavyInfantry.h"
 #include "OffensiveUnitView.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Orientation.h"
-#include "../Position.h"
+#include "Position.h"
 #include <vector>
 #include <map>
 #include "Area.h"

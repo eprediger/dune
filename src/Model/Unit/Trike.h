@@ -2,7 +2,7 @@
 #define __TRIKE_H__
 
 #include "OffensiveUnit.h"
-#include "../Weapons/AssaultRifle.h"
+#include "Model/Weapons/AssaultRifle.h"
 
 class Trike : public OffensiveUnit {
 public:

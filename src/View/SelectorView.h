@@ -1,7 +1,7 @@
 #ifndef __SELECTOR_VIEW_H__
 #define __SELECTOR_VIEW_H__
 
-#include "../Selector.h"
+#include "Selector.h"
 #include "SdlWindow.h"
 #include "Area.h"
 

@@ -1,6 +1,6 @@
 #include "ButtonHandlerLightInfantry.h"
-#include "../View/UnitViewFactory.h"
-#include "../Model/GlobalConfig.h"
+#include "View/UnitViewFactory.h"
+#include "Model/GlobalConfig.h"
 #include "GameHandler.h"
 #include <iostream>
 

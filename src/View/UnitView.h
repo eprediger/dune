@@ -1,10 +1,10 @@
 #ifndef __UNIT_VIEW_H__
 #define __UNIT_VIEW_H__
 
-#include "../Model/Unit/Unit.h"
+#include "Model/Unit/Unit.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "../Position.h"
+#include "Position.h"
 #include "Orientation.h"
 #include "Area.h"
 #include "DeadUnitView.h"

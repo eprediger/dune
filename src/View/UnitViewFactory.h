@@ -5,12 +5,12 @@
 #include "SdlWindow.h"
 #include "RocketView.h"
 #include <vector>
-#include "../Model/Unit/Trike.h"
-#include "../Model/Unit/Harvester.h"
-#include "../Model/Unit/LightInfantry.h"
-#include "../Model/Unit/HeavyInfantry.h"
-#include "../Model/Unit/Raider.h"
-#include "../Model/Unit/Tank.h"
+#include "Model/Unit/Trike.h"
+#include "Model/Unit/Harvester.h"
+#include "Model/Unit/LightInfantry.h"
+#include "Model/Unit/HeavyInfantry.h"
+#include "Model/Unit/Raider.h"
+#include "Model/Unit/Tank.h"
 
 class UnitViewFactory {
 public:

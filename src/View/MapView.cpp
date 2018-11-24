@@ -2,7 +2,7 @@
 #include <iostream>
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "../Model/Map.h"
+#include "Model/Map.h"
 #include "Area.h"
 
 MapView::MapView(Map &mapa, SdlWindow &window) :

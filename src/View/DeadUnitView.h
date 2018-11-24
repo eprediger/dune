@@ -3,7 +3,7 @@
 
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "../Position.h"
+#include "Position.h"
 #include "Area.h"
 #include <vector>
 #include <memory>

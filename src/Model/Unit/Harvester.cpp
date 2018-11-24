@@ -1,6 +1,6 @@
 #include "Harvester.h"
 
-#include "../Map.h"
+#include "Model/Map.h"
 
 // #define TIME_FACTOR 2
 

@@ -2,7 +2,7 @@
 #define __RAIDER_H__
 
 #include "OffensiveUnit.h"
-#include "../Weapons/SmallCannon.h"
+#include "Model/Weapons/SmallCannon.h"
 
 class Raider : public OffensiveUnit {
 public:

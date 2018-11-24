@@ -1,8 +1,8 @@
 #include "ConstructionYardView.h"
 #include "BuildingView.h"
-#include "../Model/Buildings/ConstructionYard.h"
+#include "Model/Buildings/ConstructionYard.h"
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include <vector>

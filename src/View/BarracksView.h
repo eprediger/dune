@@ -3,10 +3,10 @@
 
 #include "BuildingView.h"
 #include "Area.h"
-#include "../Position.h"
+#include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "../Model/Buildings/Barracks.h"
+#include "Model/Buildings/Barracks.h"
 #include <vector>
 #include <map>
 #include <string> 

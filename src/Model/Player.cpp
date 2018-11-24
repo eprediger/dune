@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "Model/Player.h"
 #include "PlayerTrainingCenter.h"
 #include <algorithm>
 #include <vector>

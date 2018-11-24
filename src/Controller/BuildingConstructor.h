@@ -1,11 +1,11 @@
 #ifndef __BUILDING_CONSTRUCTOR_H__
 #define __BUILDING_CONSTRUCTOR_H__
 
-#include "../Model/Buildings/Building.h"
-#include "../Model/Model.h"
-#include "../Model/Player.h"
-#include "../View/GameView.h"
-#include "../Common/CommunicationQueue.h"
+#include "Model/Buildings/Building.h"
+#include "Model/Model.h"
+#include "Model/Player.h"
+#include "View/GameView.h"
+#include "Common/CommunicationQueue.h"
 
 class GameView;
 
