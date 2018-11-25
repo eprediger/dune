@@ -14,15 +14,15 @@ class CustomException : public std::exception {
 protected:
 	char msg_error[BUF_LEN];
 	int error_code;
-	
+
 public:
 	CustomException(const char* fmt, ...) noexcept;
 
-	CustomException(int errnumb, const char * fmt, ...) noexcept;
-	
+	CustomException(const int errnumb, const char * fmt, ...) noexcept;
+
 	virtual const char *what() const noexcept;
-	
-	int getErrorCode();
+
+	int getErrorCode() const;
 };
 
-#endif
+#endif	// __CUSTOM_EXCEPTION__
