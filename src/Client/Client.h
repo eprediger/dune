@@ -7,12 +7,12 @@
 #include "ClientReceiver.h"
 #include "ClientSender.h"
 
-class Client : public Thread {
+class Client {
 public:
     Client(const char *host, const char *service, CommunicationQueue &queue);
     ~Client();
 
-    virtual void run() override;
+    void start();
 
     void disconnect();
 private:

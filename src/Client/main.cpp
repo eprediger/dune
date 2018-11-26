@@ -40,10 +40,10 @@ int main(int argc, char const *argv[]) {
 				// client.recvPayload();
 			}
 			client.disconnect();
-			client.join();
+//			client.join();
 		} catch (const CustomException& ce) {
 			std::cerr << ce.what() << std::endl;
-			client.join();
+//			client.join();
 			return ce.getErrorCode();
 		}
 		return SUCCESS;

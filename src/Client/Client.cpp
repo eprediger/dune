@@ -26,7 +26,7 @@ void Client::disconnect() {
     receiver.join();
 }
 
-void Client::run() {
+void Client::start() {
     receiver.start();
     sender.start();
 }
