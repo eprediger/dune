@@ -3,6 +3,7 @@
 
 void CommunicationQueue::enqueue(nlohmann::json send_json) {
     send_queue.push(send_json);
+//    recv_queue.push(send_json);
 }
 
 nlohmann::json CommunicationQueue::dequeue() {

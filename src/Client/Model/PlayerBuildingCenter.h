@@ -7,6 +7,7 @@
 
 class PlayerBuildingCenter {
 public:
+    PlayerBuildingCenter();
     bool buildingReady(Building::BuildingType type);
     void newConstruct(Building::BuildingType type);
     void construct();

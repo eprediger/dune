@@ -14,6 +14,7 @@ void ButtonHandlerHarvester::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createHarvester";
 	msg["args"]["player"] = GameHandler::actual_player;
+	model.createHarvester(0,0, GameHandler::actual_player);
 	queue.enqueue(msg);
 }
 

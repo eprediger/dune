@@ -20,6 +20,7 @@
 #include "Model/Buildings/LightFactory.h"
 #include <vector>
 #include <memory>
+#include <CommunicationQueue.h>
 
 #define LIMIT_TO_SELECT (32*32)
 
@@ -33,7 +34,7 @@ private:
     bool gameFinished;
 
 public:
-    Model(const char* file, int n_player);
+    Model(const char *file, int n_player, CommunicationQueue &queue);
     ~Model();
 
 //    Map& createMap();

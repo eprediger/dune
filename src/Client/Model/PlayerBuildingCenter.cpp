@@ -1,4 +1,13 @@
 #include "PlayerBuildingCenter.h"
+PlayerBuildingCenter::PlayerBuildingCenter() {
+    construction[Building::BARRACKS] = {GlobalConfig.buildingConstructionTime, false};
+    construction[Building::LIGHT_FACTORY] = {GlobalConfig.buildingConstructionTime, false};
+    construction[Building::HEAVY_FACTORY] = {GlobalConfig.buildingConstructionTime, false};
+    construction[Building::SPICE_REFINERY] = {GlobalConfig.buildingConstructionTime, false};
+    construction[Building::SPICE_SILO] = {GlobalConfig.buildingConstructionTime, false};
+    construction[Building::WIND_TRAP] = {GlobalConfig.buildingConstructionTime, false};
+}
+
 
 void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
     switch (type) {
@@ -60,3 +69,5 @@ bool PlayerBuildingCenter::buildingConstructed(Building::BuildingType type) {
 void PlayerBuildingCenter::build(Building::BuildingType type) {
     construction[type].second = true;
 }
+
+

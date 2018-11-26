@@ -18,13 +18,14 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(const char* file, int n_player) :
+Model::Model(const char *file, int n_player, CommunicationQueue &queue) :
     map(file),
     units(),
     buildings(),
     players(),
     rockets(),
-    gameFinished(false) {
+    gameFinished(false),
+    queue(queue) {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     for (int i = 0; i < n_player; ++i) {
         ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x, initial_pos[i].y,
@@ -70,8 +71,15 @@ void Model::step() {
         (*itr)->makeAction(map);
     }
     for (auto itr = players.begin(); itr != players.end(); itr++) {
-        (*itr)->trainUnits();
-        (*itr)->constructBuildings();
+//        (*itr)->trainUnits();
+//        (*itr)->constructBuildings();
+        nlohmann::json j;
+        j["args"]["player"] = (*itr)->getId();
+        j["method"] = "constructBuildings";
+        queue.enqueue(j);
+        j["method"] = "trainUnits";
+        queue.enqueue(j);
+
         std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
         for (auto unit = new_units.begin(); unit != new_units.end(); unit++) {
             units.push_back(*unit);

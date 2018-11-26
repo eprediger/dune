@@ -31,6 +31,10 @@ private:
     void createTrike(int player_id);
 
     void sellBuilding(int player_id, int building_id);
+
+    void constructBuildings(int player_id);
+
+    void trainUnits(int player_id);
 };
 
 

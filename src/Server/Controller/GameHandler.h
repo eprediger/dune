@@ -16,7 +16,7 @@
 class GameHandler : public InputHandler {
 public:
 	// Handler para eventos del juego
-	explicit GameHandler(GameView &view, Model &model);
+	explicit GameHandler(GameView &view, Model &model, CommunicationQueue &queue);
 	static int actual_player;
 
 	// Libera recursos asociados a la instancia
@@ -35,7 +35,7 @@ private:
 	Selector selector;
 	BuildingConstructor constructor;
 	std::vector<ButtonHandler*> buttons;
-    CommunicationQueue queue;
+    CommunicationQueue& queue;
     GameInterface interface;
 };
 

@@ -26,6 +26,7 @@ void ButtonHandlerBarracks::execute() {
 	msg["args"]["player"] = GameHandler::actual_player;
 	msg["args"]["building_type"] = Building::BARRACKS;
 	queue.enqueue(msg);
+	model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::BARRACKS);
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
@@ -33,6 +34,9 @@ bool ButtonHandlerBarracks::canBeEnabled() {
 }
 
 bool ButtonHandlerBarracks::finishAction() {
+    if (model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::BARRACKS)){
+        std::cout << "Accion finalizada" << std::endl;
+    }
     return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::BARRACKS);
 }
 
@@ -45,5 +49,8 @@ void ButtonHandlerBarracks::executeReady() {
 }
 
 bool ButtonHandlerBarracks::finishReady() {
+    if (model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::BARRACKS)){
+        std::cout << "Ready listo" << std::endl;
+    }
 	return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::BARRACKS);
 }

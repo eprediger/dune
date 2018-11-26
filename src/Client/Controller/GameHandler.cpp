@@ -17,12 +17,13 @@
 
 int GameHandler::actual_player = PLAYER;
 
-GameHandler::GameHandler(GameView &view, Model &model) :
+GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue) :
     InputHandler(),
     view(view),
     model(model),
     selector(0, 0),
     constructor(model, model.getPlayer(GameHandler::actual_player), view, queue),
+    queue(queue),
     interface(model, view) {
     view.addSelectorView(this->selector);
     this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor, this->queue));
@@ -169,7 +170,7 @@ bool GameHandler::handleInput() {
 // de la clase que haga el POP del stack recibido y actualice el modelo y
 // la vista en base a eso.
 void GameHandler::step() {
-    while (!queue.sendEmpty()){
+    while (!queue.recvEmpty()){
         interface.execute(queue.dequeue());
     }
 }

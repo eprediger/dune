@@ -18,6 +18,7 @@ void ButtonHandlerHeavyFactory::execute() {
     msg["args"]["player"] = GameHandler::actual_player;
     msg["args"]["building_type"] = Building::HEAVY_FACTORY;
     queue.enqueue(msg);
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::HEAVY_FACTORY);
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {

@@ -8,5 +8,6 @@
 #define PARAM_ERROR 1
 #define USAGE_ERROR 1
 #define SOCKET_ERROR 2
+#define FAILURE 1
 
 #endif	// __CODES_H__

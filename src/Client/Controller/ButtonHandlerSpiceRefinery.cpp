@@ -18,6 +18,7 @@ void ButtonHandlerSpiceRefinery::execute() {
     msg["args"]["player"] = GameHandler::actual_player;
     msg["args"]["building_type"] = Building::SPICE_REFINERY;
     queue.enqueue(msg);
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::SPICE_REFINERY);
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {

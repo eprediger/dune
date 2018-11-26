@@ -21,6 +21,7 @@ void ButtonHandlerWindTrap::execute() {
     msg["args"]["player"] = GameHandler::actual_player;
     msg["args"]["building_type"] = Building::WIND_TRAP;
     queue.enqueue(msg);
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::WIND_TRAP);
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {

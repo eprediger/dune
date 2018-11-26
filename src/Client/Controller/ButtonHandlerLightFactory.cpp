@@ -18,6 +18,7 @@ void ButtonHandlerLightFactory::execute() {
     msg["args"]["player"] = GameHandler::actual_player;
     msg["args"]["building_type"] = Building::LIGHT_FACTORY;
     queue.enqueue(msg);
+    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::LIGHT_FACTORY);
 }
 
 bool ButtonHandlerLightFactory::canBeEnabled() {

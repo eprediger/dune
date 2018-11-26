@@ -18,7 +18,7 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(const char* file, int n_player) :
+Model::Model(const char *file, int n_player, CommunicationQueue &queue) :
     map(file),
     units(),
     buildings(),
