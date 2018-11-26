@@ -2,7 +2,7 @@
 #define __SERVER_EXIT_THREAD_H__
 
 #include "Server.h"
-#include "../common/Thread.h"
+#include "Thread.h"
 
 class Server;
 

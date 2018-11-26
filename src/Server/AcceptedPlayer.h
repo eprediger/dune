@@ -1,8 +1,8 @@
 #ifndef __ACCEPTED_PLAYER_H__
 #define __ACCEPTED_PLAYER_H__
 
-#include "../common/Thread.h"
-#include "../common/Socket.h"
+#include "Thread.h"
+#include "Socket.h"
 #include "Server.h"
 #include <string>
 

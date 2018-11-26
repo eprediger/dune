@@ -1,25 +1,27 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
-#include "../common/Thread.h"
-#include "../common/Socket.h"
+
+#include <Socket.h>
+#include <CommunicationQueue.h>
+#include "ClientReceiver.h"
+#include "ClientSender.h"
 
 class Client : public Thread {
 public:
-	Client(const char* host, const char* service);
-	~Client();
+    Client(const char *host, const char *service, CommunicationQueue &queue);
+    ~Client();
 
-	void sendPayload(const std::string& payload);
+    virtual void run() override;
 
-	virtual void run() override;
-
-	void recvPayload();
-
-	void disconnect();
-
+    void disconnect();
 private:
-	bool keepPlaying;
-	Socket connectionSkt;
+    bool keepPlaying;
+    Socket connectionSkt;
+    CommunicationQueue& queue;
+    ClientReceiver receiver;
+    ClientSender sender;
 };
 
-#endif	// __CLIENT_H__
+
+#endif //__CLIENT_H__

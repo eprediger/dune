@@ -169,7 +169,7 @@ bool GameHandler::handleInput() {
 // de la clase que haga el POP del stack recibido y actualice el modelo y
 // la vista en base a eso.
 void GameHandler::step() {
-    while (!queue.isEmpty()){
+    while (!queue.sendEmpty()){
         interface.execute(queue.dequeue());
     }
 }

@@ -1,8 +1,8 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
-#include "../common/Socket.h"
-#include "../common/Thread.h"
+#include "Socket.h"
+#include "Thread.h"
 #include "AcceptedPlayer.h"
 #include <vector>
 

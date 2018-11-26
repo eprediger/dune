@@ -1,13 +1,16 @@
 #include <cstdlib>
 #include <iostream>
+#include "Model/GlobalConfig.h"
 #include "Server.h"
 #include "ExitThread.h"
+
+config_t GlobalConfig;
 
 #define BASE 10
 
 // ./server 10001 2 mapa.yaml
 
-/*int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[]) {
 	if (argc != SRV_ARGS) {
 		std::cerr << "Uso: " << argv[0]
 		          << " <puerto> <jugadores> <mapa.yaml>" << std::endl;
@@ -28,4 +31,4 @@
 			return EXIT_FAILURE;
 		}
 	}
-}*/
+}

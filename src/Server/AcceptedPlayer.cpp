@@ -1,6 +1,7 @@
 #include "AcceptedPlayer.h"
 #include <string>
 #include <vector>
+#include <iostream>
 // #include <nlohmann/json.hpp>
 
 AcceptedPlayer::AcceptedPlayer(Server& server) :
@@ -18,6 +19,7 @@ void AcceptedPlayer::run() {
 		std::unique_ptr<char[]> buffer(new char[length]());
 		this->peerSkt.receive(&buffer[0], length);
 		this->buffer = std::string(&buffer[0], length);
+		std::cout << "[Mensaje Recibido: " << this->buffer << "]" << std::endl;
 		running = (received > 0);
 		if (running) {
 			this->server.notifyAll(this->buffer);

@@ -2,10 +2,14 @@
 #include <string>
 
 #include <nlohmann/json.hpp>
+#include "Model/GlobalConfig.h"
+
+#include "Codes.h"
 #include "Client.h"
-#include "../common/Codes.h"
 
 // ./client 127.0.0.1 10001 ORDOS
+
+config_t GlobalConfig;
 
 int main(int argc, char const *argv[]) {
 	if (argc != CLT_ARGS) {
@@ -13,19 +17,33 @@ int main(int argc, char const *argv[]) {
 		          << " <ip-servidor> <puerto-servidor> <casa>" << std::endl;
 		return USAGE_ERROR;
 	} else {
+		CommunicationQueue queue;
+		Client client(argv[1], argv[2], queue);
 		try {
-			Client cliente(argv[1], argv[2]);
+//			ClientReceiver client(argv[1], argv[2]);
 			std::string input;
-			cliente.start();
+			client.start();
 			while (getline(std::cin, input)) {
-				cliente.sendPayload(input);
-				// cliente.recvPayload();
+			    if (input != ""){
+                    nlohmann::json send;
+                    send["message"] = input;
+                    queue.enqueue(send);
+			    } else {
+//                std::cout << "mensaje encolado" << send.dump() << std::endl;
+                    while (!queue.recvEmpty()) {
+//				    std::cout << "mensaje desencolado" << std::endl;
+                        nlohmann::json recv = queue.dequeue();
+                        std::cout << recv["message"] << std::endl;
+                    }
+                }
+				// client.sendPayload(input);
+				// client.recvPayload();
 			}
-			cliente.disconnect();
-			cliente.join();
+			client.disconnect();
+			client.join();
 		} catch (const CustomException& ce) {
 			std::cerr << ce.what() << std::endl;
-			cliente.join();
+			client.join();
 			return ce.getErrorCode();
 		}
 		return SUCCESS;

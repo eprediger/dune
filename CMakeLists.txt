@@ -43,15 +43,22 @@ file(GLOB_RECURSE SOURCE_SERVER
 file(GLOB SOURCE_COMMON
 		src/Common/*.cpp
 		src/Common/*.h
-		src/*.cpp
-		src/*.h
+#		src/*.cpp
+#		src/*.h
 		)
+
+#add_executable(${PROJECT_NAME}_Client
+#               ${SOURCE_CLIENT} ${SOURCE_COMMON})
+#
+#add_executable(${PROJECT_NAME}_Server
+#		${SOURCE_SERVER} ${SOURCE_COMMON})
 
 add_executable(${PROJECT_NAME}_Client
                ${SOURCE_CLIENT} ${SOURCE_COMMON})
 
 add_executable(${PROJECT_NAME}_Server
 		${SOURCE_SERVER} ${SOURCE_COMMON})
+
 
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}_Client PUBLIC src/Client src/Common)
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}_Server PUBLIC src/Server src/Common)

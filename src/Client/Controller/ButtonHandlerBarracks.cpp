@@ -2,6 +2,7 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include "Model/GlobalConfig.h"
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view,
 			BuildingConstructor& constructor, CommunicationQueue& queue):

@@ -12,10 +12,15 @@ public:
 
     nlohmann::json dequeue();
 
-    bool isEmpty();
+    void putReceived(nlohmann::json send_json);
+    nlohmann::json getSend();
+
+    bool sendEmpty();
+    bool recvEmpty();
 
 private:
     std::queue<nlohmann::json> send_queue;
+    std::queue<nlohmann::json> recv_queue;
 };
 
 

@@ -19,7 +19,7 @@ Socket::Socket(const char* node, const char* serv, const int flags) :
 
 	hints.ai_family = AF_INET;			// IPv4
 	hints.ai_socktype = SOCK_STREAM;	// TCP
-	hints.ai_flags = flags;				// Server: AI_PASSIVE | Client: 0
+	hints.ai_flags = flags;				// Server: AI_PASSIVE | ClientReceiver: 0
 
 	int s = getaddrinfo(node, serv, &hints, &result);
 	if (s != 0) {

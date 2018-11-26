@@ -6,7 +6,7 @@
 #include <fcntl.h>
 
 #include "Server.h"
-#include "../common/CustomException.h"
+#include "CustomException.h"
 #include <algorithm>
 
 Server::Server(const char *service, unsigned int players) :
@@ -47,10 +47,14 @@ Socket Server::accept() const {
 	}
 }
 
+#include <iostream>
 void Server::waitPlayers() {
+	std::cout << "Start to acept Players" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players.push_back(new AcceptedPlayer(*this));
+		std::cout << "Player Acepted!" << std::endl;
 	}
+	std::cout << "Start Program!!!" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->start();
 	}
