@@ -47,6 +47,7 @@ private:
     Player* player;
     BuildingType key;
     std::vector<Position> all_positions;
+protected: 
     nlohmann::json serialization;
 };
 

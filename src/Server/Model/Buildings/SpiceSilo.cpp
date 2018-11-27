@@ -8,6 +8,6 @@ SpiceSilo::SpiceSilo(const int x, const int y, int blockWidth, int blockHeight) 
                  GlobalConfig.spiceSiloSpicWidth,
                  GlobalConfig.spiceSiloSpicHeight,
                  SPICE_SILO),
-	capacity(GlobalConfig.spiceSiloSpiceCapacity) {}
-
+	capacity(GlobalConfig.spiceSiloSpiceCapacity)
+{}
 SpiceSilo::~SpiceSilo() {}

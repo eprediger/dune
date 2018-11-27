@@ -1,6 +1,6 @@
 #include "Building.h"
 #include "../Player.h"
-
+#include <iostream>
 int Building::counter = 0;
 Building::Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
                    const int hitPoints, const int width,
@@ -23,12 +23,13 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight, co
 	}
 	counter+=1;
 	serialization["class"] = "Building";
-	serialization["type"] = type;
+	serialization["type"] = int(key);
 	serialization["life"] = hitPoints;
 	serialization["width"] = width;
 	serialization["height"] = height;
 	serialization["pos"]["x"] = x;
 	serialization["pos"]["y"] = y;
+	serialization["id"] = id;
 }
 
 Building::~Building() {}

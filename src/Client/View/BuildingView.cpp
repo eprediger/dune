@@ -73,7 +73,7 @@ void BuildingView::drawConstruction(Area& camara) {
 	if (!construido) {
 		update_sprite++;
 		(*construction_it)->render(src_area, dest_area);
-		if (update_sprite == 5) {
+		if (update_sprite == 1) {
 			construction_it++;
 			update_sprite = 0;
 			if (construction_it == construction_sprites.end()) {
@@ -85,7 +85,7 @@ void BuildingView::drawConstruction(Area& camara) {
 		if (construction_it != construction_sprites.end()) {
 			(*construction_it)->render(src_area, dest_area);
 			update_sprite++;
-			if (update_sprite == 3) {
+			if (update_sprite == 1) {
 				update_sprite = 0;
 				if (construction_it == construction_sprites.begin()) {
 					construction_it = construction_sprites.end();

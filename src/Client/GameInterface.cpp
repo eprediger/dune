@@ -1,6 +1,7 @@
 #include "GameInterface.h"
 #include "View/BuildingViewFactory.h"
 #include "View/UnitViewFactory.h"
+#include <iostream>
 
 GameInterface::GameInterface(Model &model, GameView &view) :
     model(model), view(view) {}

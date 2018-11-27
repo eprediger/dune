@@ -12,7 +12,7 @@
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
 #include "View/GameView.h"
-
+#include "GameInterface.h"
 #include <iostream>
 
 // ./client 127.0.0.1 10001 ORDOS
@@ -48,12 +48,18 @@ int main(int argc, const char *argv[]) {
             model.addPlayer(player);
             Player& myPlayer = model.getPlayer(player["id"]);
             GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
+            GameInterface interface(model,gameView);
             GameHandler gameHandler(gameView, model, queue, myPlayer); 
             Application app(gameView, gameHandler, model);
             while (app.running() && !model.isGameFinished()) {
-                app.handleEvent();        // Input de usuario
-                app.update();            // Actualizar Modelo
+               // app.update();            // Actualizar Modelo
                 app.render();            // Dibujar Vista
+                while(true){
+                    app.handleEvent();        // Input de usuario
+                    nlohmann::json j(queue.dequeue());
+                    interface.execute(j);
+                    if (j["class"] == "Step") break;
+                }
             }
             client.disconnect();
         } catch (const SdlException &e) {

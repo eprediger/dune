@@ -41,7 +41,6 @@ void ClientReceiver::recvPayload() {
 //		std::cout << "[Se recibio el mensaje. Se imprimira]" << std::endl;
 //		std::cerr << buffer.get(); // << std::endl;
 		nlohmann::json recv = nlohmann::json::parse(buffer.get());
-		std::cout<<"ok\n";
 		queue.putReceived(recv);
 //		std::cout << "[Se imprimio el mensaje]" << std::endl;
 	}

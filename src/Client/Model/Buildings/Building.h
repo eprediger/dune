@@ -43,8 +43,8 @@ public:
 protected:
     int player_id;
     Player* player;
-    int initial_life;
     int life;
+    int initial_life;
     BuildingType key;
     std::vector<Position> all_positions;
 };

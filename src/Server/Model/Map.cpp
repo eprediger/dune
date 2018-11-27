@@ -22,7 +22,7 @@ Map::Map(const char* filePath) :
     char sand_key = file["SAND_KEY"].as<char>();
     serialization["sand_key"] = sand_key;
     char spiced_sand_key = file["SPICED_SAND_KEY"].as<char>();
-    serialization["spiced_sand_key"] = sand_key;
+    serialization["spiced_sand_key"] = spiced_sand_key;
     char dune_key = file["DUNE_KEY"].as<char>();
     serialization["dune_key"] = dune_key;
     char rocks_key = file["ROCK_KEY"].as<char>();
@@ -62,8 +62,6 @@ Map::Map(const char* filePath) :
         }
     }
     serialization["matrix"] = keys;
-    std::ofstream a("map.json"); 
-    a << serialization;
 }
 
 Map::~Map() {}

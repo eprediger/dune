@@ -13,7 +13,6 @@ public:
 private:
     Model& model;
     GameView& view;
-
 };
 
 

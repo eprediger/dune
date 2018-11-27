@@ -1,6 +1,6 @@
 #include "SpiceRefinery.h"
 
-#include "Model/Player.h"
+#include "../Player.h"
 
 SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,
@@ -11,7 +11,8 @@ SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int block
                  GlobalConfig.spiceRefinerySpicHeight,
                  SPICE_REFINERY),
 		capacity(GlobalConfig.spiceRefinerySpiceCapacity) ,
-		availableCapacity(0) {}
+		availableCapacity(0)
+{}
 
 SpiceRefinery::~SpiceRefinery() {}
 

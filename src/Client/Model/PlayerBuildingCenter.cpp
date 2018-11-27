@@ -3,7 +3,7 @@ PlayerBuildingCenter::PlayerBuildingCenter(nlohmann::json& j) {
     update(j);
 } 
 
-void PlayerBuildingCenter::update(nlohmann::json& j){
+void PlayerBuildingCenter::update(nlohmann::json& j){ 
     construction[Building::BARRACKS] = {j["barracks_time"], j["barracks_built"]};
     construction[Building::LIGHT_FACTORY] = {j["lightFactory_time"],j["lightFactory_built"]};
     construction[Building::HEAVY_FACTORY] = {j["heavyFactory_time"],j["heavyFactory_built"]};

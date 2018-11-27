@@ -1,5 +1,6 @@
 #define _POSIX_C_SOURCE 200112L
 #include <sys/socket.h>
+#include <chrono>
 #include <netdb.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -72,10 +73,22 @@ void Server::waitPlayers() {
 		std::cout<<"iniciado player";
 	}
 
+	int i = 0;
+	nlohmann::json j;
+	j["class"] = "Step";
 	while(!model.isGameFinished()){
-		interface.execute(commonQueue.dequeue());
 		model.step();
-		model.serialize(players);
+		if (i==100){
+			model.serialize(players);
+			i=0; 
+		}
+		while(!commonQueue.recvEmpty()){
+			interface.execute(commonQueue.dequeue());
+		}
+		for (auto player: players){
+			player->queue.enqueue(j);
+		}
+		i++;
 	}
 
 

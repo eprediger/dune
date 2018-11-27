@@ -77,8 +77,6 @@ void BuildingConstructor::build() {
             default:
                 break;
             }
-
-
             on = false;
         }
     }

@@ -7,6 +7,6 @@ LightFactory::LightFactory(const int x, const int y, int blockWidth, int blockHe
 	         GlobalConfig.lightFactoryHitPoints,
 	         GlobalConfig.lightFactoryWidth,
 	         GlobalConfig.lightFactoryHeight,
-	         LIGHT_FACTORY) {}
-
+	         LIGHT_FACTORY)
+{}
 LightFactory::~LightFactory() {}

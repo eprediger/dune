@@ -16,7 +16,9 @@ Map::Map(nlohmann::json& file):
     rows(file["height"]),
     cols(file["width"])
 {
-    nlohmann::json keys = file["matrix"]; 
+
+    nlohmann::json keys = file["matrix"];
+    
     for (auto it = keys.begin() ; it!=keys.end() ; it++){
         int key = *it;
         if (key == file["sand_key"]) {

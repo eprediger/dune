@@ -7,6 +7,7 @@ ConstructionYard::ConstructionYard(const int x, const int y, int blockWidth, int
                  GlobalConfig.constructionYardHitPoints,
                  GlobalConfig.constructionYardWidth,
                  GlobalConfig.constructionYardHeight,
-                 CONSTRUCTION_YARD) {}
+                 CONSTRUCTION_YARD)
+{}
 
 ConstructionYard::~ConstructionYard() {}
