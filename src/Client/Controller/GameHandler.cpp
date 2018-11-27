@@ -149,10 +149,6 @@ bool GameHandler::handleInput() {
             }
         }
         break;
-        // Temporal
-        case SDLK_c:
-            break;
-        /////////
         default:
             break;
         }

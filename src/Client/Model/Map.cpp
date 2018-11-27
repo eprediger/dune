@@ -24,7 +24,8 @@ Map::Map(nlohmann::json& file):
         if (key == file["sand_key"]) {
             matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
         } else if (key == file["spiced_sand_key"]) {
-            matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(file["initial_spice"])));
+            int spice = file["initial_spice"];
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(spice)));
         } else if (key == file["dune_key"]) {
             matrix.emplace_back(std::unique_ptr<Terrain>(new Dunes()));
         } else if (key == file["rocks_key"]) {

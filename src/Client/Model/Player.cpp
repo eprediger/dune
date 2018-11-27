@@ -6,12 +6,12 @@
 
 Player::Player(nlohmann::json& j) :
     id(j["id"]),
-    house(j["house"]),
+    house(j["house"].get<std::string>()),
     generatedEnergy(j["generated_energy"]),  // Inicial es 0
     consumedEnergy(j["consumed_energy"]),   // Inicial es 0
     gold(j["gold"]),
     trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
-    buildingCenter(new PlayerBuildingCenter(j["buildingCenter"]))    
+    buildingCenter(new PlayerBuildingCenter(j["buildingCenter"]))
 {}
 
 

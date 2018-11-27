@@ -26,6 +26,9 @@ int main(int argc, char const *argv[]) {
 		} catch (const CustomException& ce) {
 			std::cerr << ce.what() << std::endl;
 			return ce.getErrorCode();
+		} catch (std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			return EXIT_FAILURE;
 		} catch (...) {
 			std::cerr << "Todo termino señores, no tenemos escapatoria" << std::endl;
 			return EXIT_FAILURE;
