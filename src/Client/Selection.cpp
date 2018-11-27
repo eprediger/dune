@@ -25,7 +25,7 @@ std::vector<Building*>& Selection::getSelectedBuildings() {
 void Selection::eraseDeads() {
 	std::vector<Unit*>::iterator units_it = units.begin();
 	while (units_it != units.end()) {
-		if (Unit::isDead(*units_it)) {
+		if ((*units_it)->isDead()) {
 			units_it = units.erase(units_it);
 		} else {
 			units_it++;

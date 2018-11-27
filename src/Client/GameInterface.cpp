@@ -5,145 +5,87 @@
 GameInterface::GameInterface(Model &model, GameView &view) :
     model(model), view(view) {}
 
-void GameInterface::execute(nlohmann::json json) {
-    if ( json["method"] == "createWindTrap"){
-        this->createWindTrap(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
+void GameInterface::execute(nlohmann::json j) {
+    if (j["class"] == "Player"){
+        if (model.playerExists(j["id"]))
+            model.updatePlayer(j);
+        else
+            model.addPlayer(j);
     }
-    if ( json["method"] == "createBarracks"){
-        this->createBarracks(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
+    else if (j["class"] == "Unit"){
+        if (model.unitExists(j["id"])){
+            model.updateUnit(j);
+        }
+        else {
+            if (j["subClass"] == "Harvester"){
+                Harvester& harvester = model.createHarvester(j);
+                view.addUnitView(UnitViewFactory::createUnitView(harvester,view.getWindow()));
+            }
+            else if (j["subClass"] == "LightInfantry"){
+                LightInfantry& unit = model.createLightInfantry(j);
+                view.addUnitView(UnitViewFactory::createUnitView(unit,view.getWindow()));
+            }
+            else if (j["subClass"] == "HeavyInfantry"){
+                HeavyInfantry& unit = model.createHeavyInfantry(j); 
+                view.addUnitView(UnitViewFactory::createUnitView(unit,view.getWindow())); 
+            }
+            else if (j["subClass"] == "Trike"){
+                Trike& unit = model.createTrike(j);
+                view.addUnitView(UnitViewFactory::createUnitView(unit,view.getWindow()));
+            }
+            else if (j["subClass"] == "Raider"){
+                Raider& unit = model.createRaider(j);
+                view.addUnitView(UnitViewFactory::createUnitView(unit,view.getWindow()));
+            }
+            else if (j["subClass"] == "Tank"){
+                Tank& unit = model.createTank(j);
+                view.addUnitView(UnitViewFactory::createUnitView(unit,view.getWindow()));
+            }
+        }
     }
-    if ( json["method"] == "createLightFactory"){
-        this->createLightFactory(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
+    else if (j["class"] == "Building"){
+        if (model.buildingExists(j["id"])){
+            model.updateBuilding(j);
+        }
+        else {
+            if (j["type"] == Building::BARRACKS){
+                Barracks& building = model.createBarracks(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::LIGHT_FACTORY){
+                LightFactory& building = model.createLightFactory(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::HEAVY_FACTORY){
+                HeavyFactory& building = model.createHeavyFactory(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::CONSTRUCTION_YARD){
+                ConstructionYard& building = model.createConstructionYard(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::SPICE_REFINERY){
+                SpiceRefinery& building = model.createSpiceRefinery(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::SPICE_SILO){
+                SpiceSilo& building = model.createSpiceSilo(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+            if (j["type"] == Building::WIND_TRAP){
+                WindTrap& building = model.createWindTrap(j);
+                view.addBuildingView(BuildingViewFactory::createBuildingView(building,view.getWindow()));
+            } 
+        }
     }
-    if ( json["method"] == "createHeavyFactory"){
-        this->createHeavyFactory(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
+    else if (j["class"] == "Rocket"){
+        if (model.rocketExists(j["id"])){
+            model.updateRocket(j);
+        }
+        else{
+            Rocket& rocket = model.createRocket(j);
+            view.addRocketView(new RocketView(rocket,view.getWindow()));
+        }
     }
-    if ( json["method"] == "createSpiceRefinery"){
-        this->createSpiceRefinery(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createSpiceSilo"){
-        this->createSpiceSilo(json["args"]["x"],json["args"]["y"],json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "beginConstruction"){
-        this->beginConstruction(json["args"]["player"],json["args"]["building_type"]);
-        return;
-    }
-    if ( json["method"] == "createHarvester"){
-        this->createHarvester(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createHeavyInfantry"){
-        this->createHeavyInfantry(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createLightInfantry"){
-        this->createLightInfantry(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createRaider"){
-        this->createRaider(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createTank"){
-        this->createTank(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "createTrike"){
-        this->createTrike(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "sellBuilding"){
-        this->sellBuilding(json["args"]["player"], json["args"]["building_id"]);
-        return;
-    }
-    if ( json["method"] == "constructBuildings"){
-        this->constructBuildings(json["args"]["player"]);
-        return;
-    }
-    if ( json["method"] == "trainUnits"){
-        this->trainUnits(json["args"]["player"]);
-        return;
-    }
-}
 
-void GameInterface::createWindTrap(int x, int y, int player_id) {
-    WindTrap& windtrap = model.createWindTrap(x,y,player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(windtrap, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::WIND_TRAP);
-}
-
-void GameInterface::createBarracks(int x, int y, int player_id) {
-    Barracks& barracks = model.createBarracks(x, y, player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(barracks, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::BARRACKS);
-}
-
-void GameInterface::createLightFactory(int x, int y, int player_id) {
-    LightFactory& lightF = model.createLightFactory(x, y, player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(lightF, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::LIGHT_FACTORY);
-}
-
-void GameInterface::createHeavyFactory(int x, int y, int player_id) {
-    HeavyFactory& heavyF = model.createHeavyFactory(x, y, player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(heavyF, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::HEAVY_FACTORY);
-}
-void GameInterface::createSpiceRefinery(int x, int y, int player_id) {
-    SpiceRefinery& spiceRef = model.createSpiceRefinery(x, y, player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(spiceRef, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::SPICE_REFINERY);
-}
-
-void GameInterface::createSpiceSilo(int x, int y, int player_id) {
-    SpiceSilo& spiceSilo = model.createSpiceSilo(x, y, player_id);
-    view.addBuildingView(BuildingViewFactory::createBuildingView(spiceSilo, view.getWindow()));
-    model.getPlayer(player_id).buildingCenter->build(Building::SPICE_SILO);
-}
-
-void GameInterface::beginConstruction(int player_id, Building::BuildingType type) {
-    model.getPlayer(player_id).buildingCenter->newConstruct(type);
-}
-
-void GameInterface::createHarvester(int player_id) {
-    Harvester& newUnit = model.createHarvester(0,0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
-}
-void GameInterface::createHeavyInfantry(int player_id) {
-    HeavyInfantry& newUnit = model.createHeavyInfantry(0, 0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit,view.getRocketViews(), view.getWindow()));
-}
-void GameInterface::createLightInfantry(int player_id) {
-    LightInfantry& newUnit = model.createLightInfantry(0,0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
-}
-void GameInterface::createRaider(int player_id) {
-    Raider& newUnit = model.createRaider(0,0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
-}
-void GameInterface::createTank(int player_id) {
-    Tank& newUnit = model.createTank(0,0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
-}
-void GameInterface::createTrike(int player_id) {
-    Trike& newUnit = model.createTrike(0,0, player_id);
-    view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
-}
-
-void GameInterface::sellBuilding(int player_id, int building_id) {
-    model.getPlayer(player_id).sellBuilding(&model.getBuildingById(building_id));
-}
-
-void GameInterface::constructBuildings(int player_id) {
-    model.getPlayer(player_id).constructBuildings();
-}
-
-void GameInterface::trainUnits(int player_id) {
-    model.getPlayer(player_id).trainUnits();
 }

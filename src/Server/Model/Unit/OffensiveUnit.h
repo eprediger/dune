@@ -2,10 +2,11 @@
 #define __OffensiveUnit_H__
 
 #include "Model/Attacker.h"
+#include <nlohmann/json.hpp>
 
-#include "Model/Unit/Unit.h"
+#include "Unit.h"
 
-#include "Model/Map.h"
+#include "../Map.h"
 
 class OffensiveUnit : public Unit, public Attacker {
 public:
@@ -19,6 +20,8 @@ public:
 
 	bool automaticAttack(Map &map);
 
+	virtual nlohmann::json& getSerialization() override;
+ 
 	Position& getVictimPosition();
 //    bool attacking;
 private:

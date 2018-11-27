@@ -5,24 +5,30 @@
 #include "Socket.h"
 #include "Server.h"
 #include <string>
+#include "../Common/ClientSender.h"
+#include "../Common/ClientReceiver.h"
 
 class Server;
 
-class AcceptedPlayer : public Thread {
+class AcceptedPlayer {
 public:
 	AcceptedPlayer(Server& server);
 
 	~AcceptedPlayer();
 
-	void sendResponse(const std::string& msg);
-private:
+	void start();
 
-	void run() override;
+	void disconnect();
+
+	CommunicationQueue queue;
+
 
 private:
 	Server& server;
-	const Socket peerSkt;
+	Socket peerSkt;
 	std::string buffer;
+	ClientSender sender;
+	ClientReceiver receiver;
 };
 
 #endif	// __ACCEPTED_PLAYER_H__

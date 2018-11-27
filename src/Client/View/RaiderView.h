@@ -5,7 +5,7 @@
 #include "Model/Unit/Raider.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "Position.h"
 #include "Orientation.h"
 #include <map>

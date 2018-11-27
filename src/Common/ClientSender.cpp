@@ -1,4 +1,4 @@
-#include "ClientSender.h"
+#include "../Common/ClientSender.h"
 
 #include <sys/socket.h>
 #include <netdb.h>
@@ -28,12 +28,9 @@ void ClientSender::sendPayload(const std::string& payload) {
 
 void ClientSender::run() {
     while(this->keepPlaying){
-        if (!queue.sendEmpty()) {
-            nlohmann::json send = queue.getSend();
-            this->sendPayload(send.dump());
-        }
+        nlohmann::json send = queue.getSend();
+        this->sendPayload(send.dump());
     }
-//    this->recvPayload();
 }
 
 void ClientSender::disconnect() {

@@ -39,12 +39,17 @@ int main(int argc, const char *argv[]) {
             /*HouseSelectionView houseSelectionView(WINDOW_WIDTH, WINDOW_HEIGHT);
             HouseSelectionHandler houseSelectionHandler(houseSelectionView);
             Application app(houseSelectionView, houseSelectionHandler);*/
-
-            Model model(argv[4], 3, queue);
-            GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model);
-            GameHandler gameHandler(gameView, model, queue);
-            Application app(gameView, gameHandler, model);
             client.start();
+            std::cout<<"ok1\n";
+            nlohmann::json mapFile = queue.dequeue();
+            std::cout<<"ok2\n";
+            Model model(mapFile, queue); 
+            nlohmann::json player = queue.dequeue();
+            model.addPlayer(player);
+            Player& myPlayer = model.getPlayer(player["id"]);
+            GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
+            GameHandler gameHandler(gameView, model, queue, myPlayer); 
+            Application app(gameView, gameHandler, model);
             while (app.running() && !model.isGameFinished()) {
                 app.handleEvent();        // Input de usuario
                 app.update();            // Actualizar Modelo

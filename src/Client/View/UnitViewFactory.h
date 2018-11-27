@@ -25,7 +25,6 @@ public:
     static UnitView* createUnitView(LightInfantry& lightInfantry
                                     , SdlWindow& window);
     static UnitView* createUnitView(HeavyInfantry& heavyInfantry
-                                    ,std::vector<RocketView*>& rockets
                                     , SdlWindow& window);
 private:
     UnitViewFactory();

@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerRaider::ButtonHandlerRaider(Model &model, GameView &view, CommunicationQueue& queue) :
+ButtonHandlerRaider::ButtonHandlerRaider(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
                                             GlobalConfig.raiderConstructionTime),
-                      model, view, queue) {
+                     player, view, queue) {
 }
 
 ButtonHandlerRaider::~ButtonHandlerRaider() {}
@@ -14,15 +14,15 @@ ButtonHandlerRaider::~ButtonHandlerRaider() {}
 void ButtonHandlerRaider::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createRaider";
-	msg["args"]["player"] = GameHandler::actual_player;
+	msg["args"]["player"] = player.getId();
 	queue.enqueue(msg);
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {
-	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.raiderCost)) &&
-	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
+	return (((player.gold >= GlobalConfig.raiderCost)) &&
+	        (player.hasBuilding(Building::LIGHT_FACTORY)));
 }
 
 bool ButtonHandlerRaider::finishAction() {
-	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingRaider());
+	return (!this->player.trainingCenter->isTrainingRaider());
 }

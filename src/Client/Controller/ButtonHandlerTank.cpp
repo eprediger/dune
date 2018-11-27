@@ -3,28 +3,26 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerTank::ButtonHandlerTank(Model &model, GameView &view, CommunicationQueue& queue) :
+ButtonHandlerTank::ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
                                             GlobalConfig.tankConstructionTime),
-                      model, view, queue) {
+                      player, view, queue) {
 }
 
 ButtonHandlerTank::~ButtonHandlerTank() {}
 
 void ButtonHandlerTank::execute() {
-//	nlohmann::json msg;
-//	msg["method"] = "createTank";
-//	msg["args"]["player"] = GameHandler::actual_player;
-//	queue.enqueue(msg);
-	Tank& newUnit = model.createTank(500, 500, GameHandler::actual_player);
-	view.addUnitView(UnitViewFactory::createUnitView(newUnit, view.getWindow()));
+	nlohmann::json msg;
+	msg["method"] = "createTank";
+	msg["args"]["player"] = player.getId();
+	queue.enqueue(msg);
 }
 
 bool ButtonHandlerTank::canBeEnabled() {
-	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.tankCost)) &&
-	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::HEAVY_FACTORY)));
+	return (((player.gold >= GlobalConfig.tankCost)) &&
+	        (player.hasBuilding(Building::HEAVY_FACTORY)));
 }
-
+ 
 bool ButtonHandlerTank::finishAction() {
-	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingTank());
+	return (!this->player.trainingCenter->isTrainingTank());
 }

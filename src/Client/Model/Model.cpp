@@ -18,109 +18,73 @@
 #include <vector>
 #include "PlayerTrainingCenter.h"
 
-Model::Model(const char *file, int n_player, CommunicationQueue &queue) :
+Model::Model(nlohmann::json& file, CommunicationQueue &queue) :
     map(file),
     units(),
     buildings(),
     players(),
     rockets(),
     gameFinished(false),
-    queue(queue) {
-    std::vector<Position>& initial_pos = map.getInitialPositions();
-    for (int i = 0; i < n_player; ++i) {
-        ConstructionYard* new_building = new ConstructionYard(initial_pos[i].x, initial_pos[i].y,
-                map.getBlockWidth(), map.getBlockHeight());
-        players.push_back(new Player(i, *new_building));
-        this->createBuilding(std::move(new_building));
-    }
-}
+    queue(queue) {}
 
 Model::~Model() {
     for (auto& unit : units) {
-        delete unit;
+        delete unit.second;
     }
     for (auto& building : buildings) {
-        delete building;
+        delete building.second;
     }
     for (auto& player : players) {
-        delete player;
+        delete player.second;
+    }
+    for (auto& rocket: rockets){
+        delete rocket.second;
     }
 }
 
-//Unit &Model::createUnit(int x, int y) {
 Unit &Model::createUnit(Unit *unit) {
-    units.push_back(std::move(unit));
-    map.put(*units.back());
-    return *units.back();
+    units.insert(std::make_pair(unit->id,unit));
+    map.put(*unit);
+    return *unit;
 }
 
 Building &Model::createBuilding(Building *building) {
-    buildings.push_back(std::move(building));
-    map.put(*buildings.back());
-    return *buildings.back();
+    buildings.insert(std::make_pair(building->id,building));
+    map.put(*building);
+    return *building;
 }
 
+void Model::addPlayer(nlohmann::json& j){
+    players.insert(std::make_pair(j["id"], new Player(j)));
+}
+
+void Model::updatePlayer(nlohmann::json& j){
+    players.at(j["id"])->update(j);
+}
+
+bool Model::playerExists(int id){
+    return (players.find(id)!=players.end());
+}
+
+bool Model::unitExists(int id){
+    return (units.find(id)!=units.end());
+} 
+
+bool Model::buildingExists(int id){
+    return (buildings.find(id)!=buildings.end());
+}
+
+bool Model::rocketExists(int id){
+    return (rockets.find(id)!=rockets.end());
+}
 void Model::step() {
     this->cleanDeadUnits();
     this->cleanDeadBuildings();
     this->cleanRockets();
-    for (auto itr = units.begin(); itr != units.end(); ++itr) {
-        if ((*itr)->shotARocket()) {
-            rockets.emplace_back((*itr)->getRocket());
-        }
-        (*itr)->makeAction(map);
-    }
-    for (auto itr = players.begin(); itr != players.end(); itr++) {
-//        (*itr)->trainUnits();
-//        (*itr)->constructBuildings();
-        nlohmann::json j;
-        j["args"]["player"] = (*itr)->getId();
-        j["method"] = "constructBuildings";
-        queue.enqueue(j);
-        j["method"] = "trainUnits";
-        queue.enqueue(j);
-
-        std::vector<Unit*>& new_units = (*itr)->getTrainedUnits(map);
-        for (auto unit = new_units.begin(); unit != new_units.end(); unit++) {
-            units.push_back(*unit);
-//            (*unit)->setPlayer(**itr);
-            map.put(**unit);
-        }
-        new_units.clear();
-    }
-
-    for (auto itr = rockets.begin(); itr != rockets.end(); itr++) {
-        (*itr)->move();
-        if ((*itr)->arrived()) {
-            (*itr)->explode(map);
-        }
-    }
-
-    int players_alive = 0;
-    for (auto itr = players.begin(); itr != players.end(); ++itr) {
-        if ( !(*itr)->lose() ) {
-            players_alive++;
-        }
-    }
-    if (players_alive <= 1) {
-        gameFinished = true;
-    }
 }
 
 bool Model::isGameFinished() {
     return gameFinished;
-}
-
-Player *Model::getWinner() {
-    if (!gameFinished) {
-        return nullptr;
-    }
-    for (auto itr = players.begin(); itr != players.end() ; ++itr) {
-        if ( !(*itr)->lose() ) {
-            return *itr;
-        }
-    }
-    return nullptr;
 }
 
 std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
@@ -138,18 +102,16 @@ Map &Model::getMap() {
 void Model::cleanDeadUnits() {
     bool has_dead_unit = false;
     for (auto& u : units) {
-        if (Unit::isDead(u)) {
+        if (u.second->isDead()) {
             has_dead_unit = true;
-            map.cleanUnit(u);
-        } else {
-            u->checkForDeadVictim();
+            map.cleanUnit(u.second);
         }
     }
     if (has_dead_unit) {
-        std::vector<Unit*>::iterator it = units.begin();
+        std::map<int,Unit*>::iterator it = units.begin();
         while (it != units.end()) {
-            if (Unit::isDead((*it))) {
-                delete(*it);
+            if ((it->second)->isDead()) {
+                delete(it->second);
                 it = units.erase(it);
             } else {
                 it++;
@@ -161,19 +123,19 @@ void Model::cleanDeadUnits() {
 void Model::cleanDeadBuildings() {
     bool has_dead_unit = false;
     for (auto& b : buildings) {
-        if (Attackable::isDead(b)) {
+        if (b.second->isDead()) {
             has_dead_unit = true;
-            map.cleanBuilding(b);
+            map.cleanBuilding(b.second);
         }
     }
     if (has_dead_unit) {
         for (auto& player : players) {
-            player->cleanDeadBuildings();
+            player.second->cleanDeadBuildings(); 
         }
         auto it = buildings.begin();
         while (it != buildings.end()) {
-            if (Attackable::isDead((*it))) {
-                delete(*it);
+            if (it->second->isDead()) {
+                delete(it->second);
                 it = buildings.erase(it);
             } else {
                 it++;
@@ -184,12 +146,12 @@ void Model::cleanDeadBuildings() {
 
 void Model::cleanRockets() {
     if (!rockets.empty()) {
-        std::vector<Rocket*>::iterator it = rockets.begin();
+        std::map<int,Rocket*>::iterator it = rockets.begin();
         while (it != rockets.end()) {
-            if ((*it)->arrived()) {
-                delete(*it);
+            if ((it)->second->arrived) {
+                delete(it->second);
                 it = rockets.erase(it);
-            } else {
+            } else { 
                 it++;
             }
         }
@@ -200,109 +162,102 @@ Player &Model::getPlayer(int player) {
     return *players.at(player);
 }
 
-Harvester& Model::createHarvester(int x, int y, int player) {
-    Harvester* harvester = new Harvester(x, y);
-    harvester->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainHarvester(harvester);
+void Model::updateUnit(nlohmann::json& j){
+    units.at(j["id"])->update(j);
+}
+
+void Model::updateBuilding(nlohmann::json& j){
+    buildings.at(j["id"])->update(j);
+}
+
+Harvester& Model::createHarvester(nlohmann::json& j) {
+    Harvester* harvester = new Harvester(j);
+    harvester->setPlayer(players.at(j["player_id"]));
     return *harvester;
 }
 
-HeavyInfantry& Model::createHeavyInfantry(int x, int y, int player) {
-    HeavyInfantry* heavyInfantry = new HeavyInfantry(x, y);
-    heavyInfantry->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainHeavyInfantry(heavyInfantry);
+HeavyInfantry& Model::createHeavyInfantry(nlohmann::json& j) {
+    HeavyInfantry* heavyInfantry = new HeavyInfantry(j);
+    heavyInfantry->setPlayer(players.at(j["player_id"]));
     return *heavyInfantry;
 }
 
-LightInfantry& Model::createLightInfantry(int x, int y, int player) {
-    LightInfantry* lightInfantry = new LightInfantry(x, y);
-    lightInfantry->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainLightInfantry(lightInfantry);
+LightInfantry& Model::createLightInfantry(nlohmann::json& j) {
+    LightInfantry* lightInfantry = new LightInfantry(j);
+    lightInfantry->setPlayer(players.at(j["player_id"]));
     return *lightInfantry;
 }
 
-Raider& Model::createRaider(int x, int y, int player) {
-    Raider* raider = new Raider(x, y);
-    raider->setPlayer(*players.at(player));
-
-    players.at(player)->trainingCenter->trainRaider(raider);
+Raider& Model::createRaider(nlohmann::json& j) {
+    Raider* raider = new Raider(j);
+    raider->setPlayer(players.at(j["player_id"]));
     return (*raider);
 }
 
-Tank& Model::createTank(int x, int y, int player) {
-    Tank* tank = new Tank(x, y);
-    tank->setPlayer(*players.at(player));
-
-    players.at(player)->trainingCenter->trainTank(tank);
+Tank& Model::createTank(nlohmann::json& j) {
+    Tank* tank = new Tank(j);
+    tank->setPlayer(players.at(j["player_id"]));
     return *tank;
 }
 
-Trike& Model::createTrike(int x, int y, int player) {
-    Trike* trike = new Trike(x, y);
-    trike->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainTrike(trike);
+Trike& Model::createTrike(nlohmann::json& j) {
+    Trike* trike = new Trike(j);
+    trike->setPlayer(players.at(j["player_id"]));
     return *trike;
 }
 
-// Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)
-Barracks& Model::createBarracks(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    Barracks* building = new Barracks(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+
+
+Barracks& Model::createBarracks(nlohmann::json& j) {
+    Barracks* building = new Barracks(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (Barracks&)this->createBuilding(std::move(building));
 }
 
-ConstructionYard& Model::createConstructionYard(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    ConstructionYard* building = new ConstructionYard(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+ConstructionYard& Model::createConstructionYard(nlohmann::json& j) {
+    ConstructionYard* building = new ConstructionYard(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (ConstructionYard&)this->createBuilding(std::move(building));
 }
 
-HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    HeavyFactory* building = new HeavyFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+HeavyFactory& Model::createHeavyFactory(nlohmann::json& j) {
+    HeavyFactory* building = new HeavyFactory(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (HeavyFactory&)this->createBuilding(std::move(building));
 }
 
-LightFactory& Model::createLightFactory(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    LightFactory* building = new LightFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+LightFactory& Model::createLightFactory(nlohmann::json& j) {
+    LightFactory* building = new LightFactory(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (LightFactory&)this->createBuilding(std::move(building));
 }
 
-SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    SpiceRefinery* building = new SpiceRefinery(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+SpiceRefinery& Model::createSpiceRefinery(nlohmann::json& j) {
+    SpiceRefinery* building = new SpiceRefinery(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (SpiceRefinery&)this->createBuilding(std::move(building));
 }
 
-SpiceSilo& Model::createSpiceSilo(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    SpiceSilo* building = new SpiceSilo(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+SpiceSilo& Model::createSpiceSilo(nlohmann::json& j) {
+    SpiceSilo* building = new SpiceSilo(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (SpiceSilo&)this->createBuilding(std::move(building));
 }
 
-WindTrap& Model::createWindTrap(int x, int y, int player) {
-    Position pos1(x, y);
-    Position pos = map.getCornerPosition(pos1);
-    WindTrap* building = new WindTrap(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    players.at(player)->addBuilding(building);
+WindTrap& Model::createWindTrap(nlohmann::json& j) {
+    WindTrap* building = new WindTrap(j);
+    players.at(j["player_id"])->addBuilding(building);
     return (WindTrap&)this->createBuilding(std::move(building));
 }
 
-void Model::actionOnPosition(Position &pos, Unit &unit) {
-    unit.actionOnPosition(map, pos);
+Rocket& Model::createRocket(nlohmann::json& j){
+    Rocket* rocket = new Rocket(j);
+    rockets.insert(std::make_pair(rocket->id,rocket));
+    return *rocket;
+}
+
+void Model::updateRocket(nlohmann::json& j){
+    rockets.at(j["id"])->update(j);
 }
 
 bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player) {
@@ -316,12 +271,3 @@ int Model::numberOfPlayers() {
     return players.size();
 }
 
-
-/// TEMPORAL
-Building & Model::getBuildingById(int id) {
-    for (auto& building : buildings){
-        if(building->getId() == id ){
-            return *building;
-        }
-    }
-}

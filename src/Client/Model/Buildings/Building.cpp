@@ -1,45 +1,34 @@
 #include "Building.h"
+#include <nlohmann/json.hpp>
+#include "../Map.h"
 
-Building::Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
-                   const int hitPoints, const int width,
-                   const int height, BuildingType type):
-	Attackable(hitPoints, x, y),
-	width(width),
-	height(height),
-	energy(energy),
-	cost(cost),
+Building::Building(nlohmann::json& j):
+	width(j["width"]),
+	height(j["height"]),
+	id(j["id"]),
+	player_id(j["player_id"]),
 	player(nullptr),
-	key(type),
+	life(j["life"]),
+	initial_life(life),
+	key(j["type"]),
 	all_positions()
-{
+{ 
+	int x = j["pos"]["x"];
+	int y = j["pos"]["y"];
 	for (int i = 0 ; i < height ; i++) {
 		for (int j = 0 ; j < width ; j++) {
-			all_positions.emplace_back(x + j * blockWidth, y + i * blockHeight);
+			all_positions.emplace_back(x + j * Map::getBlockWidth(), y + i * Map::getBlockHeight());
 		}
 	}
 }
 
 Building::~Building() {}
 
-void Building::reciveBonusDammage(const Weapon &weapon) {
-	life -= weapon.getBuildingBonus();
-}
 
 bool Building::is(Building::BuildingType type) {
 	return this->key == type;
 }
 
-void Building::setPlayer(Player* player) {
-	this->player = player;
-}
-
-Player* Building::getPlayer() {
-	return this->player;
-}
-
-void Building::demolish() {
-	this->life = 0;
-}
 
 Position& Building::getClosestPosition(Position& position) {
 	int distance = position.sqrtDistance(all_positions[0]);
@@ -51,4 +40,32 @@ Position& Building::getClosestPosition(Position& position) {
 		}
 	}
 	return closest;
+}
+
+void Building::update(nlohmann::json& j){
+	life = j["life"];
+}
+
+bool Building::isDead(){
+	return life<=0;
+}
+
+void Building::setPlayer(Player* player){
+	this->player = player; 
+}
+
+Player* Building::getPlayer(){
+	return this->player;
+}
+
+Position& Building::getPosition(){
+	return all_positions[0];
+}
+
+int Building::getLife(){
+	return life;
+}
+
+int Building::getInitialLife(){
+	return initial_life;
 }

@@ -4,75 +4,27 @@
 #include <vector>
 #include <string>
 
-Player::Player(int id, ConstructionYard &construction_yard) :
-    id(id),
-    generatedEnergy(5000),  // Inicial es 0
-    consumedEnergy(2500),   // Inicial es 0
-    gold(10000),
-    gold_limit(10000),
-    trainingCenter(new PlayerTrainingCenter()),
-    buildingCenter(new PlayerBuildingCenter()),
-    construction_yard(&construction_yard) {
-    construction_yard.setPlayer(this);
-    if ((id % 3) == 0) {
-        house = "Ordos";
-    }
-    if ((id % 3) == 1) {
-        house = "Atreides";
-    }
-    if ((id % 3) == 2) {
-        house = "Harkonnen";
-    }
+Player::Player(nlohmann::json& j) :
+    id(j["id"]),
+    house(j["house"]),
+    generatedEnergy(j["generated_energy"]),  // Inicial es 0
+    consumedEnergy(j["consumed_energy"]),   // Inicial es 0
+    gold(j["gold"]),
+    trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
+    buildingCenter(new PlayerBuildingCenter(j["buildingCenter"]))    
+{}
+
+
+void Player::update(nlohmann::json& j){
+    generatedEnergy = j["generated_energy"];
+    consumedEnergy = j["consumed_energy"];
+    gold = j["gold"];
+    trainingCenter->update(j["trainingCenter"]);
+    buildingCenter->update(j["buildingCenter"]);  
 }
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
-}
-
-void Player::addGold(int gold_to_add) {
-    gold += gold_to_add;
-}
-
-void Player::subGold(int gold_to_sub) {
-    // if (gold_to_sub > gold ) throw error -> Ver que hacer
-    gold -= gold_to_sub;
-}
-
-void Player::addBuilding(Building *building) {
-    buildings.push_back(building);
-    building->setPlayer(this);
-    if (building->is(Building::WIND_TRAP)) {
-        this->generatedEnergy += building->energy;
-    } else {
-        this->consumedEnergy += building->energy;
-    }
-    this->gold -= building->cost;
-}
-
-//bool Player::hasBuilding(Building *building) {
-//    return std::find(buildings.begin(), buildings.end(), building) != buildings.end();
-//}
-
-Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
-    for (auto& b : buildings) {
-        if ( b->is(type) ) {
-            return b;
-        }
-    }
-    return nullptr;
-}
-
-void Player::trainUnits() {
-    trainingCenter->trainUnits(buildings);
-}
-
-void Player::constructBuildings() {
-    buildingCenter->construct();
-}
-
-bool Player::lose() {
-//    return this->lose;
-    return this->construction_yard == nullptr;
 }
 
 int& Player::getId() {
@@ -81,23 +33,6 @@ int& Player::getId() {
 
 std::string& Player::getHouse() {
     return this->house;
-}
-ConstructionYard &Player::getConstructionYard() {
-    return *construction_yard;
-}
-
-bool Player::hasBuilding(Building& building) {
-    if (construction_yard != nullptr) {
-        if (building == *construction_yard) {
-            return true;
-        }
-    }
-    for (auto& b : buildings) {
-        if (*b == building) {
-            return true;
-        }
-    }
-    return false;
 }
 
 bool Player::hasBuilding(Building::BuildingType buildingType) {
@@ -110,18 +45,11 @@ bool Player::hasBuilding(Building::BuildingType buildingType) {
     return buildingTypeFound;
 }
 
-void Player::cleanDeadBuildings() {
-    if (Attackable::isDead(this->construction_yard)) {
-        this->construction_yard = nullptr;
-    }
-    std::vector<Building*>::iterator it = buildings.begin();
+
+void Player::cleanDeadBuildings(){
+    std::vector<Building*>::iterator it = buildings.begin(); 
     while (it != buildings.end()) {
-        if (Attackable::isDead(*it)) {
-            if ((*it)->is(Building::WIND_TRAP)) {
-                this->generatedEnergy -= (*it)->energy;
-            } else {
-                this->consumedEnergy -= (*it)->energy;
-            }
+        if ((*it)->isDead()) {
             it = buildings.erase(it);
         } else {
             it++;
@@ -129,19 +57,7 @@ void Player::cleanDeadBuildings() {
     }
 }
 
-std::vector<Unit*>& Player::getTrainedUnits(Map& map) {
-    return this->trainingCenter->getReadyUnits(map, buildings, construction_yard);
-}
-
-void Player::sellBuilding(Building* building) {
-    std::vector<Building*>::iterator it = buildings.begin();
-    while (it != buildings.end()) {
-        if ((*it) == building) {
-            gold += building->cost * float(building->getLife()) / float(building->getInitialLife()) * 0.9;
-            building->demolish();
-            break;
-        } else {
-            it++;
-        }
-    }
-}
+void Player::addBuilding(Building *building) {
+    buildings.push_back(building);
+    building->setPlayer(this);
+ }

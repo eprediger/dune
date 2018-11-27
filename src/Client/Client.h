@@ -4,8 +4,8 @@
 
 #include <Socket.h>
 #include <CommunicationQueue.h>
-#include "ClientReceiver.h"
-#include "ClientSender.h"
+#include "../Common/ClientReceiver.h"
+#include "../Common/ClientSender.h"
 
 class Client {
 public:

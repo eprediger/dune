@@ -1,73 +1,23 @@
 #include "PlayerBuildingCenter.h"
-PlayerBuildingCenter::PlayerBuildingCenter() {
-    construction[Building::BARRACKS] = {GlobalConfig.buildingConstructionTime, false};
-    construction[Building::LIGHT_FACTORY] = {GlobalConfig.buildingConstructionTime, false};
-    construction[Building::HEAVY_FACTORY] = {GlobalConfig.buildingConstructionTime, false};
-    construction[Building::SPICE_REFINERY] = {GlobalConfig.buildingConstructionTime, false};
-    construction[Building::SPICE_SILO] = {GlobalConfig.buildingConstructionTime, false};
-    construction[Building::WIND_TRAP] = {GlobalConfig.buildingConstructionTime, false};
-}
+PlayerBuildingCenter::PlayerBuildingCenter(nlohmann::json& j) {
+    update(j);
+} 
 
-
-void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
-    switch (type) {
-        case Building::BARRACKS:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        case Building::LIGHT_FACTORY:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        case Building::HEAVY_FACTORY:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        case Building::SPICE_REFINERY:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        case Building::SPICE_SILO:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        case Building::WIND_TRAP:
-        {
-            construction[type].first = GlobalConfig.buildingConstructionTime;
-            construction[type].second = false;
-            break;
-        }
-        default:
-            break;
-    }
+void PlayerBuildingCenter::update(nlohmann::json& j){
+    construction[Building::BARRACKS] = {j["barracks_time"], j["barracks_built"]};
+    construction[Building::LIGHT_FACTORY] = {j["lightFactory_time"],j["lightFactory_built"]};
+    construction[Building::HEAVY_FACTORY] = {j["heavyFactory_time"],j["heavyFactory_built"]};
+    construction[Building::SPICE_REFINERY] = {j["spiceRefinery_time"],j["spiceRefinery_built"]};
+    construction[Building::SPICE_SILO] = {j["spiceSilo_time"],j["spiceSilo_built"]};
+    construction[Building::WIND_TRAP] = {j["windTrap_time"],j["windTrap_built"]};
 }
 
 bool PlayerBuildingCenter::buildingReady(Building::BuildingType type) {
     return construction[type].first <= 0;
 }
 
-void PlayerBuildingCenter::construct() {
-    for (auto itr = construction.begin(); itr != construction.end(); ++itr){
-        itr->second.first-= itr->second.first > 0 ? 1 : 0;
-    }
-}
-
 bool PlayerBuildingCenter::buildingConstructed(Building::BuildingType type) {
     return construction[type].second;
-}
-
-void PlayerBuildingCenter::build(Building::BuildingType type) {
-    construction[type].second = true;
 }
 
 

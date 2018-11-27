@@ -2,15 +2,12 @@
 #define __TRIKE_H__
 
 #include "OffensiveUnit.h"
-#include "Model/Weapons/AssaultRifle.h"
 
 class Trike : public OffensiveUnit {
 public:
-	Trike(int x, int y);
-	~Trike();
-	virtual bool canMoveAboveTerrain(Terrain &terrain);
+	Trike(nlohmann::json& j);
 
-	virtual void reciveBonusDammage(const Weapon &weapon) override;
+	~Trike();
 };
 
 #endif

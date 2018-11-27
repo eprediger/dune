@@ -5,7 +5,8 @@
 
 class ConstructionYard : public Building {
 public:
-	ConstructionYard(const int x, const int y, int blockWidth, int blockHeight);
+	ConstructionYard(nlohmann::json& j);
+	
 	~ConstructionYard();
 };
 

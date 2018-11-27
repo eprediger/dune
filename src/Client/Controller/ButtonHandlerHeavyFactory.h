@@ -5,7 +5,7 @@
 
 class ButtonHandlerHeavyFactory : public ButtonHandler {
 public:
-	ButtonHandlerHeavyFactory(Model &model, GameView &view,
+	ButtonHandlerHeavyFactory(Player& player, GameView &view,
 			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerHeavyFactory();

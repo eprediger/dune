@@ -6,10 +6,10 @@
 #include "View/View.h"
 #include "Model/GlobalConfig.h"
 
-ButtonHandler::ButtonHandler(ButtonView &buttonView, Model &model, GameView &view, CommunicationQueue &queue) :
+ButtonHandler::ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue) :
 	buttonState(new ButtonDisabled()),
 	buttonView(buttonView),
-	model(model),
+	player(player),
 	view(view),
 	queue(queue) {}
 

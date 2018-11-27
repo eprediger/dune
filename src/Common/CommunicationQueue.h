@@ -4,7 +4,9 @@
 
 #include <string>
 #include <queue>
-#include <json.hpp>
+#include <mutex>
+#include <condition_variable>
+#include <nlohmann/json.hpp>
 
 class CommunicationQueue {
 public:
@@ -21,6 +23,11 @@ public:
 private:
     std::queue<nlohmann::json> send_queue;
     std::queue<nlohmann::json> recv_queue;
+    std::mutex send_m;
+    std::mutex recv_m;
+    std::condition_variable condNewSendData;
+    std::condition_variable condNewRecvData;
+
 };
 
 

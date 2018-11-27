@@ -4,7 +4,10 @@
 
 Raider::Raider(int x, int y) :
         OffensiveUnit(x, y, GlobalConfig.raiderHitPoints, GlobalConfig.raiderRange, Weapons::smallCannon,
-                      GlobalConfig.raiderSpeed, GlobalConfig.raiderCost) {}
+                      GlobalConfig.raiderSpeed, GlobalConfig.raiderCost)
+{
+        serialization["subClass"] = "Raider";
+}
 
 Raider::~Raider() {}
 

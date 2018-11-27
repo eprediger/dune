@@ -4,7 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include "SdlWindow.h"
 #include "SdlException.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include <string>
 
 class SdlTexture {

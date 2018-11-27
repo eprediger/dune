@@ -2,62 +2,80 @@
 #define __MODEL_H__
 
 #include "Unit/Unit.h"
-#include "Model/Map.h"
+#include "Map.h"
 #include "Unit/OffensiveUnit.h"
-#include "Model/Player.h"
+#include "Player.h"
 #include "Unit/Raider.h"
 #include "Unit/Trike.h"
 #include "Unit/Tank.h"
 #include "Unit/LightInfantry.h"
 #include "Unit/HeavyInfantry.h"
 #include "Unit/Harvester.h"
-#include "Model/Buildings/Barracks.h"
-#include "Model/Buildings/ConstructionYard.h"
-#include "Model/Buildings/SpiceRefinery.h"
-#include "Model/Buildings/SpiceSilo.h"
-#include "Model/Buildings/WindTrap.h"
-#include "Model/Buildings/HeavyFactory.h"
-#include "Model/Buildings/LightFactory.h"
+#include "Buildings/Barracks.h"
+#include "Buildings/ConstructionYard.h"
+#include "Buildings/SpiceRefinery.h"
+#include "Buildings/SpiceSilo.h"
+#include "Buildings/WindTrap.h"
+#include "Buildings/HeavyFactory.h"
+#include "Buildings/LightFactory.h"
+#include "Weapons/Rocket.h"
 #include <vector>
+#include <map>
 #include <memory>
-#include <CommunicationQueue.h>
+#include "CommunicationQueue.h"
 
 #define LIMIT_TO_SELECT (32*32)
 
 class Model {
 private:
 	Map map;
-	std::vector<Unit*> units;
-	std::vector<Building*> buildings;
-    std::vector<Player*> players;
-	std::vector<Rocket*> rockets;
+	std::map<int,Unit*> units;
+	std::map<int,Building*> buildings;
+    std::map<int,Player*> players;
+	std::map<int,Rocket*> rockets;
     bool gameFinished;
     CommunicationQueue& queue;
 
 public:
-    Model(const char *file, int n_player, CommunicationQueue &queue);
+    Model(nlohmann::json& file, CommunicationQueue &queue);
     ~Model();
 
-//    Map& createMap();
 	Map& getMap();
 
-	Harvester& createHarvester(int x, int y, int player);
-	HeavyInfantry& createHeavyInfantry(int x, int y, int player);
-	LightInfantry& createLightInfantry(int x, int y, int player);
-	Raider& createRaider(int x, int y, int player);
-	Tank& createTank(int x, int y, int player);
-	Trike& createTrike(int x, int y, int player);
+	void addPlayer(nlohmann::json& j);
+	void updatePlayer(nlohmann::json& j);
+
+
+	bool playerExists(int id);
+	bool buildingExists(int id);
+	bool unitExists(int id);
+	bool rocketExists(int id);
+
+	Harvester& createHarvester(nlohmann::json& j);
+	HeavyInfantry& createHeavyInfantry(nlohmann::json& j);
+	LightInfantry& createLightInfantry(nlohmann::json& j);
+	Raider& createRaider(nlohmann::json& j);
+	Tank& createTank(nlohmann::json& j);
+	Trike& createTrike(nlohmann::json& j);
     Unit &createUnit(Unit *unit);
+	void updateUnit(nlohmann::json& j);
 
-	Barracks& createBarracks(int x, int y, int player);
-	ConstructionYard& createConstructionYard(int x, int y, int player);
-	HeavyFactory& createHeavyFactory(int x, int y, int player);
-	LightFactory& createLightFactory(int x, int y, int player);
-	SpiceRefinery& createSpiceRefinery(int x, int y, int player);
-	SpiceSilo& createSpiceSilo(int x, int y, int player);
-	WindTrap& createWindTrap(int x, int y, int player);
+
+	Barracks& createBarracks(nlohmann::json& j);
+	ConstructionYard& createConstructionYard(nlohmann::json& j);
+	HeavyFactory& createHeavyFactory(nlohmann::json& j);
+	LightFactory& createLightFactory(nlohmann::json& j);
+	SpiceRefinery& createSpiceRefinery(nlohmann::json& j);
+	SpiceSilo& createSpiceSilo(nlohmann::json& j);
+	WindTrap& createWindTrap(nlohmann::json& j);
 	Building& createBuilding(Building* building);
+	void updateBuilding(nlohmann::json& j);
 
+
+	Rocket& createRocket(nlohmann::json& j);
+	void updateRocket(nlohmann::json& j);
+
+	
 	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
     void actionOnPosition(Position &pos, Unit &unit);
@@ -74,8 +92,6 @@ public:
 
     void cleanDeadBuildings();
 
-    /// TEMPORAL
-	Building & getBuildingById(int id);
 };
 
 #endif	// __MODEL_H__

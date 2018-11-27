@@ -15,30 +15,29 @@
 #include "ButtonHandlerSellBuilding.h"
 #include <vector>
 
-int GameHandler::actual_player = PLAYER;
-
-GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue) :
+GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue, Player& player) :
     InputHandler(),
     view(view),
-    model(model),
+    model(model), 
+    player(player), 
     selector(0, 0),
-    constructor(model, model.getPlayer(GameHandler::actual_player), view, queue),
-    queue(queue),
+    constructor(model, player, view, queue),
+    queue(queue), 
     interface(model, view) {
     view.addSelectorView(this->selector);
-    this->buttons.push_back(new ButtonHandlerWindTrap(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerSpiceRefinery(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerBarracks(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerLightFactory(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerHeavyFactory(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerSpiceSilo(this->model, this->view, constructor, this->queue));
-    this->buttons.push_back(new ButtonHandlerLightInfantry(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerHeavyInfantry(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerTrike(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerRaider(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerTank(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerHarvester(this->model, this->view, this->queue));
-    this->buttons.push_back(new ButtonHandlerSellBuilding(this->model, this->view, this->selector, this->queue));
+    this->buttons.push_back(new ButtonHandlerWindTrap(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerSpiceRefinery(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerBarracks(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerLightFactory(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerHeavyFactory(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerSpiceSilo(player, this->view, constructor, this->queue));
+    this->buttons.push_back(new ButtonHandlerLightInfantry(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerHeavyInfantry(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerTrike(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerRaider(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerTank(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerHarvester(player, this->view, this->queue));
+    this->buttons.push_back(new ButtonHandlerSellBuilding(player, this->view, this->selector, this->queue));
     for (auto& button : this->buttons) {
         if (button->canBeEnabled()) {
             button->setState(State::ENABLED);
@@ -90,8 +89,8 @@ bool GameHandler::handleInput() {
         if (event.button.button == SDL_BUTTON_LEFT) {
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
-            std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
-            std::vector<Building*> selected_buildings = model.selectBuildingsInArea(selectArea, model.getPlayer(GameHandler::actual_player));
+            std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, player);
+            std::vector<Building*> selected_buildings = model.selectBuildingsInArea(selectArea, player);
             this->selector.addSelection(selection);
             this->selector.addSelection(selected_buildings);
             this->view.releaseMouse();
@@ -106,10 +105,15 @@ bool GameHandler::handleInput() {
         if (event.button.button == SDL_BUTTON_RIGHT) {
             this->cursor.currentPosition();
             this->constructor.on = false;
-            //this->model.getMap().setDestiny(unit, this->cursor.current_x + this->view.getCameraX(), this->cursor.current_y + this->view.getCameraY());
             Position pos(this->cursor.current_x + this->view.getCameraX(), this->cursor.current_y + this->view.getCameraY());
             for (auto& unit : this->selector.selection.getSelectedUnits()) {
-                this->model.actionOnPosition(pos, *unit);
+                nlohmann::json j;
+                j["method"] = "actionOnPositioin";
+                j["args"]["player_id"] = unit->getPlayer().getId();
+                j["args"]["unit_id"] = unit->id;
+                j["args"]["x"] = pos.x;
+                j["args"]["y"] = pos.y;
+                queue.enqueue(j);
             }
         }
         break;
@@ -139,19 +143,14 @@ bool GameHandler::handleInput() {
             for (auto itr = to_sell.begin(); itr != to_sell.end() ; itr++) {
                 nlohmann::json msg;
                 msg["method"] = "sellBuilding";
-                msg["args"]["player"] = GameHandler::actual_player;
-                msg["args"]["building_id"] = (*itr)->getId();
+                msg["args"]["player"] = player.getId();
+                msg["args"]["building_id"] = (*itr)->id;
                 queue.enqueue(msg);
             }
         }
         break;
         // Temporal
         case SDLK_c:
-            GameHandler::actual_player++;
-            if (GameHandler::actual_player >= 3) {
-                GameHandler::actual_player = 0;
-            }
-            view.changePlayer(actual_player);
             break;
         /////////
         default:

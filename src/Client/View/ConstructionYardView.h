@@ -2,7 +2,7 @@
 #define __CONSTRUCTION_YARD_VIEW_H__
 
 #include "BuildingView.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

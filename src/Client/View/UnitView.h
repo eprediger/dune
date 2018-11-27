@@ -6,7 +6,7 @@
 #include "SdlTexture.h"
 #include "Position.h"
 #include "Orientation.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "DeadUnitView.h"
 #include "PlayerColorMaker.h"
 #include <map>

@@ -78,12 +78,14 @@ bool OffensiveUnit::automaticAttack(Map &map) {
 
 Position& OffensiveUnit::getVictimPosition() {
     return this->victim_pos;
-//    return this->next_pos;
 }
 
-//void OffensiveUnit::follow(Unit* other, Map& map) {
-//    foll_unit = other;
-//    prev_foll_unit_pos = foll_unit->getPosition();
-//    map.setDestiny(*this, foll_unit->getPosition().getX(), foll_unit->getPosition().getY());
-//    state = FOLLOWING;
-//}
+nlohmann::json& OffensiveUnit::getSerialization(){
+    serialization["attacking"] = this->isAttacking();
+    serialization["shooting"] = this->isShooting();
+    if (this->isAttacking()){
+        serialization["victim_pos"]["x"] = victim_pos.x;
+        serialization["victim_pos"]["y"] = victim_pos.y;
+    }
+    return Unit::getSerialization();
+}

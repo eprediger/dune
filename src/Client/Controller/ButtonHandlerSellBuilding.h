@@ -5,7 +5,7 @@
 
 class ButtonHandlerSellBuilding : public ButtonHandler {
 public:
-	ButtonHandlerSellBuilding(Model &model, GameView &view,
+	ButtonHandlerSellBuilding(Player& player, GameView &view,
 			Selector &selector, CommunicationQueue& queue);
 
 	virtual ~ButtonHandlerSellBuilding();

@@ -17,8 +17,8 @@ int main(int argc, char const *argv[]) {
 		return PARAM_ERROR;
 	} else {
 		try {
-			Server gameServer(argv[1], (unsigned) strtoul(argv[2], NULL, BASE));
-			ExitThread exitThread(gameServer);
+			Server gameServer(argv[1], (unsigned) strtoul(argv[2], NULL, BASE),argv[3]);
+			ExitThread exitThread(gameServer); 
 			exitThread.start();
 			gameServer.waitPlayers();
 			exitThread.join();

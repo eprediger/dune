@@ -4,7 +4,7 @@
 class BuildingConstructor;
 class BuildingConstructorView;
 #include "Controller/BuildingConstructor.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 
 class BuildingConstructorView {
 private:

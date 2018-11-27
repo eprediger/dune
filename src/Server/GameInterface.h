@@ -2,17 +2,15 @@
 #define __GAMEINTERFACE_H__
 
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include "Model/Model.h"
-#include "View/GameView.h"
 
 class GameInterface {
 public:
-    GameInterface(Model &model, GameView &view);
+    GameInterface(Model &model);
     void execute(nlohmann::json json);
 private:
     Model& model;
-    GameView& view;
 
     void createWindTrap(int x, int y, int player_id);
     void createBarracks(int x, int y, int player_id);
@@ -31,6 +29,8 @@ private:
     void createTrike(int player_id);
 
     void sellBuilding(int player_id, int building_id);
+
+    void setActionOnPosition(int player_id, int unit_id, int x, int y);
 };
 
 

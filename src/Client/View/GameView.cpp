@@ -10,15 +10,16 @@
 #include <vector>
 #include <memory>
 
-GameView::GameView(const int width, const int height, Model& model) :
+GameView::GameView(const int width, const int height, Model& model,Player& player) :
 	View(width, height),
 	model(model),
+	player(player), 
 	unitViews(),
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
 	selectorView(nullptr),
-	playerView(new PlayerView(model.getPlayer(GameHandler::actual_player), window, 3 * width / 4, width / 4)),
+	playerView(new PlayerView(player, window, 3 * width / 4, width / 4)),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, 3 * width / 4, height),
@@ -31,14 +32,9 @@ GameView::GameView(const int width, const int height, Model& model) :
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
-	camera_height(camera.getHeight()) {
+	camera_height(camera.getHeight())
+{
 	backgroundMusic.start();
-	for (int i = 0; i < model.numberOfPlayers() ; ++i) {
-		this->addBuildingView(
-		    BuildingViewFactory::createBuildingView(
-		        model.getPlayer(i).getConstructionYard(),
-		        this->window));
-	}
 }
 
 GameView::~GameView() {
@@ -69,6 +65,10 @@ void GameView::addUnitView(UnitView* unitView) {
 
 void GameView::addBuildingView(BuildingView* buildingView) {
 	buildingViews.push_back(std::move(buildingView));
+}
+
+void GameView::addRocketView(RocketView* rocketView){
+	rocketViews.push_back(std::move(rocketView));
 }
 
 void GameView::addSelectorView(Selector& selector) {
@@ -144,7 +144,6 @@ void GameView::render() {
 	}
 
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-		if (!(*itr)->getUnit().isTraining())
 			(*itr)->draw(camera);
 	}
 
@@ -197,7 +196,7 @@ void GameView::render() {
 	this->RenderVPBar(this->window.width * 63 / 80,
 	                  this->window.height * 6 / 16,
 	                  this->window.height * 32 / 64,
-	                  (float)this->model.getPlayer(GameHandler::actual_player).consumedEnergy / (float)this->model.getPlayer(GameHandler::actual_player).generatedEnergy,
+	                  (float)player.consumedEnergy / (float)player.generatedEnergy,
 	                  available, bkgrColor);
 
 	this->window.render();
@@ -277,10 +276,4 @@ ButtonView &GameView::createBuildingButton(const std::string &filename, int numb
 ButtonView& GameView::createSellBuildingButton(const std::string& filename) {
 	this->buildingSellButton = new ButtonView(filename, this->window);
 	return *(this->buildingSellButton);
-}
-
-/// TEMPORAL
-void GameView::changePlayer(int new_player) {
-	delete playerView;
-	playerView = new PlayerView(model.getPlayer(GameHandler::actual_player), window, 3 * window.width / 4, window.width / 4);
 }

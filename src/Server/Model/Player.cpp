@@ -1,8 +1,9 @@
-#include "Model/Player.h"
+#include "Player.h"
 #include "PlayerTrainingCenter.h"
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <nlohmann/json.hpp>
 
 Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
@@ -12,18 +13,27 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     gold_limit(10000),
     trainingCenter(new PlayerTrainingCenter()),
     buildingCenter(new PlayerBuildingCenter()),
-    construction_yard(&construction_yard) {
+    construction_yard(&construction_yard),
+    serialization() {
     construction_yard.setPlayer(this);
     if ((id % 3) == 0) {
         house = "Ordos";
     }
     if ((id % 3) == 1) {
-        house = "Atreides";
+        house = "Atreides"; 
     }
     if ((id % 3) == 2) {
         house = "Harkonnen";
     }
-}
+    serialization["class"] = "Player";
+    serialization["id"] = id;
+    serialization["house"] = house;
+    serialization["generated_energy"] = generatedEnergy;
+    serialization["consumed_energy"] = consumedEnergy;
+    serialization["gold"] = gold;
+    serialization["trainingCenter"] = trainingCenter->getSerialization();
+    serialization["buildingCenter"] = buildingCenter->getSerialization();
+} 
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
@@ -31,11 +41,13 @@ bool Player::operator==(const Player &other) const {
 
 void Player::addGold(int gold_to_add) {
     gold += gold_to_add;
+    serialization["gold"] = gold;
 }
 
 void Player::subGold(int gold_to_sub) {
     // if (gold_to_sub > gold ) throw error -> Ver que hacer
     gold -= gold_to_sub;
+    serialization["gold"] = gold;
 }
 
 void Player::addBuilding(Building *building) {
@@ -43,10 +55,14 @@ void Player::addBuilding(Building *building) {
     building->setPlayer(this);
     if (building->is(Building::WIND_TRAP)) {
         this->generatedEnergy += building->energy;
+        serialization["generated_energy"] = generatedEnergy;
     } else {
         this->consumedEnergy += building->energy;
+        serialization["consumed_energy"] = consumedEnergy;
     }
     this->gold -= building->cost;
+    serialization["gold"] = gold;
+
 }
 
 //bool Player::hasBuilding(Building *building) {
@@ -119,8 +135,10 @@ void Player::cleanDeadBuildings() {
         if (Attackable::isDead(*it)) {
             if ((*it)->is(Building::WIND_TRAP)) {
                 this->generatedEnergy -= (*it)->energy;
+                serialization["generated_energy"] = generatedEnergy;
             } else {
                 this->consumedEnergy -= (*it)->energy;
+                serialization["consumed_energy"] = consumedEnergy;
             }
             it = buildings.erase(it);
         } else {
@@ -138,10 +156,17 @@ void Player::sellBuilding(Building* building) {
     while (it != buildings.end()) {
         if ((*it) == building) {
             gold += building->cost * float(building->getLife()) / float(building->getInitialLife()) * 0.9;
+            serialization["gold"] = gold;
             building->demolish();
             break;
         } else {
             it++;
         }
     }
+}
+
+nlohmann::json& Player::getSerialization(){
+    serialization["traininCenter"] = trainingCenter->getSerialization();
+    serialization["buildingCenter"] = buildingCenter->getSerialization();
+    return serialization;
 }

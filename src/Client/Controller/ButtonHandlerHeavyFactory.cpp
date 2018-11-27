@@ -3,11 +3,11 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Model &model, GameView &view,
+ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
                                                 GlobalConfig.buildingConstructionTime),
-                      model, view, queue),
+                      player, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
@@ -15,18 +15,17 @@ ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 void ButtonHandlerHeavyFactory::execute() {
     nlohmann::json msg;
     msg["method"] = "beginConstruction";
-    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["player"] = player.getId();
     msg["args"]["building_type"] = Building::HEAVY_FACTORY;
     queue.enqueue(msg);
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::HEAVY_FACTORY);
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
-    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.heavyFactoryCost);
+    return (this->player.gold >= GlobalConfig.heavyFactoryCost);
 }
 
 bool ButtonHandlerHeavyFactory::finishAction() {
-    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::HEAVY_FACTORY);
+    return player.buildingCenter->buildingReady(Building::HEAVY_FACTORY);
 }
 
 void ButtonHandlerHeavyFactory::executeReady() {
@@ -38,5 +37,5 @@ void ButtonHandlerHeavyFactory::executeReady() {
 }
 
 bool ButtonHandlerHeavyFactory::finishReady() {
-    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::HEAVY_FACTORY);
+    return player.buildingCenter->buildingConstructed(Building::HEAVY_FACTORY);
 }

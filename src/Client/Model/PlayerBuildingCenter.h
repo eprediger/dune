@@ -1,18 +1,18 @@
 #ifndef __PLAYERBUILDINGCENTER_H__
 #define __PLAYERBUILDINGCENTER_H__
 
-#include "Model/Buildings/Building.h"
+#include "Buildings/Building.h"
 #include <map>
 #include <utility>
+#include <nlohmann/json.hpp>
 
 class PlayerBuildingCenter {
 public:
-    PlayerBuildingCenter();
+    PlayerBuildingCenter(nlohmann::json& j);
     bool buildingReady(Building::BuildingType type);
-    void newConstruct(Building::BuildingType type);
-    void construct();
-    void build(Building::BuildingType type);
     bool buildingConstructed(Building::BuildingType type);
+
+    void update(nlohmann::json& j);
 private:
     std::map<Building::BuildingType,std::pair<int, bool>> construction;
 };

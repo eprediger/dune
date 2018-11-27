@@ -1,11 +1,14 @@
-#include "Model/Unit/Unit.h"
+#include "Unit.h"
 #include "Model/AStar.h"
 #include "Model/Weapons/AssaultRifle.h"
 #include <iostream>
 #include <stack>
 
+
+int Unit::counter = 0;
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),
+    id(counter),
     speed(speed),
     cost(cost),
     actual_speed(0),
@@ -14,8 +17,14 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
     destiny(x, y),
     prev_foll_unit_pos(),
     next_pos(x, y),
-    state((UnitState*) & Unit::training) {}
-
+    state((UnitState*) & Unit::training),
+    serialization()
+{
+    counter+=1;
+    serialization["class"] = "Unit";
+    serialization["id"] = id;
+}
+ 
 Unit::~Unit() {}
 
 const UnitStateAttacking Unit::attacking;
@@ -90,6 +99,7 @@ void Unit::follow(Attackable* other, Map& map) {
 void Unit::setPlayer(Player &player) {
     this->player = &player;
     this->player->subGold(this->cost);
+    serialization["player_id"] = player.getId();
 }
 
 Player &Unit::getPlayer() {
@@ -165,4 +175,11 @@ bool Unit::isTraining() {
 
 void Unit::finishTraining() {
     this->state = (UnitState*)&Unit::stopped;
+}
+
+nlohmann::json& Unit::getSerialization(){
+    serialization["life"] = this->getLife();
+    serialization["pos"]["x"] = pos.x;
+    serialization["pos"]["y"] = pos.y;
+    return serialization;
 }

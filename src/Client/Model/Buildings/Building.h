@@ -1,13 +1,13 @@
 #ifndef __BUILDING_H__
 #define __BUILDING_H__
 
-#include "Model/Attackable.h"
-#include "Model/GlobalConfig.h"
 #include <vector>
+#include "../../Position.h"
+#include <nlohmann/json.hpp>
 
 class Player;
 
-class Building : public Attackable {
+class Building{
 public:
     enum BuildingType {
         BARRACKS,
@@ -19,27 +19,32 @@ public:
         WIND_TRAP
     };
 
-    Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
-             const int hitPoints, const int width,
-             const int height, BuildingType type);
+    Building(nlohmann::json& j);
 
     virtual ~Building();
 
-    virtual void reciveBonusDammage(const Weapon &weapon) override;
 
     bool is(BuildingType type);
     void setPlayer(Player* player);
     Player* getPlayer();
 
-    Position& getClosestPosition(Position& position) override;
+    void update(nlohmann::json& j);
 
-    void demolish();
+    int getLife();
+    int getInitialLife();
+    Position& getPosition();
+
+    Position& getClosestPosition(Position& position);
+
+    bool isDead();
+
     const int width, height;
-    const int energy;
-    const int cost;
-
-private:
+    const int id;
+protected:
+    int player_id;
     Player* player;
+    int initial_life;
+    int life;
     BuildingType key;
     std::vector<Position> all_positions;
 };

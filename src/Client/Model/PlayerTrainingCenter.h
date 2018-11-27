@@ -13,19 +13,13 @@ class ConstructionYard;
 class Map;
 #include <vector>
 #include <utility>
-
+#include <nlohmann/json.hpp>
 class PlayerTrainingCenter {
 public:
-    PlayerTrainingCenter();
-    void trainHarvester(Harvester* harvester);
-    void trainLightInfantry(LightInfantry* lightInfantry);
-    void trainHeavyInfantry(HeavyInfantry* heavyInfantry);
-    void trainRaider(Raider* raider);
-    void trainTrike(Trike* trike);
-    void trainTank(Tank* tank);
-    void trainUnits(std::vector<Building*>& buildings);
-    std::vector<Unit*>& getReadyUnits(Map& map, std::vector<Building*>& buildings,
-                                      ConstructionYard* constructionYard);
+    PlayerTrainingCenter(nlohmann::json& j);
+    
+    void update(nlohmann::json& j);
+
 
     bool isTrainingLightInfantry();
     bool isTrainingHeavyInfantry();
@@ -35,13 +29,12 @@ public:
     bool isTrainingTrike();
 
 private:
-    std::pair<int, Harvester*> harvester;
-    std::pair<int, LightInfantry*> lightInfantry;
-    std::pair<int, HeavyInfantry*> heavyInfantry;
-    std::pair<int, Raider*> raider;
-    std::pair<int, Tank*> tank;
-    std::pair<int, Trike*> trike;
-    std::vector<Unit*>readyUnits;
+    std::pair<int, bool> harvester;
+    std::pair<int, bool> lightInfantry;
+    std::pair<int, bool> heavyInfantry;
+    std::pair<int, bool> raider;
+    std::pair<int, bool> tank;
+    std::pair<int, bool> trike;
 };
 
 #endif

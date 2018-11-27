@@ -1,8 +1,8 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "Model/Buildings/Building.h"
-#include "Model/Buildings/ConstructionYard.h"
+#include "Buildings/Building.h" 
+#include "Buildings/ConstructionYard.h" 
 #include "PlayerTrainingCenter.h"
 #include "PlayerBuildingCenter.h"
 #include <vector>
@@ -16,6 +16,7 @@ class Player {
 private:
     int id;
     std::string house;
+    nlohmann::json serialization;
 
 public:     // El cliente sólo debería tenerse a su propio player disponible
     int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
@@ -62,6 +63,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     bool operator==(const Player& other) const;
 
     void sellBuilding(Building* building);
+
+    nlohmann::json& getSerialization();
 };
 
 #endif  // __PLAYER_H__

@@ -5,7 +5,7 @@
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <map>
-#include "Area.h"
+#include "../../Common/Area.h"
 
 class MapView {
 public:

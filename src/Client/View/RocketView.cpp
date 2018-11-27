@@ -44,7 +44,7 @@ RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
 void RocketView::draw(Area& camara) {
     if (!exploding) {
         pos = rocket.getPosition();
-        if (rocket.arrived()) {
+        if (rocket.arrived) {
             exploding = true;
             anim_it = explosion_sprites.begin();
         } else {

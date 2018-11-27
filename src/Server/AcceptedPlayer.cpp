@@ -2,33 +2,32 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sys/socket.h>
+
 // #include <nlohmann/json.hpp>
 
 AcceptedPlayer::AcceptedPlayer(Server& server) :
     server(server),
 	peerSkt(server.accept()),
-	buffer() {}
+	buffer(),
+	queue(),
+	sender(peerSkt,queue),
+	receiver(peerSkt,server.commonQueue) {}
 
 AcceptedPlayer::~AcceptedPlayer() {}
 
-void AcceptedPlayer::run() {
-	bool running = true;
-	while (running) {
-		uint32_t length = 0;
-		size_t received = this->peerSkt.receiveLength(&length);
-		std::unique_ptr<char[]> buffer(new char[length]());
-		this->peerSkt.receive(&buffer[0], length);
-		this->buffer = std::string(&buffer[0], length);
-		std::cout << "[Mensaje Recibido: " << this->buffer << "]" << std::endl;
-		running = (received > 0);
-		if (running) {
-			this->server.notifyAll(this->buffer);
-		}
-		this->buffer.clear();
-	}
+void AcceptedPlayer::start(){
+	this->receiver.start();
+	this->sender.start();
 }
 
-void AcceptedPlayer::sendResponse(const std::string& msg) {
-	this->peerSkt.sendLength(msg.length() + 1);
-	this->peerSkt.send(msg.c_str(), msg.length() + 1);
+void AcceptedPlayer::disconnect(){
+    sender.disconnect();
+    receiver.disconnect();
+    this->peerSkt.shutdown(SHUT_RDWR);
+    this->peerSkt.close();
+    sender.join();
+    receiver.join();
 }
+
+

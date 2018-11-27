@@ -3,7 +3,7 @@
 
 // #include <SDL_render.h>
 #include "SdlWindow.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 
 #define POS_Q 30
 #define FACTOR 10

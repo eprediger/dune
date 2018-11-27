@@ -3,10 +3,10 @@
 #include "GameHandler.h"
 #include <iostream>
 
-ButtonHandlerTrike::ButtonHandlerTrike(Model &model, GameView &view, CommunicationQueue& queue) :
+ButtonHandlerTrike::ButtonHandlerTrike(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
                                             GlobalConfig.trikeConstructionTime),
-                      model, view, queue) {
+                      player, view, queue) {
 }
 
 ButtonHandlerTrike::~ButtonHandlerTrike() {}
@@ -14,15 +14,15 @@ ButtonHandlerTrike::~ButtonHandlerTrike() {}
 void ButtonHandlerTrike::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createTrike";
-	msg["args"]["player"] = GameHandler::actual_player;
+	msg["args"]["player"] = player.getId();
 	queue.enqueue(msg);
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {
-	return (((model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.trikeCost)) &&
-	        (model.getPlayer(GameHandler::actual_player).hasBuilding(Building::LIGHT_FACTORY)));
-}
+	return (((player.gold >= GlobalConfig.trikeCost)) &&
+	        (player.hasBuilding(Building::LIGHT_FACTORY)));
+} 
 
 bool ButtonHandlerTrike::finishAction() {
-	return (!this->model.getPlayer(GameHandler::actual_player).trainingCenter->isTrainingTrike());
+	return (!this->player.trainingCenter->isTrainingTrike());
 }

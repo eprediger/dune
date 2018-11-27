@@ -1,59 +1,42 @@
-#include "Model/Map.h"
-#include "yaml-cpp/yaml.h"
+#include "Map.h"
+#include <nlohmann/json.hpp>
 #include "Terrains/Terrain.h"
-#include "Model/AStar.h"
+#include "Terrains/Sand.h"
+#include "Terrains/Dunes.h"
+#include "Terrains/Rocks.h"
+#include "Terrains/Summit.h"
+#include "Terrains/Precipice.h"
 #include "CustomException.h"
-#include "View/Area.h"
-#include <algorithm>
+#include "../../Common/Area.h"
 #include <stack>
 #include <vector>
 
-Map::Map(const char* filePath) :
+Map::Map(nlohmann::json& file):
     matrix(),
-    rows(),
-    cols(),
-    constructionYardPositions() {
-    YAML::Node file = YAML::LoadFile(filePath);
-    cols = file["width"].as<int>();
-    rows = file["height"].as<int>();
-    char sand_key = file["SAND_KEY"].as<char>();
-    char spiced_sand_key = file["SPICED_SAND_KEY"].as<char>();
-    char dune_key = file["DUNE_KEY"].as<char>();
-    char rocks_key = file["ROCK_KEY"].as<char>();
-    char summit_key = file["SUMMIT_KEY"].as<char>();
-    char precipice_key = file["PRECIPICE_KEY"].as<char>();
-    int initial_spice = file["INITIAL_SPICE"].as<int>();
-    int max_players = file["max_players"].as<int>();
-    for (int i = 0; i < max_players ; i++) {
-        int x = file["initial_positions"][i][0].as<int>() * BLOCK_WIDTH;
-        int y = file["initial_positions"][i][1].as<int>() * BLOCK_HEIGHT;
-        constructionYardPositions.emplace_back(Position(x, y));
-    }
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            char key = file["rows"][i][j].as<char>();
-            if (key == sand_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
-            } else if (key == spiced_sand_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(initial_spice)));
-            } else if (key == dune_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Dunes()));
-            } else if (key == rocks_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Rocks()));
-            } else if (key == summit_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Summit()));
-            } else if (key == precipice_key) {
-                matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
-            }
+    rows(file["height"]),
+    cols(file["width"])
+{
+    nlohmann::json keys = file["matrix"]; 
+    for (auto it = keys.begin() ; it!=keys.end() ; it++){
+        int key = *it;
+        if (key == file["sand_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
+        } else if (key == file["spiced_sand_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(file["initial_spice"])));
+        } else if (key == file["dune_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Dunes()));
+        } else if (key == file["rocks_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Rocks()));
+        } else if (key == file["summit_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Summit()));
+        } else if (key == file["precipice_key"]) {
+            matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
         }
     }
 }
 
 Map::~Map() {}
 
-std::vector<Position>& Map::getInitialPositions() {
-    return constructionYardPositions;
-}
 
 int Map::getWidth() {
     return cols * BLOCK_WIDTH;
@@ -116,19 +99,6 @@ void Map::occupy(Building &building) {
     }
 }
 
-bool Map::canMove(Unit& unit, Position pos) {
-    return unit.canMoveAboveTerrain(this->at(pos)) && !this->at(pos).isOccupied();
-}
-
-void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
-    AStar algorithm(*this);
-    Position p_destiny(x_dest, y_dest);
-    std::stack<Position> path = algorithm.makePath(unit, p_destiny);
-    if (!path.empty()) {
-        this->at(unit.getPosition()).free();
-    }
-    unit.setPath(path, p_destiny);
-}
 
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
@@ -281,56 +251,8 @@ Position Map::getClosestFreePosition(Building* building) {
     return pos;
 }
 
-Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
-    Attackable* closest_attackable = nullptr;
-    int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units) {
-        int distance = current_unit->getPosition().sqrtDistance(position);
-        if (distance < limitRadius &&
-                distance < closest_unit_distance &&
-                !( player == current_unit->getPlayer())) {
-            closest_attackable = current_unit;
-            closest_unit_distance = distance;
-        }
-    }
-    for (auto& current_building : buildings) {
-        Position& pos = current_building->getClosestPosition(position);
-        int distance = pos.sqrtDistance(position);
-        if (distance < limitRadius
-                && distance < closest_unit_distance
-                && !player.hasBuilding(*current_building) ) {
-            closest_attackable = current_building;
-            closest_unit_distance = distance;
-        }
-    }
-    return closest_attackable;
-}
 
 Position Map::getCornerPosition(Position& pos) {
     return Position((pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT);
 }
 
-Position Map::getClosestSpeciaPosition(Position pos, int radius) {
-    int block_x = (pos.x / BLOCK_HEIGHT);
-    int block_y = (pos.y / BLOCK_WIDTH);
-    int min_distance = radius + 1;
-    Position min_position = pos;
-    for (int i = -radius; i <= +radius; ++i) {
-        for (int j = -(radius - abs(i)); j <= +(radius - abs(i)); ++j) {
-            int cur_pos_x = (block_x + j);
-            int cur_pos_y = (block_y + i);
-            if ((cur_pos_y + i) >= 0 &&
-                    (cur_pos_y + i) < cols &&
-                    (cur_pos_x + j) >= 0 &&
-                    (cur_pos_x + j) < rows) {
-                if ( abs(i) + abs(j) < min_distance
-                        && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()) {
-                    min_distance = abs(i) + abs(j);
-                    min_position = Position(cur_pos_x * BLOCK_HEIGHT, cur_pos_y * BLOCK_WIDTH);
-                }
-            }
-        }
-    }
-
-    return min_position;
-}

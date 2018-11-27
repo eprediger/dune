@@ -3,7 +3,7 @@
 
 #include "Selector.h"
 #include "SdlWindow.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 
 class SelectorView {
 public:

@@ -6,7 +6,7 @@
 
 class ButtonHandlerBarracks : public ButtonHandler {
 public:
-	ButtonHandlerBarracks(Model &model, GameView &view,
+	ButtonHandlerBarracks(Player& player, GameView &view,
 			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerBarracks();

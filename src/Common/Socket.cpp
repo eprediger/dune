@@ -135,7 +135,7 @@ size_t Socket::receive(char* buf, const uint32_t size) const {
 	while ((b_recv < size) && (open_socket)) {
 		size_t remaining = size - b_recv;
 		len_recv = ::recv(this->skt_fd, &buf[b_recv], remaining, MSG_NOSIGNAL);
-
+		std::cout<<len_recv<<std::endl;
 		if (len_recv < 0) {	// Error al recibir
 			std::string msg = "Receiving error: " + std::string(strerror(errno));
 			throw CustomException(SOCKET_ERROR, msg.data());

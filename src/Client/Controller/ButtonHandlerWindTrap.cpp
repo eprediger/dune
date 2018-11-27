@@ -2,11 +2,11 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 
-ButtonHandlerWindTrap::ButtonHandlerWindTrap(Model& model, GameView& view,
+ButtonHandlerWindTrap::ButtonHandlerWindTrap(Player& player, GameView& view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
                                                 GlobalConfig.buildingConstructionTime),
-                      model, view, queue),
+                      player, view, queue),
     constructor(constructor) {
     if (this->canBeEnabled()) {
         this->setState(State::ENABLED);
@@ -18,18 +18,17 @@ ButtonHandlerWindTrap::~ButtonHandlerWindTrap() {}
 void ButtonHandlerWindTrap::execute() {
     nlohmann::json msg;
     msg["method"] = "beginConstruction";
-    msg["args"]["player"] = GameHandler::actual_player;
+    msg["args"]["player"] = player.getId();
     msg["args"]["building_type"] = Building::WIND_TRAP;
     queue.enqueue(msg);
-    model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::WIND_TRAP);
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {
-    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.windTrapCost);
+    return (this->player.gold >= GlobalConfig.windTrapCost);
 }
 
 bool ButtonHandlerWindTrap::finishAction() {
-    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::WIND_TRAP);
+    return player.buildingCenter->buildingReady(Building::WIND_TRAP);
 }
 
 void ButtonHandlerWindTrap::executeReady() {
@@ -41,5 +40,5 @@ void ButtonHandlerWindTrap::executeReady() {
 }
 
 bool ButtonHandlerWindTrap::finishReady() {
-    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::WIND_TRAP);
+    return player.buildingCenter->buildingConstructed(Building::WIND_TRAP);
 }

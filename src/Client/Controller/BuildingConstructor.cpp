@@ -26,16 +26,16 @@ BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView&
 
 bool BuildingConstructor::canWeBuild() {
     pos = model.getMap().getCornerPosition(pos);
-    return (on && model.canWeBuild(pos, width, height, cost, model.getPlayer(GameHandler::actual_player)));
+    return (on && model.canWeBuild(pos, width, height, cost, player));
 }
 
 void BuildingConstructor::build() {
     if (on) {
-        if (model.canWeBuild(pos, width, height, cost, model.getPlayer(GameHandler::actual_player))) {
+        if (model.canWeBuild(pos, width, height, cost, player)) {
             nlohmann::json msg;
             msg["args"]["x"] = pos.x;
             msg["args"]["y"] = pos.y;
-            msg["args"]["player"] = GameHandler::actual_player;
+            msg["args"]["player"] = player.getId();
 
             switch (building) {
             case Building::BARRACKS:
@@ -85,5 +85,5 @@ void BuildingConstructor::build() {
 }
 
 Player& BuildingConstructor::getPlayer() {
-    return model.getPlayer(GameHandler::actual_player);
+    return player;
 }

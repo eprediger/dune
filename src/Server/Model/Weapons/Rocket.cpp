@@ -1,14 +1,27 @@
 #include "Rocket.h"
 #include "Position.h"
 #include "Model/Map.h"
-#include "View/Area.h"
+#include "../../../Common/Area.h"
 #include "Weapons.h"
 #include <cstdlib>
 #include <vector>
+#include "../Unit/Unit.h" 
+
+int Rocket::counter = 0;
 
 Rocket::Rocket(Position source, Position dest) :
+    id(counter),
     pos(source),
-    dest(dest) {}
+    dest(dest),
+    serialization()
+{
+    counter+=1;
+    serialization["class"] = "Rocket";
+    serialization["id"] = id;
+    serialization["pos"]["x"] = pos.x;
+    serialization["pos"]["y"] = pos.y;
+    serialization["arrived"] = false;
+}
 
 void Rocket::move() {
     if (pos.x != dest.x)
@@ -22,7 +35,7 @@ bool Rocket::arrived() {
         return true;
     }
     return (false);
-}
+} 
 
 void Rocket::explode(Map& map) {
     Area area(pos.getX() - 4, pos.getY() - 4, 8, 8);
@@ -30,12 +43,20 @@ void Rocket::explode(Map& map) {
     std::vector<Building*>damagedBuildings = map.getBuildingsInArea(area);
     for (auto itr = damagedUnits.begin(); itr != damagedUnits.end(); itr++) {
         (*itr)->reciveAttack(Weapons::rocketLauncher);
-    }
+    } 
     for (auto itr = damagedBuildings.begin() ; itr != damagedBuildings.end(); itr++) {
         (*itr)->reciveAttack(Weapons::rocketLauncher);
-    }
+    } 
 }
 
 Position& Rocket::getPosition() {
     return pos;
 }
+
+nlohmann::json& Rocket::getSerialization(){
+    serialization["pos"]["x"] = pos.x;
+    serialization["pos"]["y"] = pos.y;
+    serialization["arrived"] = this->arrived();
+    return serialization;
+}
+

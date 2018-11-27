@@ -2,7 +2,7 @@
 #define __MODEL_H__
 
 #include "Unit/Unit.h"
-#include "Model/Map.h"
+#include "Map.h"
 #include "Unit/OffensiveUnit.h"
 #include "Model/Player.h"
 #include "Unit/Raider.h"
@@ -18,27 +18,32 @@
 #include "Model/Buildings/WindTrap.h"
 #include "Model/Buildings/HeavyFactory.h"
 #include "Model/Buildings/LightFactory.h"
-#include <vector>
+#include <vector> 
+#include <map>
 #include <memory>
 #include <CommunicationQueue.h>
+
+class AcceptedPlayer;
 
 #define LIMIT_TO_SELECT (32*32)
 
 class Model {
 private:
 	Map map;
-	std::vector<Unit*> units;
-	std::vector<Building*> buildings;
-    std::vector<Player*> players;
+	std::map<int, Unit*> units;
+	std::map<int , Building*> buildings;
+    std::map<int, Player*> players;
 	std::vector<Rocket*> rockets;
     bool gameFinished;
 
 public:
-    Model(const char *file, int n_player, CommunicationQueue &queue);
+    Model(const char *file);
     ~Model();
 
 //    Map& createMap();
 	Map& getMap();
+
+	int addPlayer();
 
 	Harvester& createHarvester(int x, int y, int player);
 	HeavyInfantry& createHeavyInfantry(int x, int y, int player);
@@ -75,6 +80,10 @@ public:
 
     /// TEMPORAL
 	Building & getBuildingById(int id);
+	Unit& getUnitById(int id);
+
+	void serialize(std::vector<AcceptedPlayer*>& players);
+
 };
 
 #endif	// __MODEL_H__

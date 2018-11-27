@@ -30,6 +30,7 @@ class RocketView;
 class GameView : public View {
 private:
 	Model& model;
+	Player& player;
 	std::vector<UnitView*> unitViews;
 	std::vector<DeadUnitView*> deadUnitViews;
 	std::vector<BuildingView*> buildingViews;
@@ -50,7 +51,7 @@ private:
 	int camera_height;
 
 public:
-	GameView(const int width, const int height, Model& model);
+	GameView(const int width, const int height, Model& model, Player& player);
 
 	~GameView();
 
@@ -59,6 +60,8 @@ public:
 	void addUnitView(UnitView* unitView);
 
 	void addBuildingView(BuildingView* buildingView);
+
+	void addRocketView(RocketView* rocketView);
 
 	void addSelectorView(Selector& selector);
 
@@ -91,8 +94,6 @@ public:
 
 	void render() override;
 
-	/// TEMPORAL
-	void changePlayer(int new_player);
 };
 
 #endif	// __GAME_VIEW_H__

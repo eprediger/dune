@@ -2,15 +2,15 @@
 #define __UNIT_H__
 
 #include "Position.h"
-#include "Model/Weapons/Weapon.h"
-#include "Model/Weapons/Rocket.h"
-#include "Model/Terrains/Sand.h"
-#include "Model/Terrains/Precipice.h"
-#include "Model/Terrains/Summit.h"
-#include "Model/Terrains/Dunes.h"
-#include "Model/Terrains/Rocks.h"
-#include "Model/Attackable.h"
-#include "Model/Player.h"
+#include "../Weapons/Weapon.h"
+#include "../Weapons/Rocket.h"
+#include "../Terrains/Sand.h"
+#include "../Terrains/Precipice.h"
+#include "../Terrains/Summit.h"
+#include "../Terrains/Dunes.h"
+#include "../Terrains/Rocks.h"
+#include "../Attackable.h"
+#include "../Player.h"
 #include "States/UnitState.h"
 #include "States/UnitStateAttacking.h"
 #include "States/UnitStateFollowing.h"
@@ -25,6 +25,7 @@
 #include <stack>
 #include <memory>
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 class Map;
 
@@ -39,6 +40,8 @@ public:
     static const UnitStateFarming farming;
     static const UnitStateBacking backing;
     static const UnitStateTraining training;
+
+
 
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
@@ -78,7 +81,13 @@ public:
 
     void finishTraining();
 
+    virtual nlohmann::json& getSerialization();
+
+public:
+    const int id;
+
 protected:
+    static int counter;
     const int speed;
     const int cost;
     int actual_speed;
@@ -89,6 +98,8 @@ protected:
     Position next_pos;
     UnitState* state;
     Player* player;
+    nlohmann::json serialization;
+
 };
 
 #endif //__UNIT_H__

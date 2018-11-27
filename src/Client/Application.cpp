@@ -22,8 +22,7 @@ void Application::handleEvent() {
 }
 
 void Application::update() {
-//    this->handler.step();
-	this->model.step();
+
 }
 
 void Application::render() {

@@ -1,6 +1,5 @@
 #include "SelectorView.h"
 #include "Selector.h"
-#include "Model/Attackable.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>

@@ -2,93 +2,43 @@
 #define __UNIT_H__
 
 #include "Position.h"
-#include "Model/Weapons/Weapon.h"
-#include "Model/Weapons/Rocket.h"
-#include "Model/Terrains/Sand.h"
-#include "Model/Terrains/Precipice.h"
-#include "Model/Terrains/Summit.h"
-#include "Model/Terrains/Dunes.h"
-#include "Model/Terrains/Rocks.h"
-#include "Model/Attackable.h"
-#include "Model/Player.h"
-#include "States/UnitState.h"
-#include "States/UnitStateAttacking.h"
-#include "States/UnitStateFollowing.h"
-#include "States/UnitStateMoving.h"
-#include "States/UnitStateStopped.h"
-#include "States/UnitStateDefending.h"
-#include "States/UnitStateLoading.h"
-#include "States/UnitStateFarming.h"
-#include "States/UnitStateBacking.h"
-#include "States/UnitStateTraining.h"
-//#include "Model/Map.h"
-#include <stack>
+#include "../Player.h"
 #include <memory>
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 class Map;
 
-class Unit : public Attackable {
+class Unit{
 public:
-    static const UnitStateAttacking attacking;
-    static const UnitStateFollowing following;
-    static const UnitStateMoving moving;
-    static const UnitStateStopped stopped;
-    static const UnitStateDefending defending;
-    static const UnitStateLoading loading;
-    static const UnitStateFarming farming;
-    static const UnitStateBacking backing;
-    static const UnitStateTraining training;
-
-    Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
+   
+    Unit(nlohmann::json& j);
     virtual ~Unit();
 
-    void setPath(std::stack<Position> path, Position destiny);
+    virtual void update(nlohmann::json& j);
 
-    bool move(Map &map);
+    bool isDead();
 
-    virtual void makeAction(Map &map);
+    Position& getPosition();
+    
+    int getLife();
 
-    virtual UnitState * makeFollow(Map &map);
-    virtual UnitState * makeAttack(Map &map);
-    virtual UnitState * makeStopped(Map &map);
-    virtual UnitState * makeDefending(Map &map);
-    virtual UnitState * makeLoading(Map &map);
-    virtual UnitState * makeFarming(Map &map);
-    virtual UnitState * makeBacking(Map &map);
+    int getInitialLife();
 
-    virtual void actionOnPosition(Map& map, Position& pos);
-
-    void follow(Attackable* other, Map& map);
-
-    virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
-
-    bool isAttacking();
-
-    void setPlayer(Player &player);
-
+    void setPlayer(Player* player);
+   
     Player& getPlayer();
 
-    virtual bool shotARocket();
-    virtual Rocket* getRocket();
-
-    void checkForDeadVictim();
-
-    bool isTraining();
-
-    void finishTraining();
+    const int id;
 
 protected:
-    const int speed;
-    const int cost;
-    int actual_speed;
-    std::stack<Position> pathToDestiny;
-    Attackable* foll_unit;
-    Position destiny;
-    Position prev_foll_unit_pos;
-    Position next_pos;
-    UnitState* state;
+    int player_id;
     Player* player;
+    int life;
+    int initial_life;
+    Position pos;
+
+
 };
 
 #endif //__UNIT_H__

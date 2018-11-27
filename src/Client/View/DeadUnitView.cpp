@@ -1,6 +1,6 @@
 #include "DeadUnitView.h"
 #include "Position.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include <vector>
 
 DeadUnitView::DeadUnitView(Position pos, Area src_area, Area dest_area,

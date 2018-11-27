@@ -1,9 +1,10 @@
 #ifndef __BUILDING_H__
 #define __BUILDING_H__
 
-#include "Model/Attackable.h"
-#include "Model/GlobalConfig.h"
+#include "../Attackable.h"
+#include "../GlobalConfig.h"
 #include <vector>
+#include <nlohmann/json.hpp>
 
 class Player;
 
@@ -34,14 +35,19 @@ public:
     Position& getClosestPosition(Position& position) override;
 
     void demolish();
+
+    nlohmann::json& getSerialization();
+
     const int width, height;
     const int energy;
     const int cost;
-
+    const int id;
 private:
+    static int counter;
     Player* player;
     BuildingType key;
     std::vector<Position> all_positions;
+    nlohmann::json serialization;
 };
 
 #endif //__BUILDING_H__

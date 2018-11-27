@@ -5,7 +5,7 @@
 
 class ButtonHandlerSpiceSilo : public ButtonHandler {
 public:
-	ButtonHandlerSpiceSilo(Model& model, GameView& view,
+	ButtonHandlerSpiceSilo(Player& player, GameView& view,
 			BuildingConstructor& constructor, CommunicationQueue& queue);
 
 	~ButtonHandlerSpiceSilo();

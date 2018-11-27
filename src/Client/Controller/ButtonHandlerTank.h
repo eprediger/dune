@@ -5,7 +5,7 @@
 
 class ButtonHandlerTank : public ButtonHandler {
 public:
-	ButtonHandlerTank(Model &model, GameView &view, CommunicationQueue& queue);
+	ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue);
 
 	~ButtonHandlerTank();
 

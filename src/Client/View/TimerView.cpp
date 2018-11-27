@@ -1,5 +1,5 @@
 #include "TimerView.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 
 // TimerView::TimerView(SDL_Renderer *renderer, int number_steps) :
 TimerView::TimerView(const SdlWindow &window, int number_steps) :

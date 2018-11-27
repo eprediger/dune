@@ -5,7 +5,10 @@
 HeavyInfantry::HeavyInfantry(int x, int y) 
 		:OffensiveUnit(x, y, GlobalConfig.heavyInfantryHitPoints, GlobalConfig.heavyInfantryRange,
 					  Weapons::rocketLauncher, GlobalConfig.heavyInfantrySpeed, GlobalConfig.heavyInfantryCost)
-		,rocket(nullptr){}
+		,rocket(nullptr)
+{
+	serialization["subClass"] = "HeavyInfantry";
+}
 
 HeavyInfantry::~HeavyInfantry() {}
 

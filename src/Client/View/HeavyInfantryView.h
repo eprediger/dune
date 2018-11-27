@@ -9,11 +9,11 @@
 #include "Position.h"
 #include <vector>
 #include <map>
-#include "Area.h"
+#include "../../Common/Area.h"
 
 class HeavyInfantryView: public OffensiveUnitView{
     public:
-        HeavyInfantryView(HeavyInfantry& heavyInfantry, std::vector<RocketView*>& rocketViews, SdlWindow& window);
+        HeavyInfantryView(HeavyInfantry& heavyInfantry, SdlWindow& window);
         virtual void draw(Area& camara);
         virtual std::vector<std::unique_ptr<SdlTexture> >& getDeadSprites();
         virtual Area getDeadUnitSrcArea();
@@ -24,7 +24,6 @@ class HeavyInfantryView: public OffensiveUnitView{
         static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > sprites;
         static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > attack_sprites;
         static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
-        std::vector<RocketView*>& rocketViews;
 };
 
 #endif  // __HEAVY_INFANTRY_VIEW_H__

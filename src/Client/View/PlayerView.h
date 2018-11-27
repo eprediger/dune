@@ -4,7 +4,7 @@
 #include "Model/Player.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "Text.h"
 #include <map>
 #include <memory>

@@ -1,7 +1,7 @@
 #ifndef __HARVESTER_H__
 #define __HARVESTER_H__
 
-#include "Model/Unit/Unit.h"
+#include "Unit.h"
 #include "Model/Weapons/AssaultRifle.h"
 #include "Model/Buildings/SpiceRefinery.h"
 

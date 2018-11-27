@@ -2,19 +2,22 @@
 #define __ROCKET_H__
 
 #include "Position.h"
+#include <nlohmann/json.hpp>
 
 class Map;
 
 class Rocket{
     public:
-        Rocket(Position source, Position dest);
-        void move();
-        bool arrived();
-        void explode(Map& map);
+        Rocket(nlohmann::json& j);
         Position& getPosition(); 
+        void update(nlohmann::json& j);
+
+        const int id;
+        bool arrived;
+
     private:
+        static int counter;
         Position pos;
-        Position dest;
 };
 
 #endif	// __ROCKET_H__

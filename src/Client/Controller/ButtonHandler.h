@@ -5,10 +5,11 @@
 #include "View/ButtonView.h"
 #include "Model/Model.h"
 #include "View/GameView.h"
+#include "../../Server/Model/GlobalConfig.h"
 
 class ButtonHandler {
 public:
-	ButtonHandler(ButtonView &buttonView, Model &model, GameView &view, CommunicationQueue &queue);
+	ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue);
 
 	virtual ~ButtonHandler();
 
@@ -33,7 +34,7 @@ public:
 protected:
 	ButtonState* buttonState;
 	ButtonView& buttonView;
-	Model& model;
+	Player& player;
 	GameView& view;
 	CommunicationQueue& queue;
 };

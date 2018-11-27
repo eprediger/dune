@@ -7,7 +7,10 @@ Trike::Trike(int x, int y) :
 	              GlobalConfig.trikeRange,
 	              Weapons::assaultRifle,
 	              GlobalConfig.trikeSpeed,
-	              GlobalConfig.trikeCost) {}
+	              GlobalConfig.trikeCost)
+{
+	serialization["subClass"] = "Trike";
+}
 
 Trike::~Trike() {}
 

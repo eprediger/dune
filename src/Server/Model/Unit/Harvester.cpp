@@ -15,7 +15,10 @@ Harvester::Harvester(int x, int y) :
 	farm_speed(GlobalConfig.harvesterFarmSpeed),
 	actual_farm_speed(0),
 	load_speed(GlobalConfig.harvesterLoadSpeed),
-	actual_load_speed(0) {}
+	actual_load_speed(0)
+{
+	serialization["subClass"] = "harvester";
+}
 
 Harvester::~Harvester() {}
 

@@ -3,7 +3,7 @@
 #include "SdlTexture.h"
 #include "Position.h"
 #include "Orientation.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include <map>
 #include <vector>
 #include <memory>
@@ -52,7 +52,7 @@ Unit &UnitView::getUnit() {
 }
 
 bool UnitView::isDead(const UnitView *unit_view) {
-	return Unit::isDead(&unit_view->unit);
+	return unit_view->unit.isDead();
 }
 
 void UnitView::draw(Area& camara, std::map<int, std::unique_ptr<SdlTexture>>& sprites) {
@@ -61,7 +61,6 @@ void UnitView::draw(Area& camara, std::map<int, std::unique_ptr<SdlTexture>>& sp
 	dest_area.setY(pos.y - camara.getY() - sprite_area.getHeight() / 2);
 	orientation.calcular(prev_pos, pos);
 	prev_pos = pos;
-	//sprites.at(orientation.getValor())->setColor(unit.getPlayer().getId());
 	playerColorRect.x = dest_area.getX();
 	playerColorRect.y = dest_area.getY();
 

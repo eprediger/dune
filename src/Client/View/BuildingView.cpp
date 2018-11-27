@@ -178,7 +178,7 @@ DeadBuildingView* BuildingView::getDeadBuildingView() {
 }
 
 bool BuildingView::isDead(BuildingView* view) {
-	if (Attackable::isDead(&(view->building))) {
+	if (view->building.isDead()) {
 		return true;
 	}
 	return false;

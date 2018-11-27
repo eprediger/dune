@@ -4,12 +4,12 @@
 #include <iostream>
 #include "Model/GlobalConfig.h"
 
-ButtonHandlerBarracks::ButtonHandlerBarracks(Model &model, GameView &view,
+ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
 			BuildingConstructor& constructor, CommunicationQueue& queue):
         ButtonHandler(
                 view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
                                           GlobalConfig.buildingConstructionTime),
-                model,
+                player,
                 view, queue)
 	,constructor(constructor) {
 	/*
@@ -23,21 +23,20 @@ ButtonHandlerBarracks::~ButtonHandlerBarracks() { time = 0; }
 void ButtonHandlerBarracks::execute() {
 	nlohmann::json msg;
 	msg["method"] = "beginConstruction";
-	msg["args"]["player"] = GameHandler::actual_player;
+	msg["args"]["player"] = player.getId();
 	msg["args"]["building_type"] = Building::BARRACKS;
 	queue.enqueue(msg);
-	model.getPlayer(GameHandler::actual_player).buildingCenter->newConstruct(Building::BARRACKS);
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
-    return (this->model.getPlayer(GameHandler::actual_player).gold >= GlobalConfig.barracksCost);
+    return (this->player.gold >= GlobalConfig.barracksCost);
 }
 
 bool ButtonHandlerBarracks::finishAction() {
-    if (model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::BARRACKS)){
+    if (player.buildingCenter->buildingReady(Building::BARRACKS)){
         std::cout << "Accion finalizada" << std::endl;
     }
-    return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingReady(Building::BARRACKS);
+    return player.buildingCenter->buildingReady(Building::BARRACKS);
 }
 
 void ButtonHandlerBarracks::executeReady() {
@@ -49,8 +48,8 @@ void ButtonHandlerBarracks::executeReady() {
 }
 
 bool ButtonHandlerBarracks::finishReady() {
-    if (model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::BARRACKS)){
+    if (player.buildingCenter->buildingConstructed(Building::BARRACKS)){
         std::cout << "Ready listo" << std::endl;
     }
-	return model.getPlayer(GameHandler::actual_player).buildingCenter->buildingConstructed(Building::BARRACKS);
+	return player.buildingCenter->buildingConstructed(Building::BARRACKS);
 }

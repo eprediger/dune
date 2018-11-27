@@ -3,7 +3,7 @@
 
 #include "Model/Buildings/Building.h"
 #include "SdlWindow.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "SdlTexture.h"
 #include "DeadBuildingView.h"
 #include "Model/Player.h"

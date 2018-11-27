@@ -3,7 +3,7 @@
 
 #include "UnitView.h"
 #include "Model/Unit/OffensiveUnit.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include <map>
 #include <vector>
 #include "RocketView.h"

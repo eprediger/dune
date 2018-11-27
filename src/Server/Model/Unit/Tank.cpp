@@ -4,9 +4,14 @@
 
 Tank::Tank(int x, int y) :
         OffensiveUnit(x, y, GlobalConfig.tankHitPoints, GlobalConfig.tankRange, Weapons::cannon, GlobalConfig.tankSpeed,
-                      GlobalConfig.tankCost) {}
+                      GlobalConfig.tankCost)
+{
+        serialization["subClass"] = "Tank";
+}
 
-Tank::~Tank() {}
+Tank::~Tank()
+{
+}
 
 bool Tank::canMoveAboveTerrain(Terrain &terrain) {
 	return terrain == Sand() || terrain == Dunes() || terrain == Rocks();

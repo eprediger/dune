@@ -1,6 +1,6 @@
 #include "HeavyInfantryView.h"
 #include "Model/Unit/HeavyInfantry.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "Orientation.h"
 #include "Position.h"
 #include "SdlWindow.h"
@@ -16,11 +16,10 @@ std::map<int, std::vector<std::unique_ptr<SdlTexture> > > HeavyInfantryView::att
 std::vector<std::unique_ptr<SdlTexture> > HeavyInfantryView::dead_sprites;
 
 HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
-                                     std::vector<RocketView*>& rocketViews,
-                                     SdlWindow& window) :
+                                     SdlWindow& window):
     OffensiveUnitView(heavyInfantry, Area(0, 0, 20, 20), window)
     , heavyInf(heavyInfantry)
-    , rocketViews(rocketViews) {
+{
     if (sprites.empty()) {
         std::vector<std::unique_ptr<SdlTexture> > indef;
         indef.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00060799.bmp",window)));
@@ -180,10 +179,8 @@ void HeavyInfantryView::draw(Area& camara) {
         if (!animating_attack) {
             anim_it = sprites.at(orientation.getValor()).begin();
         }
-        if (this->heavyInf.shotARocket()){
-            rocketViews.emplace_back(new RocketView(*heavyInf.viewRocket(),window));
-        }
-    } else {
+    }
+    else {
         if (animating_attack){
             anim_it = sprites.at(orientation.getValor()).begin();
             animating_attack = false;

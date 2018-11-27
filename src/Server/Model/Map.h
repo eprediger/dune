@@ -2,13 +2,14 @@
 #define __MAP_H__
 
 #include <vector>
+#include <nlohmann/json.hpp>
 #include "Terrains/Terrain.h"
 #include "Model/Buildings/Building.h"
 #include "Unit/Unit.h"
-#include "Model/Player.h"
+#include "Player.h"
 #include <memory>
 #include <map>
-#include "View/Area.h"
+#include "../../Common/Area.h"
 #include "Position.h"
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32
@@ -23,6 +24,7 @@ private:
     std::vector<Attackable*> attackables;
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
+    nlohmann::json serialization;
 
 public:
     explicit Map(const char* filePath);
@@ -36,6 +38,8 @@ public:
     void occupy(Building& building);
     void free(Building& building);
 
+    nlohmann::json& getSerialization();
+    
     int getHeight();
     int getWidth();
 

@@ -3,7 +3,7 @@
 
 #include "BuildingView.h"
 #include "Model/Buildings/SpiceSilo.h"
-#include "Area.h"
+#include "../../Common/Area.h"
 #include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

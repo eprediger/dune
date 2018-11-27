@@ -4,7 +4,10 @@
 
 LightInfantry::LightInfantry(int x, int y) :
         OffensiveUnit(x, y, GlobalConfig.lightInfantryHitPoints, GlobalConfig.lightInfantryRange, Weapons::assaultRifle,
-                      GlobalConfig.lightInfantrySpeed, GlobalConfig.lightInfantryCost) {}
+                      GlobalConfig.lightInfantrySpeed, GlobalConfig.lightInfantryCost) 
+{
+    serialization["subClass"] = "LightInfantry";
+}
 
 LightInfantry::~LightInfantry() {}
 

@@ -1,29 +1,42 @@
-#include "Model/Map.h"
+#include "Map.h"
 #include "yaml-cpp/yaml.h"
+#include <nlohmann/json.hpp> 
 #include "Terrains/Terrain.h"
 #include "Model/AStar.h"
 #include "CustomException.h"
-#include "View/Area.h"
+#include "../../Common/Area.h"
 #include <algorithm>
 #include <stack>
 #include <vector>
-
+#include <fstream>
 Map::Map(const char* filePath) :
     matrix(),
     rows(),
     cols(),
-    constructionYardPositions() {
+    constructionYardPositions(),
+    serialization() {
     YAML::Node file = YAML::LoadFile(filePath);
     cols = file["width"].as<int>();
     rows = file["height"].as<int>();
+    serialization["class"] = "Map";
     char sand_key = file["SAND_KEY"].as<char>();
+    serialization["sand_key"] = sand_key;
     char spiced_sand_key = file["SPICED_SAND_KEY"].as<char>();
+    serialization["spiced_sand_key"] = sand_key;
     char dune_key = file["DUNE_KEY"].as<char>();
+    serialization["dune_key"] = dune_key;
     char rocks_key = file["ROCK_KEY"].as<char>();
+    serialization["rocks_key"] = rocks_key;
     char summit_key = file["SUMMIT_KEY"].as<char>();
+    serialization["summit_key"] = summit_key;
     char precipice_key = file["PRECIPICE_KEY"].as<char>();
+    serialization["precipice_key"] = precipice_key;
     int initial_spice = file["INITIAL_SPICE"].as<int>();
+    serialization["initial_spice"] = initial_spice;
     int max_players = file["max_players"].as<int>();
+    serialization["width"] = cols;
+    serialization["height"] = rows;
+    nlohmann::json keys = nlohmann::json::array();
     for (int i = 0; i < max_players ; i++) {
         int x = file["initial_positions"][i][0].as<int>() * BLOCK_WIDTH;
         int y = file["initial_positions"][i][1].as<int>() * BLOCK_HEIGHT;
@@ -45,11 +58,19 @@ Map::Map(const char* filePath) :
             } else if (key == precipice_key) {
                 matrix.emplace_back(std::unique_ptr<Terrain>(new Precipice()));
             }
+            keys.push_back(key);
         }
     }
+    serialization["matrix"] = keys;
+    std::ofstream a("map.json"); 
+    a << serialization;
 }
 
 Map::~Map() {}
+
+nlohmann::json& Map::getSerialization(){
+    return this->serialization;
+}
 
 std::vector<Position>& Map::getInitialPositions() {
     return constructionYardPositions;
@@ -298,10 +319,10 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
         int distance = pos.sqrtDistance(position);
         if (distance < limitRadius
                 && distance < closest_unit_distance
-                && !player.hasBuilding(*current_building) ) {
+                && !(*(current_building->getPlayer()) == player)) { 
             closest_attackable = current_building;
             closest_unit_distance = distance;
-        }
+        } 
     }
     return closest_attackable;
 }
@@ -334,3 +355,4 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 
     return min_position;
 }
+ 
