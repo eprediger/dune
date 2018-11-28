@@ -40,17 +40,17 @@ public:
 
     bool hasNews();
 
+    const int id;
     const int width, height;
     const int energy;
     const int cost;
-    const int id;
 private:
     static int counter;
     Player* player;
     BuildingType key;
     std::vector<Position> all_positions;
     bool news;
-protected: 
+protected:
     nlohmann::json serialization;
 };
 

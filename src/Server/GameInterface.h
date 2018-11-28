@@ -9,6 +9,7 @@ class GameInterface {
 public:
     GameInterface(Model &model);
     void execute(nlohmann::json json);
+    
 private:
     Model& model;
 

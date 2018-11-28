@@ -19,8 +19,7 @@ PlayerTrainingCenter::PlayerTrainingCenter():
     tank(0, nullptr),
     trike(0, nullptr),
     readyUnits(),
-    serialization()
-{
+    serialization() {
     serialization["trainingHarvester"] = false;
     serialization["harvesterTime"] = 0;
     serialization["trainingLightInfantry"] = false;
@@ -70,6 +69,7 @@ void PlayerTrainingCenter::trainTank(Tank* tank) {
     serialization["trainingTank"] = true;
     serialization["tankTime"] = this->tank.first;
 }
+
 void PlayerTrainingCenter::trainTrike(Trike* trike) {
     this->trike.first = GlobalConfig.trikeConstructionTime;
     this->trike.second = trike;
@@ -92,10 +92,10 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
         } else if ((*it)->is(Building::LIGHT_FACTORY)) {
             if (trike.second != nullptr)
                 trike.first -= 1;
-                serialization["trikeTime"] = trike.first;
+            serialization["trikeTime"] = trike.first;
             if (raider.second != nullptr)
                 raider.first -= 1;
-                serialization["raiderTime"] = raider.first;
+            serialization["raiderTime"] = raider.first;
         } else if ((*it)->is(Building::HEAVY_FACTORY)) {
             if (tank.second != nullptr) {
                 tank.first -= 1;
@@ -110,12 +110,12 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
     }
 }
 
-nlohmann::json& PlayerTrainingCenter::getSerialization(){
+nlohmann::json& PlayerTrainingCenter::getSerialization() {
     return this->serialization;
 }
 
 void setInitialPosition(Unit* unit, Map& map, std::vector<Building*>& buildings,
-    ConstructionYard* constructionYard, Building::BuildingType building_type) {
+                        ConstructionYard* constructionYard, Building::BuildingType building_type) {
     std::vector<Building*>::iterator it = buildings.begin();
     while (it != buildings.end()) {
         if ((*it)->is(building_type)) {

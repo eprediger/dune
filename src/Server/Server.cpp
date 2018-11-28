@@ -13,13 +13,12 @@
 #include "GameInterface.h"
 
 Server::Server(const char *service, unsigned int players, const char* mapFile) :
+	commonQueue(),
 	maxPlayers(players),
 	manualShutDown(false),
 	acceptSkt(nullptr, service, AI_PASSIVE),
 	players(),
-	commonQueue(),
-	model(mapFile) 
-{
+	model(mapFile) {
 	this->acceptSkt.bind();
 	this->acceptSkt.listen(MAX_LISTEN);
 }
@@ -69,28 +68,27 @@ void Server::waitPlayers() {
 		model.addPlayer();
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
 		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
-		this->players[i]->setId(i); 
+		this->players[i]->setId(i);
 	}
-	
+
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		for (unsigned j = 0; j < this->maxPlayers; ++j) {
 			this->players[i]->queue.enqueue(model.getPlayer(j).getSerialization());
 		}
 	}
 
-	int i = 0;
 	nlohmann::json j;
 	j["class"] = "Step";
 	const int time_step = 16;
 	int sleep_extra = 0;
-	while(!model.isGameFinished()){
+	while (!model.isGameFinished()) {
 		unsigned int loop_init = SDL_GetTicks();
 		model.step();
 		model.serialize(players);
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
-	    
-	    unsigned int loop_end = SDL_GetTicks();
+
+		unsigned int loop_end = SDL_GetTicks();
 
 		int step_duration = (loop_end - loop_init);
 		int sleep_delay = time_step - step_duration - sleep_extra;
@@ -101,7 +99,4 @@ void Server::waitPlayers() {
 
 		sleep_extra = (delay_end - loop_end) - sleep_delay;
 	}
-
-
 }
-
