@@ -134,6 +134,37 @@ Ejecución desde carpeta build/:
 2. ~~Al hacer click en los botones de unidades intenta crear el edificio de al lado.~~
 	* Resuelto: el problema esta en la vista del boton el cual toma como ancho y alto el de la imagen. Como el ancho y alto de la imagen es diferente al area de la vista del boton (En los edificios por ejemplo, es el doble de ancho por estar a color y en blanco y negro), el area de "click" es diferente del area de que muestra el boton. Se resuelve quitando el parmetro const de "height" y "width" y asignandoles el ancho y alto del area "dest" durante el render.
 
+3. No se pueden seleccionar unidades
+
+4. Arreglar el bug de la desconexion al salir
+
+5. Al hacer click en la cruz, no cierra el juego.
+
+6. Al agregar el sleep, la vista tarda en renderizar. 
+
+## ISSUES
+
+	1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
+	2. Quitar las velocidades con contadores
+	3. Crear archivo de configuracion. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
+	4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
+	5. Hacer el instalador "sudo make install"
+		* /bin/dune => ejecutable
+		* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
+		* /etc/dune.cfg => archivo de configuracion
+
+	6. Reducir tiempo en CPU 
+	7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
+	8. Ver en todo caso, cambiar la libreria de json
+
+## PROFILING
+
+	Usar "callgrind" para encontrar donde esta consumiendo mas memoria
+
+	Instalacion: sudo apt-get install kcachegrind
+	Uso: valgrind --tool=callgrind ./dune_Client
+	kcachegrind <archivo_salida (callgrind.out.###)>
+
 ## DOCUMENTACION
 
 * Instalacion y uso

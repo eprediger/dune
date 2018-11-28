@@ -54,6 +54,8 @@ Socket Server::accept() const {
 }
 
 #include <iostream>
+#include <SDL_timer.h>
+
 void Server::waitPlayers() {
 	GameInterface interface(model);
 	std::cout << "Start to acept Players" << std::endl;
@@ -76,14 +78,28 @@ void Server::waitPlayers() {
 		}
 	}
 
-
+	int i = 0;
 	nlohmann::json j;
 	j["class"] = "Step";
+	const int time_step = 16;
+	int sleep_extra = 0;
 	while(!model.isGameFinished()){
+		unsigned int loop_init = SDL_GetTicks();
 		model.step();
 		model.serialize(players);
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
+	    
+	    unsigned int loop_end = SDL_GetTicks();
+
+		int step_duration = (loop_end - loop_init);
+		int sleep_delay = time_step - step_duration - sleep_extra;
+		sleep_delay = (sleep_delay < 0) ? 0 : sleep_delay;
+
+		SDL_Delay(sleep_delay);
+		unsigned int delay_end = SDL_GetTicks();
+
+		sleep_extra = (delay_end - loop_end) - sleep_delay;
 	}
 
 

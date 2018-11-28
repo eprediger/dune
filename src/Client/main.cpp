@@ -49,13 +49,33 @@ int main(int argc, const char *argv[]) {
             GameInterface interface(model,gameView);
             GameHandler gameHandler(gameView, model, queue, myPlayer); 
             Application app(gameView, gameHandler, model);
+
+            const int time_step = 16;
+            int sleep_extra = 0;
+
             while (app.running() && !model.isGameFinished()) {
-               // app.update();            // Actualizar Modelo
+                unsigned int loop_init = SDL_GetTicks();
+
+                ////// Inicia el LOOP //////////
                 app.render();    
                 app.handleEvent();
                 if (queue.recvEmpty())
                     continue;
                 interface.execute(queue.dequeue());
+            
+                ////// Finaliza el LOOP //////////
+
+                unsigned int loop_end = SDL_GetTicks();
+
+                int step_duration = (loop_end - loop_init);
+                int sleep_delay = time_step - step_duration - sleep_extra;
+                sleep_delay = (sleep_delay < 0) ? 0 : sleep_delay;
+
+                SDL_Delay(sleep_delay);
+                unsigned int delay_end = SDL_GetTicks();
+
+                sleep_extra = (delay_end - loop_end) - sleep_delay;
+                
             }
             client.disconnect();
         } catch (const SdlException &e) {
