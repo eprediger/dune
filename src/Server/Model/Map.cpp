@@ -353,4 +353,7 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 
     return min_position;
 }
- 
+
+int Map::getSpeedFactorAt(Position &pos) {
+    return this->at(pos).getSpeedFactor();
+}

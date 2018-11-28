@@ -38,7 +38,8 @@ const UnitStateTraining Unit::training;
 
 bool Unit::move(Map &map) {
     bool moved = true;
-    if (actual_speed++ == speed) {
+    int terrain_factor = map.getSpeedFactorAt(pos);
+    if (actual_speed++ >= speed*terrain_factor) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
