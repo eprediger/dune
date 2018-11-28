@@ -13,7 +13,7 @@ ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 void ButtonHandlerHarvester::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createHarvester";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
 }
 

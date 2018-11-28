@@ -15,7 +15,7 @@ ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
 void ButtonHandlerSpiceRefinery::execute() {
     nlohmann::json msg;
     msg["method"] = "beginConstruction";
-    msg["args"]["player"] = player.getId();
+    msg["args"]["player_id"] = player.getId();
     msg["args"]["building_type"] = Building::SPICE_REFINERY;
     queue.enqueue(msg);
 	player.buildingCenter->beginConstruction(Building::SPICE_REFINERY);

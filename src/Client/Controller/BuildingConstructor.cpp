@@ -35,7 +35,7 @@ void BuildingConstructor::build() {
             nlohmann::json msg;
             msg["args"]["x"] = pos.x;
             msg["args"]["y"] = pos.y;
-            msg["args"]["player"] = player.getId();
+            msg["args"]["player_id"] = player.getId();
 
             switch (building) {
             case Building::BARRACKS:

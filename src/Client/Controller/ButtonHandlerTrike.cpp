@@ -14,7 +14,7 @@ ButtonHandlerTrike::~ButtonHandlerTrike() {}
 void ButtonHandlerTrike::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createTrike";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
 }
 

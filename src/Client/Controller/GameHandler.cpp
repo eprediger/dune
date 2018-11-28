@@ -143,7 +143,7 @@ bool GameHandler::handleInput() {
             for (auto itr = to_sell.begin(); itr != to_sell.end() ; itr++) {
                 nlohmann::json msg;
                 msg["method"] = "sellBuilding";
-                msg["args"]["player"] = player.getId();
+                msg["args"]["player_id"] = player.getId();
                 msg["args"]["building_id"] = (*itr)->id;
                 queue.enqueue(msg);
             }

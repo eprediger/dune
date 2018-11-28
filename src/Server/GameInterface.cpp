@@ -4,64 +4,64 @@ GameInterface::GameInterface(Model &model) :
     model(model) {}
 
 void GameInterface::execute(nlohmann::json json) {
-    if ( json["method"] == "createWindTrap") {
-        this->createWindTrap(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createWindTrap"){
+        this->createWindTrap(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createBarracks") {
-        this->createBarracks(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createBarracks"){
+        this->createBarracks(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createLightFactory") {
-        this->createLightFactory(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createLightFactory"){
+        this->createLightFactory(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createHeavyFactory") {
-        this->createHeavyFactory(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createHeavyFactory"){
+        this->createHeavyFactory(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createSpiceRefinery") {
-        this->createSpiceRefinery(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createSpiceRefinery"){
+        this->createSpiceRefinery(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createSpiceSilo") {
-        this->createSpiceSilo(json["args"]["x"], json["args"]["y"], json["args"]["player"]);
+    if ( json["method"] == "createSpiceSilo"){
+        this->createSpiceSilo(json["args"]["x"],json["args"]["y"],json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "beginConstruction") {
-        this->beginConstruction(json["args"]["player"], json["args"]["building_type"]);
+    if ( json["method"] == "beginConstruction"){
+        this->beginConstruction(json["args"]["player_id"],json["args"]["building_type"]);
         return;
     }
-    if ( json["method"] == "createHarvester") {
-        this->createHarvester(json["args"]["player"]);
+    if ( json["method"] == "createHarvester"){
+        this->createHarvester(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createHeavyInfantry") {
-        this->createHeavyInfantry(json["args"]["player"]);
+    if ( json["method"] == "createHeavyInfantry"){
+        this->createHeavyInfantry(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createLightInfantry") {
-        this->createLightInfantry(json["args"]["player"]);
+    if ( json["method"] == "createLightInfantry"){
+        this->createLightInfantry(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createRaider") {
-        this->createRaider(json["args"]["player"]);
+    if ( json["method"] == "createRaider"){
+        this->createRaider(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createTank") {
-        this->createTank(json["args"]["player"]);
+    if ( json["method"] == "createTank"){
+        this->createTank(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "createTrike") {
-        this->createTrike(json["args"]["player"]);
+    if ( json["method"] == "createTrike"){
+        this->createTrike(json["args"]["player_id"]);
         return;
     }
-    if ( json["method"] == "sellBuilding") {
-        this->sellBuilding(json["args"]["player"], json["args"]["building_id"]);
+    if ( json["method"] == "sellBuilding"){
+        this->sellBuilding(json["args"]["player_id"], json["args"]["building_id"]);
         return;
     }
-    if ( json["method"] == "actionOnPosition") {
-        this->setActionOnPosition(json["args"]["player"], json["args"]["unit_id"], json["args"]["x"], json["args"]["y"]);
+    if ( json["method"] == "actionOnPosition"){
+        this->setActionOnPosition(json["args"]["player_id"],json["args"]["unit_id"],json["args"]["x"],json["args"]["y"]);
     }
 }
 

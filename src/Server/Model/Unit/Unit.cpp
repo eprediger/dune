@@ -52,6 +52,7 @@ bool Unit::move(Map &map) {
             pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
             moved = true;
+            this->news = true;
         } else {
             map.at(pos).occupy();
 //            state = (UnitState*)&Unit::stopped;;

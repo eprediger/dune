@@ -1,10 +1,10 @@
 #ifndef __GLOBALCONFIG_H__
 #define __GLOBALCONFIG_H__
 
-#define SPEED_FACTOR (84*3)
+#define SPEED_FACTOR 20//(84*3)
 #define RANGE_FACTOR 2000
 
-#define TIME_FACTOR 10
+#define TIME_FACTOR 1
 
 typedef struct {
 // Building Stats

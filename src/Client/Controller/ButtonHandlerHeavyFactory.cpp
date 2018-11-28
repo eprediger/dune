@@ -15,7 +15,7 @@ ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 void ButtonHandlerHeavyFactory::execute() {
     nlohmann::json msg;
     msg["method"] = "beginConstruction";
-    msg["args"]["player"] = player.getId();
+    msg["args"]["player_id"] = player.getId();
     msg["args"]["building_type"] = Building::HEAVY_FACTORY;
     queue.enqueue(msg);
     player.buildingCenter->beginConstruction(Building::HEAVY_FACTORY);
