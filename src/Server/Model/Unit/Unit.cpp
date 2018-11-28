@@ -4,7 +4,6 @@
 #include <iostream>
 #include <stack>
 
-
 int Unit::counter = 0;
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
     Attackable(hitPoints, x, y),
@@ -19,13 +18,12 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
     next_pos(x, y),
     state((UnitState*) & Unit::training),
     serialization(),
-    news(true)
-{
-    counter+=1;
+    news(true) {
+    counter += 1;
     serialization["class"] = "Unit";
     serialization["id"] = id;
 }
- 
+
 Unit::~Unit() {}
 
 const UnitStateAttacking Unit::attacking;
@@ -35,7 +33,7 @@ const UnitStateStopped Unit::stopped;
 const UnitStateDefending Unit::defending;
 const UnitStateLoading Unit::loading;
 const UnitStateFarming Unit::farming;
-const UnitStateBacking Unit::backing; 
+const UnitStateBacking Unit::backing;
 const UnitStateTraining Unit::training;
 
 bool Unit::move(Map &map) {
@@ -156,16 +154,16 @@ void Unit::actionOnPosition(Map &map, Position &pos) {
     }
 }
 
-bool Unit::shotARocket(){
+bool Unit::shotARocket() {
     return false;
 }
 
-Rocket* Unit::getRocket(){
+Rocket* Unit::getRocket() {
     return nullptr;
 }
 void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr)
-        if (Unit::isDead(foll_unit)){
+        if (Unit::isDead(foll_unit)) {
             this->foll_unit = nullptr;
             this->state = (UnitState*)&Unit::stopped;
         }
@@ -179,7 +177,7 @@ void Unit::finishTraining() {
     this->state = (UnitState*)&Unit::stopped;
 }
 
-nlohmann::json& Unit::getSerialization(){
+nlohmann::json& Unit::getSerialization() {
     news = false;
     serialization["life"] = this->getLife();
     serialization["pos"]["x"] = pos.x;
@@ -187,6 +185,6 @@ nlohmann::json& Unit::getSerialization(){
     return serialization;
 }
 
-bool Unit::hasNews(){
-    return (news || (this->getLife() != serialization["life"]));                  
+bool Unit::hasNews() {
+    return (news || (this->getLife() != serialization["life"]));
 }

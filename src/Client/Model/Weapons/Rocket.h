@@ -6,18 +6,18 @@
 
 class Map;
 
-class Rocket{
-    public:
-        Rocket(nlohmann::json& j);
-        Position& getPosition(); 
-        void update(nlohmann::json& j);
+class Rocket {
+public:
+	Rocket(nlohmann::json& j);
+	Position& getPosition();
+	void update(nlohmann::json& j);
 
-        const int id;
-        bool arrived;
+	const int id;
+	bool arrived;
 
-    private:
-        static int counter;
-        Position pos;
+private:
+	static int counter;
+	Position pos;
 };
 
 #endif	// __ROCKET_H__

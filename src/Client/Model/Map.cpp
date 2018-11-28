@@ -14,12 +14,11 @@
 Map::Map(nlohmann::json& file):
     matrix(),
     rows(file["height"]),
-    cols(file["width"])
-{
+    cols(file["width"]) {
 
     nlohmann::json keys = file["matrix"];
-    
-    for (auto it = keys.begin() ; it!=keys.end() ; it++){
+
+    for (auto it = keys.begin() ; it != keys.end() ; it++) {
         int key = *it;
         if (key == file["sand_key"]) {
             matrix.emplace_back(std::unique_ptr<Terrain>(new Sand(0)));
@@ -39,7 +38,6 @@ Map::Map(nlohmann::json& file):
 }
 
 Map::~Map() {}
-
 
 int Map::getWidth() {
     return cols * BLOCK_WIDTH;
@@ -101,7 +99,6 @@ void Map::occupy(Building &building) {
         }
     }
 }
-
 
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
@@ -253,7 +250,6 @@ Position Map::getClosestFreePosition(Building* building) {
     }
     return pos;
 }
-
 
 Position Map::getCornerPosition(Position& pos) {
     return Position((pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT);

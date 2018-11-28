@@ -9,10 +9,10 @@
 
 class Map;
 
-class Unit{
+class Unit {
 public:
-   
     Unit(nlohmann::json& j);
+    
     virtual ~Unit();
 
     virtual void update(nlohmann::json& j);
@@ -20,13 +20,13 @@ public:
     bool isDead();
 
     Position& getPosition();
-    
+
     int getLife();
 
     int getInitialLife();
 
     void setPlayer(Player* player);
-   
+
     Player& getPlayer();
 
     const int id;
@@ -37,7 +37,6 @@ protected:
     int life;
     int initial_life;
     Position pos;
-
 
 };
 

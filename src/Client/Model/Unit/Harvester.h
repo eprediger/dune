@@ -3,13 +3,11 @@
 
 #include "Unit.h"
 
-
 class Harvester : public Unit {
 public:
 	Harvester(nlohmann::json& j);
 
 	~Harvester();
-
 };
 
 #endif

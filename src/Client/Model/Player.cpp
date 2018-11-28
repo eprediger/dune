@@ -11,16 +11,14 @@ Player::Player(nlohmann::json& j) :
     consumedEnergy(j["consumed_energy"]),   // Inicial es 0
     gold(j["gold"]),
     trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
-    buildingCenter(new PlayerBuildingCenter(j["buildingCenter"]))
-{}
+    buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])) {}
 
-
-void Player::update(nlohmann::json& j){
+void Player::update(nlohmann::json& j) {
     generatedEnergy = j["generated_energy"];
     consumedEnergy = j["consumed_energy"];
     gold = j["gold"];
     trainingCenter->update(j["trainingCenter"]);
-    buildingCenter->update(j["buildingCenter"]);  
+    buildingCenter->update(j["buildingCenter"]);
 }
 
 bool Player::operator==(const Player &other) const {
@@ -45,9 +43,8 @@ bool Player::hasBuilding(Building::BuildingType buildingType) {
     return buildingTypeFound;
 }
 
-
-void Player::cleanDeadBuildings(){
-    std::vector<Building*>::iterator it = buildings.begin(); 
+void Player::cleanDeadBuildings() {
+    std::vector<Building*>::iterator it = buildings.begin();
     while (it != buildings.end()) {
         if ((*it)->isDead()) {
             it = buildings.erase(it);
@@ -60,4 +57,4 @@ void Player::cleanDeadBuildings(){
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
     building->setPlayer(this);
- }
+}

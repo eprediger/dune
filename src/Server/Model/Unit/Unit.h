@@ -41,8 +41,6 @@ public:
     static const UnitStateBacking backing;
     static const UnitStateTraining training;
 
-
-
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
 

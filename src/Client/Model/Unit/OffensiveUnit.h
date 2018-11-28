@@ -5,11 +5,11 @@
 
 #include "../Map.h"
 
-class OffensiveUnit : public Unit{
+class OffensiveUnit : public Unit {
 public:
 	OffensiveUnit(nlohmann::json& j);
 	Position& getVictimPosition();
-	
+
 	virtual void update(nlohmann::json& j) override;
 	bool isAttacking();
 	bool isShooting();

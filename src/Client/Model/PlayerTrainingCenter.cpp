@@ -11,13 +11,11 @@
 #include "Model/Buildings/Building.h"
 #include <vector>
 
-PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j)
-{
-        update(j);
+PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j) {
+    update(j);
 }
 
-
-void PlayerTrainingCenter::update(nlohmann::json& j){
+void PlayerTrainingCenter::update(nlohmann::json& j) {
     harvester.first = (j["harvesterTime"]);
     harvester.second = (j["trainingHarvester"]);
     lightInfantry.first = j["lightInfantryTime"];

@@ -11,8 +11,7 @@ Building::Building(nlohmann::json& j):
 	life(j["life"]),
 	initial_life(life),
 	key(j["type"]),
-	all_positions()
-{ 
+	all_positions() {
 	int x = j["pos"]["x"];
 	int y = j["pos"]["y"];
 	for (int i = 0 ; i < height ; i++) {
@@ -24,11 +23,9 @@ Building::Building(nlohmann::json& j):
 
 Building::~Building() {}
 
-
 bool Building::is(Building::BuildingType type) {
 	return this->key == type;
 }
-
 
 Position& Building::getClosestPosition(Position& position) {
 	int distance = position.sqrtDistance(all_positions[0]);
@@ -42,30 +39,30 @@ Position& Building::getClosestPosition(Position& position) {
 	return closest;
 }
 
-void Building::update(nlohmann::json& j){
+void Building::update(nlohmann::json& j) {
 	life = j["life"];
 }
 
-bool Building::isDead(){
-	return life<=0;
+bool Building::isDead() {
+	return life <= 0;
 }
 
-void Building::setPlayer(Player* player){
-	this->player = player; 
+void Building::setPlayer(Player* player) {
+	this->player = player;
 }
 
-Player* Building::getPlayer(){
+Player* Building::getPlayer() {
 	return this->player;
 }
 
-Position& Building::getPosition(){
+Position& Building::getPosition() {
 	return all_positions.front();
 }
 
-int Building::getLife(){
+int Building::getLife() {
 	return life;
 }
 
-int Building::getInitialLife(){
+int Building::getInitialLife() {
 	return initial_life;
 }

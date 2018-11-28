@@ -17,9 +17,8 @@ class Map;
 class PlayerTrainingCenter {
 public:
     PlayerTrainingCenter(nlohmann::json& j);
-    
-    void update(nlohmann::json& j);
 
+    void update(nlohmann::json& j);
 
     bool isTrainingLightInfantry();
     bool isTrainingHeavyInfantry();

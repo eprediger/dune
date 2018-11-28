@@ -37,45 +37,45 @@ Model::~Model() {
     for (auto& player : players) {
         delete player.second;
     }
-    for (auto& rocket: rockets){
+    for (auto& rocket : rockets) {
         delete rocket.second;
     }
 }
 
 Unit &Model::createUnit(Unit *unit) {
-    units.insert(std::make_pair(unit->id,unit));
+    units.insert(std::make_pair(unit->id, unit));
     map.put(*unit);
     return *unit;
 }
 
 Building &Model::createBuilding(Building *building) {
-    buildings.insert(std::make_pair(building->id,building));
+    buildings.insert(std::make_pair(building->id, building));
     map.put(*building);
     return *building;
 }
 
-void Model::addPlayer(nlohmann::json& j){
+void Model::addPlayer(nlohmann::json& j) {
     players.insert(std::make_pair(j["id"], new Player(j)));
 }
 
-void Model::updatePlayer(nlohmann::json& j){
+void Model::updatePlayer(nlohmann::json& j) {
     players.at(j["id"])->update(j);
 }
 
-bool Model::playerExists(int id){
-    return (players.find(id)!=players.end());
+bool Model::playerExists(int id) {
+    return (players.find(id) != players.end());
 }
 
-bool Model::unitExists(int id){
-    return (units.find(id)!=units.end());
-} 
-
-bool Model::buildingExists(int id){
-    return (buildings.find(id)!=buildings.end());
+bool Model::unitExists(int id) {
+    return (units.find(id) != units.end());
 }
 
-bool Model::rocketExists(int id){
-    return (rockets.find(id)!=rockets.end());
+bool Model::buildingExists(int id) {
+    return (buildings.find(id) != buildings.end());
+}
+
+bool Model::rocketExists(int id) {
+    return (rockets.find(id) != rockets.end());
 }
 void Model::step() {
     this->cleanDeadUnits();
@@ -108,7 +108,7 @@ void Model::cleanDeadUnits() {
         }
     }
     if (has_dead_unit) {
-        std::map<int,Unit*>::iterator it = units.begin();
+        std::map<int, Unit*>::iterator it = units.begin();
         while (it != units.end()) {
             if ((it->second)->isDead()) {
                 delete(it->second);
@@ -130,7 +130,7 @@ void Model::cleanDeadBuildings() {
     }
     if (has_dead_unit) {
         for (auto& player : players) {
-            player.second->cleanDeadBuildings(); 
+            player.second->cleanDeadBuildings();
         }
         auto it = buildings.begin();
         while (it != buildings.end()) {
@@ -146,12 +146,12 @@ void Model::cleanDeadBuildings() {
 
 void Model::cleanRockets() {
     if (!rockets.empty()) {
-        std::map<int,Rocket*>::iterator it = rockets.begin();
+        std::map<int, Rocket*>::iterator it = rockets.begin();
         while (it != rockets.end()) {
             if ((it)->second->arrived) {
                 delete(it->second);
                 it = rockets.erase(it);
-            } else { 
+            } else {
                 it++;
             }
         }
@@ -162,11 +162,11 @@ Player &Model::getPlayer(int player) {
     return *players.at(player);
 }
 
-void Model::updateUnit(nlohmann::json& j){
+void Model::updateUnit(nlohmann::json& j) {
     units.at(j["id"])->update(j);
 }
 
-void Model::updateBuilding(nlohmann::json& j){
+void Model::updateBuilding(nlohmann::json& j) {
     buildings.at(j["id"])->update(j);
 }
 
@@ -212,8 +212,6 @@ Trike& Model::createTrike(nlohmann::json& j) {
     return *trike;
 }
 
-
-
 Barracks& Model::createBarracks(nlohmann::json& j) {
     Barracks* building = new Barracks(j);
     players.at(j["player_id"])->addBuilding(building);
@@ -256,13 +254,13 @@ WindTrap& Model::createWindTrap(nlohmann::json& j) {
     return (WindTrap&)this->createBuilding(std::move(building));
 }
 
-Rocket& Model::createRocket(nlohmann::json& j){
+Rocket& Model::createRocket(nlohmann::json& j) {
     Rocket* rocket = new Rocket(j);
-    rockets.insert(std::make_pair(rocket->id,rocket));
+    rockets.insert(std::make_pair(rocket->id, rocket));
     return *rocket;
 }
 
-void Model::updateRocket(nlohmann::json& j){
+void Model::updateRocket(nlohmann::json& j) {
     rockets.at(j["id"])->update(j);
 }
 

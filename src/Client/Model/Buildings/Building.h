@@ -7,7 +7,7 @@
 
 class Player;
 
-class Building{
+class Building {
 public:
     enum BuildingType {
         BARRACKS,
@@ -22,7 +22,6 @@ public:
     Building(nlohmann::json& j);
 
     virtual ~Building();
-
 
     bool is(BuildingType type);
     void setPlayer(Player* player);
