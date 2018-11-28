@@ -21,6 +21,7 @@ void ButtonHandlerWindTrap::execute() {
     msg["args"]["player"] = player.getId();
     msg["args"]["building_type"] = Building::WIND_TRAP;
     queue.enqueue(msg);
+	player.buildingCenter->beginConstruction(Building::WIND_TRAP);
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {

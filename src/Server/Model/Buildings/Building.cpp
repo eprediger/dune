@@ -14,7 +14,8 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight, co
 	player(nullptr),
 	key(type),
 	all_positions(),
-	serialization()
+	serialization(),
+	news(true)
 {
 	for (int i = 0 ; i < height ; i++) {
 		for (int j = 0 ; j < width ; j++) {
@@ -24,7 +25,7 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight, co
 	counter+=1;
 	serialization["class"] = "Building";
 	serialization["type"] = int(key);
-	serialization["life"] = hitPoints;
+	//serialization["life"] = hitPoints;
 	serialization["width"] = width;
 	serialization["height"] = height;
 	serialization["pos"]["x"] = x;
@@ -68,6 +69,14 @@ Position& Building::getClosestPosition(Position& position) {
 }
 
 nlohmann::json& Building::getSerialization(){
+	news = false;
 	serialization["life"] = this->getLife();
+	if (key == BuildingType::WIND_TRAP){
+		std::cout<<"pidiendo windtrap\n";
+	}
 	return serialization;
+}
+
+bool Building::hasNews(){
+	return (serialization["life"]!=this->getLife());
 }

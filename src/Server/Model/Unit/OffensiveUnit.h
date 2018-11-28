@@ -22,10 +22,13 @@ public:
 
 	virtual nlohmann::json& getSerialization() override;
  
+	virtual bool hasNews() override;
+
 	Position& getVictimPosition();
 //    bool attacking;
 private:
 	Position victim_pos;
+	bool news;
 //    void follow(Unit* other, Map& map);
 //private:
 //    Unit* foll_unit;

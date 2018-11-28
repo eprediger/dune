@@ -76,7 +76,7 @@ bool GameHandler::handleInput() {
     case SDL_MOUSEMOTION:
         this->cursor.currentPosition();
         if (this->cursor.current_x >= view.getCameraWidth()) {
-            this->selector.pos.x = this->view.getCameraX() + this->view.getCameraWidth();
+            this->selector.pos.x = this->view.getCameraX() + this->view.getCameraWidth() - 128;
         } else {
             this->selector.pos.x = this->view.getCameraX() + this->cursor.current_x;
         }
@@ -108,7 +108,7 @@ bool GameHandler::handleInput() {
             Position pos(this->cursor.current_x + this->view.getCameraX(), this->cursor.current_y + this->view.getCameraY());
             for (auto& unit : this->selector.selection.getSelectedUnits()) {
                 nlohmann::json j;
-                j["method"] = "actionOnPositioin";
+                j["method"] = "actionOnPosition";
                 j["args"]["player_id"] = unit->getPlayer().getId();
                 j["args"]["unit_id"] = unit->id;
                 j["args"]["x"] = pos.x;
@@ -158,7 +158,6 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-    this->step();
     this->selector.selection.eraseDeads();
     return keepPlaying;
 }

@@ -1,6 +1,6 @@
 #include <cstdarg>
 #include "CommunicationQueue.h"
-
+#include <iostream>
 void CommunicationQueue::enqueue(nlohmann::json send_json) {
     std::unique_lock<std::mutex> lock{send_m};
     send_queue.push(send_json);

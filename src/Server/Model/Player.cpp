@@ -14,7 +14,8 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     trainingCenter(new PlayerTrainingCenter()),
     buildingCenter(new PlayerBuildingCenter()),
     construction_yard(&construction_yard),
-    serialization() {
+    serialization(),
+    news(true) {
     construction_yard.setPlayer(this);
     if ((id % 3) == 0) {
         house = "Ordos";
@@ -140,6 +141,7 @@ void Player::cleanDeadBuildings() {
                 this->consumedEnergy -= (*it)->energy;
                 serialization["consumed_energy"] = consumedEnergy;
             }
+            news = true;
             it = buildings.erase(it);
         } else {
             it++;
@@ -158,6 +160,7 @@ void Player::sellBuilding(Building* building) {
             gold += building->cost * float(building->getLife()) / float(building->getInitialLife()) * 0.9;
             serialization["gold"] = gold;
             building->demolish();
+            news = true;
             break;
         } else {
             it++;
@@ -166,7 +169,12 @@ void Player::sellBuilding(Building* building) {
 }
 
 nlohmann::json& Player::getSerialization(){
+    news = false;
     serialization["traininCenter"] = trainingCenter->getSerialization();
     serialization["buildingCenter"] = buildingCenter->getSerialization();
     return serialization;
+}
+
+bool Player::hasNews(){
+    return ( news || buildingCenter->news);
 }

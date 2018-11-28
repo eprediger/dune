@@ -81,6 +81,7 @@ Position& OffensiveUnit::getVictimPosition() {
 }
 
 nlohmann::json& OffensiveUnit::getSerialization(){
+    news = false;
     serialization["attacking"] = this->isAttacking();
     serialization["shooting"] = this->isShooting();
     if (this->isAttacking()){
@@ -88,4 +89,10 @@ nlohmann::json& OffensiveUnit::getSerialization(){
         serialization["victim_pos"]["y"] = victim_pos.y;
     }
     return Unit::getSerialization();
+}
+
+bool OffensiveUnit::hasNews(){
+    news = (serialization["attacking"] != this->isAttacking() || 
+            serialization["shooting"]  != this->isShooting());
+    return (news || Unit::hasNews());
 }

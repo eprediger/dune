@@ -38,6 +38,8 @@ public:
 
     nlohmann::json& getSerialization();
 
+    bool hasNews();
+
     const int width, height;
     const int energy;
     const int cost;
@@ -47,6 +49,7 @@ private:
     Player* player;
     BuildingType key;
     std::vector<Position> all_positions;
+    bool news;
 protected: 
     nlohmann::json serialization;
 };

@@ -323,13 +323,15 @@ Unit& Model::getUnitById(int id){
 void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers){
 
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
-        for (auto player: connectedPlayers){
-            player->queue.enqueue((itr)->second->getSerialization());
-        }
+        if (itr->second->hasNews())
+            for (auto player: connectedPlayers){
+                player->queue.enqueue((itr)->second->getSerialization());
+            }
     }
-    for (auto itr = players.begin(); itr != players.end(); itr++) {
-        for (auto player: connectedPlayers){
-            player->queue.enqueue((itr)->second->getSerialization());
+    
+    for (auto player:connectedPlayers){
+        if (players.at(player->getId())->hasNews()){
+            player->queue.enqueue(players.at(player->getId())->getSerialization());
         }
     }
 
@@ -340,8 +342,10 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers){
     }
 
     for (auto itr = buildings.begin(); itr != buildings.end(); ++itr) {
-        for (auto player: connectedPlayers){
-            player->queue.enqueue((itr->second->getSerialization()));
-        }
+        if (itr->second->hasNews()){
+            for (auto player: connectedPlayers){
+                player->queue.enqueue((itr->second->getSerialization()));
+            }
+        }    
     }
 }

@@ -12,7 +12,8 @@ AcceptedPlayer::AcceptedPlayer(Server& server) :
 	buffer(),
 	queue(),
 	sender(peerSkt,queue),
-	receiver(peerSkt,server.commonQueue) {}
+	receiver(peerSkt,server.commonQueue),
+    id(-1) {}
 
 AcceptedPlayer::~AcceptedPlayer() {}
 
@@ -30,4 +31,10 @@ void AcceptedPlayer::disconnect(){
     receiver.join();
 }
 
+void AcceptedPlayer::setId(int id){
+    this->id = id;
+}
 
+int AcceptedPlayer::getId(){
+    return this->id;
+}

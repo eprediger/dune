@@ -17,6 +17,7 @@ private:
     int id;
     std::string house;
     nlohmann::json serialization;
+    bool news;
 
 public:     // El cliente sólo debería tenerse a su propio player disponible
     int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
@@ -65,6 +66,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     void sellBuilding(Building* building);
 
     nlohmann::json& getSerialization();
+
+    bool hasNews();
 };
 
 #endif  // __PLAYER_H__

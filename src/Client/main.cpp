@@ -24,9 +24,9 @@ config_t GlobalConfig;
 
 int main(int argc, const char *argv[]) {
 //    if (argc != CLT_ARGS) {
-    if (argc != 5) {
+    if (argc != 4) {
         std::cerr << "Uso: " << argv[0]
-                  << " <ip-servidor> <puerto-servidor> <casa> [<mapa> (Temporal)]" << std::endl;
+                  << " <ip-servidor> <puerto-servidor> <casa> " << std::endl;
         return USAGE_ERROR;
     } else {
         CommunicationQueue queue;
@@ -40,9 +40,7 @@ int main(int argc, const char *argv[]) {
             HouseSelectionHandler houseSelectionHandler(houseSelectionView);
             Application app(houseSelectionView, houseSelectionHandler);*/
             client.start();
-            std::cout<<"ok1\n";
             nlohmann::json mapFile = queue.dequeue();
-            std::cout<<"ok2\n";
             Model model(mapFile, queue); 
             nlohmann::json player = queue.dequeue();
             model.addPlayer(player);
@@ -53,13 +51,11 @@ int main(int argc, const char *argv[]) {
             Application app(gameView, gameHandler, model);
             while (app.running() && !model.isGameFinished()) {
                // app.update();            // Actualizar Modelo
-                app.render();            // Dibujar Vista
-                while(true){
-                    app.handleEvent();        // Input de usuario
-                    nlohmann::json j(queue.dequeue());
-                    interface.execute(j);
-                    if (j["class"] == "Step") break;
-                }
+                app.render();    
+                app.handleEvent();
+                if (queue.recvEmpty())
+                    continue;
+                interface.execute(queue.dequeue());
             }
             client.disconnect();
         } catch (const SdlException &e) {
@@ -67,7 +63,7 @@ int main(int argc, const char *argv[]) {
             client.disconnect();
             return FAILURE;
         } catch (const CustomException& ce) {
-            std::cerr << ce.what() << std::endl;
+            std::cerr << ce.what() << std::endl; 
             client.disconnect();
             return ce.getErrorCode();
         } catch (std::exception& e){

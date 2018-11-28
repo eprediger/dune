@@ -18,7 +18,8 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
     prev_foll_unit_pos(),
     next_pos(x, y),
     state((UnitState*) & Unit::training),
-    serialization()
+    serialization(),
+    news(true)
 {
     counter+=1;
     serialization["class"] = "Unit";
@@ -52,6 +53,7 @@ bool Unit::move(Map &map) {
         if (!(pos == next_pos)) {
             pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
             pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
+            moved = true;
         } else {
             map.at(pos).occupy();
 //            state = (UnitState*)&Unit::stopped;;
@@ -178,8 +180,13 @@ void Unit::finishTraining() {
 }
 
 nlohmann::json& Unit::getSerialization(){
+    news = false;
     serialization["life"] = this->getLife();
     serialization["pos"]["x"] = pos.x;
     serialization["pos"]["y"] = pos.y;
     return serialization;
+}
+
+bool Unit::hasNews(){
+    return (news || (this->getLife() != serialization["life"]));                  
 }

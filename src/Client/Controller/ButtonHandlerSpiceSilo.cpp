@@ -18,6 +18,7 @@ void ButtonHandlerSpiceSilo::execute() {
     msg["args"]["player"] = player.getId();
     msg["args"]["building_type"] = Building::SPICE_SILO;
     queue.enqueue(msg);
+	player.buildingCenter->beginConstruction(Building::SPICE_SILO);
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {

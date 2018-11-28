@@ -15,13 +15,11 @@ Building::Building(nlohmann::json& j):
 { 
 	int x = j["pos"]["x"];
 	int y = j["pos"]["y"];
-	std::cout<<"previos\n";
 	for (int i = 0 ; i < height ; i++) {
 		for (int j = 0 ; j < width ; j++) {
 			all_positions.emplace_back(x + j * Map::getBlockWidth(), y + i * Map::getBlockHeight());
 		}
 	}
-	std::cout<<"post\n";
 }
 
 Building::~Building() {}

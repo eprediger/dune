@@ -173,36 +173,42 @@ void Model::updateBuilding(nlohmann::json& j){
 Harvester& Model::createHarvester(nlohmann::json& j) {
     Harvester* harvester = new Harvester(j);
     harvester->setPlayer(players.at(j["player_id"]));
+    createUnit(harvester);
     return *harvester;
 }
 
 HeavyInfantry& Model::createHeavyInfantry(nlohmann::json& j) {
     HeavyInfantry* heavyInfantry = new HeavyInfantry(j);
     heavyInfantry->setPlayer(players.at(j["player_id"]));
+    createUnit(heavyInfantry);
     return *heavyInfantry;
 }
 
 LightInfantry& Model::createLightInfantry(nlohmann::json& j) {
     LightInfantry* lightInfantry = new LightInfantry(j);
     lightInfantry->setPlayer(players.at(j["player_id"]));
+    createUnit(lightInfantry);
     return *lightInfantry;
 }
 
 Raider& Model::createRaider(nlohmann::json& j) {
     Raider* raider = new Raider(j);
     raider->setPlayer(players.at(j["player_id"]));
+    createUnit(raider);
     return (*raider);
 }
 
 Tank& Model::createTank(nlohmann::json& j) {
     Tank* tank = new Tank(j);
     tank->setPlayer(players.at(j["player_id"]));
+    createUnit(tank);
     return *tank;
 }
 
 Trike& Model::createTrike(nlohmann::json& j) {
     Trike* trike = new Trike(j);
     trike->setPlayer(players.at(j["player_id"]));
+    createUnit(trike);
     return *trike;
 }
 
@@ -217,7 +223,6 @@ Barracks& Model::createBarracks(nlohmann::json& j) {
 ConstructionYard& Model::createConstructionYard(nlohmann::json& j) {
     ConstructionYard* building = new ConstructionYard(j);
     players.at(j["player_id"])->addBuilding(building);
-    std::cout<<"Construido edificion\n";
     return (ConstructionYard&)this->createBuilding(std::move(building));
 }
 

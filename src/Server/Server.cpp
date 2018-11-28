@@ -64,31 +64,26 @@ void Server::waitPlayers() {
 	std::cout << "Start Program!!!" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->start();
-		std::cout<<"player started\n";
 		model.addPlayer();
-		std::cout<<"player added\n";
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
-		std::cout<<"map serialized\n";
 		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
-		std::cout<<"iniciado player";
+		this->players[i]->setId(i); 
+	}
+	
+	for (unsigned i = 0; i < this->maxPlayers; ++i) {
+		for (unsigned j = 0; j < this->maxPlayers; ++j) {
+			this->players[i]->queue.enqueue(model.getPlayer(j).getSerialization());
+		}
 	}
 
-	int i = 0;
+
 	nlohmann::json j;
 	j["class"] = "Step";
 	while(!model.isGameFinished()){
 		model.step();
-		if (i==100){
-			model.serialize(players);
-			i=0; 
-		}
-		while(!commonQueue.recvEmpty()){
+		model.serialize(players);
+		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
-		}
-		for (auto player: players){
-			player->queue.enqueue(j);
-		}
-		i++;
 	}
 
 

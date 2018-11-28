@@ -22,6 +22,9 @@ public:
 
 	CommunicationQueue queue;
 
+	void setId(int id);
+
+	int getId();
 
 private:
 	Server& server;
@@ -29,6 +32,7 @@ private:
 	std::string buffer;
 	ClientSender sender;
 	ClientReceiver receiver;
+	int id;
 };
 
 #endif	// __ACCEPTED_PLAYER_H__

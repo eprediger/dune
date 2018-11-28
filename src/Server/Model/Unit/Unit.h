@@ -83,6 +83,8 @@ public:
 
     virtual nlohmann::json& getSerialization();
 
+    virtual bool hasNews();
+
 public:
     const int id;
 
@@ -99,7 +101,7 @@ protected:
     UnitState* state;
     Player* player;
     nlohmann::json serialization;
-
+    bool news;
 };
 
 #endif //__UNIT_H__

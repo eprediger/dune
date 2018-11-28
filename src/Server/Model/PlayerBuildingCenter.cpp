@@ -1,27 +1,22 @@
 #include "PlayerBuildingCenter.h"
-
+#include "Buildings/Building.h"
 PlayerBuildingCenter::PlayerBuildingCenter():
     construction(),
-    serialization()
+    serialization(),
+    news(false)
 {
-    serialization["building_barracks"] = false;
-    serialization["barracks_time"] = 0;
-    serialization["barracks_built"] = false;
-    serialization["building_lightFactory"] = false;
-    serialization["lightFactory_time"] = 0;
-    serialization["lightFactory_built"] = false;
-    serialization["building_heavyFactory"] = false;
-    serialization["heavyFactory_time"] = 0;
-    serialization["heavyFactory_built"] = false;
-    serialization["building_spiceRefinery"] = false;
-    serialization["spiceRefinery_time"] = 0;
-    serialization["spiceRefinery_built"] = false;
-    serialization["building_spiceSilo"] = false;
-    serialization["spiceSilo_time"] = 0;
-    serialization["spiceSilo_built"] = false;
-    serialization["building_windTrap"] = false;
-    serialization["windTrap_time"] = 0;
-    serialization["windTrap_built"] = false;
+    serialization["buildings"].push_back(Building::BARRACKS);
+    serialization["time"].push_back(0);
+    serialization["buildings"].push_back(Building::LIGHT_FACTORY);
+    serialization["time"].push_back(0);
+    serialization["buildings"].push_back(Building::HEAVY_FACTORY);
+    serialization["time"].push_back(0);
+    serialization["buildings"].push_back(Building::SPICE_REFINERY);
+    serialization["time"].push_back(0);
+    serialization["buildings"].push_back(Building::SPICE_SILO);
+    serialization["time"].push_back(0);
+    serialization["buildings"].push_back(Building::WIND_TRAP);
+    serialization["time"].push_back(0);
 }
 
 void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
@@ -30,48 +25,36 @@ void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_barracks"] = true;
-            serialization["barracks_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         case Building::LIGHT_FACTORY:
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_lightFactory"] = true;
-            serialization["lightFactory_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         case Building::HEAVY_FACTORY:
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_heavyFactory"] = true;
-            serialization["heavyFactory_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         case Building::SPICE_REFINERY:
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_spiceRefinery"] = true;
-            serialization["spiceRefinery_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         case Building::SPICE_SILO:
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_spiceSilo"] = true;
-            serialization["spiceSilo_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         case Building::WIND_TRAP:
         {
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
-            serialization["building_windTrap"] = true;
-            serialization["windTrap_time"] = GlobalConfig.buildingConstructionTime;
             break;
         }
         default:
@@ -83,33 +66,19 @@ bool PlayerBuildingCenter::buildingReady(Building::BuildingType type) {
     return construction[type].first <= 0;
 }
 
+#include <iostream>
 void PlayerBuildingCenter::construct() {
+    if (!news){
+        serialization["built"].clear();
+        serialization["buildings"].clear();
+        serialization["time"].clear();
+    }
     for (auto itr = construction.begin(); itr != construction.end(); ++itr){
-        itr->second.first-= itr->second.first > 0 ? 1 : 0;
         if (itr->second.first > 0){
+            news = true;
             itr->second.first -= 1;
-            switch (itr->first){
-                case Building::BARRACKS:
-                    serialization["barracks_time"] = itr->second.first;
-                    break;
-                case Building::LIGHT_FACTORY:
-                    serialization["lightFactory_time"] = itr->second.first;
-                    break;
-                case Building::HEAVY_FACTORY:
-                    serialization["heavyFactory_time"] =  itr->second.first;
-                    break;
-                case Building::SPICE_REFINERY:
-                    serialization["spiceRefinery_time"] = itr->second.first;
-                    break;
-                case Building::SPICE_SILO:
-                    serialization["spiceSilo_time"] =  itr->second.first;
-                    break;
-                case Building::WIND_TRAP:
-                    serialization["windTrap_time"] =  itr->second.first;
-                    break;
-                default:
-                    break;
-            }
+            serialization["buildings"].push_back(itr->first);
+            serialization["time"].push_back(itr->second.first);
         }
     }
 }
@@ -119,38 +88,17 @@ bool PlayerBuildingCenter::buildingConstructed(Building::BuildingType type) {
 }
 
 void PlayerBuildingCenter::build(Building::BuildingType type) {
-    construction[type].second = true;
-    switch (type){
-        case Building::BARRACKS:
-            serialization["barracks_built"] = true;
-            serialization["building_barracks"] = false;
-            break;
-        case Building::LIGHT_FACTORY:
-            serialization["lightFactory_built"] = true;
-            serialization["building_lightFactory"] = false;
-            break;
-        case Building::HEAVY_FACTORY:
-            serialization["heavyFactory_built"] =  true;
-            serialization["building_heavyFactory"] = false;
-            break;
-        case Building::SPICE_REFINERY:
-            serialization["spiceRefinery_built"] = true;
-            serialization["building_spiceRefinery"] = false;
-            break;
-        case Building::SPICE_SILO:
-            serialization["spiceSilo_built"] =  true;
-            serialization["building_spiceSilo"] = false;
-            break;
-        case Building::WIND_TRAP:
-            serialization["windTrap_built"] =  true;
-            serialization["building_windTrap"] = false;
-            break;
-        default:
-            break;
-        
+    if (!news){
+        serialization["built"].clear();
+        serialization["buildings"].clear();
+        serialization["time"].clear();
     }
+    news = true;
+    construction[type].second = true;
+    serialization["built"].push_back(type);
 }
 
 nlohmann::json& PlayerBuildingCenter::getSerialization(){
+    news = false;
     return this->serialization;
 }

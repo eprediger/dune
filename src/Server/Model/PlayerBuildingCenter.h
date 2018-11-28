@@ -15,6 +15,7 @@ public:
     void build(Building::BuildingType type);
     bool buildingConstructed(Building::BuildingType type);
     nlohmann::json& getSerialization();
+    bool news;
 private:
     std::map<Building::BuildingType,std::pair<int, bool>> construction;
     nlohmann::json serialization; 

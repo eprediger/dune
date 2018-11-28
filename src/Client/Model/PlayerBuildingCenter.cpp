@@ -1,15 +1,21 @@
 #include "PlayerBuildingCenter.h"
+#include "Buildings/Building.h"
 PlayerBuildingCenter::PlayerBuildingCenter(nlohmann::json& j) {
     update(j);
 } 
-
+#include <iostream>
 void PlayerBuildingCenter::update(nlohmann::json& j){ 
-    construction[Building::BARRACKS] = {j["barracks_time"], j["barracks_built"]};
-    construction[Building::LIGHT_FACTORY] = {j["lightFactory_time"],j["lightFactory_built"]};
-    construction[Building::HEAVY_FACTORY] = {j["heavyFactory_time"],j["heavyFactory_built"]};
-    construction[Building::SPICE_REFINERY] = {j["spiceRefinery_time"],j["spiceRefinery_built"]};
-    construction[Building::SPICE_SILO] = {j["spiceSilo_time"],j["spiceSilo_built"]};
-    construction[Building::WIND_TRAP] = {j["windTrap_time"],j["windTrap_built"]};
+    for (int i = 0; i<j["buildings"].size();i++){
+        construction[j["buildings"][i]].first = j["time"][i];
+        construction[j["buildings"][i]].second = false;
+    }
+    for (auto type: j["built"]){
+        construction[type].second = true;
+    }
+}
+
+void PlayerBuildingCenter::beginConstruction(Building::BuildingType type){
+    construction[type].first = 1;
 }
 
 bool PlayerBuildingCenter::buildingReady(Building::BuildingType type) {

@@ -18,7 +18,10 @@ void ButtonHandlerHeavyFactory::execute() {
     msg["args"]["player"] = player.getId();
     msg["args"]["building_type"] = Building::HEAVY_FACTORY;
     queue.enqueue(msg);
+	player.buildingCenter->beginConstruction(Building::HEAVY_FACTORY);
+
 }
+
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
     return (this->player.gold >= GlobalConfig.heavyFactoryCost);
