@@ -134,13 +134,17 @@ Ejecución desde carpeta build/:
 2. ~~Al hacer click en los botones de unidades intenta crear el edificio de al lado.~~
 	* Resuelto: el problema esta en la vista del boton el cual toma como ancho y alto el de la imagen. Como el ancho y alto de la imagen es diferente al area de la vista del boton (En los edificios por ejemplo, es el doble de ancho por estar a color y en blanco y negro), el area de "click" es diferente del area de que muestra el boton. Se resuelve quitando el parmetro const de "height" y "width" y asignandoles el ancho y alto del area "dest" durante el render.
 
-3. No se pueden seleccionar unidades
+3. ~~No se pueden seleccionar unidades~~
 
 4. Arreglar el bug de la desconexion al salir
 
-5. Al hacer click en la cruz, no cierra el juego.
+5. ~~Al hacer click en la cruz, no cierra el juego.~~
 
 6. Al agregar el sleep, la vista tarda en renderizar. 
+
+7. Arreglar bug de que no disminuye la plata al comprar unidades
+
+8. Chequear la salida al finalizar el juego
 
 ## ISSUES
 
@@ -156,6 +160,46 @@ Ejecución desde carpeta build/:
 	6. Reducir tiempo en CPU 
 	7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
 	8. Ver en todo caso, cambiar la libreria de json
+	9. Ver si se puede renderizar solo las novedades (agregar un news = true dentro de cada update)
+	10. Ver de renderizar el mapa solamente si cambia la camara (para esto ver issue 11)
+	11. Testear si cambia el terreno de arena en base a la especia
+
+## CORRECCIONES MARTIN
+	* Prioridad Critica
+
+		1. Hacer un mapa con todos los terrenos
+		2. Agregar arena al mapa y verificar que funcione la cocecha automatica
+		3. Revisar capacidad de refineria + silos
+		4. Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)
+		5. ~~Corregir~~ Testear velocidad por terrenos
+		6. Reduccion de energia edificios (?)
+		7. Ralentizacion por falta de energia (testear)
+		8. Infanteria puede moverse por cimas (testear)
+		9. Efectividad de una unidad sobre otra (bono de armas?)
+		10. Verificar que el tanque aparezca
+		11. Mejorar jugabilidad
+		12. Hacer el juego en pantalla completa (permitir alternar)
+		13. Hacer los manuales y documentacion
+
+		14. Borra codigo comentado!
+		15. ~~Main.cpp agregar loop de juego~~
+		16. Corregir los paths harcodeados para facilitar la instalacion
+		17. GameView.cpp : quitar los "magic numbers"
+		18. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
+		19. ~~GameHandler : variable global actual player~~
+		20. Eliminar prints de debug
+
+
+	* Prioridad Media
+		1. Hacer gusanos
+		2. Mejorar interfaz de dinero/energia
+		3. Mejorar progreso de construccion/entrenamiento
+
+
+	* Prioridad baja
+		1. Mejorar el boton de venta de edificios
+		2. Aumento de velocidad de entrenamiento (testear)
+		3. Agregar sonidos y FX
 
 ## PROFILING
 

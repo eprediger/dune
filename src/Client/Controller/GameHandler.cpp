@@ -157,12 +157,3 @@ bool GameHandler::handleInput() {
     this->selector.selection.eraseDeads();
     return keepPlaying;
 }
-
-// Este metodo es temporal. La idea es luego, colocar este metodo dentro
-// de la clase que haga el POP del stack recibido y actualice el modelo y
-// la vista en base a eso.
-void GameHandler::step() {
-    while (!queue.recvEmpty()) {
-        interface.execute(queue.dequeue());
-    }
-}

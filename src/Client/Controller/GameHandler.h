@@ -23,9 +23,6 @@ public:
 
 	bool handleInput() override;
 
-	// Metodo temporal
-	virtual void step();
-
 private:
 	GameView& view;
 	Model& model;

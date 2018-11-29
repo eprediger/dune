@@ -58,10 +58,17 @@ int main(int argc, const char *argv[]) {
 
                 ////// Inicia el LOOP //////////
                 app.render();    
-                app.handleEvent();
-                if (queue.recvEmpty())
-                    continue;
-                interface.execute(queue.dequeue());
+//                app.handleEvent();
+//                if (queue.recvEmpty())
+//                    continue;
+//                interface.execute(queue.dequeue());
+
+                while(true){
+                    app.handleEvent();        // Input de usuario
+                    nlohmann::json j(queue.dequeue());
+                    interface.execute(j);
+                    if (j["class"] == "Step") break;
+                }
             
                 ////// Finaliza el LOOP //////////
 

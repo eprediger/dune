@@ -13,6 +13,7 @@ Unit::Unit(nlohmann::json& j):
 Unit::~Unit() {}
 
 void Unit::update(nlohmann::json& j) {
+//    news = true;
     life = j["life"];
     pos.x = j["pos"]["x"];
     pos.y = j["pos"]["y"];

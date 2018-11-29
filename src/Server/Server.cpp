@@ -88,6 +88,10 @@ void Server::waitPlayers() {
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
 
+		for (auto player: players){
+			player->queue.enqueue(j);
+		}
+		
 		unsigned int loop_end = SDL_GetTicks();
 
 		int step_duration = (loop_end - loop_init);
