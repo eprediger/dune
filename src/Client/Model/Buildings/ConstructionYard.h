@@ -5,7 +5,7 @@
 
 class ConstructionYard : public Building {
 public:
-	ConstructionYard(nlohmann::json& j);
+	explicit ConstructionYard(nlohmann::json& j);
 	
 	~ConstructionYard();
 };

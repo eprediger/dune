@@ -11,18 +11,17 @@ class Player;
 
 class Unit {
 public:
-
     enum UnitType {
-            HARVESTER,
-            LIGHT_INFANTRY,
-            HEAVY_INFANTRY,
-            RAIDER,
-            TANK,
-            TRIKE,
+        HARVESTER,
+        LIGHT_INFANTRY,
+        HEAVY_INFANTRY,
+        RAIDER,
+        TANK,
+        TRIKE,
     };
 
-    Unit(nlohmann::json& j);
-    
+    explicit Unit(nlohmann::json& j);
+
     virtual ~Unit();
 
     virtual void update(nlohmann::json& j);
@@ -47,7 +46,6 @@ protected:
     int life;
     int initial_life;
     Position pos;
-
 };
 
 #endif //__UNIT_H__

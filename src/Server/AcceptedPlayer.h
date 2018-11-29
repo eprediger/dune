@@ -12,7 +12,7 @@ class Server;
 
 class AcceptedPlayer {
 public:
-	AcceptedPlayer(Server& server);
+	explicit AcceptedPlayer(Server& server);
 
 	~AcceptedPlayer();
 

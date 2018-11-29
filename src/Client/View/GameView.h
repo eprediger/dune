@@ -86,14 +86,13 @@ public:
 	void grabMouse();
 	void releaseMouse();
 
-    ButtonView &createUnitButton(const std::string &filename, int number_steps);
+	ButtonView &createUnitButton(const std::string &filename, int number_steps);
 
 	ButtonView &createBuildingButton(const std::string &filename, int number_steps);
 
 	ButtonView& createSellBuildingButton(const std::string& filename);
 
 	void render() override;
-
 };
 
 #endif	// __GAME_VIEW_H__

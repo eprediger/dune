@@ -5,13 +5,13 @@
 #include "Model/GlobalConfig.h"
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
-			BuildingConstructor& constructor, CommunicationQueue& queue):
-        ButtonHandler(
-                view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-                                          GlobalConfig.buildingConstructionTime),
-                player,
-                view, queue)
-	,constructor(constructor) {
+    BuildingConstructor& constructor, CommunicationQueue& queue):
+	ButtonHandler(
+	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
+	                              GlobalConfig.buildingConstructionTime),
+	    player,
+	    view, queue),
+	constructor(constructor) {
 	/*
 	"../assets/img/btns/buildings/barracks-harkonnen.jpg"
 	"../assets/img/btns/buildings/barracks-ordos.jpg"
@@ -30,11 +30,11 @@ void ButtonHandlerBarracks::execute() {
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
-    return (this->player.gold >= GlobalConfig.barracksCost);
+	return (this->player.gold >= GlobalConfig.barracksCost);
 }
 
 bool ButtonHandlerBarracks::finishAction() {
-    return player.buildingCenter->buildingReady(Building::BARRACKS);
+	return player.buildingCenter->buildingReady(Building::BARRACKS);
 }
 
 void ButtonHandlerBarracks::executeReady() {
@@ -46,6 +46,5 @@ void ButtonHandlerBarracks::executeReady() {
 }
 
 bool ButtonHandlerBarracks::finishReady() {
-
 	return player.buildingCenter->buildingConstructed(Building::BARRACKS);
 }

@@ -63,7 +63,6 @@ void Player::addBuilding(Building *building) {
     }
     this->gold -= building->cost;
     serialization["gold"] = gold;
-
 }
 
 //bool Player::hasBuilding(Building *building) {
@@ -175,6 +174,6 @@ nlohmann::json& Player::getSerialization() {
     return serialization;
 }
 
-bool Player::hasNews(){
+bool Player::hasNews() {
     return ( news || buildingCenter->news || trainingCenter->news);
 }

@@ -17,11 +17,12 @@ private:
     int id;
     std::string house;
     std::vector<Building*> buildings;
-public:     // El cliente sólo debería tenerse a su propio player disponible
-    int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
-    int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
-    int gold;   // Se restara durante los constructores
-    int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
+
+public:
+    int generatedEnergy;
+    int consumedEnergy;
+    int gold;
+    int gold_limit;
     PlayerTrainingCenter* trainingCenter;
     PlayerBuildingCenter* buildingCenter;
 

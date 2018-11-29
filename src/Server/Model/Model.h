@@ -18,7 +18,7 @@
 #include "Model/Buildings/WindTrap.h"
 #include "Model/Buildings/HeavyFactory.h"
 #include "Model/Buildings/LightFactory.h"
-#include <vector> 
+#include <vector>
 #include <map>
 #include <memory>
 #include <CommunicationQueue.h>
@@ -32,13 +32,13 @@ private:
 	Map map;
 	std::map<int, Unit*> units;
 	std::map<int , Building*> buildings;
-    std::map<int, Player*> players;
+	std::map<int, Player*> players;
 	std::vector<Rocket*> rockets;
-    bool gameFinished;
+	bool gameFinished;
 
 public:
-    Model(const char *file);
-    ~Model();
+	explicit Model(const char *file);
+	~Model();
 
 //    Map& createMap();
 	Map& getMap();
@@ -51,7 +51,7 @@ public:
 	Raider& createRaider(int x, int y, int player);
 	Tank& createTank(int x, int y, int player);
 	Trike& createTrike(int x, int y, int player);
-    Unit &createUnit(Unit *unit);
+	Unit &createUnit(Unit *unit);
 
 	Barracks& createBarracks(int x, int y, int player);
 	ConstructionYard& createConstructionYard(int x, int y, int player);
@@ -64,26 +64,25 @@ public:
 
 	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
-    void actionOnPosition(Position &pos, Unit &unit);
-	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player); 
+	void actionOnPosition(Position &pos, Unit &unit);
+	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player);
 	void step();
-    void cleanDeadUnits();
+	void cleanDeadUnits();
 	void cleanRockets();
-    bool isGameFinished();
-    Player* getWinner();
+	bool isGameFinished();
+	Player* getWinner();
 
 	Player& getPlayer(int player);
 
 	int numberOfPlayers();
 
-    void cleanDeadBuildings();
+	void cleanDeadBuildings();
 
-    /// TEMPORAL
+	/// TEMPORAL
 	Building & getBuildingById(int id);
 	Unit& getUnitById(int id);
 
 	void serialize(std::vector<AcceptedPlayer*>& players);
-
 };
 
 #endif	// __MODEL_H__

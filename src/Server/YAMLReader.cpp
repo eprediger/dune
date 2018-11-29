@@ -3,9 +3,7 @@
 #include <Codes.h>
 
 YAMLReader::YAMLReader(const char *filename) :
-    file(YAML::LoadFile(filename)) {
-
-}
+    file(YAML::LoadFile(filename)) {}
 
 YAMLReader::~YAMLReader() {}
 

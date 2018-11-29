@@ -5,7 +5,7 @@
 
 class Barracks : public Building {
 public:
-	Barracks(nlohmann::json& j);
+	explicit Barracks(nlohmann::json& j);
 	~Barracks();
 };
 

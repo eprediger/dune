@@ -1,16 +1,14 @@
 #include "PlayerTrainingCenter.h"
-
 #include "Unit/Unit.h"
 
-PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j)
-{
+PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j) {
     update(j);
 }
 
 
-void PlayerTrainingCenter::update(nlohmann::json& j){
+void PlayerTrainingCenter::update(nlohmann::json& j) {
     for (unsigned i = 0; i < j["units"].size(); i++) {
-        units[j["units"][i]]= j["time"][i];
+        units[j["units"][i]] = j["time"][i];
     }
 }
 
@@ -37,6 +35,6 @@ bool PlayerTrainingCenter::isTrainingTrike() {
     return (units.at(Unit::TRIKE)  > 0);
 }
 
-void PlayerTrainingCenter::beginTraining(Unit::UnitType type){
+void PlayerTrainingCenter::beginTraining(Unit::UnitType type) {
     units.at(type) = 1;
 }

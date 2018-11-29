@@ -8,7 +8,7 @@ class Map;
 
 class Rocket {
 public:
-	Rocket(nlohmann::json& j);
+	explicit Rocket(nlohmann::json& j);
 	Position& getPosition();
 	void update(nlohmann::json& j);
 

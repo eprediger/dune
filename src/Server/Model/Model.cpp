@@ -14,10 +14,11 @@
 #include "Unit/Raider.h"
 #include "Unit/Tank.h"
 #include "Unit/Trike.h"
-#include <algorithm>
-#include <vector>
 #include "../AcceptedPlayer.h"
 #include "PlayerTrainingCenter.h"
+#include <algorithm>
+#include <vector>
+#include <map>
 
 Model::Model(const char *file) :
     map(file),
@@ -318,12 +319,12 @@ Unit& Model::getUnitById(int id) {
 }
 
 void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
-
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
-        if (itr->second->hasNews())
+        if (itr->second->hasNews()) {
             for (auto player : connectedPlayers) {
                 player->queue.enqueue((itr)->second->getSerialization());
             }
+        }
     }
 
     for (auto player : connectedPlayers) {

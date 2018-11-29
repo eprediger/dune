@@ -5,7 +5,7 @@
 
 class HeavyFactory : public Building {
 public:
-	HeavyFactory(nlohmann::json& j);
+	explicit HeavyFactory(nlohmann::json& j);
 	~HeavyFactory();
 };
 

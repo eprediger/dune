@@ -5,7 +5,7 @@
 
 class Trike : public OffensiveUnit {
 public:
-	Trike(nlohmann::json& j);
+	explicit Trike(nlohmann::json& j);
 
 	~Trike();
 };

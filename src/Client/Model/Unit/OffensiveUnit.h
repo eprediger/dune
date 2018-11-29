@@ -7,7 +7,7 @@
 
 class OffensiveUnit : public Unit {
 public:
-	OffensiveUnit(nlohmann::json& j);
+	explicit OffensiveUnit(nlohmann::json& j);
 	Position& getVictimPosition();
 
 	virtual void update(nlohmann::json& j) override;

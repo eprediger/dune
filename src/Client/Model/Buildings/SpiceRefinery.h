@@ -5,7 +5,7 @@
 
 class SpiceRefinery : public Building {
 public:
-	SpiceRefinery(nlohmann::json& j);
+	explicit SpiceRefinery(nlohmann::json& j);
 	~SpiceRefinery();
 };
 

@@ -17,8 +17,6 @@ public:
 	// Retorna false si el evento es SDL_QUIT
 	virtual bool handleInput() = 0;
 
-	virtual void step();
-
 protected:
 	Cursor cursor;
 };

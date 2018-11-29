@@ -8,13 +8,13 @@
 
 class PlayerBuildingCenter {
 public:
-    PlayerBuildingCenter(nlohmann::json& j);
-    bool buildingReady(Building::BuildingType type);
-    bool buildingConstructed(Building::BuildingType type);
-    void beginConstruction(Building::BuildingType type);
-    void update(nlohmann::json& j);
+	explicit PlayerBuildingCenter(nlohmann::json& j);
+	bool buildingReady(Building::BuildingType type);
+	bool buildingConstructed(Building::BuildingType type);
+	void beginConstruction(Building::BuildingType type);
+	void update(nlohmann::json& j);
 private:
-    std::map<Building::BuildingType,std::pair<int, bool>> construction;
+	std::map<Building::BuildingType, std::pair<int, bool>> construction;
 };
 
 #endif //DUNE_PLAYERBUILDINGCENTER_H

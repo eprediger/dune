@@ -8,12 +8,13 @@
 
 #include <memory>
 #include <iostream>
+#include <string>
 #include <CommunicationQueue.h>
 
 ClientSender::ClientSender(Socket &connectionSkt, CommunicationQueue &queue) :
-        keepPlaying(true),
-        connectionSkt(connectionSkt),
-        queue(queue) {}
+    keepPlaying(true),
+    connectionSkt(connectionSkt),
+    queue(queue) {}
 
 ClientSender::~ClientSender() {
     if (keepPlaying) {
@@ -27,7 +28,7 @@ void ClientSender::sendPayload(const std::string& payload) {
 }
 
 void ClientSender::run() {
-    while(this->keepPlaying){
+    while (this->keepPlaying) {
         nlohmann::json send = queue.getSend();
         this->sendPayload(send.dump());
     }

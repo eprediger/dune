@@ -14,9 +14,10 @@
 #include "Unit/Raider.h"
 #include "Unit/Tank.h"
 #include "Unit/Trike.h"
+#include "PlayerTrainingCenter.h"
 #include <algorithm>
 #include <vector>
-#include "PlayerTrainingCenter.h"
+#include <map>
 
 Model::Model(nlohmann::json& file, CommunicationQueue &queue) :
     map(file),

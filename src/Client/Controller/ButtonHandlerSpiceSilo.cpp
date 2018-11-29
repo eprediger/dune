@@ -4,10 +4,10 @@
 #include <iostream>
 
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player& player, GameView &view,
-            BuildingConstructor& constructor, CommunicationQueue& queue) :
-        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-                                                GlobalConfig.buildingConstructionTime),
-                      player, view, queue),
+    BuildingConstructor& constructor, CommunicationQueue& queue) :
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
+                                            GlobalConfig.buildingConstructionTime),
+                  player, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
@@ -18,9 +18,8 @@ void ButtonHandlerSpiceSilo::execute() {
     msg["args"]["player_id"] = player.getId();
     msg["args"]["building_type"] = Building::SPICE_SILO;
     queue.enqueue(msg);
-	player.buildingCenter->beginConstruction(Building::SPICE_SILO);
-	this->update();
-
+    player.buildingCenter->beginConstruction(Building::SPICE_SILO);
+    this->update();
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {

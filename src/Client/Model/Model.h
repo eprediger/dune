@@ -88,7 +88,6 @@ public:
 	int numberOfPlayers();
 
 	void cleanDeadBuildings();
-
 };
 
 #endif	// __MODEL_H__

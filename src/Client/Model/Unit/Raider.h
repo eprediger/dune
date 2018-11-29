@@ -5,7 +5,7 @@
 
 class Raider : public OffensiveUnit {
 public:
-	Raider(nlohmann::json& j);
+	explicit Raider(nlohmann::json& j);
 	~Raider();
 };
 

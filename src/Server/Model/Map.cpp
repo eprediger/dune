@@ -1,6 +1,6 @@
 #include "Map.h"
 #include "yaml-cpp/yaml.h"
-#include <nlohmann/json.hpp> 
+#include <nlohmann/json.hpp>
 #include "Terrains/Terrain.h"
 #include "Model/AStar.h"
 #include "CustomException.h"
@@ -9,6 +9,7 @@
 #include <stack>
 #include <vector>
 #include <fstream>
+
 Map::Map(const char* filePath) :
     matrix(),
     rows(),
@@ -66,7 +67,7 @@ Map::Map(const char* filePath) :
 
 Map::~Map() {}
 
-nlohmann::json& Map::getSerialization(){
+nlohmann::json& Map::getSerialization() {
     return this->serialization;
 }
 
@@ -100,7 +101,7 @@ int Map::getHeightInBlocks() {
 
 Terrain& Map::at(int x, int y) {
     if ((x < 0) || (y < 0)) {
-        throw (std::out_of_range("Out of range"));
+        throw std::out_of_range("Out of range");
     }
     return *matrix.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH));
 }
@@ -220,7 +221,7 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
 std::vector<Building*> Map::getBuildingsInArea(Area& area) {
     std::vector<Building*> answer;
     Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
-    Position areaCenter(area.getX()+area.getWidth()/2, area.getY()+area.getHeight()/2);
+    Position areaCenter(area.getX() + area.getWidth() / 2, area.getY() + area.getHeight() / 2);
     for (auto& building : buildings) {
         if ( (building->getClosestPosition(areaCenter).x > area.getX()) &&
                 (building->getClosestPosition(areaCenter).x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
@@ -307,9 +308,8 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     int closest_unit_distance = limitRadius;
     for (auto& current_unit : units) {
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if (distance < limitRadius &&
-                distance < closest_unit_distance &&
-                !( player == current_unit->getPlayer())) {
+        if ((distance < limitRadius) && (distance < closest_unit_distance) &&
+            !(player == current_unit->getPlayer())) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
         }
@@ -319,10 +319,10 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
         int distance = pos.sqrtDistance(position);
         if (distance < limitRadius
                 && distance < closest_unit_distance
-                && !(*(current_building->getPlayer()) == player)) { 
+                && !(*(current_building->getPlayer()) == player)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
-        } 
+        }
     }
     return closest_attackable;
 }

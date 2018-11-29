@@ -5,9 +5,9 @@
 #include <iostream>
 
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
-                                            GlobalConfig.lightInfantryTrainingTime),
-                      player, view, queue) {}
+	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
+	                                    GlobalConfig.lightInfantryTrainingTime),
+	              player, view, queue) {}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
 
@@ -18,7 +18,6 @@ void ButtonHandlerLightInfantry::execute() {
 	queue.enqueue(msg);
 	player.trainingCenter->beginTraining(Unit::LIGHT_INFANTRY);
 	this->update();
-
 }
 
 bool ButtonHandlerLightInfantry::canBeEnabled() {

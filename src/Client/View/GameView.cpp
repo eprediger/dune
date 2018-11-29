@@ -32,13 +32,12 @@ GameView::GameView(const int width, const int height, Model& model,Player& playe
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
-	camera_height(camera.getHeight())
-{
-	backgroundMusic.start();
+	camera_height(camera.getHeight()) {
+//	backgroundMusic.start();
 }
 
 GameView::~GameView() {
-	backgroundMusic.stop();
+//	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -56,7 +55,7 @@ GameView::~GameView() {
 	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
-	backgroundMusic.join();
+//	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {

@@ -36,7 +36,6 @@ void BuildingConstructor::build() {
             msg["args"]["x"] = pos.x;
             msg["args"]["y"] = pos.y;
             msg["args"]["player_id"] = player.getId();
-
             switch (building) {
             case Building::BARRACKS:
             {
@@ -62,7 +61,6 @@ void BuildingConstructor::build() {
                 queue.enqueue(msg);
                 break;
             }
-
             case Building::SPICE_SILO:
             {
                 msg["method"] = "createSpiceSilo";

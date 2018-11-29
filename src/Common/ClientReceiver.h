@@ -4,10 +4,12 @@
 #include <CommunicationQueue.h>
 #include "Thread.h"
 #include "Socket.h"
+#include <string>
 
 class ClientReceiver : public Thread {
 public:
 	ClientReceiver(Socket &connectionSkt, CommunicationQueue &queue);
+
 	~ClientReceiver();
 
 	void sendPayload(const std::string& payload);

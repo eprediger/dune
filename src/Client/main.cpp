@@ -5,20 +5,17 @@
 #include "Model/GlobalConfig.h"
 
 #include "Application.h"
-#include "Model/GlobalConfig.h"
 #include "Codes.h"
 #include "Client.h"
 
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
-#include "View/GameView.h"
 #include "GameInterface.h"
-#include <iostream>
 
 // ./client 127.0.0.1 10001 ORDOS
 
-#define MAX_FPS	60
-#define SECOND	1000
+#define MAX_FPS 60
+#define SECOND  1000
 
 config_t GlobalConfig;
 
@@ -40,13 +37,13 @@ int main(int argc, const char *argv[]) {
             Application app(houseSelectionView, houseSelectionHandler);*/
             client.start();
             nlohmann::json mapFile = queue.dequeue();
-            Model model(mapFile, queue); 
+            Model model(mapFile, queue);
             nlohmann::json player = queue.dequeue();
             model.addPlayer(player);
             Player& myPlayer = model.getPlayer(player["id"]);
             GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
-            GameInterface interface(model,gameView);
-            GameHandler gameHandler(gameView, model, queue, myPlayer); 
+            GameInterface interface(model, gameView);
+            GameHandler gameHandler(gameView, model, queue, myPlayer);
             Application app(gameView, gameHandler, model);
 
             const int time_step = 16;
@@ -56,19 +53,17 @@ int main(int argc, const char *argv[]) {
                 unsigned int loop_init = SDL_GetTicks();
 
                 ////// Inicia el LOOP //////////
-                app.render();    
+                app.render();
 //                app.handleEvent();
 //                if (queue.recvEmpty())
 //                    continue;
 //                interface.execute(queue.dequeue());
-
-                while(true){
+                while (true) {
                     app.handleEvent();        // Input de usuario
                     nlohmann::json j(queue.dequeue());
                     interface.execute(j);
                     if (j["class"] == "Step") break;
                 }
-            
                 ////// Finaliza el LOOP //////////
 
                 unsigned int loop_end = SDL_GetTicks();
@@ -81,7 +76,6 @@ int main(int argc, const char *argv[]) {
                 unsigned int delay_end = SDL_GetTicks();
 
                 sleep_extra = (delay_end - loop_end) - sleep_delay;
-                
             }
             client.disconnect();
         } catch (const SdlException &e) {
@@ -89,10 +83,10 @@ int main(int argc, const char *argv[]) {
             client.disconnect();
             return FAILURE;
         } catch (const CustomException& ce) {
-            std::cerr << ce.what() << std::endl; 
+            std::cerr << ce.what() << std::endl;
             client.disconnect();
             return ce.getErrorCode();
-        } catch (std::exception& e){
+        } catch (std::exception& e) {
             std::cerr << e.what() << std::endl;
             client.disconnect();
             return FAILURE;

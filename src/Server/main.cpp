@@ -6,14 +6,12 @@
 
 config_t GlobalConfig;
 
-#define BASE 10
-
 // ./server 10001 2 mapa.yaml
 
 int main(int argc, char const *argv[]) {
 	if (argc != SRV_ARGS) {
 		std::cerr << "Uso: " << argv[0]
-		          << " <puerto> <jugadores> <mapa.yaml>" << std::endl;
+		          << " <puerto> <mapa.yaml>" << std::endl;
 		return PARAM_ERROR;
 	} else {
 		Server gameServer(argv[1], argv[2]);

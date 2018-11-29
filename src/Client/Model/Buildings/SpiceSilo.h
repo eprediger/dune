@@ -5,7 +5,7 @@
 
 class SpiceSilo : public Building {
 public:
-	SpiceSilo(nlohmann::json& j);
+	explicit SpiceSilo(nlohmann::json& j);
 	~SpiceSilo();
 
 private:

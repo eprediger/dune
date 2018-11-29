@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <iostream>
+#include <string>
 
 ClientReceiver::ClientReceiver(Socket &connectionSkt, CommunicationQueue &queue) :
 	keepPlaying(true),
@@ -33,17 +34,11 @@ void ClientReceiver::run() {
 void ClientReceiver::recvPayload() {
 	uint32_t length = 0;
 	while (this->keepPlaying) {
-		
 		this->connectionSkt.receiveLength(&length);
-
 		std::unique_ptr<char[]> buffer(new char[length + 1]());
-
 		this->connectionSkt.receive(&buffer[0], length);
-
 		nlohmann::json recv = nlohmann::json::parse(buffer.get());
-		
 		queue.putReceived(recv);
-
 	}
 }
 

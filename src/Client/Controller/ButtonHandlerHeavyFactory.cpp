@@ -4,7 +4,7 @@
 #include <iostream>
 
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &view,
-        BuildingConstructor& constructor, CommunicationQueue& queue) :
+    BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
                                             GlobalConfig.buildingConstructionTime),
                   player, view, queue),
@@ -19,7 +19,6 @@ void ButtonHandlerHeavyFactory::execute() {
     msg["args"]["building_type"] = Building::HEAVY_FACTORY;
     queue.enqueue(msg);
     player.buildingCenter->beginConstruction(Building::HEAVY_FACTORY);
-
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {

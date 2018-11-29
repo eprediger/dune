@@ -5,7 +5,7 @@
 
 class Harvester : public Unit {
 public:
-	Harvester(nlohmann::json& j);
+	explicit Harvester(nlohmann::json& j);
 
 	~Harvester();
 };

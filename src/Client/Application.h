@@ -4,28 +4,24 @@
 #include "View/View.h"
 #include "Controller/InputHandler.h"
 #include "Model/Model.h"
+
 #define WINDOW_WIDTH  1240
 #define WINDOW_HEIGHT 768
 
 class Application {
 public:
-	//
 	Application(View& view, InputHandler& handler, Model& model);
-	// Application();
 
-	//
+	// Liberación de recursos asoaciados
 	~Application();
 
-	//
+	// Retorna true mientras el cliente no salga de la aplicación
 	bool running();
 
-	//
+	// Manejar input de usuario
 	void handleEvent();
 
-	//
-	void update();
-
-	//
+	// Renderiza vista
 	void render();
 
 private:

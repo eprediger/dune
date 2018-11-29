@@ -5,7 +5,7 @@
 
 class WindTrap : public Building {
 public:
-	WindTrap(nlohmann::json& j);
+	explicit WindTrap(nlohmann::json& j);
 	~WindTrap();	
 };
 

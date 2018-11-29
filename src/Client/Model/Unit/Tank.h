@@ -5,7 +5,7 @@
 
 class Tank : public OffensiveUnit {
 public:
-	Tank(nlohmann::json& j);
+	explicit Tank(nlohmann::json& j);
 	~Tank();
 };
 

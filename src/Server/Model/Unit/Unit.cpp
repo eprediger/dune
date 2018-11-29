@@ -39,7 +39,7 @@ const UnitStateTraining Unit::training;
 bool Unit::move(Map &map) {
     bool moved = true;
     int terrain_factor = map.getSpeedFactorAt(pos);
-    if (actual_speed++ >= speed*terrain_factor) {
+    if (actual_speed++ >= speed * terrain_factor) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
@@ -164,11 +164,12 @@ Rocket* Unit::getRocket() {
     return nullptr;
 }
 void Unit::checkForDeadVictim() {
-    if (foll_unit != nullptr)
+    if (foll_unit != nullptr) {
         if (Unit::isDead(foll_unit)) {
             this->foll_unit = nullptr;
             this->state = (UnitState*)&Unit::stopped;
         }
+    }
 }
 
 bool Unit::isTraining() {

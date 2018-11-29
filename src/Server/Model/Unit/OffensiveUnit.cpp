@@ -80,19 +80,19 @@ Position& OffensiveUnit::getVictimPosition() {
     return this->victim_pos;
 }
 
-nlohmann::json& OffensiveUnit::getSerialization(){
+nlohmann::json& OffensiveUnit::getSerialization() {
     news = false;
     serialization["attacking"] = this->isAttacking();
     serialization["shooting"] = this->isShooting();
-    if (this->isAttacking()){
+    if (this->isAttacking()) {
         serialization["victim_pos"]["x"] = victim_pos.x;
         serialization["victim_pos"]["y"] = victim_pos.y;
     }
     return Unit::getSerialization();
 }
 
-bool OffensiveUnit::hasNews(){
-    news = (serialization["attacking"] != this->isAttacking() || 
+bool OffensiveUnit::hasNews() {
+    news = (serialization["attacking"] != this->isAttacking() ||
             serialization["shooting"]  != this->isShooting());
     return (news || Unit::hasNews());
 }

@@ -5,7 +5,7 @@
 
 class HeavyInfantry : public OffensiveUnit {
 public:
-	HeavyInfantry(nlohmann::json& j);
+	explicit HeavyInfantry(nlohmann::json& j);
 	~HeavyInfantry();
 };
 

@@ -9,7 +9,7 @@
 
 class PlayerTrainingCenter {
 public:
-    PlayerTrainingCenter(nlohmann::json& j);
+    explicit PlayerTrainingCenter(nlohmann::json& j);
 
     void update(nlohmann::json& j);
 

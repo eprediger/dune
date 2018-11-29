@@ -19,7 +19,7 @@ public:
         WIND_TRAP
     };
 
-    Building(nlohmann::json& j);
+    explicit Building(nlohmann::json& j);
 
     virtual ~Building();
 
@@ -39,6 +39,7 @@ public:
 
     const int width, height;
     const int id;
+
 protected:
     int player_id;
     Player* player;

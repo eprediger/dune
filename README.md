@@ -154,9 +154,8 @@ Ejecución desde carpeta build/:
 4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
 5. Hacer el instalador "sudo make install"
 	* /bin/dune => ejecutable
-	* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
-	* /etc/dune.cfg => archivo de configuracion
-
+	* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuración (esto solo si hay tiempo)
+	* /etc/dune.cfg => archivo de configuración
 6. Reducir tiempo en CPU 
 7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
 8. Ver en todo caso, cambiar la libreria de json
@@ -165,10 +164,10 @@ Ejecución desde carpeta build/:
 11. Testear si cambia el terreno de arena en base a la especia
 
 ## CORRECCIONES MARTIN
-* Prioridad Critica
 
-	1. Hacer un mapa con todos los terrenos
-	2. Agregar arena al mapa y verificar que funcione la cocecha automatica
+* Prioridad Critica
+	1. ~~Hacer un mapa con todos los terrenos~~
+	2. ~~Agregar arena al mapa y verificar que funcione la cosecha automatica~~
 	3. Revisar capacidad de refineria + silos
 	4. Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)
 	5. ~~Corregir~~ Testear velocidad por terrenos
@@ -180,7 +179,6 @@ Ejecución desde carpeta build/:
 	11. Mejorar jugabilidad
 	12. Hacer el juego en pantalla completa (permitir alternar)
 	13. Hacer los manuales y documentacion
-
 	14. Borra codigo comentado!
 	15. ~~Main.cpp agregar loop de juego~~
 	16. Corregir los paths harcodeados para facilitar la instalacion

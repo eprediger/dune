@@ -15,7 +15,6 @@ Map::Map(nlohmann::json& file):
     matrix(),
     rows(file["height"]),
     cols(file["width"]) {
-
     nlohmann::json keys = file["matrix"];
 
     for (auto it = keys.begin() ; it != keys.end() ; it++) {
@@ -65,7 +64,7 @@ int Map::getHeightInBlocks() {
 
 Terrain& Map::at(int x, int y) {
     if ((x < 0) || (y < 0)) {
-        throw (std::out_of_range("Out of range"));
+        throw std::out_of_range("Out of range");
     }
     return *matrix.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH));
 }

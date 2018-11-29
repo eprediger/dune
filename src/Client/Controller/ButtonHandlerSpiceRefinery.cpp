@@ -4,10 +4,10 @@
 #include <iostream>
 
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Player& player, GameView &view,
-            BuildingConstructor& constructor, CommunicationQueue& queue) :
-        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
-                                                GlobalConfig.buildingConstructionTime),
-                      player, view, queue),
+    BuildingConstructor& constructor, CommunicationQueue& queue) :
+    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
+                                            GlobalConfig.buildingConstructionTime),
+                  player, view, queue),
     constructor(constructor) {}
 
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
@@ -18,8 +18,7 @@ void ButtonHandlerSpiceRefinery::execute() {
     msg["args"]["player_id"] = player.getId();
     msg["args"]["building_type"] = Building::SPICE_REFINERY;
     queue.enqueue(msg);
-	player.buildingCenter->beginConstruction(Building::SPICE_REFINERY);
-
+    player.buildingCenter->beginConstruction(Building::SPICE_REFINERY);
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {

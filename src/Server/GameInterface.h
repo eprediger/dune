@@ -6,7 +6,7 @@
 
 class GameInterface {
 public:
-    GameInterface(Model &model);
+    explicit GameInterface(Model &model);
     void execute(nlohmann::json json);
 
 private:

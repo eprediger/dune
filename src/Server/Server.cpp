@@ -59,10 +59,10 @@ Socket Server::accept() const {
 
 void Server::waitPlayers() {
 	GameInterface interface(model);
-	std::cout << "Start to acept Players" << std::endl;
+	std::cout << "Start to accept Players" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players.push_back(new AcceptedPlayer(*this));
-		std::cout << "Player Acepted!" << std::endl;
+		std::cout << "Player Accepted!" << std::endl;
 	}
 	std::cout << "Start Program!!!" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {

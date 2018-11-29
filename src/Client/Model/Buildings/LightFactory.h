@@ -5,7 +5,7 @@
 
 class LightFactory : public Building {
 public:
-	LightFactory(nlohmann::json& j);
+	explicit LightFactory(nlohmann::json& j);
 	~LightFactory();
 };
 

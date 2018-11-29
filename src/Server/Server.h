@@ -24,8 +24,6 @@ public:
 
 	void waitPlayers();
 
-	void notifyAll(const std::string& msg);
-
 	CommunicationQueue commonQueue;
 
 private:

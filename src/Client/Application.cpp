@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "View/BuildingViewFactory.h"
 
-Application::Application(View& view, InputHandler& handler,Model& model) :
+Application::Application(View& view, InputHandler& handler, Model& model) :
 	isRunning(true),
 	/*host(),
 	port(),
@@ -19,10 +19,6 @@ bool Application::running() {
 
 void Application::handleEvent() {
 	this->isRunning = this->handler.handleInput();
-}
-
-void Application::update() {
-
 }
 
 void Application::render() {
