@@ -57,10 +57,10 @@ Ejecución desde carpeta build/:
 
 5. ~~Seleccionar una cosechadora, se la envía a recolectar especia y automáticamente realiza el recorrido hacia ese punto, cuando se completa su capacidad de 200 unidades en 20 segundos, retorna a la refinería, descarga lo cosechado en 5 segundos, incrementando en 1 la cantidad de dinero del jugador por cada unidad de especia recolectada. Cuando se agota la especia en la zona donde la cosechadora recolecta, debe buscar más especia en las cercanías automáticamente, continuando la cosecha. En el momento en que no encuentra más especia en sus alrededores, la cosechadora retorna a la refinería.~~
 
-6. ~~Para construir un edificio, se debe contar con el dinero suficiente correspondiente a su costo. Caso contrario, se _deshabilitará_ el botón para comenzar su construcción. Al iniciar la construcción de cualquier edificio, se restará el dinero correspondiente del jugador y se actualizará la energía consumida por el mismo,~~ sumando y pasado el tiempo de construcción correspondiente a cada uno, se podrá colocar en cualquier parte del mapa cuyo terreno sean rocas, ~~no haya unidades en el mismo y se encuentre al menos a 5 bloques de distancia de otros edificios. El edificio pasara a ocupar tantos bloques como su superficie lo indique.~~
+6. ~~Para construir un edificio, se debe contar con el dinero suficiente correspondiente a su costo. Caso contrario, se _deshabilitará_ el botón para comenzar su construcción. Al iniciar la construcción de cualquier edificio, se restará el dinero correspondiente del jugador y se actualizará la energía consumida por el mismo, sumando y pasado el tiempo de construcción correspondiente a cada uno, se podrá colocar en cualquier parte del mapa cuyo terreno sean rocas, no haya unidades en el mismo y se encuentre al menos a 5 bloques de distancia de otros edificios. El edificio pasara a ocupar tantos bloques como su superficie lo indique.~~
 
 	* ~~Validar la cantidad de dinero (no resta al construir, no deshabilita botón si no hay suficiente)~~
-	* La construcción es instantánea
+	* ~~La construcción es instantánea~~
 	* ~~Tomar posición de ubicación de edificio del input de click del jugador~~
 	* ~~No se actualiza energía consumida~~
 
@@ -68,7 +68,7 @@ Ejecución desde carpeta build/:
 
 8. Los jugadores al iniciar la aplicación, ingresan host y puerto, la casa con la cual jugará cada uno y se inicia la partida con los jugadores repartidos en el mapa con su dinero inicial y el centro de construcción.
 
-9. Para iniciar el servidor, se deberá indicar, puerto al cual escuchar, mapa sobre el que se jugará y cantidad de jugadores. El juego no iniciará hasta que se hayan conectado la cantidad de clientes indicada por parámetro. Una vez alcanzado ese número, se iniciará el juego para todos.
+9. ~~Para iniciar el servidor, se deberá indicar, puerto al cual escuchar, mapa sobre el que se jugará y cantidad de jugadores. El juego no iniciará hasta que se hayan conectado la cantidad de clientes indicada por parámetro. Una vez alcanzado ese número, se iniciará el juego para todos.~~
 
 10. ~~Las distintas unidades de cada jugador se podrán diferenciar mediante un color característico para cada uno de ellos.~~
 
@@ -148,68 +148,73 @@ Ejecución desde carpeta build/:
 
 ## ISSUES
 
-	1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
-	2. Quitar las velocidades con contadores
-	3. Crear archivo de configuracion. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
-	4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
-	5. Hacer el instalador "sudo make install"
-		* /bin/dune => ejecutable
-		* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
-		* /etc/dune.cfg => archivo de configuracion
+1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
+2. Quitar las velocidades con contadores
+3. Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
+4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
+5. Hacer el instalador "sudo make install"
+	* /bin/dune => ejecutable
+	* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
+	* /etc/dune.cfg => archivo de configuracion
 
-	6. Reducir tiempo en CPU 
-	7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
-	8. Ver en todo caso, cambiar la libreria de json
-	9. Ver si se puede renderizar solo las novedades (agregar un news = true dentro de cada update)
-	10. Ver de renderizar el mapa solamente si cambia la camara (para esto ver issue 11)
-	11. Testear si cambia el terreno de arena en base a la especia
+6. Reducir tiempo en CPU 
+7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
+8. Ver en todo caso, cambiar la libreria de json
+9. Ver si se puede renderizar solo las novedades (agregar un news = true dentro de cada update)
+10. Ver de renderizar el mapa solamente si cambia la camara (para esto ver issue 11)
+11. Testear si cambia el terreno de arena en base a la especia
 
 ## CORRECCIONES MARTIN
-	* Prioridad Critica
+* Prioridad Critica
 
-		1. Hacer un mapa con todos los terrenos
-		2. Agregar arena al mapa y verificar que funcione la cocecha automatica
-		3. Revisar capacidad de refineria + silos
-		4. Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)
-		5. ~~Corregir~~ Testear velocidad por terrenos
-		6. Reduccion de energia edificios (?)
-		7. Ralentizacion por falta de energia (testear)
-		8. Infanteria puede moverse por cimas (testear)
-		9. Efectividad de una unidad sobre otra (bono de armas?)
-		10. Verificar que el tanque aparezca
-		11. Mejorar jugabilidad
-		12. Hacer el juego en pantalla completa (permitir alternar)
-		13. Hacer los manuales y documentacion
+	1. Hacer un mapa con todos los terrenos
+	2. Agregar arena al mapa y verificar que funcione la cocecha automatica
+	3. Revisar capacidad de refineria + silos
+	4. Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)
+	5. ~~Corregir~~ Testear velocidad por terrenos
+	6. Reduccion de energia edificios (?)
+	7. Ralentizacion por falta de energia (testear)
+	8. Infanteria puede moverse por cimas (testear)
+	9. Efectividad de una unidad sobre otra (bono de armas?)
+	10. Verificar que el tanque aparezca
+	11. Mejorar jugabilidad
+	12. Hacer el juego en pantalla completa (permitir alternar)
+	13. Hacer los manuales y documentacion
 
-		14. Borra codigo comentado!
-		15. ~~Main.cpp agregar loop de juego~~
-		16. Corregir los paths harcodeados para facilitar la instalacion
-		17. GameView.cpp : quitar los "magic numbers"
-		18. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
-		19. ~~GameHandler : variable global actual player~~
-		20. Eliminar prints de debug
+	14. Borra codigo comentado!
+	15. ~~Main.cpp agregar loop de juego~~
+	16. Corregir los paths harcodeados para facilitar la instalacion
+	17. GameView.cpp : quitar los "magic numbers"
+	18. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
+	19. ~~GameHandler : variable global actual player~~
+	20. Eliminar prints de debug
 
+* Prioridad Media
+	1. Hacer gusanos
+	2. Mejorar interfaz de dinero/energía
+	3. Mejorar progreso de construcción/entrenamiento
 
-	* Prioridad Media
-		1. Hacer gusanos
-		2. Mejorar interfaz de dinero/energia
-		3. Mejorar progreso de construccion/entrenamiento
-
-
-	* Prioridad baja
-		1. Mejorar el boton de venta de edificios
-		2. Aumento de velocidad de entrenamiento (testear)
-		3. Agregar sonidos y FX
+* Prioridad baja
+	1. Mejorar el botón de venta de edificios
+	2. Aumento de velocidad de entrenamiento (testear)
+	3. Agregar sonidos y FX
 
 ## PROFILING
 
-	Usar "callgrind" para encontrar donde esta consumiendo mas memoria
+Usar "callgrind" para encontrar donde está consumiendo más memoria
 
-	Instalacion: sudo apt-get install kcachegrind
-	Uso: valgrind --tool=callgrind ./dune_Client
-	kcachegrind <archivo_salida (callgrind.out.###)>
+Instalación:
+```
+sudo apt-get install kcachegrind
+```
 
-## DOCUMENTACION
+Uso:
 
-* Instalacion y uso
-* Archivo de Configuracion (detalles)
+```valgrind --tool=callgrind ./dune_Client
+kcachegrind <archivo_salida (callgrind.out.pid)>
+```
+
+## DOCUMENTACIÓN
+
+* Instalación y uso
+* Archivo de Configuración (detalles)

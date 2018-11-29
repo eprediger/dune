@@ -13,9 +13,10 @@
 #include <SDL2/SDL.h>
 #include "GameInterface.h"
 
-Server::Server(const char *service, unsigned int players, const char* mapFile) :
+Server::Server(const char *service, const char* mapFile) :
 	commonQueue(),
-	maxPlayers(players),
+	config(mapFile),
+	maxPlayers(config.getPlayers()),
 	manualShutDown(false),
 	acceptSkt(nullptr, service, AI_PASSIVE),
 	players(),

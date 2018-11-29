@@ -6,13 +6,15 @@
 #include "AcceptedPlayer.h"
 #include <vector>
 #include "Model/Model.h"
+#include "YAMLReader.h"
+
 #define MAX_LISTEN 10
 
 class AcceptedPlayer;
 
 class Server {
 public:
-	explicit Server(const char *service, unsigned int players, const char* mapFile);
+	explicit Server(const char *service, const char* mapFile);
 
 	~Server();
 
@@ -27,6 +29,7 @@ public:
 	CommunicationQueue commonQueue;
 
 private:
+	YAMLReader config;
 	unsigned maxPlayers;
 	bool manualShutDown;
 	Socket acceptSkt;

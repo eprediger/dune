@@ -23,8 +23,7 @@
 config_t GlobalConfig;
 
 int main(int argc, const char *argv[]) {
-//    if (argc != CLT_ARGS) {
-    if (argc != 4) {
+    if (argc != CLT_ARGS) {
         std::cerr << "Uso: " << argv[0]
                   << " <ip-servidor> <puerto-servidor> <casa> " << std::endl;
         return USAGE_ERROR;

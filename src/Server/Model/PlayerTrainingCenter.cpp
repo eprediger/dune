@@ -12,6 +12,7 @@
 #include <vector>
 
 PlayerTrainingCenter::PlayerTrainingCenter():
+    news(true),
     harvester(0, nullptr),
     lightInfantry(0, nullptr),
     heavyInfantry(0, nullptr),
@@ -19,9 +20,7 @@ PlayerTrainingCenter::PlayerTrainingCenter():
     tank(0, nullptr),
     trike(0, nullptr),
     readyUnits(),
-    serialization(),
-    news(true)
-{
+    serialization() {
     serialization["units"].push_back(Unit::LIGHT_INFANTRY);
     serialization["time"].push_back(0);
     serialization["units"].push_back(Unit::HEAVY_INFANTRY);
