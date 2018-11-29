@@ -170,7 +170,7 @@ void Player::sellBuilding(Building* building) {
 
 nlohmann::json& Player::getSerialization() {
     news = false;
-    serialization["traininCenter"] = trainingCenter->getSerialization();
+    serialization["trainingCenter"] = trainingCenter->getSerialization();
     serialization["buildingCenter"] = buildingCenter->getSerialization();
     return serialization;
 }

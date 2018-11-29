@@ -8,6 +8,7 @@ ButtonEnabled::~ButtonEnabled() {}
 void ButtonEnabled::handle(ButtonHandler *button, const int x, const int y) {
 	if (button->wasClicked(x, y)) {
 		button->execute();
+		std::cout << "button pressed! " << std::endl;
 		button->setState(State::BUSY);
 	}
 }
