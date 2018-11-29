@@ -10,6 +10,7 @@
 #include "Model/Model.h"
 #include "CustomException.h"
 #include <algorithm>
+#include <SDL2/SDL.h>
 #include "GameInterface.h"
 
 Server::Server(const char *service, unsigned int players, const char* mapFile) :
@@ -79,13 +80,26 @@ void Server::waitPlayers() {
 
 	nlohmann::json j;
 	j["class"] = "Step";
+	const int time_step = 16;
+	int sleep_extra = 0;
 	while(!model.isGameFinished()){
+		unsigned int loop_init = SDL_GetTicks();
 		model.step();
 		model.serialize(players);
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
-	}
+		unsigned int loop_end = SDL_GetTicks();
 
+		int step_duration = (loop_end - loop_init);
+		int sleep_delay = time_step - step_duration - sleep_extra;
+		sleep_delay = (sleep_delay < 0) ? 0 : sleep_delay;
+
+		SDL_Delay(sleep_delay);
+		unsigned int delay_end = SDL_GetTicks();
+
+		sleep_extra = (delay_end - loop_end) - sleep_delay;
+
+	}
 
 }
 

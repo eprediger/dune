@@ -19,10 +19,13 @@ PlayerBuildingCenter::PlayerBuildingCenter():
     serialization["time"].push_back(0);
 }
 
+#include <iostream>
+
 void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
     switch (type) {
         case Building::BARRACKS:
         {
+            std::cout<<"begin barracks\n";
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
             break;
@@ -53,6 +56,7 @@ void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
         }
         case Building::WIND_TRAP:
         {
+            std::cout<<"begin windtra\n";
             construction[type].first = GlobalConfig.buildingConstructionTime;
             construction[type].second = false;
             break;
@@ -77,6 +81,8 @@ void PlayerBuildingCenter::construct() {
         if (itr->second.first > 0){
             news = true;
             itr->second.first -= 1;
+            if (itr->second.first == 0)
+                std::cout<<"fin building\n";
             serialization["buildings"].push_back(itr->first);
             serialization["time"].push_back(itr->second.first);
         }

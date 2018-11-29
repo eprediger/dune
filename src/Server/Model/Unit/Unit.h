@@ -41,6 +41,14 @@ public:
     static const UnitStateBacking backing;
     static const UnitStateTraining training;
 
+    enum UnitType {
+            HARVESTER,
+            LIGHT_INFANTRY,
+            HEAVY_INFANTRY,
+            RAIDER,
+            TANK,
+            TRIKE,
+    };
 
 
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);

@@ -176,5 +176,5 @@ nlohmann::json& Player::getSerialization(){
 }
 
 bool Player::hasNews(){
-    return ( news || buildingCenter->news);
+    return ( news || buildingCenter->news || trainingCenter->news);
 }

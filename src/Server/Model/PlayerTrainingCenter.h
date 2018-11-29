@@ -37,6 +37,8 @@ public:
     bool isTrainingRaider();
     bool isTrainingTrike();
 
+    bool news;
+
 private:
     nlohmann::json serialization;
     std::pair<int, Harvester*> harvester;

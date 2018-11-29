@@ -15,6 +15,7 @@ void ButtonHandlerHarvester::execute() {
 	msg["method"] = "createHarvester";
 	msg["args"]["player"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->trainHarvester();
 }
 
 bool ButtonHandlerHarvester::canBeEnabled() {

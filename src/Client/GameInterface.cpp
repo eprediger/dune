@@ -14,6 +14,7 @@ void GameInterface::execute(nlohmann::json j) {
             model.addPlayer(j);
     }
     else if (j["class"] == "Unit"){
+        std::cout<<j["subclass"]<<std::endl;
         if (model.unitExists(j["id"])){
             model.updateUnit(j);
         }

@@ -7,6 +7,8 @@ PlayerBuildingCenter::PlayerBuildingCenter(nlohmann::json& j) {
 void PlayerBuildingCenter::update(nlohmann::json& j){ 
     for (int i = 0; i<j["buildings"].size();i++){
         construction[j["buildings"][i]].first = j["time"][i];
+        if (j["time"][i] == 0)
+            std::cout<<"finalizado: "<<j["buildings"][i]<<std::endl;
         construction[j["buildings"][i]].second = false;
     }
     for (auto type: j["built"]){

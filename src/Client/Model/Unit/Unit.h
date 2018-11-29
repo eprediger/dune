@@ -11,7 +11,16 @@ class Map;
 
 class Unit{
 public:
-   
+
+    enum UnitType {
+            HARVESTER,
+            LIGHT_INFANTRY,
+            HEAVY_INFANTRY,
+            RAIDER,
+            TANK,
+            TRIKE,
+    };
+
     Unit(nlohmann::json& j);
     virtual ~Unit();
 
