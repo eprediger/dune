@@ -16,6 +16,7 @@ void ButtonHandlerRaider::execute() {
 	msg["method"] = "createRaider";
 	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTrainingRaider();
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {

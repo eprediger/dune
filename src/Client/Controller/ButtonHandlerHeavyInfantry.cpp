@@ -16,6 +16,7 @@ void ButtonHandlerHeavyInfantry::execute() {
 	msg["method"] = "createHeavyInfantry";
 	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTrainingHeavyInfantry();
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {

@@ -27,6 +27,13 @@ public:
     bool isTrainingRaider();
     bool isTrainingTrike();
 
+    void beginTrainingLightInfantry();
+    void beginTrainingHeavyInfantry();
+    void beginTrainingHarvester();
+    void beginTrainingTank();
+    void beginTrainingRaider();
+    void beginTrainingTrike();
+
 private:
     std::pair<int, bool> harvester;
     std::pair<int, bool> lightInfantry;
@@ -34,6 +41,12 @@ private:
     std::pair<int, bool> raider;
     std::pair<int, bool> tank;
     std::pair<int, bool> trike;
+    bool harvesterPressed;
+    bool lightInfantryPressed;
+    bool heavyInfantryPressed;
+    bool raiderPressed;
+    bool tankPressed;
+    bool trikePressed;
 };
 
 #endif

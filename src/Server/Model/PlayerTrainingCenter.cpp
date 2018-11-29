@@ -40,6 +40,7 @@ void PlayerTrainingCenter::trainHarvester(Harvester* harvester) {
 
     serialization["trainingHarvester"] = true;
     serialization["harvesterTime"] = this->harvester.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainHeavyInfantry(HeavyInfantry* heavyInfantry) {
@@ -47,6 +48,7 @@ void PlayerTrainingCenter::trainHeavyInfantry(HeavyInfantry* heavyInfantry) {
     this->heavyInfantry.second = heavyInfantry;
     serialization["trainingHeavyInfantry"] = true;
     serialization["heavyInfantryTime"] = this->heavyInfantry.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainLightInfantry(LightInfantry* lightInfantry) {
@@ -54,6 +56,7 @@ void PlayerTrainingCenter::trainLightInfantry(LightInfantry* lightInfantry) {
     this->lightInfantry.second = lightInfantry;
     serialization["trainingLightInfantry"] = true;
     serialization["lightInfantryTime"] = this->lightInfantry.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainRaider(Raider* raider) {
@@ -61,6 +64,7 @@ void PlayerTrainingCenter::trainRaider(Raider* raider) {
     this->raider.second = raider;
     serialization["trainingRaider"] = true;
     serialization["raiderTime"] = this->raider.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainTank(Tank* tank) {
@@ -68,6 +72,7 @@ void PlayerTrainingCenter::trainTank(Tank* tank) {
     this->tank.second = tank;
     serialization["trainingTank"] = true;
     serialization["tankTime"] = this->tank.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainTrike(Trike* trike) {
@@ -75,6 +80,7 @@ void PlayerTrainingCenter::trainTrike(Trike* trike) {
     this->trike.second = trike;
     serialization["trainingTrike"] = true;
     serialization["trikeTime"] = this->trike.first;
+    this->news = true;
 }
 
 void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
@@ -84,26 +90,32 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
             if (lightInfantry.second != nullptr) {
                 lightInfantry.first -= 1;
                 serialization["lightInfantryTime"] = lightInfantry.first;
+                this->news = true;
             }
             if (heavyInfantry.second != nullptr) {
                 heavyInfantry.first -= 1;
                 serialization["heavyInfantryTime"] = heavyInfantry.first;
+                this->news = true;
             }
         } else if ((*it)->is(Building::LIGHT_FACTORY)) {
             if (trike.second != nullptr)
                 trike.first -= 1;
-            serialization["trikeTime"] = trike.first;
+                serialization["trikeTime"] = trike.first;
+                this->news = true;
             if (raider.second != nullptr)
                 raider.first -= 1;
-            serialization["raiderTime"] = raider.first;
+                serialization["raiderTime"] = raider.first;
+                this->news = true;
         } else if ((*it)->is(Building::HEAVY_FACTORY)) {
             if (tank.second != nullptr) {
                 tank.first -= 1;
                 serialization["tankTime"] = tank.first;
+                this->news = true;
             }
             if (harvester.second != nullptr) {
                 harvester.first -= 1;
                 serialization["harvesterTime"] = harvester.first;
+                this->news = true;
             }
         }
         it++;
@@ -111,6 +123,7 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
 }
 
 nlohmann::json& PlayerTrainingCenter::getSerialization() {
+    this->news = false;
     return this->serialization;
 }
 

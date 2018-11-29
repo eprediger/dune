@@ -16,6 +16,7 @@ void ButtonHandlerTank::execute() {
 	msg["method"] = "createTank";
 	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTrainingTank();
 }
 
 bool ButtonHandlerTank::canBeEnabled() {

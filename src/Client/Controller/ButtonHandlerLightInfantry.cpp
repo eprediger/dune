@@ -15,6 +15,7 @@ void ButtonHandlerLightInfantry::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createLightInfantry";
 	msg["args"]["player_id"] = player.getId();
+	player.trainingCenter->beginTrainingLightInfantry();
 	queue.enqueue(msg);
 }
 

@@ -16,6 +16,7 @@ void ButtonHandlerTrike::execute() {
 	msg["method"] = "createTrike";
 	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTrainingTrike();
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {
