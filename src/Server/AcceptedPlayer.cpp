@@ -7,22 +7,22 @@
 // #include <nlohmann/json.hpp>
 
 AcceptedPlayer::AcceptedPlayer(Server& server) :
+    queue(),
     server(server),
-	peerSkt(server.accept()),
-	buffer(),
-	queue(),
-	sender(peerSkt,queue),
-	receiver(peerSkt,server.commonQueue),
+    peerSkt(server.accept()),
+    buffer(),
+    sender(peerSkt, queue),
+    receiver(peerSkt, server.commonQueue),
     id(-1) {}
 
 AcceptedPlayer::~AcceptedPlayer() {}
 
-void AcceptedPlayer::start(){
-	this->receiver.start();
-	this->sender.start();
+void AcceptedPlayer::start() {
+    this->receiver.start();
+    this->sender.start();
 }
 
-void AcceptedPlayer::disconnect(){
+void AcceptedPlayer::disconnect() {
     sender.disconnect();
     receiver.disconnect();
     this->peerSkt.shutdown(SHUT_RDWR);
@@ -31,10 +31,10 @@ void AcceptedPlayer::disconnect(){
     receiver.join();
 }
 
-void AcceptedPlayer::setId(int id){
+void AcceptedPlayer::setId(int id) {
     this->id = id;
 }
 
-int AcceptedPlayer::getId(){
+int AcceptedPlayer::getId() {
     return this->id;
 }

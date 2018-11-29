@@ -28,7 +28,6 @@ public:
     std::vector<Unit*>& getReadyUnits(Map& map, std::vector<Building*>& buildings,
                                       ConstructionYard* constructionYard);
 
-
     nlohmann::json& getSerialization();
     bool isTrainingLightInfantry();
     bool isTrainingHeavyInfantry();
@@ -40,7 +39,6 @@ public:
     bool news;
 
 private:
-    nlohmann::json serialization;
     std::pair<int, Harvester*> harvester;
     std::pair<int, LightInfantry*> lightInfantry;
     std::pair<int, HeavyInfantry*> heavyInfantry;
@@ -48,6 +46,7 @@ private:
     std::pair<int, Tank*> tank;
     std::pair<int, Trike*> trike;
     std::vector<Unit*>readyUnits;
+    nlohmann::json serialization;
 };
 
 #endif

@@ -14,8 +14,10 @@ ButtonHandlerRaider::~ButtonHandlerRaider() {}
 void ButtonHandlerRaider::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createRaider";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTraining(Unit::RAIDER);
+	this->update();
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {

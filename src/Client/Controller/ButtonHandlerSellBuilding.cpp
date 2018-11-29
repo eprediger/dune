@@ -16,7 +16,7 @@ void ButtonHandlerSellBuilding::execute() {
 	for (auto itr = to_sell.begin(); itr != to_sell.end(); itr++) {
 		nlohmann::json j;
 		j["method"] = "sellBuilding";
-		j["args"]["player"] = player.getId();
+		j["args"]["player_id"] = player.getId();
 		j["args"]["building_id"] = (*itr)->id;
 	}
 }

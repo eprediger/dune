@@ -14,8 +14,11 @@ ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
 void ButtonHandlerLightInfantry::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createLightInfantry";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTraining(Unit::LIGHT_INFANTRY);
+	this->update();
+
 }
 
 bool ButtonHandlerLightInfantry::canBeEnabled() {

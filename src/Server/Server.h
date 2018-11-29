@@ -12,8 +12,8 @@ class AcceptedPlayer;
 
 class Server {
 public:
-	explicit Server(const char *service, unsigned int players,const char* mapFile);
-	
+	explicit Server(const char *service, unsigned int players, const char* mapFile);
+
 	~Server();
 
 	void shutdown();
@@ -23,7 +23,7 @@ public:
 	void waitPlayers();
 
 	void notifyAll(const std::string& msg);
-	
+
 	CommunicationQueue commonQueue;
 
 private:

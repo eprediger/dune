@@ -14,8 +14,10 @@ ButtonHandlerTank::~ButtonHandlerTank() {}
 void ButtonHandlerTank::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createTank";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTraining(Unit::TANK);
+	this->update();
 }
 
 bool ButtonHandlerTank::canBeEnabled() {

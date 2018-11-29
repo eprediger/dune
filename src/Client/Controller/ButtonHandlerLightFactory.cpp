@@ -15,7 +15,7 @@ ButtonHandlerLightFactory::~ButtonHandlerLightFactory() {}
 void ButtonHandlerLightFactory::execute() {
     nlohmann::json msg;
     msg["method"] = "beginConstruction";
-    msg["args"]["player"] = player.getId();
+    msg["args"]["player_id"] = player.getId();
     msg["args"]["building_type"] = Building::LIGHT_FACTORY;
     queue.enqueue(msg);
 	player.buildingCenter->beginConstruction(Building::LIGHT_FACTORY);

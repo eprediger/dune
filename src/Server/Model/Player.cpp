@@ -7,21 +7,21 @@
 
 Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
+    serialization(),
+    news(true),
     generatedEnergy(5000),  // Inicial es 0
     consumedEnergy(2500),   // Inicial es 0
     gold(10000),
     gold_limit(10000),
     trainingCenter(new PlayerTrainingCenter()),
     buildingCenter(new PlayerBuildingCenter()),
-    construction_yard(&construction_yard),
-    serialization(),
-    news(true) {
+    construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
     if ((id % 3) == 0) {
         house = "Ordos";
     }
     if ((id % 3) == 1) {
-        house = "Atreides"; 
+        house = "Atreides";
     }
     if ((id % 3) == 2) {
         house = "Harkonnen";
@@ -34,7 +34,7 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     serialization["gold"] = gold;
     serialization["trainingCenter"] = trainingCenter->getSerialization();
     serialization["buildingCenter"] = buildingCenter->getSerialization();
-} 
+}
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
@@ -168,7 +168,7 @@ void Player::sellBuilding(Building* building) {
     }
 }
 
-nlohmann::json& Player::getSerialization(){
+nlohmann::json& Player::getSerialization() {
     news = false;
     serialization["traininCenter"] = trainingCenter->getSerialization();
     serialization["buildingCenter"] = buildingCenter->getSerialization();

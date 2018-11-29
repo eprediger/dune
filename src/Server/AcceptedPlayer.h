@@ -20,11 +20,11 @@ public:
 
 	void disconnect();
 
-	CommunicationQueue queue;
-
 	void setId(int id);
 
 	int getId();
+
+	CommunicationQueue queue;
 
 private:
 	Server& server;

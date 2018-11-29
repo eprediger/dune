@@ -1,8 +1,8 @@
 #include "Terrain.h"
 
-Terrain::Terrain() : key(' '), occupied(false) {}
+Terrain::Terrain() : key(' '), occupied(false), speed_factor(1) {}
 
-Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false) {}
+Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1) {}
 
 char Terrain::getKey() {
 	return key;
@@ -44,4 +44,8 @@ int Terrain::farm() {
 
 bool Terrain::hasFarm() {
 	return false;
+}
+
+int Terrain::getSpeedFactor() {
+	return this->speed_factor;
 }

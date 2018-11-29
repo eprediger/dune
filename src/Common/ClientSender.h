@@ -1,7 +1,6 @@
 #ifndef __CLIENTSENDER_H__
 #define __CLIENTSENDER_H__
 
-
 #include <string>
 #include <Socket.h>
 #include <Thread.h>
@@ -9,22 +8,21 @@
 
 class ClientSender : public Thread {
 public:
-    ClientSender(Socket &connectionSkt, CommunicationQueue &queue);
-    ~ClientSender();
+	ClientSender(Socket &connectionSkt, CommunicationQueue &queue);
+	~ClientSender();
 
-    void sendPayload(const std::string& payload);
+	void sendPayload(const std::string& payload);
 
-    virtual void run() override;
+	virtual void run() override;
 
-    void recvPayload();
+	void recvPayload();
 
-    void disconnect();
+	void disconnect();
 
 private:
-    bool keepPlaying;
-    Socket& connectionSkt;
-    CommunicationQueue& queue;
+	bool keepPlaying;
+	Socket& connectionSkt;
+	CommunicationQueue& queue;
 };
-
 
 #endif //__CLIENTSENDER_H__

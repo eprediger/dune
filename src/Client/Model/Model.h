@@ -29,22 +29,21 @@
 class Model {
 private:
 	Map map;
-	std::map<int,Unit*> units;
-	std::map<int,Building*> buildings;
-    std::map<int,Player*> players;
-	std::map<int,Rocket*> rockets;
-    bool gameFinished;
-    CommunicationQueue& queue;
+	std::map<int, Unit*> units;
+	std::map<int, Building*> buildings;
+	std::map<int, Player*> players;
+	std::map<int, Rocket*> rockets;
+	bool gameFinished;
+	CommunicationQueue& queue;
 
 public:
-    Model(nlohmann::json& file, CommunicationQueue &queue);
-    ~Model();
+	Model(nlohmann::json& file, CommunicationQueue &queue);
+	~Model();
 
 	Map& getMap();
 
 	void addPlayer(nlohmann::json& j);
 	void updatePlayer(nlohmann::json& j);
-
 
 	bool playerExists(int id);
 	bool buildingExists(int id);
@@ -57,9 +56,8 @@ public:
 	Raider& createRaider(nlohmann::json& j);
 	Tank& createTank(nlohmann::json& j);
 	Trike& createTrike(nlohmann::json& j);
-    Unit &createUnit(Unit *unit);
+	Unit &createUnit(Unit *unit);
 	void updateUnit(nlohmann::json& j);
-
 
 	Barracks& createBarracks(nlohmann::json& j);
 	ConstructionYard& createConstructionYard(nlohmann::json& j);
@@ -71,26 +69,25 @@ public:
 	Building& createBuilding(Building* building);
 	void updateBuilding(nlohmann::json& j);
 
-
 	Rocket& createRocket(nlohmann::json& j);
 	void updateRocket(nlohmann::json& j);
 
-	
+
 	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
-    void actionOnPosition(Position &pos, Unit &unit);
-	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player); 
+	void actionOnPosition(Position &pos, Unit &unit);
+	bool canWeBuild(Position& pos, int width, int height, int cost, Player& player);
 	void step();
-    void cleanDeadUnits();
+	void cleanDeadUnits();
 	void cleanRockets();
-    bool isGameFinished();
-    Player* getWinner();
+	bool isGameFinished();
+	Player* getWinner();
 
 	Player& getPlayer(int player);
 
 	int numberOfPlayers();
 
-    void cleanDeadBuildings();
+	void cleanDeadBuildings();
 
 };
 

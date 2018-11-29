@@ -10,7 +10,6 @@
 #include <string>
 #include <memory>
 
-
 std::map<std::string, std::vector<std::unique_ptr<SdlTexture> > > ConstructionYardView::sprites;
  
 ConstructionYardView::ConstructionYardView(ConstructionYard& constructionYard, SdlWindow& window)

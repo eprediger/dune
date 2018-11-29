@@ -8,6 +8,7 @@ protected:
 	char key;
 	bool occupied;
 	bool builtOn;
+	int speed_factor;
 public:
 	Terrain();
 
@@ -21,6 +22,7 @@ public:
 	virtual int farm();
 	virtual int getSpice();
 	virtual bool hasFarm();
+	int getSpeedFactor();
 
 	bool operator==(const Terrain& terrain);
 

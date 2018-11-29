@@ -17,8 +17,8 @@ public:
     nlohmann::json& getSerialization();
     bool news;
 private:
-    std::map<Building::BuildingType,std::pair<int, bool>> construction;
-    nlohmann::json serialization; 
+    std::map<Building::BuildingType, std::pair<int, bool>> construction;
+    nlohmann::json serialization;
 };
 
 #endif //DUNE_PLAYERBUILDINGCENTER_H

@@ -21,12 +21,12 @@ Area::Area(const Position& pos1,const Position& pos2){
     height = abs(pos1.y - pos2.y);
 }
 
-void Area::setX(int x){
-	this->x = x;
+void Area::setX(int newX){
+	this->x = newX;
 }
 
-void Area::setY(int y) {
-	this->y = y;
+void Area::setY(int newY) {
+	this->y = newY;
 }
 
 int Area::getX() const {

@@ -1,7 +1,9 @@
 #include "Building.h"
 #include "../Player.h"
 #include <iostream>
+
 int Building::counter = 0;
+
 Building::Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
                    const int hitPoints, const int width,
                    const int height, BuildingType type):
@@ -14,15 +16,14 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight, co
 	player(nullptr),
 	key(type),
 	all_positions(),
-	serialization(),
-	news(true)
-{
+	news(true),
+	serialization() {
 	for (int i = 0 ; i < height ; i++) {
 		for (int j = 0 ; j < width ; j++) {
 			all_positions.emplace_back(x + j * blockWidth, y + i * blockHeight);
 		}
 	}
-	counter+=1;
+	counter += 1;
 	serialization["class"] = "Building";
 	serialization["type"] = int(key);
 	//serialization["life"] = hitPoints;
@@ -68,15 +69,15 @@ Position& Building::getClosestPosition(Position& position) {
 	return closest;
 }
 
-nlohmann::json& Building::getSerialization(){
+nlohmann::json& Building::getSerialization() {
 	news = false;
 	serialization["life"] = this->getLife();
-	if (key == BuildingType::WIND_TRAP){
-		std::cout<<"pidiendo windtrap\n";
+	if (key == BuildingType::WIND_TRAP) {
+		std::cout << "pidiendo windtrap\n";
 	}
 	return serialization;
 }
 
-bool Building::hasNews(){
-	return (serialization["life"]!=this->getLife());
+bool Building::hasNews() {
+	return (serialization["life"] != this->getLife());
 }

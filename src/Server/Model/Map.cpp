@@ -216,18 +216,20 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
     }
     return std::move(answer);
 }
+
 std::vector<Building*> Map::getBuildingsInArea(Area& area) {
     std::vector<Building*> answer;
     Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
+    Position areaCenter(area.getX()+area.getWidth()/2, area.getY()+area.getHeight()/2);
     for (auto& building : buildings) {
-        if ( (building->getPosition().x > area.getX()) &&
-                (building->getPosition().x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
-                (building->getPosition().y > area.getY()) &&
-                (building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
+        if ( (building->getClosestPosition(areaCenter).x > area.getX()) &&
+                (building->getClosestPosition(areaCenter).x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+                (building->getClosestPosition(areaCenter).y > area.getY()) &&
+                (building->getClosestPosition(areaCenter).y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
             answer.emplace_back(building);
         } else {
-            if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
-                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
+            if ((pos.x > building->getClosestPosition(areaCenter).x) && (pos.x < building->getClosestPosition(areaCenter).x + building->width * BLOCK_WIDTH) &&
+                    (pos.y > building->getClosestPosition(areaCenter).y) && (pos.y < building->getClosestPosition(areaCenter).y + building->height * BLOCK_HEIGHT)) {
                 answer.emplace_back(building);
             }
         }
@@ -353,4 +355,7 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 
     return min_position;
 }
- 
+
+int Map::getSpeedFactorAt(Position &pos) {
+    return this->at(pos).getSpeedFactor();
+}

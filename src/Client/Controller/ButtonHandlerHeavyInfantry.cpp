@@ -14,8 +14,10 @@ ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}
 void ButtonHandlerHeavyInfantry::execute() {
 	nlohmann::json msg;
 	msg["method"] = "createHeavyInfantry";
-	msg["args"]["player"] = player.getId();
+	msg["args"]["player_id"] = player.getId();
 	queue.enqueue(msg);
+	player.trainingCenter->beginTraining(Unit::HEAVY_INFANTRY);
+	this->update();
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {

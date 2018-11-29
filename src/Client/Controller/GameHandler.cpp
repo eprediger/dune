@@ -18,11 +18,11 @@
 GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue, Player& player) :
     InputHandler(),
     view(view),
-    model(model), 
-    player(player), 
+    model(model),
+    player(player),
     selector(0, 0),
     constructor(model, player, view, queue),
-    queue(queue), 
+    queue(queue),
     interface(model, view) {
     view.addSelectorView(this->selector);
     this->buttons.push_back(new ButtonHandlerWindTrap(player, this->view, constructor, this->queue));
@@ -143,16 +143,12 @@ bool GameHandler::handleInput() {
             for (auto itr = to_sell.begin(); itr != to_sell.end() ; itr++) {
                 nlohmann::json msg;
                 msg["method"] = "sellBuilding";
-                msg["args"]["player"] = player.getId();
+                msg["args"]["player_id"] = player.getId();
                 msg["args"]["building_id"] = (*itr)->id;
                 queue.enqueue(msg);
             }
         }
         break;
-        // Temporal
-        case SDLK_c:
-            break;
-        /////////
         default:
             break;
         }
@@ -160,15 +156,4 @@ bool GameHandler::handleInput() {
     }
     this->selector.selection.eraseDeads();
     return keepPlaying;
-}
-
-
-
-// Este metodo es temporal. La idea es luego, colocar este metodo dentro
-// de la clase que haga el POP del stack recibido y actualice el modelo y
-// la vista en base a eso.
-void GameHandler::step() {
-    while (!queue.recvEmpty()){
-        interface.execute(queue.dequeue());
-    }
 }

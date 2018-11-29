@@ -1,7 +1,6 @@
 #ifndef __GAMEINTERFACE_H__
 #define __GAMEINTERFACE_H__
 
-
 #include <nlohmann/json.hpp>
 #include "Model/Model.h"
 
@@ -9,6 +8,7 @@ class GameInterface {
 public:
     GameInterface(Model &model);
     void execute(nlohmann::json json);
+
 private:
     Model& model;
 
@@ -32,6 +32,5 @@ private:
 
     void setActionOnPosition(int player_id, int unit_id, int x, int y);
 };
-
 
 #endif //__GAMEINTERFACE_H__

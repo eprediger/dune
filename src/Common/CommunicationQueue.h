@@ -1,7 +1,6 @@
 #ifndef __COMMUNICATIONQUEUE_H__
 #define __COMMUNICATIONQUEUE_H__
 
-
 #include <string>
 #include <queue>
 #include <mutex>
@@ -29,6 +28,5 @@ private:
     std::condition_variable condNewRecvData;
 
 };
-
 
 #endif //DUNE_COMMUNICATIONQUEUE_H

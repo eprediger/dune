@@ -25,7 +25,7 @@ Model::Model(const char *file) :
     buildings(),
     players(),
     rockets(),
-    gameFinished(false){}
+    gameFinished(false) {}
 
 Model::~Model() {
     for (auto& unit : units) {
@@ -40,28 +40,26 @@ Model::~Model() {
 }
 
 Unit &Model::createUnit(Unit *unit) {
-    units.insert(std::make_pair(unit->id,unit));
+    units.insert(std::make_pair(unit->id, unit));
     map.put(*unit);
     return *unit;
 }
 
 Building &Model::createBuilding(Building *building) {
-    buildings.insert(std::make_pair(building->id,building));
+    buildings.insert(std::make_pair(building->id, building));
     map.put(*building);
     return *building;
 }
 
-
-int Model::addPlayer(){
+int Model::addPlayer() {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     int i = this->players.size();
-    ConstructionYard* cYard = new ConstructionYard(initial_pos[i].x,initial_pos[i].y, map.getBlockWidth(),map.getBlockHeight());
-    Player* player = new Player(i,*cYard);
-    players.insert(std::make_pair(player->getId(),player));
+    ConstructionYard* cYard = new ConstructionYard(initial_pos[i].x, initial_pos[i].y, map.getBlockWidth(), map.getBlockHeight());
+    Player* player = new Player(i, *cYard);
+    players.insert(std::make_pair(player->getId(), player));
     this->createBuilding(std::move(cYard));
     return i;
 }
-
 
 void Model::step() {
     this->cleanDeadUnits();
@@ -140,7 +138,7 @@ void Model::cleanDeadUnits() {
         }
     }
     if (has_dead_unit) {
-        std::map<int,Unit*>::iterator it = units.begin();
+        std::map<int, Unit*>::iterator it = units.begin();
         while (it != units.end()) {
             if (Unit::isDead((it->second))) {
                 delete(it->second);
@@ -268,7 +266,7 @@ LightFactory& Model::createLightFactory(int x, int y, int player) {
     Position pos = map.getCornerPosition(pos1);
     LightFactory* building = new LightFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
     players.at(player)->addBuilding(building);
-    return (LightFactory&)this->createBuilding(std::move(building)); 
+    return (LightFactory&)this->createBuilding(std::move(building));
 }
 
 SpiceRefinery& Model::createSpiceRefinery(int x, int y, int player) {
@@ -294,7 +292,7 @@ WindTrap& Model::createWindTrap(int x, int y, int player) {
     players.at(player)->addBuilding(building);
     return (WindTrap&)this->createBuilding(std::move(building));
 }
- 
+
 void Model::actionOnPosition(Position &pos, Unit &unit) {
     unit.actionOnPosition(map, pos);
 }
@@ -310,42 +308,41 @@ int Model::numberOfPlayers() {
     return players.size();
 }
 
-
 /// TEMPORAL
 Building & Model::getBuildingById(int id) {
     return *buildings.at(id);
 }
 
-Unit& Model::getUnitById(int id){ 
+Unit& Model::getUnitById(int id) {
     return *units.at(id);
 }
 
-void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers){
+void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
 
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         if (itr->second->hasNews())
-            for (auto player: connectedPlayers){
+            for (auto player : connectedPlayers) {
                 player->queue.enqueue((itr)->second->getSerialization());
             }
     }
-    
-    for (auto player:connectedPlayers){
-        if (players.at(player->getId())->hasNews()){
+
+    for (auto player : connectedPlayers) {
+        if (players.at(player->getId())->hasNews()) {
             player->queue.enqueue(players.at(player->getId())->getSerialization());
         }
     }
 
     for (auto itr = rockets.begin(); itr != rockets.end(); itr++) {
-        for (auto player: connectedPlayers){
+        for (auto player : connectedPlayers) {
             player->queue.enqueue((*itr)->getSerialization());
         }
     }
 
     for (auto itr = buildings.begin(); itr != buildings.end(); ++itr) {
-        if (itr->second->hasNews()){
-            for (auto player: connectedPlayers){
+        if (itr->second->hasNews()) {
+            for (auto player : connectedPlayers) {
                 player->queue.enqueue((itr->second->getSerialization()));
             }
-        }    
+        }
     }
 }

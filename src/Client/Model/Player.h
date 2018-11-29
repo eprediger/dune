@@ -1,7 +1,6 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-
 class Player;
 
 #include "Model/Buildings/Building.h"
@@ -12,7 +11,6 @@ class Player;
 #include <string>
 #include <functional>
 #include <nlohmann/json.hpp>
-
 
 class Player {
 private:
