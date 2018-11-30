@@ -87,8 +87,8 @@ void Server::waitPlayers() {
 	int sleep_extra = 0;
 	while (!model.isGameFinished() && !players.empty()) {
 		unsigned int loop_init = SDL_GetTicks();
-		model.step();
-		model.serialize(players);
+        model.serialize(players);
+        model.step();
 
 		this->cleanDisconectedPlayers();
 		if (!commonQueue.recvEmpty())

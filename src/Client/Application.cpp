@@ -27,4 +27,5 @@ void Application::render() {
 
 void Application::update() {
 	this->handler.update();
+	this->model.step();
 }
