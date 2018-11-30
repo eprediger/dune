@@ -1,7 +1,7 @@
 #ifndef __GAME_CONFIGURATION_H__
 #define __GAME_CONFIGURATION_H__
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 
 class GameConfiguration {
 private:

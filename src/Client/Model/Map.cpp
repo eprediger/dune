@@ -222,12 +222,12 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
             Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
             if (isValid(aux)) {
                 if (this->at(aux).isBuiltOn()) {
-                    return true;
+                    return false;
                 }
             }
         }
     }
-    return false;
+    return true;
 }
 
 Position Map::getClosestFreePosition(Building* building) {
