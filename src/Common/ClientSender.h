@@ -19,6 +19,8 @@ public:
 
 	void disconnect();
 
+	bool is_alive();
+
 private:
 	bool keepPlaying;
 	Socket& connectionSkt;

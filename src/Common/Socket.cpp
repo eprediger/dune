@@ -96,12 +96,12 @@ void Socket::connect() {
 	}
 }
 
-void Socket::sendLength(uint32_t number) const {
+size_t Socket::sendLength(uint32_t number) const {
 	number = ::htonl(number);
-	this->send((char*) &number, NUM_SIZE);
+	return this->send((char*) &number, NUM_SIZE);
 }
 
-void Socket::send(const char* buf, size_t size) const {
+size_t Socket::send(const char *buf, size_t size) const {
 	size_t sent = 0;
 	int len_sent = 0;
 	bool open_socket = true;
@@ -114,11 +114,14 @@ void Socket::send(const char* buf, size_t size) const {
 			std::string msg = "Sending error: " + std::string(strerror(errno));
 			throw CustomException(SOCKET_ERROR, msg.data());
 		} else if  (len_sent == 0) {
+			std::cout << "Se cierra el socket send!" << std::endl;
 			open_socket = false;
 		} else {
 			sent += len_sent;
 		}
 	}
+
+	return sent;
 }
 
 size_t Socket::receiveLength(uint32_t* number) const {

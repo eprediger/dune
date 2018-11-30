@@ -26,6 +26,8 @@ public:
 
 	CommunicationQueue queue;
 
+	bool is_alive();
+
 private:
 	Server& server;
 	Socket peerSkt;

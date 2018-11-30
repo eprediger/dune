@@ -25,6 +25,8 @@ public:
 
 	void waitPlayers();
 
+	void cleanDisconectedPlayers();
+
 	CommunicationQueue commonQueue;
 
 private:

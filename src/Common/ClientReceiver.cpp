@@ -10,6 +10,8 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include "ClientReceiver.h"
+
 
 ClientReceiver::ClientReceiver(Socket &connectionSkt, CommunicationQueue &queue) :
 	keepPlaying(true),
@@ -22,26 +24,32 @@ ClientReceiver::~ClientReceiver() {
 	}
 }
 
-void ClientReceiver::sendPayload(const std::string& payload) {
-	this->connectionSkt.sendLength(payload.length());
-	this->connectionSkt.send(payload.c_str(), payload.length());
-}
-
 void ClientReceiver::run() {
-	this->recvPayload();
+	try {
+		this->recvPayload();
+		std::cout << "Finaliza el receiver!" << std::endl;
+		this->keepPlaying = false;
+	} catch(CustomException& e) {
+		this->keepPlaying = false;
+	}
 }
 
 void ClientReceiver::recvPayload() {
 	uint32_t length = 0;
-	while (this->keepPlaying) {
-		this->connectionSkt.receiveLength(&length);
+	while (this->keepPlaying && queue.isWorking()) {
+		if (this->connectionSkt.receiveLength(&length) == 0) break;
 		std::unique_ptr<char[]> buffer(new char[length + 1]());
-		this->connectionSkt.receive(&buffer[0], length);
+		if (this->connectionSkt.receive(&buffer[0], length) == 0) break;
 		nlohmann::json recv = nlohmann::json::parse(buffer.get());
 		queue.putReceived(recv);
 	}
 }
 
 void ClientReceiver::disconnect() {
+	std::cout << "Disconect el receiver!" << std::endl;
 	this->keepPlaying = false;
+}
+
+bool ClientReceiver::is_alive() {
+    return this->keepPlaying;
 }

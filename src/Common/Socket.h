@@ -24,9 +24,9 @@ public:
 
 	void connect();
 
-	void sendLength(uint32_t number) const;
+	size_t sendLength(uint32_t number) const;
 
-	void send(const char* buf, size_t size) const;
+	size_t send(const char *buf, size_t size) const;
 
 	size_t receiveLength(uint32_t* number) const;
 

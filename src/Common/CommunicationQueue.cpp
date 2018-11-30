@@ -10,7 +10,7 @@ void CommunicationQueue::enqueue(nlohmann::json send_json) {
 
 nlohmann::json CommunicationQueue::dequeue() {
     std::unique_lock<std::mutex> lock{recv_m};
-    while (recv_queue.empty()) {
+    while (recv_queue.empty() && working) {
         condNewRecvData.wait(lock);
     }
     nlohmann::json ret_json = std::move(recv_queue.front());
@@ -35,10 +35,23 @@ bool CommunicationQueue::recvEmpty() {
 
 nlohmann::json CommunicationQueue::getSend() {
     std::unique_lock<std::mutex> lock{send_m};
-    while (send_queue.empty()) {
+    while (send_queue.empty() && working) {
         condNewSendData.wait(lock);
     }
+    if (!working) return nullptr;
     nlohmann::json ret_json = std::move(send_queue.front());
     send_queue.pop();
     return ret_json;
+}
+
+CommunicationQueue::CommunicationQueue() : working(true) {}
+
+void CommunicationQueue::clear() {
+    working = false;
+    condNewRecvData.notify_all();
+    condNewSendData.notify_all();
+}
+
+bool CommunicationQueue::isWorking() {
+    return this->working;
 }

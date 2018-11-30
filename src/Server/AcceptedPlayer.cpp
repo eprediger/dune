@@ -15,7 +15,9 @@ AcceptedPlayer::AcceptedPlayer(Server& server) :
     receiver(peerSkt, server.commonQueue),
     id(-1) {}
 
-AcceptedPlayer::~AcceptedPlayer() {}
+AcceptedPlayer::~AcceptedPlayer() {
+    this->disconnect();
+}
 
 void AcceptedPlayer::start() {
     this->receiver.start();
@@ -27,6 +29,7 @@ void AcceptedPlayer::disconnect() {
     receiver.disconnect();
     this->peerSkt.shutdown(SHUT_RDWR);
     this->peerSkt.close();
+    queue.clear();
     sender.join();
     receiver.join();
 }
@@ -37,4 +40,8 @@ void AcceptedPlayer::setId(int id) {
 
 int AcceptedPlayer::getId() {
     return this->id;
+}
+
+bool AcceptedPlayer::is_alive() {
+    return receiver.is_alive() || sender.is_alive();
 }

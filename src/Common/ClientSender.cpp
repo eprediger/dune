@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <CommunicationQueue.h>
+#include "ClientSender.h"
+
 
 ClientSender::ClientSender(Socket &connectionSkt, CommunicationQueue &queue) :
     keepPlaying(true),
@@ -23,17 +25,34 @@ ClientSender::~ClientSender() {
 }
 
 void ClientSender::sendPayload(const std::string& payload) {
-    this->connectionSkt.sendLength(payload.length());
-    this->connectionSkt.send(payload.c_str(), payload.length());
+    if (this->keepPlaying){
+        if (this->connectionSkt.sendLength(payload.length()) == 0){
+            std::cout << "sendLength devuelve 0!" << std::endl;
+        }
+        this->connectionSkt.send(payload.c_str(), payload.length());
+    }
 }
 
 void ClientSender::run() {
-    while (this->keepPlaying) {
-        nlohmann::json send = queue.getSend();
-        this->sendPayload(send.dump());
+    try {
+        while (this->keepPlaying) {
+            nlohmann::json send = queue.getSend();
+            this->sendPayload(send.dump());
+        }
+    } catch (CustomException& e){
+        this->keepPlaying = false;
+        std::cout << "Exception en el sender!" << std::endl;
     }
+
+    std::cout << "Finaliza el sender!" << std::endl;
 }
 
 void ClientSender::disconnect() {
     this->keepPlaying = false;
+    std::cout << "Disconect el sender!" << std::endl;
+//    queue.clear();
+}
+
+bool ClientSender::is_alive() {
+    return this->keepPlaying;
 }

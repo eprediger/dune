@@ -85,10 +85,12 @@ void Server::waitPlayers() {
 	j["class"] = "Step";
 	const int time_step = 16;
 	int sleep_extra = 0;
-	while (!model.isGameFinished()) {
+	while (!model.isGameFinished() && !players.empty()) {
 		unsigned int loop_init = SDL_GetTicks();
 		model.step();
 		model.serialize(players);
+
+		this->cleanDisconectedPlayers();
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
 
@@ -107,4 +109,18 @@ void Server::waitPlayers() {
 
 		sleep_extra = (delay_end - loop_end) - sleep_delay;
 	}
+}
+
+void Server::cleanDisconectedPlayers() {
+    auto itr = std::remove_if(this->players.begin(), this->players.end(),
+                   [](AcceptedPlayer *&player) {
+                       if (!player->is_alive()){
+                           delete player;
+                           return true;
+                       }
+                       return false;
+                   });
+    if (itr != players.end()){
+        players.erase(itr, this->players.end());    
+    }
 }

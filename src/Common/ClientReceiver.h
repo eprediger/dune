@@ -12,13 +12,13 @@ public:
 
 	~ClientReceiver();
 
-	void sendPayload(const std::string& payload);
-
 	virtual void run() override;
 
 	void recvPayload();
 
 	void disconnect();
+
+	bool is_alive();
 
 private:
 	bool keepPlaying;

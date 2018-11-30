@@ -9,6 +9,7 @@
 
 class CommunicationQueue {
 public:
+    CommunicationQueue();
     void enqueue(nlohmann::json send_json);
 
     nlohmann::json dequeue();
@@ -18,8 +19,13 @@ public:
 
     bool sendEmpty();
     bool recvEmpty();
+    
+    void clear();
+
+    bool isWorking();
 
 private:
+    bool working;
     std::queue<nlohmann::json> send_queue;
     std::queue<nlohmann::json> recv_queue;
     std::mutex send_m;

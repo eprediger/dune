@@ -22,6 +22,7 @@ void Client::disconnect() {
     receiver.disconnect();
     this->connectionSkt.shutdown(SHUT_RDWR);
     this->connectionSkt.close();
+    queue.clear();
     sender.join();
     receiver.join();
 }
