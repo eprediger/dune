@@ -30,15 +30,11 @@ Server::~Server() {
 	if (!manualShutDown) {
 		this->shutdown();
 	}
-	std::for_each(this->players.begin(), this->players.end(),
-	[](AcceptedPlayer *&AcceptedPlayer) {
-		AcceptedPlayer->disconnect();
-		delete AcceptedPlayer;
-	});
 }
 
 void Server::shutdown() {
 	this->manualShutDown = true;
+	this->disconectAllPlayers();
 	this->acceptSkt.shutdown(SHUT_RDWR);
 	this->acceptSkt.close();
 }
@@ -119,4 +115,13 @@ void Server::cleanDisconectedPlayers() {
     if (itr != players.end()){
         players.erase(itr, this->players.end());    
     }
+}
+
+void Server::disconectAllPlayers() {
+	std::for_each(this->players.begin(), this->players.end(),
+				  [](AcceptedPlayer *&AcceptedPlayer) {
+//					  AcceptedPlayer->disconnect();
+					  delete AcceptedPlayer;
+				  });
+	players.clear();
 }

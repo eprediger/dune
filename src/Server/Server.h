@@ -27,6 +27,8 @@ public:
 
 	void cleanDisconectedPlayers();
 
+	void disconectAllPlayers();
+
 	CommunicationQueue commonQueue;
 
 private:
