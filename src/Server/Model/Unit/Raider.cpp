@@ -1,10 +1,10 @@
+#include <Model/GameConfiguration.h>
 #include "Raider.h"
 #include "Model/Weapons/Weapons.h"
-#include "Model/GlobalConfig.h"
 
 Raider::Raider(int x, int y) :
-        OffensiveUnit(x, y, GlobalConfig.raiderHitPoints, GlobalConfig.raiderRange, Weapons::smallCannon,
-                      GlobalConfig.raiderSpeed, GlobalConfig.raiderCost)
+        OffensiveUnit(x, y, GameConfiguration::getConfig().raiderHitPoints, GameConfiguration::getConfig().raiderRange, Weapons::smallCannon,
+                      GameConfiguration::getConfig().raiderSpeed, GameConfiguration::getConfig().raiderCost)
 {
         serialization["subClass"] = "Raider";
 }

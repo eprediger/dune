@@ -15,12 +15,13 @@
 
 Server::Server(const char *service, const char* mapFile) :
 	commonQueue(),
-	config(mapFile),
-	maxPlayers(config.getPlayers()),
+	mapLayout(mapFile),
+	maxPlayers(mapLayout.getPlayers()),
 	manualShutDown(false),
 	acceptSkt(nullptr, service, AI_PASSIVE),
 	players(),
 	model(mapFile) {
+	// model(mapLayout, gameConfig) {
 	this->acceptSkt.bind();
 	this->acceptSkt.listen(MAX_LISTEN);
 }
@@ -70,6 +71,7 @@ void Server::waitPlayers() {
 		model.addPlayer();
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
 		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
+		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initwithJson());
 		this->players[i]->setId(i);
 	}
 
@@ -90,10 +92,10 @@ void Server::waitPlayers() {
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
 
-		for (auto player: players){
+		for (auto player : players) {
 			player->queue.enqueue(j);
 		}
-		
+
 		unsigned int loop_end = SDL_GetTicks();
 
 		int step_duration = (loop_end - loop_init);

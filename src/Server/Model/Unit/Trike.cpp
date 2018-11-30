@@ -1,13 +1,14 @@
+#include <Model/GameConfiguration.h>
 #include "Trike.h"
 #include "Model/Weapons/Weapons.h"
 
 Trike::Trike(int x, int y) :
 	OffensiveUnit(x, y,
-	              GlobalConfig.trikeHitPoints,
-	              GlobalConfig.trikeRange,
+	              GameConfiguration::getConfig().trikeHitPoints,
+	              GameConfiguration::getConfig().trikeRange,
 	              Weapons::assaultRifle,
-	              GlobalConfig.trikeSpeed,
-	              GlobalConfig.trikeCost)
+	              GameConfiguration::getConfig().trikeSpeed,
+	              GameConfiguration::getConfig().trikeCost)
 {
 	serialization["subClass"] = "Trike";
 }

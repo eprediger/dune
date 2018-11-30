@@ -2,7 +2,7 @@
 #include "Model/Unit/Tank.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Orientation.h"
 #include <map>
 #include <vector>

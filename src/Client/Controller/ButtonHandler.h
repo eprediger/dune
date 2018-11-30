@@ -5,7 +5,7 @@
 #include "View/ButtonView.h"
 #include "Model/Model.h"
 #include "View/GameView.h"
-#include "../../Server/Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 class ButtonHandler {
 public:

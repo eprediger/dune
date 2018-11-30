@@ -6,7 +6,7 @@
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
-                                            GlobalConfig.buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime),
                   player, view, queue),
     constructor(constructor) {}
 
@@ -22,7 +22,7 @@ void ButtonHandlerHeavyFactory::execute() {
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
-    return (this->player.gold >= GlobalConfig.heavyFactoryCost);
+    return (this->player.gold >= GameConfiguration::getConfig().heavyFactoryCost);
 }
 
 bool ButtonHandlerHeavyFactory::finishAction() {
@@ -31,9 +31,9 @@ bool ButtonHandlerHeavyFactory::finishAction() {
 
 void ButtonHandlerHeavyFactory::executeReady() {
     constructor.building = Building::HEAVY_FACTORY;
-    constructor.cost = GlobalConfig.heavyFactoryCost;
-    constructor.width = GlobalConfig.heavyFactoryWidth;
-    constructor.height = GlobalConfig.heavyFactoryHeight;
+    constructor.cost = GameConfiguration::getConfig().heavyFactoryCost;
+    constructor.width = GameConfiguration::getConfig().heavyFactoryWidth;
+    constructor.height = GameConfiguration::getConfig().heavyFactoryHeight;
     constructor.on = true;
 }
 

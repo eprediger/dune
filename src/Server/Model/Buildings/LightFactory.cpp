@@ -1,12 +1,13 @@
+#include <Model/GameConfiguration.h>
 #include "LightFactory.h"
 
 LightFactory::LightFactory(const int x, const int y, int blockWidth, int blockHeight) :
 	Building(x, y, blockWidth, blockHeight,
-	         GlobalConfig.lightFactoryEnergy,
-	         GlobalConfig.lightFactoryCost,
-	         GlobalConfig.lightFactoryHitPoints,
-	         GlobalConfig.lightFactoryWidth,
-	         GlobalConfig.lightFactoryHeight,
+	         GameConfiguration::getConfig().lightFactoryEnergy,
+	         GameConfiguration::getConfig().lightFactoryCost,
+	         GameConfiguration::getConfig().lightFactoryHitPoints,
+	         GameConfiguration::getConfig().lightFactoryWidth,
+	         GameConfiguration::getConfig().lightFactoryHeight,
 	         LIGHT_FACTORY)
 {}
 LightFactory::~LightFactory() {}

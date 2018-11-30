@@ -5,7 +5,7 @@
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Player& player, GameView& view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
-                                                GlobalConfig.buildingConstructionTime),
+                                                GameConfiguration::getConfig().buildingConstructionTime),
                       player, view, queue),
     constructor(constructor) {
     if (this->canBeEnabled()) {
@@ -25,7 +25,7 @@ void ButtonHandlerWindTrap::execute() {
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {
-    return (this->player.gold >= GlobalConfig.windTrapCost);
+    return (this->player.gold >= GameConfiguration::getConfig().windTrapCost);
 }
 
 bool ButtonHandlerWindTrap::finishAction() {
@@ -34,9 +34,9 @@ bool ButtonHandlerWindTrap::finishAction() {
 
 void ButtonHandlerWindTrap::executeReady() {
     constructor.building = Building::WIND_TRAP;
-    constructor.cost = GlobalConfig.windTrapCost;
-    constructor.width = GlobalConfig.windTrapWidth;
-    constructor.height = GlobalConfig.windTrapHeight;
+    constructor.cost = GameConfiguration::getConfig().windTrapCost;
+    constructor.width = GameConfiguration::getConfig().windTrapWidth;
+    constructor.height = GameConfiguration::getConfig().windTrapHeight;
     constructor.on = true;
 }
 

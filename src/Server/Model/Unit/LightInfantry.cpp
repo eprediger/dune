@@ -1,10 +1,10 @@
+#include <Model/GameConfiguration.h>
 #include "LightInfantry.h"
 #include "Model/Weapons/Weapons.h"
-#include "Model/GlobalConfig.h"
 
 LightInfantry::LightInfantry(int x, int y) :
-        OffensiveUnit(x, y, GlobalConfig.lightInfantryHitPoints, GlobalConfig.lightInfantryRange, Weapons::assaultRifle,
-                      GlobalConfig.lightInfantrySpeed, GlobalConfig.lightInfantryCost) 
+        OffensiveUnit(x, y, GameConfiguration::getConfig().lightInfantryHitPoints, GameConfiguration::getConfig().lightInfantryRange, Weapons::assaultRifle,
+                      GameConfiguration::getConfig().lightInfantrySpeed, GameConfiguration::getConfig().lightInfantryCost)
 {
     serialization["subClass"] = "LightInfantry";
 }

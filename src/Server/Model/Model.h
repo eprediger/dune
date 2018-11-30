@@ -18,6 +18,7 @@
 #include "Model/Buildings/WindTrap.h"
 #include "Model/Buildings/HeavyFactory.h"
 #include "Model/Buildings/LightFactory.h"
+#include <Model/GameConfiguration.h>
 #include <vector>
 #include <map>
 #include <memory>
@@ -31,14 +32,14 @@ class Model {
 private:
 	Map map;
 	std::map<int, Unit*> units;
-	std::map<int , Building*> buildings;
+	std::map<int, Building*> buildings;
 	std::map<int, Player*> players;
 	std::vector<Rocket*> rockets;
 	bool gameFinished;
 
 public:
 	explicit Model(const char *file);
-	~Model();
+    ~Model();
 
 //    Map& createMap();
 	Map& getMap();

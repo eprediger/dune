@@ -1,12 +1,12 @@
 #include "ButtonHandlerLightInfantry.h"
 #include "View/UnitViewFactory.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 #include "GameHandler.h"
 #include <iostream>
 
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
-	                                    GlobalConfig.lightInfantryTrainingTime),
+	                                    GameConfiguration::getConfig().lightInfantryTrainingTime),
 	              player, view, queue) {}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
@@ -21,7 +21,7 @@ void ButtonHandlerLightInfantry::execute() {
 }
 
 bool ButtonHandlerLightInfantry::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.lightInfantryCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().lightInfantryCost)) &&
 	        (player.hasBuilding(Building::BARRACKS)));
 }
 

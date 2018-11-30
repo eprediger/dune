@@ -5,7 +5,7 @@
 
 ButtonHandlerRaider::ButtonHandlerRaider(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
-                                            GlobalConfig.raiderConstructionTime),
+                                            GameConfiguration::getConfig().raiderConstructionTime),
                      player, view, queue) {
 }
 
@@ -21,7 +21,7 @@ void ButtonHandlerRaider::execute() {
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.raiderCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().raiderCost)) &&
 	        (player.hasBuilding(Building::LIGHT_FACTORY)));
 }
 

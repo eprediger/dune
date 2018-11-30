@@ -1,12 +1,13 @@
+#include <Model/GameConfiguration.h>
 #include "WindTrap.h"
 
 WindTrap::WindTrap(const int x, const int y, int blockWidth, int blockHeight) :
 	Building(x, y, blockWidth, blockHeight,
-	         GlobalConfig.windTrapEnergy,
-	         GlobalConfig.windTrapCost,
-	         GlobalConfig.windTrapHitPoints,
-	         GlobalConfig.windTrapWidth,
-	         GlobalConfig.windTrapHeight,
+	         GameConfiguration::getConfig().windTrapEnergy,
+	         GameConfiguration::getConfig().windTrapCost,
+	         GameConfiguration::getConfig().windTrapHitPoints,
+	         GameConfiguration::getConfig().windTrapWidth,
+	         GameConfiguration::getConfig().windTrapHeight,
 	         WIND_TRAP)
 {}
 

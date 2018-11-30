@@ -14,7 +14,7 @@
 #include "Unit/Raider.h"
 #include "Unit/Tank.h"
 #include "Unit/Trike.h"
-#include "../AcceptedPlayer.h"
+#include <AcceptedPlayer.h>
 #include "PlayerTrainingCenter.h"
 #include <algorithm>
 #include <vector>

@@ -1,6 +1,6 @@
 #include "HeavyInfantryView.h"
 #include "Model/Unit/HeavyInfantry.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Orientation.h"
 #include "Position.h"
 #include "SdlWindow.h"

@@ -3,8 +3,8 @@
 
 #include <Socket.h>
 #include <CommunicationQueue.h>
-#include "../Common/ClientReceiver.h"
-#include "../Common/ClientSender.h"
+#include <ClientReceiver.h>
+#include <ClientSender.h>
 
 class Client {
 public:

@@ -4,7 +4,7 @@
 #include "Terrains/Terrain.h"
 #include "Model/AStar.h"
 #include "CustomException.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include <algorithm>
 #include <stack>
 #include <vector>

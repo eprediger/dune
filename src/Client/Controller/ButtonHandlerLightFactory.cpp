@@ -6,7 +6,7 @@
 ButtonHandlerLightFactory::ButtonHandlerLightFactory(Player& player, GameView &view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif",
-                                                GlobalConfig.buildingConstructionTime),
+                                                GameConfiguration::getConfig().buildingConstructionTime),
                       player, view, queue),
     constructor(constructor) {}
 
@@ -22,7 +22,7 @@ void ButtonHandlerLightFactory::execute() {
 }
 
 bool ButtonHandlerLightFactory::canBeEnabled() {
-    return (this->player.gold >= GlobalConfig.lightFactoryCost);
+    return (this->player.gold >= GameConfiguration::getConfig().lightFactoryCost);
 }
 
 bool ButtonHandlerLightFactory::finishAction() {
@@ -31,9 +31,9 @@ bool ButtonHandlerLightFactory::finishAction() {
 
 void ButtonHandlerLightFactory::executeReady() {
     constructor.building = Building::LIGHT_FACTORY;
-    constructor.cost = GlobalConfig.lightFactoryCost;
-    constructor.width = GlobalConfig.lightFactoryWidth;
-    constructor.height = GlobalConfig.lightFactoryHeight;
+    constructor.cost = GameConfiguration::getConfig().lightFactoryCost;
+    constructor.width = GameConfiguration::getConfig().lightFactoryWidth;
+    constructor.height = GameConfiguration::getConfig().lightFactoryHeight;
     constructor.on = true;
 }
 

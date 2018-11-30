@@ -1,5 +1,6 @@
 #include "PlayerBuildingCenter.h"
 #include "Buildings/Building.h"
+#include <Model/GameConfiguration.h>
 
 PlayerBuildingCenter::PlayerBuildingCenter():
     news(false),
@@ -25,37 +26,37 @@ void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
     switch (type) {
     case Building::BARRACKS:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }
     case Building::LIGHT_FACTORY:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }
     case Building::HEAVY_FACTORY:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }
     case Building::SPICE_REFINERY:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }
     case Building::SPICE_SILO:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }
     case Building::WIND_TRAP:
     {
-        construction[type].first = GlobalConfig.buildingConstructionTime;
+        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
         construction[type].second = false;
         break;
     }

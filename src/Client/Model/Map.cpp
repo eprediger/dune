@@ -7,7 +7,7 @@
 #include "Terrains/Summit.h"
 #include "Terrains/Precipice.h"
 #include "CustomException.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include <stack>
 #include <vector>
 

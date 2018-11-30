@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "../Common/ClientReceiver.h"
+#include <ClientReceiver.h>
 
 #include <memory>
 #include <iostream>

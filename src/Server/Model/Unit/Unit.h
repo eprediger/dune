@@ -2,15 +2,15 @@
 #define __UNIT_H__
 
 #include "Position.h"
-#include "../Weapons/Weapon.h"
-#include "../Weapons/Rocket.h"
-#include "../Terrains/Sand.h"
-#include "../Terrains/Precipice.h"
-#include "../Terrains/Summit.h"
-#include "../Terrains/Dunes.h"
-#include "../Terrains/Rocks.h"
-#include "../Attackable.h"
-#include "../Player.h"
+#include <Model/Weapons/Weapon.h>
+#include <Model/Weapons/Rocket.h>
+#include <Model/Terrains/Sand.h>
+#include <Model/Terrains/Precipice.h>
+#include <Model/Terrains/Summit.h>
+#include <Model/Terrains/Dunes.h>
+#include <Model/Terrains/Rocks.h>
+#include <Model/Attackable.h>
+#include <Model/Player.h>
 #include "States/UnitState.h"
 #include "States/UnitStateAttacking.h"
 #include "States/UnitStateFollowing.h"

@@ -9,7 +9,7 @@
 #include "Position.h"
 #include <vector>
 #include <map>
-#include "../../Common/Area.h"
+#include <Area.h>
 
 class HeavyInfantryView: public OffensiveUnitView{
     public:

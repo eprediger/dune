@@ -4,7 +4,7 @@
 #include "ButtonBusy.h"
 #include "ButtonReady.h"
 #include "View/View.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 ButtonHandler::ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue) :
 	buttonState(new ButtonDisabled()),

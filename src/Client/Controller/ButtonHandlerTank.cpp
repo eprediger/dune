@@ -5,7 +5,7 @@
 
 ButtonHandlerTank::ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
-                                            GlobalConfig.tankConstructionTime),
+                                            GameConfiguration::getConfig().tankConstructionTime),
                       player, view, queue) {
 }
 
@@ -21,7 +21,7 @@ void ButtonHandlerTank::execute() {
 }
 
 bool ButtonHandlerTank::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.tankCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().tankCost)) &&
 	        (player.hasBuilding(Building::HEAVY_FACTORY)));
 }
  

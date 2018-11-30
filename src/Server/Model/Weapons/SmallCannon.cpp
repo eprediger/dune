@@ -1,10 +1,10 @@
 #include "SmallCannon.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 SmallCannon::SmallCannon() :
-	Weapon(GlobalConfig.smallCannonDamage,
-		   GlobalConfig.smallCannonShootingRate,
-		   GlobalConfig.smallCannonBonus) {}
+	Weapon(GameConfiguration::getConfig().smallCannonDamage,
+		   GameConfiguration::getConfig().smallCannonShootingRate,
+		   GameConfiguration::getConfig().smallCannonBonus) {}
 
 SmallCannon::~SmallCannon() {}
 

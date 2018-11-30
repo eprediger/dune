@@ -1,6 +1,6 @@
 #include "Rocket.h"
 #include "Position.h"
-#include "../../../Common/Area.h"
+#include <Area.h>
 #include <cstdlib>
 #include <vector>
 

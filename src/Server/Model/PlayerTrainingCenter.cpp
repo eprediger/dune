@@ -1,5 +1,5 @@
 #include "PlayerTrainingCenter.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 #include "Unit/HeavyInfantry.h"
 #include "Unit/LightInfantry.h"
@@ -36,7 +36,7 @@ PlayerTrainingCenter::PlayerTrainingCenter():
 }
 
 void PlayerTrainingCenter::trainHarvester(Harvester* harvester) {
-    this->harvester.first = GlobalConfig.harvesterConstructionTime;
+    this->harvester.first = GameConfiguration::getConfig().harvesterConstructionTime;
     this->harvester.second = harvester;
 
     serialization["units"].push_back(Unit::HARVESTER);
@@ -45,7 +45,7 @@ void PlayerTrainingCenter::trainHarvester(Harvester* harvester) {
 }
 
 void PlayerTrainingCenter::trainHeavyInfantry(HeavyInfantry* heavyInfantry) {
-    this->heavyInfantry.first = GlobalConfig.heavyInfantryTrainingTime;
+    this->heavyInfantry.first = GameConfiguration::getConfig().heavyInfantryTrainingTime;
     this->heavyInfantry.second = heavyInfantry;
     serialization["units"].push_back(Unit::HEAVY_INFANTRY);
     serialization["time"].push_back(this->heavyInfantry.first);
@@ -53,7 +53,7 @@ void PlayerTrainingCenter::trainHeavyInfantry(HeavyInfantry* heavyInfantry) {
 }
 
 void PlayerTrainingCenter::trainLightInfantry(LightInfantry* lightInfantry) {
-    this->lightInfantry.first = GlobalConfig.lightInfantryTrainingTime;
+    this->lightInfantry.first = GameConfiguration::getConfig().lightInfantryTrainingTime;
     this->lightInfantry.second = lightInfantry;
     serialization["units"].push_back(Unit::LIGHT_INFANTRY);
     serialization["time"].push_back(this->lightInfantry.first);
@@ -61,7 +61,7 @@ void PlayerTrainingCenter::trainLightInfantry(LightInfantry* lightInfantry) {
 }
 
 void PlayerTrainingCenter::trainRaider(Raider* raider) {
-    this->raider.first = GlobalConfig.raiderConstructionTime;
+    this->raider.first = GameConfiguration::getConfig().raiderConstructionTime;
     this->raider.second = raider;
     serialization["units"].push_back(Unit::RAIDER);
     serialization["time"].push_back(this->raider.first);
@@ -69,7 +69,7 @@ void PlayerTrainingCenter::trainRaider(Raider* raider) {
 }
 
 void PlayerTrainingCenter::trainTank(Tank* tank) {
-    this->tank.first = GlobalConfig.tankConstructionTime;
+    this->tank.first = GameConfiguration::getConfig().tankConstructionTime;
     this->tank.second = tank;
     serialization["units"].push_back(Unit::TANK);
     serialization["time"].push_back(this->tank.first);
@@ -77,7 +77,7 @@ void PlayerTrainingCenter::trainTank(Tank* tank) {
 }
 
 void PlayerTrainingCenter::trainTrike(Trike* trike) {
-    this->trike.first = GlobalConfig.trikeConstructionTime;
+    this->trike.first = GameConfiguration::getConfig().trikeConstructionTime;
     this->trike.second = trike;
     serialization["units"].push_back(Unit::TRIKE);
     serialization["time"].push_back(this->trike.first);

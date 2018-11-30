@@ -5,7 +5,7 @@
 #include "SdlTexture.h"
 #include "SdlWindow.h"
 #include <vector>
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Position.h"
 #include "Model/Weapons/Rocket.h"
 #include <memory>

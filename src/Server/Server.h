@@ -6,7 +6,8 @@
 #include "AcceptedPlayer.h"
 #include <vector>
 #include "Model/Model.h"
-#include "YAMLReader.h"
+#include "MapReader.h"
+#include "ConfigurationReader.h"
 
 #define MAX_LISTEN 10
 
@@ -27,7 +28,7 @@ public:
 	CommunicationQueue commonQueue;
 
 private:
-	YAMLReader config;
+	MapReader mapLayout;
 	unsigned maxPlayers;
 	bool manualShutDown;
 	Socket acceptSkt;

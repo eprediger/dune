@@ -6,7 +6,7 @@
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-                                            GlobalConfig.buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime),
                   player, view, queue),
     constructor(constructor) {}
 
@@ -23,7 +23,7 @@ void ButtonHandlerSpiceSilo::execute() {
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {
-    return (player.gold >= GlobalConfig.spiceSiloCost);
+    return (player.gold >= GameConfiguration::getConfig().spiceSiloCost);
 }
 
 bool ButtonHandlerSpiceSilo::finishAction() {
@@ -32,9 +32,9 @@ bool ButtonHandlerSpiceSilo::finishAction() {
 
 void ButtonHandlerSpiceSilo::executeReady() {
     constructor.building = Building::SPICE_SILO;
-    constructor.cost = GlobalConfig.spiceSiloCost;
-    constructor.width = GlobalConfig.spiceSiloSpicWidth;
-    constructor.height = GlobalConfig.spiceSiloSpicHeight;
+    constructor.cost = GameConfiguration::getConfig().spiceSiloCost;
+    constructor.width = GameConfiguration::getConfig().spiceSiloSpicWidth;
+    constructor.height = GameConfiguration::getConfig().spiceSiloSpicHeight;
     constructor.on = true;
 }
 

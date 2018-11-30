@@ -1,0 +1,49 @@
+SPEED_FACTOR: 84
+RANGE_FACTOR: 2000
+TIME_FACTOR: 1
+buildings:
+  constructionTime: 100
+  constructionYard:
+    energy: 0
+    cost: 0
+    hitPoints: 3000
+    width: 3
+    height: 3
+  windTrap:
+    energy: 500
+    cost: 800
+    hitPoints: 500
+    width: 3
+    height: 3
+  lightFactory:
+    energy: 500
+    cost: 800
+    hitPoints: 500
+    width: 3
+    height: 3
+  heavyFactory:
+    energy: 800
+    cost: 1500
+    hitPoints: 1500
+    width: 4
+    height: 4
+  spiceRefinery:
+    energy: 400
+    cost: 500
+    hitPoints: 500
+    spiceCapacity: 5000
+    width: 3
+    height: 3
+  spiceSilo:
+    energy: 100
+    cost: 200
+    hitPoints: 200
+    spiceCapacity: 1000
+    width: 1
+    height: 1
+  barracks:
+    energy: 100
+    cost: 300
+    hitPoints: 300
+    width: 3
+    height: 2

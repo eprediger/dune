@@ -1,5 +1,5 @@
 #include "Building.h"
-#include "../Player.h"
+#include <Model/Player.h>
 #include <iostream>
 
 int Building::counter = 0;

@@ -1,16 +1,17 @@
+#include <Model/GameConfiguration.h>
 #include "SpiceRefinery.h"
 
-#include "../Player.h"
+#include <Model/Player.h>
 
 SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,
-                 GlobalConfig.spiceRefineryEnergy,
-                 GlobalConfig.spiceRefineryCost,
-                 GlobalConfig.spiceRefineryHitPoints,
-                 GlobalConfig.spiceRefinerySpicWidth,
-                 GlobalConfig.spiceRefinerySpicHeight,
+                 GameConfiguration::getConfig().spiceRefineryEnergy,
+                 GameConfiguration::getConfig().spiceRefineryCost,
+                 GameConfiguration::getConfig().spiceRefineryHitPoints,
+                 GameConfiguration::getConfig().spiceRefinerySpicWidth,
+                 GameConfiguration::getConfig().spiceRefinerySpicHeight,
                  SPICE_REFINERY),
-		capacity(GlobalConfig.spiceRefinerySpiceCapacity) ,
+		capacity(GameConfiguration::getConfig().spiceRefinerySpiceCapacity) ,
 		availableCapacity(0)
 {}
 

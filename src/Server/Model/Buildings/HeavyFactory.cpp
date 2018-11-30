@@ -1,12 +1,13 @@
+#include <Model/GameConfiguration.h>
 #include "HeavyFactory.h"
 
 HeavyFactory::HeavyFactory(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,
-                 GlobalConfig.heavyFactoryEnergy,
-                 GlobalConfig.heavyFactoryCost,
-                 GlobalConfig.heavyFactoryHitPoints, 
-                 GlobalConfig.heavyFactoryWidth,
-                 GlobalConfig.heavyFactoryHeight,
+                 GameConfiguration::getConfig().heavyFactoryEnergy,
+                 GameConfiguration::getConfig().heavyFactoryCost,
+                 GameConfiguration::getConfig().heavyFactoryHitPoints,
+                 GameConfiguration::getConfig().heavyFactoryWidth,
+                 GameConfiguration::getConfig().heavyFactoryHeight,
                  HEAVY_FACTORY)
 {}
 

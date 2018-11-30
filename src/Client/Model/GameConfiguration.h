@@ -1,59 +1,71 @@
-#ifndef __GLOBALCONFIG_H__
-#define __GLOBALCONFIG_H__
+#ifndef __GAME_CONFIGURATION_H__
+#define __GAME_CONFIGURATION_H__
 
-#define SPEED_FACTOR 20//(84*3)
-#define RANGE_FACTOR 2000
+#include <json.hpp>
 
-#define TIME_FACTOR 1
+class GameConfiguration {
+private:
+	explicit GameConfiguration(nlohmann::json& j);
+	static std::unique_ptr<GameConfiguration> instance;
 
-typedef struct {
+public:
+
+	~GameConfiguration() = default;
+
+	static void init(nlohmann::json& j);
+	static GameConfiguration& getConfig();
+
+// private:
+	const int SPEED_FACTOR; // (84*3)
+	const int RANGE_FACTOR; // 2000
+	const int TIME_FACTOR; // 1
 // Building Stats
 	// Tiempo de costruccion de edificios
-	const int buildingConstructionTime	= 100*TIME_FACTOR;
+	const int buildingConstructionTime;
 	// Centro de Construcción
-	const int constructionYardEnergy	= 0;
-	const int constructionYardCost		= 0;
-	const int constructionYardHitPoints	= 3000;
-	const int constructionYardWidth 	= 3;
-	const int constructionYardHeight	= 3;
+	const int constructionYardEnergy;
+	const int constructionYardCost;
+	const int constructionYardHitPoints;
+	const int constructionYardWidth ;
+	const int constructionYardHeight;
 	// Trampas de Aire
-	const int windTrapEnergy	= 500;
-	const int windTrapCost		= 800;
-	const int windTrapHitPoints	= 500;
-	const int windTrapWidth 	= 3;
-	const int windTrapHeight	= 3;
+	const int windTrapEnergy;
+	const int windTrapCost;
+	const int windTrapHitPoints;
+	const int windTrapWidth ;
+	const int windTrapHeight;
 	// Fabrica Ligera
-	const int lightFactoryEnergy	= 500;
-	const int lightFactoryCost		= 800;
-	const int lightFactoryHitPoints	= 500;
-	const int lightFactoryWidth 	= 3;
-	const int lightFactoryHeight	= 3;
+	const int lightFactoryEnergy;
+	const int lightFactoryCost;
+	const int lightFactoryHitPoints;
+	const int lightFactoryWidth ;
+	const int lightFactoryHeight;
 	// Fabrica Pesada
-	const int heavyFactoryEnergy	= 800;
-	const int heavyFactoryCost		= 1500;
-	const int heavyFactoryHitPoints	= 1500;
-	const int heavyFactoryWidth 	= 4;
-	const int heavyFactoryHeight	= 4;
+	const int heavyFactoryEnergy;
+	const int heavyFactoryCost;
+	const int heavyFactoryHitPoints;
+	const int heavyFactoryWidth ;
+	const int heavyFactoryHeight;
 	// Refinera
-	const int spiceRefineryEnergy			= 400;
-	const int spiceRefineryCost				= 500;
-	const int spiceRefineryHitPoints		= 500;	// el enunciado no dice
-	const int spiceRefinerySpiceCapacity	= 5000;
-	const int spiceRefinerySpicWidth 		= 3;	// enunciado no dice
-	const int spiceRefinerySpicHeight		= 3;	// enunciado no dice
+	const int spiceRefineryEnergy;
+	const int spiceRefineryCost;
+	const int spiceRefineryHitPoints;		// el enunciado no dice
+	const int spiceRefinerySpiceCapacity;
+	const int spiceRefinerySpicWidth ;		// enunciado no dice
+	const int spiceRefinerySpicHeight;		// enunciado no dice
 	// Silo
-	const int spiceSiloEnergy			= 100;
-	const int spiceSiloCost				= 200;
-	const int spiceSiloHitPoints		= 200;
-	const int spiceSiloSpiceCapacity	= 1000;
-	const int spiceSiloSpicWidth 	= 1;
-	const int spiceSiloSpicHeight	= 1;
+	const int spiceSiloEnergy;
+	const int spiceSiloCost;
+	const int spiceSiloHitPoints;
+	const int spiceSiloSpiceCapacity;
+	const int spiceSiloSpicWidth ;
+	const int spiceSiloSpicHeight;
 	// Cuartel
-	const int barracksEnergy	= 100;
-	const int barracksCost		= 300;
-	const int barracksHitPoints	= 300;
-	const int barracksWidth 	= 3;
-	const int barracksHeight	= 2;
+	const int barracksEnergy;
+	const int barracksCost;
+	const int barracksHitPoints;
+	const int barracksWidth ;
+	const int barracksHeight;
 	// Palacio
 	/*const int palaceEnergy		= 800;
 	const int palaceCost		= 2000;
@@ -92,13 +104,13 @@ typedef struct {
 	const int lightInfantryHitPoints	= 50;
 	const int lightInfantryRange		= RANGE_FACTOR * 3;
 	const int lightInfantrySpeed		= SPEED_FACTOR / 16;
-	const int lightInfantryTrainingTime	= 60*TIME_FACTOR;
+	const int lightInfantryTrainingTime	= 60 * TIME_FACTOR;
 	const int lightInfantryCost			= 50;
 	// Infanteria Pesada
 	const int heavyInfantryHitPoints	= 80;
 	const int heavyInfantryRange		= RANGE_FACTOR * 3;
 	const int heavyInfantrySpeed		= SPEED_FACTOR / 14;
-	const int heavyInfantryTrainingTime	= 78*TIME_FACTOR;
+	const int heavyInfantryTrainingTime	= 78 * TIME_FACTOR;
 	const int heavyInfantryCost			= 70;
 	// Fremen
 	/*
@@ -119,30 +131,29 @@ typedef struct {
 // Vehicles
 	// Cosechadora
 	const int harvesterHitPoints		= 600;
-	//const int harvesterRange			= RANGE_FACTOR*0;
 	const int harvesterSpeed			= SPEED_FACTOR / 12;
-	const int harvesterConstructionTime	= 180*TIME_FACTOR;
+	const int harvesterConstructionTime	= 180 * TIME_FACTOR;
 	const int harvesterCost				= 300;
 	const int harvesterSpiceCapacity	= 200;
-	const int harvesterFarmSpeed        = 20;
-	const int harvesterLoadSpeed        = 5;
+	const int harvesterFarmSpeed        = 20 * TIME_FACTOR;
+	const int harvesterLoadSpeed        = 5 * TIME_FACTOR;
 	// Trike
 	const int trikeHitPoints		= 80;
 	const int trikeRange			= RANGE_FACTOR * 4;
 	const int trikeSpeed			= SPEED_FACTOR / 64;
-	const int trikeConstructionTime	= 120*TIME_FACTOR;
+	const int trikeConstructionTime	= 120 * TIME_FACTOR;
 	const int trikeCost				= 100;
 	// Raider
 	const int raiderHitPoints			= 80;
 	const int raiderRange				= RANGE_FACTOR * 4;
 	const int raiderSpeed				= SPEED_FACTOR / 84;
-	const int raiderConstructionTime	= 120*TIME_FACTOR;
+	const int raiderConstructionTime	= 120 * TIME_FACTOR;
 	const int raiderCost				= 100;
 	// Tanque
 	const int tankHitPoints			= 30;
 	const int tankRange				= RANGE_FACTOR * 4;
 	const int tankSpeed				= SPEED_FACTOR / 40;
-	const int tankConstructionTime	= 240*TIME_FACTOR;
+	const int tankConstructionTime	= 240 * TIME_FACTOR;
 	const int tankCost				= 300;
 	// Tanque Sonico
 	/*
@@ -168,8 +179,9 @@ typedef struct {
 	const int desvastatorConstructionTime	= 300;
 	const int desvastatorCost				= 400;
 	*/
-} config_t;
 
-extern config_t GlobalConfig;
+	void initwithJson(nlohmann::json j);
 
-#endif
+};
+
+#endif	// __GAME_CONFIGURATION_H__

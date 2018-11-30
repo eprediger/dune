@@ -5,7 +5,7 @@
 
 ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
-                                            GlobalConfig.harvesterConstructionTime),
+                                            GameConfiguration::getConfig().harvesterConstructionTime),
                       player, view, queue) {}
 
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
@@ -20,7 +20,7 @@ void ButtonHandlerHarvester::execute() {
 }
 
 bool ButtonHandlerHarvester::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.harvesterCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().harvesterCost)) &&
 	        (player.hasBuilding(Building::HEAVY_FACTORY)));
 }
 

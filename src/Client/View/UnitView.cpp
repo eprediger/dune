@@ -3,7 +3,7 @@
 #include "SdlTexture.h"
 #include "Position.h"
 #include "Orientation.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include <map>
 #include <vector>
 #include <memory>

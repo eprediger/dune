@@ -1,10 +1,11 @@
+#include <Model/GameConfiguration.h>
 #include "AssaultRifle.h"
-#include "Model/GlobalConfig.h"
+
 
 AssaultRifle::AssaultRifle() :
-	Weapon(GlobalConfig.assaultRifleDamage,
-		   GlobalConfig.assaultRifleShootingRate,
-		   GlobalConfig.assaultRifleBonus) {}
+	Weapon(GameConfiguration::getConfig().assaultRifleDamage,
+		   GameConfiguration::getConfig().assaultRifleShootingRate,
+		   GameConfiguration::getConfig().assaultRifleBonus) {}
 
 AssaultRifle::~AssaultRifle() {}
 

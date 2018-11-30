@@ -1,12 +1,7 @@
 #include <cstdlib>
 #include <iostream>
-#include "Model/GlobalConfig.h"
 #include "Server.h"
 #include "ExitThread.h"
-
-config_t GlobalConfig;
-
-// ./server 10001 2 mapa.yaml
 
 int main(int argc, char const *argv[]) {
 	if (argc != SRV_ARGS) {

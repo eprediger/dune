@@ -1,7 +1,7 @@
 #include "LightFactoryView.h"
 #include "BuildingView.h"
 #include "Model/Buildings/LightFactory.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

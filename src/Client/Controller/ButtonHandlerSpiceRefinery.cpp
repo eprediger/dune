@@ -6,7 +6,7 @@
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
-                                            GlobalConfig.buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime),
                   player, view, queue),
     constructor(constructor) {}
 
@@ -22,7 +22,7 @@ void ButtonHandlerSpiceRefinery::execute() {
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {
-    return (this->player.gold >= GlobalConfig.spiceRefineryCost);
+    return (this->player.gold >= GameConfiguration::getConfig().spiceRefineryCost);
 }
 
 bool ButtonHandlerSpiceRefinery::finishAction() {
@@ -31,9 +31,9 @@ bool ButtonHandlerSpiceRefinery::finishAction() {
 
 void ButtonHandlerSpiceRefinery::executeReady() {
     constructor.building = Building::SPICE_REFINERY;
-    constructor.cost = GlobalConfig.spiceRefineryCost;
-    constructor.width = GlobalConfig.spiceRefinerySpicWidth;
-    constructor.height = GlobalConfig.spiceRefinerySpicHeight;
+    constructor.cost = GameConfiguration::getConfig().spiceRefineryCost;
+    constructor.width = GameConfiguration::getConfig().spiceRefinerySpicWidth;
+    constructor.height = GameConfiguration::getConfig().spiceRefinerySpicHeight;
     constructor.on = true;
 }
 

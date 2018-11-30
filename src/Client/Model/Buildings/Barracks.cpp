@@ -1,5 +1,5 @@
 #include "Barracks.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 Barracks::Barracks(nlohmann::json& j) :
 	Building(j) {}

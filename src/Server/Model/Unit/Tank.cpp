@@ -1,10 +1,10 @@
+#include <Model/GameConfiguration.h>
 #include "Tank.h"
 #include "Model/Weapons/Weapons.h"
-#include "Model/GlobalConfig.h"
 
 Tank::Tank(int x, int y) :
-        OffensiveUnit(x, y, GlobalConfig.tankHitPoints, GlobalConfig.tankRange, Weapons::cannon, GlobalConfig.tankSpeed,
-                      GlobalConfig.tankCost)
+        OffensiveUnit(x, y, GameConfiguration::getConfig().tankHitPoints, GameConfiguration::getConfig().tankRange, Weapons::cannon, GameConfiguration::getConfig().tankSpeed,
+                      GameConfiguration::getConfig().tankCost)
 {
         serialization["subClass"] = "Tank";
 }

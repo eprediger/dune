@@ -8,7 +8,7 @@
 #include "Player.h"
 #include <memory>
 #include <map>
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Position.h"
 #include <nlohmann/json.hpp>
 

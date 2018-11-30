@@ -5,7 +5,7 @@
 
 ButtonHandlerTrike::ButtonHandlerTrike(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
-                                            GlobalConfig.trikeConstructionTime),
+                                            GameConfiguration::getConfig().trikeConstructionTime),
                       player, view, queue) {
 }
 
@@ -21,7 +21,7 @@ void ButtonHandlerTrike::execute() {
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.trikeCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().trikeCost)) &&
 	        (player.hasBuilding(Building::LIGHT_FACTORY)));
 } 
 

@@ -5,11 +5,12 @@
 
 class YAMLReader {
 public:
-    explicit YAMLReader(const char *filename);
-    ~YAMLReader();
-    unsigned getPlayers();
-private:
-    YAML::Node file;
+	explicit YAMLReader(const char *filename);
+
+	virtual ~YAMLReader() = default;
+
+protected:
+	YAML::Node config;
 };
 
 #endif  // __YAML_READER_H__

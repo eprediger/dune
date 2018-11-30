@@ -6,7 +6,7 @@
 
 #include "Unit.h"
 
-#include "../Map.h"
+#include <Model/Map.h>
 
 class OffensiveUnit : public Unit, public Attacker {
 public:

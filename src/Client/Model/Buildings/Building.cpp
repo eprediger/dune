@@ -1,6 +1,6 @@
 #include "Building.h"
 #include <nlohmann/json.hpp>
-#include "../Map.h"
+#include <Model/Map.h>
 
 Building::Building(nlohmann::json& j):
 	width(j["width"]),

@@ -1,3 +1,4 @@
+#include <Model/GameConfiguration.h>
 #include "Harvester.h"
 
 #include "Model/Map.h"
@@ -6,15 +7,15 @@
 
 Harvester::Harvester(int x, int y) :
 	Unit(x, y,
-	     GlobalConfig.harvesterHitPoints,
-	     GlobalConfig.harvesterSpeed,
-	     GlobalConfig.harvesterCost),
-	spiceCapacity(GlobalConfig.harvesterSpiceCapacity),
+	     GameConfiguration::getConfig().harvesterHitPoints,
+	     GameConfiguration::getConfig().harvesterSpeed,
+	     GameConfiguration::getConfig().harvesterCost),
+	spiceCapacity(GameConfiguration::getConfig().harvesterSpiceCapacity),
 	spiceCollected(0),
 	refinery(nullptr),
-	farm_speed(GlobalConfig.harvesterFarmSpeed),
+	farm_speed(GameConfiguration::getConfig().harvesterFarmSpeed),
 	actual_farm_speed(0),
-	load_speed(GlobalConfig.harvesterLoadSpeed),
+	load_speed(GameConfiguration::getConfig().harvesterLoadSpeed),
 	actual_load_speed(0)
 {
 	serialization["subClass"] = "Harvester";
@@ -48,7 +49,7 @@ UnitState *Harvester::makeFollow(Map &map) {
 
 #include <iostream>
 UnitState *Harvester::makeFarming(Map &map) {
-	if (actual_farm_speed++ < farm_speed*TIME_FACTOR){
+	if (actual_farm_speed++ < farm_speed){
 		return (UnitState *) &Unit::farming;
 	} else {
         actual_farm_speed = 0;
@@ -91,7 +92,7 @@ UnitState *Harvester::makeFarming(Map &map) {
 }
 
 UnitState *Harvester::makeLoading(Map &map) {
-	if (actual_load_speed++ < load_speed*TIME_FACTOR){
+	if (actual_load_speed++ < load_speed){
 		return (UnitState *) &Unit::loading;
     } else {
         actual_load_speed = 0;

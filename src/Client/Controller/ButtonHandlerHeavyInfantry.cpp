@@ -5,7 +5,7 @@
 
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
-                                            GlobalConfig.heavyInfantryTrainingTime),
+                                            GameConfiguration::getConfig().heavyInfantryTrainingTime),
                      player, view, queue) {
 }
 
@@ -21,7 +21,7 @@ void ButtonHandlerHeavyInfantry::execute() {
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {
-	return (((player.gold >= GlobalConfig.heavyInfantryCost)) &&
+	return (((player.gold >= GameConfiguration::getConfig().heavyInfantryCost)) &&
 	        (player.hasBuilding(Building::BARRACKS)));
 }
 

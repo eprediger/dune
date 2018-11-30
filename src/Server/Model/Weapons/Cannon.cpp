@@ -1,10 +1,11 @@
+#include <Model/GameConfiguration.h>
 #include "Cannon.h"
-#include "Model/GlobalConfig.h"
+
 
 Cannon::Cannon() :
-	Weapon(GlobalConfig.cannonDamage,
-		   GlobalConfig.cannonShootingRate,
-		   GlobalConfig.cannonBonus) {}
+	Weapon(GameConfiguration::getConfig().cannonDamage,
+		   GameConfiguration::getConfig().cannonShootingRate,
+		   GameConfiguration::getConfig().cannonBonus) {}
 
 Cannon::~Cannon() {}
 

@@ -5,8 +5,8 @@
 #include "Socket.h"
 #include "Server.h"
 #include <string>
-#include "../Common/ClientSender.h"
-#include "../Common/ClientReceiver.h"
+#include <ClientSender.h>
+#include <ClientReceiver.h>
 
 class Server;
 

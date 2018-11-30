@@ -1,7 +1,7 @@
 #include "WindTrapView.h"
 #include "BuildingView.h"
 #include "Model/Buildings/WindTrap.h"
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Position.h"
 #include "SdlWindow.h"
 #include "SdlTexture.h"

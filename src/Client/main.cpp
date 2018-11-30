@@ -2,7 +2,7 @@
 #include <string>
 
 #include <nlohmann/json.hpp>
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 #include "Application.h"
 #include "Codes.h"
@@ -17,7 +17,6 @@
 #define MAX_FPS 60
 #define SECOND  1000
 
-config_t GlobalConfig;
 
 int main(int argc, const char *argv[]) {
     if (argc != CLT_ARGS) {
@@ -40,6 +39,8 @@ int main(int argc, const char *argv[]) {
             Model model(mapFile, queue);
             nlohmann::json player = queue.dequeue();
             model.addPlayer(player);
+            nlohmann::json gameConfig = queue.dequeue();
+            GameConfiguration::init(gameConfig);
             Player& myPlayer = model.getPlayer(player["id"]);
             GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
             GameInterface interface(model, gameView);

@@ -2,13 +2,13 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue):
 	ButtonHandler(
 	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-	                              GlobalConfig.buildingConstructionTime),
+	                              GameConfiguration::getConfig().buildingConstructionTime),
 	    player,
 	    view, queue),
 	constructor(constructor) {
@@ -30,7 +30,7 @@ void ButtonHandlerBarracks::execute() {
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
-	return (this->player.gold >= GlobalConfig.barracksCost);
+	return (this->player.gold >= GameConfiguration::getConfig().barracksCost);
 }
 
 bool ButtonHandlerBarracks::finishAction() {
@@ -39,9 +39,9 @@ bool ButtonHandlerBarracks::finishAction() {
 
 void ButtonHandlerBarracks::executeReady() {
 	constructor.building = Building::BARRACKS;
-	constructor.cost = GlobalConfig.barracksCost;
-	constructor.width = GlobalConfig.barracksWidth;
-	constructor.height = GlobalConfig.barracksHeight;
+	constructor.cost = GameConfiguration::getConfig().barracksCost;
+	constructor.width = GameConfiguration::getConfig().barracksWidth;
+	constructor.height = GameConfiguration::getConfig().barracksHeight;
 	constructor.on = true;
 }
 

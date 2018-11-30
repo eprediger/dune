@@ -1,10 +1,10 @@
 #include "RocketLauncher.h"
-#include "Model/GlobalConfig.h"
+#include <Model/GameConfiguration.h>
 
 RocketLauncher::RocketLauncher() :
-	Weapon(GlobalConfig.rocketLauncherDamage,
-		   GlobalConfig.rocketLauncherShootingRate,
-		   GlobalConfig.rocketLauncherBonus) {}
+	Weapon(GameConfiguration::getConfig().rocketLauncherDamage,
+		   GameConfiguration::getConfig().rocketLauncherShootingRate,
+		   GameConfiguration::getConfig().rocketLauncherBonus) {}
 
 RocketLauncher::~RocketLauncher() {}
 

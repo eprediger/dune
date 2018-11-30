@@ -1,12 +1,13 @@
+#include <Model/GameConfiguration.h>
 #include "ConstructionYard.h"
 
 ConstructionYard::ConstructionYard(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,
-                 GlobalConfig.constructionYardEnergy,
-                 GlobalConfig.constructionYardCost,
-                 GlobalConfig.constructionYardHitPoints,
-                 GlobalConfig.constructionYardWidth,
-                 GlobalConfig.constructionYardHeight,
+                 GameConfiguration::getConfig().constructionYardEnergy,
+                 GameConfiguration::getConfig().constructionYardCost,
+                 GameConfiguration::getConfig().constructionYardHitPoints,
+                 GameConfiguration::getConfig().constructionYardWidth,
+                 GameConfiguration::getConfig().constructionYardHeight,
                  CONSTRUCTION_YARD)
 {}
 

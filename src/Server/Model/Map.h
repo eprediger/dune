@@ -9,7 +9,7 @@
 #include "Player.h"
 #include <memory>
 #include <map>
-#include "../../Common/Area.h"
+#include <Area.h>
 #include "Position.h"
 // Configurar aca el tamaño de los bloques
 #define BLOCK_HEIGHT 32

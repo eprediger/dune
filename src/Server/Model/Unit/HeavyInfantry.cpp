@@ -1,10 +1,10 @@
+#include <Model/GameConfiguration.h>
 #include "HeavyInfantry.h"
 #include "Model/Weapons/Weapons.h"
-#include "Model/GlobalConfig.h"
 
 HeavyInfantry::HeavyInfantry(int x, int y) 
-		:OffensiveUnit(x, y, GlobalConfig.heavyInfantryHitPoints, GlobalConfig.heavyInfantryRange,
-					  Weapons::rocketLauncher, GlobalConfig.heavyInfantrySpeed, GlobalConfig.heavyInfantryCost)
+		:OffensiveUnit(x, y, GameConfiguration::getConfig().heavyInfantryHitPoints, GameConfiguration::getConfig().heavyInfantryRange,
+					  Weapons::rocketLauncher, GameConfiguration::getConfig().heavyInfantrySpeed, GameConfiguration::getConfig().heavyInfantryCost)
 		,rocket(nullptr)
 {
 	serialization["subClass"] = "HeavyInfantry";
