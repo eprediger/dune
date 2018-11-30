@@ -5,47 +5,55 @@
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
 GameConfiguration::GameConfiguration(nlohmann::json& j) :
-	SPEED_FACTOR(j["SPEED_FACTOR"]),
-	RANGE_FACTOR(j["RANGE_FACTOR"]),
-	TIME_FACTOR(j["TIME_FACTOR"]),
 	buildingConstructionTime(j["buildingConstructionTime"]),
-	constructionYardEnergy(j["constructionYardEnergy"]),
+	
 	constructionYardCost(j["constructionYardCost"]),
-	constructionYardHitPoints(j["constructionYardHitPoints"]),
 	constructionYardWidth(j["constructionYardWidth"]),
 	constructionYardHeight(j["constructionYardHeight"]),
-	windTrapEnergy(j["windTrapEnergy"]),
+	
 	windTrapCost(j["windTrapCost"]),
-	windTrapHitPoints(j["windTrapHitPoints"]),
 	windTrapWidth(j["windTrapWidth"]),
 	windTrapHeight(j["windTrapHeight"]),
-	lightFactoryEnergy(j["lightFactoryEnergy"]),
+	
 	lightFactoryCost(j["lightFactoryCost"]),
-	lightFactoryHitPoints(j["lightFactoryHitPoints"]),
 	lightFactoryWidth(j["lightFactoryWidth"]),
 	lightFactoryHeight(j["lightFactoryHeight"]),
-	heavyFactoryEnergy(j["heavyFactoryEnergy"]),
+	
 	heavyFactoryCost(j["heavyFactoryCost"]),
-	heavyFactoryHitPoints(j["heavyFactoryHitPoints"]),
 	heavyFactoryWidth(j["heavyFactoryWidth"]),
 	heavyFactoryHeight(j["heavyFactoryHeight"]),
-	spiceRefineryEnergy(j["spiceRefineryEnergy"]),
+	
 	spiceRefineryCost(j["spiceRefineryCost"]),
-	spiceRefineryHitPoints(j["spiceRefineryHitPoints"]),
 	spiceRefinerySpiceCapacity(j["spiceRefinerySpiceCapacity"]),
-	spiceRefinerySpicWidth(j["spiceRefinerySpicWidth"]),
-	spiceRefinerySpicHeight(j["spiceRefinerySpicHeight"]),
-	spiceSiloEnergy(j["spiceSiloEnergy"]),
+	spiceRefineryWidth(j["spiceRefineryWidth"]),
+	spiceRefineryHeight(j["spiceRefineryHeight"]),
+	
 	spiceSiloCost(j["spiceSiloCost"]),
-	spiceSiloHitPoints(j["spiceSiloHitPoints"]),
 	spiceSiloSpiceCapacity(j["spiceSiloSpiceCapacity"]),
-	spiceSiloSpicWidth(j["spiceSiloSpicWidth"]),
-	spiceSiloSpicHeight(j["spiceSiloSpicHeight"]),
-	barracksEnergy(j["barracksEnergy"]),
+	spiceSiloWidth(j["spiceSiloWidth"]),
+	spiceSiloHeight(j["spiceSiloHeight"]),
+	
 	barracksCost(j["barracksCost"]),
-	barracksHitPoints(j["barracksHitPoints"]),
 	barracksWidth(j["barracksWidth"]),
-	barracksHeight(j["barracksHeight"]) {}
+	barracksHeight(j["barracksHeight"]),
+	
+	lightInfantryTrainingTime(j["lightInfantryTrainingTime"]),
+	lightInfantryCost(j["lightInfantryCost"]),
+	
+	heavyInfantryTrainingTime(j["heavyInfantryTrainingTime"]),
+	heavyInfantryCost(j["heavyInfantryCost"]),
+	
+	harvesterConstructionTime(j["harvesterConstructionTime"]),
+	harvesterCost(j["harvesterCost"]),
+	
+	trikeConstructionTime(j["trikeConstructionTime"]),
+	trikeCost(j["trikeCost"]),
+	
+	raiderConstructionTime(j["raiderConstructionTime"]),
+	raiderCost(j["raiderCost"]),
+	
+	tankConstructionTime(j["tankConstructionTime"]),
+	tankCost(j["tankCost"]) {}
 
 void GameConfiguration::init(nlohmann::json& j) {
 	if (instance == nullptr) {

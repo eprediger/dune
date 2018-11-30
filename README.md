@@ -17,19 +17,19 @@ Instalación de librerías externas:
 
 	sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev libyaml-cpp-dev nlohmann-json-dev
 
-Instalación librería libsdl2-mixer-dev versión 2.0.1:
+Instalacion libreria libsdl2-mixer-dev version 2.0.1:
 
 	https://packages.ubuntu.com/xenial/amd64/libsdl2-mixer-2.0-0/download
 	https://packages.ubuntu.com/xenial/amd64/libsdl2-mixer-dev/download
 
-	Instalación [amd64]: sudo dpkg -i libsdl2-mixer-2.0-0_2.0.1+dfsg1-1_amd64.deb
-	Instalación [amd64]: sudo dpkg -i libsdl2-mixer-dev_2.0.1+dfsg1-1_amd64.deb
+	Instalacion [amd64]: sudo dpkg -i libsdl2-mixer-2.0-0_2.0.1+dfsg1-1_amd64.deb
+	Instalacion [amd64]: sudo dpkg -i libsdl2-mixer-dev_2.0.1+dfsg1-1_amd64.deb
 
-Instalación librería nlohmann-json-dev (solo en caso de no tener Ubuntu 18):
+Instalacion libreria nlohmann-json-dev (solo en caso de no tener Ubuntu 18):
 
 	https://packages.ubuntu.com/bionic/all/nlohmann-json-dev/download
 
-	Instalación [amd64]: sudo dpkg -i nlohmann-json-dev_2.1.1-1.1_all.deb
+	Instalacion [amd64]: sudo dpkg -i nlohmann-json-dev_2.1.1-1.1_all.deb
 
 Compilación desde carpeta de proyecto:
 
@@ -41,7 +41,7 @@ Ejecución desde carpeta build/:
 
 ## USER STORIES
 
-1. ~~El juego finaliza cuando se destruyen todos los centros de construcción menos uno, el jugador cuyo centro queda en pie, será el ganador,~~ informándole a todos los clientes si resultaron victoriosos o derrotados.
+1. ~~El juego finaliza cuando se destruyen todos los centros de construcción menos uno, el jugador cuyo centro queda en pie, será el ganador,~~ informandole a todos los clientes si resultaron victoriosos o derrotados.
 
 2. ~~Al seleccionar una unidad con click izquierdo o varias arrastrando el mouse con el click presionado~~, se informa por mensaje de voz la unidad seleccionada, ~~y enviarla a atacar a una unidad enemiga, haciendo click derecho sobre esta, se acercará hasta encontrarse en rango y ahí comenzará el ataque. Si la atacada se desplaza, por ejemplo, intentando escapar, la atacante comenzará a perseguirla automáticamente, hasta encontrarse dentro de su rango de ataque.~~
 
@@ -76,7 +76,7 @@ Ejecución desde carpeta build/:
 
 12. Debe aparecer un gusano de arena en intervalos de tiempo aleatorios, en lugares aleatorio, el cual devora cualquier unidad aleatoriamente. Estos no pueden ser atacados. Tras un numero aleatorio de ataques, desaparece.
 
-13. Cuando el jugador seleccione un edificio, se habilitará el botón de venta, sobre el cual al hacer click izquierdo, destruirá el edificio, devolviéndole al jugador una parte de dinero de su costo de construcción.
+13. Cuando el jugador seleccione un edificio, se habilitará el botón de venta, sobre el cual al hacer click izquierdo, destruirá el edificio, devolviendole al jugador una parte de dinero de su costo de construcción.
 
 14. ~~Si una unidad se encuentra quieta y una unidad enemiga ingresa dentro de su rango de ataque, la primera, comenzará a atacarla sin desplazarse. Cuando la segunda salga del rango, detendrá el ataque.~~
 
@@ -123,15 +123,20 @@ Ejecución desde carpeta build/:
 
 ## Listado de bugs
 
-1. ~~Explota durante la animación al intentar renderizar un ataque. ~~
-	
+1. Explota durante la animacion al intentar renderizar un ataque. 
+	* Trace:
+		1. SDL_Texture::render linea 50
+		1. OffensiveUnitView::drawAttack linea 30
+		1. LightInfantryView::draw linea 153
+		1. GameView::render linea 126
+		1. Aplication::render linea 28
 
 2. ~~Al hacer click en los botones de unidades intenta crear el edificio de al lado.~~
-	* Resuelto: el problema esta en la vista del botón el cual toma como ancho y alto el de la imagen. Como el ancho y alto de la imagen es diferente al área de la vista del botón (En los edificios por ejemplo, es el doble de ancho por estar a color y en blanco y negro), el área de "click" es diferente del área de que muestra el botón. Se resuelve quitando el parámetro const de "height" y "width" y asignándoles el ancho y alto del área "dest" durante el render.
+	* Resuelto: el problema esta en la vista del boton el cual toma como ancho y alto el de la imagen. Como el ancho y alto de la imagen es diferente al area de la vista del boton (En los edificios por ejemplo, es el doble de ancho por estar a color y en blanco y negro), el area de "click" es diferente del area de que muestra el boton. Se resuelve quitando el parmetro const de "height" y "width" y asignandoles el ancho y alto del area "dest" durante el render.
 
 3. ~~No se pueden seleccionar unidades~~
 
-4. ~~Arreglar el bug de la desconexión al salir~~
+4. Arreglar el bug de la desconexion al salir
 
 5. ~~Al hacer click en la cruz, no cierra el juego.~~
 
@@ -143,42 +148,43 @@ Ejecución desde carpeta build/:
 
 ## ISSUES
 
-1. Renderizar solamente las unidades que se están viendo (dentro de la cámara)
+1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
 2. Quitar las velocidades con contadores
-3. ~~Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.~~
-4. ~~Modificar el GlobalConfig para que no sea una variable global. Opción: Dejarla Static en el Model~~
+3. Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
+4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
 5. Hacer el instalador "sudo make install"
 	* /bin/dune => ejecutable
-	* /var/dune/assets => todos los assets. Acá se puede cambiar el path en el código (ponerla como absoluto) o poner desde assets y el resto por archivo de configuración (esto solo si hay tiempo)
-	* /etc/dune.cfg => archivo de configuración
+	* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
+	* /etc/dune.cfg => archivo de configuracion
+
 6. Reducir tiempo en CPU 
-7. ~~Ver de mejorar el envío de datos. Tratar de enviar solo novedades~~
-8. Ver en todo caso, cambiar la librería de json
+7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
+8. Ver en todo caso, cambiar la libreria de json
 9. Ver si se puede renderizar solo las novedades (agregar un news = true dentro de cada update)
-10. Ver de renderizar el mapa solamente si cambia la cámara (para esto ver issue 11)
-11. ~~Testear~~ Corregir para que cambie el terreno de arena en base a la especia
+10. Ver de renderizar el mapa solamente si cambia la camara (para esto ver issue 11)
+11. Testear si cambia el terreno de arena en base a la especia
 
-## CORRECCIONES MARTÍN
-
+## CORRECCIONES MARTIN
 * Prioridad Critica
+
 	1. ~~Hacer un mapa con todos los terrenos~~
-	2. ~~Agregar arena al mapa y verificar que funcione la cosecha automática~~
-	3. Revisar capacidad de refinería + silos
-	4. ~~Corregir la distancia de los edificios, se debe construir a NO MAS de 5 bloques de distancia de otro edificio~~ propio
+	2. ~~Agregar arena al mapa y verificar que funcione la cosecha automatica~~
+	3. Revisar capacidad de refineria + silos
+	4. ~~Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)~~
 	5. ~~Corregir~~ Testear velocidad por terrenos
-	6. Reducción de energía edificios (?)
-	7. Ralentización por falta de energía (testear)
-	8. ~~Infantería puede moverse por cimas (testear)~~
+	6. Reduccion de energia edificios (?)
+	7. Ralentizacion por falta de energia (testear)
+	8. Infanteria puede moverse por cimas (testear)
 	9. Efectividad de una unidad sobre otra (bono de armas?)
 	10. ~~Verificar que el tanque aparezca~~
 	11. Mejorar jugabilidad
 	12. Hacer el juego en pantalla completa (permitir alternar)
-	13. Hacer los manuales y documentación
-	14. Borra código comentado!
+	13. Hacer los manuales y documentacion
+	14. Borra codigo comentado!
 	15. ~~Main.cpp agregar loop de juego~~
-	16. Corregir los paths harcodeados para facilitar la instalación
+	16. Corregir los paths harcodeados para facilitar la instalacion
 	17. GameView.cpp : quitar los "magic numbers"
-	18. GameView.cpp : corregir barra de energía RenderVPBar => percentage = 1 - percentage
+	18. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
 	19. ~~GameHandler : variable global actual player~~
 	20. Eliminar prints de debug
 
@@ -197,13 +203,14 @@ Ejecución desde carpeta build/:
 Usar "callgrind" para encontrar donde está consumiendo más memoria
 
 Instalación:
-```
+```bash
 sudo apt-get install kcachegrind
 ```
 
 Uso:
 
-```valgrind --tool=callgrind ./dune_Client
+```bash
+valgrind --tool=callgrind ./dune_Client
 kcachegrind <archivo_salida (callgrind.out.pid)>
 ```
 

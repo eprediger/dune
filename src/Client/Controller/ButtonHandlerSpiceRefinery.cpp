@@ -32,8 +32,8 @@ bool ButtonHandlerSpiceRefinery::finishAction() {
 void ButtonHandlerSpiceRefinery::executeReady() {
     constructor.building = Building::SPICE_REFINERY;
     constructor.cost = GameConfiguration::getConfig().spiceRefineryCost;
-    constructor.width = GameConfiguration::getConfig().spiceRefinerySpicWidth;
-    constructor.height = GameConfiguration::getConfig().spiceRefinerySpicHeight;
+    constructor.width = GameConfiguration::getConfig().spiceRefineryWidth;
+    constructor.height = GameConfiguration::getConfig().spiceRefineryHeight;
     constructor.on = true;
 }
 

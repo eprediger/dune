@@ -33,8 +33,8 @@ bool ButtonHandlerSpiceSilo::finishAction() {
 void ButtonHandlerSpiceSilo::executeReady() {
     constructor.building = Building::SPICE_SILO;
     constructor.cost = GameConfiguration::getConfig().spiceSiloCost;
-    constructor.width = GameConfiguration::getConfig().spiceSiloSpicWidth;
-    constructor.height = GameConfiguration::getConfig().spiceSiloSpicHeight;
+    constructor.width = GameConfiguration::getConfig().spiceSiloWidth;
+    constructor.height = GameConfiguration::getConfig().spiceSiloHeight;
     constructor.on = true;
 }
 

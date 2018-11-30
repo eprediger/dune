@@ -47,3 +47,59 @@ buildings:
     hitPoints: 300
     width: 3
     height: 2
+weaponry:
+  assaultRifle:
+    damage: 2
+    shootingRate: 6
+    bonus: 1
+  cannon:
+    damage: 7
+    shootingRate: 1
+    bonus: 0
+  rocketLauncher:
+    damage: 8
+    shootingRate: 1
+    bonus: 0
+  smallCannon:
+    damage: 6
+    shootingRate: 6
+    bonus: 2
+units:
+  lightInfantry:
+    hitPoints: 50
+    range: 3
+    speed: 16
+    trainingTime: 60
+    cost: 50
+  heavyInfantry:
+    hitPoints: 80
+    range: 3
+    speed: 14
+    trainingTime: 78
+    cost: 70
+  harvester:
+    hitPoints: 600
+    speed: 12
+    trainingTime: 180
+    cost: 300
+    spiceCapacity: 200
+    farmSpeed: 20
+    loadSpeed: 5
+  trike:
+    hitPoints: 80
+    range: 4
+    speed: 64
+    trainingTime: 120
+    cost: 100
+  raider:
+    hitPoints: 80
+    range: 4
+    speed: 84
+    trainingTime: 120
+    cost: 100
+  tank:
+    hitPoints: 30
+    range: 4
+    speed: 40
+    trainingTime: 240
+    cost: 300

@@ -6,7 +6,7 @@
 class Area {
 public:
 	Area(int x, int y, int width, int height);
-	Area(const Position& pos1,const Position& pos2);
+	Area(const Position& pos1, const Position& pos2);
 	void setX(int x);
 	void setY(int y);
 	int getX() const;
