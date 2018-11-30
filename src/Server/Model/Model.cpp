@@ -319,21 +319,21 @@ Unit& Model::getUnitById(int id) {
 }
 
 void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
+    bool news = false;
+    nlohmann::json step;
+    step["class"] = "Step";
+
     for (auto itr = units.begin(); itr != units.end(); ++itr) {
         if (itr->second->hasNews()) {
+            news = true;
             for (auto player : connectedPlayers) {
                 player->queue.enqueue((itr)->second->getSerialization());
             }
         }
     }
 
-    for (auto player : connectedPlayers) {
-        if (players.at(player->getId())->hasNews()) {
-            player->queue.enqueue(players.at(player->getId())->getSerialization());
-        }
-    }
-
     for (auto itr = rockets.begin(); itr != rockets.end(); itr++) {
+        news = true;
         for (auto player : connectedPlayers) {
             player->queue.enqueue((*itr)->getSerialization());
         }
@@ -341,9 +341,26 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
 
     for (auto itr = buildings.begin(); itr != buildings.end(); ++itr) {
         if (itr->second->hasNews()) {
+            news = true;
             for (auto player : connectedPlayers) {
                 player->queue.enqueue((itr->second->getSerialization()));
             }
         }
     }
+
+    for (auto player : connectedPlayers) {
+        if (players.at(player->getId())->hasNews()) {
+            player->queue.enqueue(players.at(player->getId())->getSerialization());
+            if (!news){
+                player->queue.enqueue(step);
+            }
+        }
+    }
+
+    if (news){
+        for (auto player : connectedPlayers){
+            player->queue.enqueue(step);
+        }
+    }
+
 }

@@ -60,12 +60,13 @@ int main(int argc, const char *argv[]) {
                 app.render();
                 app.update();
 
-                while (true) {
-                    nlohmann::json j(queue.dequeue());
-                    interface.execute(j);
-                    if (j["class"] == "Step") break;
+                if (!queue.recvEmpty()){
+                    while (true) {
+                        nlohmann::json j(queue.dequeue());
+                        interface.execute(j);
+                        if (j["class"] == "Step") break;
+                    }
                 }
-                ////// Finaliza el LOOP //////////
 
                 unsigned int loop_end = SDL_GetTicks();
 
