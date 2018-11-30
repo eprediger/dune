@@ -131,7 +131,7 @@ Ejecución desde carpeta build/:
 
 3. ~~No se pueden seleccionar unidades~~
 
-4. Arreglar el bug de la desconexión al salir
+4. ~~Arreglar el bug de la desconexión al salir~~
 
 5. ~~Al hacer click en la cruz, no cierra el juego.~~
 
