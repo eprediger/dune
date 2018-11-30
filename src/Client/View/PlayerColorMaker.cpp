@@ -14,6 +14,11 @@ void PlayerColorMaker::makeColor(Player& player, int* r, int* g, int* b) {
     case 2:
         *g = 150;
         break;
+    case 3:
+        *r = 90;
+        *g = 50;
+        *b = 125;
+        break;
     default:
         break;
     }
@@ -35,6 +40,11 @@ void PlayerColorMaker::menuColor(Player& player, int*r, int*g, int*b) {
         *r = 25;
         *b = 25;
         *g = 150;
+        break;
+    case 3:
+        *r = 90;
+        *g = 50;
+        *b = 125;
         break;
     default:
         break;
@@ -58,6 +68,10 @@ void PlayerColorMaker::textColor(Player& player, int*r, int*g, int*b) {
         *g = 80;
         *b = 0;
         break;
+    case 3:
+        *r = 90;
+        *g = 50;
+        *b = 125;
     default:
         break;
     }
