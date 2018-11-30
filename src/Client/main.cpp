@@ -11,6 +11,7 @@
 #include "View/GameView.h"
 #include "Controller/GameHandler.h"
 #include "GameInterface.h"
+#include "HandlerThread.h"
 
 // ./client 127.0.0.1 10001 ORDOS
 
@@ -46,7 +47,9 @@ int main(int argc, const char *argv[]) {
             GameInterface interface(model, gameView);
             GameHandler gameHandler(gameView, model, queue, myPlayer);
             Application app(gameView, gameHandler, model);
+            HandlerThread handler(app);
 
+            handler.start();
             const int time_step = 16;
             int sleep_extra = 0;
 
@@ -55,12 +58,9 @@ int main(int argc, const char *argv[]) {
 
                 ////// Inicia el LOOP //////////
                 app.render();
-//                app.handleEvent();
-//                if (queue.recvEmpty())
-//                    continue;
-//                interface.execute(queue.dequeue());
+                app.update();
+
                 while (true) {
-                    app.handleEvent();        // Input de usuario
                     nlohmann::json j(queue.dequeue());
                     interface.execute(j);
                     if (j["class"] == "Step") break;
@@ -78,6 +78,8 @@ int main(int argc, const char *argv[]) {
 
                 sleep_extra = (delay_end - loop_end) - sleep_delay;
             }
+
+            handler.join();
             client.disconnect();
         } catch (const SdlException &e) {
             std::cerr << e.what() << std::endl;

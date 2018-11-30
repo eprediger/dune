@@ -24,3 +24,7 @@ void Application::handleEvent() {
 void Application::render() {
 	this->view.render();
 }
+
+void Application::update() {
+	this->handler.update();
+}

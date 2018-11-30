@@ -24,6 +24,8 @@ public:
 	// Renderiza vista
 	void render();
 
+    void update();
+
 private:
 	bool isRunning;
 	// std::string host, port, house;

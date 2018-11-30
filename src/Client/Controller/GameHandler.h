@@ -23,6 +23,8 @@ public:
 
 	bool handleInput() override;
 
+	virtual void update() override;
+
 private:
 	GameView& view;
 	Model& model;

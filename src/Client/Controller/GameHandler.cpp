@@ -54,11 +54,9 @@ GameHandler::~GameHandler() {
 
 bool GameHandler::handleInput() {
     bool keepPlaying = true;
-    for (auto& button : this->buttons) {
-        button->update();
-    }
+
     SDL_Event event;
-    SDL_PollEvent(&event);
+    SDL_WaitEvent(&event);
     switch (event.type) {
     case SDL_QUIT:
         keepPlaying = false;
@@ -154,6 +152,13 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-    this->selector.selection.eraseDeads();
+
     return keepPlaying;
+}
+
+void GameHandler::update() {
+    for (auto& button : this->buttons) {
+        button->update();
+    }
+    this->selector.selection.eraseDeads();
 }
