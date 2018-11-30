@@ -1,9 +1,9 @@
 #ifndef __ACCEPTED_PLAYER_H__
 #define __ACCEPTED_PLAYER_H__
 
-#include "Thread.h"
-#include "Socket.h"
-#include "Server.h"
+#include <Thread.h>
+#include <Socket.h>
+#include <Server.h>
 #include <string>
 #include <ClientSender.h>
 #include <ClientReceiver.h>

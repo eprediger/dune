@@ -1,12 +1,14 @@
 #ifndef __WEAPON_H__
 #define __WEAPON_H__
 
+enum class WeaponType { ASSAULT_RIFLE, CANNON, ROCKET_LAUNCHER, SMALL_CANNON };
+
 class Weapon {
-protected:
+    protected:
     const int damage;
     const int frecuency;
     const int bonus;
-public:
+    public:
     Weapon(int damage, int frecuency, int bonus);
     ~Weapon();
     int getFrecuency() const;
@@ -16,4 +18,4 @@ public:
     virtual int getBuildingBonus() const = 0;
 };
 
-#endif //__WEAPON_H__
+#endif  // __WEAPON_H__

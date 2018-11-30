@@ -6,9 +6,9 @@ SpiceSilo::SpiceSilo(const int x, const int y, int blockWidth, int blockHeight) 
                  GameConfiguration::getConfig().spiceSiloEnergy,
                  GameConfiguration::getConfig().spiceSiloCost,
                  GameConfiguration::getConfig().spiceSiloHitPoints,
-                 GameConfiguration::getConfig().spiceSiloSpicWidth,
-                 GameConfiguration::getConfig().spiceSiloSpicHeight,
+                 GameConfiguration::getConfig().spiceSiloWidth,
+                 GameConfiguration::getConfig().spiceSiloHeight,
                  SPICE_SILO),
-	capacity(GameConfiguration::getConfig().spiceSiloSpiceCapacity)
-{}
+	capacity(GameConfiguration::getConfig().spiceSiloSpiceCapacity) {}
+
 SpiceSilo::~SpiceSilo() {}

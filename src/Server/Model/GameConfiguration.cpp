@@ -1,6 +1,8 @@
 #include <Model/GameConfiguration.h>
 #include <Model/Buildings/Building.h>
+#include <Model/Unit/Unit.h>
 #include <CustomException.h>
+#include <Model/Weapons/Weapon.h>
 
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
@@ -8,104 +10,173 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
 	SPEED_FACTOR(config.getSpeedFactor()),
 	RANGE_FACTOR(config.getRangeFactor()),
 	TIME_FACTOR(config.getTimeFactor()),
+
 	buildingConstructionTime(config.getBuildingConstructionTime() * TIME_FACTOR),
+
 	constructionYardEnergy(config.getEnergyFor(Building::BuildingType::CONSTRUCTION_YARD)),
 	constructionYardCost(config.getCostFor(Building::BuildingType::CONSTRUCTION_YARD)),
 	constructionYardHitPoints(config.getHitPointsFor(Building::BuildingType::CONSTRUCTION_YARD)),
 	constructionYardWidth(config.getWidthFor(Building::BuildingType::CONSTRUCTION_YARD)),
 	constructionYardHeight(config.getHeightFor(Building::BuildingType::CONSTRUCTION_YARD)),
+
 	windTrapEnergy(config.getEnergyFor(Building::BuildingType::WIND_TRAP)),
 	windTrapCost(config.getCostFor(Building::BuildingType::WIND_TRAP)),
 	windTrapHitPoints(config.getHitPointsFor(Building::BuildingType::WIND_TRAP)),
 	windTrapWidth(config.getWidthFor(Building::BuildingType::WIND_TRAP)),
 	windTrapHeight(config.getHeightFor(Building::BuildingType::WIND_TRAP)),
+
 	lightFactoryEnergy(config.getEnergyFor(Building::BuildingType::LIGHT_FACTORY)),
 	lightFactoryCost(config.getCostFor(Building::BuildingType::LIGHT_FACTORY)),
 	lightFactoryHitPoints(config.getHitPointsFor(Building::BuildingType::LIGHT_FACTORY)),
 	lightFactoryWidth(config.getWidthFor(Building::BuildingType::LIGHT_FACTORY)),
 	lightFactoryHeight(config.getHeightFor(Building::BuildingType::LIGHT_FACTORY)),
+
 	heavyFactoryEnergy(config.getEnergyFor(Building::BuildingType::HEAVY_FACTORY)),
 	heavyFactoryCost(config.getCostFor(Building::BuildingType::HEAVY_FACTORY)),
 	heavyFactoryHitPoints(config.getHitPointsFor(Building::BuildingType::HEAVY_FACTORY)),
 	heavyFactoryWidth(config.getWidthFor(Building::BuildingType::HEAVY_FACTORY)),
 	heavyFactoryHeight(config.getHeightFor(Building::BuildingType::HEAVY_FACTORY)),
+
 	spiceRefineryEnergy(config.getEnergyFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceRefineryCost(config.getCostFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceRefineryHitPoints(config.getHitPointsFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceRefinerySpiceCapacity(config.getSpiceCapacityFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceRefinerySpicWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceRefinerySpicHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
+	spiceRefineryWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
+	spiceRefineryHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
+
 	spiceSiloEnergy(config.getEnergyFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceSiloCost(config.getCostFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceSiloHitPoints(config.getHitPointsFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceSiloSpiceCapacity(config.getSpiceCapacityFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloSpicWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloSpicHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
+	spiceSiloWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
+	spiceSiloHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
+
 	barracksEnergy(config.getEnergyFor(Building::BuildingType::BARRACKS)),
 	barracksCost(config.getCostFor(Building::BuildingType::BARRACKS)),
 	barracksHitPoints(config.getHitPointsFor(Building::BuildingType::BARRACKS)),
 	barracksWidth(config.getWidthFor(Building::BuildingType::BARRACKS)),
-	barracksHeight(config.getHeightFor(Building::BuildingType::BARRACKS)) {}
+	barracksHeight(config.getHeightFor(Building::BuildingType::BARRACKS)),
+
+	assaultRifleDamage(config.getDamageFor(WeaponType::ASSAULT_RIFLE)),
+	assaultRifleShootingRate(config.getShootingRateFor(WeaponType::ASSAULT_RIFLE)),
+	assaultRifleBonus(config.getBonusFor(WeaponType::ASSAULT_RIFLE)),
+
+	cannonDamage(config.getDamageFor(WeaponType::CANNON)),
+	cannonShootingRate(config.getShootingRateFor(WeaponType::CANNON)),
+	cannonBonus(config.getBonusFor(WeaponType::CANNON)),
+
+	rocketLauncherDamage(config.getDamageFor(WeaponType::ROCKET_LAUNCHER)),
+	rocketLauncherShootingRate(config.getShootingRateFor(WeaponType::ROCKET_LAUNCHER)),
+	rocketLauncherBonus(config.getBonusFor(WeaponType::ROCKET_LAUNCHER)),
+
+	smallCannonDamage(config.getDamageFor(WeaponType::SMALL_CANNON)),
+	smallCannonShootingRate(config.getShootingRateFor(WeaponType::SMALL_CANNON)),
+	smallCannonBonus(config.getBonusFor(WeaponType::SMALL_CANNON)),
+
+	lightInfantryHitPoints(config.getHitPointsFor(Unit::UnitType::LIGHT_INFANTRY)),
+	lightInfantryRange(config.getRangeFor(Unit::UnitType::LIGHT_INFANTRY) * RANGE_FACTOR),
+	lightInfantrySpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::LIGHT_INFANTRY)),
+	lightInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::LIGHT_INFANTRY) * TIME_FACTOR),
+	lightInfantryCost(config.getCostFor(Unit::UnitType::LIGHT_INFANTRY)),
+
+	heavyInfantryHitPoints(config.getHitPointsFor(Unit::UnitType::HEAVY_INFANTRY)),
+	heavyInfantryRange(config.getRangeFor(Unit::UnitType::HEAVY_INFANTRY) * RANGE_FACTOR),
+	heavyInfantrySpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::HEAVY_INFANTRY)),
+	heavyInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::HEAVY_INFANTRY) * TIME_FACTOR),
+	heavyInfantryCost(config.getCostFor(Unit::UnitType::HEAVY_INFANTRY)),
+
+	harvesterHitPoints(config.getHitPointsFor(Unit::UnitType::HARVESTER)),
+	harvesterSpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::HARVESTER)),
+	harvesterConstructionTime(config.getTrainingTimeFor(Unit::UnitType::HARVESTER) * TIME_FACTOR),
+	harvesterCost(config.getCostFor(Unit::UnitType::HARVESTER)),
+	harvesterSpiceCapacity(config.getSpiceCapacityFor(Unit::UnitType::HARVESTER)),
+	harvesterFarmSpeed(config.getFarmSpeed(Unit::UnitType::HARVESTER) * TIME_FACTOR),
+	harvesterLoadSpeed(config.getLoadSpeed(Unit::UnitType::HARVESTER) * TIME_FACTOR),
+
+	trikeHitPoints(config.getHitPointsFor(Unit::UnitType::TRIKE)),
+	trikeRange(config.getRangeFor(Unit::UnitType::TRIKE) * RANGE_FACTOR),
+	trikeSpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::TRIKE)),
+	trikeConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TRIKE) * TIME_FACTOR),
+	trikeCost(config.getCostFor(Unit::UnitType::TRIKE)),
+
+	raiderHitPoints(config.getHitPointsFor(Unit::UnitType::RAIDER)),
+	raiderRange(config.getRangeFor(Unit::UnitType::RAIDER) * RANGE_FACTOR),
+	raiderSpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::RAIDER)),
+	raiderConstructionTime(config.getTrainingTimeFor(Unit::UnitType::RAIDER) * TIME_FACTOR),
+	raiderCost(config.getCostFor(Unit::UnitType::RAIDER)),
+
+	tankHitPoints(config.getHitPointsFor(Unit::UnitType::TANK)),
+	tankRange(config.getRangeFor(Unit::UnitType::TANK) * RANGE_FACTOR),
+	tankSpeed(SPEED_FACTOR / config.getSpeedFor(Unit::UnitType::TANK)),
+	tankConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TANK) * TIME_FACTOR),
+	tankCost(config.getCostFor(Unit::UnitType::TANK)) {}
 
 void GameConfiguration::init(const char *string) {
-	if (instance == nullptr){
+	if (instance == nullptr) {
 		ConfigurationReader config(string);
 		instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
 	}
 }
 
-GameConfiguration &GameConfiguration::getConfig() {
-	if (instance == nullptr){
-		// throw CustomException("Game Configuration Not initialized");
+GameConfiguration& GameConfiguration::getConfig() {
+	if (instance == nullptr) {
 		ConfigurationReader config("../gameConfig.yaml");
 		instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
-
 	}
 	return *instance;
 }
 
-nlohmann::json GameConfiguration::initwithJson() {
+nlohmann::json GameConfiguration::initWithJson() {
 	nlohmann::json j;
-	j["SPEED_FACTOR"] = this->SPEED_FACTOR;
-	j["RANGE_FACTOR"] = this->RANGE_FACTOR;
-	j["TIME_FACTOR"] = this->TIME_FACTOR;
+
 	j["buildingConstructionTime"] = this->buildingConstructionTime;
-	j["constructionYardEnergy"] = this->constructionYardEnergy;
+	
 	j["constructionYardCost"] = this->constructionYardCost;
-	j["constructionYardHitPoints"] = this->constructionYardHitPoints;
 	j["constructionYardWidth"] = this->constructionYardWidth;
 	j["constructionYardHeight"] = this->constructionYardHeight;
-	j["windTrapEnergy"] = this->windTrapEnergy;
+	
 	j["windTrapCost"] = this->windTrapCost;
-	j["windTrapHitPoints"] = this->windTrapHitPoints;
 	j["windTrapWidth"] = this->windTrapWidth;
 	j["windTrapHeight"] = this->windTrapHeight;
-	j["lightFactoryEnergy"] = this->lightFactoryEnergy;
+	
 	j["lightFactoryCost"] = this->lightFactoryCost;
-	j["lightFactoryHitPoints"] = this->lightFactoryHitPoints;
 	j["lightFactoryWidth"] = this->lightFactoryWidth;
 	j["lightFactoryHeight"] = this->lightFactoryHeight;
-	j["heavyFactoryEnergy"] = this->heavyFactoryEnergy;
+	
 	j["heavyFactoryCost"] = this->heavyFactoryCost;
-	j["heavyFactoryHitPoints"] = this->heavyFactoryHitPoints;
 	j["heavyFactoryWidth"] = this->heavyFactoryWidth;
 	j["heavyFactoryHeight"] = this->heavyFactoryHeight;
-	j["spiceRefineryEnergy"] = this->spiceRefineryEnergy;
+	
 	j["spiceRefineryCost"] = this->spiceRefineryCost;
-	j["spiceRefineryHitPoints"] = this->spiceRefineryHitPoints;
 	j["spiceRefinerySpiceCapacity"] = this->spiceRefinerySpiceCapacity;
-	j["spiceRefinerySpicWidth"] = this->spiceRefinerySpicWidth;
-	j["spiceRefinerySpicHeight"] = this->spiceRefinerySpicHeight;
-	j["spiceSiloEnergy"] = this->spiceSiloEnergy;
+	j["spiceRefineryWidth"] = this->spiceRefineryWidth;
+	j["spiceRefineryHeight"] = this->spiceRefineryWidth;
+	
 	j["spiceSiloCost"] = this->spiceSiloCost;
-	j["spiceSiloHitPoints"] = this->spiceSiloHitPoints;
 	j["spiceSiloSpiceCapacity"] = this->spiceSiloSpiceCapacity;
-	j["spiceSiloSpicWidth"] = this->spiceSiloSpicWidth;
-	j["spiceSiloSpicHeight"] = this->spiceSiloSpicHeight;
-	j["barracksEnergy"] = this->barracksEnergy;
+	j["spiceSiloWidth"] = this->spiceSiloWidth;
+	j["spiceSiloHeight"] = this->spiceSiloWidth;
+	
 	j["barracksCost"] = this->barracksCost;
-	j["barracksHitPoints"] = this->barracksHitPoints;
 	j["barracksWidth"] = this->barracksWidth;
 	j["barracksHeight"] = this->barracksHeight;
+	
+	j["lightInfantryTrainingTime"] = this->lightInfantryTrainingTime;
+	j["lightInfantryCost"] = this->lightInfantryCost;
+	
+	j["heavyInfantryTrainingTime"] = this->heavyInfantryTrainingTime;
+	j["heavyInfantryCost"] = this->heavyInfantryCost;
+	
+	j["harvesterConstructionTime"] = this->harvesterConstructionTime;
+	j["harvesterCost"] = this->harvesterCost;
+	
+	j["trikeConstructionTime"] = this->trikeConstructionTime;
+	j["trikeCost"] = this->trikeCost;
+	
+	j["raiderConstructionTime"] = this->raiderConstructionTime;
+	j["raiderCost"] = this->raiderCost;
+	
+	j["tankConstructionTime"] = this->tankConstructionTime;
+	j["tankCost"] = this->tankCost;
 	return j;
 }

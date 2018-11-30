@@ -1,85 +1,189 @@
 #include "ConfigurationReader.h"
 #include <CustomException.h>
 #include <Codes.h>
+#include <string>
 
 ConfigurationReader::ConfigurationReader(const char *filename) :
-	YAMLReader(filename) {}
+    YAMLReader(filename) {}
 
-ConfigurationReader::~ConfigurationReader() {}
+ConfigurationReader::~ConfigurationReader() = default;
 
 unsigned ConfigurationReader::getSpeedFactor() const {
-	return this->config["SPEED_FACTOR"].as<unsigned>();
+    return this->config["SPEED_FACTOR"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getRangeFactor() const {
-	return this->config["RANGE_FACTOR"].as<unsigned>();
+    return this->config["RANGE_FACTOR"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getTimeFactor() const {
-	return this->config["TIME_FACTOR"].as<unsigned>();
+    return this->config["TIME_FACTOR"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getBuildingConstructionTime() const {
-	return this->config["buildings"]["constructionTime"].as<unsigned>();
+    return this->config["buildings"]["constructionTime"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getEnergyFor(Building::BuildingType buildingType) const {
-	std::string buildingName;
-	buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["energy"].as<unsigned>();
+    std::string buildingName;
+    buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["energy"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getCostFor(Building::BuildingType buildingType) const {
-	std::string buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["cost"].as<unsigned>();
+    std::string buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["cost"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getHitPointsFor(Building::BuildingType buildingType) const {
-	std::string buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["hitPoints"].as<unsigned>();
+    std::string buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["hitPoints"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getWidthFor(Building::BuildingType buildingType) const {
-	std::string buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["width"].as<unsigned>();
+    std::string buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["width"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getHeightFor(Building::BuildingType buildingType) const {
-	std::string buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["height"].as<unsigned>();
+    std::string buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["height"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getSpiceCapacityFor(Building::BuildingType buildingType) const {
-	std::string buildingName = this->parseType(buildingType);
-	return this->config["buildings"][buildingName]["spiceCapacity"].as<unsigned>();
+    std::string buildingName = this->parseType(buildingType);
+    return this->config["buildings"][buildingName]["spiceCapacity"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getDamageFor(const WeaponType weaponType) const {
+    std::string weaponName = this->parseType(weaponType);
+    return this->config["weaponry"][weaponName]["damage"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getShootingRateFor(const WeaponType weaponType) const {
+    std::string weaponName = this->parseType(weaponType);
+    return this->config["weaponry"][weaponName]["shootingRate"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getBonusFor(const WeaponType weaponType) const {
+    std::string weaponName = this->parseType(weaponType);
+    return this->config["weaponry"][weaponName]["bonus"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getHitPointsFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["hitPoints"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getRangeFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["range"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getSpeedFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["speed"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getTrainingTimeFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["trainingTime"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getCostFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["cost"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getSpiceCapacityFor(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["spiceCapacity"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getFarmSpeed(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["farmSpeed"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getLoadSpeed(const Unit::UnitType unitType) const {
+    std::string unitName = this->parseType(unitType);
+    return this->config["units"][unitName]["loadSpeed"].as<unsigned>();
 }
 
 std::string ConfigurationReader::parseType(const Building::BuildingType buildingType) const {
-	std::string buildingName;
+    std::string buildingName;
     switch (buildingType) {
-        case Building::BuildingType::BARRACKS:
-            buildingName = "constructionYard";
-            break;
-        case Building::BuildingType::CONSTRUCTION_YARD:
-            buildingName = "windTrap";
-            break;
-        case Building::BuildingType::HEAVY_FACTORY:
-            buildingName = "lightFactory";
-            break;
-        case Building::BuildingType::LIGHT_FACTORY:
-            buildingName = "heavyFactory";
-            break;
-        case Building::BuildingType::SPICE_REFINERY:
-            buildingName = "spiceRefinery";
-            break;
-        case Building::BuildingType::SPICE_SILO:
-            buildingName = "spiceSilo";
-            break;
-        case Building::BuildingType::WIND_TRAP:
-            buildingName = "barracks";
-            break;
-        default:
-            throw CustomException("Tipo de edificio no reconocido");
+    case Building::BuildingType::BARRACKS:
+        buildingName = "constructionYard";
+        break;
+    case Building::BuildingType::CONSTRUCTION_YARD:
+        buildingName = "windTrap";
+        break;
+    case Building::BuildingType::HEAVY_FACTORY:
+        buildingName = "lightFactory";
+        break;
+    case Building::BuildingType::LIGHT_FACTORY:
+        buildingName = "heavyFactory";
+        break;
+    case Building::BuildingType::SPICE_REFINERY:
+        buildingName = "spiceRefinery";
+        break;
+    case Building::BuildingType::SPICE_SILO:
+        buildingName = "spiceSilo";
+        break;
+    case Building::BuildingType::WIND_TRAP:
+        buildingName = "barracks";
+        break;
+    default:
+        throw CustomException("Tipo de edificio no reconocido");
     }
-	return buildingName;
+    return buildingName;
+}
+
+std::string ConfigurationReader::parseType(const WeaponType weaponType) const {
+    std::string weaponName;
+    switch (weaponType) {
+    case WeaponType::ASSAULT_RIFLE:
+        weaponName = "assaultRifle";
+        break;
+    case WeaponType::CANNON:
+        weaponName = "cannon";
+        break;
+    case WeaponType::ROCKET_LAUNCHER:
+        weaponName = "rocketLauncher";
+        break;
+    case WeaponType::SMALL_CANNON:
+        weaponName = "smallCannon";
+        break;
+    default:
+        throw CustomException("Tipo de arma no reconocida");
+    }
+    return weaponName;
+}
+
+std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const {
+    std::string unitName;
+    switch (unitType) {
+    case Unit::UnitType::HARVESTER:
+        unitName = "harvester";
+        break;
+    case Unit::UnitType::LIGHT_INFANTRY:
+        unitName = "lightInfantry";
+        break;
+    case Unit::UnitType::HEAVY_INFANTRY:
+        unitName = "heavyInfantry";
+        break;
+    case Unit::UnitType::RAIDER:
+        unitName = "raider";
+        break;
+    case Unit::UnitType::TANK:
+        unitName = "tank";
+        break;
+    case Unit::UnitType::TRIKE:
+        unitName = "trike";
+        break;
+    default:
+        throw CustomException("Tipo de unidad no reconocida");
+    }
+    return unitName;
 }

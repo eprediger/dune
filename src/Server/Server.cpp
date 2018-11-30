@@ -71,7 +71,7 @@ void Server::waitPlayers() {
 		model.addPlayer();
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
 		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
-		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initwithJson());
+		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initWithJson());
 		this->players[i]->setId(i);
 	}
 
