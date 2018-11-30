@@ -4,7 +4,7 @@ SAND_KEY: A
 SPICED_SAND_KEY: S
 DUNE_KEY: D
 PRECIPICE_KEY: P
-max_players: 4
+max_players: 2
 initial_positions:
     -
         - 8
