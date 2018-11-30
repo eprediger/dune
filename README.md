@@ -150,7 +150,7 @@ Ejecución desde carpeta build/:
 
 1. Renderizar solamente las unidades que se están viendo (dentro de la cámara)
 2. Quitar las velocidades con contadores
-3. Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
+3. ~~Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.~~
 4. Modificar el GlobalConfig para que no sea una variable global. Opción: Dejarla Static en el Model
 5. Hacer el instalador "sudo make install"
 	* /bin/dune => ejecutable

@@ -42,12 +42,14 @@ bool Player::operator==(const Player &other) const {
 
 void Player::addGold(int gold_to_add) {
     gold += gold_to_add;
+    this->news = true;
     serialization["gold"] = gold;
 }
 
 void Player::subGold(int gold_to_sub) {
     // if (gold_to_sub > gold ) throw error -> Ver que hacer
     gold -= gold_to_sub;
+    this->news = true;
     serialization["gold"] = gold;
 }
 
