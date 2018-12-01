@@ -3,6 +3,7 @@
 #include "Model/Weapons/AssaultRifle.h"
 #include <iostream>
 #include <stack>
+#include <Model/GameConfiguration.h>
 
 int Unit::counter = 0;
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
@@ -39,7 +40,10 @@ const UnitStateTraining Unit::training;
 bool Unit::move(Map &map) {
     bool moved = true;
     int terrain_factor = map.getSpeedFactorAt(pos);
-    if (actual_speed++ >= speed * terrain_factor) {
+    int counter_limit = terrain_factor * GameConfiguration::getConfig().SPEED_FACTOR;
+    int speed_counter = actual_speed;
+    actual_speed += speed;
+    if (speed_counter >= counter_limit) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
@@ -50,16 +54,16 @@ bool Unit::move(Map &map) {
         }
 
         if (!(pos == next_pos)) {
-            pos.x += (next_pos.x < pos.x) ? -1 : ((next_pos.x > pos.x) ? +1 : 0);
-            pos.y += (next_pos.y < pos.y) ? -1 : ((next_pos.y > pos.y) ? +1 : 0);
+            int block_movement = GameConfiguration::getConfig().blockMovement;
+            pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0);
+            pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
             moved = true;
             this->news = true;
         } else {
             map.at(pos).occupy();
-//            state = (UnitState*)&Unit::stopped;;
             moved = false;
         }
-        actual_speed = 0;
+        actual_speed = speed_counter - counter_limit;
     }
     return moved;
 }
