@@ -21,8 +21,7 @@ void ButtonHandlerLightInfantry::execute() {
 }
 
 bool ButtonHandlerLightInfantry::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().lightInfantryCost)) &&
-	        (player.hasBuilding(Building::BARRACKS)));
+	return this->player.hasResourcesFor(Unit::UnitType::LIGHT_INFANTRY);
 }
 
 bool ButtonHandlerLightInfantry::finishAction() {

@@ -21,8 +21,7 @@ void ButtonHandlerRaider::execute() {
 }
 
 bool ButtonHandlerRaider::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().raiderCost)) &&
-	        (player.hasBuilding(Building::LIGHT_FACTORY)));
+	return this->player.hasResourcesFor(Unit::UnitType::RAIDER);
 }
 
 bool ButtonHandlerRaider::finishAction() {

@@ -114,16 +114,16 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
     std::string buildingName;
     switch (buildingType) {
     case Building::BuildingType::BARRACKS:
-        buildingName = "constructionYard";
+        buildingName = "barracks";
         break;
     case Building::BuildingType::CONSTRUCTION_YARD:
-        buildingName = "windTrap";
+        buildingName = "constructionYard";
         break;
     case Building::BuildingType::HEAVY_FACTORY:
-        buildingName = "lightFactory";
+        buildingName = "heavyFactory";
         break;
     case Building::BuildingType::LIGHT_FACTORY:
-        buildingName = "heavyFactory";
+        buildingName = "lightFactory";
         break;
     case Building::BuildingType::SPICE_REFINERY:
         buildingName = "spiceRefinery";
@@ -132,7 +132,7 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
         buildingName = "spiceSilo";
         break;
     case Building::BuildingType::WIND_TRAP:
-        buildingName = "barracks";
+        buildingName = "windTrap";
         break;
     default:
         throw CustomException("Tipo de edificio no reconocido");

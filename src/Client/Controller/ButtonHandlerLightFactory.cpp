@@ -22,7 +22,7 @@ void ButtonHandlerLightFactory::execute() {
 }
 
 bool ButtonHandlerLightFactory::canBeEnabled() {
-    return (this->player.gold >= GameConfiguration::getConfig().lightFactoryCost);
+    return (this->player.hasResourcesFor(Building::BuildingType::LIGHT_FACTORY));
 }
 
 bool ButtonHandlerLightFactory::finishAction() {

@@ -22,7 +22,7 @@ void ButtonHandlerSpiceRefinery::execute() {
 }
 
 bool ButtonHandlerSpiceRefinery::canBeEnabled() {
-    return (this->player.gold >= GameConfiguration::getConfig().spiceRefineryCost);
+    return (this->player.hasResourcesFor(Building::SPICE_REFINERY));
 }
 
 bool ButtonHandlerSpiceRefinery::finishAction() {

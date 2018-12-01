@@ -73,15 +73,15 @@ public:
 
 	std::vector<RocketView*>& getRocketViews();
 
-	void moveUp(int distance);
-	void moveDown(int distance);
-	void moveLeft(int distance);
+	void moveUp(const int distance);
+	void moveDown(const int distance);
+	void moveLeft(const int distance);
 	void moveRight(const int distance);
 
-	int getCameraX();
-	int getCameraY();
-	int& getCameraWidth();
-	int& getCameraHeight();
+	int getCameraX() const;
+	int getCameraY() const;
+	int getCameraWidth() const;
+	int getCameraHeight() const;
 
 	void grabMouse();
 	void releaseMouse();

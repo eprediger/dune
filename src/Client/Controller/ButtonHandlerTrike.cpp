@@ -21,8 +21,7 @@ void ButtonHandlerTrike::execute() {
 }
 
 bool ButtonHandlerTrike::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().trikeCost)) &&
-	        (player.hasBuilding(Building::LIGHT_FACTORY)));
+	return this->player.hasResourcesFor(Unit::UnitType::TRIKE);
 } 
 
 bool ButtonHandlerTrike::finishAction() {

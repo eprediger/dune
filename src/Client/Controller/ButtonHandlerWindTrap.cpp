@@ -25,7 +25,7 @@ void ButtonHandlerWindTrap::execute() {
 }
 
 bool ButtonHandlerWindTrap::canBeEnabled() {
-    return (this->player.gold >= GameConfiguration::getConfig().windTrapCost);
+    return (this->player.hasResourcesFor(Building::WIND_TRAP));
 }
 
 bool ButtonHandlerWindTrap::finishAction() {

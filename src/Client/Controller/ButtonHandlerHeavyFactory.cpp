@@ -22,7 +22,7 @@ void ButtonHandlerHeavyFactory::execute() {
 }
 
 bool ButtonHandlerHeavyFactory::canBeEnabled() {
-    return (this->player.gold >= GameConfiguration::getConfig().heavyFactoryCost);
+    return (this->player.hasResourcesFor(Building::HEAVY_FACTORY));
 }
 
 bool ButtonHandlerHeavyFactory::finishAction() {

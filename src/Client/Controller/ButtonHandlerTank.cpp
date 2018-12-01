@@ -21,8 +21,7 @@ void ButtonHandlerTank::execute() {
 }
 
 bool ButtonHandlerTank::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().tankCost)) &&
-	        (player.hasBuilding(Building::HEAVY_FACTORY)));
+	return this->player.hasResourcesFor(Unit::UnitType::TANK);
 }
  
 bool ButtonHandlerTank::finishAction() {

@@ -30,7 +30,7 @@ void ButtonHandlerBarracks::execute() {
 }
 
 bool ButtonHandlerBarracks::canBeEnabled() {
-	return (this->player.gold >= GameConfiguration::getConfig().barracksCost);
+	return (this->player.hasResourcesFor(Building::BARRACKS));
 }
 
 bool ButtonHandlerBarracks::finishAction() {

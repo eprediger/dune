@@ -21,8 +21,7 @@ void ButtonHandlerHeavyInfantry::execute() {
 }
 
 bool ButtonHandlerHeavyInfantry::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().heavyInfantryCost)) &&
-	        (player.hasBuilding(Building::BARRACKS)));
+	return this->player.hasResourcesFor(Unit::UnitType::HEAVY_INFANTRY);
 }
 
 bool ButtonHandlerHeavyInfantry::finishAction() {

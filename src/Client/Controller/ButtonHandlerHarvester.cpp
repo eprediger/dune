@@ -20,8 +20,7 @@ void ButtonHandlerHarvester::execute() {
 }
 
 bool ButtonHandlerHarvester::canBeEnabled() {
-	return (((player.gold >= GameConfiguration::getConfig().harvesterCost)) &&
-	        (player.hasBuilding(Building::HEAVY_FACTORY)));
+	return this->player.hasResourcesFor(Unit::UnitType::HARVESTER);
 }
 
 bool ButtonHandlerHarvester::finishAction() {

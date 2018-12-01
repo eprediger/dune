@@ -4,7 +4,6 @@
 class Player;
 
 #include "Model/Buildings/Building.h"
-//#include "Model/Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
 #include "PlayerBuildingCenter.h"
 #include <vector>
@@ -17,10 +16,10 @@ private:
     int id;
     std::string house;
     std::vector<Building*> buildings;
-
-public:
     int generatedEnergy;
     int consumedEnergy;
+
+public:
     int gold;
     int gold_limit;
     PlayerTrainingCenter* trainingCenter;
@@ -34,12 +33,20 @@ public:
 
     void sellBuilding(Building* building);
 
-    bool hasBuilding(Building::BuildingType type);
+    bool hasBuilding(const Building::BuildingType type) const;
 
     void addBuilding(Building* building);
     void cleanDeadBuildings();
 
-    int getGoldLimit();
+    int getGoldLimit() const;
+
+    float getEnergyRatio() const;
+
+    // Retorna true si el jugador tiene recursos
+    // suficientes para el edificio buildingType
+    bool hasResourcesFor(const Building::BuildingType buildingType) const;
+
+    bool hasResourcesFor(const Unit::UnitType unitType) const;
 };
 
 #endif  // __PLAYER_H__

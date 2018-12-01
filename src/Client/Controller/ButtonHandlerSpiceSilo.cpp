@@ -23,7 +23,7 @@ void ButtonHandlerSpiceSilo::execute() {
 }
 
 bool ButtonHandlerSpiceSilo::canBeEnabled() {
-    return (player.gold >= GameConfiguration::getConfig().spiceSiloCost);
+    return (player.hasResourcesFor(Building::SPICE_SILO));
 }
 
 bool ButtonHandlerSpiceSilo::finishAction() {

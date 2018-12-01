@@ -195,7 +195,7 @@ void GameView::render() {
 	this->RenderVPBar(this->window.width * 63 / 80,
 	                  this->window.height * 6 / 16,
 	                  this->window.height * 32 / 64,
-	                  (float)player.consumedEnergy / (float)player.generatedEnergy,
+	                  this->player.getEnergyRatio(),
 	                  available, bkgrColor);
 
 	this->window.render();
@@ -236,19 +236,19 @@ void GameView::moveRight(const int distance) {
 	camera.setX((new_x < (map_width - camera_width)) ? new_x : map_width - camera_width);
 }
 
-int GameView::getCameraX() {
+int GameView::getCameraX() const {
 	return this->camera.getX();
 }
 
-int GameView::getCameraY() {
+int GameView::getCameraY() const {
 	return this->camera.getY();
 }
 
-int& GameView::getCameraWidth() {
+int GameView::getCameraWidth() const {
 	return this->camera_width;
 }
 
-int& GameView::getCameraHeight() {
+int GameView::getCameraHeight() const {
 	return this->camera_height;
 }
 

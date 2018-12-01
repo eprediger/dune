@@ -9,8 +9,8 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
     serialization(),
     news(true),
-    generatedEnergy(5000),  // Inicial es 0
-    consumedEnergy(2500),   // Inicial es 0
+    generatedEnergy(0),
+    consumedEnergy(0),
     gold(10000),
     gold_limit(10000),
     trainingCenter(),

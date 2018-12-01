@@ -169,7 +169,7 @@ Ejecución desde carpeta build/:
 
 	1. ~~Hacer un mapa con todos los terrenos~~
 	2. ~~Agregar arena al mapa y verificar que funcione la cosecha automatica~~
-	3. Revisar capacidad de refineria + silos
+	3. ~~Revisar capacidad de refineria + silos~~
 	4. ~~Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)~~
 	5. ~~Corregir~~ Testear velocidad por terrenos
 	6. Reduccion de energia edificios (?)
