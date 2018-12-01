@@ -46,6 +46,8 @@ public:
     // suficientes para el edificio buildingType
     bool hasResourcesFor(const Building::BuildingType buildingType) const;
 
+    // Retorna true si el jugador tiene recursos
+    // suficientes para la unidad unitType
     bool hasResourcesFor(const Unit::UnitType unitType) const;
 };
 

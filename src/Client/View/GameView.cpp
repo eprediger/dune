@@ -10,16 +10,17 @@
 #include <vector>
 #include <memory>
 
-GameView::GameView(const int width, const int height, Model& model,Player& player) :
+GameView::GameView(const int width, const int height,
+                   Model& model, Player& player) :
 	View(width, height),
 	model(model),
-	player(player), 
+	player(player),
 	unitViews(),
 	deadUnitViews(),
 	buildingViews(),
 	rocketViews(),
 	selectorView(nullptr),
-	playerView(new PlayerView(player, window, 3 * width / 4, width / 4)),
+	playerView(player, window, 3 * width / 4, width / 4),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, 3 * width / 4, height),
@@ -33,11 +34,11 @@ GameView::GameView(const int width, const int height, Model& model,Player& playe
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
 	camera_height(camera.getHeight()) {
-//	backgroundMusic.start();
+	backgroundMusic.start();
 }
 
 GameView::~GameView() {
-//	backgroundMusic.stop();
+	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -55,7 +56,19 @@ GameView::~GameView() {
 	for (auto& building_view : buildingViews) {
 		delete building_view;
 	}
-//	backgroundMusic.join();
+	if (selectorView != nullptr) {
+		delete this->selectorView;
+		this->selectorView = nullptr;
+	}
+	if (buildingSellButton != nullptr) {
+		delete this->buildingSellButton;
+		this->buildingSellButton = nullptr;
+	}
+	if (constructorView != nullptr) {
+		delete this->constructorView;
+		this->constructorView = nullptr;
+	}
+	backgroundMusic.join();
 }
 
 void GameView::addUnitView(UnitView* unitView) {
@@ -66,7 +79,7 @@ void GameView::addBuildingView(BuildingView* buildingView) {
 	buildingViews.push_back(std::move(buildingView));
 }
 
-void GameView::addRocketView(RocketView* rocketView){
+void GameView::addRocketView(RocketView* rocketView) {
 	rocketViews.push_back(std::move(rocketView));
 }
 
@@ -143,7 +156,7 @@ void GameView::render() {
 	}
 
 	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-			(*itr)->draw(camera);
+		(*itr)->draw(camera);
 	}
 
 	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
@@ -158,7 +171,7 @@ void GameView::render() {
 		selectorView->draw(camera);
 	}
 
-	playerView->draw();
+	playerView.draw();
 
 	// Botones
 	// Vender Edificio

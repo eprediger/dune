@@ -36,7 +36,7 @@ private:
 	std::vector<BuildingView*> buildingViews;
 	std::vector<RocketView*> rocketViews;
 	SelectorView* selectorView;
-	PlayerView* playerView;
+	PlayerView playerView;
 	BuildingConstructorView* constructorView;
 	MapView map_view;
 	Area camera;
