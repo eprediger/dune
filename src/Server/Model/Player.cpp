@@ -32,6 +32,7 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     serialization["generated_energy"] = generatedEnergy;
     serialization["consumed_energy"] = consumedEnergy;
     serialization["gold"] = gold;
+    serialization["gold_limit"] = gold_limit;
     serialization["trainingCenter"] = trainingCenter->getSerialization();
     serialization["buildingCenter"] = buildingCenter->getSerialization();
 }
@@ -63,8 +64,9 @@ void Player::addBuilding(Building *building) {
         this->consumedEnergy += building->energy;
         serialization["consumed_energy"] = consumedEnergy;
     }
-    this->gold -= building->cost;
-    serialization["gold"] = gold;
+    this->gold_limit += building->getCapacity();
+    serialization["gold_limit"] = this->gold_limit;
+    this->subGold(building->cost);
 }
 
 //bool Player::hasBuilding(Building *building) {
@@ -142,6 +144,8 @@ void Player::cleanDeadBuildings() {
                 this->consumedEnergy -= (*it)->energy;
                 serialization["consumed_energy"] = consumedEnergy;
             }
+            this->gold_limit -= (*it)->getCapacity();
+            serialization["gold_limit"] = this->gold_limit;
             news = true;
             it = buildings.erase(it);
         } else {

@@ -26,6 +26,7 @@ public:
 	virtual ~Building();
 
 	virtual void reciveBonusDammage(const Weapon &weapon) override;
+    virtual int getCapacity();
 
 	bool is(BuildingType type);
 	void setPlayer(Player* player);
@@ -49,9 +50,9 @@ private:
 	Player* player;
 	BuildingType key;
 	std::vector<Position> all_positions;
-	bool news;
 
 protected:
+    bool news;
 	nlohmann::json serialization;
 };
 

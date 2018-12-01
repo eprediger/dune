@@ -79,5 +79,9 @@ nlohmann::json& Building::getSerialization() {
 }
 
 bool Building::hasNews() {
-	return (serialization["life"] != this->getLife());
+	return (serialization["life"] != this->getLife()) || this->news;
+}
+
+int Building::getCapacity() {
+	return 0;
 }

@@ -38,6 +38,8 @@ public:
 
     void addBuilding(Building* building);
     void cleanDeadBuildings();
+
+    int getGoldLimit();
 };
 
 #endif  // __PLAYER_H__

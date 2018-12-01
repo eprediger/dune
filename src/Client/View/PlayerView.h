@@ -26,6 +26,7 @@ private:
     std::unique_ptr<SdlTexture> house;
     static std::unique_ptr<SdlTexture> background;
     Text* moneyTag, *moneyBalance;
+    Text* capacityTag, *capacityBalance;
     int gold;
     std::map<Text*, int> balances;
 };

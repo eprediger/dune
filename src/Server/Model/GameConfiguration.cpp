@@ -44,12 +44,12 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
 	spiceRefineryWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
 	spiceRefineryHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
 
-	spiceSiloEnergy(config.getEnergyFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloCost(config.getCostFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloHitPoints(config.getHitPointsFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloSpiceCapacity(config.getSpiceCapacityFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloWidth(config.getWidthFor(Building::BuildingType::SPICE_REFINERY)),
-	spiceSiloHeight(config.getHeightFor(Building::BuildingType::SPICE_REFINERY)),
+	spiceSiloEnergy(config.getEnergyFor(Building::BuildingType::SPICE_SILO)),
+	spiceSiloCost(config.getCostFor(Building::BuildingType::SPICE_SILO)),
+	spiceSiloHitPoints(config.getHitPointsFor(Building::BuildingType::SPICE_SILO)),
+	spiceSiloSpiceCapacity(config.getSpiceCapacityFor(Building::BuildingType::SPICE_SILO)),
+	spiceSiloWidth(config.getWidthFor(Building::BuildingType::SPICE_SILO)),
+	spiceSiloHeight(config.getHeightFor(Building::BuildingType::SPICE_SILO)),
 
 	barracksEnergy(config.getEnergyFor(Building::BuildingType::BARRACKS)),
 	barracksCost(config.getCostFor(Building::BuildingType::BARRACKS)),

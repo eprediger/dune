@@ -8,6 +8,7 @@ public:
 	SpiceSilo(const int x, const int y, int blockWidth, int blockHeight);
 	~SpiceSilo();
 
+	virtual int getCapacity() override;
 private:
 	int capacity;
 };

@@ -10,9 +10,9 @@ public:
 
 	bool load(Player &player);
 
+	virtual int getCapacity() override;
 private:
 	int capacity;
-	int availableCapacity;
 };
 
 #endif

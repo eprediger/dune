@@ -12,3 +12,8 @@ SpiceSilo::SpiceSilo(const int x, const int y, int blockWidth, int blockHeight) 
 	capacity(GameConfiguration::getConfig().spiceSiloSpiceCapacity) {}
 
 SpiceSilo::~SpiceSilo() {}
+
+
+int SpiceSilo::getCapacity() {
+    return this->capacity;
+}

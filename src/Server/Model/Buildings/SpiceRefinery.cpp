@@ -11,17 +11,20 @@ SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int block
 	         GameConfiguration::getConfig().spiceRefineryWidth,
 	         GameConfiguration::getConfig().spiceRefineryHeight,
 	         SPICE_REFINERY),
-	capacity(GameConfiguration::getConfig().spiceRefinerySpiceCapacity),
-	availableCapacity(0) {}
+	capacity(GameConfiguration::getConfig().spiceRefinerySpiceCapacity) {}
 
 SpiceRefinery::~SpiceRefinery() {}
 
 bool SpiceRefinery::load(Player &player) {
-	if (availableCapacity < capacity) {
-		++availableCapacity;
+	this->news = true;
+	if (player.gold < player.gold_limit) {
 		player.addGold(1);
 		return true;
 	} else {
 		return false;
 	}
+}
+
+int SpiceRefinery::getCapacity() {
+	return this->capacity;
 }

@@ -1,5 +1,7 @@
 #include "Model/Player.h"
 #include "PlayerTrainingCenter.h"
+#include "Player.h"
+
 #include <algorithm>
 #include <vector>
 #include <string>
@@ -10,6 +12,7 @@ Player::Player(nlohmann::json& j) :
     generatedEnergy(j["generated_energy"]),  // Inicial es 0
     consumedEnergy(j["consumed_energy"]),   // Inicial es 0
     gold(j["gold"]),
+    gold_limit(j["gold_limit"]),
     trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
     buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])) {}
 
@@ -17,6 +20,7 @@ void Player::update(nlohmann::json& j) {
     generatedEnergy = j["generated_energy"];
     consumedEnergy = j["consumed_energy"];
     gold = j["gold"];
+    gold_limit = j["gold_limit"];
     trainingCenter->update(j["trainingCenter"]);
     buildingCenter->update(j["buildingCenter"]);
 }
@@ -57,4 +61,8 @@ void Player::cleanDeadBuildings() {
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
     building->setPlayer(this);
+}
+
+int Player::getGoldLimit() {
+    return gold_limit;
 }

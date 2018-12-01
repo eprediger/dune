@@ -28,6 +28,8 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     background = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002396b2.bmp", window)));
     moneyTag = new  Text("DINERO", 16, window, text_r, text_g, text_b);
     moneyBalance = new Text(std::to_string(player.gold), 16, window, text_r, text_g, text_b);
+    capacityTag = new Text("CAPACIDAD", 16, window, text_r, text_g, text_b);
+    capacityBalance = new Text(std::to_string(player.getGoldLimit()), 16, window, text_r, text_g, text_b);
     rect.x = x + width / 5;
     rect.y = this->window.height * 2 / 32;
     rect.w = width * 3 / 5;
@@ -55,6 +57,12 @@ void PlayerView::draw() {
     this->moneyBalance->setText(std::to_string(player.gold), text_r, text_g, text_b);
     this->moneyBalance->render((this->window.width - this->moneyBalance->textWidth) * 18 / 20 + this->moneyTag->textWidth,
                                this->window.height * 9 / 32);
+//    this->moneyBalance->setText(std::to_string(player.gold), text_r, text_g, text_b);
+    this->capacityTag->render((this->window.width - this->capacityTag->textWidth) * 18 / 20,
+                               this->window.height * 9 / 32 + this->moneyTag->textHeight);
+    this->capacityBalance->setText(std::to_string(player.getGoldLimit()), text_r, text_g, text_b);
+    this->capacityBalance->render((this->window.width - this->capacityBalance->textWidth) * 18 / 20 + this->capacityTag->textWidth,
+                               this->window.height * 9 / 32 + this->moneyTag->textHeight);
     if (player.gold != gold || !balances.empty()) {
         animateMoney();
     }
