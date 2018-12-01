@@ -96,7 +96,8 @@ void GameInterface::createSpiceSilo(int x, int y, int player_id) {
 }
 
 void GameInterface::beginConstruction(int player_id, Building::BuildingType type) {
-    model.getPlayer(player_id).buildingCenter.newConstruct(type);
+    float energy_factor = model.getPlayer(player_id).getEnergyFactor();
+    model.getPlayer(player_id).buildingCenter.newConstruct(type, energy_factor);
 }
 
 void GameInterface::createHarvester(int player_id) {

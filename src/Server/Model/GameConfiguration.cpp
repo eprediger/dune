@@ -10,6 +10,9 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
 	SPEED_FACTOR(config.getSpeedFactor()),
 	RANGE_FACTOR(config.getRangeFactor()),
 	TIME_FACTOR(config.getTimeFactor()),
+	initialGold(config.getInitialGold()),
+	initialEnergy(config.getInitialEnergy()),
+	initialMaxEnergy(config.getInitialMaxEnergy()),
 
 	buildingConstructionTime(config.getBuildingConstructionTime() * TIME_FACTOR),
 
@@ -128,6 +131,10 @@ GameConfiguration& GameConfiguration::getConfig() {
 
 nlohmann::json GameConfiguration::initWithJson() {
 	nlohmann::json j;
+
+	j["initialGold"] = this->initialGold;
+	j["initialEnergy"] = this->initialEnergy;
+	j["initialMaxEnergy"] = this->initialMaxEnergy;
 
 	j["buildingConstructionTime"] = this->buildingConstructionTime;
 	

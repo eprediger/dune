@@ -38,6 +38,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     void subGold(int gold_to_sub);
     //void addEnergy(int energy_to_add);
     //void subEnergy(int energy_to_sub);
+    float getEnergyFactor();
 
 //    void addUnit(Unit* unit);
     void addBuilding(Building* building);

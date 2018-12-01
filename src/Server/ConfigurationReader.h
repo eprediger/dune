@@ -14,6 +14,9 @@ public:
 	unsigned getSpeedFactor() const;
 	unsigned getRangeFactor() const;
 	unsigned getTimeFactor() const;
+	unsigned getInitialGold() const;
+	unsigned getInitialEnergy() const;
+	unsigned getInitialMaxEnergy() const;
 
 	// Parametros de edificios
 	unsigned getBuildingConstructionTime() const;

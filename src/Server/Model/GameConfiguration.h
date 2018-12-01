@@ -21,6 +21,9 @@ public:
 	const int SPEED_FACTOR;	// El speed factor debe ser multiplo de 84
 	const int RANGE_FACTOR;
 	const int TIME_FACTOR;
+	const int initialGold;
+	const int initialEnergy;
+	const int initialMaxEnergy;
 // Building Stats
 	// Tiempo de costruccion de edificios
 	const int buildingConstructionTime;

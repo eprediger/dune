@@ -20,6 +20,18 @@ unsigned ConfigurationReader::getTimeFactor() const {
     return this->config["TIME_FACTOR"].as<unsigned>();
 }
 
+unsigned ConfigurationReader::getInitialGold() const {
+    return this->config["initialGold"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getInitialEnergy() const {
+    return this->config["initialEnergy"].as<unsigned>();
+}
+
+unsigned ConfigurationReader::getInitialMaxEnergy() const {
+    return this->config["initialMaxEnergy"].as<unsigned>();
+}
+
 unsigned ConfigurationReader::getBuildingConstructionTime() const {
     return this->config["buildings"]["constructionTime"].as<unsigned>();
 }
