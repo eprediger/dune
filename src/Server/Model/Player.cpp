@@ -14,8 +14,8 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     consumedEnergy(GameConfiguration::getConfig().initialEnergy),
     gold(GameConfiguration::getConfig().initialGold),
     gold_limit(GameConfiguration::getConfig().initialGold),
-    trainingCenter(new PlayerTrainingCenter()),
-    buildingCenter(new PlayerBuildingCenter()),
+    trainingCenter(),
+    buildingCenter(),
     construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
     if ((id % 3) == 0) {
@@ -34,8 +34,8 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     serialization["consumed_energy"] = consumedEnergy;
     serialization["gold"] = gold;
     serialization["gold_limit"] = gold_limit;
-    serialization["trainingCenter"] = trainingCenter->getSerialization();
-    serialization["buildingCenter"] = buildingCenter->getSerialization();
+    serialization["trainingCenter"] = trainingCenter.getSerialization();
+    serialization["buildingCenter"] = buildingCenter.getSerialization();
 }
 
 bool Player::operator==(const Player &other) const {
@@ -90,11 +90,11 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
 }
 
 void Player::trainUnits() {
-    trainingCenter->trainUnits(buildings);
+    trainingCenter.trainUnits(buildings);
 }
 
 void Player::constructBuildings() {
-    buildingCenter->construct();
+    buildingCenter.construct();
 }
 
 bool Player::lose() {
@@ -102,7 +102,7 @@ bool Player::lose() {
     return this->construction_yard == nullptr;
 }
 
-int& Player::getId() {
+int Player::getId() const {
     return this->id;
 }
 
@@ -162,7 +162,7 @@ void Player::cleanDeadBuildings() {
 }
 
 std::vector<Unit*>& Player::getTrainedUnits(Map& map) {
-    return this->trainingCenter->getReadyUnits(map, buildings, construction_yard);
+    return this->trainingCenter.getReadyUnits(map, buildings, construction_yard);
 }
 
 void Player::sellBuilding(Building* building) {
@@ -182,11 +182,11 @@ void Player::sellBuilding(Building* building) {
 
 nlohmann::json& Player::getSerialization() {
     news = false;
-    serialization["trainingCenter"] = trainingCenter->getSerialization();
-    serialization["buildingCenter"] = buildingCenter->getSerialization();
+    serialization["trainingCenter"] = trainingCenter.getSerialization();
+    serialization["buildingCenter"] = buildingCenter.getSerialization();
     return serialization;
 }
 
 bool Player::hasNews() {
-    return ( news || buildingCenter->news || trainingCenter->news);
+    return ( news || buildingCenter.news || trainingCenter.news);
 }

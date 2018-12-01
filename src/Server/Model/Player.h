@@ -14,7 +14,7 @@ class Unit;
 
 class Player {
 private:
-    int id;
+    const int id;
     std::string house;
     nlohmann::json serialization;
     bool news;
@@ -24,8 +24,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
     int gold;   // Se restara durante los constructores
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
-    PlayerTrainingCenter* trainingCenter;
-    PlayerBuildingCenter* buildingCenter;
+    PlayerTrainingCenter trainingCenter;
+    PlayerBuildingCenter buildingCenter;
 
     std::vector<Building*> buildings;
     ConstructionYard* construction_yard;
@@ -59,7 +59,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     void trainUnits();
     void constructBuildings();
 
-    int& getId();
+    int getId() const;
     std::string& getHouse();
 
     bool operator==(const Player& other) const;

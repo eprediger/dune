@@ -68,36 +68,36 @@ void GameInterface::execute(nlohmann::json json) {
 
 void GameInterface::createWindTrap(int x, int y, int player_id) {
     model.createWindTrap(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::WIND_TRAP);
+    model.getPlayer(player_id).buildingCenter.build(Building::WIND_TRAP);
 }
 
 void GameInterface::createBarracks(int x, int y, int player_id) {
     model.createBarracks(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::BARRACKS);
+    model.getPlayer(player_id).buildingCenter.build(Building::BARRACKS);
 }
 
 void GameInterface::createLightFactory(int x, int y, int player_id) {
     model.createLightFactory(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::LIGHT_FACTORY);
+    model.getPlayer(player_id).buildingCenter.build(Building::LIGHT_FACTORY);
 }
 
 void GameInterface::createHeavyFactory(int x, int y, int player_id) {
     model.createHeavyFactory(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::HEAVY_FACTORY);
+    model.getPlayer(player_id).buildingCenter.build(Building::HEAVY_FACTORY);
 }
 void GameInterface::createSpiceRefinery(int x, int y, int player_id) {
     model.createSpiceRefinery(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::SPICE_REFINERY);
+    model.getPlayer(player_id).buildingCenter.build(Building::SPICE_REFINERY);
 }
 
 void GameInterface::createSpiceSilo(int x, int y, int player_id) {
     model.createSpiceSilo(x, y, player_id);
-    model.getPlayer(player_id).buildingCenter->build(Building::SPICE_SILO);
+    model.getPlayer(player_id).buildingCenter.build(Building::SPICE_SILO);
 }
 
 void GameInterface::beginConstruction(int player_id, Building::BuildingType type) {
     float energy_factor = model.getPlayer(player_id).getEnergyFactor();
-    model.getPlayer(player_id).buildingCenter->newConstruct(type, energy_factor);
+    model.getPlayer(player_id).buildingCenter.newConstruct(type, energy_factor);
 }
 
 void GameInterface::createHarvester(int player_id) {
