@@ -86,17 +86,17 @@ void Map::put(Unit &unit) {
     this->at(unit.getPosition()).occupy();
 }
 
-void Map::put(Building &building) {
-    buildings.push_back(&building);
-    this->occupy(building);
+void Map::put(Building* building) {
+    buildings.push_back(building);
+    this->occupy(building); 
 }
 
-void Map::occupy(Building &building) {
-    for (int i = 0; i < building.height; i++) {
-        for (int j = 0; j < building.width; j++) {
-            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).buildOn();
+void Map::occupy(Building* building) {
+    for (int i = 0; i < building->height; i++) {
+        for (int j = 0; j < building->width; j++) {
+            this->at(building->getPosition().x + j * BLOCK_WIDTH, building->getPosition().y + i * BLOCK_HEIGHT).buildOn(building);
         }
-    }
+    } 
 }
 
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
@@ -203,13 +203,13 @@ void Map::free(Building &building) {
     }
 }
 
-bool Map::canWeBuild(Position& pos, int width, int height) {
+bool Map::canWeBuild(Position& pos, int width, int height, Player& player) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
             if (isValid(aux)) {
                 if ((this->at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()) {
-                    return false;
+                    return false; 
                 }
             } else {
                 return false;
@@ -222,7 +222,8 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
             Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
             if (isValid(aux)) {
                 if (this->at(aux).isBuiltOn()) {
-                    return true;
+                    if (*(this->at(aux).getBuilding()->getPlayer()) == player)
+                        return true;
                 }
             }
         }

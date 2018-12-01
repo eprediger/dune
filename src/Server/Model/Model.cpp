@@ -48,7 +48,7 @@ Unit &Model::createUnit(Unit *unit) {
 
 Building &Model::createBuilding(Building *building) {
     buildings.insert(std::make_pair(building->id, building));
-    map.put(*building);
+    map.put(building);
     return *building;
 }
 
@@ -302,7 +302,7 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
     if ( cost > player.gold ) {
         return false;
     }
-    return this->map.canWeBuild(pos, width, height);
+    return this->map.canWeBuild(pos, width, height, player);
 }
 
 int Model::numberOfPlayers() {

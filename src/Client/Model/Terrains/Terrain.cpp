@@ -16,16 +16,16 @@ void Terrain::occupy(){
 	occupied = true;
 }
 
-void Terrain::buildOn(){
-	occupied = true;
-	builtOn = true;
-}
+void Terrain::buildOn(Building* building){}
 
 void Terrain::free(){
 	occupied = false;
 	builtOn = false;
 }
 
+Building* Terrain::getBuilding(){
+	return nullptr;
+}
 bool Terrain::isOccupied(){
 	return occupied || builtOn;
 }

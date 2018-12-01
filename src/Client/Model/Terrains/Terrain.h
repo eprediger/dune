@@ -3,6 +3,8 @@
 
 #include <ostream>
 
+class Building;
+
 class Terrain {
 protected:
 	char key;
@@ -14,14 +16,14 @@ public:
 	explicit Terrain(char key);
 
 	void occupy();
-	void buildOn();
-	void free();
+	virtual void buildOn(Building* building);
+	virtual void free();
 	bool isOccupied();
 	bool isBuiltOn();
 	virtual int farm();
 	virtual int getSpice();
 	virtual bool hasFarm();
-
+	virtual Building* getBuilding();
 	bool operator==(const Terrain& terrain);
 
 	virtual char getKey();

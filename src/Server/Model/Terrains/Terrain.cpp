@@ -1,5 +1,7 @@
 #include "Terrain.h"
 
+#include "../Buildings/Building.h"
+
 Terrain::Terrain() : key(' '), occupied(false), speed_factor(1) {}
 
 Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1) {}
@@ -16,9 +18,10 @@ void Terrain::occupy(){
 	occupied = true;
 }
 
-void Terrain::buildOn(){
-	occupied = true;
-	builtOn = true;
+void Terrain::buildOn(Building* building){}
+
+Building* Terrain::getBuilding(){
+	return nullptr;
 }
 
 void Terrain::free(){

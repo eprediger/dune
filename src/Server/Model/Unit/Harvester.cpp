@@ -85,7 +85,7 @@ UnitState *Harvester::makeFarming(Map &map) {
 
 	map.free(*refinery);
 	map.setDestiny(*this, refinery->getPosition().x, refinery->getPosition().y);
-	map.occupy(*refinery);
+	map.occupy(refinery);
 
 	std::cout << "Farming => Backing" << std::endl;
 	return (UnitState *) &Unit::backing;

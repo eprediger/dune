@@ -36,8 +36,8 @@ public:
     bool isValid(Position& pos);
     bool canMove(Unit& unit, Position pos);
     void put(Unit& unit);
-    void put(Building& building);
-    void occupy(Building& building);
+    void put(Building* building);
+    void occupy(Building* building);
     void free(Building& building);
 
     nlohmann::json& getSerialization();
@@ -67,7 +67,7 @@ public:
     void cleanUnit(Unit* unit);
     void cleanBuilding(Building* building);
 
-    bool canWeBuild(Position& pos, int width, int height);
+    bool canWeBuild(Position& pos, int width, int height, Player& player);
 
     Position getClosestFreePosition(Building* building);
     Position getCornerPosition(Position& pos);
