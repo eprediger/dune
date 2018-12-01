@@ -15,7 +15,9 @@ Map::Map(const char* filePath) :
     rows(),
     cols(),
     constructionYardPositions(),
-    serialization() {
+    serialization(),
+    news(false),
+    spiceUpdate() {
     YAML::Node file = YAML::LoadFile(filePath);
     cols = file["width"].as<int>();
     rows = file["height"].as<int>();
@@ -63,6 +65,8 @@ Map::Map(const char* filePath) :
         }
     }
     serialization["matrix"] = keys;
+
+    spiceUpdate["class"] = "SpiceUpdate";
 }
 
 Map::~Map() {}
@@ -71,6 +75,22 @@ nlohmann::json& Map::getSerialization() {
     return this->serialization;
 }
 
+bool Map::hasNews(){
+    return this->news;
+}
+
+void Map::updateSpice(int x, int y){
+    if (!news){
+        spiceUpdate["updates"].clear();
+        news = true;
+    }
+    spiceUpdate["updates"].push_back({x,y});
+}
+
+nlohmann::json& Map::getSpiceUpdate(){
+    news = false;
+    return spiceUpdate;
+}
 std::vector<Position>& Map::getInitialPositions() {
     return constructionYardPositions;
 }
@@ -359,3 +379,4 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 int Map::getSpeedFactorAt(Position &pos) {
     return this->at(pos).getSpeedFactor();
 }
+

@@ -62,6 +62,8 @@ public:
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
 
+    void updateSpice(nlohmann::json& j);
+
     ~Map();
 };
 

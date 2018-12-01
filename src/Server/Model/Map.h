@@ -25,6 +25,8 @@ private:
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
     nlohmann::json serialization;
+    bool news;
+    nlohmann::json spiceUpdate;
 
 public:
     explicit Map(const char* filePath);
@@ -39,7 +41,9 @@ public:
     void free(Building& building);
 
     nlohmann::json& getSerialization();
-    
+    bool hasNews();
+    void updateSpice(int x, int y);
+    nlohmann::json& getSpiceUpdate();
     int getHeight();
     int getWidth();
 

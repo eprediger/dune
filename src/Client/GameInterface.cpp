@@ -13,7 +13,6 @@ void GameInterface::execute(nlohmann::json j) {
         else
             model.addPlayer(j);
     } else if (j["class"] == "Unit") {
-        std::cout << j["subclass"] << std::endl;
         if (model.unitExists(j["id"])) {
             model.updateUnit(j);
         } else {
@@ -77,5 +76,8 @@ void GameInterface::execute(nlohmann::json j) {
             Rocket &rocket = model.createRocket(j);
             view.addRocketView(new RocketView(rocket, view.getWindow()));
         }
+    
+    } else if (j["class"] == "SpiceUpdate"){
+        this->model.getMap().updateSpice(j);
     }
 }

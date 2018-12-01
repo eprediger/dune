@@ -332,6 +332,13 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
         }
     }
 
+    if (map.hasNews()){
+        news = true;
+        for (auto player : connectedPlayers){
+            player->queue.enqueue(map.getSpiceUpdate());
+        }
+    }
+
     for (auto itr = rockets.begin(); itr != rockets.end(); itr++) {
         news = true;
         for (auto player : connectedPlayers) {
