@@ -5,6 +5,7 @@
 #include <map>
 
 std::unique_ptr<SdlTexture> PlayerView::background;
+
 PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     player(player),
     x(x),
@@ -13,8 +14,12 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     background_area(Area(0, 0, 32, 32)),
     house_src(0, 0, 300, 300),
     house_dest(x + width / 5, window.height * 2 / 32, width * 3 / 5, window.height * 5 / 32),
-    gold(player.gold)
-{
+    moneyTag(nullptr),
+    moneyBalance(nullptr),
+    capacityTag(nullptr),
+    capacityBalance(nullptr),
+    gold(player.gold),
+    balances() {
     if (player.getHouse() == "Ordos") {
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg", window)));
     } else if (player.getHouse() == "Harkonnen") {
@@ -34,6 +39,25 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     rect.y = this->window.height * 2 / 32;
     rect.w = width * 3 / 5;
     rect.h = this->window.height * 5 / 32;
+}
+
+PlayerView::~PlayerView() {
+    if (moneyTag != nullptr) {
+        delete this->moneyTag;
+        this->moneyTag = nullptr;
+    }
+    if (moneyBalance != nullptr) {
+        delete this->moneyBalance;
+        this->moneyBalance = nullptr;
+    }
+    if (capacityTag != nullptr) {
+        delete this->capacityTag;
+        this->capacityTag = nullptr;
+    }
+    if (capacityBalance != nullptr) {
+        delete this->capacityBalance;
+        this->capacityBalance = nullptr;
+    }
 }
 
 void PlayerView::draw() {
@@ -57,12 +81,11 @@ void PlayerView::draw() {
     this->moneyBalance->setText(std::to_string(player.gold), text_r, text_g, text_b);
     this->moneyBalance->render((this->window.width - this->moneyBalance->textWidth) * 18 / 20 + this->moneyTag->textWidth,
                                this->window.height * 9 / 32);
-//    this->moneyBalance->setText(std::to_string(player.gold), text_r, text_g, text_b);
     this->capacityTag->render((this->window.width - this->capacityTag->textWidth) * 18 / 20,
-                               this->window.height * 9 / 32 + this->moneyTag->textHeight);
+                              this->window.height * 9 / 32 + this->moneyTag->textHeight);
     this->capacityBalance->setText(std::to_string(player.getGoldLimit()), text_r, text_g, text_b);
     this->capacityBalance->render((this->window.width - this->capacityBalance->textWidth) * 18 / 20 + this->capacityTag->textWidth,
-                               this->window.height * 9 / 32 + this->moneyTag->textHeight);
+                                  this->window.height * 9 / 32 + this->moneyTag->textHeight);
     if (player.gold != gold || !balances.empty()) {
         animateMoney();
     }
