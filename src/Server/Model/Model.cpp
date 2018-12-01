@@ -196,21 +196,21 @@ Player &Model::getPlayer(int player) {
 Harvester& Model::createHarvester(int x, int y, int player) {
     Harvester* harvester = new Harvester(x, y);
     harvester->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainHarvester(harvester);
+    players.at(player)->trainingCenter.trainHarvester(harvester);
     return *harvester;
 }
 
 HeavyInfantry& Model::createHeavyInfantry(int x, int y, int player) {
     HeavyInfantry* heavyInfantry = new HeavyInfantry(x, y);
     heavyInfantry->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainHeavyInfantry(heavyInfantry);
+    players.at(player)->trainingCenter.trainHeavyInfantry(heavyInfantry);
     return *heavyInfantry;
 }
 
 LightInfantry& Model::createLightInfantry(int x, int y, int player) {
     LightInfantry* lightInfantry = new LightInfantry(x, y);
     lightInfantry->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainLightInfantry(lightInfantry);
+    players.at(player)->trainingCenter.trainLightInfantry(lightInfantry);
     return *lightInfantry;
 }
 
@@ -218,7 +218,7 @@ Raider& Model::createRaider(int x, int y, int player) {
     Raider* raider = new Raider(x, y);
     raider->setPlayer(*players.at(player));
 
-    players.at(player)->trainingCenter->trainRaider(raider);
+    players.at(player)->trainingCenter.trainRaider(raider);
     return (*raider);
 }
 
@@ -226,14 +226,14 @@ Tank& Model::createTank(int x, int y, int player) {
     Tank* tank = new Tank(x, y);
     tank->setPlayer(*players.at(player));
 
-    players.at(player)->trainingCenter->trainTank(tank);
+    players.at(player)->trainingCenter.trainTank(tank);
     return *tank;
 }
 
 Trike& Model::createTrike(int x, int y, int player) {
     Trike* trike = new Trike(x, y);
     trike->setPlayer(*players.at(player));
-    players.at(player)->trainingCenter->trainTrike(trike);
+    players.at(player)->trainingCenter.trainTrike(trike);
     return *trike;
 }
 
