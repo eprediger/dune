@@ -146,6 +146,8 @@ Ejecución desde carpeta build/:
 
 8. Chequear la salida al finalizar el juego
 
+9. Al vender una refineria donde esta descargando una cocechadora, esta sigue descargando en el mismo lugar como si estuviera el edificio.
+
 ## ISSUES
 
 1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
@@ -169,12 +171,12 @@ Ejecución desde carpeta build/:
 
 	1. ~~Hacer un mapa con todos los terrenos~~
 	2. ~~Agregar arena al mapa y verificar que funcione la cosecha automatica~~
-	3. Revisar capacidad de refineria + silos
+	3. ~~Revisar capacidad de refineria + silos~~
 	4. ~~Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)~~
 	5. ~~Corregir~~ Testear velocidad por terrenos
 	6. Reduccion de energia edificios (?)
-	7. Ralentizacion por falta de energia (testear)
-	8. Infanteria puede moverse por cimas (testear)
+	7. ~~Ralentizacion por falta de energia (testear)~~
+	8. ~~Infanteria puede moverse por cimas (testear)~~
 	9. Efectividad de una unidad sobre otra (bono de armas?)
 	10. ~~Verificar que el tanque aparezca~~
 	11. Mejorar jugabilidad
@@ -195,7 +197,7 @@ Ejecución desde carpeta build/:
 
 * Prioridad baja
 	1. Mejorar el botón de venta de edificios
-	2. Aumento de velocidad de entrenamiento (testear)
+	2. ~~Aumento de velocidad de entrenamiento (testear)~~
 	3. Agregar sonidos y FX
 
 ## PROFILING

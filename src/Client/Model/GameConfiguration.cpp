@@ -5,6 +5,10 @@
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
 GameConfiguration::GameConfiguration(nlohmann::json& j) :
+	initialGold(j["initialGold"]),
+	initialEnergy(j["initialEnergy"]),
+	initialMaxEnergy(j["initialMaxEnergy"]),	
+
 	buildingConstructionTime(j["buildingConstructionTime"]),
 	
 	constructionYardCost(j["constructionYardCost"]),

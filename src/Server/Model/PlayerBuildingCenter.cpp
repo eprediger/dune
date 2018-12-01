@@ -22,41 +22,47 @@ PlayerBuildingCenter::PlayerBuildingCenter():
 
 #include <iostream>
 
-void PlayerBuildingCenter::newConstruct(Building::BuildingType type) {
+void PlayerBuildingCenter::newConstruct(Building::BuildingType type, float energy_factor) {
     switch (type) {
     case Building::BARRACKS:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }
     case Building::LIGHT_FACTORY:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }
     case Building::HEAVY_FACTORY:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }
     case Building::SPICE_REFINERY:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }
     case Building::SPICE_SILO:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }
     case Building::WIND_TRAP:
     {
-        construction[type].first = GameConfiguration::getConfig().buildingConstructionTime;
+        construction[type].first = (int)(GameConfiguration::getConfig().buildingConstructionTime
+                                         * energy_factor);
         construction[type].second = false;
         break;
     }

@@ -17,7 +17,10 @@ public:
 	static GameConfiguration& getConfig();
 
 	void initwithJson(nlohmann::json j);
-
+// Parmetros Generales
+	const int initialGold;
+	const int initialEnergy;
+	const int initialMaxEnergy;
 // Building Stats
 	// Tiempo de costruccion de edificios
 	const int buildingConstructionTime;

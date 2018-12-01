@@ -10,7 +10,7 @@ class PlayerBuildingCenter {
 public:
     PlayerBuildingCenter();
     bool buildingReady(Building::BuildingType type);
-    void newConstruct(Building::BuildingType type);
+    void newConstruct(Building::BuildingType type, float energy_factor);
     void construct();
     void build(Building::BuildingType type);
     bool buildingConstructed(Building::BuildingType type);

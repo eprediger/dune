@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayerTrainingCenter.h"
+#include "GameConfiguration.h"
 #include <algorithm>
 #include <vector>
 #include <string>
@@ -9,10 +10,10 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     id(id),
     serialization(),
     news(true),
-    generatedEnergy(5000),  // Inicial es 0
-    consumedEnergy(2500),   // Inicial es 0
-    gold(10000),
-    gold_limit(10000),
+    generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
+    consumedEnergy(GameConfiguration::getConfig().initialEnergy),
+    gold(GameConfiguration::getConfig().initialGold),
+    gold_limit(GameConfiguration::getConfig().initialGold),
     trainingCenter(new PlayerTrainingCenter()),
     buildingCenter(new PlayerBuildingCenter()),
     construction_yard(&construction_yard) {
@@ -53,6 +54,12 @@ void Player::subGold(int gold_to_sub) {
     this->news = true;
     serialization["gold"] = gold;
 }
+
+float Player::getEnergyFactor() {
+    float energy_factor = consumedEnergy < generatedEnergy ? 1 : (float)consumedEnergy/(float)generatedEnergy;
+    return energy_factor;
+}
+
 
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
