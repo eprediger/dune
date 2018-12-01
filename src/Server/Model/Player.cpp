@@ -6,7 +6,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-Player::Player(int id, ConstructionYard &construction_yard) :
+Player::Player(int id, ConstructionYard &construction_yard,const std::string& house):
     id(id),
     serialization(),
     news(true),
@@ -16,17 +16,9 @@ Player::Player(int id, ConstructionYard &construction_yard) :
     gold_limit(GameConfiguration::getConfig().initialGold),
     trainingCenter(),
     buildingCenter(),
-    construction_yard(&construction_yard) {
+    construction_yard(&construction_yard),
+    house(house) {
     construction_yard.setPlayer(this);
-    if ((id % 3) == 0) {
-        house = "Ordos";
-    }
-    if ((id % 3) == 1) {
-        house = "Atreides";
-    }
-    if ((id % 3) == 2) {
-        house = "Harkonnen";
-    }
     serialization["class"] = "Player";
     serialization["id"] = id;
     serialization["house"] = house;

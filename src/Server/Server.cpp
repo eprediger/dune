@@ -64,7 +64,7 @@ void Server::waitPlayers() {
 	std::cout << "Start Program!!!" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->start();
-		model.addPlayer();
+		model.addPlayer(commonQueue.dequeue()["house"]);
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
 		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
 		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initWithJson());

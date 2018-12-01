@@ -32,7 +32,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
     std::vector<Unit*>& getTrainedUnits(Map& map);
 
-    explicit Player(int id, ConstructionYard &construction_yard);
+    explicit Player(int id, ConstructionYard &construction_yard, const std::string& house);
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);

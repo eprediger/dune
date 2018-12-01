@@ -36,6 +36,9 @@ int main(int argc, const char *argv[]) {
             HouseSelectionHandler houseSelectionHandler(houseSelectionView);
             Application app(houseSelectionView, houseSelectionHandler);*/
             client.start();
+            nlohmann::json house;
+            house["house"] = std::string(argv[3]);
+            queue.enqueue(house);
             nlohmann::json mapFile = queue.dequeue();
             Model model(mapFile, queue);
             nlohmann::json player = queue.dequeue();
