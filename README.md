@@ -151,20 +151,20 @@ Ejecución desde carpeta build/:
 ## ISSUES
 
 1. Renderizar solamente las unidades que se estan viendo (dentro de la camara)
-2. Quitar las velocidades con contadores
-3. Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.
-4. Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model
+2. ~~Quitar las velocidades con contadores~~
+3. ~~Crear archivo de configuración. Eliminar (o cargarlo desde el archivo de conf) el GlobalConfig.~~
+4. ~~Modificar el GlobalConfig para que no sea una variable global. Opcion: Dejarla Static en el Model~~
 5. Hacer el instalador "sudo make install"
 	* /bin/dune => ejecutable
 	* /var/dune/assets => todos los assets. Aca se puede cambiar el path en el codigo (ponerla como absoluto) o poner desde assets y el resto por archivo de configuracion (esto solo si hay tiempo)
 	* /etc/dune.cfg => archivo de configuracion
 
 6. Reducir tiempo en CPU 
-7. Ver de mejorar el envio de datos. Tratar de enviar solo novedades
+7. ~~Ver de mejorar el envio de datos. Tratar de enviar solo novedades~~
 8. Ver en todo caso, cambiar la libreria de json
 9. Ver si se puede renderizar solo las novedades (agregar un news = true dentro de cada update)
 10. Ver de renderizar el mapa solamente si cambia la camara (para esto ver issue 11)
-11. Testear si cambia el terreno de arena en base a la especia
+11. ~~Testear si cambia el terreno de arena en base a la especia~~
 
 ## CORRECCIONES MARTIN
 * Prioridad Critica
@@ -177,18 +177,19 @@ Ejecución desde carpeta build/:
 	6. Reduccion de energia edificios (?)
 	7. ~~Ralentizacion por falta de energia (testear)~~
 	8. ~~Infanteria puede moverse por cimas (testear)~~
-	9. Efectividad de una unidad sobre otra (bono de armas?)
-	10. ~~Verificar que el tanque aparezca~~
-	11. Mejorar jugabilidad
-	12. Hacer el juego en pantalla completa (permitir alternar)
-	13. Hacer los manuales y documentacion
-	14. Borra codigo comentado!
-	15. ~~Main.cpp agregar loop de juego~~
-	16. Corregir los paths harcodeados para facilitar la instalacion
-	17. GameView.cpp : quitar los "magic numbers"
-	18. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
-	19. ~~GameHandler : variable global actual player~~
-	20. Eliminar prints de debug
+	9. ~~Velocidad cambia segun el terreno~~
+	10. Efectividad de una unidad sobre otra (bono de armas?)
+	11. ~~Verificar que el tanque aparezca~~
+	12. Mejorar jugabilidad
+	13. Hacer el juego en pantalla completa (permitir alternar)
+	14. Hacer los manuales y documentacion
+	15. Borra codigo comentado!
+	16. ~~Main.cpp agregar loop de juego~~
+	17. Corregir los paths harcodeados para facilitar la instalacion
+	18. GameView.cpp : quitar los "magic numbers"
+	19. GameView.cpp : corregir barra de energia RenderVPBar => percentage = 1 - percentage
+	20. ~~GameHandler : variable global actual player~~
+	21. Eliminar prints de debug
 
 * Prioridad Media
 	1. Hacer gusanos

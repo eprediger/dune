@@ -12,6 +12,10 @@ unsigned ConfigurationReader::getSpeedFactor() const {
     return this->config["SPEED_FACTOR"].as<unsigned>();
 }
 
+unsigned ConfigurationReader::getBlockMovement() const {
+    return this->config["blockMovement"].as<unsigned>();
+}
+
 unsigned ConfigurationReader::getRangeFactor() const {
     return this->config["RANGE_FACTOR"].as<unsigned>();
 }

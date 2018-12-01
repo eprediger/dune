@@ -12,6 +12,7 @@ public:
 
 	// Parametros generales de configuracion
 	unsigned getSpeedFactor() const;
+	unsigned getBlockMovement() const;
 	unsigned getRangeFactor() const;
 	unsigned getTimeFactor() const;
 	unsigned getInitialGold() const;
