@@ -151,20 +151,20 @@ void GameView::render() {
 		constructorView->draw(camera);
 	}
 
-	for (auto itr = deadUnitViews.begin(); itr != deadUnitViews.end(); ++itr) {
-		(*itr)->draw(camera);
+	for (auto &deadUnitView : deadUnitViews) {
+		deadUnitView->draw(camera);
 	}
 
-	for (auto itr = unitViews.begin(); itr != unitViews.end(); ++itr) {
-		(*itr)->draw(camera);
+	for (auto &unitView : unitViews) {
+		unitView->draw(camera);
 	}
 
-	for (auto itr = buildingViews.begin(); itr != buildingViews.end(); ++itr) {
-		(*itr)->draw(camera);
+	for (auto &buildingView : buildingViews) {
+		buildingView->draw(camera);
 	}
 
-	for (auto itr = rocketViews.begin(); itr != rocketViews.end(); ++itr) {
-		(*itr)->draw(camera);
+	for (auto &rocketView : rocketViews) {
+		rocketView->draw(camera);
 	}
 
 	if (selectorView != nullptr) {
@@ -175,7 +175,6 @@ void GameView::render() {
 
 	// Botones
 	// Vender Edificio
-//	this->buttons.render(this->window.width * 16 / 20, this->window.height * 9 / 32);
 	Area sellBuildingDest(this->window.width * 16 / 20,
 	                      this->window.height * 9 / 32,
 	                      BTN_SELL_BUILDING,
