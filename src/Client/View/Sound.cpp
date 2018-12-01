@@ -21,10 +21,6 @@ Sound::~Sound() {
 
 void Sound::run() {
     Mix_PlayMusic(this->music, -1);
-    bool isPlaying = true;
-    while (!SDL_QuitRequested() && isPlaying) {
-        isPlaying = Mix_PlayingMusic();
-    }
 }
 
 void Sound::stop() {
