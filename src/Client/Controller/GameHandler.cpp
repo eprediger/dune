@@ -95,6 +95,12 @@ bool GameHandler::handleInput() {
     case SDL_MOUSEBUTTONUP:
         this->cursor.currentPosition();
         if (event.button.button == SDL_BUTTON_LEFT) {
+            if (constructor.on) {
+                constructor.build();
+            }
+            for (auto& button : this->buttons) {
+                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
+            }
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, player);
@@ -102,14 +108,8 @@ bool GameHandler::handleInput() {
             this->selector.addSelection(selection);
             this->selector.addSelection(selected_buildings);
             this->view.releaseMouse();
-            if (constructor.on) {
-                constructor.build();
-            }
-            for (auto& button : this->buttons) {
-                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
-            }
         }
-        // TEST
+            // TEST
         if (event.button.button == SDL_BUTTON_RIGHT) {
             this->cursor.currentPosition();
             this->constructor.on = false;
