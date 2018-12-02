@@ -45,6 +45,10 @@ public:
 
 	std::string getPort() const;
 
+    std::string getWindowWidth() const;
+
+    std::string getWindowHeight() const;
+
 	void render() override;
 	
 private:

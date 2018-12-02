@@ -16,6 +16,10 @@ public:
 
 	std::string getPort() const;
 
+	int getWindowWidth() const;
+
+	int getWindowHeight() const;
+
 private:
 	MainMenuView& view;
 	MainMenuHandler& handler;

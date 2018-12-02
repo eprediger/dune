@@ -20,3 +20,12 @@ std::string MainMenu::getHost() const {
 std::string MainMenu::getPort() const {
 	return this->handler.getPort();
 }
+
+int MainMenu::getWindowWidth() const {
+	return std::stoi(this->handler.getWindowWidth());
+}
+
+int MainMenu::getWindowHeight() const {
+	return std::stoi(this->handler.getWindowHeight());
+}
+

@@ -47,6 +47,8 @@ bool MainMenuHandler::handleInput() {
 	}
 	this->host = this->view.getHost();
 	this->port = this->view.getPort();
+	this->windowWidth = this->view.getWindowWidth();
+	this->windowHeight = this->view.getWindowHeight();
 	return handleResult;
 }
 
@@ -57,4 +59,13 @@ std::string MainMenuHandler::getHost() const {
 std::string MainMenuHandler::getPort() const {
 	return this->port;
 }
+
+std::string MainMenuHandler::getWindowWidth() const {
+	return this->windowWidth;
+}
+
+std::string MainMenuHandler::getWindowHeight() const {
+	return this->windowHeight;
+}
+
 

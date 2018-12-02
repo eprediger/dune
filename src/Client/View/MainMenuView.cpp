@@ -14,9 +14,13 @@ MainMenuView::MainMenuView(const int width, const int height) :
 
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Ancho     :", TXT_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Alto      :", TXT_FONT_SIZE, this->window)));
 
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("localhost", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("8080", BOX_FONT_SIZE, this->window)));
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("1366", BOX_FONT_SIZE, this->window)));
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("768", BOX_FONT_SIZE, this->window)));
 
 	this->playButton.reset(new Text("Jugar", BTN_FONT_SIZE, this->window));
 	this->selectedTextBox = this->inputBoxes[textBoxIndex].get();
@@ -82,6 +86,14 @@ std::string MainMenuView::getHost() const {
 
 std::string MainMenuView::getPort() const {
 	return this->inputBoxes[1]->getText();
+}
+
+std::string MainMenuView::getWindowWidth() const {
+	return this->inputBoxes[2]->getText();
+}
+
+std::string MainMenuView::getWindowHeight() const {
+	return this->inputBoxes[3]->getText();
 }
 
 void MainMenuView::render() {

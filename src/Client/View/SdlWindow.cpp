@@ -4,13 +4,14 @@
 SdlWindow::SdlWindow(const int width, const int height) :
 	width(width),
 	height(height),
+	full_screen(false),
 	window(nullptr),
 	renderer(nullptr),
 	iconSurface(nullptr) {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		throw SdlException("Error en la inicialización", SDL_GetError());
 	}
-	if (SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_ACCELERATED,// | SDL_WINDOW_BORDERLESS,
+	if (SDL_CreateWindowAndRenderer(width, height, SDL_RENDERER_ACCELERATED,// | SDL_WINDOW_FULLSCREEN,
 	                                &this->window, &this->renderer)) {
 		throw SdlException("Error al crear ventana", SDL_GetError());
 	}
@@ -62,4 +63,14 @@ void SdlWindow::render() {
 
 SDL_Renderer* SdlWindow::getRenderer() const {
 	return this->renderer;
+}
+
+void SdlWindow::toggleFullScreen() {
+	if (full_screen){
+		SDL_SetWindowFullscreen(window, 0 );
+		full_screen = false;
+	} else {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		full_screen = true;
+	}
 }

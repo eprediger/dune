@@ -146,7 +146,9 @@ bool GameHandler::handleInput() {
         case SDLK_w:
             view.moveUp(MOVE_AMOUNT);
             break;
-
+        case SDLK_f:
+            view.getWindow().toggleFullScreen();
+            break;
         case SDLK_DELETE:
         case SDLK_BACKSPACE:
         {

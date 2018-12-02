@@ -19,9 +19,14 @@ public:
 
 	std::string getPort() const;
 
+    std::string getWindowWidth() const;
+
+    std::string getWindowHeight() const;
+
 private:
 	MainMenuView& view;
 	std::string host, port;
+    std::string windowWidth, windowHeight;
 };
 
 #endif	// __MAIN_MENU_HANDLER_H__
