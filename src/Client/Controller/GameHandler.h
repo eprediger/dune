@@ -10,6 +10,7 @@
 #include "ButtonHandler.h"
 #include "CommunicationQueue.h"
 #include "GameInterface.h"
+#include "CameraDragger.h"
 #include <vector>
 
 class GameHandler : public InputHandler {
@@ -30,6 +31,7 @@ private:
 	Model& model;
 	Player& player;
 	Selector selector;
+	CameraDragger dragger;
 	BuildingConstructor constructor;
 	std::vector<ButtonHandler*> buttons;
 	CommunicationQueue& queue;

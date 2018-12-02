@@ -21,6 +21,7 @@ GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue
     model(model),
     player(player),
     selector(0, 0),
+    dragger(view),
     constructor(model, player, view, queue),
     queue(queue),
     interface(model, view) {
@@ -70,9 +71,18 @@ bool GameHandler::handleInput() {
                 this->selector.drag_source = selector.pos;
             }
         }
+        if (event.button.button == SDL_BUTTON_MIDDLE) {
+            this->cursor.currentPosition();
+            Position curr_pos(cursor.current_x, cursor.current_y);
+            dragger.on(curr_pos);
+        }
         break;
     case SDL_MOUSEMOTION:
         this->cursor.currentPosition();
+        if (dragger.isOn()){
+            dragger.move(Position(cursor.current_x, cursor.current_y));
+        }
+
         if (this->cursor.current_x >= view.getCameraWidth()) {
             this->selector.pos.x = this->view.getCameraX() + this->view.getCameraWidth() - 128;
         } else {
@@ -113,6 +123,9 @@ bool GameHandler::handleInput() {
                 j["args"]["y"] = pos.y;
                 queue.enqueue(j);
             }
+        }
+        if (event.button.button == SDL_BUTTON_MIDDLE) {
+            dragger.off();
         }
         break;
     case SDL_KEYDOWN:
