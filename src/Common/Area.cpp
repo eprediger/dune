@@ -21,6 +21,13 @@ Area::Area(const Position& pos1, const Position& pos2) {
 	height = abs(pos1.y - pos2.y);
 }
 
+Area::Area(SDL_Rect &rect) {
+	this->x = rect.x;
+	this->y = rect.y;
+	this->width = rect.w;
+	this->height = rect.h;
+}
+
 void Area::setX(int newX) {
 	this->x = newX;
 }
@@ -43,4 +50,10 @@ int Area::getWidth() const {
 
 int Area::getHeight() const {
 	return this->height;
+}
+
+bool Area::anyInteract(Area &other) {
+    return
+        ((this->x < other.x + other.width) && (this->x + this->width > other.x))||
+        ((this->y < other.y + other.height) || (this->y + this->height > other.y) );
 }

@@ -179,7 +179,7 @@ void GameView::render() {
 	                      this->window.height * 9 / 32,
 	                      BTN_SELL_BUILDING,
 	                      BTN_SELL_BUILDING);
-	this->buildingSellButton->render(sellBuildingDest);
+    this->buildingSellButton->render(sellBuildingDest);
 
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
