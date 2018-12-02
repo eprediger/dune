@@ -1,10 +1,10 @@
-#ifndef __MAIN_MENU_H__
-#define __MAIN_MENU_H__
+#ifndef __MAIN_MENU_VIEW_H__
+#define __MAIN_MENU_VIEW_H__
 
 #include "View.h"
 #include <vector>
 
-#define TAG_FONT_SIZE 	28
+#define TXT_FONT_SIZE 	28
 #define BOX_FONT_SIZE 	24
 #define BTN_FONT_SIZE	36
 
@@ -41,7 +41,9 @@ public:
 
 	// Imprime la informacion de los textBox (servidor y puerto)
 	// Luego, se va a modificar para conectarse contra el servidor
-	void getTextBoxContent();
+	std::string getHost() const;
+
+	std::string getPort() const;
 
 	void render() override;
 	
@@ -57,4 +59,4 @@ private:
 	unsigned textBoxIndex;
 };
 
-#endif	// __MAIN_MENU_H__
+#endif	// __MAIN_MENU_VIEW_H__

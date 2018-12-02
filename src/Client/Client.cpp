@@ -1,7 +1,8 @@
 #include <sys/socket.h>
 #include "Client.h"
 
-Client::Client(const char *host, const char *service, CommunicationQueue &queue) :
+Client::Client(const char* host, const char* service,
+               CommunicationQueue &queue) :
     keepPlaying(true),
     connectionSkt(host, service, 0),
     queue(queue),

@@ -1,8 +1,9 @@
 #ifndef __MAIN_MENU_HANDLER_H__
 #define __MAIN_MENU_HANDLER_H__
 
-#include "InputHandler.h"
-#include "View/MainMenuView.h"
+#include <Controller/InputHandler.h>
+#include <View/MainMenuView.h>
+#include <string>
 
 class MainMenuHandler : public InputHandler {
 public:
@@ -14,8 +15,13 @@ public:
 	
 	bool handleInput() override;
 
+	std::string getHost() const;
+
+	std::string getPort() const;
+
 private:
 	MainMenuView& view;
+	std::string host, port;
 };
 
 #endif	// __MAIN_MENU_HANDLER_H__

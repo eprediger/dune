@@ -1,5 +1,4 @@
 #include "HouseSelectionView.h"
-#include <iostream>
 #include <memory>
 
 HouseSelectionView::HouseSelectionView(const int width, const int height) :
@@ -38,10 +37,6 @@ bool HouseSelectionView::setFocusOn(const int x, const int y) {
 			this->selectedHouse = this->houseNames[i].get();
 			houseSelected = true;
 		}
-	}
-	// Prueba texto
-	if (this->selectedHouse != nullptr) {
-		std::cout << this->selectedHouse->getText() << std::endl;
 	}
 	return houseSelected;
 }
