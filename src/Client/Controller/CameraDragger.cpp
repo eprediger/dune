@@ -1,6 +1,6 @@
 #include "CameraDragger.h"
 
-CameraDragger::CameraDragger(GameView &view) : view(view), drag_on(false), sensivity(SENSIVITY) {}
+CameraDragger::CameraDragger(GameView &view) : view(view), sensivity(SENSIVITY), drag_on(false) {}
 
 void CameraDragger::on(Position initial) {
     drag_on = true;
