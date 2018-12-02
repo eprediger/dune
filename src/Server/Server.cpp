@@ -65,13 +65,14 @@ void Server::waitPlayers() {
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->start();
 		model.addPlayer(commonQueue.dequeue()["house"]);
-		this->players[i]->queue.enqueue(model.getMap().getSerialization());
-		this->players[i]->queue.enqueue(model.getPlayer(i).getSerialization());
-		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initWithJson());
 		this->players[i]->setId(i);
 	}
 
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
+		this->players[i]->queue.enqueue(model.getMap().getSerialization());
+		this->players[i]->queue.enqueue(model.getPlayer(this->players[i]->getId()).getSerialization());
+		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initWithJson());
+
 		for (unsigned j = 0; j < this->maxPlayers; ++j) {
 			this->players[i]->queue.enqueue(model.getPlayer(j).getSerialization());
 		}
