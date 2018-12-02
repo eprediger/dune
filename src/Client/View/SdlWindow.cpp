@@ -26,11 +26,15 @@ SdlWindow::~SdlWindow() {
 		SDL_DestroyRenderer(this->renderer);
 		this->renderer = nullptr;
 	}
+	this->destroyWindow();
+	SDL_Quit();
+}
+
+void SdlWindow::destroyWindow() {
 	if (this->window != nullptr) {
 		SDL_DestroyWindow(this->window);
 		this->window = nullptr;
 	}
-	SDL_Quit();
 }
 
 void SdlWindow::grabMouse(bool grab) {

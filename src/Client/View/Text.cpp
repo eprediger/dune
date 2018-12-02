@@ -101,7 +101,7 @@ void Text::createText(const std::string& text, int r, int g, int b) {
 	                 &(this->textWidth), &(this->textHeight));
 }
 
-std::string Text::getText() {
+std::string Text::getText() const {
 	return this->inputText;
 }
 

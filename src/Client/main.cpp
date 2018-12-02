@@ -8,52 +8,63 @@
 #include "Codes.h"
 #include "Client.h"
 
-#include "View/GameView.h"
-#include "Controller/GameHandler.h"
-#include "GameInterface.h"
-#include "HandlerThread.h"
+#include <HouseSelection.h>
+#include <Controller/HouseSelectionHandler.h>
+#include <View/HouseSelectionView.h>
+
+#include <Controller/GameHandler.h>
+#include <View/GameView.h>
+#include <GameInterface.h>
+#include <HandlerThread.h>
 
 // ./client 127.0.0.1 10001 ORDOS
 
 #define MAX_FPS 60
 #define SECOND  1000
 
-
 int main(int argc, const char *argv[]) {
     if (argc != CLT_ARGS) {
         std::cerr << "Uso: " << argv[0]
-                  << " <ip-servidor> <puerto-servidor> <casa> " << std::endl;
+                  << " <ip-servidor> <puerto-servidor>" << std::endl;
         return USAGE_ERROR;
     } else {
+        /*MainMenuView menuView(WINDOW_WIDTH, WINDOW_HEIGHT);
+        MainMenuHandler menuHandler(menuView);
+        Application app(menuView, menuHandler);*/
         CommunicationQueue queue;
         Client client(argv[1], argv[2], queue);
         try {
-            /*MainMenuView menuView(WINDOW_WIDTH, WINDOW_HEIGHT);
-            MainMenuHandler menuHandler(menuView);
-            Application app(menuView, menuHandler);*/
-
-            /*HouseSelectionView houseSelectionView(WINDOW_WIDTH, WINDOW_HEIGHT);
+            HouseSelectionView houseSelectionView(WINDOW_WIDTH, WINDOW_HEIGHT);
             HouseSelectionHandler houseSelectionHandler(houseSelectionView);
-            Application app(houseSelectionView, houseSelectionHandler);*/
+            HouseSelection houseSelection(houseSelectionView, houseSelectionHandler);
+            std::string selectedHouse = houseSelection.run();
+
             client.start();
             nlohmann::json house;
-            house["house"] = std::string(argv[3]);
+            house["house"] = selectedHouse;//std::string(argv[3]);
             queue.enqueue(house);
+
             nlohmann::json mapFile = queue.dequeue();
             Model model(mapFile, queue);
+
             nlohmann::json player = queue.dequeue();
             model.addPlayer(player);
+
             nlohmann::json gameConfig = queue.dequeue();
             GameConfiguration::init(gameConfig);
+
             Player& myPlayer = model.getPlayer(player["id"]);
+
             GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
             GameInterface interface(model, gameView);
             GameHandler gameHandler(gameView, model, queue, myPlayer);
+
             Application app(gameView, gameHandler, model);
+
             HandlerThread handler(app);
 
             handler.start();
-            const int time_step = 16;
+            const int time_step = SECOND / MAX_FPS;
             int sleep_extra = 0;
 
             while (app.running() && !model.isGameFinished()) {

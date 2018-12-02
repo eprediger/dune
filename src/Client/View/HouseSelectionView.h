@@ -19,14 +19,16 @@ public:
 	// Selecciona elemento en posicion (x, y)
 	bool setFocusOn(const int x, const int y);
 
+	std::string getHouse() const;
+
 	void render() override;
 
 private:
 	SdlTexture backgroundImage;
 	Sound backgroundMusic;
 	Text title;
-	std::vector<std::unique_ptr<SdlTexture> > houses;
-	std::vector<std::unique_ptr<Text> > houseNames;
+	std::vector<std::unique_ptr<SdlTexture>> houses;
+	std::vector<std::unique_ptr<Text>> houseNames;
 	Text* selectedHouse;
 };
 

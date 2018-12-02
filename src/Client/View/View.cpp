@@ -8,3 +8,7 @@ View::View(const int width, const int height) :
 }
 
 View::~View() {}
+
+void View::closeWindow() {
+    this->window.destroyWindow();
+}

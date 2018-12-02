@@ -6,8 +6,9 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-Player::Player(int id, ConstructionYard &construction_yard,const std::string& house):
+Player::Player(int id, ConstructionYard &construction_yard, const std::string& house):
     id(id),
+    house(house),
     serialization(),
     news(true),
     generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
@@ -16,8 +17,7 @@ Player::Player(int id, ConstructionYard &construction_yard,const std::string& ho
     gold_limit(GameConfiguration::getConfig().initialGold),
     trainingCenter(),
     buildingCenter(),
-    construction_yard(&construction_yard),
-    house(house) {
+    construction_yard(&construction_yard) {
     construction_yard.setPlayer(this);
     serialization["class"] = "Player";
     serialization["id"] = id;
@@ -48,7 +48,7 @@ void Player::subGold(int gold_to_sub) {
 }
 
 float Player::getEnergyFactor() {
-    float energy_factor = consumedEnergy < generatedEnergy ? 1 : (float)consumedEnergy/(float)generatedEnergy;
+    float energy_factor = consumedEnergy < generatedEnergy ? 1 : (float)consumedEnergy / (float)generatedEnergy;
     return energy_factor;
 }
 

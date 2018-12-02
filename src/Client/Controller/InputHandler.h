@@ -2,7 +2,6 @@
 #define __INPUT_HANDLER_H__
 
 #include "InputHandler.h"
-#include "View/HouseSelectionView.h"
 #include "Cursor.h"
 
 class InputHandler {

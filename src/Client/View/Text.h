@@ -22,7 +22,7 @@ public:
 	virtual ~Text();
 
 	// Obtener el texto
-	std::string getText();
+	std::string getText() const;
 
 	// Reemplaza el contenido por newText
 	void setText(const std::string& newText);

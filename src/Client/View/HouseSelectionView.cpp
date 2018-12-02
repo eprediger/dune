@@ -13,9 +13,9 @@ HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.png", this->window))));
 	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.png", this->window))));
 	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.png", this->window))));
-	this->houseNames.push_back(std::unique_ptr<Text>(new Text("ATREIDES", HOUSE_FONT_SIZE, this->window)));
-	this->houseNames.push_back(std::unique_ptr<Text>(new Text("HARKONNEN", HOUSE_FONT_SIZE, this->window)));
-	this->houseNames.push_back(std::unique_ptr<Text>(new Text("ORDOS", HOUSE_FONT_SIZE, this->window)));
+	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Atreides", HOUSE_FONT_SIZE, this->window)));
+	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Harkonnen", HOUSE_FONT_SIZE, this->window)));
+	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Ordos", HOUSE_FONT_SIZE, this->window)));
 	backgroundMusic.start();
 }
 
@@ -46,15 +46,15 @@ bool HouseSelectionView::setFocusOn(const int x, const int y) {
 	return houseSelected;
 }
 
+std::string HouseSelectionView::getHouse() const {
+	return this->selectedHouse->getText();
+}
+
 void HouseSelectionView::render() {
 	Area src(0, 0, backgroundImage.width, backgroundImage.height);
 	Area dest(0, 0, window.width, window.height);
 	this->backgroundImage.render(src, dest);
 
-	/*Area titleArea((this->window.width - this->title.textWidth) / 2,
-	               this->window.height / 10,
-	               this->title.textWidth,
-	               this->title.textHeight);*/
 	this->title.render((this->window.width - this->title.textWidth) / 2,
 	                   this->window.height / 10);
 

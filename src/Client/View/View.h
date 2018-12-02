@@ -21,6 +21,7 @@ public:
     // Se dibuja vista en la pantalla
     virtual void render() = 0;
 
+    void closeWindow();
 public:
     const int windowWidth, windowHeight;
 protected:

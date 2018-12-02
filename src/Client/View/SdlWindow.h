@@ -12,6 +12,8 @@ public:
 	// Libera recursos asociados a la instancia
 	~SdlWindow();
 
+	void destroyWindow();
+
 	// 
 	void fill();
 

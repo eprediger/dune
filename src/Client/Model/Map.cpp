@@ -255,8 +255,8 @@ Position Map::getCornerPosition(Position& pos) {
     return Position((pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT);
 }
 
-void Map::updateSpice(nlohmann::json& j){
-    for (int i = 0; i<j["updates"].size(); i++){
-        this->at(j["updates"][i][0],j["updates"][i][1]).farm();
+void Map::updateSpice(nlohmann::json& j) {
+    for (unsigned i = 0; i < j["updates"].size(); i++) {
+        this->at(j["updates"][i][0], j["updates"][i][1]).farm();
     }
 }
