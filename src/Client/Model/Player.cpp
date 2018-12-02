@@ -121,7 +121,7 @@ bool Player::hasResourcesFor(const Unit::UnitType unitType) const {
 		            && this->hasBuilding(Building::BARRACKS));
 		break;
 	case Unit::UnitType::RAIDER:
-		canTrain = ((this->gold >= GameConfiguration::getConfig().raiderCost))
+		canTrain = (this->house == "Ordos") && ((this->gold >= GameConfiguration::getConfig().raiderCost))
 		           && (this->hasBuilding(Building::LIGHT_FACTORY));
 		break;
 	case Unit::UnitType::TANK:
@@ -129,7 +129,7 @@ bool Player::hasResourcesFor(const Unit::UnitType unitType) const {
 		           && (this->hasBuilding(Building::HEAVY_FACTORY));
 		break;
 	case Unit::UnitType::TRIKE:
-		canTrain = ((this->gold >= GameConfiguration::getConfig().trikeCost))
+		canTrain = (this->house != "Ordos") && ((this->gold >= GameConfiguration::getConfig().trikeCost))
 		           && (this->hasBuilding(Building::LIGHT_FACTORY));
 		break;
 	default:    // El tipo de unidad no se encuentra definida
