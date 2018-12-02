@@ -2,7 +2,7 @@
 #define __CODES_H__
 
 #define SRV_ARGS 3
-#define CLT_ARGS 3
+#define CLT_ARGS 1
 
 #define SUCCESS 0
 

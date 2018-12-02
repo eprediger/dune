@@ -2,7 +2,9 @@
 
 MainMenuHandler::MainMenuHandler(MainMenuView& view) :
 	InputHandler(),
-	view(view) {
+	view(view),
+	host(),
+	port() {
 	SDL_StartTextInput();
 }
 
@@ -11,15 +13,17 @@ MainMenuHandler::~MainMenuHandler() {
 }
 
 bool MainMenuHandler::handleInput() {
+	bool handleResult = true;
 	SDL_Event event;
-	SDL_PollEvent(&(event));
+	SDL_WaitEvent(&(event));
 	switch (event.type) {
 	case SDL_QUIT:
-		return false;
+		handleResult = false;
 	case SDL_MOUSEBUTTONUP:
 		if (event.button.button == SDL_BUTTON_LEFT) {
 			this->cursor.currentPosition();
-			return this->view.setFocusOn(this->cursor.current_x, this->cursor.current_y);
+			handleResult = this->view.setFocusOn(this->cursor.current_x,
+			                                      this->cursor.current_y);
 		}
 		break;
 	case SDL_KEYDOWN:
@@ -33,8 +37,7 @@ bool MainMenuHandler::handleInput() {
 		}
 		// Enter pasa a la siguiente pantalla
 		if (event.key.keysym.sym == SDLK_RETURN) {
-			this->view.getTextBoxContent();
-			return false;
+			handleResult = false;
 		}
 		break;
 	// Insertar texto
@@ -42,5 +45,16 @@ bool MainMenuHandler::handleInput() {
 		this->view.insertTextToTextBox(event.text.text);
 		break;
 	}
-	return true;
+	this->host = this->view.getHost();
+	this->port = this->view.getPort();
+	return handleResult;
 }
+
+std::string MainMenuHandler::getHost() const {
+	return this->host;
+}
+
+std::string MainMenuHandler::getPort() const {
+	return this->port;
+}
+

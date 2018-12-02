@@ -1,5 +1,4 @@
 #include "MainMenuView.h"
-#include <iostream>	// print server y puerto
 
 MainMenuView::MainMenuView(const int width, const int height) :
 	View(width, height),
@@ -13,8 +12,8 @@ MainMenuView::MainMenuView(const int width, const int height) :
 	textBoxIndex(0) {
 	this->backgroundMusic.start();
 
-	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TAG_FONT_SIZE, this->window)));
-	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TAG_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TXT_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
 
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("localhost", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("10001", BOX_FONT_SIZE, this->window)));
@@ -53,7 +52,6 @@ bool MainMenuView::setFocusOn(const unsigned x, const unsigned y) {
 		unsigned button_y = (this->window.height * 2 / 3);
 		unsigned button_height = button_y + this->playButton->textHeight;
 		if (((x >= button_x) && (x <= button_width)) && ((y >= button_y) && (y <= button_height))) {
-			this->getTextBoxContent();
 			playButtonFocus = true;
 		}
 	}
@@ -78,44 +76,35 @@ void MainMenuView::insertTextToTextBox(const char* text) {
 	}
 }
 
-void MainMenuView::getTextBoxContent() {
-	for (unsigned i = 0; i < this->inputBoxes.size(); i++) {
-		std::cout << this->inputBoxes[i]->getText() << std::endl;
-	}
+std::string MainMenuView::getHost() const {
+	return this->inputBoxes[0]->getText();
+}
+
+std::string MainMenuView::getPort() const {
+	return this->inputBoxes[1]->getText();
 }
 
 void MainMenuView::render() {
-	Area bkgrImgSrc(0, 0, this->backgroundImage.width, this->backgroundImage.height);
+	Area bkgrImgSrc(0, 0, this->backgroundImage.width,
+	                this->backgroundImage.height);
 	Area bkgrImgDest(0, 0, this->window.width, this->window.height);
 	this->backgroundImage.render(bkgrImgSrc, bkgrImgDest);
 
-	/*this->title.render((this->window.width - this->title.textWidth) / 2,
-	                   this->window.height / 10);*/
-
 	Area titleAreaSrc(0, 0, this->titleImage.width, this->titleImage.height);
-	Area titleAreaDest(((this->window.width - (this->titleImage.width / 2)) / 2),
+	Area titleAreaDst(((this->window.width - (this->titleImage.width / 2)) / 2),
 	                   this->window.height / 10,
 	                   this->titleImage.width / 2,
 	                   this->titleImage.height / 2);
-	this->titleImage.render(titleAreaSrc, titleAreaDest);
+	this->titleImage.render(titleAreaSrc, titleAreaDst);
 
 	for (unsigned i = 0; i < this->tags.size(); i++) {
-		/*Area tagArea((this->window.width / 4),
-		             ((this->window.height - (this->tags.size() * this->tags[i]->textHeight)) / 2) + (i * this->tags[i]->textHeight),
-		             this->tags[i]->textWidth,
-		             this->tags[i]->textHeight);*/
-		this->tags[i]->render((this->window.width / 4),
-		                      ((this->window.height - (this->tags.size() * this->tags[i]->textHeight)) / 2) + (i * this->tags[i]->textHeight));
+		this->tags[i]->render((this->window.width / 4), ((this->window.height - (this->tags.size() * this->tags[i]->textHeight)) / 2) + (i * this->tags[i]->textHeight));
 	}
 
 	for (unsigned i = 0; i < this->inputBoxes.size(); i++) {
 		this->inputBoxes[i]->render((this->window.width / 2), ((this->window.height - (this->inputBoxes.size() * this->inputBoxes[i]->textHeight)) / 2) + (i * this->inputBoxes[i]->textHeight));
 	}
 
-	/*Area buttonArea((this->window.width - this->playButton->textWidth) * 2 / 3,
-	                (this->window.height * 2 / 3),
-	                this->playButton->textWidth,
-	                this->playButton->textHeight);*/
 	this->playButton->render((this->window.width - this->playButton->textWidth) * 2 / 3,
 	                         (this->window.height * 2 / 3));
 	this->window.render();
