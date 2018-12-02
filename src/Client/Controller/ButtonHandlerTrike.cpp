@@ -6,7 +6,7 @@
 ButtonHandlerTrike::ButtonHandlerTrike(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
                                             GameConfiguration::getConfig().trikeConstructionTime),
-                      player, view, queue) {
+                      player, view, queue, GameConfiguration::getConfig().trikeConstructionTime) {
 }
 
 ButtonHandlerTrike::~ButtonHandlerTrike() {}
@@ -25,5 +25,6 @@ bool ButtonHandlerTrike::canBeEnabled() {
 } 
 
 bool ButtonHandlerTrike::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::TRIKE)) * 100) / time);  
 	return (!this->player.trainingCenter->isTrainingTrike());
 }

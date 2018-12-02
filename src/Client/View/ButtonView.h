@@ -26,7 +26,7 @@ public:
 
 	bool isClicked(const int x, const int y);
 
-	void update();
+	void update(int percentage);
 
 	// Setea el estado de la vista para determinar que se renderiza
 	void setState(const ViewState newState);
@@ -43,6 +43,7 @@ private:
 public:
 	int x, y;
 	int width, height;
+	int complete_percentage;
 };
 
 #endif	// __BUTTON_VIEW_H__

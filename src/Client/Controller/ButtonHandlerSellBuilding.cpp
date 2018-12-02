@@ -6,7 +6,7 @@
 ButtonHandlerSellBuilding::ButtonHandlerSellBuilding(Player& player, GameView &view,
 			Selector &selector, CommunicationQueue& queue) :
         ButtonHandler(view.createSellBuildingButton("../assets/img/btns/sellBuilding.png"),player, view,
-                      queue),
+                      queue, 0),
 	selector(selector) {}
 
 ButtonHandlerSellBuilding::~ButtonHandlerSellBuilding() {}

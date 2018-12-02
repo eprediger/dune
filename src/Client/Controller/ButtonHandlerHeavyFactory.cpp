@@ -7,8 +7,9 @@ ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &v
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
                                             GameConfiguration::getConfig().buildingConstructionTime),
-                  player, view, queue),
-    constructor(constructor) {}
+                  player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
+    constructor(constructor)
+    {}
 
 ButtonHandlerHeavyFactory::~ButtonHandlerHeavyFactory() {}
 
@@ -26,6 +27,7 @@ bool ButtonHandlerHeavyFactory::canBeEnabled() {
 }
 
 bool ButtonHandlerHeavyFactory::finishAction() {
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::HEAVY_FACTORY)) * 100) / time);
     return player.buildingCenter->buildingReady(Building::HEAVY_FACTORY);
 }
 

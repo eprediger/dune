@@ -6,7 +6,7 @@
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
                                             GameConfiguration::getConfig().heavyInfantryTrainingTime),
-                     player, view, queue) {
+                     player, view, queue,GameConfiguration::getConfig().heavyInfantryTrainingTime) {
 }
 
 ButtonHandlerHeavyInfantry::~ButtonHandlerHeavyInfantry() {}
@@ -25,5 +25,6 @@ bool ButtonHandlerHeavyInfantry::canBeEnabled() {
 }
 
 bool ButtonHandlerHeavyInfantry::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::HEAVY_INFANTRY)) * 100) / time);  
 	return !(this->player.trainingCenter->isTrainingHeavyInfantry());
 }

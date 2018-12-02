@@ -10,8 +10,8 @@ ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
 	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
 	                              GameConfiguration::getConfig().buildingConstructionTime),
 	    player,
-	    view, queue),
-	constructor(constructor) {
+	    view, queue, GameConfiguration::getConfig().buildingConstructionTime),
+	constructor(constructor){
 	/*
 	"../assets/img/btns/buildings/barracks-harkonnen.jpg"
 	"../assets/img/btns/buildings/barracks-ordos.jpg"
@@ -34,6 +34,7 @@ bool ButtonHandlerBarracks::canBeEnabled() {
 }
 
 bool ButtonHandlerBarracks::finishAction() {
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::BARRACKS)) * 100) / time);
 	return player.buildingCenter->buildingReady(Building::BARRACKS);
 }
 

@@ -7,7 +7,7 @@ ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
                                             GameConfiguration::getConfig().buildingConstructionTime),
-                  player, view, queue),
+                  player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
@@ -27,6 +27,7 @@ bool ButtonHandlerSpiceSilo::canBeEnabled() {
 }
 
 bool ButtonHandlerSpiceSilo::finishAction() {
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::SPICE_SILO)) * 100) / time);  
     return player.buildingCenter->buildingReady(Building::SPICE_SILO);
 }
 

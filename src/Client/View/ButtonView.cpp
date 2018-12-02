@@ -17,7 +17,8 @@ ButtonView::ButtonView(const std::string &filename, const SdlWindow &window) :
 	x(0),
 	y(0),
 	width(buttonImage.width),
-	height(buttonImage.height) {}
+	height(buttonImage.height),
+	complete_percentage(0) {}
 
 ButtonView::~ButtonView() {}
 
@@ -29,6 +30,12 @@ bool ButtonView::isClicked(const int x, const int y) {
 void ButtonView::setState(const ViewState newState) {
 	this->buttonState = newState;
 }
+
+void ButtonView::update(int percentage){
+	if ((0 <= percentage) && (percentage <= 100))
+		complete_percentage = percentage;
+}
+#include <iostream>
 
 void ButtonView::render(const Area& dest) {
 	Area enabledSrc(0, 0, this->buttonImage.width / 2,
@@ -51,7 +58,7 @@ void ButtonView::render(const Area& dest) {
         break;
 	case ViewState::BUSY:
 		this->buttonImage.render(disabledSrc, dest);
-		this->timer.render(dest);
+		this->timer.render(dest,complete_percentage); 
 		break;
 	case ViewState::READY:
 		this->buttonImage.render(enabledSrc, dest);

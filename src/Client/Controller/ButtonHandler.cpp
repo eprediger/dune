@@ -6,12 +6,13 @@
 #include "View/View.h"
 #include <Model/GameConfiguration.h>
 
-ButtonHandler::ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue) :
+ButtonHandler::ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue, int time) :
 	buttonState(new ButtonDisabled()),
 	buttonView(buttonView),
 	player(player),
 	view(view),
-	queue(queue) {}
+	queue(queue),
+	time(time) {}
 
 ButtonHandler::~ButtonHandler() {
 	delete this->buttonState;

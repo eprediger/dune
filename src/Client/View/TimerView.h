@@ -25,13 +25,14 @@ public:
 
     ~TimerView();
 
-    void render(const Area &dest);
+    void render(const Area &dest, int complete_percentage);
 
 private:
     SDL_Renderer* renderer;
     int actual_position;
     int actual_step;
     const int number_steps;
+    int remaining_steps;
     const int x_pos[POS_Q] = X_POSITIONS;
     const int y_pos[POS_Q] = Y_POSITIONS;
     const int factor = FACTOR;

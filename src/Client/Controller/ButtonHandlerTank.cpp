@@ -6,7 +6,7 @@
 ButtonHandlerTank::ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
                                             GameConfiguration::getConfig().tankConstructionTime),
-                      player, view, queue) {
+                      player, view, queue,GameConfiguration::getConfig().tankConstructionTime) {
 }
 
 ButtonHandlerTank::~ButtonHandlerTank() {}
@@ -25,5 +25,6 @@ bool ButtonHandlerTank::canBeEnabled() {
 }
  
 bool ButtonHandlerTank::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::TANK)) * 100) / time);  
 	return (!this->player.trainingCenter->isTrainingTank());
 }

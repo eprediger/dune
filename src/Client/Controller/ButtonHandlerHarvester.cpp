@@ -6,8 +6,7 @@
 ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
                                             GameConfiguration::getConfig().harvesterConstructionTime),
-                      player, view, queue) {}
-
+                      player, view, queue, GameConfiguration::getConfig().harvesterConstructionTime){ }
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 
 void ButtonHandlerHarvester::execute() {
@@ -24,5 +23,6 @@ bool ButtonHandlerHarvester::canBeEnabled() {
 }
 
 bool ButtonHandlerHarvester::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::HARVESTER)) * 100) / time);  
 	return (!this->player.trainingCenter->isTrainingHarvester());
 }

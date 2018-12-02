@@ -9,7 +9,7 @@
 
 class ButtonHandler {
 public:
-	ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue);
+	ButtonHandler(ButtonView &buttonView, Player& player, GameView &view, CommunicationQueue &queue, int time);
 
 	virtual ~ButtonHandler();
 
@@ -37,6 +37,7 @@ protected:
 	Player& player;
 	GameView& view;
 	CommunicationQueue& queue;
+	int time;
 };
 
 #endif	// __BUTTON_HANDLER_H__

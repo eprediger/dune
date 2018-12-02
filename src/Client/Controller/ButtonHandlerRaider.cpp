@@ -6,7 +6,7 @@
 ButtonHandlerRaider::ButtonHandlerRaider(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
                                             GameConfiguration::getConfig().raiderConstructionTime),
-                     player, view, queue) {
+                     player, view, queue, GameConfiguration::getConfig().raiderConstructionTime) {
 }
 
 ButtonHandlerRaider::~ButtonHandlerRaider() {}
@@ -25,5 +25,6 @@ bool ButtonHandlerRaider::canBeEnabled() {
 }
 
 bool ButtonHandlerRaider::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::RAIDER)) * 100) / time);  
 	return (!this->player.trainingCenter->isTrainingRaider());
 }

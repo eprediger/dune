@@ -23,7 +23,6 @@ public:
 
 private:
 	BuildingConstructor& constructor;
-	int time;
 };
 
 #endif  // __BUTTON_HANDLER_BARRACKS_H__

@@ -7,7 +7,7 @@
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
 	                                    GameConfiguration::getConfig().lightInfantryTrainingTime),
-	              player, view, queue) {}
+	              player, view, queue,GameConfiguration::getConfig().lightInfantryTrainingTime){}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}
 
@@ -25,5 +25,6 @@ bool ButtonHandlerLightInfantry::canBeEnabled() {
 }
 
 bool ButtonHandlerLightInfantry::finishAction() {
+	buttonView.update(((time - player.trainingCenter->remainingTime(Unit::LIGHT_INFANTRY)) * 100) / time);  
 	return (!this->player.trainingCenter->isTrainingLightInfantry());
 }

@@ -6,7 +6,7 @@ ButtonHandlerWindTrap::ButtonHandlerWindTrap(Player& player, GameView& view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
                                                 GameConfiguration::getConfig().buildingConstructionTime),
-                      player, view, queue),
+                      player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {
     if (this->canBeEnabled()) {
         this->setState(State::ENABLED);
@@ -29,6 +29,7 @@ bool ButtonHandlerWindTrap::canBeEnabled() {
 }
 
 bool ButtonHandlerWindTrap::finishAction() {
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::WIND_TRAP)) * 100) / time);  
     return player.buildingCenter->buildingReady(Building::WIND_TRAP);
 }
 

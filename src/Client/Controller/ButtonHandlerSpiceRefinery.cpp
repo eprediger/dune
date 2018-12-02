@@ -7,7 +7,7 @@ ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Player& player, GameView 
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
                                             GameConfiguration::getConfig().buildingConstructionTime),
-                  player, view, queue),
+                  player, view, queue, GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 
 ButtonHandlerSpiceRefinery::~ButtonHandlerSpiceRefinery() {}
@@ -26,7 +26,8 @@ bool ButtonHandlerSpiceRefinery::canBeEnabled() {
 }
 
 bool ButtonHandlerSpiceRefinery::finishAction() {
-    return player.buildingCenter->buildingReady(Building::SPICE_REFINERY);
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::SPICE_REFINERY)) * 100) / time);  
+    return player.buildingCenter->buildingReady(Building::SPICE_REFINERY); 
 }
 
 void ButtonHandlerSpiceRefinery::executeReady() {

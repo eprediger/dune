@@ -7,7 +7,7 @@ ButtonHandlerLightFactory::ButtonHandlerLightFactory(Player& player, GameView &v
             BuildingConstructor& constructor, CommunicationQueue& queue) :
         ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif",
                                                 GameConfiguration::getConfig().buildingConstructionTime),
-                      player, view, queue),
+                      player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 
 ButtonHandlerLightFactory::~ButtonHandlerLightFactory() {}
@@ -26,6 +26,7 @@ bool ButtonHandlerLightFactory::canBeEnabled() {
 }
 
 bool ButtonHandlerLightFactory::finishAction() {
+	buttonView.update(((time - player.buildingCenter->remainingTime(Building::LIGHT_FACTORY)) * 100) / time);  
     return player.buildingCenter->buildingReady(Building::LIGHT_FACTORY);
 }
 

@@ -16,7 +16,7 @@ MainMenuView::MainMenuView(const int width, const int height) :
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
 
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("localhost", BOX_FONT_SIZE, this->window)));
-	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("10001", BOX_FONT_SIZE, this->window)));
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("8080", BOX_FONT_SIZE, this->window)));
 
 	this->playButton.reset(new Text("Jugar", BTN_FONT_SIZE, this->window));
 	this->selectedTextBox = this->inputBoxes[textBoxIndex].get();
