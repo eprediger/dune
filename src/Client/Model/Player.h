@@ -15,6 +15,7 @@ class Player {
 private:
     int id;
     std::string house;
+    std::string playerName;
     std::vector<Building*> buildings;
     int generatedEnergy;
     int consumedEnergy;
@@ -29,6 +30,7 @@ public:
     void update(nlohmann::json& j);
     int& getId();
     std::string& getHouse();
+    std::string& getName();
     bool operator==(const Player& other) const;
 
     void sellBuilding(Building* building);

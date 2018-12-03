@@ -6,9 +6,11 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-Player::Player(int id, ConstructionYard &construction_yard, const std::string& house):
+Player::Player(int id, ConstructionYard &construction_yard, 
+        const std::string& house, const std::string& playerName):
     id(id),
     house(house),
+    playerName(playerName),
     serialization(),
     news(true),
     generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
@@ -22,6 +24,7 @@ Player::Player(int id, ConstructionYard &construction_yard, const std::string& h
     serialization["class"] = "Player";
     serialization["id"] = id;
     serialization["house"] = house;
+    serialization["playerName"] = playerName;
     serialization["generated_energy"] = generatedEnergy;
     serialization["consumed_energy"] = consumedEnergy;
     serialization["gold"] = gold;

@@ -40,6 +40,8 @@ public:
 
 	std::string getWindowHeight() const;
 
+	std::string getPlayerName() const;
+
 	void render() override;
 
 private:

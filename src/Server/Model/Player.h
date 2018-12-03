@@ -16,6 +16,7 @@ class Player {
 private:
     const int id;
     std::string house;
+    std::string playerName;
     nlohmann::json serialization;
     bool news;
 
@@ -32,7 +33,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
     std::vector<Unit*>& getTrainedUnits(Map& map);
 
-    explicit Player(int id, ConstructionYard &construction_yard, const std::string& house);
+    explicit Player(int id, ConstructionYard &construction_yard, 
+            const std::string& house, const std::string& playerName);
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);

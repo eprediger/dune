@@ -22,6 +22,8 @@ public:
 
 	int getWindowHeight() const;
 
+	std::string getPlayerName() const;
+
 private:
 	MainMenuView view;
 	MainMenuHandler handler;

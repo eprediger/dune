@@ -12,11 +12,13 @@ MainMenuView::MainMenuView(const int width, const int height) :
 	textBoxIndex(0) {
 	this->backgroundMusic.start();
 
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Nickname  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Ancho     :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Alto      :", TXT_FONT_SIZE, this->window)));
 
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("guest", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("localhost", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("8080", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("1366", BOX_FONT_SIZE, this->window)));
@@ -81,20 +83,24 @@ void MainMenuView::insertTextToTextBox(const char* text) {
 	}
 }
 
-std::string MainMenuView::getHost() const {
+std::string MainMenuView::getPlayerName() const {
 	return this->inputBoxes[0]->getText();
 }
 
-std::string MainMenuView::getPort() const {
+std::string MainMenuView::getHost() const {
 	return this->inputBoxes[1]->getText();
 }
 
-std::string MainMenuView::getWindowWidth() const {
+std::string MainMenuView::getPort() const {
 	return this->inputBoxes[2]->getText();
 }
 
-std::string MainMenuView::getWindowHeight() const {
+std::string MainMenuView::getWindowWidth() const {
 	return this->inputBoxes[3]->getText();
+}
+
+std::string MainMenuView::getWindowHeight() const {
+	return this->inputBoxes[4]->getText();
 }
 
 void MainMenuView::render() {
@@ -118,7 +124,7 @@ void MainMenuView::render() {
 
 	for (unsigned i = 0; i < this->inputBoxes.size(); i++) {
 		this->inputBoxes[i]->render((this->window.width / 2),
-			((this->window.height - 
+			((this->window.height -
 			(this->inputBoxes.size() * this->inputBoxes[i]->textHeight)) / 2)
 			 + (i * this->inputBoxes[i]->textHeight));
 	}

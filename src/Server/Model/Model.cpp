@@ -53,11 +53,11 @@ Building &Model::createBuilding(Building *building) {
     return *building;
 }
 
-int Model::addPlayer(const std::string& house) {
+int Model::addPlayer(const std::string& house, const std::string& playerName) {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     int i = this->players.size();
     ConstructionYard* cYard = new ConstructionYard(initial_pos[i].x, initial_pos[i].y, map.getBlockWidth(), map.getBlockHeight());
-    Player* player = new Player(i, *cYard, house);
+    Player* player = new Player(i, *cYard, house, playerName);
     players.insert(std::make_pair(player->getId(), player));
     this->createBuilding(std::move(cYard));
     return i;
