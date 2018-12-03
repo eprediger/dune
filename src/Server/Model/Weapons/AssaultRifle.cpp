@@ -1,7 +1,6 @@
 #include <Model/GameConfiguration.h>
 #include "AssaultRifle.h"
 
-
 AssaultRifle::AssaultRifle() :
 	Weapon(GameConfiguration::getConfig().assaultRifleDamage,
 		   GameConfiguration::getConfig().assaultRifleShootingRate,

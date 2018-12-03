@@ -7,10 +7,10 @@
 #include "View/GameView.h"
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
-
 #include <nlohmann/json.hpp>
 
-BuildingConstructor::BuildingConstructor(Model& model, Player& player, GameView& view, CommunicationQueue& queue):
+BuildingConstructor::BuildingConstructor(Model& model, Player& player,
+        GameView& view, CommunicationQueue& queue):
     model(model),
     player(player),
     view(view),

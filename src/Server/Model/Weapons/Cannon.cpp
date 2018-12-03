@@ -1,7 +1,6 @@
 #include <Model/GameConfiguration.h>
 #include "Cannon.h"
 
-
 Cannon::Cannon() :
 	Weapon(GameConfiguration::getConfig().cannonDamage,
 		   GameConfiguration::getConfig().cannonShootingRate,

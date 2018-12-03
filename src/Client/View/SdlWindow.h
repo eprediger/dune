@@ -14,16 +14,16 @@ public:
 
 	void destroyWindow();
 
-	// 
+	//
 	void fill();
 
-	// 
+	//
 	void fill(Uint8 r, Uint8 g, Uint8 b, Uint8 alpha);
 
 	// Dibuja render en pantalla
 	void render();
 
-	// 
+	//
 	void grabMouse(bool grab);
 
 	// Retorna render de la instancia
@@ -32,7 +32,7 @@ public:
 	void toggleFullScreen();
 
 	const int width, height;
-	
+
 private:
 	bool full_screen;
 	SDL_Window* window;

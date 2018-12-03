@@ -23,7 +23,7 @@ SdlTexture::~SdlTexture() {
 SDL_Texture* SdlTexture::loadTexture(const std::string& filename) {
 	this->surface = IMG_Load(filename.c_str());
 	if (surface == nullptr) {
-		throw SdlException("Error al cargar la textura", SDL_GetError());
+		throw SdlException("Error al cargar la textura:" + filename, SDL_GetError());
 	} else {
 		SDL_SetColorKey(surface, SDL_TRUE,
 		                SDL_MapRGB(surface->format, 0, 0, 0));
@@ -40,8 +40,8 @@ int SdlTexture::setColor(int& r, int& g, int& b) {
 	return SDL_SetTextureColorMod(texture, r, g, b);
 }
 
-int SdlTexture::setBlendMode(SDL_BlendMode mode){
-	return SDL_SetTextureBlendMode(texture, mode); 
+int SdlTexture::setBlendMode(SDL_BlendMode mode) {
+	return SDL_SetTextureBlendMode(texture, mode);
 }
 
 int SdlTexture::render(const Area& src, const Area& dest) {

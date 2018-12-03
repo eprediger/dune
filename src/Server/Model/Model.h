@@ -72,7 +72,7 @@ public:
 	void cleanDeadUnits();
 	void cleanRockets();
 	bool isGameFinished();
-	Player* getWinner();
+	int getWinnerId();
 
 	Player& getPlayer(int player);
 

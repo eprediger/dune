@@ -109,15 +109,15 @@ void UnitView::draw(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlT
 	playerColorRect.x = dest_area.getX();
 	playerColorRect.y = dest_area.getY();
 
-    if (camara.anyInteract(dest_area)) {
-        SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
-        SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
-        SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
-        SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
-        SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
+	if (camara.anyInteract(dest_area)) {
+		SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
+		SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
+		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
+		SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
 
-        (*anim_it)->render(sprite_area, dest_area);
-    }
+		(*anim_it)->render(sprite_area, dest_area);
+	}
 	if (life > unit.getLife()) {
 		life = unit.getLife();
 		animating_damage = true;
@@ -140,9 +140,9 @@ void UnitView::drawDamage(Area& camara) {
 	} else {
 		damage_update++;
 	}
-    if (camara.anyInteract(damage_dest_area)) {
-        (*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
-    }
+	if (camara.anyInteract(damage_dest_area)) {
+		(*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
+	}
 }
 
 DeadUnitView* UnitView::getDeadUnitView() {

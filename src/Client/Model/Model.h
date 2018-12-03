@@ -34,6 +34,7 @@ private:
 	std::map<int, Player*> players;
 	std::map<int, Rocket*> rockets;
 	bool gameFinished;
+	int winner_player_id;
 	CommunicationQueue& queue;
 
 public:
@@ -72,7 +73,6 @@ public:
 	Rocket& createRocket(nlohmann::json& j);
 	void updateRocket(nlohmann::json& j);
 
-
 	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
 	void actionOnPosition(Position &pos, Unit &unit);
@@ -81,7 +81,8 @@ public:
 	void cleanDeadUnits();
 	void cleanRockets();
 	bool isGameFinished();
-	Player* getWinner();
+	int getWinnerId();
+	void finishGame(int player_id);
 
 	Player& getPlayer(int player);
 

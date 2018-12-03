@@ -13,13 +13,16 @@
 class RocketView {
 public:
     RocketView(Rocket& rocket, SdlWindow& window);
+    
     void draw(Area& camara);
+    
     bool finished;
+
 private:
     Rocket& rocket;
     static std::vector<std::unique_ptr<SdlTexture> > travel_sprites;
     static std::vector<std::unique_ptr<SdlTexture> > explosion_sprites;
-    bool reverse,exploding;
+    bool reverse, exploding;
     Position pos;
     int update_sprite;
     std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;

@@ -79,5 +79,7 @@ void GameInterface::execute(nlohmann::json j) {
     
     } else if (j["class"] == "SpiceUpdate"){
         this->model.getMap().updateSpice(j);
+    } else if (j["class"] == "finishGame"){
+        this->model.finishGame(j["winner_id"]);
     }
 }

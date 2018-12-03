@@ -10,7 +10,9 @@
 class MapView {
 public:
 	MapView(Map &map, SdlWindow &window);
+
 	void draw(Area& camara);
+
 private:
 	Map& map;
 	SdlTexture terrenos;

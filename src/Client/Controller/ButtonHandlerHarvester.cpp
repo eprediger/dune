@@ -8,7 +8,6 @@ ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, C
                                             GameConfiguration::getConfig().harvesterConstructionTime,
 											"../assets/sound/fx/new harvester.wav"),
                       player, view, queue, GameConfiguration::getConfig().harvesterConstructionTime){ }
-ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 
 void ButtonHandlerHarvester::execute() {
 	nlohmann::json msg;

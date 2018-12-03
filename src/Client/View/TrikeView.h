@@ -13,9 +13,13 @@
 class TrikeView: public OffensiveUnitView {
 public:
     TrikeView(Trike& trike, SdlWindow& window);
+    
     virtual void draw(Area& camara);
+    
     virtual std::vector<std::unique_ptr<SdlTexture> >& getDeadSprites();
+    
     virtual Area getDeadUnitSrcArea();
+    
     virtual Area getDeadUnitDestArea();
 
 private:

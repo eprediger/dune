@@ -7,7 +7,7 @@ class ButtonHandlerHarvester : public ButtonHandler {
 public:
 	ButtonHandlerHarvester(Player& player, GameView &view, CommunicationQueue& queue);
 
-	~ButtonHandlerHarvester();
+	virtual ~ButtonHandlerHarvester() = default;
 
 	virtual void execute() override;
 

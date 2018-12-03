@@ -14,20 +14,22 @@
 
 class View {
 public:
-    // Se inicializan recursos asociados a la vista
-    View(const int width, const int height);
+	// Se inicializan recursos asociados a la vista
+	View(const int width, const int height);
 
-    // Se liberan recursos asociados a la instancia
-    virtual ~View();
+	// Se liberan recursos asociados a la instancia
+	virtual ~View();
 
-    // Se dibuja vista en la pantalla
-    virtual void render() = 0;
+	// Se dibuja vista en la pantalla
+	virtual void render() = 0;
 
-    void closeWindow();
+	void closeWindow();
+
 public:
-    const int windowWidth, windowHeight;
+	const int windowWidth, windowHeight;
+
 protected:
-    SdlWindow window;
+	SdlWindow window;
 };
 
 #endif	// __VIEW_H__

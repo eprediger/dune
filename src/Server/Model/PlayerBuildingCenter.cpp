@@ -86,8 +86,6 @@ void PlayerBuildingCenter::construct() {
         if (itr->second.first > 0) {
             news = true;
             itr->second.first -= 1;
-            if (itr->second.first == 0)
-                std::cout<<"fin building\n";
             serialization["buildings"].push_back(itr->first);
             serialization["time"].push_back(itr->second.first);
         }

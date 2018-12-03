@@ -26,6 +26,7 @@ Model::Model(nlohmann::json& file, CommunicationQueue &queue) :
     players(),
     rockets(),
     gameFinished(false),
+    winner_player_id(-1),
     queue(queue) {}
 
 Model::~Model() {
@@ -86,6 +87,10 @@ void Model::step() {
 
 bool Model::isGameFinished() {
     return gameFinished;
+}
+
+int Model::getWinnerId(){
+    return winner_player_id;
 }
 
 std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
@@ -274,5 +279,10 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
 
 int Model::numberOfPlayers() {
     return players.size();
+}
+
+void Model::finishGame(int player_id) {
+    gameFinished = true;
+    winner_player_id = player_id;    
 }
 

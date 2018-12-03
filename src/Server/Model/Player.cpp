@@ -52,7 +52,6 @@ float Player::getEnergyFactor() {
     return energy_factor;
 }
 
-
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
     building->setPlayer(this);

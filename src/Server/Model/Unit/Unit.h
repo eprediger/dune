@@ -21,7 +21,6 @@
 #include "States/UnitStateFarming.h"
 #include "States/UnitStateBacking.h"
 #include "States/UnitStateTraining.h"
-//#include "Model/Map.h"
 #include <stack>
 #include <memory>
 #include <iostream>
@@ -49,7 +48,6 @@ public:
             TANK,
             TRIKE,
     };
-
 
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();

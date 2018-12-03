@@ -32,8 +32,7 @@ void Orientation::calcular(const Position& p1, const Position& p2) {
 	}
 }
 
-
-void Orientation::calcularEnAtaque(const Position& p1, const Position& p2){
+void Orientation::calcularEnAtaque(const Position& p1, const Position& p2) {
 	if (p1 == p2) return;
 	if (p1.getX() < p2.getX() - 32) {
 		if (p1.getY() < p2.getY() - 32) {
@@ -59,7 +58,6 @@ void Orientation::calcularEnAtaque(const Position& p1, const Position& p2){
 		}
 	}
 }
-
 
 bool Orientation::operator==(const Orientation& other) {
 	return this->valor == other.valor;
@@ -104,4 +102,3 @@ int Orientation::este() {
 int Orientation::noreste() {
 	return 8;
 }
-

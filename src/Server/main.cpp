@@ -24,10 +24,6 @@ int main(int argc, char const *argv[]) {
 			std::cerr << e.what() << std::endl;
 			exitThread.join();
 			return EXIT_FAILURE;
-		} catch (...) {
-			std::cerr << "Todo termino señores, no tenemos escapatoria" << std::endl;
-			exitThread.join();
-			return EXIT_FAILURE;
 		}
 	}
 }

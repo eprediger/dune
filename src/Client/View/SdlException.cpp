@@ -8,8 +8,6 @@ SdlException::SdlException(std::string what, const char* sdlError) :
 	this->msg.append("\n SDL_ERROR: ").append(sdlError);
 }
 
-//SdlException::~SdlException() {}
-
 const char* SdlException::what() const noexcept {
 	return this->msg.c_str();
 }

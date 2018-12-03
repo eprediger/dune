@@ -8,7 +8,9 @@
 class GameInterface {
 public:
 	GameInterface(Model &model, GameView &view);
+
 	void execute(nlohmann::json json);
+
 private:
 	Model& model;
 	GameView& view;

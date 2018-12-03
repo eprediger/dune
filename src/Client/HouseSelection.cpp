@@ -15,9 +15,7 @@ void HouseSelection::run() {
 		this->status = this->handler.handleInput();
 	} while (this->keepWindowOpen());
 	this->view.closeWindow();
-	if (this->keepWindowOpen()) {
-		this->selectedHouse = this->handler.getSelectedHouse();
-	}
+	this->selectedHouse = this->handler.getSelectedHouse();
 }
 
 std::string HouseSelection::getSelectedHouse() const {

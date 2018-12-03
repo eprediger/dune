@@ -102,6 +102,7 @@ void Server::waitPlayers() {
 
 		sleep_extra = (delay_end - loop_end) - sleep_delay;
 	}
+	model.serialize(players);
 }
 
 void Server::cleanDisconectedPlayers() {

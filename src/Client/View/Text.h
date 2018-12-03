@@ -16,7 +16,8 @@ public:
 	// Construye un texto a partir del string text
 	// y lo agrega a la ventana window
 	Text(const std::string& text, const int fontSize, SdlWindow& window);
-	Text(const std::string& text, const int fontSize, SdlWindow& window, int r, int g, int b);
+	Text(const std::string& text, const int fontSize,
+	     SdlWindow& window, int r, int g, int b);
 
 	// Libera recursos de la instancia
 	virtual ~Text();

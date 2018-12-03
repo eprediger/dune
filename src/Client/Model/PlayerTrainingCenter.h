@@ -1,12 +1,12 @@
 #ifndef __PLAYER_TRAINING_CENTER_H__
 #define __PLAYER_TRAINING_CENTER_H__
 
-
 #include <map>
 #include <utility>
 #include <nlohmann/json.hpp>
 #include "Unit/Unit.h"
 #include <mutex> 
+
 class PlayerTrainingCenter {
 public:
     explicit PlayerTrainingCenter(nlohmann::json& j);

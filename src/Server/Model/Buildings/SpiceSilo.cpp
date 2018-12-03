@@ -14,7 +14,6 @@ SpiceSilo::SpiceSilo(const int x, const int y,
 
 SpiceSilo::~SpiceSilo() {}
 
-
 int SpiceSilo::getCapacity() {
 	return this->capacity;
 }

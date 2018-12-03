@@ -7,14 +7,20 @@
 #include <map>
 #include <vector>
 #include "RocketView.h"
-#include <memory> 
+#include <memory>
+
 class OffensiveUnitView: public UnitView {
 public:
     OffensiveUnitView(OffensiveUnit& unit, Area sprite_area, SdlWindow& window);
+    
     virtual void draw(Area& camara) = 0;
+    
     void drawAttack(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlTexture> > >& sprites);
+    
     virtual std::vector<std::unique_ptr<SdlTexture> >& getDeadSprites() = 0;
+    
     virtual Area getDeadUnitSrcArea() = 0;
+    
     virtual Area getDeadUnitDestArea() = 0;
 
 protected:

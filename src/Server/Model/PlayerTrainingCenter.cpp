@@ -37,7 +37,7 @@ PlayerTrainingCenter::PlayerTrainingCenter():
 
 void PlayerTrainingCenter::trainHarvester(Harvester* harvester) {
     int training_time = (int)(GameConfiguration::getConfig().harvesterConstructionTime
-            * harvester->getPlayer().getEnergyFactor());
+                              * harvester->getPlayer().getEnergyFactor());
     this->harvester.first = training_time;
     this->harvester.second = harvester;
 
@@ -98,7 +98,7 @@ void PlayerTrainingCenter::trainTrike(Trike* trike) {
 
 void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
     std::vector<Building*>::iterator it = buildings.begin();
-    if (!news){
+    if (!news) {
         serialization["units"].clear();
         serialization["time"].clear();
     }
@@ -117,13 +117,13 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
                 news = true;
             }
         } else if ((*it)->is(Building::LIGHT_FACTORY)) {
-            if (trike.second != nullptr){
+            if (trike.second != nullptr) {
                 trike.first -= 1;
                 serialization["units"].push_back(Unit::TRIKE);
                 serialization["time"].push_back(this->trike.first);
                 news = true;
-           }
-            if (raider.second != nullptr){
+            }
+            if (raider.second != nullptr) {
                 raider.first -= 1;
                 serialization["units"].push_back(Unit::RAIDER);
                 serialization["time"].push_back(this->raider.first);
@@ -140,19 +140,17 @@ void PlayerTrainingCenter::trainUnits(std::vector<Building*>& buildings) {
                 harvester.first -= 1;
                 serialization["units"].push_back(Unit::HARVESTER);
                 serialization["time"].push_back(this->harvester.first);
-                news = true;    
+                news = true;
             }
         }
         it++;
     }
 }
 
-nlohmann::json& PlayerTrainingCenter::getSerialization(){
+nlohmann::json& PlayerTrainingCenter::getSerialization() {
     news = false;
     return this->serialization;
 }
-
-
 
 void setInitialPosition(Unit* unit, Map& map, std::vector<Building*>& buildings,
                         ConstructionYard* constructionYard, Building::BuildingType building_type) {

@@ -8,7 +8,11 @@ class HandlerThread : public Thread {
 public:
 	explicit HandlerThread(Application& app);
 
+	virtual ~HandlerThread() = default;
+
 	virtual void run() override;
+
+    void stop();
 
 private:
 	Application& app;

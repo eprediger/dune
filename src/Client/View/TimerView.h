@@ -1,7 +1,6 @@
 #ifndef __TIMERVIEW_H__
 #define __TIMERVIEW_H__
 
-// #include <SDL_render.h>
 #include "SdlWindow.h"
 #include <Area.h>
 
@@ -21,7 +20,6 @@
 class TimerView {
 public:
     TimerView(const SdlWindow &window, int number_steps);
-    // TimerView(SDL_Renderer *renderer, int number_steps);
 
     ~TimerView();
 
@@ -38,4 +36,4 @@ private:
     const int factor = FACTOR;
 };
 
-#endif //DUNE_TIMERVIEW_H
+#endif  // __TIMERVIEW_H__
