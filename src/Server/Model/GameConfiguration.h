@@ -2,6 +2,7 @@
 #define __GAME_CONFIGURATION_H__
 
 #include <ConfigurationReader.h>
+#include <string>
 
 class GameConfiguration {
 private:

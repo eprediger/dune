@@ -1,5 +1,6 @@
 #include "HouseSelectionView.h"
 #include <memory>
+#include <string>
 
 HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	View(width, height),

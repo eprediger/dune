@@ -3,22 +3,21 @@
 
 #include <View/GameView.h>
 
-#define SENSIVITY 15
+#define SENSITIVITY 15
 
 class CameraDragger {
 public:
-    CameraDragger(GameView& view);
-    void on(Position initial);
-    bool isOn();
-    void move(Position move_pos);
-    void off();
-private:
-    GameView& view;
-    Position reference;
-    const int sensivity;
-    bool drag_on;
+	explicit CameraDragger(GameView& view);
+	void on(Position initial);
+	bool isOn();
+	void move(Position move_pos);
+	void off();
 
+private:
+	GameView& view;
+	Position reference;
+	const int sensivity;
+	bool drag_on;
 };
 
-
-#endif //__DRAGGER_H__
+#endif	// __DRAGGER_H__

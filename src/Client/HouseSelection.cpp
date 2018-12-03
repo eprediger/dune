@@ -1,4 +1,5 @@
 #include "HouseSelection.h"
+#include <string>
 
 HouseSelection::HouseSelection() :
 	WindowMenu(),

@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <string>
 
 Model::Model(const char *file) :
     map(file),
@@ -56,7 +57,7 @@ int Model::addPlayer(const std::string& house) {
     std::vector<Position>& initial_pos = map.getInitialPositions();
     int i = this->players.size();
     ConstructionYard* cYard = new ConstructionYard(initial_pos[i].x, initial_pos[i].y, map.getBlockWidth(), map.getBlockHeight());
-    Player* player = new Player(i, *cYard, house); 
+    Player* player = new Player(i, *cYard, house);
     players.insert(std::make_pair(player->getId(), player));
     this->createBuilding(std::move(cYard));
     return i;
@@ -332,9 +333,9 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
         }
     }
 
-    if (map.hasNews()){
+    if (map.hasNews()) {
         news = true;
-        for (auto player : connectedPlayers){
+        for (auto player : connectedPlayers) {
             player->queue.enqueue(map.getSpiceUpdate());
         }
     }
@@ -358,16 +359,15 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
     for (auto player : connectedPlayers) {
         if (players.at(player->getId())->hasNews()) {
             player->queue.enqueue(players.at(player->getId())->getSerialization());
-            if (!news){
+            if (!news) {
                 player->queue.enqueue(step);
             }
         }
     }
 
-    if (news){
-        for (auto player : connectedPlayers){
+    if (news) {
+        for (auto player : connectedPlayers) {
             player->queue.enqueue(step);
         }
     }
-
 }

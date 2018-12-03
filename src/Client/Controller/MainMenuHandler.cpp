@@ -1,4 +1,5 @@
 #include "MainMenuHandler.h"
+#include <string>
 
 MainMenuHandler::MainMenuHandler(MainMenuView& view) :
 	InputHandler(),
@@ -22,7 +23,8 @@ WindowStatus MainMenuHandler::handleInput() {
 	case SDL_MOUSEBUTTONUP:
 		if (event.button.button == SDL_BUTTON_LEFT) {
 			this->cursor.currentPosition();
-			if (!(this->view.setFocusOn(this->cursor.current_x, this->cursor.current_y))) {
+			if (!(this->view.setFocusOn(this->cursor.current_x,
+			                            this->cursor.current_y))) {
 				handleResult = WindowStatus::NEXT_WINDOW;
 			}
 		}
@@ -70,5 +72,3 @@ std::string MainMenuHandler::getWindowWidth() const {
 std::string MainMenuHandler::getWindowHeight() const {
 	return this->windowHeight;
 }
-
-

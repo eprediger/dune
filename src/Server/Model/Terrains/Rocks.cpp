@@ -1,19 +1,20 @@
 #include "Rocks.h"
 
-Rocks::Rocks() : Terrain(ROCKS_KEY),building(nullptr) {}
+Rocks::Rocks() :
+	Terrain(ROCKS_KEY),
+	building(nullptr) {}
 
-
-void Rocks::buildOn(Building* newBuilding){
-    this->occupied = true;
-    this->builtOn = true;
-    this->building = newBuilding;
+void Rocks::buildOn(Building* newBuilding) {
+	this->occupied = true;
+	this->builtOn = true;
+	this->building = newBuilding;
 }
 
-Building* Rocks::getBuilding(){
-    return this->building;
+Building* Rocks::getBuilding() {
+	return this->building;
 }
 
-void Rocks::free(){
-    this->building = nullptr;
-    Terrain::free();
+void Rocks::free() {
+	this->building = nullptr;
+	Terrain::free();
 }

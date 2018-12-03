@@ -3,20 +3,11 @@
 
 #include "View.h"
 #include <vector>
+#include <string>
 
 #define TXT_FONT_SIZE 	28
 #define BOX_FONT_SIZE 	24
 #define BTN_FONT_SIZE	36
-
-/* Mejoras:
- * Colores del texto
- * TextBox de tamaño fijo
- * Resaltar TextBox seleccionado
- * Remover unique_ptr
- */
-// https://gamedev.stackexchange.com/questions/140294/what-is-the-most-efficient-way-to-render-a-textbox-in-c-sdl2
-// https://wiki.libsdl.org/Tutorials/TextInput#Example
-// https://wiki.libsdl.org/SDL_RenderSetClipRect
 
 class MainMenuView : public View {
 public:
@@ -45,16 +36,15 @@ public:
 
 	std::string getPort() const;
 
-    std::string getWindowWidth() const;
+	std::string getWindowWidth() const;
 
-    std::string getWindowHeight() const;
+	std::string getWindowHeight() const;
 
 	void render() override;
-	
+
 private:
 	SdlTexture backgroundImage;
 	Sound backgroundMusic;
-	// Text title;
 	SdlTexture titleImage;
 	std::vector<std::unique_ptr<Text> > tags;
 	std::vector<std::unique_ptr<TextBox> > inputBoxes;

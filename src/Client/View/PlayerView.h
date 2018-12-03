@@ -12,14 +12,15 @@
 class PlayerView {
 public:
     PlayerView(Player& player, SdlWindow& window, int x, int width);
-    
+
     ~PlayerView();
 
     void draw();
-    
+
     void animateMoney();
 
     Player& player;
+
 private:
     int x;
     int width;

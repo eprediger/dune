@@ -4,11 +4,12 @@
 #include <View/MainMenuView.h>
 #include <Controller/MainMenuHandler.h>
 #include <WindowMenu.h>
+#include <string>
 
 class MainMenu : public WindowMenu {
 public:
 	MainMenu();
-	
+
 	virtual ~MainMenu() = default;
 
 	void run() override;

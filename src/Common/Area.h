@@ -8,8 +8,8 @@ class Area {
 public:
 	Area(int x, int y, int width, int height);
 	Area(const Position& pos1, const Position& pos2);
-	Area(SDL_Rect& rect);
-	
+	explicit Area(SDL_Rect& rect);
+
 	void setX(int x);
 	void setY(int y);
 	int getX() const;

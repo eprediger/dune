@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "WindowMenu.h"
+#include <string>
 
 MainMenu::MainMenu() :
 	WindowMenu(),
