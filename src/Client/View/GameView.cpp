@@ -24,7 +24,7 @@ GameView::GameView(const int width, const int height,
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, 3 * width / 4, height),
-	backgroundMusic("../assets/sound/music/fight-for-power.mp3"),
+	backgroundMusic(Mix_LoadMUS("../assets/sound/music/fight-for-power.mp3")),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
@@ -33,12 +33,12 @@ GameView::GameView(const int width, const int height,
 	map_width(model.getMap().getWidth()),
 	map_height(model.getMap().getHeight()),
 	camera_width(camera.getWidth()),
-	camera_height(camera.getHeight()) {
-	backgroundMusic.start();
+	camera_height(camera.getHeight()) 
+{
+	Sound::getSound()->playMusic(backgroundMusic);
 }
 
 GameView::~GameView() {
-	backgroundMusic.stop();
 	while (!this->buildingButtons.empty()) {
 		delete this->buildingButtons.back();
 		this->buildingButtons.pop_back();
@@ -68,7 +68,10 @@ GameView::~GameView() {
 		delete this->constructorView;
 		this->constructorView = nullptr;
 	}
-	backgroundMusic.join();
+	if (Sound::getSound()->getCurrentMusic() == backgroundMusic){
+		Sound::getSound()->stopMusic();
+	}
+	//Mix_FreeMusic(backgroundMusic);
 }
 
 void GameView::addUnitView(UnitView* unitView) {

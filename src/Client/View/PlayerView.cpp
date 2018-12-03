@@ -19,7 +19,9 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     capacityTag(nullptr),
     capacityBalance(nullptr),
     gold(player.gold),
-    balances() {
+    balances(),
+    constructYardLife(0)
+    {
     if (player.getHouse() == "Ordos") {
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg", window)));
     } else if (player.getHouse() == "Harkonnen") {
@@ -88,6 +90,12 @@ void PlayerView::draw() {
     if (player.gold != gold || !balances.empty()) {
         animateMoney();
     }
+    if (player.getConstructionYard()){
+        if (constructYardLife > player.getConstructionYard()->getLife())
+            //sirena
+        constructYardLife = player.getConstructionYard()->getLife();
+    }
+
 }
 
 void PlayerView::animateMoney() {

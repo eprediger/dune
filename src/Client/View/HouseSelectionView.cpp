@@ -5,7 +5,7 @@
 HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	View(width, height),
 	backgroundImage("../assets/img/bkgr/dune2000_4.jpg", this->window),
-	backgroundMusic("../assets/sound/music/plotting.mp3"),
+	backgroundMusic(Mix_LoadMUS("../assets/sound/music/plotting.mp3")),
 	title("ELIGE TU CASA", TITLE_FONT_SIZE / 2, this->window),
 	houses(),
 	houseNames(),
@@ -16,12 +16,14 @@ HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Atreides", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Harkonnen", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Ordos", HOUSE_FONT_SIZE, this->window)));
-	backgroundMusic.start();
+	Sound::getSound()->playMusic(backgroundMusic);
 }
 
 HouseSelectionView::~HouseSelectionView() {
-	backgroundMusic.stop();
-	backgroundMusic.join();
+	if (Sound::getSound()->getCurrentMusic() == backgroundMusic){
+		Sound::getSound()->stopMusic();
+	}
+	Mix_FreeMusic(backgroundMusic);
 }
 
 bool HouseSelectionView::setFocusOn(const int x, const int y) {

@@ -4,14 +4,13 @@
 MainMenuView::MainMenuView(const int width, const int height) :
 	View(width, height),
 	backgroundImage("../assets/img/bkgr/dune2000_1.jpg", this->window),
-	backgroundMusic("../assets/sound/music/options.mp3"),
+	backgroundMusic(Mix_LoadMUS("../assets/sound/music/options.mp3")),
 	titleImage("../assets/img/bkgr/d2klogo.png", this->window),
 	tags(),
 	playButton(nullptr),
 	selectedTextBox(nullptr),
 	textBoxIndex(0) {
-	this->backgroundMusic.start();
-
+	Sound::getSound()->playMusic(backgroundMusic);
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Nickname  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
@@ -27,13 +26,19 @@ MainMenuView::MainMenuView(const int width, const int height) :
 	this->playButton.reset(new Text("Jugar", BTN_FONT_SIZE, this->window));
 	this->selectedTextBox = this->inputBoxes[textBoxIndex].get();
 }
-
+#include <iostream>
 MainMenuView::~MainMenuView() {
-	backgroundMusic.stop();
-	backgroundMusic.join();
+	if (Sound::getSound()->getCurrentMusic() == backgroundMusic){
+		std::cout<<"stopped music\n";
+		Sound::getSound()->stopMusic();
+	}
+	std::cout<<"before free\n";
+	//Mix_FreeMusic(backgroundMusic);
+	std::cout<<"after free\n";
 	if (this->selectedTextBox != nullptr) {
 		this->selectedTextBox = nullptr;
 	}
+	Sound::getSound().reset();
 }
 
 bool MainMenuView::setFocusOn(const unsigned x, const unsigned y) {

@@ -40,7 +40,7 @@ private:
 	BuildingConstructorView* constructorView;
 	MapView map_view;
 	Area camera;
-	Sound backgroundMusic;
+	Mix_Music* backgroundMusic;
 	Text buildingTag, unitsTag;
 	std::vector<ButtonView*> buildingButtons;
 	std::vector<ButtonView*> unitButtons;

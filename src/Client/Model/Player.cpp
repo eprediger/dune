@@ -2,7 +2,7 @@
 #include "PlayerTrainingCenter.h"
 #include "Player.h"
 #include "GameConfiguration.h"
-
+#include "Model/Buildings/ConstructionYard.h"
 #include <algorithm>
 #include <vector>
 #include <string>
@@ -16,7 +16,8 @@ Player::Player(nlohmann::json& j) :
 	gold(j["gold"]),
 	gold_limit(j["gold_limit"]),
 	trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
-	buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])) {}
+	buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])),
+	constructionYard(nullptr) {}
 
 void Player::update(nlohmann::json& j) {
 	generatedEnergy = j["generated_energy"];
@@ -25,6 +26,14 @@ void Player::update(nlohmann::json& j) {
 	gold_limit = j["gold_limit"];
 	trainingCenter->update(j["trainingCenter"]);
 	buildingCenter->update(j["buildingCenter"]);
+}
+
+void Player::setConstructionYard(ConstructionYard* constructionYard){
+	this->constructionYard = constructionYard;
+}
+
+ConstructionYard* Player::getConstructionYard(){
+	return this->constructionYard;
 }
 
 bool Player::operator==(const Player &other) const {

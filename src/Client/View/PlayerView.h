@@ -35,6 +35,7 @@ private:
     Text* capacityTag, *capacityBalance;
     int gold;
     std::map<Text*, int> balances;
+    int constructYardLife;
 };
 
 #endif

@@ -4,6 +4,7 @@
 class Player;
 
 #include "Model/Buildings/Building.h"
+#include "Model/Buildings/ConstructionYard.h"
 #include "PlayerTrainingCenter.h"
 #include "PlayerBuildingCenter.h"
 #include <vector>
@@ -19,6 +20,7 @@ private:
     std::vector<Building*> buildings;
     int generatedEnergy;
     int consumedEnergy;
+    ConstructionYard* constructionYard;
 
 public:
     int gold;
@@ -27,7 +29,11 @@ public:
     PlayerBuildingCenter* buildingCenter;
 
     explicit Player(nlohmann::json& j);
+
     void update(nlohmann::json& j);
+
+    void setConstructionYard(ConstructionYard* constructionYard);
+    ConstructionYard* getConstructionYard();
     int& getId();
     std::string& getHouse();
     std::string& getName();

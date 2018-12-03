@@ -1,6 +1,6 @@
 #include "ButtonView.h"
 #include <string>
-
+#include "Sound.h"
 ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, int number_steps, const char* soundFile) :
 	buttonState(ViewState::HIDDEN),
 	buttonImage(filename, window),
@@ -22,7 +22,9 @@ ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, con
 	complete_percentage(0),
 	sound_fx(Mix_LoadWAV(soundFile)) {}
 
-ButtonView::~ButtonView() {}
+ButtonView::~ButtonView() {
+	Mix_FreeChunk(sound_fx);
+}
 
 bool ButtonView::isClicked(const int x, const int y) {
 	return (((x >= this->x) && (x <= this->x + this->width)) &&
@@ -32,8 +34,7 @@ bool ButtonView::isClicked(const int x, const int y) {
 #include <iostream>
 void ButtonView::setState(const ViewState newState) {
 	if (newState == ViewState::READY){
-		if (sound_fx)
-			Mix_PlayChannel(-1,sound_fx,0);
+		Sound::getSound()->playButtonFx(sound_fx);
 	}
 	this->buttonState = newState;
 }
