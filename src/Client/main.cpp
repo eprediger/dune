@@ -6,7 +6,7 @@
 #include "Application.h"
 #include "Codes.h"
 #include "Client.h"
-#include "VictoryScreenView.h"
+#include "View/VictoryScreenView.h"
 #include "VictoryScreen.h"
 
 #include <MainMenu.h>

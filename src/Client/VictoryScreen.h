@@ -2,8 +2,8 @@
 #define __VICTORYSCREEN_H__
 
 
-#include "VictoryScreenView.h"
-#include "VictoryScreenHandler.h"
+#include "View/VictoryScreenView.h"
+#include "Controller/VictoryScreenHandler.h"
 
 class VictoryScreen {
 public:

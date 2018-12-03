@@ -3,7 +3,7 @@
 
 
 #include <Controller/InputHandler.h>
-#include "VictoryScreenView.h"
+#include "View/VictoryScreenView.h"
 
 class VictoryScreenHandler : public InputHandler {
 public:
