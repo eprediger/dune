@@ -64,7 +64,9 @@ void Server::waitPlayers() {
 	std::cout << "Start Program!!!" << std::endl;
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->start();
-		model.addPlayer(commonQueue.dequeue()["house"]);
+		std::string house = commonQueue.dequeue()["house"];
+		std::string name = commonQueue.dequeue()["playerName"];
+		model.addPlayer(house, name);
 		this->players[i]->setId(i);
 	}
 

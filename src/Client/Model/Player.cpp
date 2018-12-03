@@ -10,6 +10,7 @@
 Player::Player(nlohmann::json& j) :
 	id(j["id"]),
 	house(j["house"].get<std::string>()),
+	playerName(j["playerName"].get<std::string>()),
 	generatedEnergy(j["generated_energy"]),
 	consumedEnergy(j["consumed_energy"]),
 	gold(j["gold"]),
@@ -36,6 +37,10 @@ int& Player::getId() {
 
 std::string& Player::getHouse() {
 	return this->house;
+}
+
+std::string &Player::getName() {
+	return this->playerName;
 }
 
 bool Player::hasBuilding(const Building::BuildingType buildingType) const {

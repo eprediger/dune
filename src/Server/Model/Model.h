@@ -45,7 +45,7 @@ public:
 //    Map& createMap();
 	Map& getMap();
 
-	int addPlayer(const std::string& house);
+	int addPlayer(const std::string& house, const std::string& playerName);
 
 	Harvester& createHarvester(int x, int y, int player);
 	HeavyInfantry& createHeavyInfantry(int x, int y, int player);

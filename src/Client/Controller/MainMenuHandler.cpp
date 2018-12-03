@@ -54,6 +54,7 @@ WindowStatus MainMenuHandler::handleInput() {
 	this->port = this->view.getPort();
 	this->windowWidth = this->view.getWindowWidth();
 	this->windowHeight = this->view.getWindowHeight();
+	this->playerName = this->view.getPlayerName();
 	return handleResult;
 }
 
@@ -71,4 +72,8 @@ std::string MainMenuHandler::getWindowWidth() const {
 
 std::string MainMenuHandler::getWindowHeight() const {
 	return this->windowHeight;
+}
+
+std::string MainMenuHandler::getPlayerName() const {
+	return this->playerName;
 }

@@ -30,3 +30,7 @@ int MainMenu::getWindowWidth() const {
 int MainMenu::getWindowHeight() const {
 	return std::stoi(this->handler.getWindowHeight());
 }
+
+std::string MainMenu::getPlayerName() const {
+	return this->handler.getPlayerName();
+}

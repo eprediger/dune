@@ -38,6 +38,10 @@ int main(int argc, const char *argv[]) {
                     house["house"] = houseSelection.getSelectedHouse();
                     queue.enqueue(house);
 
+                    nlohmann::json playerName;
+                    playerName["playerName"] = mainMenu.getPlayerName();
+                    queue.enqueue(playerName);
+
                     nlohmann::json mapFile = queue.dequeue();
                     Model model(mapFile, queue);
 
@@ -94,8 +98,9 @@ int main(int argc, const char *argv[]) {
                     client.disconnect();
 
                     if (model.isGameFinished()) {
+                        std::string winner_name = model.getPlayer(model.getWinnerId()).getName();
                         VictoryScreenView victoryScreenView(WINDOW_WIDTH, WINDOW_HEIGHT,
-                                                            std::to_string(model.getWinnerId()));
+                                                            winner_name);
                         VictoryScreenHandler victoryScreenHandler(victoryScreenView);
                         VictoryScreen victoryScreen(victoryScreenView, victoryScreenHandler);
                         victoryScreen.run();
