@@ -11,7 +11,7 @@ Sound::Sound()
     if (flags != (result = Mix_Init(flags))) {
         throw SdlException("Error en recurso en audio", Mix_GetError());
     }
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, CHANNELS, 1024);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_Volume(-1,128);
 }
 
@@ -66,11 +66,8 @@ void Sound::stopMusic(){
 #include <iostream>
 
 Sound::~Sound(){
-    std::cout<<"chau\n";
     Mix_HaltMusic();
-    //Mix_HaltChannel(-1);
+    Mix_HaltChannel(-1);
     Mix_Quit();
-    this->instance = nullptr;
-    std::cout<<"chau2\n";
 }
 

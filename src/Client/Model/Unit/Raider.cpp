@@ -5,3 +5,6 @@ Raider::Raider(nlohmann::json& j) :
 
 Raider::~Raider() {}
 
+Unit::UnitType Raider::getUnitType(){
+        return Unit::RAIDER;
+}

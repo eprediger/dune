@@ -7,6 +7,8 @@ class Trike : public OffensiveUnit {
 public:
 	explicit Trike(nlohmann::json& j);
 
+	virtual Unit::UnitType getUnitType();
+
 	~Trike();
 };
 

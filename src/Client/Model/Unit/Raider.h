@@ -6,6 +6,7 @@
 class Raider : public OffensiveUnit {
 public:
 	explicit Raider(nlohmann::json& j);
+	virtual Unit::UnitType getUnitType();
 	~Raider();
 };
 

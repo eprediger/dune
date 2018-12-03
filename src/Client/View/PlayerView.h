@@ -8,7 +8,7 @@
 #include "Text.h"
 #include <map>
 #include <memory>
-
+#include "Sound.h"
 class PlayerView {
 public:
     PlayerView(Player& player, SdlWindow& window, int x, int width);
@@ -36,6 +36,7 @@ private:
     int gold;
     std::map<Text*, int> balances;
     int constructYardLife;
+    Mix_Chunk* emergencyFx;
 };
 
 #endif

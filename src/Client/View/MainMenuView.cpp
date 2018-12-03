@@ -29,16 +29,12 @@ MainMenuView::MainMenuView(const int width, const int height) :
 #include <iostream>
 MainMenuView::~MainMenuView() {
 	if (Sound::getSound()->getCurrentMusic() == backgroundMusic){
-		std::cout<<"stopped music\n";
 		Sound::getSound()->stopMusic();
 	}
-	std::cout<<"before free\n";
-	//Mix_FreeMusic(backgroundMusic);
-	std::cout<<"after free\n";
+	Mix_FreeMusic(backgroundMusic);
 	if (this->selectedTextBox != nullptr) {
 		this->selectedTextBox = nullptr;
 	}
-	Sound::getSound().reset();
 }
 
 bool MainMenuView::setFocusOn(const unsigned x, const unsigned y) {

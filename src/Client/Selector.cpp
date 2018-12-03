@@ -6,10 +6,16 @@ Selector::Selector(int x, int y) :
 	pos(x, y),
 	drag(false),
 	drag_source(x, y),
-	selection() {}
+	selection(),
+	newUnits(false) {}
 
 void Selector::addSelection(std::vector<Unit*>& units) {
+	if (!units.empty()){
+		std::cout<<"new units\n";
+		newUnits = true;
+	}	
 	this->selection.addSelection(units);
+
 }
 
 void Selector::addSelection(std::vector<Building*>& buildings) {

@@ -16,6 +16,7 @@
 class Sound {
 public:
     ~Sound();
+
     static std::unique_ptr<Sound>& getSound();
     void playButtonFx(Mix_Chunk* chunk);
     void playEmergencyFx(Mix_Chunk* chunk);

@@ -25,6 +25,8 @@ public:
 	Position drag_source;
 	
 	Selection selection;
+
+	bool newUnits;
 };
 
 #endif	// __SELECTOR_H__

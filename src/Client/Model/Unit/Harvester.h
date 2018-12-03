@@ -6,6 +6,7 @@
 class Harvester : public Unit {
 public:
 	explicit Harvester(nlohmann::json& j);
+	virtual Unit::UnitType getUnitType();
 
 	~Harvester();
 };

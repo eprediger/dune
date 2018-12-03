@@ -4,6 +4,8 @@
 #include "Selector.h"
 #include "SdlWindow.h"
 #include <Area.h>
+#include <map>
+#include <SDL2/SDL_mixer.h>
 
 class SelectorView {
 public:
@@ -19,6 +21,7 @@ private:
 	void drawLife(Unit* unit, Area& camara);
 	void drawSelection(Area& camara);
 	SDL_Rect drag_rect, max_life, current_life;
+	std::map<Unit::UnitType,Mix_Chunk*> selectionFx;
 };
 
 #endif  // __SELECTOR_VIEW_H__

@@ -3,7 +3,8 @@
 #include "Text.h"
 #include <memory>
 #include <map>
-
+#include <SDL2/SDL_mixer.h>
+#include "Sound.h"
 std::unique_ptr<SdlTexture> PlayerView::background;
 
 PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
@@ -20,7 +21,8 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     capacityBalance(nullptr),
     gold(player.gold),
     balances(),
-    constructYardLife(0)
+    constructYardLife(0),
+    emergencyFx(Mix_LoadWAV("../assets/sound/fx/Siren_Noise-KevanGC-1337458893.wav"))
     {
     if (player.getHouse() == "Ordos") {
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg", window)));
@@ -91,11 +93,11 @@ void PlayerView::draw() {
         animateMoney();
     }
     if (player.getConstructionYard()){
-        if (constructYardLife > player.getConstructionYard()->getLife())
-            //sirena
+        if (constructYardLife > player.getConstructionYard()->getLife()){
+            Sound::getSound()->playEmergencyFx(emergencyFx);
+        }
         constructYardLife = player.getConstructionYard()->getLife();
     }
-
 }
 
 void PlayerView::animateMoney() {

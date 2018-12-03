@@ -7,7 +7,7 @@
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
 	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
 	                                    GameConfiguration::getConfig().lightInfantryTrainingTime,
-										"../assets/sound/fx/new infantry.wav"),
+										"../assets/sound/fx/new light inf.wav"),
 	              player, view, queue,GameConfiguration::getConfig().lightInfantryTrainingTime){}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}

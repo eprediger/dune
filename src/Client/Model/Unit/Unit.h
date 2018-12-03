@@ -38,6 +38,8 @@ public:
 
     Player& getPlayer();
 
+    virtual Unit::UnitType getUnitType() = 0;
+
     const int id;
 
 protected:

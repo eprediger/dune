@@ -3,15 +3,25 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>
+#include <map>
+#include "Sound.h"
 
 SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
     window(window),
     selector(selector),
     drag_rect(),
     max_life(),
-    current_life() {
+    current_life(),
+    selectionFx()
+{
     max_life.h = 4;
     current_life.h = 4;
+    selectionFx.insert(std::make_pair(Unit::HARVESTER,Mix_LoadWAV("../assets/sound/fx/harvester.wav")));
+    selectionFx.insert(std::make_pair(Unit::LIGHT_INFANTRY,Mix_LoadWAV("../assets/sound/fx/light inf.wav")));
+    selectionFx.insert(std::make_pair(Unit::HEAVY_INFANTRY,Mix_LoadWAV("../assets/sound/fx/heavy inf.wav")));
+    selectionFx.insert(std::make_pair(Unit::RAIDER,Mix_LoadWAV("../assets/sound/fx/raider.wav")));
+    selectionFx.insert(std::make_pair(Unit::TRIKE,Mix_LoadWAV("../assets/sound/fx/trike.wav")));
+    selectionFx.insert(std::make_pair(Unit::TANK,Mix_LoadWAV("../assets/sound/fx/tank.wav")));
 }
 
 void SelectorView::drawLife(Building* building, Area& camara) {
@@ -99,6 +109,12 @@ void SelectorView::drawSelection(Area& camara) {
 }
 
 void SelectorView::draw(Area& camara) {
+    if (selector.newUnits){
+        std::cout<<"in\n";
+        Sound::getSound()->playSelectionFX(selectionFx.at(selector.selection.getSelectedUnits().front()->getUnitType()));
+        std::cout<<"out\n";
+        selector.newUnits = false;
+    }
     if (selector.drag) {
         drag_rect.x = selector.drag_source.x - camara.getX();
         drag_rect.y = selector.drag_source.y - camara.getY();

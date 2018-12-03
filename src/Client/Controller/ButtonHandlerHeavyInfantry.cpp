@@ -6,7 +6,7 @@
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
                                             GameConfiguration::getConfig().heavyInfantryTrainingTime,
-											"../assets/sound/fx/new infantry.wav"),
+											"../assets/sound/fx/new heavy inf.wav"),
                      player, view, queue,GameConfiguration::getConfig().heavyInfantryTrainingTime) {
 }
 

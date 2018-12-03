@@ -6,6 +6,7 @@
 class HeavyInfantry : public OffensiveUnit {
 public:
 	explicit HeavyInfantry(nlohmann::json& j);
+	virtual Unit::UnitType getUnitType();
 	~HeavyInfantry();
 };
 

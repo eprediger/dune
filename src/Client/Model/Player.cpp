@@ -29,7 +29,8 @@ void Player::update(nlohmann::json& j) {
 }
 
 void Player::setConstructionYard(ConstructionYard* constructionYard){
-	this->constructionYard = constructionYard;
+	this->constructionYard = constructionYard; 
+	constructionYard->setPlayer(this);
 }
 
 ConstructionYard* Player::getConstructionYard(){

@@ -226,7 +226,7 @@ Barracks& Model::createBarracks(nlohmann::json& j) {
 
 ConstructionYard& Model::createConstructionYard(nlohmann::json& j) {
     ConstructionYard* building = new ConstructionYard(j);
-    players.at(j["player_id"])->addBuilding(building);
+    players.at(j["player_id"])->setConstructionYard(building);
     return (ConstructionYard&)this->createBuilding(std::move(building));
 }
 
