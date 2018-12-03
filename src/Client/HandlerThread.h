@@ -12,6 +12,8 @@ public:
 
 	virtual void run() override;
 
+    void stop();
+
 private:
 	Application& app;
 };

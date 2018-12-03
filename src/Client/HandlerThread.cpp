@@ -7,3 +7,11 @@ void HandlerThread::run() {
 		app.handleEvent();
 	}
 }
+
+void HandlerThread::stop() {
+//    app.stop();
+    SDL_Event quit;
+    quit.type = SDL_QUIT;
+    SDL_PushEvent(&quit);
+//    SDL_FlushEvent(SDL_QUIT);
+}

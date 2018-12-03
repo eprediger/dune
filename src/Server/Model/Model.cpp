@@ -105,16 +105,16 @@ bool Model::isGameFinished() {
     return gameFinished;
 }
 
-Player *Model::getWinner() {
+int Model::getWinnerId() {
     if (!gameFinished) {
-        return nullptr;
+        return -1;
     }
     for (auto itr = players.begin(); itr != players.end() ; ++itr) {
         if ( !(itr)->second->lose() ) {
-            return itr->second;
+            return itr->second->getId();
         }
     }
-    return nullptr;
+    return -1;
 }
 
 std::vector<Unit*> Model::selectUnitsInArea(Area& area, Player& player) {
@@ -370,4 +370,14 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
             player->queue.enqueue(step);
         }
     }
+    
+    if (gameFinished){
+        nlohmann::json finishGameJson;
+        finishGameJson["class"] = "finishGame";
+        finishGameJson["winner_id"] = this->getWinnerId();
+        for (auto player : connectedPlayers){
+            player->queue.enqueue(finishGameJson);
+        }
+    }
+
 }
