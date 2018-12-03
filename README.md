@@ -180,5 +180,42 @@ kcachegrind <archivo_salida (callgrind.out.pid)>
 
 ## DOCUMENTACIÓN
 
+### Manual de Proyecto
+
+* Integrantes
+* Enunciado
+* División de tareas
+* Evolución del proyecto: Cronograma propuesto y cronograma real
+* Inconvenientes encontrados: Problemas principales encontrados
+* Análisis de puntos pendientes: Cosas que faltan o deberían mejorar, cómo y por qué
+* Herramientas: Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, control de versiones, herramienta para generar documentación, herramientas para debug, etcétera.
+* Conclusiones
+
+
+### Documentación Técnica
+
+[Proyecto Overleaf](https://www.overleaf.com/project/5be8b82bfdbce4745a262a43)
+
+* Requerimientos de software: ~~OS, bibliotecas y herramientas necesarias para compilar, desarrollar, probar y depurar el programa~~
+* Descripción general: Arquitectura general del proyecto, qué módulos tiene, etcétera.
+* Módulo N: Una sección por módulo, que puede ser una aplicación, explicando más en detalle los ítems a continuación
+	- Descripción general
+	- Clases: Breve descripción de cada una que incluya responsabilidad y métodos principales, como mínimo
+	- Diagramas UML: De clases como mínimo, en lo posible diagramas de secuencia para operaciones más complejas
+	- Descripción de archivos y protocolos: Formato de archivos y protocolos de red utilizados, si son compartidos por varias aplicaciones pueden ponerlo en una sección aparte de este manual y hacer referencia a esa sección en cada módulo que lo use
+* Programas intermedios y de prueba: Programas ‘intermedios’ que hayan usado para probar porciones del tp
+* Código Fuente
+
+
+### Manual de Usuario
+
+* Instalación
+	- Requerimientos de software: OS, bibliotecas y herramientas necesarias para instalar el programa
+	- Requerimientos de hardware
+	- Proceso de Instalación: Eventualmente puede requerir también la compilación
+* Configuración: Archivos de configuración y configuración general de la aplicación)
+* Forma de uso: A criterio del alumno, debe explicar como usar la aplicación de forma completa y desde la perspectiva del usuario final, incluyendo capturas de pantalla
+* Apéndice de errores: Si la aplicación tiene códigos de error, poner aquí su descripción, posible causa y posible solución
+
 * Instalación y uso
 * Archivo de Configuración (detalles)

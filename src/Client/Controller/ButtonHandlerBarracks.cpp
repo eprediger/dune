@@ -5,17 +5,17 @@
 #include <Model/GameConfiguration.h>
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
-    BuildingConstructor& constructor, CommunicationQueue& queue):
+        BuildingConstructor& constructor, CommunicationQueue& queue):
 	ButtonHandler(
-	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
+	    view.createBarracksButton(player.getHouse(),
 	                              GameConfiguration::getConfig().buildingConstructionTime,
-								  "../assets/sound/fx/finished barracks.wav"),
+	                              "../assets/sound/fx/finished barracks.wav"),
 	    player,
 	    view, queue, GameConfiguration::getConfig().buildingConstructionTime),
 	constructor(constructor) {}
 
 ButtonHandlerBarracks::~ButtonHandlerBarracks() {
-    time = 0;
+	time = 0;
 }
 
 void ButtonHandlerBarracks::execute() {
