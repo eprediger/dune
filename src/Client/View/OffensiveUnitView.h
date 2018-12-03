@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include "RocketView.h"
+#include "Sound.h"
 #include <memory>
 
 class OffensiveUnitView: public UnitView {
@@ -28,6 +29,7 @@ protected:
     std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
     int update;
     bool animating_attack;
+    static std::unique_ptr<Mix_Chunk> machineGunFx;
 };
 
 #endif  // __OFFENSIVE_UNIT_VIEW_H__

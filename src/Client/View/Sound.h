@@ -7,12 +7,11 @@
 #include "SDL2/SDL_mixer.h"
 #include <memory>
 
-#define CHANNELS 4
 #define SELECTOR_CHANNEL 0
 #define BUTTON_FX_CHANNEL 1
 #define EMERGENGY_CHANNEL 2
 #define EXPLOSION_CHANNEL 3
-
+#define SHOOTING_CHANNEL 4
 class Sound {
 public:
     ~Sound();
@@ -23,16 +22,15 @@ public:
     void playSelectionFX(Mix_Chunk* chunk);
     void playMusic(Mix_Music* music);
     void playExplosionFX(Mix_Chunk* chunk);
+    void playShootingFx(Mix_Chunk* chunk);
 
     void stopMusic();
 
     Mix_Music* getCurrentMusic();
-    Mix_Chunk* getCurrentChunk();
 
 private:
     Sound();
     static std::unique_ptr<Sound> instance;
-    Mix_Chunk* currentChunk;
     Mix_Music* currentMusic;
 
 };

@@ -11,6 +11,7 @@ class SelectorView {
 public:
 	SelectorView(Selector& selector, SdlWindow& window);
 
+	~SelectorView();
 	void draw(Area& camara);
 
 	SdlWindow& window;

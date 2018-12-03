@@ -26,6 +26,7 @@ private:
     Position pos;
     int update_sprite;
     std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
+    static std::unique_ptr<Mix_Chunk> launchFx;
     static std::unique_ptr<Mix_Chunk> explosionFx;
 };
 

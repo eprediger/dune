@@ -24,6 +24,13 @@ SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
     selectionFx.insert(std::make_pair(Unit::TANK,Mix_LoadWAV("../assets/sound/fx/tank.wav")));
 }
 
+SelectorView::~SelectorView(){
+    for (auto fx : selectionFx){
+        Mix_FreeChunk(fx.second);
+    }
+}
+
+
 void SelectorView::drawLife(Building* building, Area& camara) {
     max_life.w = building->getInitialLife() / 4;
     if (max_life.w > 80)
