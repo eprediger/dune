@@ -22,7 +22,7 @@ public:
 	// Libera recursos asociados a la instancia
 	~GameHandler();
 
-	bool handleInput() override;
+	WindowStatus handleInput() override;
 
 	virtual void update() override;
 

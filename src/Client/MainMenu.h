@@ -3,14 +3,15 @@
 
 #include <View/MainMenuView.h>
 #include <Controller/MainMenuHandler.h>
+#include <WindowMenu.h>
 
-class MainMenu {
+class MainMenu : public WindowMenu {
 public:
-	MainMenu(MainMenuView& view, MainMenuHandler& handler);
+	MainMenu();
 	
-	~MainMenu();
+	virtual ~MainMenu() = default;
 
-	void run();
+	void run() override;
 
 	std::string getHost() const;
 
@@ -21,8 +22,8 @@ public:
 	int getWindowHeight() const;
 
 private:
-	MainMenuView& view;
-	MainMenuHandler& handler;
+	MainMenuView view;
+	MainMenuHandler handler;
 };
 
 #endif	// __MAIN_MENU_H__

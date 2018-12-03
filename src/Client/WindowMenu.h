@@ -1,16 +1,23 @@
-//
-// Created by emiliano on 02/12/18.
-//
+#ifndef __WINDOW_MENU_H__
+#define __WINDOW_MENU_H__
 
-#ifndef DUNE_WINDOWMENU_H
-#define DUNE_WINDOWMENU_H
-
-
+#include <Controller/InputHandler.h>
 
 class WindowMenu {
+public:
+    WindowMenu();
 
+    virtual ~WindowMenu();
+
+    virtual void run() = 0;
+
+    bool keepWindowOpen();
+
+    WindowStatus windowStatus() const;
+
+protected:
+    WindowStatus status;
 };
 
 
-
-#endif //DUNE_WINDOWMENU_H
+#endif  // __WINDOW_MENU_H__

@@ -4,19 +4,22 @@
 #include <View/HouseSelectionView.h>
 #include <Controller/HouseSelectionHandler.h>
 #include <string>
+#include "WindowMenu.h"
 
-class HouseSelection {
+class HouseSelection : public WindowMenu {
 public:
-	HouseSelection(HouseSelectionView& view, HouseSelectionHandler& handler);
+	HouseSelection();
 	
 	~HouseSelection();
 
-	std::string run();
+	void run() override;
+
+	std::string getSelectedHouse() const;
 
 private:
-	bool wasHouseSelected;
-	HouseSelectionView& view;
-	HouseSelectionHandler& handler;
+	std::string selectedHouse;
+	HouseSelectionView view;
+	HouseSelectionHandler handler;
 };
 
 #endif	// __HOUSE_SELECTION_H__

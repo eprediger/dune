@@ -9,18 +9,19 @@ HouseSelectionHandler::HouseSelectionHandler(HouseSelectionView& view) :
 
 HouseSelectionHandler::~HouseSelectionHandler() {}
 
-bool HouseSelectionHandler::handleInput() {
-	bool handleResult = true;
+WindowStatus HouseSelectionHandler::handleInput() {
+	WindowStatus handleResult = WindowStatus::OPEN;
 	SDL_Event event;
 	SDL_WaitEvent(&(event));
 	switch (event.type) {
 	case SDL_QUIT:
-		handleResult = false;
+		handleResult = WindowStatus::CLOSE;
 	case SDL_MOUSEBUTTONUP:
 		if (event.button.button == SDL_BUTTON_LEFT) {
 			this->cursor.currentPosition();
-			handleResult = !(this->view.setFocusOn(this->cursor.current_x,
-			                                       this->cursor.current_y));
+			if ((this->view.setFocusOn(this->cursor.current_x, this->cursor.current_y))) {
+				handleResult = WindowStatus::NEXT_WINDOW;
+			}
 		}
 		break;
 	}

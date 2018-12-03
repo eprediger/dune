@@ -12,18 +12,19 @@ MainMenuHandler::~MainMenuHandler() {
 	SDL_StopTextInput();
 }
 
-bool MainMenuHandler::handleInput() {
-	bool handleResult = true;
+WindowStatus MainMenuHandler::handleInput() {
+	WindowStatus handleResult = WindowStatus::OPEN;
 	SDL_Event event;
 	SDL_WaitEvent(&(event));
 	switch (event.type) {
 	case SDL_QUIT:
-		handleResult = false;
+		handleResult = WindowStatus::CLOSE;
 	case SDL_MOUSEBUTTONUP:
 		if (event.button.button == SDL_BUTTON_LEFT) {
 			this->cursor.currentPosition();
-			handleResult = this->view.setFocusOn(this->cursor.current_x,
-			                                      this->cursor.current_y);
+			if (!(this->view.setFocusOn(this->cursor.current_x, this->cursor.current_y))) {
+				handleResult = WindowStatus::NEXT_WINDOW;
+			}
 		}
 		break;
 	case SDL_KEYDOWN:
@@ -37,12 +38,14 @@ bool MainMenuHandler::handleInput() {
 		}
 		// Enter pasa a la siguiente pantalla
 		if (event.key.keysym.sym == SDLK_RETURN) {
-			handleResult = false;
+			handleResult = WindowStatus::NEXT_WINDOW;
 		}
 		break;
 	// Insertar texto
 	case SDL_TEXTINPUT:
 		this->view.insertTextToTextBox(event.text.text);
+		break;
+	default:
 		break;
 	}
 	this->host = this->view.getHost();

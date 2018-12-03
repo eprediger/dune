@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 #include <nlohmann/json.hpp>
 #include <Model/GameConfiguration.h>
@@ -9,16 +8,10 @@
 #include "Client.h"
 
 #include <MainMenu.h>
-#include <Controller/MainMenuHandler.h>
-#include <View/MainMenuView.h>
 
 #include <HouseSelection.h>
-#include <Controller/HouseSelectionHandler.h>
-#include <View/HouseSelectionView.h>
 
 #include <Controller/GameHandler.h>
-#include <View/GameView.h>
-#include <GameInterface.h>
 #include <HandlerThread.h>
 
 #define MAX_FPS 60
@@ -29,94 +22,86 @@ int main(int argc, const char *argv[]) {
 		std::cerr << "Uso: " << argv[0] << std::endl;
 		return USAGE_ERROR;
 	} else {
-		MainMenuView menuView(WINDOW_WIDTH, WINDOW_HEIGHT);
-		MainMenuHandler menuHandler(menuView);
-		MainMenu mainMenu(menuView, menuHandler);
+		MainMenu mainMenu;
 		mainMenu.run();
+		if (mainMenu.windowStatus() != WindowStatus::CLOSE) {
+			HouseSelection houseSelection;
+			houseSelection.run();
+			if (houseSelection.windowStatus() != WindowStatus::CLOSE) {
+				CommunicationQueue queue;
+				Client client(mainMenu.getHost().c_str(), mainMenu.getPort().c_str(), queue);
+				try {
+					client.start();
+					nlohmann::json house;
+					house["house"] = houseSelection.getSelectedHouse();
+					queue.enqueue(house);
 
-		/*std::cout << "Host: " << mainMenu.getHost() << std::endl;
-		std::cout << "Port: " << mainMenu.getPort() << std::endl;*/
+					nlohmann::json mapFile = queue.dequeue();
+					Model model(mapFile, queue);
 
-		CommunicationQueue queue;
-		Client client(mainMenu.getHost().c_str(), mainMenu.getPort().c_str(), queue);
-		try {
-			HouseSelectionView houseSelectionView(WINDOW_WIDTH, WINDOW_HEIGHT);
-			HouseSelectionHandler houseSelectionHandler(houseSelectionView);
-			HouseSelection houseSelection(houseSelectionView, houseSelectionHandler);
-			std::string selectedHouse = houseSelection.run();
+					nlohmann::json player = queue.dequeue();
+					model.addPlayer(player);
 
-			/*std::cout << "Casa: " << selectedHouse << std::endl;*/
+					nlohmann::json gameConfig = queue.dequeue();
+					GameConfiguration::init(gameConfig);
 
-			client.start();
-			nlohmann::json house;
-			house["house"] = selectedHouse;//std::string(argv[3]);
-			queue.enqueue(house);
+					Player& myPlayer = model.getPlayer(player["id"]);
 
-			nlohmann::json mapFile = queue.dequeue();
-			Model model(mapFile, queue);
+					GameView gameView(mainMenu.getWindowWidth(), mainMenu.getWindowHeight(), model, myPlayer);
+					GameInterface interface(model, gameView);
+					GameHandler gameHandler(gameView, model, queue, myPlayer);
 
-			nlohmann::json player = queue.dequeue();
-			model.addPlayer(player);
+					Application app(gameView, gameHandler, model);
 
-			nlohmann::json gameConfig = queue.dequeue();
-			GameConfiguration::init(gameConfig);
+					HandlerThread handler(app);
 
-			Player& myPlayer = model.getPlayer(player["id"]);
+					handler.start();
+					const int time_step = SECOND / MAX_FPS;
+					int sleep_extra = 0;
 
-//			GameView gameView(WINDOW_WIDTH, WINDOW_HEIGHT, model, myPlayer);
-			GameView gameView(mainMenu.getWindowWidth(), mainMenu.getWindowHeight(), model, myPlayer);
-			GameInterface interface(model, gameView);
-			GameHandler gameHandler(gameView, model, queue, myPlayer);
+					while (app.running() && !model.isGameFinished()) {
+						unsigned int loop_init = SDL_GetTicks();
 
-			Application app(gameView, gameHandler, model);
+						////// Inicia el LOOP //////////
+						app.render();
+						app.update();
 
-			HandlerThread handler(app);
+						if (!queue.recvEmpty()) {
+							while (true) {
+								nlohmann::json j(queue.dequeue());
+								interface.execute(j);
+								if (j["class"] == "Step") break;
+							}
+						}
 
-			handler.start();
-			const int time_step = SECOND / MAX_FPS;
-			int sleep_extra = 0;
+						unsigned int loop_end = SDL_GetTicks();
 
-			while (app.running() && !model.isGameFinished()) {
-				unsigned int loop_init = SDL_GetTicks();
+						int step_duration = (loop_end - loop_init);
+						int sleep_delay = time_step - step_duration - sleep_extra;
+						sleep_delay = (sleep_delay < 0) ? 0 : sleep_delay;
 
-				////// Inicia el LOOP //////////
-				app.render();
-				app.update();
+						SDL_Delay(sleep_delay);
+						unsigned int delay_end = SDL_GetTicks();
 
-				if (!queue.recvEmpty()) {
-					while (true) {
-						nlohmann::json j(queue.dequeue());
-						interface.execute(j);
-						if (j["class"] == "Step") break;
+						sleep_extra = (delay_end - loop_end) - sleep_delay;
 					}
+
+					handler.join();
+					client.disconnect();
+				} catch (const SdlException &e) {
+					std::cerr << e.what() << std::endl;
+					client.disconnect();
+					return FAILURE;
+				} catch (const CustomException& ce) {
+					std::cerr << ce.what() << std::endl;
+					client.disconnect();
+					return ce.getErrorCode();
+				} catch (std::exception& e) {
+					std::cerr << e.what() << std::endl;
+					client.disconnect();
+					return FAILURE;
 				}
-
-				unsigned int loop_end = SDL_GetTicks();
-
-				int step_duration = (loop_end - loop_init);
-				int sleep_delay = time_step - step_duration - sleep_extra;
-				sleep_delay = (sleep_delay < 0) ? 0 : sleep_delay;
-
-				SDL_Delay(sleep_delay);
-				unsigned int delay_end = SDL_GetTicks();
-
-				sleep_extra = (delay_end - loop_end) - sleep_delay;
 			}
-
-			handler.join();
-			client.disconnect();
-		} catch (const SdlException &e) {
-			std::cerr << e.what() << std::endl;
-			// client.disconnect();
-			return FAILURE;
-		} catch (const CustomException& ce) {
-			std::cerr << ce.what() << std::endl;
-			// client.disconnect();
-			return ce.getErrorCode();
-		} catch (std::exception& e) {
-			std::cerr << e.what() << std::endl;
-			// client.disconnect();
-			return FAILURE;
 		}
 	}
 	return SUCCESS;

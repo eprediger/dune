@@ -15,7 +15,7 @@ public:
 
 	// Controla el input del usuario.
 	// Retorna false frente al evento de cierre
-	bool handleInput() override;
+    WindowStatus handleInput() override;
 
 	// Retorna la casa elegida por el usuario
 	std::string getSelectedHouse() const;

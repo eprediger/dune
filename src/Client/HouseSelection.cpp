@@ -1,17 +1,24 @@
 #include "HouseSelection.h"
 
-HouseSelection::HouseSelection(HouseSelectionView& view,
-                               HouseSelectionHandler& handler) :
-	wasHouseSelected(false),
-	view(view),
-	handler(handler) {}
+HouseSelection::HouseSelection() :
+	WindowMenu(),
+	selectedHouse(),
+	view(WINDOW_WIDTH, WINDOW_HEIGHT),
+	handler(view) {}
 
 HouseSelection::~HouseSelection() {}
 
-std::string HouseSelection::run() {
+void HouseSelection::run() {
 	do {
 		this->view.render();
-	} while (this->handler.handleInput());
+		this->status = this->handler.handleInput();
+	} while (this->keepWindowOpen());
 	this->view.closeWindow();
-	return this->handler.getSelectedHouse();
+	if (this->keepWindowOpen()) {
+		this->selectedHouse = this->handler.getSelectedHouse();
+	}
+}
+
+std::string HouseSelection::getSelectedHouse() const {
+	return this->selectedHouse;
 }

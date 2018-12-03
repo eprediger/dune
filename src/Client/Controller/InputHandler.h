@@ -4,6 +4,8 @@
 #include "InputHandler.h"
 #include "Cursor.h"
 
+enum class WindowStatus { OPEN, CLOSE, NEXT_WINDOW };
+
 class InputHandler {
 public:
 	// 
@@ -14,7 +16,7 @@ public:
 
 	// Handler de eventos de teclado/mouse
 	// Retorna false si el evento es SDL_QUIT
-	virtual bool handleInput() = 0;
+	virtual WindowStatus handleInput() = 0;
 
 	virtual void update();
 

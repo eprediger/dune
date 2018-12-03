@@ -53,14 +53,14 @@ GameHandler::~GameHandler() {
     }
 }
 
-bool GameHandler::handleInput() {
-    bool keepPlaying = true;
+WindowStatus GameHandler::handleInput() {
+    WindowStatus keepPlaying = WindowStatus::OPEN;
 
     SDL_Event event;
     SDL_WaitEvent(&event);
     switch (event.type) {
     case SDL_QUIT:
-        keepPlaying = false;
+        keepPlaying = WindowStatus::CLOSE;
         break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT) {
@@ -167,7 +167,6 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-
     return keepPlaying;
 }
 

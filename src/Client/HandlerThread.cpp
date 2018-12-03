@@ -7,7 +7,7 @@
 HandlerThread::HandlerThread(Application &app) : app(app) {}
 
 void HandlerThread::run() {
-    while (app.running()){
+    while (app.running()) {
         app.handleEvent();
     }
 }

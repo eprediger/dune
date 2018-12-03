@@ -1,15 +1,16 @@
 #include "MainMenu.h"
+#include "WindowMenu.h"
 
-MainMenu::MainMenu(MainMenuView& view, MainMenuHandler& handler) :
-	view(view),
-	handler(handler) {}
-
-MainMenu::~MainMenu() {}
+MainMenu::MainMenu() :
+	WindowMenu(),
+	view(WINDOW_WIDTH, WINDOW_HEIGHT),
+	handler(view) {}
 
 void MainMenu::run() {
 	do {
 		this->view.render();
-	} while (this->handler.handleInput());
+		this->status = this->handler.handleInput();
+	} while (this->keepWindowOpen());
 	this->view.closeWindow();
 }
 
@@ -28,4 +29,3 @@ int MainMenu::getWindowWidth() const {
 int MainMenu::getWindowHeight() const {
 	return std::stoi(this->handler.getWindowHeight());
 }
-

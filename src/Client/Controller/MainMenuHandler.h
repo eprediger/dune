@@ -13,7 +13,7 @@ public:
 	// Libera recursos asociados a la instancia
 	~MainMenuHandler();
 	
-	bool handleInput() override;
+	WindowStatus handleInput() override;
 
 	std::string getHost() const;
 
