@@ -275,13 +275,19 @@ void GameView::releaseMouse() {
 	this->window.grabMouse(false);
 }
 
-ButtonView& GameView::createUnitButton(const std::string &filename, int number_steps, const char* sound_fx) {
-	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps,sound_fx);
+ButtonView& GameView::createUnitButton(const std::string& filename, int number_steps, const char* sound_fx) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps, sound_fx);
 	this->unitButtons.emplace_back(newButtonView);
 	return *newButtonView;
 }
 
-ButtonView& GameView::createBuildingButton(const std::string &playerHouse, int number_steps, const char* sound_fx) {
+ButtonView& GameView::createBuildingButton(const std::string& filename, int number_steps, const char* sound_fx) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps, sound_fx);
+	this->buildingButtons.emplace_back(newButtonView);
+	return *newButtonView;
+}
+
+ButtonView& GameView::createBarracksButton(const std::string& playerHouse, int number_steps, const char* sound_fx) {
 	std::string filename;
 	if (playerHouse == "Atreides") {
 		filename = "../assets/img/btns/buildings/barracks-atreides.jpg";
@@ -292,7 +298,7 @@ ButtonView& GameView::createBuildingButton(const std::string &playerHouse, int n
 	} else {
 		filename = playerHouse;
 	}
-	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps,sound_fx);
+	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps, sound_fx);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
 }
