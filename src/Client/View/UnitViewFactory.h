@@ -14,18 +14,14 @@
 
 class UnitViewFactory {
 public:
-    static UnitView* createUnitView(Trike& trike
-                                    , SdlWindow& window);
-    static UnitView* createUnitView(Tank& tank
-                                    , SdlWindow& window);
-    static UnitView* createUnitView(Raider& raider
-                                    , SdlWindow& window);
-    static UnitView* createUnitView(Harvester& harvester
-                                    , SdlWindow& window);
-    static UnitView* createUnitView(LightInfantry& lightInfantry
-                                    , SdlWindow& window);
-    static UnitView* createUnitView(HeavyInfantry& heavyInfantry
-                                    , SdlWindow& window);
+    static UnitView* createUnitView(Trike& trike, SdlWindow& window);
+    static UnitView* createUnitView(Tank& tank, SdlWindow& window);
+    static UnitView* createUnitView(Raider& raider, SdlWindow& window);
+    static UnitView* createUnitView(Harvester& harvester, SdlWindow& window);
+    static UnitView* createUnitView(LightInfantry& lightInfantry,
+                                    SdlWindow& window);
+    static UnitView* createUnitView(HeavyInfantry& heavyInfantry,
+                                    SdlWindow& window);
 private:
     UnitViewFactory();
 };

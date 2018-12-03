@@ -145,7 +145,7 @@ SdlWindow &GameView::getWindow() {
 
 void GameView::render() {
 	this->cleanDeadViews();
-	 map_view.draw(camera);
+	map_view.draw(camera);
 
 	if (constructorView != nullptr) {
 		constructorView->draw(camera);
@@ -179,7 +179,7 @@ void GameView::render() {
 	                      this->window.height * 9 / 32,
 	                      BTN_SELL_BUILDING,
 	                      BTN_SELL_BUILDING);
-    this->buildingSellButton->render(sellBuildingDest);
+	this->buildingSellButton->render(sellBuildingDest);
 
 	// Botones de Edificios
 	this->buildingTag.render(this->window.width * 16 / 20, this->window.height * 11 / 32);
@@ -278,7 +278,17 @@ ButtonView& GameView::createUnitButton(const std::string &filename, int number_s
 	return *newButtonView;
 }
 
-ButtonView& GameView::createBuildingButton(const std::string &filename, int number_steps) {
+ButtonView& GameView::createBuildingButton(const std::string &playerHouse, int number_steps) {
+	std::string filename;
+	if (playerHouse == "Atreides") {
+		filename = "../assets/img/btns/buildings/barracks-atreides.jpg";
+	} else if (playerHouse == "Harkonnen") {
+		filename = "../assets/img/btns/buildings/barracks-harkonnen.jpg";
+	} else if (playerHouse == "Ordos") {
+		filename = "../assets/img/btns/buildings/barracks-ordos.jpg";
+	} else {
+		filename = playerHouse;
+	}
 	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;

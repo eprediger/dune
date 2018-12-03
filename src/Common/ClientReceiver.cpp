@@ -12,8 +12,8 @@
 #include <string>
 #include "ClientReceiver.h"
 
-
-ClientReceiver::ClientReceiver(Socket &connectionSkt, CommunicationQueue &queue) :
+ClientReceiver::ClientReceiver(Socket &connectionSkt,
+                               CommunicationQueue &queue) :
 	keepPlaying(true),
 	connectionSkt(connectionSkt),
 	queue(queue) {}
@@ -29,7 +29,7 @@ void ClientReceiver::run() {
 		this->recvPayload();
 		std::cout << "Finaliza el receiver!" << std::endl;
 		this->keepPlaying = false;
-	} catch(CustomException& e) {
+	} catch (CustomException& e) {
 		this->keepPlaying = false;
 	}
 }
@@ -51,5 +51,5 @@ void ClientReceiver::disconnect() {
 }
 
 bool ClientReceiver::is_alive() {
-    return this->keepPlaying;
+	return this->keepPlaying;
 }

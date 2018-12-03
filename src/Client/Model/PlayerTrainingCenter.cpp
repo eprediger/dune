@@ -1,10 +1,9 @@
 #include "PlayerTrainingCenter.h"
 #include "Unit/Unit.h"
 
-PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j):m() {
+PlayerTrainingCenter::PlayerTrainingCenter(nlohmann::json& j) : m() {
     update(j);
 }
-
 
 void PlayerTrainingCenter::update(nlohmann::json& j) {
     m.lock();
@@ -41,10 +40,9 @@ void PlayerTrainingCenter::beginTraining(Unit::UnitType type) {
     units.at(type) = 1;
 }
 
-int PlayerTrainingCenter::remainingTime(Unit::UnitType unitType){
+int PlayerTrainingCenter::remainingTime(Unit::UnitType unitType) {
     m.lock();
     int answer = units.at(unitType);
     m.unlock();
-    return answer; 
+    return answer;
 }
-

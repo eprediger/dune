@@ -9,7 +9,7 @@ public:
 	ButtonHandlerBarracks(Player& player, GameView &view,
 			BuildingConstructor& constructor, CommunicationQueue& queue);
 
-	~ButtonHandlerBarracks();
+	virtual ~ButtonHandlerBarracks();
 
 	virtual void execute() override;
 

@@ -10,6 +10,8 @@ public:
 	Area(const Position& pos1, const Position& pos2);
 	explicit Area(SDL_Rect& rect);
 
+	~Area() = default;
+
 	void setX(int x);
 	void setY(int y);
 	int getX() const;

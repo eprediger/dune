@@ -24,8 +24,7 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg", window)));
     } else if (player.getHouse() == "Harkonnen") {
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.jpg", window)));
-    }
-    if (player.getHouse() == "Atreides") {
+    } else if (player.getHouse() == "Atreides") {
         house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.jpg", window)));
     }
     PlayerColorMaker::menuColor(player, &r, &g, &b);

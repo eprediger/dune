@@ -19,7 +19,7 @@ Socket::Socket(const char* node, const char* serv, const int flags) :
 
 	hints.ai_family = AF_INET;			// IPv4
 	hints.ai_socktype = SOCK_STREAM;	// TCP
-	hints.ai_flags = flags;				// Server: AI_PASSIVE | ClientReceiver: 0
+	hints.ai_flags = flags;				// Srvr: AI_PASSIVE | ClientReceiver: 0
 
 	int s = getaddrinfo(node, serv, &hints, &result);
 	if (s != 0) {
@@ -57,7 +57,7 @@ Socket::~Socket() {
 
 void Socket::bind() {
 	int o = 1;	// one
-	if (setsockopt(this->skt_fd, SOL_SOCKET, SO_REUSEADDR, &o, sizeof(o)) == -1) {
+	if (setsockopt(this->skt_fd,SOL_SOCKET,SO_REUSEADDR,&o, sizeof(o)) == -1) {
 		throw CustomException(SOCKET_ERROR, "reusing address error");
 	}
 
@@ -114,7 +114,6 @@ size_t Socket::send(const char *buf, size_t size) const {
 			std::string msg = "Sending error: " + std::string(strerror(errno));
 			throw CustomException(SOCKET_ERROR, msg.data());
 		} else if  (len_sent == 0) {
-			std::cout << "Se cierra el socket send!" << std::endl;
 			open_socket = false;
 		} else {
 			sent += len_sent;
@@ -138,7 +137,6 @@ size_t Socket::receive(char* buf, const uint32_t size) const {
 	while ((b_recv < size) && (open_socket)) {
 		size_t remaining = size - b_recv;
 		len_recv = ::recv(this->skt_fd, &buf[b_recv], remaining, MSG_NOSIGNAL);
-		//std::cout<<len_recv<<std::endl;
 		if (len_recv < 0) {	// Error al recibir
 			std::string msg = "Receiving error: " + std::string(strerror(errno));
 			throw CustomException(SOCKET_ERROR, msg.data());

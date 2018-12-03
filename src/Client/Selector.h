@@ -11,11 +11,19 @@
 class Selector {
 public:
 	Selector(int x, int y);
+
+	~Selector() = default;
+	
 	void addSelection(std::vector<Unit*>& units);
+	
 	void addSelection(std::vector<Building*>& buildings);
+	
 	Position pos;
+	
 	bool drag;
+	
 	Position drag_source;
+	
 	Selection selection;
 };
 

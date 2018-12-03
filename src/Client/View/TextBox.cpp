@@ -1,7 +1,8 @@
 #include "TextBox.h"
 #include <string>
 
-TextBox::TextBox(const std::string& text, const int fontSize, SdlWindow& window) :
+TextBox::TextBox(const std::string& text,
+                 const int fontSize, SdlWindow& window) :
 	Text(text, fontSize, window) {
 	this->createText(this->inputText);
 }

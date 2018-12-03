@@ -95,8 +95,8 @@ void TankView::draw(Area& camara) {
     if (offensiveUnit.isAttacking() && (offensiveUnit.isShooting() || animating_attack)) {
         drawAttack(camara, attack_sprites);
     } else {
-            animating_attack = false;
-            UnitView::draw(camara, sprites);
+        animating_attack = false;
+        UnitView::draw(camara, sprites);
     }
 }
 

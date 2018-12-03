@@ -7,7 +7,6 @@ ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, C
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
                                             GameConfiguration::getConfig().harvesterConstructionTime),
                       player, view, queue, GameConfiguration::getConfig().harvesterConstructionTime){ }
-ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 
 void ButtonHandlerHarvester::execute() {
 	nlohmann::json msg;

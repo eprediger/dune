@@ -72,7 +72,6 @@ public:
 	Rocket& createRocket(nlohmann::json& j);
 	void updateRocket(nlohmann::json& j);
 
-
 	std::vector<Unit*> selectUnitsInArea(Area& area, Player& player);
 	std::vector<Building*> selectBuildingsInArea(Area& area, Player& player);
 	void actionOnPosition(Position &pos, Unit &unit);

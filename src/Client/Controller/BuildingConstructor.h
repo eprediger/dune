@@ -24,8 +24,11 @@ public:
     int cost;
 
     BuildingConstructor(Model& model, Player& player, GameView& view, CommunicationQueue& queue);
+
     void build();
+
     bool canWeBuild();
+
     Player& getPlayer();
 };
 

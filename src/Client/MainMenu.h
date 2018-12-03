@@ -1,9 +1,9 @@
 #ifndef __MAIN_MENU_H__
 #define __MAIN_MENU_H__
 
+#include <WindowMenu.h>
 #include <View/MainMenuView.h>
 #include <Controller/MainMenuHandler.h>
-#include <WindowMenu.h>
 #include <string>
 
 class MainMenu : public WindowMenu {

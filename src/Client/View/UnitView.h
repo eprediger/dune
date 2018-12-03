@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 #include <memory>
+
 class UnitView {
 public:
 	UnitView(Unit& unit, Area sprite_area, SdlWindow& window);
@@ -20,7 +21,7 @@ public:
 	Unit& getUnit();
 	virtual void draw(Area& camara) = 0;
 	void draw(Area& camara, std::map<int, std::unique_ptr<SdlTexture>>& sprites);
-	void draw(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlTexture> > >& sprites,
+	void draw(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlTexture>>>& sprites,
 	          std::vector<std::unique_ptr<SdlTexture> >::iterator& anim_it, int& update);
 	void drawDamage(Area& camara);
 	static bool isDead(const UnitView *unit_view);

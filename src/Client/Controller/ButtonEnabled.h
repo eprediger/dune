@@ -6,8 +6,11 @@
 class ButtonEnabled : public ButtonState {
 public:
 	ButtonEnabled();
-	~ButtonEnabled();
+	
+	virtual ~ButtonEnabled() = default;
+	
 	virtual void handle(ButtonHandler *button, const int x, const int y) override;
+	
 	virtual void update(ButtonHandler *button) override;
 };
 

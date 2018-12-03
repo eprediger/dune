@@ -13,7 +13,7 @@ public:
 	~Application();
 
 	// Retorna true mientras el cliente no salga de la aplicación
-    bool running();
+	bool running();
 
 	// Manejar input de usuario
 	void handleEvent();
@@ -21,7 +21,7 @@ public:
 	// Renderiza vista
 	void render();
 
-    void update();
+	void update();
 
 private:
 	WindowStatus status;

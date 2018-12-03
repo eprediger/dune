@@ -9,6 +9,7 @@
 class Client {
 public:
 	Client(const char* host, const char* service, CommunicationQueue &queue);
+
 	~Client();
 
 	void start();

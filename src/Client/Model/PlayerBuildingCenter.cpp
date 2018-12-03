@@ -29,8 +29,7 @@ bool PlayerBuildingCenter::buildingConstructed(Building::BuildingType type) {
     return construction[type].second;
 }
 
-
-int PlayerBuildingCenter::remainingTime(Building::BuildingType buildingType){
+int PlayerBuildingCenter::remainingTime(Building::BuildingType buildingType) {
     m.lock();
     int ans = this->construction.at(buildingType).first;
     m.unlock();

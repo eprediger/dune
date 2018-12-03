@@ -7,18 +7,15 @@
 ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue):
 	ButtonHandler(
-	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
+	    view.createBuildingButton(player.getHouse(),//"../assets/img/btns/buildings/barracks-atreides.jpg",
 	                              GameConfiguration::getConfig().buildingConstructionTime),
 	    player,
 	    view, queue, GameConfiguration::getConfig().buildingConstructionTime),
-	constructor(constructor){
-	/*
-	"../assets/img/btns/buildings/barracks-harkonnen.jpg"
-	"../assets/img/btns/buildings/barracks-ordos.jpg"
-	*/
-}
+	constructor(constructor) {}
 
-ButtonHandlerBarracks::~ButtonHandlerBarracks() { time = 0; }
+ButtonHandlerBarracks::~ButtonHandlerBarracks() {
+    time = 0;
+}
 
 void ButtonHandlerBarracks::execute() {
 	nlohmann::json msg;

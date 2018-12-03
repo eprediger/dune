@@ -4,11 +4,6 @@
 #include "Text.h"
 #include <string>
 
-/*
-#define RED		0xCD
-#define GREEN	0x65
-#define BLUE	0x32
-*/
 #define BKG_RED		0xFF //0x04
 #define BKG_GREEN	0xFF //0x09
 #define BKG_BLUE	0xFF //0x26

@@ -26,7 +26,6 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight,
 	counter += 1;
 	serialization["class"] = "Building";
 	serialization["type"] = int(key);
-	//serialization["life"] = hitPoints;
 	serialization["width"] = width;
 	serialization["height"] = height;
 	serialization["pos"]["x"] = x;
@@ -72,9 +71,6 @@ Position& Building::getClosestPosition(Position& position) {
 nlohmann::json& Building::getSerialization() {
 	news = false;
 	serialization["life"] = this->getLife();
-	if (key == BuildingType::WIND_TRAP) {
-		std::cout << "pidiendo windtrap\n";
-	}
 	return serialization;
 }
 

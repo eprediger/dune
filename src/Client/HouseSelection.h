@@ -9,7 +9,7 @@
 class HouseSelection : public WindowMenu {
 public:
 	HouseSelection();
-	
+
 	~HouseSelection();
 
 	void run() override;

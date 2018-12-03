@@ -7,10 +7,8 @@
 #define BLOCK_Y 32
 
 class Position {
-//private:
-
 public:
-    int x,y;
+    int x, y;
 
     Position();
     Position(int x, int y);

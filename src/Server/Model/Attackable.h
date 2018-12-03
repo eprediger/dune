@@ -14,6 +14,8 @@ protected:
 public:
     explicit Attackable(const int life, const int x, const int y);
 
+    virtual ~Attackable() = default;
+
     void setPosition(Position pos);
 
     int getId();

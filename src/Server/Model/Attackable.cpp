@@ -21,11 +21,6 @@ int Attackable::getInitialLife() {
 void Attackable::reciveAttack(const Weapon &weapon) {
     life -= weapon.getDammage();
     this->reciveBonusDammage(weapon);
-    std::cout << "Recibe ataque. Vida: " << life << std::endl;
-    if (life <= 0) {
-        // this->kill;
-        std::cout << "Muere!!" << std::endl;
-    }
 }
 
 Position &Attackable::getPosition() {
@@ -36,7 +31,7 @@ bool Attackable::isDead(const Attackable *unit) {
     if (!unit) {
         return true;
     }
-    return unit->life <= 0;
+    return (unit->life <= 0);
 }
 
 bool Attackable::operator==(const Attackable &other) {

@@ -21,7 +21,7 @@ void SelectorView::drawLife(Building* building, Area& camara) {
     max_life.x = building->getPosition().x  - camara.getX();
     max_life.y = building->getPosition().y + 10 - camara.getY();
     Area life_area(max_life);
-    if (camara.anyInteract(life_area)){
+    if (camara.anyInteract(life_area)) {
         SDL_SetRenderDrawColor(window.getRenderer(), 0, 0, 0, 0xFF);
         SDL_RenderFillRect(window.getRenderer(), &max_life);
     }

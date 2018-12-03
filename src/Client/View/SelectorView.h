@@ -8,8 +8,11 @@
 class SelectorView {
 public:
 	SelectorView(Selector& selector, SdlWindow& window);
+
 	void draw(Area& camara);
+
 	SdlWindow& window;
+
 private:
 	Selector& selector;
 	void drawLife(Building* building, Area& camara);

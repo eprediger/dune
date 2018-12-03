@@ -20,7 +20,8 @@ Text::Text(const std::string& text, const int fontSize, SdlWindow& window) :
 	this->createText(text);
 }
 
-Text::Text(const std::string& text, const int fontSize, SdlWindow& window, int r, int g, int b) :
+Text::Text(const std::string& text, const int fontSize,
+           SdlWindow& window, int r, int g, int b) :
 	textWidth(0),
 	textHeight(0),
 	inputText(text),
@@ -57,13 +58,10 @@ Text::~Text() {
 
 void Text::createText(const std::string& text) {
 	SDL_Color fntColor = {RED, GREEN, BLUE};
-	// SDL_Color fntColor = { 0x0, 0xFF, 0x0 };
 	if (this->surface != nullptr) {
 		SDL_FreeSurface(this->surface);
 	}
 	this->surface = TTF_RenderText_Blended(this->font, text.c_str(), fntColor);
-	// SDL_Color bkgColor = { 0x33, 0x33, 0x33 };
-	// this->surface = TTF_RenderText_Shaded(this->font, text.c_str(), fntColor, bkgColor);
 	if (this->surface == nullptr) {
 		throw SdlException("Error al crear superficie", SDL_GetError());
 	}
@@ -80,13 +78,10 @@ void Text::createText(const std::string& text) {
 
 void Text::createText(const std::string& text, int r, int g, int b) {
 	SDL_Color fntColor = { (Uint8) r, (Uint8) g, (Uint8) b };
-	// SDL_Color fntColor = { 0x0, 0xFF, 0x0 };
 	if (this->surface != nullptr) {
 		SDL_FreeSurface(this->surface);
 	}
 	this->surface = TTF_RenderText_Blended(this->font, text.c_str(), fntColor);
-	// SDL_Color bkgColor = { 0x33, 0x33, 0x33 };
-	// this->surface = TTF_RenderText_Shaded(this->font, text.c_str(), fntColor, bkgColor);
 	if (this->surface == nullptr) {
 		throw SdlException("Error al crear superficie", SDL_GetError());
 	}
@@ -116,20 +111,6 @@ void Text::setText(const std::string& newText, int r, int g, int b) {
 }
 
 void Text::render(const int x, const int y) {
-	// Rectangulo
-	// SDL_SetRenderDrawColor(this->renderer, 0x33, 0x33, 0x33, 0xFF);
-	/*SDL_SetRenderDrawColor(this->renderer, BKG_RED, BKG_GREEN, BKG_BLUE, 0xFF);
-	SDL_Rect boxRect = {x, y, textWidth, textHeight};
-	SDL_RenderFillRect(this->renderer, &boxRect);*/
-
 	SDL_Rect dstrect = {x, y, textWidth, textHeight};
 	SDL_RenderCopy(this->renderer, this->texture, NULL, &dstrect);
 }
-
-/*void Text::render(const Area& dest) {
-	SDL_Rect dstrect = {dest.getX(), dest.getY(),
-	                    dest.getWidth(), dest.getHeight()
-	                   };
-
-	SDL_RenderCopy(this->renderer, this->texture, NULL, &dstrect);
-}*/

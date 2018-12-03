@@ -12,7 +12,6 @@
 #include <CommunicationQueue.h>
 #include "ClientSender.h"
 
-
 ClientSender::ClientSender(Socket &connectionSkt, CommunicationQueue &queue) :
     keepPlaying(true),
     connectionSkt(connectionSkt),
@@ -25,8 +24,8 @@ ClientSender::~ClientSender() {
 }
 
 void ClientSender::sendPayload(const std::string& payload) {
-    if (this->keepPlaying){
-        if (this->connectionSkt.sendLength(payload.length()) == 0){
+    if (this->keepPlaying) {
+        if (this->connectionSkt.sendLength(payload.length()) == 0) {
             std::cout << "sendLength devuelve 0!" << std::endl;
         }
         this->connectionSkt.send(payload.c_str(), payload.length());
@@ -39,18 +38,16 @@ void ClientSender::run() {
             nlohmann::json send = queue.getSend();
             this->sendPayload(send.dump());
         }
-    } catch (CustomException& e){
+    } catch (CustomException& e) {
         this->keepPlaying = false;
         std::cout << "Exception en el sender!" << std::endl;
     }
-
     std::cout << "Finaliza el sender!" << std::endl;
 }
 
 void ClientSender::disconnect() {
     this->keepPlaying = false;
     std::cout << "Disconect el sender!" << std::endl;
-//    queue.clear();
 }
 
 bool ClientSender::is_alive() {
