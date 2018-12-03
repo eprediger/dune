@@ -72,7 +72,9 @@ Building &BuildingView::getBuilding() {
 void BuildingView::drawConstruction(Area& camara) {
 	if (!construido) {
 		update_sprite++;
-		(*construction_it)->render(src_area, dest_area);
+		if (camara.anyInteract(dest_area)) {
+			(*construction_it)->render(src_area, dest_area);
+		}
 		if (update_sprite == 1) {
 			construction_it++;
 			update_sprite = 0;
@@ -83,7 +85,9 @@ void BuildingView::drawConstruction(Area& camara) {
 		}
 	} else {
 		if (construction_it != construction_sprites.end()) {
-			(*construction_it)->render(src_area, dest_area);
+			if (camara.anyInteract(dest_area)) {
+				(*construction_it)->render(src_area, dest_area);
+			}
 			update_sprite++;
 			if (update_sprite == 1) {
 				update_sprite = 0;
@@ -103,13 +107,15 @@ void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite){
 	if (construido) {
 		playerColorRect.x = dest_area.getX() - 4;
 		playerColorRect.y = dest_area.getY() - 4;
-		SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
-		SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
-		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
-		SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
-		sprite->render(src_area, dest_area);
+        if (camara.anyInteract(dest_area)){
+            SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
+            SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
+            SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
+            SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
 
+			sprite->render(src_area, dest_area);
+		}
 		if (life > building.getLife()) {
 			life = building.getLife();
 			animating_damage = true;
@@ -130,18 +136,22 @@ void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite, std:
 		playerColorRect.y = dest_area.getY();
 		playerColorRect.w = dest_area.getWidth() + abs(base_x) + 8;
 		playerColorRect.h = dest_area.getHeight() + abs(base_y) + 8;
-		SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
-		SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
-		SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
-		SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
-
 		dest_area.setX(dest_area.getX() + base_x);
 		dest_area.setY(dest_area.getY() + base_y);
-		base->render(src_area, dest_area);
+		if (camara.anyInteract(dest_area)) {
+			SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+			SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 250);
+			SDL_RenderDrawRect(window.getRenderer(), &playerColorRect);
+			SDL_SetRenderDrawColor(window.getRenderer(), player_r, player_g, player_b, 30);
+			SDL_RenderFillRect(window.getRenderer(), &playerColorRect);
+
+			base->render(src_area, dest_area);
+		}
 		dest_area.setX(dest_area.getX() - base_x);
 		dest_area.setY(dest_area.getY() - base_y);
-		sprite->render(src_area, dest_area);
+		if (camara.anyInteract(dest_area)) {
+			sprite->render(src_area, dest_area);
+		}
 
 		if (life > building.getLife()) {
 			life = building.getLife();
@@ -157,10 +167,14 @@ void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite, std:
 void BuildingView::drawDamage(Area& camara) {
 	damage_dest_area.setX(dest_area.getX() + dest_area.getWidth() / 4);
 	damage_dest_area.setY(dest_area.getY() + dest_area.getHeight() / 4);
-	(*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
+	if (camara.anyInteract(damage_dest_area)) {
+		(*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
+	}
 	damage_dest_area.setX(dest_area.getX() + dest_area.getWidth() / 2);
 	damage_dest_area.setY(dest_area.getY() + dest_area.getHeight() / 2);
-	(*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
+	if (camara.anyInteract(damage_dest_area)) {
+		(*damage_anim_it)->render(damage_sprite_area, damage_dest_area);
+	}
 	if (damage_update == 4) {
 		damage_anim_it++;
 		damage_update = 0;

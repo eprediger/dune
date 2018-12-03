@@ -23,6 +23,7 @@
 #include <map>
 #include <memory>
 #include <CommunicationQueue.h>
+#include <string>
 
 class AcceptedPlayer;
 

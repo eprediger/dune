@@ -8,7 +8,6 @@
 class Building;
 
 class Rocks : public Terrain {
-
 private:
 	Building* building;
 

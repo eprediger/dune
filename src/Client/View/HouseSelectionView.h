@@ -3,8 +3,8 @@
 
 #include "View.h"
 #include <vector>
+#include <string>
 
-/*#define TITLE_FONT_SIZE 42*/
 #define HOUSE_FONT_SIZE 28
 
 class HouseSelectionView : public View {

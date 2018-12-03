@@ -29,9 +29,12 @@ public:
 	// Retorna render de la instancia
 	SDL_Renderer* getRenderer() const;
 
+	void toggleFullScreen();
+
 	const int width, height;
 	
 private:
+	bool full_screen;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Surface* iconSurface;

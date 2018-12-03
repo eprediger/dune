@@ -48,8 +48,10 @@ void RocketView::draw(Area& camara) {
             exploding = true;
             anim_it = explosion_sprites.begin();
         } else {
-            (*anim_it)->render(Area(0, 0, 20, 20),
-                               Area(pos.x - camara.getX() - 5 , pos.y - camara.getY() - 5, 10, 10));
+            Area dest_area(pos.x - camara.getX() - 5 , pos.y - camara.getY() - 5, 10, 10);
+            if (camara.anyInteract(dest_area)){
+                (*anim_it)->render(Area(0, 0, 20, 20),dest_area);
+            }
             anim_it++;
             if (anim_it == travel_sprites.end()) {
                 anim_it = travel_sprites.begin();
@@ -58,8 +60,10 @@ void RocketView::draw(Area& camara) {
         }
     }
 
-    (*anim_it)->render(Area(0, 0, 72, 72),
-                       Area(pos.x - camara.getX() , pos.y - camara.getY(), 40, 40));
+    Area dest_area(pos.x - camara.getX(), pos.y - camara.getY(), 40, 40);
+    if (camara.anyInteract(dest_area)) {
+        (*anim_it)->render(Area(0, 0, 72, 72), dest_area);
+    }
 
     if (update_sprite == 5) {
         if (reverse)

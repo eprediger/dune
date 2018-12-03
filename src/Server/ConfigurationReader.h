@@ -4,10 +4,11 @@
 #include "YAMLReader.h"
 #include <Model/Buildings/Building.h>
 #include <Model/Unit/Unit.h>
+#include <string>
 
 class ConfigurationReader : public YAMLReader {
 public:
-	ConfigurationReader(const char *filename);
+	explicit ConfigurationReader(const char *filename);
 	~ConfigurationReader();
 
 	// Parametros generales de configuracion

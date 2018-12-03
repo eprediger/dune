@@ -5,7 +5,7 @@
 
 class MapReader : public YAMLReader {
 public:
-	MapReader(const char *filename);
+	explicit MapReader(const char* filename);
 
 	~MapReader();
 

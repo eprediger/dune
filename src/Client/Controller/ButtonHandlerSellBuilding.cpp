@@ -18,6 +18,7 @@ void ButtonHandlerSellBuilding::execute() {
 		j["method"] = "sellBuilding";
 		j["args"]["player_id"] = player.getId();
 		j["args"]["building_id"] = (*itr)->id;
+		queue.enqueue(j);
 	}
 }
 

@@ -1,10 +1,10 @@
 #include "MainMenuView.h"
+#include <string>
 
 MainMenuView::MainMenuView(const int width, const int height) :
 	View(width, height),
 	backgroundImage("../assets/img/bkgr/dune2000_1.jpg", this->window),
 	backgroundMusic("../assets/sound/music/options.mp3"),
-	// title("Dune 2000", TITLE_FONT_SIZE, this->window),
 	titleImage("../assets/img/bkgr/d2klogo.png", this->window),
 	tags(),
 	playButton(nullptr),
@@ -14,9 +14,13 @@ MainMenuView::MainMenuView(const int width, const int height) :
 
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Servidor  :", TXT_FONT_SIZE, this->window)));
 	this->tags.push_back(std::unique_ptr<Text>(new Text("Puerto    :", TXT_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Ancho     :", TXT_FONT_SIZE, this->window)));
+	this->tags.push_back(std::unique_ptr<Text>(new Text("Alto      :", TXT_FONT_SIZE, this->window)));
 
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("localhost", BOX_FONT_SIZE, this->window)));
 	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("8080", BOX_FONT_SIZE, this->window)));
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("1366", BOX_FONT_SIZE, this->window)));
+	this->inputBoxes.push_back(std::unique_ptr<TextBox>(new TextBox("768", BOX_FONT_SIZE, this->window)));
 
 	this->playButton.reset(new Text("Jugar", BTN_FONT_SIZE, this->window));
 	this->selectedTextBox = this->inputBoxes[textBoxIndex].get();
@@ -61,7 +65,8 @@ bool MainMenuView::setFocusOn(const unsigned x, const unsigned y) {
 
 void MainMenuView::selectNextTextBox() {
 	this->textBoxIndex++;
-	selectedTextBox = this->inputBoxes[this->textBoxIndex % this->inputBoxes.size()].get();
+	unsigned index = this->textBoxIndex % this->inputBoxes.size();
+	selectedTextBox = this->inputBoxes[index].get();
 }
 
 void MainMenuView::deleteFromTextBox() {
@@ -84,6 +89,14 @@ std::string MainMenuView::getPort() const {
 	return this->inputBoxes[1]->getText();
 }
 
+std::string MainMenuView::getWindowWidth() const {
+	return this->inputBoxes[2]->getText();
+}
+
+std::string MainMenuView::getWindowHeight() const {
+	return this->inputBoxes[3]->getText();
+}
+
 void MainMenuView::render() {
 	Area bkgrImgSrc(0, 0, this->backgroundImage.width,
 	                this->backgroundImage.height);
@@ -92,20 +105,26 @@ void MainMenuView::render() {
 
 	Area titleAreaSrc(0, 0, this->titleImage.width, this->titleImage.height);
 	Area titleAreaDst(((this->window.width - (this->titleImage.width / 2)) / 2),
-	                   this->window.height / 10,
-	                   this->titleImage.width / 2,
-	                   this->titleImage.height / 2);
+	                  this->window.height / 10,
+	                  this->titleImage.width / 2,
+	                  this->titleImage.height / 2);
 	this->titleImage.render(titleAreaSrc, titleAreaDst);
 
 	for (unsigned i = 0; i < this->tags.size(); i++) {
-		this->tags[i]->render((this->window.width / 4), ((this->window.height - (this->tags.size() * this->tags[i]->textHeight)) / 2) + (i * this->tags[i]->textHeight));
+		this->tags[i]->render((this->window.width / 4), ((this->window.height -
+		                   (this->tags.size() * this->tags[i]->textHeight)) / 2)
+		                    + (i * this->tags[i]->textHeight));
 	}
 
 	for (unsigned i = 0; i < this->inputBoxes.size(); i++) {
-		this->inputBoxes[i]->render((this->window.width / 2), ((this->window.height - (this->inputBoxes.size() * this->inputBoxes[i]->textHeight)) / 2) + (i * this->inputBoxes[i]->textHeight));
+		this->inputBoxes[i]->render((this->window.width / 2),
+			((this->window.height - 
+			(this->inputBoxes.size() * this->inputBoxes[i]->textHeight)) / 2)
+			 + (i * this->inputBoxes[i]->textHeight));
 	}
 
 	this->playButton->render((this->window.width - this->playButton->textWidth) * 2 / 3,
 	                         (this->window.height * 2 / 3));
+
 	this->window.render();
 }

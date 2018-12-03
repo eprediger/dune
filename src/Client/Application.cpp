@@ -2,10 +2,7 @@
 #include "View/BuildingViewFactory.h"
 
 Application::Application(View& view, InputHandler& handler, Model& model) :
-	isRunning(true),
-	/*host(),
-	port(),
-	house(),*/
+	status(WindowStatus::OPEN),
 	view(view),
 	handler(handler),
 	model(model) {
@@ -14,11 +11,11 @@ Application::Application(View& view, InputHandler& handler, Model& model) :
 Application::~Application() {}
 
 bool Application::running() {
-	return this->isRunning;
+	return (this->status != WindowStatus::CLOSE);
 }
 
 void Application::handleEvent() {
-	this->isRunning = this->handler.handleInput();
+	this->status = this->handler.handleInput();
 }
 
 void Application::render() {

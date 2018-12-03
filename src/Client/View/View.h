@@ -9,10 +9,12 @@
 
 #define TITLE_FONT_SIZE 80
 
+#define WINDOW_WIDTH  1240
+#define WINDOW_HEIGHT 768
+
 class View {
 public:
     // Se inicializan recursos asociados a la vista
-    // View(Model& model, const int width, const int height)
     View(const int width, const int height);
 
     // Se liberan recursos asociados a la instancia

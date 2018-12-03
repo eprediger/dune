@@ -1,15 +1,15 @@
 #ifndef __TERRAIN_H__
 #define __TERRAIN_H__
 
-#include <ostream>
-
 class Building;
+
 class Terrain {
 protected:
 	char key;
 	bool occupied;
 	bool builtOn;
 	int speed_factor;
+
 public:
 	Terrain();
 

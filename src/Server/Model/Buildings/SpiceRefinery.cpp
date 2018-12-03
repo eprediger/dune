@@ -3,7 +3,8 @@
 
 #include <Model/Player.h>
 
-SpiceRefinery::SpiceRefinery(const int x, const int y, int blockWidth, int blockHeight) :
+SpiceRefinery::SpiceRefinery(const int x, const int y,
+                             int blockWidth, int blockHeight) :
 	Building(x, y, blockWidth, blockHeight,
 	         GameConfiguration::getConfig().spiceRefineryEnergy,
 	         GameConfiguration::getConfig().spiceRefineryCost,

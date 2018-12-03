@@ -20,8 +20,11 @@ void SelectorView::drawLife(Building* building, Area& camara) {
         max_life.w = 80;
     max_life.x = building->getPosition().x  - camara.getX();
     max_life.y = building->getPosition().y + 10 - camara.getY();
-    SDL_SetRenderDrawColor(window.getRenderer(), 0, 0, 0, 0xFF);
-    SDL_RenderFillRect(window.getRenderer(), &max_life);
+    Area life_area(max_life);
+    if (camara.anyInteract(life_area)){
+        SDL_SetRenderDrawColor(window.getRenderer(), 0, 0, 0, 0xFF);
+        SDL_RenderFillRect(window.getRenderer(), &max_life);
+    }
     float factor = float(building->getLife()) / float(building->getInitialLife());
     current_life.w = max_life.w * factor;
     current_life.x = max_life.x;
@@ -39,8 +42,10 @@ void SelectorView::drawLife(Building* building, Area& camara) {
         r = 0;
         g = 128;
     }
-    SDL_SetRenderDrawColor(window.getRenderer(), r, g, 0, 0xFF);
-    SDL_RenderFillRect(window.getRenderer(), &current_life);
+    if (camara.anyInteract(life_area)) {
+        SDL_SetRenderDrawColor(window.getRenderer(), r, g, 0, 0xFF);
+        SDL_RenderFillRect(window.getRenderer(), &current_life);
+    }
 }
 
 void SelectorView::drawLife(Unit* unit, Area& camara) {
@@ -49,8 +54,11 @@ void SelectorView::drawLife(Unit* unit, Area& camara) {
     max_life.y = unit->getPosition().y + 10 - camara.getY();
     if (max_life.w > 80)
         max_life.w = 80;
-    SDL_SetRenderDrawColor(window.getRenderer(), 0, 0, 0, 0xFF);
-    SDL_RenderFillRect(window.getRenderer(), &max_life);
+    Area life_area(max_life);
+    if (camara.anyInteract(life_area)) {
+        SDL_SetRenderDrawColor(window.getRenderer(), 0, 0, 0, 0xFF);
+        SDL_RenderFillRect(window.getRenderer(), &max_life);
+    }
     float factor = float(unit->getLife()) / float(unit->getInitialLife());
     current_life.w = max_life.w * factor;
     current_life.x = max_life.x;
@@ -68,8 +76,10 @@ void SelectorView::drawLife(Unit* unit, Area& camara) {
         r = 0;
         g = 128;
     }
-    SDL_SetRenderDrawColor(window.getRenderer(), r, g, 0, 0xFF);
-    SDL_RenderFillRect(window.getRenderer(), &current_life);
+    if (camara.anyInteract(life_area)) {
+        SDL_SetRenderDrawColor(window.getRenderer(), r, g, 0, 0xFF);
+        SDL_RenderFillRect(window.getRenderer(), &current_life);
+    }
 }
 
 void SelectorView::drawSelection(Area& camara) {
@@ -94,11 +104,14 @@ void SelectorView::draw(Area& camara) {
         drag_rect.y = selector.drag_source.y - camara.getY();
         drag_rect.w = selector.pos.x - selector.drag_source.x;
         drag_rect.h = selector.pos.y - selector.drag_source.y;
-        SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
-        SDL_SetRenderDrawColor(window.getRenderer(), 0, 128, 0, 0xFF);
-        SDL_RenderDrawRect(window.getRenderer(), &drag_rect);
-        SDL_SetRenderDrawColor(window.getRenderer(), 0, 128, 64, 80);
-        SDL_RenderFillRect(window.getRenderer(), &drag_rect);
+        Area life_area(drag_rect);
+        if (camara.anyInteract(life_area)) {
+            SDL_SetRenderDrawBlendMode(window.getRenderer(), SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(window.getRenderer(), 0, 128, 0, 0xFF);
+            SDL_RenderDrawRect(window.getRenderer(), &drag_rect);
+            SDL_SetRenderDrawColor(window.getRenderer(), 0, 128, 64, 80);
+            SDL_RenderFillRect(window.getRenderer(), &drag_rect);
+        }
     } else {
         drawSelection(camara);
     }

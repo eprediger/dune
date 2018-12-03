@@ -21,6 +21,7 @@ GameHandler::GameHandler(GameView &view, Model &model, CommunicationQueue &queue
     model(model),
     player(player),
     selector(0, 0),
+    dragger(view),
     constructor(model, player, view, queue),
     queue(queue),
     interface(model, view) {
@@ -52,14 +53,14 @@ GameHandler::~GameHandler() {
     }
 }
 
-bool GameHandler::handleInput() {
-    bool keepPlaying = true;
+WindowStatus GameHandler::handleInput() {
+    WindowStatus keepPlaying = WindowStatus::OPEN;
 
     SDL_Event event;
     SDL_WaitEvent(&event);
     switch (event.type) {
     case SDL_QUIT:
-        keepPlaying = false;
+        keepPlaying = WindowStatus::CLOSE;
         break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT) {
@@ -70,9 +71,18 @@ bool GameHandler::handleInput() {
                 this->selector.drag_source = selector.pos;
             }
         }
+        if (event.button.button == SDL_BUTTON_MIDDLE) {
+            this->cursor.currentPosition();
+            Position curr_pos(cursor.current_x, cursor.current_y);
+            dragger.on(curr_pos);
+        }
         break;
     case SDL_MOUSEMOTION:
         this->cursor.currentPosition();
+        if (dragger.isOn()){
+            dragger.move(Position(cursor.current_x, cursor.current_y));
+        }
+
         if (this->cursor.current_x >= view.getCameraWidth()) {
             this->selector.pos.x = this->view.getCameraX() + this->view.getCameraWidth() - 128;
         } else {
@@ -85,6 +95,12 @@ bool GameHandler::handleInput() {
     case SDL_MOUSEBUTTONUP:
         this->cursor.currentPosition();
         if (event.button.button == SDL_BUTTON_LEFT) {
+            if (constructor.on) {
+                constructor.build();
+            }
+            for (auto& button : this->buttons) {
+                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
+            }
             this->selector.drag = false;
             Area selectArea(this->selector.drag_source, this->selector.pos);
             std::vector<Unit*> selection = model.selectUnitsInArea(selectArea, player);
@@ -92,14 +108,8 @@ bool GameHandler::handleInput() {
             this->selector.addSelection(selection);
             this->selector.addSelection(selected_buildings);
             this->view.releaseMouse();
-            if (constructor.on) {
-                constructor.build();
-            }
-            for (auto& button : this->buttons) {
-                button->handleUserInput(this->cursor.current_x, this->cursor.current_y);
-            }
         }
-        // TEST
+            // TEST
         if (event.button.button == SDL_BUTTON_RIGHT) {
             this->cursor.currentPosition();
             this->constructor.on = false;
@@ -113,6 +123,9 @@ bool GameHandler::handleInput() {
                 j["args"]["y"] = pos.y;
                 queue.enqueue(j);
             }
+        }
+        if (event.button.button == SDL_BUTTON_MIDDLE) {
+            dragger.off();
         }
         break;
     case SDL_KEYDOWN:
@@ -133,7 +146,9 @@ bool GameHandler::handleInput() {
         case SDLK_w:
             view.moveUp(MOVE_AMOUNT);
             break;
-
+        case SDLK_f:
+            view.getWindow().toggleFullScreen();
+            break;
         case SDLK_DELETE:
         case SDLK_BACKSPACE:
         {
@@ -152,7 +167,6 @@ bool GameHandler::handleInput() {
         }
         break;
     }
-
     return keepPlaying;
 }
 

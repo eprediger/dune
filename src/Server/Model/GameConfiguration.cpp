@@ -3,6 +3,7 @@
 #include <Model/Unit/Unit.h>
 #include <CustomException.h>
 #include <Model/Weapons/Weapon.h>
+#include <string>
 
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
@@ -138,52 +139,52 @@ nlohmann::json GameConfiguration::initWithJson() {
 	j["initialMaxEnergy"] = this->initialMaxEnergy;
 
 	j["buildingConstructionTime"] = this->buildingConstructionTime;
-	
+
 	j["constructionYardCost"] = this->constructionYardCost;
 	j["constructionYardWidth"] = this->constructionYardWidth;
 	j["constructionYardHeight"] = this->constructionYardHeight;
-	
+
 	j["windTrapCost"] = this->windTrapCost;
 	j["windTrapWidth"] = this->windTrapWidth;
 	j["windTrapHeight"] = this->windTrapHeight;
-	
+
 	j["lightFactoryCost"] = this->lightFactoryCost;
 	j["lightFactoryWidth"] = this->lightFactoryWidth;
 	j["lightFactoryHeight"] = this->lightFactoryHeight;
-	
+
 	j["heavyFactoryCost"] = this->heavyFactoryCost;
 	j["heavyFactoryWidth"] = this->heavyFactoryWidth;
 	j["heavyFactoryHeight"] = this->heavyFactoryHeight;
-	
+
 	j["spiceRefineryCost"] = this->spiceRefineryCost;
 	j["spiceRefinerySpiceCapacity"] = this->spiceRefinerySpiceCapacity;
 	j["spiceRefineryWidth"] = this->spiceRefineryWidth;
 	j["spiceRefineryHeight"] = this->spiceRefineryWidth;
-	
+
 	j["spiceSiloCost"] = this->spiceSiloCost;
 	j["spiceSiloSpiceCapacity"] = this->spiceSiloSpiceCapacity;
 	j["spiceSiloWidth"] = this->spiceSiloWidth;
 	j["spiceSiloHeight"] = this->spiceSiloWidth;
-	
+
 	j["barracksCost"] = this->barracksCost;
 	j["barracksWidth"] = this->barracksWidth;
 	j["barracksHeight"] = this->barracksHeight;
-	
+
 	j["lightInfantryTrainingTime"] = this->lightInfantryTrainingTime;
 	j["lightInfantryCost"] = this->lightInfantryCost;
-	
+
 	j["heavyInfantryTrainingTime"] = this->heavyInfantryTrainingTime;
 	j["heavyInfantryCost"] = this->heavyInfantryCost;
-	
+
 	j["harvesterConstructionTime"] = this->harvesterConstructionTime;
 	j["harvesterCost"] = this->harvesterCost;
-	
+
 	j["trikeConstructionTime"] = this->trikeConstructionTime;
 	j["trikeCost"] = this->trikeCost;
-	
+
 	j["raiderConstructionTime"] = this->raiderConstructionTime;
 	j["raiderCost"] = this->raiderCost;
-	
+
 	j["tankConstructionTime"] = this->tankConstructionTime;
 	j["tankCost"] = this->tankCost;
 	return j;

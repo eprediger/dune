@@ -135,7 +135,7 @@ Server: `./dune_Server <puerto> <mapa.yaml>`
 	3. ~~Revisar capacidad de refinería + silos~~
 	4. ~~Corregir la distancia de los edificios (se debe construir a NO MAS de 5 bloques de distancia de otro edificio propio)~~
 	5. ~~Corregir~~ Testear velocidad por terrenos
-	6. Reducción de energía edificios (?)
+	6. ~~Reducción de energía edificios~~
 	7. ~~Ralentización por falta de energía (testear)~~
 	8. ~~Infantería puede moverse por cimas (testear)~~
 	9. ~~Velocidad cambia según el terreno~~
@@ -158,7 +158,7 @@ Server: `./dune_Server <puerto> <mapa.yaml>`
 	3. Mejorar progreso de construcción/entrenamiento
 
 * Prioridad baja
-	1. Mejorar el botón de venta de edificios
+	1. ~~Mejorar el botón de venta de edificios~~
 	2. ~~Aumento de velocidad de entrenamiento (testear)~~
 	3. Agregar sonidos y FX
 

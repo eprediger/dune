@@ -3,22 +3,28 @@
 
 #include <View/MainMenuView.h>
 #include <Controller/MainMenuHandler.h>
+#include <WindowMenu.h>
+#include <string>
 
-class MainMenu {
+class MainMenu : public WindowMenu {
 public:
-	MainMenu(MainMenuView& view, MainMenuHandler& handler);
-	
-	~MainMenu();
+	MainMenu();
 
-	void run();
+	virtual ~MainMenu() = default;
+
+	void run() override;
 
 	std::string getHost() const;
 
 	std::string getPort() const;
 
+	int getWindowWidth() const;
+
+	int getWindowHeight() const;
+
 private:
-	MainMenuView& view;
-	MainMenuHandler& handler;
+	MainMenuView view;
+	MainMenuHandler handler;
 };
 
 #endif	// __MAIN_MENU_H__
