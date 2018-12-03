@@ -4,6 +4,9 @@
 #define SRV_ARGS 3
 #define CLT_ARGS 1
 
+#define MAX_FPS 60
+#define SECOND 1000
+
 #define SUCCESS 0
 
 #define PARAM_ERROR 1

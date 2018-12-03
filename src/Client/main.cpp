@@ -16,9 +16,6 @@
 #include <Controller/GameHandler.h>
 #include <HandlerThread.h>
 
-#define MAX_FPS 60
-#define SECOND  1000
-
 int main(int argc, const char *argv[]) {
     if (argc != CLT_ARGS) {
         std::cerr << "Uso: " << argv[0] << std::endl;
@@ -109,19 +106,19 @@ int main(int argc, const char *argv[]) {
 
                 } catch (const SdlException &e) {
                     std::cerr << e.what() << std::endl;
-                    // client.disconnect();
+                    client.disconnect();
                     return FAILURE;
                 } catch (const CustomException &ce) {
                     std::cerr << ce.what() << std::endl;
-                    // client.disconnect();
+                    client.disconnect();
                     return ce.getErrorCode();
                 } catch (std::exception &e) {
                     std::cerr << e.what() << std::endl;
-                    // client.disconnect();
+                    client.disconnect();
                     return FAILURE;
                 }
             }
         }
     }
-	return SUCCESS;
+    return SUCCESS;
 }

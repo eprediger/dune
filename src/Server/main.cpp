@@ -11,19 +11,19 @@ int main(int argc, char const *argv[]) {
 	} else {
 		Server gameServer(argv[1], argv[2]);
 		ExitThread exitThread(gameServer);
-//		try {
+		try {
 			exitThread.start();
 			gameServer.waitPlayers();
 			exitThread.join();
 			return SUCCESS;
-//		} catch (const CustomException& ce) {
-//			std::cerr << ce.what() << std::endl;
-//			exitThread.join();
-//			return ce.getErrorCode();
-//		} catch (std::exception& e) {
-//			std::cerr << e.what() << std::endl;
-//			exitThread.join();
-//			return EXIT_FAILURE;
-//		}
+		} catch (const CustomException& ce) {
+			std::cerr << ce.what() << std::endl;
+			exitThread.join();
+			return ce.getErrorCode();
+		} catch (std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			exitThread.join();
+			return EXIT_FAILURE;
+		}
 	}
 }

@@ -8,6 +8,7 @@
 #include "Model/Model.h"
 #include "MapReader.h"
 #include "ConfigurationReader.h"
+#include <Codes.h>
 
 #define MAX_LISTEN 10
 

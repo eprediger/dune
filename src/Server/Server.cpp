@@ -82,7 +82,7 @@ void Server::waitPlayers() {
 
 	nlohmann::json j;
 	j["class"] = "Step";
-	const int time_step = 16;
+	const int time_step = SECOND / MAX_FPS;
 	int sleep_extra = 0;
 	while (!model.isGameFinished() && !players.empty()) {
 		unsigned int loop_init = SDL_GetTicks();
