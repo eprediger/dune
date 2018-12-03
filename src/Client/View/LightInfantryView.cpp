@@ -7,14 +7,22 @@
 #include <vector>
 #include "Orientation.h"
 #include <memory>
+#include "Sound.h"
 
 std::map<int, std::vector<std::unique_ptr<SdlTexture> > > LightInfantryView::sprites;
 std::map<int, std::vector<std::unique_ptr<SdlTexture> > > LightInfantryView::attack_sprites;
 std::vector<std::unique_ptr<SdlTexture> > LightInfantryView::dead_sprites;
+std::unique_ptr<Mix_Chunk> LightInfantryView::deathFx;
+
 
 LightInfantryView::LightInfantryView(LightInfantry& lightInfantry,
                                      SdlWindow& window) :
-    OffensiveUnitView(lightInfantry, Area(0, 0, 20, 20), window) {
+    OffensiveUnitView(lightInfantry, Area(0, 0, 20, 20), window)
+{
+    if (!deathFx){
+        deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV("../assets/sound/fx/infantry death.wav")));
+    }
+
     if (sprites.empty()) {
         std::vector<std::unique_ptr<SdlTexture> > indef;
         indef.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00061b8d.bmp",window)));
@@ -164,6 +172,7 @@ void LightInfantryView::draw(Area& camara) {
 }
 
 std::vector<std::unique_ptr<SdlTexture> >& LightInfantryView::getDeadSprites() {
+    Sound::getSound()->playDeathFx(deathFx.get());
     return dead_sprites;
 }
 

@@ -46,6 +46,12 @@ void Sound::playSelectionFX(Mix_Chunk* chunk){
     Mix_PlayChannel(SELECTOR_CHANNEL,chunk,0);
 }
 
+void Sound::playDeathFx(Mix_Chunk* chunk){
+    if (!Mix_Playing(DEATH_CHANNEL)){
+        Mix_PlayChannel(DEATH_CHANNEL,chunk,0);
+    }
+}
+
 Mix_Music* Sound::getCurrentMusic(){
     return this->currentMusic;
 }

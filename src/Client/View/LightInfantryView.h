@@ -23,6 +23,7 @@ class LightInfantryView: public OffensiveUnitView {
         static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > sprites;
         static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > attack_sprites;
         static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
+        static std::unique_ptr<Mix_Chunk> deathFx;
 };
 
 #endif  // __LIGHT_INFANTRY_VIEW_H__
