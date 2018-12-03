@@ -9,7 +9,7 @@
 #include "Position.h"
 #include "Model/Weapons/Rocket.h"
 #include <memory>
-
+#include "Sound.h"
 class RocketView {
 public:
     RocketView(Rocket& rocket, SdlWindow& window);
@@ -26,6 +26,7 @@ private:
     Position pos;
     int update_sprite;
     std::vector<std::unique_ptr<SdlTexture> >::iterator anim_it;
+    static std::unique_ptr<Mix_Chunk> explosionFx;
 };
 
 #endif  // __ROCKET_VIEW_H__
