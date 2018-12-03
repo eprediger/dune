@@ -5,7 +5,8 @@
 
 ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
-                                            GameConfiguration::getConfig().harvesterConstructionTime),
+                                            GameConfiguration::getConfig().harvesterConstructionTime,
+											"../assets/sound/fx/new harvester.wav"),
                       player, view, queue, GameConfiguration::getConfig().harvesterConstructionTime){ }
 ButtonHandlerHarvester::~ButtonHandlerHarvester() {}
 

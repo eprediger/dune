@@ -4,7 +4,7 @@
 #include "SdlTexture.h"
 #include "TimerView.h"
 #include <string>
-
+#include <SDL2/SDL_mixer.h>
 // El boton cuenta con tres estados:
 // HIDDEN: no se dibuja el botón
 // ENABLE: botón habilitado se dibuja en pantalla
@@ -17,10 +17,10 @@ class ButtonView {
 public:
 	// Constructor para botones con timer
 	// PRE: la imagen debe contener todos los sprites dispuestos horizontalmente
-	ButtonView(const std::string &filename, const SdlWindow &window, int number_steps);
+	ButtonView(const std::string &filename, const SdlWindow &window, int number_steps, const char* soundFile);
 
 	// Constructor para botones sin timer
-	ButtonView(const std::string &filename, const SdlWindow &window);
+	ButtonView(const std::string &filename, const SdlWindow &window,const char* soundFile);
 
 	virtual ~ButtonView();
 
@@ -44,6 +44,7 @@ public:
 	int x, y;
 	int width, height;
 	int complete_percentage;
+	Mix_Chunk* sound_fx;
 };
 
 #endif	// __BUTTON_VIEW_H__

@@ -86,9 +86,9 @@ public:
 	void grabMouse();
 	void releaseMouse();
 
-	ButtonView &createUnitButton(const std::string &filename, int number_steps);
+	ButtonView &createUnitButton(const std::string &filename, int number_steps,const char* sound_fx);
 
-	ButtonView &createBuildingButton(const std::string &filename, int number_steps);
+	ButtonView &createBuildingButton(const std::string &filename, int number_steps, const char* sound_fx);
 
 	ButtonView& createSellBuildingButton(const std::string& filename);
 

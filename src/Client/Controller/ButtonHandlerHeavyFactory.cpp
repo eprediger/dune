@@ -6,7 +6,8 @@
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
-                                            GameConfiguration::getConfig().buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime
+                                            ,"../assets/sound/fx/fin heavy fac.wav"),
                   player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor)
     {}

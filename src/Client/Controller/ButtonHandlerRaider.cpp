@@ -5,7 +5,8 @@
 
 ButtonHandlerRaider::ButtonHandlerRaider(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
-                                            GameConfiguration::getConfig().raiderConstructionTime),
+                                            GameConfiguration::getConfig().raiderConstructionTime,
+											"../assets/sound/fx/new raider.wav"),
                      player, view, queue, GameConfiguration::getConfig().raiderConstructionTime) {
 }
 

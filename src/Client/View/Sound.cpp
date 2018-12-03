@@ -11,6 +11,8 @@ Sound::Sound(const std::string& filename) :
     }
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     this->music = Mix_LoadMUS(filename.c_str());
+    Mix_Volume(-1,128);
+
 }
 
 Sound::~Sound() {

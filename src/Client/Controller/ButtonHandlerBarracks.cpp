@@ -8,7 +8,8 @@ ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue):
 	ButtonHandler(
 	    view.createBuildingButton("../assets/img/btns/buildings/barracks-atreides.jpg",
-	                              GameConfiguration::getConfig().buildingConstructionTime),
+	                              GameConfiguration::getConfig().buildingConstructionTime,
+								  "../assets/sound/fx/finished barracks.wav"),
 	    player,
 	    view, queue, GameConfiguration::getConfig().buildingConstructionTime),
 	constructor(constructor){

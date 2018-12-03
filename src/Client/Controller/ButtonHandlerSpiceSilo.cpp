@@ -6,7 +6,8 @@
 ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-                                            GameConfiguration::getConfig().buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime,
+                                            "../assets/sound/fx/fin spice silo.wav"),
                   player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 

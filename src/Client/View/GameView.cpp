@@ -272,19 +272,19 @@ void GameView::releaseMouse() {
 	this->window.grabMouse(false);
 }
 
-ButtonView& GameView::createUnitButton(const std::string &filename, int number_steps) {
-	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
+ButtonView& GameView::createUnitButton(const std::string &filename, int number_steps, const char* sound_fx) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps,sound_fx);
 	this->unitButtons.emplace_back(newButtonView);
 	return *newButtonView;
 }
 
-ButtonView& GameView::createBuildingButton(const std::string &filename, int number_steps) {
-	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps);
+ButtonView& GameView::createBuildingButton(const std::string &filename, int number_steps, const char* sound_fx) {
+	ButtonView* newButtonView = new ButtonView(filename, this->window, number_steps,sound_fx);
 	this->buildingButtons.emplace_back(newButtonView);
 	return *newButtonView;
 }
 
 ButtonView& GameView::createSellBuildingButton(const std::string& filename) {
-	this->buildingSellButton = new ButtonView(filename, this->window);
+	this->buildingSellButton = new ButtonView(filename, this->window, nullptr);
 	return *(this->buildingSellButton);
 }

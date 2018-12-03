@@ -1,16 +1,17 @@
 #include "ButtonView.h"
 #include <string>
 
-ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, int number_steps) :
+ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, int number_steps, const char* soundFile) :
 	buttonState(ViewState::HIDDEN),
 	buttonImage(filename, window),
     timer(window, number_steps),
 	x(0),
 	y(0),
 	width(buttonImage.width),
-	height(buttonImage.height) {}
+	height(buttonImage.height),
+	sound_fx(Mix_LoadWAV(soundFile)) {}
 
-ButtonView::ButtonView(const std::string &filename, const SdlWindow &window) :
+ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, const char* soundFile) :
 	buttonState(ViewState::HIDDEN),
 	buttonImage(filename, window),
 	timer(window, 0),
@@ -18,7 +19,8 @@ ButtonView::ButtonView(const std::string &filename, const SdlWindow &window) :
 	y(0),
 	width(buttonImage.width),
 	height(buttonImage.height),
-	complete_percentage(0) {}
+	complete_percentage(0),
+	sound_fx(Mix_LoadWAV(soundFile)) {}
 
 ButtonView::~ButtonView() {}
 
@@ -27,7 +29,12 @@ bool ButtonView::isClicked(const int x, const int y) {
 	        (((y >= this->y) && (y <= this->y + this->height))));
 }
 
+#include <iostream>
 void ButtonView::setState(const ViewState newState) {
+	if (newState == ViewState::READY){
+		if (sound_fx)
+			Mix_PlayChannel(-1,sound_fx,0);
+	}
 	this->buttonState = newState;
 }
 
@@ -35,7 +42,6 @@ void ButtonView::update(int percentage){
 	if ((0 <= percentage) && (percentage <= 100))
 		complete_percentage = percentage;
 }
-#include <iostream>
 
 void ButtonView::render(const Area& dest) {
 	Area enabledSrc(0, 0, this->buttonImage.width / 2,

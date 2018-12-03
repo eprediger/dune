@@ -8,7 +8,7 @@ std::unique_ptr<SdlTexture> PlayerView::background;
 
 PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     player(player),
-    x(x),
+    x(x), 
     width(width),
     window(window),
     background_area(Area(0, 0, 32, 32)),

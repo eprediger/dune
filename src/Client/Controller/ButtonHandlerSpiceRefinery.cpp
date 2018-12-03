@@ -6,7 +6,8 @@
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
     ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
-                                            GameConfiguration::getConfig().buildingConstructionTime),
+                                            GameConfiguration::getConfig().buildingConstructionTime,
+                                            "../assets/sound/fx/finished refinery.wav"),
                   player, view, queue, GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 

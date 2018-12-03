@@ -5,7 +5,8 @@
 
 ButtonHandlerTank::ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
-                                            GameConfiguration::getConfig().tankConstructionTime),
+                                            GameConfiguration::getConfig().tankConstructionTime,
+											"../assets/sound/fx/new tank.wav"),
                       player, view, queue,GameConfiguration::getConfig().tankConstructionTime) {
 }
 

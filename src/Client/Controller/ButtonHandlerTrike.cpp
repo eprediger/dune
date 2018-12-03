@@ -5,7 +5,8 @@
 
 ButtonHandlerTrike::ButtonHandlerTrike(Player& player, GameView &view, CommunicationQueue& queue) :
         ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
-                                            GameConfiguration::getConfig().trikeConstructionTime),
+                                            GameConfiguration::getConfig().trikeConstructionTime,
+											"../assets/sound/fx/new trike.wav"),
                       player, view, queue, GameConfiguration::getConfig().trikeConstructionTime) {
 }
 
