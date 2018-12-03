@@ -31,13 +31,17 @@ void Sound::playMusic(Mix_Music* music) {
 }
 
 void Sound::playButtonFx(Mix_Chunk* chunk){
-    Mix_PlayChannel(BUTTON_FX_CHANNEL,chunk,0);
-    currentChunk = chunk;
+    if (!Mix_Playing(BUTTON_FX_CHANNEL)){
+        Mix_PlayChannel(BUTTON_FX_CHANNEL,chunk,0);
+        currentChunk = chunk;
+    }
 }
 
 void Sound::playExplosionFX(Mix_Chunk* chunk){
-    Mix_PlayChannel(EXPLOSION_CHANNEL,chunk,0);
-    currentChunk = chunk;
+    if (!Mix_Playing(EXPLOSION_CHANNEL)){
+        Mix_PlayChannel(EXPLOSION_CHANNEL,chunk,0);
+        currentChunk = chunk;
+    }
 }
 
 void Sound::playSelectionFX(Mix_Chunk* chunk){
@@ -55,8 +59,10 @@ Mix_Music* Sound::getCurrentMusic(){
 
 
 void Sound::playEmergencyFx(Mix_Chunk* chunk){
-    Mix_PlayChannel(EMERGENGY_CHANNEL,chunk,0);
-    currentChunk = chunk;
+    if (!Mix_Playing(EMERGENGY_CHANNEL)){
+        Mix_PlayChannel(EMERGENGY_CHANNEL,chunk,0);
+        currentChunk = chunk;
+    }
 }
 
 void Sound::stopMusic(){
