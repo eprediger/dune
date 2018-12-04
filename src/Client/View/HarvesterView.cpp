@@ -9,12 +9,18 @@
 #include <vector>
 #include <memory>
 #include <Path.h>
+#include "Sound.h"
 
 std::map<int, std::unique_ptr<SdlTexture>> HarvesterView::harvester_sprites;
 std::vector<std::unique_ptr<SdlTexture> > HarvesterView::dead_sprites;
+std::unique_ptr<Mix_Chunk> HarvesterView::deathFx;
 
 HarvesterView::HarvesterView(Harvester& harvester, SdlWindow& window) :
 	UnitView(harvester, Area(0, 0, 41, 38), window) {
+    
+	if (!deathFx) {
+        deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/rocket explosion.wav").c_str())));
+    }
 	if (harvester_sprites.empty()) {
 		harvester_sprites.emplace(std::make_pair(Orientation::indefinida(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/000a612e.bmp"),window))));
 		harvester_sprites.emplace(std::make_pair(Orientation::norte(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/000a612e.bmp"),window))));
@@ -47,6 +53,7 @@ void HarvesterView::draw(Area& camara) {
 }
 
 std::vector<std::unique_ptr<SdlTexture> >& HarvesterView::getDeadSprites() {
+    Sound::getSound()->playDeathFx(deathFx.get());	
 	return dead_sprites;
 }
 

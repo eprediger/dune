@@ -8,13 +8,19 @@
 #include <vector>
 #include <memory>
 #include <Path.h>
+#include "Sound.h"
 
 std::map<int, std::unique_ptr<SdlTexture>> TrikeView::trike_sprites;
 std::map<int, std::vector<std::unique_ptr<SdlTexture> > > TrikeView:: attack_sprites;
 std::vector<std::unique_ptr<SdlTexture> > TrikeView::dead_sprites;
+std::unique_ptr<Mix_Chunk> TrikeView::deathFx;
 
 TrikeView::TrikeView(Trike& trike, SdlWindow& window) :
 	OffensiveUnitView(trike, Area(0, 0, 25, 25), window) {
+    
+	if (!deathFx) {
+        deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/rocket explosion.wav").c_str())));
+    }
 	if (trike_sprites.empty()) {
 		trike_sprites.emplace(std::make_pair(Orientation::indefinida(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/0009e9ca.bmp"), window))));
 		trike_sprites.emplace(std::make_pair(Orientation::norte(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/0009e6d8.bmp"), window))));
@@ -101,6 +107,7 @@ void TrikeView::draw(Area& camara) {
 }
 
 std::vector<std::unique_ptr<SdlTexture> >& TrikeView::getDeadSprites() {
+    Sound::getSound()->playDeathFx(deathFx.get());
 	return dead_sprites;
 }
 

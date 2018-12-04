@@ -5,6 +5,8 @@
 #include "UnitView.h"
 #include <map>
 #include <vector>
+#include <memory>
+#include "Sound.h"
 
 class HarvesterView: public UnitView {
 public:
@@ -17,6 +19,8 @@ public:
 private:
 	static std::map<int, std::unique_ptr<SdlTexture>> harvester_sprites;
 	static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
+    static std::unique_ptr<Mix_Chunk> deathFx;
+
 };
 
 #endif	// __HARVESTER_VIEW_H__

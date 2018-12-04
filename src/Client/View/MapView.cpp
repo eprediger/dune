@@ -14,8 +14,8 @@ MapView::MapView(Map &mapa, SdlWindow &window) :
 	areas.emplace(std::make_pair('M', Area(80, 296, 32, 24)));
 	areas.emplace(std::make_pair('R', Area(106, 216, 32, 32)));
 	areas.emplace(std::make_pair('P', Area(0, 64, 32, 32)));
-	areas.emplace(std::make_pair('D', Area(32, 96, 32, 32)));
-	areas.emplace(std::make_pair('C', Area(112, 64, 32, 32)));
+	areas.emplace(std::make_pair('D', Area(48, 256, 26, 26)));
+	areas.emplace(std::make_pair('C', Area(112, 62, 32, 32)));
 }
 
 void MapView::draw(Area& camara) {

@@ -9,13 +9,20 @@
 #include <vector>
 #include <memory>
 #include <Path.h>
+#include "Sound.h"
 
 std::map<int, std::unique_ptr<SdlTexture>> RaiderView::raider_sprites;
 std::map<int, std::vector<std::unique_ptr<SdlTexture> > > RaiderView::attack_sprites;
 std::vector<std::unique_ptr<SdlTexture> > RaiderView::dead_sprites;
+std::unique_ptr<Mix_Chunk> RaiderView::deathFx;
+
 
 RaiderView::RaiderView(Raider& raider, SdlWindow& window) :
 	OffensiveUnitView(raider, Area(0, 0, 30, 30), window) {
+    
+	if (!deathFx) {
+        deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/rocket explosion.wav").c_str())));
+    }
 	if (raider_sprites.empty()) {
 		raider_sprites.emplace(std::make_pair(Orientation::indefinida(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/000a08e6.bmp"), window))));
 		raider_sprites.emplace(std::make_pair(Orientation::norte(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/0009e6d8.bmp"), window))));
@@ -102,6 +109,7 @@ void RaiderView::draw(Area& camara) {
 }
 
 std::vector<std::unique_ptr<SdlTexture> >& RaiderView::getDeadSprites() {
+    Sound::getSound()->playDeathFx(deathFx.get());	
 	return dead_sprites;
 }
 

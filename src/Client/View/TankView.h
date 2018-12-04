@@ -9,6 +9,7 @@
 #include "Orientation.h"
 #include <map>
 #include <vector>
+#include "Sound.h"
 
 class TankView: public OffensiveUnitView {
 public:
@@ -22,6 +23,8 @@ private:
     static std::map<int, std::unique_ptr<SdlTexture>> sprites;
     static std::map<int, std::vector<std::unique_ptr<SdlTexture> > > attack_sprites;
     static std::vector<std::unique_ptr<SdlTexture> > dead_sprites;
+    static std::unique_ptr<Mix_Chunk> deathFx;
+ 
 };
 
 #endif  // __TANK_VIEW_H__

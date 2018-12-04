@@ -8,13 +8,19 @@
 #include <vector>
 #include <memory>
 #include <Path.h>
+#include "Sound.h"
 
 std::map<int, std::unique_ptr<SdlTexture>> TankView::sprites;
 std::map<int, std::vector<std::unique_ptr<SdlTexture> > > TankView::attack_sprites;
 std::vector<std::unique_ptr<SdlTexture> > TankView::dead_sprites;
+std::unique_ptr<Mix_Chunk> TankView::deathFx;
 
 TankView::TankView(Tank& tank, SdlWindow& window) :
     OffensiveUnitView(tank, Area(0, 0, 30, 30), window) {
+    
+    if (!deathFx) {
+        deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/rocket explosion.wav").c_str())));
+    }
     if (sprites.empty()) {
         sprites.emplace(std::make_pair(Orientation::indefinida(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/000ba250.bmp"), window))));
         sprites.emplace(std::make_pair(Orientation::norte(), std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/000b748d.bmp"), window))));
@@ -102,6 +108,7 @@ void TankView::draw(Area& camara) {
 }
 
 std::vector<std::unique_ptr<SdlTexture> >& TankView::getDeadSprites() {
+    Sound::getSound()->playDeathFx(deathFx.get());
     return dead_sprites;
 }
 
