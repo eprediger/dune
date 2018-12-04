@@ -15,7 +15,7 @@ void PlayerColorMaker::makeColor(Player& player, int* r, int* g, int* b) {
         *g = 150;
         break;
     case 3:
-        *r = 90;
+        *r = 140;
         *g = 50;
         *b = 125;
         break;
@@ -28,21 +28,21 @@ void PlayerColorMaker::menuColor(Player& player, int*r, int*g, int*b) {
     switch (player.getId()) {
     case 0:
         *r = 150;
-        *b = 25;
         *g = 25;
+        *b = 25;
         break;
     case 1:
         *r = 25;
-        *b = 150;
         *g = 25;
+        *b = 200;
         break;
     case 2:
         *r = 25;
-        *b = 25;
         *g = 150;
+        *b = 25;
         break;
     case 3:
-        *r = 90;
+        *r = 140;
         *g = 50;
         *b = 125;
         break;
@@ -69,7 +69,7 @@ void PlayerColorMaker::textColor(Player& player, int*r, int*g, int*b) {
         *b = 0;
         break;
     case 3:
-        *r = 90;
+        *r = 140;
         *g = 50;
         *b = 125;
     default:
