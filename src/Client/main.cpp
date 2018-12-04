@@ -57,7 +57,7 @@ int main(int argc, const char *argv[]) {
                     Player &myPlayer = model.getPlayer(player["id"]);
 
                     GameView gameView(mainMenu.getWindowWidth(),
-                                  mainMenu.getWindowHeight(), model, myPlayer);
+                                  mainMenu.getWindowHeight(), model, myPlayer,cYard["pos"]["x"],cYard["pos"]["y"]);
                     GameInterface interface(model, gameView);
                     GameHandler gameHandler(gameView, model, queue, myPlayer);
 

@@ -51,7 +51,7 @@ private:
 	int camera_height;
 
 public:
-	GameView(const int width, const int height, Model& model, Player& player);
+	GameView(const int width, const int height, Model& model, Player& player, int camera_x, int camera_y);
 
 	~GameView();
 

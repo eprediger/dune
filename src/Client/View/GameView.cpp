@@ -12,7 +12,7 @@
 #include <Path.h>
 
 GameView::GameView(const int width, const int height,
-                   Model& model, Player& player) :
+                   Model& model, Player& player, int camera_x, int camera_y) :
 	View(width, height),
 	model(model),
 	player(player),
@@ -24,7 +24,7 @@ GameView::GameView(const int width, const int height,
 	playerView(player, window, 3 * width / 4, width / 4),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
-	camera(0, 0, 3 * width / 4, height),
+	camera(camera_x, camera_y, 3 * width / 4, height),
 	backgroundMusic(Mix_LoadMUS(Path::rootVar("assets/sound/music/fight-for-power.mp3").c_str())),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
@@ -37,6 +37,13 @@ GameView::GameView(const int width, const int height,
 	camera_height(camera.getHeight()) 
 {
 	Sound::getSound()->playMusic(backgroundMusic);
+
+	if ((camera_x + camera_width) >= model.getMap().getWidth()){
+		camera.setX(model.getMap().getWidth() - camera_width);
+	}
+	if ((camera_y + camera_height) >= model.getMap().getHeight()){
+		camera.setY(model.getMap().getHeight() - camera_height);
+	}
 }
 
 GameView::~GameView() {
