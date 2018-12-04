@@ -9,6 +9,7 @@ ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, int
 	y(0),
 	width(buttonImage.width),
 	height(buttonImage.height),
+    complete_percentage(0),
 	sound_fx(Mix_LoadWAV(soundFile)) {}
 
 ButtonView::ButtonView(const std::string &filename, const SdlWindow &window, const char* soundFile) :
