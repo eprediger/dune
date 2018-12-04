@@ -38,19 +38,12 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
-    //void addEnergy(int energy_to_add);
-    //void subEnergy(int energy_to_sub);
     float getEnergyFactor();
-
-//    void addUnit(Unit* unit);
+    
     void addBuilding(Building* building);
-//    void cleanUnit(Unit* unit);
     void cleanDeadBuildings();
 
     Building * getClosestBuilding(Position pos, Building::BuildingType type);
-//    bool hasBuilding(const Building* building);
-
-//    bool hasUnit(Unit *unit);
     bool hasBuilding(Building& building);
     bool hasBuilding(Building::BuildingType buildingType);
 
