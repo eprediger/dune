@@ -72,14 +72,20 @@ GameView::~GameView() {
 	if (Sound::getSound()->getCurrentMusic() == backgroundMusic){
 		Sound::getSound()->stopMusic();
 	}
-	//Mix_FreeMusic(backgroundMusic);
+	Mix_FreeMusic(backgroundMusic);
 }
 
 void GameView::addUnitView(UnitView* unitView) {
+	if (unitView->getUnit().getPlayer() == this->player){
+		unitView->setSoundOn();
+	}
 	unitViews.push_back(std::move(unitView));
 }
 
 void GameView::addBuildingView(BuildingView* buildingView) {
+	if (*(buildingView->getBuilding().getPlayer()) == this->player){
+		buildingView->setSoundOn();
+	}
 	buildingViews.push_back(std::move(buildingView));
 }
 

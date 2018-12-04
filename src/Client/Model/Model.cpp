@@ -169,7 +169,10 @@ Player &Model::getPlayer(int player) {
 }
 
 void Model::updateUnit(nlohmann::json& j) {
-    units.at(j["id"])->update(j);
+    Unit* unit = units.at(j["id"]);
+    map.at(unit->getPosition().x,unit->getPosition().y).free();
+    unit->update(j);
+    map.at(unit->getPosition().x,unit->getPosition().y).occupy();
 }
 
 void Model::updateBuilding(nlohmann::json& j) {

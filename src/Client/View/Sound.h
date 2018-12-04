@@ -13,6 +13,7 @@
 #define EXPLOSION_CHANNEL 3
 #define SHOOTING_CHANNEL 4
 #define DEATH_CHANNEL 5
+#define UNDER_ATTACK_CHANNEL 6
 class Sound {
 public:
     ~Sound();
@@ -25,6 +26,7 @@ public:
     void playExplosionFX(Mix_Chunk* chunk);
     void playShootingFx(Mix_Chunk* chunk);
     void playDeathFx(Mix_Chunk* chunk);
+    void playUnderAttackFx(Mix_Chunk* chunk);
     void stopMusic();
 
     Mix_Music* getCurrentMusic();

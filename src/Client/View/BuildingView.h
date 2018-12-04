@@ -9,6 +9,7 @@
 #include "Model/Player.h"
 #include <memory>
 #include <vector>
+#include "Sound.h"
 
 class BuildingView {
 public:
@@ -22,6 +23,8 @@ public:
 	void drawDamage(Area& camara);
 	DeadBuildingView* getDeadBuildingView();
 
+	void setSoundOn();
+	void setSoundOff();
 	static bool isDead(BuildingView* view);
 
 protected:
@@ -42,6 +45,8 @@ protected:
 	std::vector<std::unique_ptr<SdlTexture> >::iterator damage_anim_it;
 	int damage_update;
 	bool animating_damage;
+	bool soundMonitor;
+	static std::unique_ptr<Mix_Chunk> alertAttackFx;
 };
 
 #endif //__BUILDINGVIEW_H__

@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 #include <memory>
+#include "Sound.h"
 
 class UnitView {
 public:
@@ -29,6 +30,8 @@ public:
 	virtual Area getDeadUnitSrcArea() = 0;
 	virtual Area getDeadUnitDestArea() = 0;
 	virtual std::vector<std::unique_ptr<SdlTexture> >& getDeadSprites() = 0;
+	void setSoundOn();
+	void setSoundOff();
 
 protected:
 	SdlWindow& window;
@@ -44,6 +47,8 @@ protected:
 	int damage_update;
 	bool animating_damage;
 	int player_r, player_g, player_b;
+	bool monitorSound;
+	static std::unique_ptr<Mix_Chunk> alertAttackFx;
 };
 
 #endif	// __UNIT_VIEW_H__

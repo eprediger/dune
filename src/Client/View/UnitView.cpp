@@ -10,6 +10,7 @@
 #include <Path.h>
 
 std::vector<std::unique_ptr<SdlTexture> > UnitView::damage_sprites;
+std::unique_ptr<Mix_Chunk> UnitView::alertAttackFx;
 
 UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	window(window),
@@ -24,12 +25,20 @@ UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	life(unit.getLife()),
 	damage_anim_it(),
 	damage_update(0),
-	animating_damage(false) {
+	animating_damage(false),
+	monitorSound(false)
+
+{
 	PlayerColorMaker::makeColor(unit.getPlayer(), &player_r, &player_g, &player_b);
 	playerColorRect.x = 0;
 	playerColorRect.y = 0;
 	playerColorRect.w = sprite_area.getWidth();
 	playerColorRect.h = sprite_area.getHeight();
+	
+	if (!alertAttackFx){
+		alertAttackFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/unit alert.wav").c_str())));
+	}
+	
 	if (damage_sprites.empty()) {
 		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc36.bmp"), window)));
 		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc00.bmp"), window)));
@@ -77,6 +86,9 @@ void UnitView::draw(Area& camara, std::map<int, std::unique_ptr<SdlTexture>>& sp
 	if (life > unit.getLife()) {
 		life = unit.getLife();
 		animating_damage = true;
+		if (monitorSound){
+			Sound::getSound()->playUnderAttackFx(alertAttackFx.get());
+		}	
 	}
 	if (animating_damage) {
 		drawDamage(camara);
@@ -122,6 +134,9 @@ void UnitView::draw(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlT
 	if (life > unit.getLife()) {
 		life = unit.getLife();
 		animating_damage = true;
+		if (monitorSound){
+			Sound::getSound()->playUnderAttackFx(alertAttackFx.get());
+		}
 	}
 	if (animating_damage) {
 		drawDamage(camara);
@@ -149,4 +164,12 @@ void UnitView::drawDamage(Area& camara) {
 DeadUnitView* UnitView::getDeadUnitView() {
 	return new DeadUnitView(prev_pos, this->getDeadUnitSrcArea(), this->getDeadUnitDestArea(),
 	                        this->getDeadSprites(), player_r, player_g, player_b, window);
+}
+
+void UnitView::setSoundOn(){
+	this->monitorSound = true;
+}
+
+void UnitView::setSoundOff(){
+	this->monitorSound = false;
 }

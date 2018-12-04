@@ -4,9 +4,11 @@
 #include <memory>
 #include <vector>
 #include <Path.h>
+#include "Sound.h"
 
 std::vector<std::unique_ptr<SdlTexture> > BuildingView::construction_sprites;
 std::vector<std::unique_ptr<SdlTexture> > BuildingView::damage_sprites; 
+std::unique_ptr<Mix_Chunk> BuildingView::alertAttackFx;
 
 BuildingView::BuildingView(Building& building, SdlWindow& window, Area src_area, Area dest_area) :
 	building(building),
@@ -21,7 +23,12 @@ BuildingView::BuildingView(Building& building, SdlWindow& window, Area src_area,
 	damage_sprite_area(Area(0, 0, 15, 15)),
 	damage_dest_area(Area(0, 0, 15, 15)),
 	damage_anim_it(),
-	damage_update(0) {
+	damage_update(0),
+	soundMonitor(false)
+{
+	if (!alertAttackFx){
+		alertAttackFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/building alert.wav").c_str())));
+	}
 	PlayerColorMaker::makeColor(*building.getPlayer(), &player_r, &player_g, &player_b);
 	playerColorRect.x = dest_area.getX();
 	playerColorRect.y = dest_area.getY();
@@ -120,6 +127,9 @@ void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite){
 		if (life > building.getLife()) {
 			life = building.getLife();
 			animating_damage = true;
+			if (soundMonitor){
+				Sound::getSound()->playUnderAttackFx(alertAttackFx.get());
+			}
 		}
 		if (animating_damage) {
 			drawDamage(camara);
@@ -157,6 +167,9 @@ void BuildingView::draw(Area& camara,  std::unique_ptr<SdlTexture>& sprite, std:
 		if (life > building.getLife()) {
 			life = building.getLife();
 			animating_damage = true;
+			if (soundMonitor){
+				Sound::getSound()->playUnderAttackFx(alertAttackFx.get());
+			}
 		}
 		if (animating_damage) {
 			drawDamage(camara);
@@ -197,4 +210,12 @@ bool BuildingView::isDead(BuildingView* view) {
 		return true;
 	}
 	return false;
+}
+
+void BuildingView::setSoundOn(){
+	this->soundMonitor = true;
+}
+
+void BuildingView::setSoundOff(){
+	this->soundMonitor = false;
 }
