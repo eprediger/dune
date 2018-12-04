@@ -64,7 +64,6 @@ WindowStatus GameHandler::handleInput() {
         break;
     case SDL_MOUSEBUTTONDOWN:
         if (event.button.button == SDL_BUTTON_LEFT) {
-            //this->view.grabMouse();
             this->cursor.initialPosition();
             if (constructor.on == false) {
                 this->selector.drag = true;
@@ -109,7 +108,7 @@ WindowStatus GameHandler::handleInput() {
             this->selector.addSelection(selected_buildings);
             this->view.releaseMouse();
         }
-            // TEST
+
         if (event.button.button == SDL_BUTTON_RIGHT) {
             this->cursor.currentPosition();
             this->constructor.on = false;

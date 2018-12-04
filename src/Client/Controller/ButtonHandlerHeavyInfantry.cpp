@@ -1,7 +1,6 @@
 #include "ButtonHandlerHeavyInfantry.h"
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
-#include <iostream>
 #include <Path.h>
 
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Player& player, GameView &view, CommunicationQueue& queue) :

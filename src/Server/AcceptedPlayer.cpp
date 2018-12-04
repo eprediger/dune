@@ -4,8 +4,6 @@
 #include <iostream>
 #include <sys/socket.h>
 
-// #include <nlohmann/json.hpp>
-
 AcceptedPlayer::AcceptedPlayer(Server& server) :
     queue(),
     server(server),
@@ -25,6 +23,7 @@ void AcceptedPlayer::start() {
 }
 
 void AcceptedPlayer::disconnect() {
+    std::cout << "Player disconected" << std::endl;
     sender.disconnect();
     receiver.disconnect();
     this->peerSkt.shutdown(SHUT_RDWR);

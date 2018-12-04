@@ -1,5 +1,4 @@
 #include "MapView.h"
-#include <iostream>
 #include "SdlWindow.h"
 #include "SdlTexture.h"
 #include "Model/Map.h"

@@ -27,7 +27,6 @@ ClientReceiver::~ClientReceiver() {
 void ClientReceiver::run() {
 	try {
 		this->recvPayload();
-		std::cout << "Finaliza el receiver!" << std::endl;
 		this->keepPlaying = false;
 	} catch (CustomException& e) {
 		this->keepPlaying = false;
@@ -46,7 +45,6 @@ void ClientReceiver::recvPayload() {
 }
 
 void ClientReceiver::disconnect() {
-	std::cout << "Disconect el receiver!" << std::endl;
 	this->keepPlaying = false;
 }
 

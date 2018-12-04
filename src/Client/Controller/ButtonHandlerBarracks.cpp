@@ -1,7 +1,6 @@
 #include "ButtonHandlerBarracks.h"
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
-#include <iostream>
 #include <Model/GameConfiguration.h>
 #include <Path.h>
 
