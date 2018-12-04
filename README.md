@@ -134,6 +134,7 @@ Server: `./dune_Server <puerto> <mapa.yaml>`
 
 9. Al vender una refinería donde está descargando una cosechadora, esta sigue descargando en el mismo lugar como si aún estuviera el edificio.
 
+---
 ## ISSUES
 
 1. Renderizar solamente las unidades que se están viendo (dentro de la cámara)
@@ -152,6 +153,7 @@ Server: `./dune_Server <puerto> <mapa.yaml>`
 10. Ver de renderizar el mapa solamente si cambia la cámara (para esto ver issue 11)
 11. ~~Testear si cambia el terreno de arena en base a la especia~~
 
+---
 ## CORRECCIONES MARTÍN
 * Prioridad Critica
 
@@ -187,6 +189,7 @@ Server: `./dune_Server <puerto> <mapa.yaml>`
 	2. ~~Aumento de velocidad de entrenamiento (testear)~~
 	3. ~~Agregar sonidos y FX~~
 
+---
 ## PROFILING
 
 Usar "callgrind" para encontrar donde está consumiendo más memoria
@@ -203,7 +206,10 @@ valgrind --tool=callgrind ./dune_Client
 kcachegrind <archivo_salida (callgrind.out.pid)>
 ```
 
+---
 ## DOCUMENTACIÓN
+
+[Proyecto Overleaf](https://www.overleaf.com/project/5be8b82bfdbce4745a262a43)
 
 ### Manual de Proyecto
 
@@ -212,14 +218,12 @@ kcachegrind <archivo_salida (callgrind.out.pid)>
 * División de tareas
 * ~~Evolución del proyecto: Cronograma propuesto y cronograma real~~
 * Inconvenientes encontrados: Problemas principales encontrados
-* Análisis de puntos pendientes: Cosas que faltan o deberían mejorar, cómo y por qué
-* Herramientas: Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, control de versiones, herramienta para generar documentación, herramientas para debug, etcétera.
+* ~~Análisis de puntos pendientes: Cosas que faltan o deberían mejorar, cómo y por qué~~
+* ~~Herramientas: Herramientas auxiliares que utilizaron para hacer el proyecto, como editor de interfaz gráfica, control de versiones, herramienta para generar documentación, herramientas para debug, etcétera.~~
 * Conclusiones
 
 
 ### Documentación Técnica
-
-[Proyecto Overleaf](https://www.overleaf.com/project/5be8b82bfdbce4745a262a43)
 
 * Requerimientos de software: ~~OS, bibliotecas y herramientas necesarias para compilar, desarrollar, probar y depurar el programa~~
 * Descripción general: Arquitectura general del proyecto, qué módulos tiene, etcétera.
