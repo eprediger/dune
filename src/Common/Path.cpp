@@ -1,4 +1,5 @@
 #include "Path.h"
+#include <string>
 
 std::string Path::root(std::string path) {
 #ifdef DEBUG
@@ -22,4 +23,3 @@ std::string Path::rootVar(std::string path) {
     root_var_path += path;
     return root_var_path;
 }
-

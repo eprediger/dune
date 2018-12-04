@@ -386,14 +386,13 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
             player->queue.enqueue(step);
         }
     }
-    
-    if (gameFinished){
+
+    if (gameFinished) {
         nlohmann::json finishGameJson;
         finishGameJson["class"] = "finishGame";
         finishGameJson["winner_id"] = this->getWinnerId();
-        for (auto player : connectedPlayers){
+        for (auto player : connectedPlayers) {
             player->queue.enqueue(finishGameJson);
         }
     }
-
 }

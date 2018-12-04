@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include <nlohmann/json.hpp>
 #include <Model/GameConfiguration.h>
@@ -29,7 +30,8 @@ int main(int argc, const char *argv[]) {
             houseSelection.run();
             if (houseSelection.windowStatus() != WindowStatus::CLOSE) {
                 CommunicationQueue queue;
-                Client client(mainMenu.getHost().c_str(), mainMenu.getPort().c_str(), queue);
+                Client client(mainMenu.getHost().c_str(),
+                              mainMenu.getPort().c_str(), queue);
                 try {
                     bool defeated = false;
                     client.start();
@@ -54,7 +56,8 @@ int main(int argc, const char *argv[]) {
 
                     Player &myPlayer = model.getPlayer(player["id"]);
 
-                    GameView gameView(mainMenu.getWindowWidth(), mainMenu.getWindowHeight(), model, myPlayer);
+                    GameView gameView(mainMenu.getWindowWidth(),
+                                  mainMenu.getWindowHeight(), model, myPlayer);
                     GameInterface interface(model, gameView);
                     GameHandler gameHandler(gameView, model, queue, myPlayer);
 
@@ -80,10 +83,15 @@ int main(int argc, const char *argv[]) {
                             while (true) {
                                 nlohmann::json j(queue.dequeue());
                                 interface.execute(j);
+<<<<<<< HEAD
                                 if (myPlayer.getConstructionYard()->getLife()<=0){
                                     defeated = true;
                                 }
                                 if ((j["class"] == "Step") || (j["class"] == "finishGame")) break;
+=======
+                                if ((j["class"] == "Step") ||
+                                        (j["class"] == "finishGame")) break;
+>>>>>>> 8fd6ace7a4b7699d65c8fbf09d69c139523ea6ff
                             }
                         }
 
@@ -118,8 +126,6 @@ int main(int argc, const char *argv[]) {
                         VictoryScreen victoryScreen(victoryScreenView, victoryScreenHandler);
                         victoryScreen.run();
                     }
-
-
                 } catch (const SdlException &e) {
                     std::cerr << e.what() << std::endl;
                     client.disconnect();

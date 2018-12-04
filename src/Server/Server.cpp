@@ -5,13 +5,19 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <fcntl.h>
+
 #include <yaml-cpp/yaml.h>
+
 #include "Server.h"
 #include "Model/Model.h"
 #include "CustomException.h"
-#include <algorithm>
-#include <SDL2/SDL.h>
 #include "GameInterface.h"
+
+#include <algorithm>
+#include <string>
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL_timer.h>
 
 Server::Server(const char *service, const char* mapFile) :
 	commonQueue(),
@@ -21,7 +27,6 @@ Server::Server(const char *service, const char* mapFile) :
 	acceptSkt(nullptr, service, AI_PASSIVE),
 	players(),
 	model(mapFile) {
-	// model(mapLayout, gameConfig) {
 	this->acceptSkt.bind();
 	this->acceptSkt.listen(MAX_LISTEN);
 }
@@ -50,9 +55,6 @@ Socket Server::accept() const {
 		throw CustomException("Server error");
 	}
 }
-
-#include <iostream>
-#include <SDL_timer.h>
 
 void Server::waitPlayers() {
 	GameInterface interface(model);

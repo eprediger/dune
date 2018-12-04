@@ -21,11 +21,8 @@ std::unique_ptr<Mix_Chunk> HeavyInfantryView::deathFx;
 HeavyInfantryView::HeavyInfantryView(HeavyInfantry& heavyInfantry,
                                      SdlWindow& window):
     OffensiveUnitView(heavyInfantry, Area(0, 0, 20, 20), window),
-    heavyInf(heavyInfantry) 
-
-{
-
-    if (!deathFx){
+    heavyInf(heavyInfantry) {
+    if (!deathFx) {
         deathFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/infantry death.wav").c_str())));
     }
 

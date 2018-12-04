@@ -24,7 +24,6 @@ RocketView::RocketView(Rocket& rocket, SdlWindow& window) :
         travel_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebbb2.bmp"), window)));
         travel_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebb55.bmp"), window)));
 
-
         explosion_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002dc3d4.bmp"), window)));
         explosion_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002db5e5.bmp"), window)));
         explosion_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002da77e.bmp"), window)));
@@ -56,8 +55,8 @@ void RocketView::draw(Area& camara) {
         } else {
             Area dest_area(pos.x - camara.getX() - 5 , pos.y - camara.getY() - 5, 10, 10);
             if (camara.anyInteract(dest_area)) {
-                if (anim_it == travel_sprites.begin()){
-                 Sound::getSound()->playExplosionFX(launchFx.get());
+                if (anim_it == travel_sprites.begin()) {
+                    Sound::getSound()->playExplosionFX(launchFx.get());
                 }
                 (*anim_it)->render(Area(0, 0, 20, 20), dest_area);
             }
@@ -76,7 +75,7 @@ void RocketView::draw(Area& camara) {
             Sound::getSound()->playExplosionFX(explosionFx.get());
     }
 
-    
+
     if (update_sprite == 5) {
         if (reverse)
             anim_it--;

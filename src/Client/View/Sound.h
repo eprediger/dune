@@ -14,6 +14,7 @@
 #define SHOOTING_CHANNEL 4
 #define DEATH_CHANNEL 5
 #define UNDER_ATTACK_CHANNEL 6
+
 class Sound {
 public:
     ~Sound();
@@ -35,7 +36,6 @@ private:
     Sound();
     static std::unique_ptr<Sound> instance;
     Mix_Music* currentMusic;
-
 };
 
-#endif	// __SOUND_H__
+#endif  // __SOUND_H__

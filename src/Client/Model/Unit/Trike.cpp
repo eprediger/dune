@@ -1,10 +1,10 @@
 #include "Trike.h"
 
 Trike::Trike(nlohmann::json& j) :
-	OffensiveUnit(j){}
+	OffensiveUnit(j) {}
 
 Trike::~Trike() {}
 
-Unit::UnitType Trike::getUnitType(){
+Unit::UnitType Trike::getUnitType() {
 	return Unit::TRIKE;
 }

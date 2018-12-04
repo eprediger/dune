@@ -12,9 +12,8 @@ Selector::Selector(int x, int y) :
 void Selector::addSelection(std::vector<Unit*>& units) {
 	if (!units.empty()){
 		newUnits = true;
-	}	
+	}
 	this->selection.addSelection(units);
-
 }
 
 void Selector::addSelection(std::vector<Building*>& buildings) {

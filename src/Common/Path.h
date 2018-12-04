@@ -3,7 +3,6 @@
 
 #include <string>
 
-
 #ifdef DEBUG
 
 #define ROOT_PATH "../"
@@ -21,8 +20,6 @@ class Path {
 public:
     static std::string root(std::string path);
     static std::string rootVar(std::string path);
-
 };
-
 
 #endif //__PATH_H__

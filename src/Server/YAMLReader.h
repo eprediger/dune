@@ -2,6 +2,7 @@
 #define __YAML_READER_H__
 
 #include <yaml-cpp/yaml.h>
+#include <string>
 
 class YAMLReader {
 public:
