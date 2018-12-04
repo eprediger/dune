@@ -58,6 +58,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
 
     bool lose();
 
+    bool isDefeated();
+
     void trainUnits();
     void constructBuildings();
 

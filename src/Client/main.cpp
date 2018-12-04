@@ -8,7 +8,8 @@
 #include "Client.h"
 #include "View/VictoryScreenView.h"
 #include "VictoryScreen.h"
-
+#include "View/DefeatedScreenView.h"
+#include "DefeatedScreen.h"
 #include <MainMenu.h>
 
 #include <HouseSelection.h>
@@ -30,6 +31,7 @@ int main(int argc, const char *argv[]) {
                 CommunicationQueue queue;
                 Client client(mainMenu.getHost().c_str(), mainMenu.getPort().c_str(), queue);
                 try {
+                    bool defeated = false;
                     client.start();
                     nlohmann::json house;
                     house["house"] = houseSelection.getSelectedHouse();
@@ -48,11 +50,16 @@ int main(int argc, const char *argv[]) {
                     nlohmann::json gameConfig = queue.dequeue();
                     GameConfiguration::init(gameConfig);
 
+                    nlohmann::json cYard = queue.dequeue();
+
                     Player &myPlayer = model.getPlayer(player["id"]);
 
                     GameView gameView(mainMenu.getWindowWidth(), mainMenu.getWindowHeight(), model, myPlayer);
                     GameInterface interface(model, gameView);
                     GameHandler gameHandler(gameView, model, queue, myPlayer);
+
+                    interface.execute(cYard);
+
 
                     Application app(gameView, gameHandler, model);
 
@@ -62,7 +69,7 @@ int main(int argc, const char *argv[]) {
                     const int time_step = SECOND / MAX_FPS;
                     int sleep_extra = 0;
 
-                    while (app.running() && !model.isGameFinished()) {
+                    while (app.running() && !model.isGameFinished() && !defeated) {
                         unsigned int loop_init = SDL_GetTicks();
 
                         ////// Inicia el LOOP //////////
@@ -73,6 +80,9 @@ int main(int argc, const char *argv[]) {
                             while (true) {
                                 nlohmann::json j(queue.dequeue());
                                 interface.execute(j);
+                                if (myPlayer.getConstructionYard()->getLife()<=0){
+                                    defeated = true;
+                                }
                                 if ((j["class"] == "Step") || (j["class"] == "finishGame")) break;
                             }
                         }
@@ -94,6 +104,12 @@ int main(int argc, const char *argv[]) {
                     gameView.closeWindow();
                     client.disconnect();
 
+                    if (defeated){
+                        DefeatedScreenView defeatedView(WINDOW_WIDTH,WINDOW_HEIGHT);
+                        DefeatedScreenHandler defeatedHandler(defeatedView);
+                        DefeatedScreen defeatedScreen(defeatedView,defeatedHandler);
+                        defeatedScreen.run();
+                    }
                     if (model.isGameFinished()) {
                         std::string winner_name = model.getPlayer(model.getWinnerId()).getName();
                         VictoryScreenView victoryScreenView(WINDOW_WIDTH, WINDOW_HEIGHT,

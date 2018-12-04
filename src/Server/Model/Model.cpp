@@ -356,6 +356,23 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
         }
     }
 
+    nlohmann::json defeated;
+    defeated["class"] = "Defeated";
+    for (auto player : connectedPlayers) {
+        if (players.at(player->getId())->isDefeated()){
+            player->queue.enqueue(defeated);
+            if (!news){
+                player->queue.enqueue(step);
+            }
+        }
+        else if (players.at(player->getId())->hasNews()) {
+            player->queue.enqueue(players.at(player->getId())->getSerialization());
+            if (!news) {
+                player->queue.enqueue(step);
+            }
+        }
+    }
+    
     for (auto player : connectedPlayers) {
         if (players.at(player->getId())->hasNews()) {
             player->queue.enqueue(players.at(player->getId())->getSerialization());
@@ -364,7 +381,6 @@ void Model::serialize(std::vector<AcceptedPlayer*>& connectedPlayers) {
             }
         }
     }
-
     if (news) {
         for (auto player : connectedPlayers) {
             player->queue.enqueue(step);

@@ -118,9 +118,7 @@ void SelectorView::drawSelection(Area& camara) {
 
 void SelectorView::draw(Area& camara) {
     if (selector.newUnits){
-        std::cout<<"in\n";
         Sound::getSound()->playSelectionFX(selectionFx.at(selector.selection.getSelectedUnits().front()->getUnitType()));
-        std::cout<<"out\n";
         selector.newUnits = false;
     }
     if (selector.drag) {

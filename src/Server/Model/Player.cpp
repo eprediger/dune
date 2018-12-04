@@ -184,3 +184,9 @@ nlohmann::json& Player::getSerialization() {
 bool Player::hasNews() {
     return ( news || buildingCenter.news || trainingCenter.news);
 }
+
+bool Player::isDefeated(){
+    if (this->construction_yard == nullptr)
+        return true;
+    return (this->construction_yard->getLife()<=0);
+}

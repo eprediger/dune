@@ -7,6 +7,9 @@ MainMenu::MainMenu() :
 	view(WINDOW_WIDTH, WINDOW_HEIGHT),
 	handler(view) {}
 
+#include <iostream>
+
+
 void MainMenu::run() {
 	do {
 		this->view.render();

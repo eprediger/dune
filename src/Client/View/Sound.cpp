@@ -72,7 +72,6 @@ void Sound::playShootingFx(Mix_Chunk* chunk){
 #include <iostream>
 void Sound::playUnderAttackFx(Mix_Chunk* chunk){
     if (!Mix_Playing(UNDER_ATTACK_CHANNEL)){
-        std::cout<<"aqui\n";
         Mix_PlayChannel(UNDER_ATTACK_CHANNEL,chunk,0);
     }
 }

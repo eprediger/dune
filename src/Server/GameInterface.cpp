@@ -4,7 +4,6 @@ GameInterface::GameInterface(Model &model) :
     model(model) {}
 
 void GameInterface::execute(nlohmann::json json) {
-    std::cout << json["method"] << std::endl;
     if (json["method"] == "createWindTrap") {
         this->createWindTrap(json["args"]["x"], json["args"]["y"], json["args"]["player_id"]);
         return;

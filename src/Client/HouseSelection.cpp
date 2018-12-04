@@ -9,6 +9,8 @@ HouseSelection::HouseSelection() :
 
 HouseSelection::~HouseSelection() {}
 
+#include <iostream>
+
 void HouseSelection::run() {
 	do {
 		this->view.render();

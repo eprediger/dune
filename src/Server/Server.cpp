@@ -70,25 +70,31 @@ void Server::waitPlayers() {
 		this->players[i]->setId(i);
 	}
 
+	nlohmann::json step;
+	step["class"] = "Step";
+
 	for (unsigned i = 0; i < this->maxPlayers; ++i) {
 		this->players[i]->queue.enqueue(model.getMap().getSerialization());
 		this->players[i]->queue.enqueue(model.getPlayer(this->players[i]->getId()).getSerialization());
 		this->players[i]->queue.enqueue(GameConfiguration::getConfig().initWithJson());
+		this->players[i]->queue.enqueue(model.getPlayer(this->players[i]->getId()).getConstructionYard().getSerialization());
 
 		for (unsigned j = 0; j < this->maxPlayers; ++j) {
 			this->players[i]->queue.enqueue(model.getPlayer(j).getSerialization());
+			this->players[i]->queue.enqueue(model.getPlayer(this->players[j]->getId()).getConstructionYard().getSerialization());
 		}
+		this->players[i]->queue.enqueue(step);
 	}
 
-	nlohmann::json j;
-	j["class"] = "Step";
+
+
+
 	const int time_step = SECOND / MAX_FPS;
 	int sleep_extra = 0;
 	while (!model.isGameFinished() && !players.empty()) {
 		unsigned int loop_init = SDL_GetTicks();
-        model.serialize(players);
+		model.serialize(players);
         model.step();
-
 		this->cleanDisconectedPlayers();
 		if (!commonQueue.recvEmpty())
 			interface.execute(commonQueue.dequeue());
