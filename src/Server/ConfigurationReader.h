@@ -8,7 +8,7 @@
 
 class ConfigurationReader : public YAMLReader {
 public:
-	explicit ConfigurationReader(const char *filename);
+	explicit ConfigurationReader(const std::string filename);
 	~ConfigurationReader();
 
 	// Parametros generales de configuracion

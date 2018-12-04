@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <Path.h>
 
 std::map<std::string, std::vector<std::unique_ptr<SdlTexture> > > HeavyFactoryView::sprites;
  
@@ -18,19 +19,19 @@ HeavyFactoryView::HeavyFactoryView(HeavyFactory& heavyFactory, SdlWindow& window
 {
     if (sprites.empty()){
         std::vector<std::unique_ptr<SdlTexture> > vector;
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00146e44.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00147d65.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00149a9e.bmp",window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/00146e44.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/00147d65.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/00149a9e.bmp"),window)));
         sprites.emplace(std::make_pair("Atreides",std::move(vector)));
         vector.clear();
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00190d63.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/0019203a.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/00193dc4.bmp",window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/00190d63.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/0019203a.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/00193dc4.bmp"),window)));
         sprites.emplace(std::make_pair("Harkonnen",std::move(vector)));
         vector.clear();
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/001dc086.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/001dd390.bmp",window)));
-        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/001dedc0.bmp",window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/001dc086.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/001dd390.bmp"),window)));
+        vector.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/001dedc0.bmp"),window)));
         sprites.emplace(std::make_pair("Ordos",std::move(vector)));
     }
     anim_it = sprites.at(building.getPlayer()->getHouse()).begin(); 

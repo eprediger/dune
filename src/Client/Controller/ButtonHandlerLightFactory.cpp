@@ -2,12 +2,13 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerLightFactory::ButtonHandlerLightFactory(Player& player, GameView &view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
-        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/light-factory.gif",
+        ButtonHandler(view.createBuildingButton(Path::rootVar("assets/img/btns/buildings/light-factory.gif"),
                                                 GameConfiguration::getConfig().buildingConstructionTime,
-                                                "../assets/sound/fx/fin light fac.wav"),
+                                                Path::rootVar("assets/sound/fx/fin light fac.wav").c_str()),
                       player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 

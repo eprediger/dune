@@ -2,11 +2,12 @@
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerTrike::ButtonHandlerTrike(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/trike.jpg",
+        ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/trike.jpg"),
                                             GameConfiguration::getConfig().trikeConstructionTime,
-											"../assets/sound/fx/new trike.wav"),
+											Path::rootVar("assets/sound/fx/new trike.wav").c_str()),
                       player, view, queue, GameConfiguration::getConfig().trikeConstructionTime) {
 }
 

@@ -1,18 +1,19 @@
 #include "HouseSelectionView.h"
 #include <memory>
 #include <string>
+#include <Path.h>
 
 HouseSelectionView::HouseSelectionView(const int width, const int height) :
 	View(width, height),
-	backgroundImage("../assets/img/bkgr/dune2000_4.jpg", this->window),
-	backgroundMusic(Mix_LoadMUS("../assets/sound/music/plotting.mp3")),
+	backgroundImage(Path::rootVar("assets/img/bkgr/dune2000_4.jpg"), this->window),
+	backgroundMusic(Mix_LoadMUS(Path::rootVar("assets/sound/music/plotting.mp3").c_str())),
 	title("ELIGE TU CASA", TITLE_FONT_SIZE / 2, this->window),
 	houses(),
 	houseNames(),
 	selectedHouse(nullptr) {
-	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.png", this->window))));
-	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.png", this->window))));
-	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.png", this->window))));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/atreides.png"), this->window))));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/harkonnen.png"), this->window))));
+	this->houses.push_back(std::unique_ptr<SdlTexture>(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/ordos.png"), this->window))));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Atreides", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Harkonnen", HOUSE_FONT_SIZE, this->window)));
 	this->houseNames.push_back(std::unique_ptr<Text>(new Text("Ordos", HOUSE_FONT_SIZE, this->window)));

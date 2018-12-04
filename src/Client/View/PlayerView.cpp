@@ -4,6 +4,7 @@
 #include <memory>
 #include <map>
 #include <SDL2/SDL_mixer.h>
+#include <Path.h>
 #include "Sound.h"
 std::unique_ptr<SdlTexture> PlayerView::background;
 
@@ -22,18 +23,18 @@ PlayerView::PlayerView(Player& player, SdlWindow& window, int x, int width) :
     gold(player.gold),
     balances(),
     constructYardLife(0),
-    emergencyFx(Mix_LoadWAV("../assets/sound/fx/Siren_Noise-KevanGC-1337458893.wav"))
+    emergencyFx(Mix_LoadWAV(Path::rootVar("assets/sound/fx/Siren_Noise-KevanGC-1337458893.wav").c_str()))
     {
     if (player.getHouse() == "Ordos") {
-        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/ordos.jpg", window)));
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/ordos.jpg"), window)));
     } else if (player.getHouse() == "Harkonnen") {
-        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/harkonnen.jpg", window)));
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/harkonnen.jpg"), window)));
     } else if (player.getHouse() == "Atreides") {
-        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../assets/img/houses/atreides.jpg", window)));
+        house = std::move(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/houses/atreides.jpg"), window)));
     }
     PlayerColorMaker::menuColor(player, &r, &g, &b);
     PlayerColorMaker::textColor(player, &text_r, &text_g, &text_b);
-    background = std::move(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002396b2.bmp", window)));
+    background = std::move(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002396b2.bmp"), window)));
     moneyTag = new  Text("DINERO", 16, window, text_r, text_g, text_b);
     moneyBalance = new Text(std::to_string(player.gold), 16, window, text_r, text_g, text_b);
     capacityTag = new Text("CAPACIDAD", 16, window, text_r, text_g, text_b);

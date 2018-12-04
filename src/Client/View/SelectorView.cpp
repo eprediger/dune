@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "Sound.h"
+#include <Path.h>
 
 SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
     window(window),
@@ -16,12 +17,12 @@ SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
 {
     max_life.h = 4;
     current_life.h = 4;
-    selectionFx.insert(std::make_pair(Unit::HARVESTER,Mix_LoadWAV("../assets/sound/fx/harvester.wav")));
-    selectionFx.insert(std::make_pair(Unit::LIGHT_INFANTRY,Mix_LoadWAV("../assets/sound/fx/light inf.wav")));
-    selectionFx.insert(std::make_pair(Unit::HEAVY_INFANTRY,Mix_LoadWAV("../assets/sound/fx/heavy inf.wav")));
-    selectionFx.insert(std::make_pair(Unit::RAIDER,Mix_LoadWAV("../assets/sound/fx/raider.wav")));
-    selectionFx.insert(std::make_pair(Unit::TRIKE,Mix_LoadWAV("../assets/sound/fx/trike.wav")));
-    selectionFx.insert(std::make_pair(Unit::TANK,Mix_LoadWAV("../assets/sound/fx/tank.wav")));
+    selectionFx.insert(std::make_pair(Unit::HARVESTER,Mix_LoadWAV(Path::rootVar("assets/sound/fx/harvester.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::LIGHT_INFANTRY,Mix_LoadWAV(Path::rootVar("assets/sound/fx/light inf.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::HEAVY_INFANTRY,Mix_LoadWAV(Path::rootVar("assets/sound/fx/heavy inf.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::RAIDER,Mix_LoadWAV(Path::rootVar("assets/sound/fx/raider.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::TRIKE,Mix_LoadWAV(Path::rootVar("assets/sound/fx/trike.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::TANK,Mix_LoadWAV(Path::rootVar("assets/sound/fx/tank.wav").c_str())));
 }
 
 SelectorView::~SelectorView(){

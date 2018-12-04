@@ -2,11 +2,12 @@
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerTank::ButtonHandlerTank(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/tank.gif",
+        ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/tank.gif"),
                                             GameConfiguration::getConfig().tankConstructionTime,
-											"../assets/sound/fx/new tank.wav"),
+											Path::rootVar("assets/sound/fx/new tank.wav").c_str()),
                       player, view, queue,GameConfiguration::getConfig().tankConstructionTime) {
 }
 

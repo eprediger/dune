@@ -1,12 +1,13 @@
+#include <Path.h>
 #include "ButtonHandlerWindTrap.h"
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 
 ButtonHandlerWindTrap::ButtonHandlerWindTrap(Player& player, GameView& view,
             BuildingConstructor& constructor, CommunicationQueue& queue) :
-        ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/windtrap.gif",
+        ButtonHandler(view.createBuildingButton(Path::rootVar("assets/img/btns/buildings/windtrap.gif"),
                                                 GameConfiguration::getConfig().buildingConstructionTime,
-                                                "../assets/sound/fx/finished windtrap.wav"),
+                                                Path::rootVar("assets/sound/fx/finished windtrap.wav").c_str()),
                       player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {
     if (this->canBeEnabled()) {

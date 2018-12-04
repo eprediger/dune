@@ -1,15 +1,13 @@
+#include <Path.h>
 #include "ButtonHandlerSpiceSilo.h"
-#include "View/BuildingViewFactory.h"
-#include "GameHandler.h"
-#include <iostream>
 
-ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player& player, GameView &view,
-    BuildingConstructor& constructor, CommunicationQueue& queue) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/silo.gif",
-                                            GameConfiguration::getConfig().buildingConstructionTime,
-                                            "../assets/sound/fx/fin spice silo.wav"),
-                  player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
-    constructor(constructor) {}
+ButtonHandlerSpiceSilo::ButtonHandlerSpiceSilo(Player &player, GameView &view,
+                                               BuildingConstructor &constructor, CommunicationQueue &queue) :
+        ButtonHandler(view.createBuildingButton(Path::rootVar("assets/img/btns/buildings/silo.gif"),
+                                                GameConfiguration::getConfig().buildingConstructionTime,
+                                                Path::rootVar("assets/sound/fx/fin spice silo.wav").c_str()),
+                      player, view, queue, GameConfiguration::getConfig().buildingConstructionTime),
+        constructor(constructor) {}
 
 ButtonHandlerSpiceSilo::~ButtonHandlerSpiceSilo() {}
 
@@ -28,7 +26,7 @@ bool ButtonHandlerSpiceSilo::canBeEnabled() {
 }
 
 bool ButtonHandlerSpiceSilo::finishAction() {
-	buttonView.update(((time - player.buildingCenter->remainingTime(Building::SPICE_SILO)) * 100) / time);  
+    buttonView.update(((time - player.buildingCenter->remainingTime(Building::SPICE_SILO)) * 100) / time);
     return player.buildingCenter->buildingReady(Building::SPICE_SILO);
 }
 

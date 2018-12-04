@@ -3,13 +3,14 @@
 #include "GameHandler.h"
 #include <iostream>
 #include <Model/GameConfiguration.h>
+#include <Path.h>
 
 ButtonHandlerBarracks::ButtonHandlerBarracks(Player& player, GameView &view,
         BuildingConstructor& constructor, CommunicationQueue& queue):
 	ButtonHandler(
 	    view.createBarracksButton(player.getHouse(),
 	                              GameConfiguration::getConfig().buildingConstructionTime,
-	                              "../assets/sound/fx/finished barracks.wav"),
+	                              Path::rootVar("assets/sound/fx/finished barracks.wav").c_str()),
 	    player,
 	    view, queue, GameConfiguration::getConfig().buildingConstructionTime),
 	constructor(constructor) {}

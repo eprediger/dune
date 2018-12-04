@@ -2,11 +2,12 @@
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerRaider::ButtonHandlerRaider(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/raider.gif",
+        ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/raider.gif"),
                                             GameConfiguration::getConfig().raiderConstructionTime,
-											"../assets/sound/fx/new raider.wav"),
+											Path::rootVar("assets/sound/fx/new raider.wav").c_str()),
                      player, view, queue, GameConfiguration::getConfig().raiderConstructionTime) {
 }
 

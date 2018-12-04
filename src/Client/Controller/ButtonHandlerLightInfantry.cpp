@@ -3,11 +3,12 @@
 #include <Model/GameConfiguration.h>
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerLightInfantry::ButtonHandlerLightInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
-	ButtonHandler(view.createUnitButton("../assets/img/btns/units/linfantry.gif",
+	ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/linfantry.gif"),
 	                                    GameConfiguration::getConfig().lightInfantryTrainingTime,
-										"../assets/sound/fx/new light inf.wav"),
+										Path::rootVar("assets/sound/fx/new light inf.wav").c_str()),
 	              player, view, queue,GameConfiguration::getConfig().lightInfantryTrainingTime){}
 
 ButtonHandlerLightInfantry::~ButtonHandlerLightInfantry() {}

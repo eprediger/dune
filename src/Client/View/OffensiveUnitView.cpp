@@ -3,6 +3,7 @@
 #include <vector>
 #include "Sound.h"
 #include <memory>
+#include <Path.h>
 
 std::unique_ptr<Mix_Chunk> OffensiveUnitView::machineGunFx;
 
@@ -14,7 +15,7 @@ OffensiveUnitView::OffensiveUnitView(OffensiveUnit& unit, Area sprite_area, SdlW
     animating_attack(false)
 {
     if (!machineGunFx)
-        machineGunFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV("../assets/sound/fx/machine gun.wav")));
+        machineGunFx = std::move(std::unique_ptr<Mix_Chunk>(Mix_LoadWAV(Path::rootVar("assets/sound/fx/machine gun.wav").c_str())));
 }
 
 void OffensiveUnitView::drawAttack(Area& camara, std::map<int, std::vector<std::unique_ptr<SdlTexture> > >& sprites) {

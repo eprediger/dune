@@ -4,10 +4,11 @@
 #include "SdlTexture.h"
 #include "Model/Map.h"
 #include <Area.h>
+#include <Path.h>
 
 MapView::MapView(Map &mapa, SdlWindow &window) :
 	map(mapa),
-	terrenos("../terrain/d2k_BLOXBASE.bmp", window),
+	terrenos(Path::rootVar("assets/img/terrain/d2k_BLOXBASE.bmp"), window),
 	areas() {
 	areas.emplace(std::make_pair('A', Area(0, 8, 32, 32)));
 	areas.emplace(std::make_pair('S', Area(64, 296, 32, 24)));

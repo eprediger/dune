@@ -2,11 +2,12 @@
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerHeavyInfantry::ButtonHandlerHeavyInfantry(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/hinfantry.gif",
+        ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/hinfantry.gif"),
                                             GameConfiguration::getConfig().heavyInfantryTrainingTime,
-											"../assets/sound/fx/new heavy inf.wav"),
+											Path::rootVar("assets/sound/fx/new heavy inf.wav").c_str()),
                      player, view, queue,GameConfiguration::getConfig().heavyInfantryTrainingTime) {
 }
 

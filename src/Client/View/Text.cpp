@@ -1,5 +1,6 @@
 #include "Text.h"
 #include <string>
+#include <Path.h>
 
 Text::Text(const std::string& text, const int fontSize, SdlWindow& window) :
 	textWidth(0),
@@ -13,7 +14,7 @@ Text::Text(const std::string& text, const int fontSize, SdlWindow& window) :
 	if (TTF_Init() == -1) {
 		throw SdlException("Error al inicializar fuente", TTF_GetError());
 	}
-	this->font = TTF_OpenFont("../assets/font/Dune2k.ttf", fontSize);
+	this->font = TTF_OpenFont(Path::rootVar("assets/font/Dune2k.ttf").c_str(), fontSize);
 	if (this->font == nullptr) {
 		throw SdlException("Error al cargar la fuente", TTF_GetError());
 	}
@@ -33,7 +34,7 @@ Text::Text(const std::string& text, const int fontSize,
 	if (TTF_Init() == -1) {
 		throw SdlException("Error al inicializar fuente", TTF_GetError());
 	}
-	this->font = TTF_OpenFont("../assets/font/Dune2k.ttf", fontSize);
+	this->font = TTF_OpenFont(Path::rootVar("assets/font/Dune2k.ttf").c_str(), fontSize);
 	if (this->font == nullptr) {
 		throw SdlException("Error al cargar la fuente", TTF_GetError());
 	}

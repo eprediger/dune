@@ -33,9 +33,34 @@ Instalación librería nlohmann-json-dev (solo en caso de no tener Ubuntu 18):
 
 	Instalación [amd64]: sudo dpkg -i nlohmann-json-dev_2.1.1-1.1_all.deb
 
-Compilación desde carpeta de proyecto:
+Flags de cmake para compilar en distintos modos:
+	
+	set(CMAKE_CXX_FLAGS_DEBUG "-Wall -DDEBUG") #Flags para modo debug
+	set(CMAKE_CXX_FLAGS "-Wall")	#Flags para modo sin argumentos
+
+Compilacion en cmake en modo DEBUG
+
+	mkdir debug; cd debug; rm -rf *; cmake .. -DCMAKE_BUILD_TYPE=Debug; make
+
+Compilacion en cmake en modo RELEASE
 
 	mkdir build; cd build; rm -rf *; cmake ..; make
+
+Pasos para instalar el juego:
+
+	1. sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-image-dev libyaml-cpp-dev nlohmann-json-dev
+	2. Pararse sobre el directorio raiz de GIT
+	2. mkdir build; cd build
+	3. cmake ..
+	4. make [-j4]
+	5. sudo make install
+	6. ejecutar servidor: ~/usr/bin/dune/dune_Server 8080 <ruta_mapa>
+	7. ejecutar cliente: ~/usr/bin/dune/dune_Client
+
+
+Desinstalar el juego:
+
+	1. sudo rm -r $HOME/usr/bin/dune; sudo rm -r $HOME/usr/var/dune; sudo rm -r $HOME/usr/etc/dune
 
 ---
 ### Ejecución 

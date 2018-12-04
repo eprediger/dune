@@ -2,12 +2,13 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerHeavyFactory::ButtonHandlerHeavyFactory(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/heavy-factory.gif",
+    ButtonHandler(view.createBuildingButton(Path::rootVar("assets/img/btns/buildings/heavy-factory.gif"),
                                             GameConfiguration::getConfig().buildingConstructionTime
-                                            ,"../assets/sound/fx/fin heavy fac.wav"),
+                                            ,Path::rootVar("assets/sound/fx/fin heavy fac.wav").c_str()),
                   player, view, queue,GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor)
     {}

@@ -3,7 +3,7 @@
 #include <Codes.h>
 #include <string>
 
-ConfigurationReader::ConfigurationReader(const char *filename) :
+ConfigurationReader::ConfigurationReader(const std::string filename) :
     YAMLReader(filename) {}
 
 ConfigurationReader::~ConfigurationReader() = default;

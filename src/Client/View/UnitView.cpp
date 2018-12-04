@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <memory>
+#include <Path.h>
 
 std::vector<std::unique_ptr<SdlTexture> > UnitView::damage_sprites;
 
@@ -30,17 +31,17 @@ UnitView::UnitView(Unit& unit, Area sprite_area, SdlWindow& window):
 	playerColorRect.w = sprite_area.getWidth();
 	playerColorRect.h = sprite_area.getHeight();
 	if (damage_sprites.empty()) {
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc36.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc00.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebbb2.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebb55.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eb959.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eb9fa.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002eba90.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebb55.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebbb2.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc00.bmp", window)));
-		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture("../imgs/imgs/002ebc36.bmp", window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc36.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc00.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebbb2.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebb55.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002eb959.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002eb9fa.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002eba90.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebb55.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebbb2.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc00.bmp"), window)));
+		damage_sprites.emplace_back(std::unique_ptr<SdlTexture>(new SdlTexture(Path::rootVar("assets/img/sprites/002ebc36.bmp"), window)));
 	}
 	damage_anim_it = damage_sprites.begin();
 }

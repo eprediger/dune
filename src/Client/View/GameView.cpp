@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <Path.h>
 
 GameView::GameView(const int width, const int height,
                    Model& model, Player& player) :
@@ -24,7 +25,7 @@ GameView::GameView(const int width, const int height,
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
 	camera(0, 0, 3 * width / 4, height),
-	backgroundMusic(Mix_LoadMUS("../assets/sound/music/fight-for-power.mp3")),
+	backgroundMusic(Mix_LoadMUS(Path::rootVar("assets/sound/music/fight-for-power.mp3").c_str())),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
 	buildingButtons(),
@@ -290,11 +291,11 @@ ButtonView& GameView::createBuildingButton(const std::string& filename, int numb
 ButtonView& GameView::createBarracksButton(const std::string& playerHouse, int number_steps, const char* sound_fx) {
 	std::string filename;
 	if (playerHouse == "Atreides") {
-		filename = "../assets/img/btns/buildings/barracks-atreides.jpg";
+		filename = Path::rootVar("assets/img/btns/buildings/barracks-atreides.jpg");
 	} else if (playerHouse == "Harkonnen") {
-		filename = "../assets/img/btns/buildings/barracks-harkonnen.jpg";
+		filename = Path::rootVar("assets/img/btns/buildings/barracks-harkonnen.jpg");
 	} else if (playerHouse == "Ordos") {
-		filename = "../assets/img/btns/buildings/barracks-ordos.jpg";
+		filename = Path::rootVar("assets/img/btns/buildings/barracks-ordos.jpg");
 	} else {
 		filename = playerHouse;
 	}

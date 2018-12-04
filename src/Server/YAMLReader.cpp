@@ -1,4 +1,4 @@
 #include "YAMLReader.h"
 
-YAMLReader::YAMLReader(const char *filename) :
+YAMLReader::YAMLReader(const std::string filename) :
 	config(YAML::LoadFile(filename)) {}

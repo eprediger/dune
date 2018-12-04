@@ -4,6 +4,7 @@
 #include <CustomException.h>
 #include <Model/Weapons/Weapon.h>
 #include <string>
+#include <Path.h>
 
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
@@ -125,7 +126,8 @@ void GameConfiguration::init(const char *string) {
 
 GameConfiguration& GameConfiguration::getConfig() {
 	if (instance == nullptr) {
-		ConfigurationReader config("../gameConfig.yaml");
+		std::string path = Path::root(CONFIG_PATH);
+		ConfigurationReader config(path);
 		instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
 	}
 	return *instance;

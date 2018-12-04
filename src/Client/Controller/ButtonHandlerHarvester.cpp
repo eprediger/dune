@@ -2,11 +2,12 @@
 #include "View/UnitViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerHarvester::ButtonHandlerHarvester(Player& player, GameView &view, CommunicationQueue& queue) :
-        ButtonHandler(view.createUnitButton("../assets/img/btns/units/harvest.gif",
+        ButtonHandler(view.createUnitButton(Path::rootVar("assets/img/btns/units/harvest.gif"),
                                             GameConfiguration::getConfig().harvesterConstructionTime,
-											"../assets/sound/fx/new harvester.wav"),
+											Path::rootVar("assets/sound/fx/new harvester.wav").c_str()),
                       player, view, queue, GameConfiguration::getConfig().harvesterConstructionTime){ }
 
 void ButtonHandlerHarvester::execute() {

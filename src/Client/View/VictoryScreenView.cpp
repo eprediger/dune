@@ -1,9 +1,10 @@
+#include <Path.h>
 #include "VictoryScreenView.h"
 
 VictoryScreenView::VictoryScreenView(const int width, const int height, std::string winner_player) :
         View(width, height),
-        backgroundImage("../assets/img/bkgr/dune2000_1.jpg", this->window),
-        titleImage("../assets/img/bkgr/d2klogo.png", this->window),
+        backgroundImage(Path::rootVar("assets/img/bkgr/dune2000_1.jpg"), this->window),
+        titleImage(Path::rootVar("assets/img/bkgr/d2klogo.png"), this->window),
         winner_tag("Winner is: "+ winner_player, TITLE_FONT_SIZE, this->window),
         thanks_tag("Thank You for playing!", TXT_FONT_SIZE, this->window),
         author_tag("Authors: Grupo 2 [Perez Ondarts Flavio - Poggio Demian - Prediger Emiliano]", TXT_FONT_SIZE, this->window),

@@ -5,7 +5,7 @@
 
 class YAMLReader {
 public:
-	explicit YAMLReader(const char *filename);
+	explicit YAMLReader(const std::string filename);
 
 	virtual ~YAMLReader() = default;
 

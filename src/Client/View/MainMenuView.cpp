@@ -1,11 +1,12 @@
 #include "MainMenuView.h"
 #include <string>
+#include <Path.h>
 
 MainMenuView::MainMenuView(const int width, const int height) :
 	View(width, height),
-	backgroundImage("../assets/img/bkgr/dune2000_1.jpg", this->window),
-	backgroundMusic(Mix_LoadMUS("../assets/sound/music/options.mp3")),
-	titleImage("../assets/img/bkgr/d2klogo.png", this->window),
+	backgroundImage(Path::rootVar("assets/img/bkgr/dune2000_1.jpg"), this->window),
+	backgroundMusic(Mix_LoadMUS(Path::rootVar("assets/sound/music/options.mp3").c_str())),
+	titleImage(Path::rootVar("assets/img/bkgr/d2klogo.png"), this->window),
 	tags(),
 	playButton(nullptr),
 	selectedTextBox(nullptr),

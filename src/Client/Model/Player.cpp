@@ -13,11 +13,11 @@ Player::Player(nlohmann::json& j) :
 	playerName(j["playerName"].get<std::string>()),
 	generatedEnergy(j["generated_energy"]),
 	consumedEnergy(j["consumed_energy"]),
+    constructionYard(nullptr),
 	gold(j["gold"]),
 	gold_limit(j["gold_limit"]),
 	trainingCenter(new PlayerTrainingCenter(j["trainingCenter"])),
-	buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])),
-	constructionYard(nullptr) {}
+	buildingCenter(new PlayerBuildingCenter(j["buildingCenter"])) {}
 
 void Player::update(nlohmann::json& j) {
 	generatedEnergy = j["generated_energy"];

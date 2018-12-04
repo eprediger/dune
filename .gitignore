@@ -1,6 +1,7 @@
 # Ignorar proyecto de CLion
 .idea/
 cmake-build-debug/
+cmake-build-default/
 
 # VSCode
 .vscode/

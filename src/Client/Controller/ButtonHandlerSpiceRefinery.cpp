@@ -2,12 +2,13 @@
 #include "View/BuildingViewFactory.h"
 #include "GameHandler.h"
 #include <iostream>
+#include <Path.h>
 
 ButtonHandlerSpiceRefinery::ButtonHandlerSpiceRefinery(Player& player, GameView &view,
     BuildingConstructor& constructor, CommunicationQueue& queue) :
-    ButtonHandler(view.createBuildingButton("../assets/img/btns/buildings/refinery.jpg",
+    ButtonHandler(view.createBuildingButton(Path::rootVar("assets/img/btns/buildings/refinery.jpg"),
                                             GameConfiguration::getConfig().buildingConstructionTime,
-                                            "../assets/sound/fx/finished refinery.wav"),
+                                            Path::rootVar("assets/sound/fx/finished refinery.wav").c_str()),
                   player, view, queue, GameConfiguration::getConfig().buildingConstructionTime),
     constructor(constructor) {}
 
