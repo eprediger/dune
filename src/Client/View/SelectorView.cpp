@@ -1,7 +1,6 @@
 #include "SelectorView.h"
 #include "Selector.h"
 #include <SDL2/SDL.h>
-#include <iostream>
 #include <vector>
 #include <map>
 #include "Sound.h"
@@ -17,20 +16,19 @@ SelectorView::SelectorView(Selector& selector, SdlWindow& window) :
 {
     max_life.h = 4;
     current_life.h = 4;
-    selectionFx.insert(std::make_pair(Unit::HARVESTER,Mix_LoadWAV(Path::rootVar("assets/sound/fx/harvester.wav").c_str())));
-    selectionFx.insert(std::make_pair(Unit::LIGHT_INFANTRY,Mix_LoadWAV(Path::rootVar("assets/sound/fx/light inf.wav").c_str())));
-    selectionFx.insert(std::make_pair(Unit::HEAVY_INFANTRY,Mix_LoadWAV(Path::rootVar("assets/sound/fx/heavy inf.wav").c_str())));
-    selectionFx.insert(std::make_pair(Unit::RAIDER,Mix_LoadWAV(Path::rootVar("assets/sound/fx/raider.wav").c_str())));
-    selectionFx.insert(std::make_pair(Unit::TRIKE,Mix_LoadWAV(Path::rootVar("assets/sound/fx/trike.wav").c_str())));
-    selectionFx.insert(std::make_pair(Unit::TANK,Mix_LoadWAV(Path::rootVar("assets/sound/fx/tank.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::HARVESTER, Mix_LoadWAV(Path::rootVar("assets/sound/fx/harvester.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::LIGHT_INFANTRY, Mix_LoadWAV(Path::rootVar("assets/sound/fx/light inf.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::HEAVY_INFANTRY, Mix_LoadWAV(Path::rootVar("assets/sound/fx/heavy inf.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::RAIDER, Mix_LoadWAV(Path::rootVar("assets/sound/fx/raider.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::TRIKE, Mix_LoadWAV(Path::rootVar("assets/sound/fx/trike.wav").c_str())));
+    selectionFx.insert(std::make_pair(Unit::TANK, Mix_LoadWAV(Path::rootVar("assets/sound/fx/tank.wav").c_str())));
 }
 
-SelectorView::~SelectorView(){
-    for (auto fx : selectionFx){
+SelectorView::~SelectorView() {
+    for (auto fx : selectionFx) {
         Mix_FreeChunk(fx.second);
     }
 }
-
 
 void SelectorView::drawLife(Building* building, Area& camara) {
     max_life.w = building->getInitialLife() / 4;
@@ -117,10 +115,8 @@ void SelectorView::drawSelection(Area& camara) {
 }
 
 void SelectorView::draw(Area& camara) {
-    if (selector.newUnits){
-        std::cout<<"in\n";
+    if (selector.newUnits) {
         Sound::getSound()->playSelectionFX(selectionFx.at(selector.selection.getSelectedUnits().front()->getUnitType()));
-        std::cout<<"out\n";
         selector.newUnits = false;
     }
     if (selector.drag) {

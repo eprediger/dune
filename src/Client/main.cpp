@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include <nlohmann/json.hpp>
 #include <Model/GameConfiguration.h>
@@ -28,7 +29,8 @@ int main(int argc, const char *argv[]) {
             houseSelection.run();
             if (houseSelection.windowStatus() != WindowStatus::CLOSE) {
                 CommunicationQueue queue;
-                Client client(mainMenu.getHost().c_str(), mainMenu.getPort().c_str(), queue);
+                Client client(mainMenu.getHost().c_str(),
+                              mainMenu.getPort().c_str(), queue);
                 try {
                     client.start();
                     nlohmann::json house;
@@ -50,7 +52,8 @@ int main(int argc, const char *argv[]) {
 
                     Player &myPlayer = model.getPlayer(player["id"]);
 
-                    GameView gameView(mainMenu.getWindowWidth(), mainMenu.getWindowHeight(), model, myPlayer);
+                    GameView gameView(mainMenu.getWindowWidth(),
+                                  mainMenu.getWindowHeight(), model, myPlayer);
                     GameInterface interface(model, gameView);
                     GameHandler gameHandler(gameView, model, queue, myPlayer);
 
@@ -73,7 +76,8 @@ int main(int argc, const char *argv[]) {
                             while (true) {
                                 nlohmann::json j(queue.dequeue());
                                 interface.execute(j);
-                                if ((j["class"] == "Step") || (j["class"] == "finishGame")) break;
+                                if ((j["class"] == "Step") ||
+                                        (j["class"] == "finishGame")) break;
                             }
                         }
 
@@ -102,8 +106,6 @@ int main(int argc, const char *argv[]) {
                         VictoryScreen victoryScreen(victoryScreenView, victoryScreenHandler);
                         victoryScreen.run();
                     }
-
-
                 } catch (const SdlException &e) {
                     std::cerr << e.what() << std::endl;
                     client.disconnect();
