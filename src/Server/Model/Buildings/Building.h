@@ -25,6 +25,8 @@ public:
 
 	virtual ~Building();
 
+	bool operator==(const Building& other);
+
 	virtual void reciveBonusDammage(const Weapon &weapon) override;
     virtual int getCapacity();
 

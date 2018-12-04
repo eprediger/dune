@@ -6,7 +6,6 @@
 
 class Attackable {
 protected:
-    int id;
     int initial_life;
     int life;
     Position pos;
@@ -17,8 +16,6 @@ public:
     virtual ~Attackable() = default;
 
     void setPosition(Position pos);
-
-    int getId();
 
     Position& getPosition();
 
@@ -32,8 +29,6 @@ public:
     virtual void reciveBonusDammage(const Weapon &weapon) = 0;
 
     static bool isDead(const Attackable *unit);
-
-    bool operator==(const Attackable& other);
 };
 
 #endif //__ATTACKABLE_H__

@@ -195,3 +195,7 @@ nlohmann::json& Unit::getSerialization() {
 bool Unit::hasNews() {
     return (news || (this->getLife() != serialization["life"]));
 }
+
+bool Unit::operator==(const Unit &other) {
+    return this->id == other.id;
+}

@@ -81,3 +81,7 @@ bool Building::hasNews() {
 int Building::getCapacity() {
 	return 0;
 }
+
+bool Building::operator==(const Building &other) {
+	return this->id == other.id;
+}

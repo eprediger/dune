@@ -1,9 +1,7 @@
 #include "Attackable.h"
-#include "Config.h"
 #include <iostream>
 
 Attackable::Attackable(const int life, const int x, const int y) :
-    id(Config::getNextId()),
     initial_life(life),
     life(life),
     pos(x, y) {
@@ -34,18 +32,10 @@ bool Attackable::isDead(const Attackable *unit) {
     return (unit->life <= 0);
 }
 
-bool Attackable::operator==(const Attackable &other) {
-    return this->id == other.id;
-}
-
 void Attackable::setPosition(Position pos) {
     this->pos = pos;
 }
 
 Position& Attackable::getClosestPosition(Position& position) {
     return this->pos;
-}
-
-int Attackable::getId() {
-    return id;
 }

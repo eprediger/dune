@@ -52,6 +52,8 @@ public:
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
 
+    bool operator==(const Unit& other);
+
     void setPath(std::stack<Position> path, Position destiny);
 
     bool move(Map &map);
