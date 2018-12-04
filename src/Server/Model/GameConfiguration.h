@@ -19,10 +19,10 @@ public:
 
 	nlohmann::json initWithJson();
 
-	const int SPEED_FACTOR;	// El speed factor debe ser multiplo de 84
+	const int speedFactor;	// El speed factor debe ser multiplo de 84
 	const int blockMovement;
-	const int RANGE_FACTOR;
-	const int TIME_FACTOR;
+	const int rangeFactor;
+	const int timeFactor;
 	const int initialGold;
 	const int initialEnergy;
 	const int initialMaxEnergy;

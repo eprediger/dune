@@ -40,7 +40,7 @@ const UnitStateTraining Unit::training;
 bool Unit::move(Map &map) {
     bool moved = true;
     int terrain_factor = map.getSpeedFactorAt(pos);
-    int counter_limit = terrain_factor * GameConfiguration::getConfig().SPEED_FACTOR;
+    int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
     int speed_counter = actual_speed;
     actual_speed += speed;
     if (speed_counter >= counter_limit) {

@@ -9,15 +9,15 @@
 std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
 GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
-	SPEED_FACTOR(config.getSpeedFactor()),
+	speedFactor(config.getSpeedFactor()),
 	blockMovement(config.getBlockMovement()),
-	RANGE_FACTOR(config.getRangeFactor()),
-	TIME_FACTOR(config.getTimeFactor()),
+	rangeFactor(config.getRangeFactor()),
+	timeFactor(config.getTimeFactor()),
 	initialGold(config.getInitialGold()),
 	initialEnergy(config.getInitialEnergy()),
 	initialMaxEnergy(config.getInitialMaxEnergy()),
 
-	buildingConstructionTime(config.getBuildingConstructionTime() * TIME_FACTOR),
+	buildingConstructionTime(config.getBuildingConstructionTime() * timeFactor),
 
 	constructionYardEnergy(config.getEnergyFor(Building::BuildingType::CONSTRUCTION_YARD)),
 	constructionYardCost(config.getCostFor(Building::BuildingType::CONSTRUCTION_YARD)),
@@ -80,41 +80,41 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
 	smallCannonBonus(config.getBonusFor(WeaponType::SMALL_CANNON)),
 
 	lightInfantryHitPoints(config.getHitPointsFor(Unit::UnitType::LIGHT_INFANTRY)),
-	lightInfantryRange(config.getRangeFor(Unit::UnitType::LIGHT_INFANTRY) * RANGE_FACTOR),
+	lightInfantryRange(config.getRangeFor(Unit::UnitType::LIGHT_INFANTRY) * rangeFactor),
 	lightInfantrySpeed(config.getSpeedFor(Unit::UnitType::LIGHT_INFANTRY)),
-	lightInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::LIGHT_INFANTRY) * TIME_FACTOR),
+	lightInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::LIGHT_INFANTRY) * timeFactor),
 	lightInfantryCost(config.getCostFor(Unit::UnitType::LIGHT_INFANTRY)),
 
 	heavyInfantryHitPoints(config.getHitPointsFor(Unit::UnitType::HEAVY_INFANTRY)),
-	heavyInfantryRange(config.getRangeFor(Unit::UnitType::HEAVY_INFANTRY) * RANGE_FACTOR),
+	heavyInfantryRange(config.getRangeFor(Unit::UnitType::HEAVY_INFANTRY) * rangeFactor),
 	heavyInfantrySpeed(config.getSpeedFor(Unit::UnitType::HEAVY_INFANTRY)),
-	heavyInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::HEAVY_INFANTRY) * TIME_FACTOR),
+	heavyInfantryTrainingTime(config.getTrainingTimeFor(Unit::UnitType::HEAVY_INFANTRY) * timeFactor),
 	heavyInfantryCost(config.getCostFor(Unit::UnitType::HEAVY_INFANTRY)),
 
 	harvesterHitPoints(config.getHitPointsFor(Unit::UnitType::HARVESTER)),
 	harvesterSpeed(config.getSpeedFor(Unit::UnitType::HARVESTER)),
-	harvesterConstructionTime(config.getTrainingTimeFor(Unit::UnitType::HARVESTER) * TIME_FACTOR),
+	harvesterConstructionTime(config.getTrainingTimeFor(Unit::UnitType::HARVESTER) * timeFactor),
 	harvesterCost(config.getCostFor(Unit::UnitType::HARVESTER)),
 	harvesterSpiceCapacity(config.getSpiceCapacityFor(Unit::UnitType::HARVESTER)),
-	harvesterFarmSpeed(config.getFarmSpeed(Unit::UnitType::HARVESTER) * TIME_FACTOR),
-	harvesterLoadSpeed(config.getLoadSpeed(Unit::UnitType::HARVESTER) * TIME_FACTOR),
+	harvesterFarmSpeed(config.getFarmSpeed(Unit::UnitType::HARVESTER) * timeFactor),
+	harvesterLoadSpeed(config.getLoadSpeed(Unit::UnitType::HARVESTER) * timeFactor),
 
 	trikeHitPoints(config.getHitPointsFor(Unit::UnitType::TRIKE)),
-	trikeRange(config.getRangeFor(Unit::UnitType::TRIKE) * RANGE_FACTOR),
+	trikeRange(config.getRangeFor(Unit::UnitType::TRIKE) * rangeFactor),
 	trikeSpeed(config.getSpeedFor(Unit::UnitType::TRIKE)),
-	trikeConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TRIKE) * TIME_FACTOR),
+	trikeConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TRIKE) * timeFactor),
 	trikeCost(config.getCostFor(Unit::UnitType::TRIKE)),
 
 	raiderHitPoints(config.getHitPointsFor(Unit::UnitType::RAIDER)),
-	raiderRange(config.getRangeFor(Unit::UnitType::RAIDER) * RANGE_FACTOR),
+	raiderRange(config.getRangeFor(Unit::UnitType::RAIDER) * rangeFactor),
 	raiderSpeed(config.getSpeedFor(Unit::UnitType::RAIDER)),
-	raiderConstructionTime(config.getTrainingTimeFor(Unit::UnitType::RAIDER) * TIME_FACTOR),
+	raiderConstructionTime(config.getTrainingTimeFor(Unit::UnitType::RAIDER) * timeFactor),
 	raiderCost(config.getCostFor(Unit::UnitType::RAIDER)),
 
 	tankHitPoints(config.getHitPointsFor(Unit::UnitType::TANK)),
-	tankRange(config.getRangeFor(Unit::UnitType::TANK) * RANGE_FACTOR),
+	tankRange(config.getRangeFor(Unit::UnitType::TANK) * rangeFactor),
 	tankSpeed(config.getSpeedFor(Unit::UnitType::TANK)),
-	tankConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TANK) * TIME_FACTOR),
+	tankConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TANK) * timeFactor),
 	tankCost(config.getCostFor(Unit::UnitType::TANK)) {}
 
 void GameConfiguration::init(const char *string) {

@@ -9,7 +9,7 @@ ConfigurationReader::ConfigurationReader(const std::string filename) :
 ConfigurationReader::~ConfigurationReader() = default;
 
 unsigned ConfigurationReader::getSpeedFactor() const {
-    return this->config["SPEED_FACTOR"].as<unsigned>();
+    return this->config["speedFactor"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getBlockMovement() const {
@@ -17,11 +17,11 @@ unsigned ConfigurationReader::getBlockMovement() const {
 }
 
 unsigned ConfigurationReader::getRangeFactor() const {
-    return this->config["RANGE_FACTOR"].as<unsigned>();
+    return this->config["rangeFactor"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getTimeFactor() const {
-    return this->config["TIME_FACTOR"].as<unsigned>();
+    return this->config["timeFactor"].as<unsigned>();
 }
 
 unsigned ConfigurationReader::getInitialGold() const {
