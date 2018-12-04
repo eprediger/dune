@@ -24,6 +24,7 @@ ClientSender::~ClientSender() {
 
 void ClientSender::sendPayload(const std::string& payload) {
     if (this->keepPlaying) {
+        this->connectionSkt.sendLength(payload.length();
         this->connectionSkt.send(payload.c_str(), payload.length());
     }
 }
