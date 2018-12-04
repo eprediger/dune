@@ -24,7 +24,7 @@ GameView::GameView(const int width, const int height,
 	playerView(player, window, 3 * width / 4, width / 4),
 	constructorView(nullptr),
 	map_view(model.getMap(), window),
-	camera(camera_x, camera_y, 3 * width / 4, height),
+	camera(camera_x - width/4, camera_y - height / 4, 3 * width / 4, height),
 	backgroundMusic(Mix_LoadMUS(Path::rootVar("assets/sound/music/fight-for-power.mp3").c_str())),
 	buildingTag(Text("EDIFICIOS", TAG_FONT_SIZE, this->window)),
 	unitsTag(Text("UNIDADES", TAG_FONT_SIZE, this->window)),
@@ -38,10 +38,16 @@ GameView::GameView(const int width, const int height,
 {
 	Sound::getSound()->playMusic(backgroundMusic);
 
-	if ((camera_x + camera_width) >= model.getMap().getWidth()){
+	if (camera.getX() < 0){
+		camera.setX(0);
+	}
+	else if ((camera.getX() + camera_width) >= model.getMap().getWidth()){
 		camera.setX(model.getMap().getWidth() - camera_width);
 	}
-	if ((camera_y + camera_height) >= model.getMap().getHeight()){
+	if (camera.getY()<0){
+		camera.setY(0);
+	}
+	else if ((camera.getY() + camera_height) >= model.getMap().getHeight()){
 		camera.setY(model.getMap().getHeight() - camera_height);
 	}
 }
